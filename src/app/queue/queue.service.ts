@@ -1,26 +1,21 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Queue } from './models/queue';
+import { HttpClient } from '@angular/common/http';
+import { API_URL } from '@app/api-url';
 
 @Injectable({
   providedIn: 'root'
 })
 export class QueueService {
 
+  constructor(
+    private http: HttpClient,
+    @Inject(API_URL) private apiUrl: string,
+  ) { }
+
   fetchQueue(): Observable<Queue> {
-    return of({
-      config: {
-        classes: [
-          { name: 'scout', count: 2 },
-          { name: 'soldier', count: 2 },
-          { name: 'demoman', count: 1 },
-          { name: 'medic', count: 1 }
-        ],
-      },
-      players: [
-        { playerId: '1', slot: 'soldier' },
-      ],
-    });
+    return this.http.get<Queue>(`${this.apiUrl}/queue`);
   }
 
 }

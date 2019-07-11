@@ -10,6 +10,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { QueueEffects } from './queue.effects';
 import { QueuePlayerListItemComponent } from './queue-player-list-item/queue-player-list-item.component';
 import { QueuePlayerListComponent } from './queue-player-list/queue-player-list.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { QueuePlayerListComponent } from './queue-player-list/queue-player-list.
   ],
   imports: [
     CommonModule,
+    HttpClientModule,
     StoreModule.forFeature('queue', reducer),
     EffectsModule.forFeature([QueueEffects]),
 
