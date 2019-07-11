@@ -3,5 +3,5 @@ import { State as PlayerState } from './player/player.reducer';
 
 export interface AppState {
   queue: QueueState;
-  player: PlayerState;
+  players: PlayerState;
 }

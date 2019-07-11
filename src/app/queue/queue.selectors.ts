@@ -10,7 +10,10 @@ export const queueClasses = createSelector(queueConfig, qc => qc.classes);
 
 export const queueRequiredPlayerCount = createSelector(
   queueClasses,
-  qc => qc.reduce((prev, curr) => prev + curr.count, 0)
+  qc => qc.reduce((prev, curr) => prev + curr.count, 0) * 2
 );
 
-export const queueCurrentPlayerCount = createSelector(queue, q => q.players.length);
+export const queuePlayers = createSelector(queue, q => q.players);
+export const queueCurrentPlayerCount = createSelector(queuePlayers, players => players.length);
+
+export const queueSlotPlayers = (slot: string) => createSelector(queuePlayers, players => players.filter(p => p.slot === slot));

@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
 import { QueueModule } from './queue/queue.module';
 import { EffectsModule } from '@ngrx/effects';
+import { PlayerModule } from './player/player.module';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { EffectsModule } from '@ngrx/effects';
     }),
     EffectsModule.forRoot([]),
 
+    PlayerModule,
     QueueModule,
   ],
   providers: [],

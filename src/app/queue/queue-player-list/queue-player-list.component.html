@@ -1,0 +1,6 @@
+<ng-container *ngIf="players | async as _players">
+  <ul class="list-group list-group-flush">
+    <app-queue-player-list-item *ngFor="let player of _players"
+      [playerId]="player"></app-queue-player-list-item>
+  </ul>
+</ng-container>

@@ -17,7 +17,9 @@ export class QueueService {
           { name: 'medic', count: 1 }
         ],
       },
-      players: [],
+      players: [
+        { playerId: '1', slot: 'soldier' },
+      ],
     });
   }
 
