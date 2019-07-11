@@ -1,7 +1,6 @@
-import { GameClass } from './game-class';
-import { Player } from 'src/app/player/models/player';
+import { QueueConfig } from './queue-config';
 
 export interface Queue {
-  classes: GameClass[];
-  players: Player[];
+  config: QueueConfig;
+  players: string[];
 }

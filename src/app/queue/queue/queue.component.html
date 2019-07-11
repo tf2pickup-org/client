@@ -1,0 +1,7 @@
+<div class="row" *ngIf="queueClasses | async as _queueClasses">
+  <div
+    *ngFor="let class of _queueClasses"
+    class="col">
+    <h4>{{ class.name }}</h4>
+  </div>
+</div>
