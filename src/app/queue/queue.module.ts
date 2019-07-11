@@ -6,6 +6,8 @@ import { QueueContainerComponent } from './queue-container/queue-container.compo
 import { QueueRoutingModule } from './queue-routing.module';
 import { QueueComponent } from './queue/queue.component';
 import { QueueStatusComponent } from './queue-status/queue-status.component';
+import { EffectsModule } from '@ngrx/effects';
+import { QueueEffects } from './queue.effects';
 
 @NgModule({
   declarations: [
@@ -16,6 +18,7 @@ import { QueueStatusComponent } from './queue-status/queue-status.component';
   imports: [
     CommonModule,
     StoreModule.forFeature('queue', reducer),
+    EffectsModule.forFeature([QueueEffects]),
 
     QueueRoutingModule,
   ],

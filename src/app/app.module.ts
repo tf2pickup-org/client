@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
 import { QueueModule } from './queue/queue.module';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { QueueModule } from './queue/queue.module';
         strictActionImmutability: true
       }
     }),
+    EffectsModule.forRoot([]),
 
     QueueModule,
   ],

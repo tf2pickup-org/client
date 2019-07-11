@@ -7,17 +7,7 @@ export interface State {
 }
 
 export const initialState: State = {
-  queue: {
-    config: {
-      classes: [
-        { name: 'scout', count: 2 },
-        { name: 'soldier', count: 2 },
-        { name: 'demoman', count: 1 },
-        { name: 'medic', count: 1 }
-      ],
-    },
-    players: [],
-  },
+  queue: null,
 };
 
 const queueReducer = createReducer(
