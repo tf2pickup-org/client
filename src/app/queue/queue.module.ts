@@ -12,6 +12,8 @@ import { QueuePlayerListItemComponent } from './queue-player-list-item/queue-pla
 import { QueuePlayerListComponent } from './queue-player-list/queue-player-list.component';
 import { HttpClientModule } from '@angular/common/http';
 import { JoinButtonComponent } from './join-button/join-button.component';
+import { JoinOrLeaveQueueComponent } from './join-or-leave-queue/join-or-leave-queue.component';
+import { LeaveButtonComponent } from './leave-button/leave-button.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { JoinButtonComponent } from './join-button/join-button.component';
     QueuePlayerListItemComponent,
     QueuePlayerListComponent,
     JoinButtonComponent,
+    JoinOrLeaveQueueComponent,
+    LeaveButtonComponent,
   ],
   imports: [
     CommonModule,

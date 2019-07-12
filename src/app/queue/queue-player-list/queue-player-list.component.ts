@@ -1,6 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs';
-import { QueuePlayer } from '../models/queue-player';
 import { AppState } from 'src/app/app.state';
 import { Store, select } from '@ngrx/store';
 import { queueSlotPlayers } from '../queue.selectors';
@@ -10,7 +9,8 @@ import { AuthService } from '@app/auth/auth.service';
 @Component({
   selector: 'app-queue-player-list',
   templateUrl: './queue-player-list.component.html',
-  styleUrls: ['./queue-player-list.component.scss']
+  styleUrls: ['./queue-player-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class QueuePlayerListComponent {
 

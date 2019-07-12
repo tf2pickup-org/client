@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Queue } from './models/queue';
 import { HttpClient } from '@angular/common/http';
 import { API_URL } from '@app/api-url';
@@ -21,6 +21,10 @@ export class QueueService {
 
   joinQueue(slot: string): Observable<QueuePlayer[]> {
     return this.http.post<QueuePlayer[]>(`${this.apiUrl}/queue/players`, { slot });
+  }
+
+  leaveQueue(): Observable<QueuePlayer[]> {
+    return this.http.delete<QueuePlayer[]>(`${this.apiUrl}/queue/players`);
   }
 
 }

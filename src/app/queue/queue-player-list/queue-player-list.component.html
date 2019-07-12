@@ -2,6 +2,9 @@
   <div class="list-group list-group-flush p-2 border rounded">
     <app-queue-player-list-item *ngFor="let player of _players"
       [playerId]="player"></app-queue-player-list-item>
-    <app-join-button *ngIf="authenticated" [slot]="slot" class="list-group-item"></app-join-button>
+    <app-join-or-leave-queue
+      *ngIf="authenticated"
+      [slot]="slot"
+      class="list-group-item"></app-join-or-leave-queue>
   </div>
 </ng-container>

@@ -1,0 +1,7 @@
+<app-join-button
+  *ngIf="!(isInSlot | async); else leaveButton"
+  [slot]="slot"></app-join-button>
+
+<ng-template #leaveButton>
+  <app-leave-button></app-leave-button>
+</ng-template>

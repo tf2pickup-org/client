@@ -18,3 +18,5 @@ export const queuePlayersRefreshed = createAction(
   '[API] Queue players refreshed',
   props<{ players: QueuePlayer[] }>(),
 );
+
+export const leaveQueue = createAction('[Queue] Leave queue');
