@@ -8,6 +8,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { PlayerModule } from '@app/player/player.module';
 import { API_URL } from './api-url';
 import { environment } from '@environment';
+import { AuthModule } from './auth/auth.module';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -24,8 +26,10 @@ import { environment } from '@environment';
     }),
     EffectsModule.forRoot([]),
 
+    AuthModule,
     PlayerModule,
     QueueModule,
+    SharedModule,
   ],
   providers: [
     { provide: API_URL, useValue: environment.apiUrl },
