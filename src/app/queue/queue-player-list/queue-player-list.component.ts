@@ -5,6 +5,7 @@ import { AppState } from 'src/app/app.state';
 import { Store, select } from '@ngrx/store';
 import { queueSlotPlayers } from '../queue.selectors';
 import { map } from 'rxjs/operators';
+import { AuthService } from '@app/auth/auth.service';
 
 @Component({
   selector: 'app-queue-player-list',
@@ -13,6 +14,7 @@ import { map } from 'rxjs/operators';
 })
 export class QueuePlayerListComponent {
 
+  authenticated = this.authService.authenticated;
   players: Observable<string[]>;
 
   @Input()
@@ -25,6 +27,7 @@ export class QueuePlayerListComponent {
 
   constructor(
     private store: Store<AppState>,
+    private authService: AuthService,
   ) { }
 
 }

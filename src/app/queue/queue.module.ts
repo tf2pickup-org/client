@@ -11,6 +11,7 @@ import { QueueEffects } from './queue.effects';
 import { QueuePlayerListItemComponent } from './queue-player-list-item/queue-player-list-item.component';
 import { QueuePlayerListComponent } from './queue-player-list/queue-player-list.component';
 import { HttpClientModule } from '@angular/common/http';
+import { JoinButtonComponent } from './join-button/join-button.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
     QueueStatusComponent,
     QueuePlayerListItemComponent,
     QueuePlayerListComponent,
+    JoinButtonComponent,
   ],
   imports: [
     CommonModule,

@@ -2,5 +2,6 @@
   <ul class="list-group list-group-flush">
     <app-queue-player-list-item *ngFor="let player of _players"
       [playerId]="player"></app-queue-player-list-item>
+    <app-join-button *ngIf="authenticated"></app-join-button>
   </ul>
 </ng-container>
