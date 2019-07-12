@@ -11,6 +11,7 @@ import { environment } from '@environment';
 import { AuthModule } from './auth/auth.module';
 import { SharedModule } from './shared/shared.module';
 import { ProfileModule } from './profile/profile.module';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { ProfileModule } from './profile/profile.module';
       }
     }),
     EffectsModule.forRoot([]),
+    StoreDevtoolsModule.instrument(),
 
     AuthModule,
     PlayerModule,

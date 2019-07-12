@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
-import { createEffect, Actions, ofType, OnInitEffects } from '@ngrx/effects';
-import { loadPlayers, playersLoaded } from './player.actions';
+import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { PlayersService } from './players.service';
 import { map, mergeMap } from 'rxjs/operators';
+import { loadPlayer, playerLoaded } from './player.actions';
 
 @Injectable()
-export class PlayerEffects implements OnInitEffects {
+export class PlayerEffects {
 
-  loadPlayers = createEffect(() =>
+  loadPlayer = createEffect(() =>
     this.actions.pipe(
-      ofType(loadPlayers),
-      mergeMap(() => this.playersService.fetchOnlinePlayers()),
-      map(players => playersLoaded({ players })),
+      ofType(loadPlayer),
+      mergeMap(({ playerId }) => this.playersService.fetchPlayer(playerId)),
+      map(player => playerLoaded({ player })),
     )
   );
 
@@ -19,9 +19,5 @@ export class PlayerEffects implements OnInitEffects {
     private actions: Actions,
     private playersService: PlayersService,
   ) { }
-
-  ngrxOnInitEffects() {
-    return loadPlayers();
-  }
 
 }

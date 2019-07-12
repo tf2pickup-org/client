@@ -1,5 +1,12 @@
 import { createAction, props } from '@ngrx/store';
 import { Player } from './models/player';
 
-export const loadPlayers = createAction('[Init] Load players');
-export const playersLoaded = createAction('[API] Players loaded', props<{ players: Player[] }>());
+export const loadPlayer = createAction(
+  '[Queue] Load player',
+  props<{ playerId: string }>(),
+);
+
+export const playerLoaded = createAction(
+  '[API] Player loaded',
+  props<{ player: Player }>(),
+);
