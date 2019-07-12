@@ -1,0 +1,9 @@
+import { createAction, props } from '@ngrx/store';
+import { Profile } from './models/profile';
+
+export const loadProfile = createAction('[Init] Load profile');
+
+export const profileLoaded = createAction(
+  '[API] Profile loaded',
+  props<{ profile: Profile }>(),
+);

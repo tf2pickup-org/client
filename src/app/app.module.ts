@@ -10,6 +10,7 @@ import { API_URL } from './api-url';
 import { environment } from '@environment';
 import { AuthModule } from './auth/auth.module';
 import { SharedModule } from './shared/shared.module';
+import { ProfileModule } from './profile/profile.module';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { SharedModule } from './shared/shared.module';
     PlayerModule,
     QueueModule,
     SharedModule,
+    ProfileModule,
   ],
   providers: [
     { provide: API_URL, useValue: environment.apiUrl },
