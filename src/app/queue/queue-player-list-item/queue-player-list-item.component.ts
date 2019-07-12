@@ -21,7 +21,6 @@ export class QueuePlayerListItemComponent {
     this.player = this.store.pipe(
       select(playerById(playerId)),
       tap(player => {
-        console.log(player);
         if (!player) {
           this.store.dispatch(loadPlayer({ playerId }));
         }

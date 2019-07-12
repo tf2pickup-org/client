@@ -14,15 +14,21 @@ import { AuthService } from '@app/auth/auth.service';
 })
 export class QueuePlayerListComponent {
 
+  private _slot: string;
   authenticated = this.authService.authenticated;
   players: Observable<string[]>;
 
   @Input()
   set slot(slot: string) {
+    this._slot = slot;
     this.players = this.store.pipe(
       select(queueSlotPlayers(slot)),
       map(ps => ps.map(p => p.playerId)),
     );
+  }
+
+  get slot() {
+    return this._slot;
   }
 
   constructor(

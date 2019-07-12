@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType, OnInitEffects } from '@ngrx/effects';
-import { loadQueue, queueLoaded } from './queue.actions';
+import { loadQueue, queueLoaded, joinQueue, queuePlayersRefreshed } from './queue.actions';
 import { mergeMap, map } from 'rxjs/operators';
 import { QueueService } from './queue.service';
 
@@ -12,6 +12,14 @@ export class QueueEffects implements OnInitEffects {
       ofType(loadQueue),
       mergeMap(() => this.queueService.fetchQueue()),
       map(queue => queueLoaded({ queue })),
+    )
+  );
+
+  joinQueue = createEffect(() =>
+    this.actions.pipe(
+      ofType(joinQueue),
+      mergeMap(({ slot }) => this.queueService.joinQueue(slot)),
+      map(players => queuePlayersRefreshed({ players })),
     )
   );
 

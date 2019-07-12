@@ -1,15 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { AppState } from '@app/app.state';
+import { joinQueue } from '../queue.actions';
 
 @Component({
   selector: 'app-join-button',
   templateUrl: './join-button.component.html',
-  styleUrls: ['./join-button.component.scss']
+  styleUrls: ['./join-button.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class JoinButtonComponent implements OnInit {
+export class JoinButtonComponent {
 
-  constructor() { }
+  @Input()
+  slot: string;
 
-  ngOnInit() {
+  constructor(
+    private store: Store<AppState>,
+  ) { }
+
+  joinQueue() {
+    this.store.dispatch(joinQueue({ slot: this.slot }));
   }
 
 }

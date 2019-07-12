@@ -1,7 +1,7 @@
 <ng-container *ngIf="players | async as _players">
-  <ul class="list-group list-group-flush">
+  <div class="list-group list-group-flush p-2 border rounded">
     <app-queue-player-list-item *ngFor="let player of _players"
       [playerId]="player"></app-queue-player-list-item>
-    <app-join-button *ngIf="authenticated"></app-join-button>
-  </ul>
+    <app-join-button *ngIf="authenticated" [slot]="slot" class="list-group-item"></app-join-button>
+  </div>
 </ng-container>
