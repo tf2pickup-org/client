@@ -7,5 +7,5 @@
   <a href="#" *ngIf="slot.playerId; else addPrompt" class="text-white">
     <app-player-name [playerId]="slot.playerId"></app-player-name>
   </a>
-  <ng-template #addPrompt>Join</ng-template>
+  <ng-template #addPrompt><span class="oi oi-plus text-secondary"></span></ng-template>
 </div>
