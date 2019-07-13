@@ -1,11 +1,22 @@
 <div
   class="queue-slot-item"
-  [class.taken]="!!slot.playerId"
   [class.free]="!slot.playerId"
+  [class.taken]="!!slot.playerId"
+  [class.by-me]="takenByMe"
   (click)="takeSlot()">
 
   <a href="#" *ngIf="slot.playerId; else addPrompt" class="text-white">
     <app-player-name [playerId]="slot.playerId"></app-player-name>
   </a>
-  <ng-template #addPrompt><span class="oi oi-plus text-secondary"></span></ng-template>
+
+  <ng-template #addPrompt>
+    <span class="oi oi-plus text-secondary add-prompt"></span>
+  </ng-template>
+
+  <button *ngIf="takenByMe"
+    type="button"
+    class="btn btn-light btn-sm leave-btn"
+    (click)="freeSlot($event)">
+    <span class="oi oi-minus"></span>
+  </button>
 </div>

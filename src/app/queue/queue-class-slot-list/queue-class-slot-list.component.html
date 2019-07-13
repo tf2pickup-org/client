@@ -1,4 +1,5 @@
-<div class="d-flex flex-column">
+<div class="d-flex flex-column" *ngIf="currentUserId | async as _currentUserId">
   <app-queue-slot-item *ngFor="let slot of slots | async"
-    [slot]="slot"></app-queue-slot-item>
+    [slot]="slot"
+    [takenByMe]="slot.playerId === _currentUserId"></app-queue-slot-item>
 </div>

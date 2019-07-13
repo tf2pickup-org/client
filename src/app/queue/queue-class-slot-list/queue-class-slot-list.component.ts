@@ -1,9 +1,11 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs';
 import { QueueSlot } from '../models/queue-slot';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { AppState } from '@app/app.state';
 import { queueSlotsForClass } from '../queue.selectors';
+import { profile } from '@app/profile/profile.selectors';
+import { map, startWith, filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-queue-class-slot-list',
@@ -13,6 +15,12 @@ import { queueSlotsForClass } from '../queue.selectors';
 })
 export class QueueClassSlotListComponent {
 
+  currentUserId: Observable<string> = this.store.pipe(
+    select(profile),
+    filter(theProfile => !!theProfile),
+    map(theProfile => theProfile.id),
+    startWith(null),
+  );
   slots: Observable<QueueSlot[]>;
 
   @Input()

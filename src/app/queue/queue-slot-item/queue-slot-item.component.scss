@@ -9,13 +9,24 @@
   background-color: theme-color-level("light", -5);
 
   display: flex;
+  flex-flow: row nowrap;
   justify-content: center;
   align-items: center;
 
+  position: relative;
+
   &.free {
+    .add-prompt {
+      display: none;
+    }
+
     &:hover {
       background-color: theme-color("light");
       cursor: pointer;
+
+      .add-prompt {
+        display: inline;
+      }
     }
   }
 
@@ -24,11 +35,11 @@
 
     &.by-me {
       background-color: theme-color("primary");
-
-      &:hover {
-        background-color: theme-color-level("primary", 5);
-        cursor: pointer;
-      }
     }
+  }
+
+  .leave-btn {
+    position: absolute;
+    left: .7em;
   }
 }
