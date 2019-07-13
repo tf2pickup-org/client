@@ -1,6 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 import { Queue } from './models/queue';
 import { QueueSlot } from './models/queue-slot';
+import { QueueState } from './models/queue-state';
 
 export const loadQueue = createAction('[Init] Load queue');
 
@@ -24,4 +25,9 @@ export const leaveQueue = createAction('[Queue] Leave queue');
 export const queueSlotUpdated = createAction(
   '[WS] Queue slot updated',
   props<{ slot: QueueSlot }>(),
+);
+
+export const queueStateUpdated = createAction(
+  '[WS] Queue state updated',
+  props<{ queueState: QueueState }>(),
 );

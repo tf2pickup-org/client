@@ -1,4 +1,6 @@
-<div class="container p-3 mt-2 mb-4 bg-info text-white rounded">
+<div
+  class="container p-3 mt-2 mb-4 text-white rounded"
+  [ngClass]="(state | async) === 'waiting' ? 'bg-info' : 'bg-success'">
   <div class="row text-center">
     <div class="col">
       Players: {{ playerCount | async }} / {{ requiredPlayerCount | async }}

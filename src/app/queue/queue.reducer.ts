@@ -1,6 +1,6 @@
 import { Queue } from './models/queue';
 import { createReducer, on, Action } from '@ngrx/store';
-import { queueLoaded, queueSlotsRefreshed, queueSlotUpdated } from './queue.actions';
+import { queueLoaded, queueSlotsRefreshed, queueSlotUpdated, queueStateUpdated } from './queue.actions';
 import { QueueSlot } from './models/queue-slot';
 import { QueueConfig } from './models/queue-config';
 import { QueueState } from './models/queue-state';
@@ -27,6 +27,7 @@ const queueReducer = createReducer(
   on(queueLoaded, (state, { queue }) => ({ ...state, ...queue })),
   on(queueSlotsRefreshed, (state, { slots }) => ({ ...state, slots })),
   on(queueSlotUpdated, (state, { slot }) => updateQueueSlot(slot, state)),
+  on(queueStateUpdated, (state, { queueState }) => ({ ...state, state: queueState })),
 );
 
 export function reducer(state: State | undefined, action: Action) {
