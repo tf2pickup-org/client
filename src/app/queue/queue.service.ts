@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { Queue } from './models/queue';
 import { HttpClient } from '@angular/common/http';
 import { API_URL } from '@app/api-url';
-import { QueuePlayer } from './models/queue-player';
+import { QueueSlot } from './models/queue-slot';
 
 @Injectable({
   providedIn: 'root'
@@ -19,12 +19,12 @@ export class QueueService {
     return this.http.get<Queue>(`${this.apiUrl}/queue`);
   }
 
-  joinQueue(slot: string): Observable<QueuePlayer[]> {
-    return this.http.post<QueuePlayer[]>(`${this.apiUrl}/queue/players`, { slot });
+  joinQueue(slotId: number): Observable<QueueSlot[]> {
+    return this.http.post<QueueSlot[]>(`${this.apiUrl}/queue/slots`, { slot_id: slotId });
   }
 
-  leaveQueue(): Observable<QueuePlayer[]> {
-    return this.http.delete<QueuePlayer[]>(`${this.apiUrl}/queue/players`);
+  leaveQueue(): Observable<QueueSlot[]> {
+    return this.http.delete<QueueSlot[]>(`${this.apiUrl}/queue/slots`);
   }
 
 }

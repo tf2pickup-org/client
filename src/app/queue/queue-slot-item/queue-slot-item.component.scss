@@ -1,0 +1,34 @@
+@import "~bootstrap/scss/bootstrap";
+
+.queue-slot-item {
+  @extend .border;
+  @extend .rounded;
+
+  height: 3em;
+  margin: 0.1em;
+  background-color: theme-color-level("light", -5);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &.free {
+    &:hover {
+      background-color: theme-color("light");
+      cursor: pointer;
+    }
+  }
+
+  &.taken {
+    background-color: theme-color-level("primary", -5);
+
+    &.by-me {
+      background-color: theme-color("primary");
+
+      &:hover {
+        background-color: theme-color-level("primary", 5);
+        cursor: pointer;
+      }
+    }
+  }
+}

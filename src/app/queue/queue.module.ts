@@ -8,29 +8,26 @@ import { QueueComponent } from './queue/queue.component';
 import { QueueStatusComponent } from './queue-status/queue-status.component';
 import { EffectsModule } from '@ngrx/effects';
 import { QueueEffects } from './queue.effects';
-import { QueuePlayerListItemComponent } from './queue-player-list-item/queue-player-list-item.component';
-import { QueuePlayerListComponent } from './queue-player-list/queue-player-list.component';
 import { HttpClientModule } from '@angular/common/http';
-import { JoinButtonComponent } from './join-button/join-button.component';
-import { JoinOrLeaveQueueComponent } from './join-or-leave-queue/join-or-leave-queue.component';
-import { LeaveButtonComponent } from './leave-button/leave-button.component';
+import { QueueClassSlotListComponent } from './queue-class-slot-list/queue-class-slot-list.component';
+import { QueueSlotItemComponent } from './queue-slot-item/queue-slot-item.component';
+import { PlayerModule } from '@app/player/player.module';
 
 @NgModule({
   declarations: [
     QueueContainerComponent,
     QueueComponent,
     QueueStatusComponent,
-    QueuePlayerListItemComponent,
-    QueuePlayerListComponent,
-    JoinButtonComponent,
-    JoinOrLeaveQueueComponent,
-    LeaveButtonComponent,
+    QueueClassSlotListComponent,
+    QueueSlotItemComponent,
   ],
   imports: [
     CommonModule,
     HttpClientModule,
     StoreModule.forFeature('queue', reducer),
     EffectsModule.forFeature([QueueEffects]),
+
+    PlayerModule,
 
     QueueRoutingModule,
   ],

@@ -7,9 +7,9 @@
   </div>
 
   <div class="row">
-    <div *ngFor="let class of _queueClasses"
+    <div *ngFor="let gameClass of _queueClasses"
       class="col list-group">
-      <app-queue-player-list [slot]="class.name"></app-queue-player-list>
+      <app-queue-class-slot-list [gameClass]="gameClass.name"></app-queue-class-slot-list>
     </div>
   </div>
 

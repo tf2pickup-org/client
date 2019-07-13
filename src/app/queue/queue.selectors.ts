@@ -4,8 +4,7 @@ import { State } from './queue.reducer';
 
 const queueFeature = createFeatureSelector<AppState, State>('queue');
 
-export const queue = createSelector(queueFeature, feature => feature.queue);
-export const queueConfig = createSelector(queue, q => q && q.config);
+export const queueConfig = createSelector(queueFeature, feature => feature.config);
 export const queueClasses = createSelector(queueConfig, qc => qc && qc.classes);
 
 export const queueRequiredPlayerCount = createSelector(
@@ -13,7 +12,12 @@ export const queueRequiredPlayerCount = createSelector(
   qc => qc && qc.reduce((prev, curr) => prev + curr.count, 0) * 2
 );
 
-export const queuePlayers = createSelector(queue, q => q && q.players);
-export const queueCurrentPlayerCount = createSelector(queuePlayers, players => players && players.length);
+export const queueSlots = createSelector(queueFeature, feature => feature.slots);
+export const queueCurrentPlayerCount = createSelector(
+  queueSlots,
+  slots => slots && slots.reduce((prev, curr) => curr.playerId ? prev + 1 : prev, 0));
 
-export const queueSlotPlayers = (slot: string) => createSelector(queuePlayers, players => players.filter(p => p.slot === slot));
+export const queueSlotsForClass = (gameClass: string) => createSelector(
+  queueSlots,
+  slots => slots && slots.filter(s => s.gameClass === gameClass),
+);

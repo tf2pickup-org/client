@@ -1,30 +1,23 @@
 import { Queue } from './models/queue';
 import { createReducer, on, Action } from '@ngrx/store';
-import { queueLoaded, queuePlayersRefreshed } from './queue.actions';
-import { QueuePlayer } from './models/queue-player';
+import { queueLoaded, queueSlotsRefreshed } from './queue.actions';
+import { QueueSlot } from './models/queue-slot';
+import { QueueConfig } from './models/queue-config';
 
 export interface State {
-  queue: Queue;
+  config: QueueConfig;
+  slots: QueueSlot[];
 }
 
 export const initialState: State = {
-  queue: null,
+  config: null,
+  slots: [],
 };
-
-function replacePlayers(players: QueuePlayer[], state: State) {
-  return {
-    ...state,
-    queue: {
-      ...state.queue,
-      players,
-    }
-  };
-}
 
 const queueReducer = createReducer(
   initialState,
-  on(queueLoaded, (state, { queue }) => ({ ...state, queue })),
-  on(queuePlayersRefreshed, (state, { players }) => replacePlayers(players, state)),
+  on(queueLoaded, (state, { queue }) => ({ ...state, ...queue })),
+  on(queueSlotsRefreshed, (state, { slots }) => ({ ...state, slots })),
 );
 
 export function reducer(state: State | undefined, action: Action) {

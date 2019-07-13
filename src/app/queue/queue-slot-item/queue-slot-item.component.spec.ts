@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LeaveButtonComponent } from './leave-button.component';
+import { QueueSlotItemComponent } from './queue-slot-item.component';
 
-describe('LeaveButtonComponent', () => {
-  let component: LeaveButtonComponent;
-  let fixture: ComponentFixture<LeaveButtonComponent>;
+describe('QueueSlotItemComponent', () => {
+  let component: QueueSlotItemComponent;
+  let fixture: ComponentFixture<QueueSlotItemComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LeaveButtonComponent ]
+      declarations: [ QueueSlotItemComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LeaveButtonComponent);
+    fixture = TestBed.createComponent(QueueSlotItemComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

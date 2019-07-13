@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { QueuePlayerListComponent } from './queue-player-list.component';
+import { QueueClassSlotListComponent } from './queue-class-slot-list.component';
 
-describe('QueuePlayerListComponent', () => {
-  let component: QueuePlayerListComponent;
-  let fixture: ComponentFixture<QueuePlayerListComponent>;
+describe('QueueClassSlotListComponent', () => {
+  let component: QueueClassSlotListComponent;
+  let fixture: ComponentFixture<QueueClassSlotListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ QueuePlayerListComponent ]
+      declarations: [ QueueClassSlotListComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(QueuePlayerListComponent);
+    fixture = TestBed.createComponent(QueueClassSlotListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,0 +1,11 @@
+<div
+  class="queue-slot-item"
+  [class.taken]="!!slot.playerId"
+  [class.free]="!slot.playerId"
+  (click)="takeSlot()">
+
+  <a href="#" *ngIf="slot.playerId; else addPrompt" class="text-white">
+    <app-player-name [playerId]="slot.playerId"></app-player-name>
+  </a>
+  <ng-template #addPrompt>Join</ng-template>
+</div>

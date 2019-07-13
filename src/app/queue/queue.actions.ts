@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { Queue } from './models/queue';
-import { QueuePlayer } from './models/queue-player';
+import { QueueSlot } from './models/queue-slot';
 
 export const loadQueue = createAction('[Init] Load queue');
 
@@ -11,12 +11,12 @@ export const queueLoaded = createAction(
 
 export const joinQueue = createAction(
   '[Queue] Join queue',
-  props<{ slot: string }>(),
+  props<{ slotId: number }>(),
 );
 
-export const queuePlayersRefreshed = createAction(
-  '[API] Queue players refreshed',
-  props<{ players: QueuePlayer[] }>(),
+export const queueSlotsRefreshed = createAction(
+  '[API] Queue slots refreshed',
+  props<{ slots: QueueSlot[] }>(),
 );
 
 export const leaveQueue = createAction('[Queue] Leave queue');
