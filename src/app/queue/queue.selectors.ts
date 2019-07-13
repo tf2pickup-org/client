@@ -6,10 +6,12 @@ const queueFeature = createFeatureSelector<AppState, State>('queue');
 
 export const queueConfig = createSelector(queueFeature, feature => feature.config);
 export const queueClasses = createSelector(queueConfig, qc => qc && qc.classes);
+export const queueState = createSelector(queueFeature, feature => feature.state);
 
 export const queueRequiredPlayerCount = createSelector(
   queueClasses,
-  qc => qc && qc.reduce((prev, curr) => prev + curr.count, 0) * 2
+  queueConfig,
+  (classes, config) => classes && classes.reduce((prev, curr) => prev + curr.count, 0) * config.teamCount
 );
 
 export const queueSlots = createSelector(queueFeature, feature => feature.slots);

@@ -20,11 +20,11 @@ export class QueueService {
   }
 
   joinQueue(slotId: number): Observable<QueueSlot[]> {
-    return this.http.post<QueueSlot[]>(`${this.apiUrl}/queue/slots`, { slot_id: slotId });
+    return this.http.put<QueueSlot[]>(`${this.apiUrl}/queue/slots`, { action: 'join', slot_id: slotId });
   }
 
   leaveQueue(): Observable<QueueSlot[]> {
-    return this.http.delete<QueueSlot[]>(`${this.apiUrl}/queue/slots`);
+    return this.http.put<QueueSlot[]>(`${this.apiUrl}/queue/slots`, { action: 'leave' });
   }
 
 }

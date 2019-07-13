@@ -3,15 +3,18 @@ import { createReducer, on, Action } from '@ngrx/store';
 import { queueLoaded, queueSlotsRefreshed, queueSlotUpdated } from './queue.actions';
 import { QueueSlot } from './models/queue-slot';
 import { QueueConfig } from './models/queue-config';
+import { QueueState } from './models/queue-state';
 
 export interface State {
   config: QueueConfig;
   slots: QueueSlot[];
+  state: QueueState;
 }
 
 export const initialState: State = {
   config: null,
   slots: [],
+  state: 'waiting',
 };
 
 function updateQueueSlot(slot: QueueSlot, state: State) {

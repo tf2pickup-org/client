@@ -1,3 +1,11 @@
-<h6>
-  Players: {{ playerCount | async }} / {{ requiredPlayerCount | async }}
-</h6>
+<div class="container p-3 mt-2 mb-4 bg-info text-white rounded">
+  <div class="row text-center">
+    <div class="col">
+      Players: {{ playerCount | async }} / {{ requiredPlayerCount | async }}
+    </div>
+
+    <div class="col">
+      Status: {{ state | async }}
+    </div>
+  </div>
+</div>
