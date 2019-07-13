@@ -5,6 +5,10 @@
   [class.by-me]="takenByMe"
   (click)="takeSlot()">
 
+  <div class="avatar" *ngIf="slot.playerId">
+    <app-player-avatar [playerId]="slot.playerId"></app-player-avatar>
+  </div>
+
   <a href="#" *ngIf="slot.playerId; else addPrompt" class="text-white">
     <app-player-name [playerId]="slot.playerId"></app-player-name>
   </a>

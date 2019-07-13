@@ -3,4 +3,5 @@ export interface Player {
   name: string;
   joinedAt: Date;
   steamId: string;
+  avatarUrl: string;
 }

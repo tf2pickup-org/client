@@ -5,14 +5,15 @@ import { reducer } from './player.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { PlayerEffects } from './player.effects';
 import { PlayerNameComponent } from './player-name/player-name.component';
+import { PlayerAvatarComponent } from './player-avatar/player-avatar.component';
 
 @NgModule({
-  declarations: [PlayerNameComponent],
+  declarations: [PlayerNameComponent, PlayerAvatarComponent],
   imports: [
     CommonModule,
     StoreModule.forFeature('players', reducer),
     EffectsModule.forFeature([PlayerEffects]),
   ],
-  exports: [PlayerNameComponent]
+  exports: [PlayerNameComponent, PlayerAvatarComponent]
 })
 export class PlayerModule { }
