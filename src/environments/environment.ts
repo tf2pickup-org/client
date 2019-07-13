@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   apiUrl: '/api', // goes via local proxy
+  wsUrl: '/',
 };
 
 /*

@@ -15,12 +15,7 @@ import { map, startWith, filter } from 'rxjs/operators';
 })
 export class QueueClassSlotListComponent {
 
-  currentUserId: Observable<string> = this.store.pipe(
-    select(profile),
-    filter(theProfile => !!theProfile),
-    map(theProfile => theProfile.id),
-    startWith(null),
-  );
+  currentPlayerId: string;
   slots: Observable<QueueSlot[]>;
 
   @Input()
@@ -30,6 +25,11 @@ export class QueueClassSlotListComponent {
 
   constructor(
     private store: Store<AppState>,
-  ) { }
+  ) {
+    this.store.pipe(
+      select(profile),
+      map(theProfile => theProfile ? theProfile.id : null),
+    ).subscribe(id => this.currentPlayerId = id);
+  }
 
 }

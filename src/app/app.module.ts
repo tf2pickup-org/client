@@ -12,6 +12,8 @@ import { AuthModule } from './auth/auth.module';
 import { SharedModule } from './shared/shared.module';
 import { ProfileModule } from './profile/profile.module';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { WS_URL } from './ws-url';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     StoreDevtoolsModule.instrument(),
 
     AuthModule,
+    CoreModule,
     PlayerModule,
     QueueModule,
     SharedModule,
@@ -37,6 +40,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
   ],
   providers: [
     { provide: API_URL, useValue: environment.apiUrl },
+    { provide: WS_URL, useValue: environment.wsUrl },
   ],
   bootstrap: [AppComponent]
 })

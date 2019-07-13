@@ -20,3 +20,8 @@ export const queueSlotsRefreshed = createAction(
 );
 
 export const leaveQueue = createAction('[Queue] Leave queue');
+
+export const queueSlotUpdated = createAction(
+  '[WS] Queue slot updated',
+  props<{ slot: QueueSlot }>(),
+);
