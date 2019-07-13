@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType, OnInitEffects } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { loadQueue, queueLoaded, joinQueue, queueSlotsRefreshed, leaveQueue, queueSlotUpdated } from './queue.actions';
 import { mergeMap, map } from 'rxjs/operators';
 import { QueueService } from './queue.service';
@@ -8,7 +8,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '@app/app.state';
 
 @Injectable()
-export class QueueEffects implements OnInitEffects {
+export class QueueEffects {
 
   loadQueue = createEffect(() =>
     this.actions.pipe(
@@ -41,10 +41,6 @@ export class QueueEffects implements OnInitEffects {
     private store: Store<AppState>,
   ) {
     this.queueEventsService.slotUpdate.subscribe(slot => this.store.dispatch(queueSlotUpdated({ slot })));
-  }
-
-  ngrxOnInitEffects() {
-    return loadQueue();
   }
 
 }
