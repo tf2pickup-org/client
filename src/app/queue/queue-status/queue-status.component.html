@@ -1,13 +1,18 @@
 <div
+  *ngIf="state | async as _state"
   class="container p-3 mt-2 mb-4 text-white rounded"
-  [ngClass]="(state | async) === 'waiting' ? 'bg-info' : 'bg-success'">
+  [ngClass]="{
+    'bg-info' :_state === 'waiting',
+    'bg-success': _state === 'ready',
+    'bg-dark': _state === 'launching'
+  }">
   <div class="row text-center">
     <div class="col">
       Players: {{ playerCount | async }} / {{ requiredPlayerCount | async }}
     </div>
 
     <div class="col">
-      Status: {{ state | async }}
+      Status: {{ _state }}
     </div>
   </div>
 </div>
