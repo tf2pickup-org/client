@@ -1,9 +1,9 @@
 import { Component, ChangeDetectionStrategy, OnDestroy, OnInit, ViewChild, TemplateRef } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { AppState } from '@app/app.state';
 import { Subject, combineLatest } from 'rxjs';
 import { queueState, mySlot } from '../queue.selectors';
-import { distinctUntilChanged, takeUntil, filter, debounceTime } from 'rxjs/operators';
+import { distinctUntilChanged, takeUntil, filter, debounceTime, withLatestFrom } from 'rxjs/operators';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { leaveQueue, readyUp } from '../queue.actions';
 
@@ -27,10 +27,9 @@ export class QueueContainerComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    combineLatest(
-      this.store.select(queueState).pipe(distinctUntilChanged()),
-      this.store.select(mySlot),
-    ).pipe(
+    this.store.pipe(
+      select(queueState),
+      withLatestFrom(this.store.select(mySlot)),
       filter(([, slot]) => !!slot),
       takeUntil(this.destroyed),
     ).subscribe(([state, slot]) => {
