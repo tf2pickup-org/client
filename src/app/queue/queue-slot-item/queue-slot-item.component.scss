@@ -36,6 +36,10 @@
     &.by-me {
       background-color: theme-color("primary");
     }
+
+    &.and-ready {
+      background-color: theme-color("success");
+    }
   }
 
   .avatar {

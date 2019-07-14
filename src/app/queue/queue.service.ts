@@ -52,4 +52,17 @@ export class QueueService {
     });
   }
 
+  readyUp(): Observable<QueueSlot> {
+    return new Observable(observer => {
+      this.ioClientService.socket.emit('player ready', (response: SlotUpdateResponse) => {
+        if (response.error) {
+          observer.error(response.error);
+        } else if (response.slot) {
+          observer.next(response.slot);
+          observer.complete();
+        }
+      });
+    });
+  }
+
 }

@@ -14,6 +14,7 @@ import { ProfileModule } from './profile/profile.module';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { WS_URL } from './ws-url';
 import { CoreModule } from './core/core.module';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { CoreModule } from './core/core.module';
     }),
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument(),
+    ModalModule.forRoot(),
 
     AuthModule,
     CoreModule,

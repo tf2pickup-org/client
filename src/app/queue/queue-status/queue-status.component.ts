@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
@@ -8,7 +8,8 @@ import { QueueState } from '../models/queue-state';
 @Component({
   selector: 'app-queue-status',
   templateUrl: './queue-status.component.html',
-  styleUrls: ['./queue-status.component.scss']
+  styleUrls: ['./queue-status.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class QueueStatusComponent {
 

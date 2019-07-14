@@ -3,6 +3,7 @@
   [class.free]="!slot.playerId"
   [class.taken]="!!slot.playerId"
   [class.by-me]="takenByMe"
+  [class.and-ready]="slot.playerReady"
   (click)="takeSlot()">
 
   <div class="avatar" *ngIf="slot.playerId">
@@ -17,7 +18,7 @@
     <span class="oi oi-plus text-secondary add-prompt"></span>
   </ng-template>
 
-  <button *ngIf="takenByMe"
+  <button *ngIf="takenByMe && !slot.playerReady"
     type="button"
     class="btn btn-light btn-sm leave-btn"
     (click)="freeSlot($event)">

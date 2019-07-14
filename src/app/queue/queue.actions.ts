@@ -41,3 +41,10 @@ export const queueStateUpdated = createAction(
   '[WS] Queue state updated',
   props<{ queueState: QueueState }>(),
 );
+
+export const readyUp = createAction('[Queue] Confirm ready to play');
+
+export const readyUpError = createAction(
+  '[API] Failed to ready up',
+  props<{ error: string }>(),
+);
