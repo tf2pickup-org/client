@@ -1,5 +1,5 @@
-<div class="container-fluid">
-  <app-steam-login-button *ngIf="!isAuthenticated"></app-steam-login-button>
-  <h2 *ngIf="profile | async as _profile">{{ _profile.name }}</h2>
+<app-navigation-bar></app-navigation-bar>
+
+<div class="container py-5">
   <router-outlet></router-outlet>
 </div>
