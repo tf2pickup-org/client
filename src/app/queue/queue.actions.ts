@@ -15,12 +15,22 @@ export const joinQueue = createAction(
   props<{ slotId: number }>(),
 );
 
+export const joinQueueError = createAction(
+  '[API] Failed to join queue',
+  props<{ error: string }>(),
+);
+
 export const queueSlotsRefreshed = createAction(
   '[API] Queue slots refreshed',
   props<{ slots: QueueSlot[] }>(),
 );
 
 export const leaveQueue = createAction('[Queue] Leave queue');
+
+export const leaveQueueError = createAction(
+  '[API] Failed to leave queue',
+  props<{ error: string }>(),
+);
 
 export const queueSlotUpdated = createAction(
   '[WS] Queue slot updated',

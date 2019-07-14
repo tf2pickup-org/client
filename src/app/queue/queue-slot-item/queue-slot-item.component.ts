@@ -23,7 +23,9 @@ export class QueueSlotItemComponent {
   ) { }
 
   takeSlot() {
-    this.store.dispatch(joinQueue({ slotId: this.slot.id }));
+    if (!this.slot.playerId) {
+      this.store.dispatch(joinQueue({ slotId: this.slot.id }));
+    }
   }
 
   freeSlot(event: Event) {

@@ -6,6 +6,11 @@ import { API_URL } from '@app/api-url';
 import { QueueSlot } from './models/queue-slot';
 import { IoClientService } from '@app/core/io-client.service';
 
+interface SlotUpdateResponse {
+  slot?: QueueSlot;
+  error?: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -23,18 +28,26 @@ export class QueueService {
 
   joinQueue(slotId: number): Observable<QueueSlot> {
     return new Observable(observer => {
-      this.ioClientService.socket.emit('join queue', slotId, (slot: QueueSlot) => {
-        observer.next(slot);
-        observer.complete();
+      this.ioClientService.socket.emit('join queue', slotId, (response: SlotUpdateResponse) => {
+        if (response.error) {
+          observer.error(response.error);
+        } else if (response.slot) {
+          observer.next(response.slot);
+          observer.complete();
+        }
       });
     });
   }
 
   leaveQueue(): Observable<QueueSlot> {
     return new Observable(observer => {
-      this.ioClientService.socket.emit('leave queue', (slot: QueueSlot) => {
-        observer.next(slot);
-        observer.complete();
+      this.ioClientService.socket.emit('leave queue', (response: SlotUpdateResponse) => {
+        if (response.error) {
+          observer.error(response.error);
+        } else if (response.slot) {
+          observer.next(response.slot);
+          observer.complete();
+        }
       });
     });
   }
