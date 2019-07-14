@@ -15,6 +15,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { WS_URL } from './ws-url';
 import { CoreModule } from './core/core.module';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { GamesModule } from './games/games.module';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     QueueModule,
     SharedModule,
     ProfileModule,
+    GamesModule,
   ],
   providers: [
     { provide: API_URL, useValue: environment.apiUrl },

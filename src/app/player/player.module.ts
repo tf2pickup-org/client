@@ -14,6 +14,9 @@ import { PlayerAvatarComponent } from './player-avatar/player-avatar.component';
     StoreModule.forFeature('players', reducer),
     EffectsModule.forFeature([PlayerEffects]),
   ],
-  exports: [PlayerNameComponent, PlayerAvatarComponent]
+  exports: [
+    PlayerNameComponent,
+    PlayerAvatarComponent,
+  ],
 })
 export class PlayerModule { }

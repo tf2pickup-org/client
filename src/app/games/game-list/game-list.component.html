@@ -1,0 +1,6 @@
+<ul class="list-group">
+  <li *ngFor="let game of games | async"
+    class="list-group-item">
+    #{{ game.number }} - {{ game.launchedAt | date:'medium' }} - {{ game.map }}
+  </li>
+</ul>
