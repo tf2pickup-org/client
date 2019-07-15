@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { GamesService } from './games.service';
 import { loadGames, gamesLoaded, gameAdded, loadGame, gameUpdated } from './games.actions';
-import { mergeMap, map, filter, mapTo, pairwise, withLatestFrom } from 'rxjs/operators';
+import { mergeMap, map, filter, mapTo, withLatestFrom } from 'rxjs/operators';
 import { GamesEventsService } from './games-events.service';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app.state';
@@ -34,6 +34,7 @@ export class GamesEffects {
   );
 
   loadActiveGame = createEffect(() =>
+    /* if there is a game that I participate in, fetch it */
     this.actions.pipe(
       ofType(profileLoaded),
       filter(({ profile: theProfile }) => !!theProfile && !!theProfile.activeGameId),
@@ -42,6 +43,7 @@ export class GamesEffects {
   );
 
   redirectToNewGame = createEffect(() =>
+    /* when a game I am part of starts, redirect to its details page */
     this.actions.pipe(
       ofType(gameAdded),
       withLatestFrom(this.store.select(profile)),
@@ -51,6 +53,7 @@ export class GamesEffects {
   );
 
   lockQueue = createEffect(() =>
+    /* lock the queue when a game that I participate in starts */
     combineLatest(
       this.store.select(profile),
       this.actions.pipe(ofType(gameAdded)),
@@ -61,16 +64,14 @@ export class GamesEffects {
   );
 
   unlockQueue = createEffect(() =>
+    /* unlock the queue when a game that I participated in ends */
     combineLatest(
       this.store.select(profile),
       this.actions.pipe(ofType(gameUpdated)),
     ).pipe(
-      filter(([theProfile, { game }]) => game.players.includes(theProfile.id)),
+      filter(([theProfile, { game }]) => theProfile && game.players.includes(theProfile.id)),
       map(([, { game }]) => game),
-      pairwise(),
-      filter(([previous, next]) =>
-        (previous.state === 'started' || previous.state === 'launching')
-          && (next.state === 'ended' || next.state === 'interrputed')),
+      filter(game => game.state === 'ended' || game.state === 'interrputed'),
       mapTo(queueUnlocked()),
     )
   );
