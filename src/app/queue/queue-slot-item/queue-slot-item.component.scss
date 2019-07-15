@@ -5,7 +5,7 @@
   @extend .rounded;
 
   height: 3em;
-  margin: 0.1em;
+  margin: 0.1em 0;
   background-color: theme-color-level("light", -5);
 
   display: flex;
