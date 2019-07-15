@@ -13,6 +13,7 @@ import { QueueClassSlotListComponent } from './queue-class-slot-list/queue-class
 import { QueueSlotItemComponent } from './queue-slot-item/queue-slot-item.component';
 import { PlayersModule } from '@app/players/players.module';
 import { QueueReadyUpDialogComponent } from './queue-ready-up-dialog/queue-ready-up-dialog.component';
+import { QueueReadyUpDialogControllerComponent } from './queue-ready-up-dialog-controller/queue-ready-up-dialog-controller.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { QueueReadyUpDialogComponent } from './queue-ready-up-dialog/queue-ready
     QueueClassSlotListComponent,
     QueueSlotItemComponent,
     QueueReadyUpDialogComponent,
+    QueueReadyUpDialogControllerComponent,
   ],
   imports: [
     CommonModule,
@@ -34,7 +36,7 @@ import { QueueReadyUpDialogComponent } from './queue-ready-up-dialog/queue-ready
     QueueRoutingModule,
   ],
   exports: [
-    QueueReadyUpDialogComponent,
+    QueueReadyUpDialogControllerComponent,
   ],
   entryComponents: [
     QueueReadyUpDialogComponent,

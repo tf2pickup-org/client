@@ -1,6 +1,6 @@
 <div
   *ngIf="state | async as _state"
-  class="container p-3 mt-2 mb-4 text-white rounded"
+  class="p-3 mt-2 mb-4 text-white rounded"
   [ngClass]="{
     'bg-info' :_state === 'waiting',
     'bg-success': _state === 'ready',
@@ -13,6 +13,10 @@
 
     <div class="col">
       Status: {{ _state }}
+    </div>
+
+    <div class="col">
+      Next map: cp_badlands
     </div>
   </div>
 </div>
