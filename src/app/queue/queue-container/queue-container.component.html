@@ -1,4 +1,12 @@
 <div class="m-2">
+
+  <div
+    *ngIf="activeGameId | async as _activeGameId"
+    class="alert alert-primary"
+    role="alert">
+    Click <a [routerLink]="['/game', _activeGameId]">here</a> to go back to your game.
+  </div>
+
   <app-queue-status></app-queue-status>
   <app-queue></app-queue>
 </div>

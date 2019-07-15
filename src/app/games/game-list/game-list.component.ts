@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { AppState } from '@app/app.state';
 import { first } from 'rxjs/operators';
@@ -10,7 +10,8 @@ import { Game } from '../models/game';
 @Component({
   selector: 'app-game-list',
   templateUrl: './game-list.component.html',
-  styleUrls: ['./game-list.component.scss']
+  styleUrls: ['./game-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GameListComponent implements OnInit {
 

@@ -1,11 +1,11 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, Input, ChangeDetectionStrategy, OnInit, OnDestroy } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
 import { QueueSlot } from '../models/queue-slot';
 import { Store, select } from '@ngrx/store';
 import { AppState } from '@app/app.state';
 import { queueSlotsForClass } from '../queue.selectors';
 import { profile } from '@app/profile/profile.selectors';
-import { map, startWith, filter } from 'rxjs/operators';
+import { map, takeUntil } from 'rxjs/operators';
 import { AuthService } from '@app/auth/auth.service';
 
 @Component({
@@ -14,8 +14,9 @@ import { AuthService } from '@app/auth/auth.service';
   styleUrls: ['./queue-class-slot-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class QueueClassSlotListComponent {
+export class QueueClassSlotListComponent implements OnInit, OnDestroy {
 
+  private destroyed = new Subject<void>();
   currentPlayerId: string;
   slots: Observable<QueueSlot[]>;
   disabled = !this.authService.authenticated;
@@ -28,11 +29,23 @@ export class QueueClassSlotListComponent {
   constructor(
     private store: Store<AppState>,
     private authService: AuthService,
-  ) {
+  ) { }
+
+  ngOnInit() {
     this.store.pipe(
       select(profile),
-      map(theProfile => theProfile ? theProfile.id : null),
-    ).subscribe(id => this.currentPlayerId = id);
+      takeUntil(this.destroyed),
+    ).subscribe(theProfile => {
+      if (theProfile) {
+        this.currentPlayerId = theProfile.id;
+        this.disabled = !!theProfile.activeGameId;
+      }
+    });
+  }
+
+  ngOnDestroy() {
+    this.destroyed.next();
+    this.destroyed.unsubscribe();
   }
 
 }
