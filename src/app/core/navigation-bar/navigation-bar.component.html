@@ -6,14 +6,15 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" routerLink="/games">games</a>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/games" routerLinkActive="active">games</a>
       </li>
     </ul>
 
     <div class="navbar-text">
       <app-steam-login-button *ngIf="!isAuthenticated"></app-steam-login-button>
     </div>
+
     <h2 *ngIf="profile | async as _profile">{{ _profile.name }}</h2>
   </div>
 </nav>
