@@ -1,10 +1,10 @@
 <div class="m-2">
 
   <div
-    *ngIf="activeGameId | async as _activeGameId"
+    *ngIf="activeGame | async as _activeGame"
     class="alert alert-primary"
     role="alert">
-    Click <a [routerLink]="['/game', _activeGameId]">here</a> to go back to your game.
+    Click <a [routerLink]="['/game', _activeGame.id]">here</a> to go back to your game.
   </div>
 
   <app-queue-status></app-queue-status>

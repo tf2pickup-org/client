@@ -17,3 +17,8 @@ export const loadGame = createAction(
   '[Games] Load game',
   props<{ gameId: string }>(),
 );
+
+export const gameUpdated = createAction(
+  '[WS] Game updated',
+  props<{ game: Game }>(),
+);

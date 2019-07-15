@@ -2,7 +2,7 @@
   class="queue-slot-item"
   [ngClass]="{
     'free': !slot.playerId,
-    'disabled': disabled,
+    'locked': locked,
     'taken': !!slot.playerId,
     'by-me': takenByMe,
     'and-ready': slot.playerReady
@@ -23,7 +23,7 @@
     <span class="oi oi-plus text-secondary add-prompt"></span>
   </ng-template>
 
-  <button *ngIf="takenByMe && !slot.playerReady"
+  <button *ngIf="!locked && takenByMe && !slot.playerReady"
     type="button"
     class="btn btn-light btn-sm leave-btn"
     (click)="freeSlot($event)">

@@ -19,14 +19,14 @@ export class QueueSlotItemComponent {
   takenByMe = false;
 
   @Input()
-  disabled = false;
+  locked = false;
 
   constructor(
     private store: Store<AppState>,
   ) { }
 
   takeSlot() {
-    if (!this.disabled && !this.slot.playerId) {
+    if (!this.locked && !this.slot.playerId) {
       this.store.dispatch(joinQueue({ slotId: this.slot.id }));
     }
   }

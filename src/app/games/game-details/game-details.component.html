@@ -2,10 +2,10 @@
   class="container">
   <h4>Pickup #{{ _game.number }}</h4>
 
-  <div class="row">
-    <div class="col">Launched</div>
-    <div class="col">Map</div>
-    <div class="col">State</div>
+  <div class="row text-muted">
+    <div class="col">launched</div>
+    <div class="col">map</div>
+    <div class="col">state</div>
   </div>
 
   <div class="row">
@@ -14,7 +14,63 @@
     <div class="col">{{ _game.state }}</div>
   </div>
 
-  <div class="row mt-3">
+  <ng-container *ngIf="_game.state === 'launching' || _game.state === 'started'">
+    <div class="row text-muted mt-2">
+      <div class="col">connect</div>
+    </div>
+
+    <div class="row">
+      <div class="col-8">
+        <span *ngIf="_game.connectString; else noConnectString">
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" [value]="_game.connectString" readonly>
+            <div class="input-group-append">
+              <button
+                class="btn btn-outline-secondary"
+                type="button"
+                tooltip="Copy the connect string to the clipboard">copy</button>
+              <button
+                class="btn btn-outline-primary"
+                type="button"
+                tooltip="Join the game straight away">join</button>
+            </div>
+          </div>
+        </span>
+        <ng-template #noConnectString>
+          <span class="font-italic text-muted">not available yet</span>
+        </ng-template>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="_game.state === 'ended'">
+    <div class="row text-muted mt-2">
+      <div class="col">logs</div>
+      <div class="col">demo</div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <span *ngIf="_game.logsUrl; else noLogs">
+          {{ _game.logsUrl }}
+        </span>
+        <ng-template #noLogs>
+          <span class="font-italic text-muted">unavailable</span>
+        </ng-template>
+      </div>
+
+      <div class="col">
+        <span *ngIf="_game.demoUrl; else noDemo">
+          {{ _game.demoUrl }}
+        </span>
+        <ng-template #noDemo>
+          <span class="font-italic text-muted">unavailable</span>
+        </ng-template>
+      </div>
+    </div>
+  </ng-container>
+
+  <div class="row mt-4">
     <div class="col">
       <div class="list-group list-group-flush" *ngIf="playersRed | async as _playersRed">
         <div class="team-header team-header-red">RED</div>

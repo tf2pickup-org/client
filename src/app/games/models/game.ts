@@ -12,4 +12,5 @@ export interface Game {
   logsUrl?: string;
   demoUrl?: string;
   state: GameState;
+  connectString: string;
 }

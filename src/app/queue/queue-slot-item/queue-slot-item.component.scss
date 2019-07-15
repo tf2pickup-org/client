@@ -20,7 +20,7 @@
       display: none;
     }
 
-    &:not(.disabled):hover {
+    &:not(.locked):hover {
       background-color: theme-color("light");
       cursor: pointer;
 

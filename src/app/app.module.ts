@@ -16,6 +16,7 @@ import { WS_URL } from './ws-url';
 import { CoreModule } from './core/core.module';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { GamesModule } from './games/games.module';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { GamesModule } from './games/games.module';
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument(),
     ModalModule.forRoot(),
+    TooltipModule.forRoot(),
 
     AuthModule,
     CoreModule,

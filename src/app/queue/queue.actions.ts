@@ -48,3 +48,6 @@ export const readyUpError = createAction(
   '[API] Failed to ready up',
   props<{ error: string }>(),
 );
+
+export const queueLocked = createAction('[Queue] Queue locked');
+export const queueUnlocked = createAction('[Queue] Queue unlocked');
