@@ -4,11 +4,15 @@ import { AppState } from '@app/app.state';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Player } from '../models/player';
-import { map, switchMap, tap } from 'rxjs/operators';
+import { map, switchMap, tap, first } from 'rxjs/operators';
 import { playerById } from '../players.selectors';
 import { loadPlayer } from '../players.actions';
 import { Game } from '@app/games/models/game';
 import { PlayersService } from '../players.service';
+import { profile } from '@app/profile/profile.selectors';
+import { Profile } from '@app/profile/models/profile';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { EditPlayerDialogComponent } from '../edit-player-dialog/edit-player-dialog.component';
 
 @Component({
   selector: 'app-player-details',
@@ -20,11 +24,13 @@ export class PlayerDetailsComponent implements OnInit {
 
   player: Observable<Player>;
   games: Observable<Game[]>;
+  profile: Observable<Profile> = this.store.select(profile);
 
   constructor(
     private route: ActivatedRoute,
     private store: Store<AppState>,
     private playersService: PlayersService,
+    private modalService: BsModalService,
   ) { }
 
   ngOnInit() {
@@ -39,6 +45,15 @@ export class PlayerDetailsComponent implements OnInit {
         })
       ))
     );
+  }
+
+  editPlayer(event: Event) {
+    event.preventDefault();
+
+    this.player.pipe(first()).subscribe(player => {
+      const initialState = { player };
+      this.modalService.show(EditPlayerDialogComponent, { initialState });
+    });
   }
 
 }

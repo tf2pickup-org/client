@@ -10,6 +10,12 @@
       <a href="http://etf2l.org/" target="_blank">etf2l</a>
       &bull;
       <a [href]="'http://logs.tf/profile/' + _player.steamId" target="_blank">logs</a>
+
+      <ng-container *ngIf="(profile | async)?.role === 'super-user'">
+        &bull;
+        <!-- <button type="button" class="btn btn-link">edit name</button> -->
+        <a href="#" class="text-secondary" (click)="editPlayer($event)">edit</a>
+      </ng-container>
     </small>
   </h4>
 

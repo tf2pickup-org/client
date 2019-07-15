@@ -23,4 +23,8 @@ export class PlayersService {
     return this.http.get<Game[]>(`${this.apiUrl}/players/${playerId}/games`);
   }
 
+  savePlayer(player: Player): Observable<Player> {
+    return this.http.put<Player>(`${this.apiUrl}/players/${player.id}`, player);
+  }
+
 }

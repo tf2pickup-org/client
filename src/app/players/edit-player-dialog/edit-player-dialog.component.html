@@ -1,0 +1,30 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">edit player</h4>
+</div>
+
+<div class="modal-body">
+  <div class="form-group row">
+    <label for="playerName" class="col-2 col-form-label">name</label>
+    <div class="col-10">
+      <input
+        #playerName
+        type="text"
+        class="form-control"
+        id="playerName"
+        [(ngModel)]="playerNameValue">
+    </div>
+  </div>
+</div>
+
+<div class="modal-footer">
+  <button
+    type="button"
+    class="btn btn-primary"
+    (click)="save()"
+    [disabled]="locked | async">{{ (locked | async) ? 'saving...' : 'save' }}</button>
+  <button
+    type="button"
+    class="btn btn-danger"
+    (click)="bsModalRef.hide()"
+    [disabled]="locked | async">cancel</button>
+</div>
