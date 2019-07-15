@@ -6,7 +6,8 @@ export interface Game {
   launchedAt: Date;
   number: number;
   teams: { [teamId: string]: string };
-  players: GamePlayer[];
+  slots: GamePlayer[];
+  players: string[];
   map: string;
   logsUrl?: string;
   demoUrl?: string;

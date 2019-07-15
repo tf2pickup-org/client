@@ -41,7 +41,7 @@ export class GameDetailsComponent implements OnInit {
       filter(game => !!game),
       tap(game => {
         const playersForTeam = (teamId: string) => zip(
-          ...game.players
+          ...game.slots
             .filter(p => p.teamId === teamId)
             .map(p => p.playerId)
             .map(playerId =>

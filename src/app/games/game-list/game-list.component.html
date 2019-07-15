@@ -3,5 +3,7 @@
     [routerLink]="['/game', game.id]"
     class="list-group-item list-group-item-action">
     #{{ game.number }} - {{ game.launchedAt | date:'medium' }} - {{ game.map }}
+    <span *ngIf="game.state === 'launching'" class="badge badge-primary">launching</span>
+    <span *ngIf="game.state === 'started'" class="badge badge-warning">in progress</span>
   </a>
 </div>

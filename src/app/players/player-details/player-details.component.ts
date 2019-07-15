@@ -7,6 +7,8 @@ import { Player } from '../models/player';
 import { map, switchMap, tap } from 'rxjs/operators';
 import { playerById } from '../players.selectors';
 import { loadPlayer } from '../players.actions';
+import { Game } from '@app/games/models/game';
+import { PlayersService } from '../players.service';
 
 @Component({
   selector: 'app-player-details',
@@ -17,15 +19,18 @@ import { loadPlayer } from '../players.actions';
 export class PlayerDetailsComponent implements OnInit {
 
   player: Observable<Player>;
+  games: Observable<Game[]>;
 
   constructor(
     private route: ActivatedRoute,
     private store: Store<AppState>,
+    private playersService: PlayersService,
   ) { }
 
   ngOnInit() {
     this.player = this.route.paramMap.pipe(
       map(params => params.get('id')),
+      tap(id => this.games = this.playersService.fetchPlayerGames(id)),
       switchMap(id => this.store.select(playerById(id)).pipe(
         tap(player => {
           if (!player) {

@@ -12,7 +12,24 @@
   </h4>
 
   <div class="row">
-    <div class="col-1">Joined</div>
+    <div class="col-2 text-muted">Joined</div>
     <div class="col">{{ _player.joinedAt | date:'medium' }}</div>
+  </div>
+
+  <div class="row">
+    <div class="col-2 text-muted">Games played</div>
+    <div class="col">{{ _player.gameCount }}</div>
+  </div>
+
+  <h6 class="mt-5">Games</h6>
+
+  <div class="list-group list-group-flush">
+    <a *ngFor="let game of games | async"
+      [routerLink]="['/game', game.id]"
+      class="list-group-item list-group-item-action">
+      #{{ game.number }} - {{ game.launchedAt | date:'medium' }} - {{ game.map }}
+      <span *ngIf="game.state === 'launching'" class="badge badge-primary">launching</span>
+      <span *ngIf="game.state === 'started'" class="badge badge-warning">in progress</span>
+    </a>
   </div>
 </div>
