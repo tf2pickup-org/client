@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { PlayersService } from './players.service';
 import { map, mergeMap } from 'rxjs/operators';
-import { loadPlayer, playerLoaded } from './player.actions';
+import { loadPlayer, playerLoaded } from './players.actions';
 
 @Injectable()
 export class PlayerEffects {

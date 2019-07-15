@@ -1,8 +1,8 @@
 import { EntityState } from '@ngrx/entity';
 import { Player } from './models/player';
-import { adapter } from './player.adapter';
+import { adapter } from './players.adapter';
 import { createReducer, Action, on } from '@ngrx/store';
-import { playerLoaded } from './player.actions';
+import { playerLoaded } from './players.actions';
 
 export interface State extends EntityState<Player> { }
 

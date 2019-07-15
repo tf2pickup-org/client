@@ -11,7 +11,7 @@ import { QueueEffects } from './queue.effects';
 import { HttpClientModule } from '@angular/common/http';
 import { QueueClassSlotListComponent } from './queue-class-slot-list/queue-class-slot-list.component';
 import { QueueSlotItemComponent } from './queue-slot-item/queue-slot-item.component';
-import { PlayerModule } from '@app/player/player.module';
+import { PlayersModule } from '@app/players/players.module';
 import { QueueReadyUpDialogComponent } from './queue-ready-up-dialog/queue-ready-up-dialog.component';
 
 @NgModule({
@@ -29,7 +29,7 @@ import { QueueReadyUpDialogComponent } from './queue-ready-up-dialog/queue-ready
     StoreModule.forFeature('queue', reducer),
     EffectsModule.forFeature([QueueEffects]),
 
-    PlayerModule,
+    PlayersModule,
 
     QueueRoutingModule,
   ],

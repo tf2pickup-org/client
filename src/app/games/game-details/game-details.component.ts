@@ -7,9 +7,9 @@ import { ActivatedRoute } from '@angular/router';
 import { switchMap, map, tap, filter } from 'rxjs/operators';
 import { gameById } from '../games.selectors';
 import { loadGame } from '../games.actions';
-import { Player } from '@app/player/models/player';
-import { playerById } from '@app/player/player.selectors';
-import { loadPlayer } from '@app/player/player.actions';
+import { Player } from '@app/players/models/player';
+import { playerById } from '@app/players/players.selectors';
+import { loadPlayer } from '@app/players/players.actions';
 
 @Component({
   selector: 'app-game-details',

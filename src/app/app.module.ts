@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
 import { QueueModule } from '@app/queue/queue.module';
 import { EffectsModule } from '@ngrx/effects';
-import { PlayerModule } from '@app/player/player.module';
+import { PlayersModule } from '@app/players/players.module';
 import { API_URL } from './api-url';
 import { environment } from '@environment';
 import { AuthModule } from './auth/auth.module';
@@ -36,7 +36,7 @@ import { GamesModule } from './games/games.module';
 
     AuthModule,
     CoreModule,
-    PlayerModule,
+    PlayersModule,
     QueueModule,
     SharedModule,
     ProfileModule,

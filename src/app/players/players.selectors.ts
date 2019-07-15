@@ -1,7 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { AppState } from '../app.state';
-import { State } from './player.reducer';
-import { adapter } from './player.adapter';
+import { State } from './players.reducer';
+import { adapter } from './players.adapter';
 
 const playerFeature = createFeatureSelector<AppState, State>('players');
 const { selectEntities } = adapter.getSelectors();

@@ -2,9 +2,9 @@ import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { AppState } from '@app/app.state';
 import { Observable } from 'rxjs';
-import { playerById } from '../player.selectors';
+import { playerById } from '../players.selectors';
 import { tap, map, filter } from 'rxjs/operators';
-import { loadPlayer } from '../player.actions';
+import { loadPlayer } from '../players.actions';
 
 @Component({
   selector: 'app-player-name',
