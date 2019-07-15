@@ -1,0 +1,36 @@
+<div *ngIf="game | async as _game"
+  class="container">
+  <h4>Pickup #{{ _game.number }}</h4>
+
+  <div class="row">
+    <div class="col">Launched</div>
+    <div class="col">Map</div>
+    <div class="col">State</div>
+  </div>
+
+  <div class="row">
+    <div class="col">{{ _game.launchedAt | date:'medium' }}</div>
+    <div class="col">{{ _game.map }}</div>
+    <div class="col">{{ _game.state }}</div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col">
+      <div class="list-group list-group-flush" *ngIf="playersRed | async as _playersRed">
+        <div class="team-header team-header-red">RED</div>
+        <a *ngFor="let player of _playersRed" href="#" class="list-group-item list-group-item-action">
+          {{ player?.name }}
+        </a>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="list-group list-group-flush" *ngIf="playersBlu | async as _playersBlu">
+        <div class="team-header team-header-blu">BLU</div>
+        <a *ngFor="let player of _playersBlu" href="#" class="list-group-item list-group-item-action">
+          {{ player?.name }}
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

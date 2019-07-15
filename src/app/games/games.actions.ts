@@ -9,6 +9,11 @@ export const gamesLoaded = createAction(
 );
 
 export const gameAdded = createAction(
-  '[WS] Game added',
+  '[WS/API] Game added',
   props<{ game: Game }>(),
+);
+
+export const loadGame = createAction(
+  '[Games] Load game',
+  props<{ gameId: string }>(),
 );

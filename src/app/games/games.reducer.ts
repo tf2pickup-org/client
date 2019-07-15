@@ -15,7 +15,7 @@ const initialState: State = adapter.getInitialState({
 const gameReducer = createReducer(
   initialState,
   on(gamesLoaded, (state, { games }) => ({ ...adapter.addAll(games, state), loaded: true })),
-  on(gameAdded, (state, { game }) => adapter.addOne(game, state)),
+  on(gameAdded, (state, { game }) => adapter.upsertOne(game, state)),
 );
 
 export function reducer(state: State | undefined, action: Action) {

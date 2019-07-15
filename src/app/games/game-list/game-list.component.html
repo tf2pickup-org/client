@@ -1,6 +1,7 @@
-<ul class="list-group">
-  <li *ngFor="let game of games | async"
-    class="list-group-item">
+<div class="list-group">
+  <a *ngFor="let game of games | async"
+    [routerLink]="['/game', game.id]"
+    class="list-group-item list-group-item-action">
     #{{ game.number }} - {{ game.launchedAt | date:'medium' }} - {{ game.map }}
-  </li>
-</ul>
+  </a>
+</div>

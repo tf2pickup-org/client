@@ -18,4 +18,8 @@ export class GamesService {
     return this.http.get<Game[]>(`${this.apiUrl}/games`);
   }
 
+  fetchGame(gameId: string): Observable<Game> {
+    return this.http.get<Game>(`${this.apiUrl}/games/${gameId}`);
+  }
+
 }
