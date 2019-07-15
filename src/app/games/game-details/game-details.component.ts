@@ -40,10 +40,9 @@ export class GameDetailsComponent implements OnInit {
       )),
       filter(game => !!game),
       tap(game => {
-        const redTeamId = Object.keys(game.teams).find(key => game.teams[key] === 'RED');
-        this.playersRed = zip(
+        const playersForTeam = (teamId: string) => zip(
           ...game.players
-            .filter(p => p.teamId === redTeamId)
+            .filter(p => p.teamId === teamId)
             .map(p => p.playerId)
             .map(playerId =>
               this.store.select(playerById(playerId)).pipe(
@@ -56,21 +55,10 @@ export class GameDetailsComponent implements OnInit {
             )
         );
 
+        const redTeamId = Object.keys(game.teams).find(key => game.teams[key] === 'RED');
+        this.playersRed = playersForTeam(redTeamId);
         const bluTeamId = Object.keys(game.teams).find(key => game.teams[key] === 'BLU');
-        this.playersBlu = zip(
-          ...game.players
-            .filter(p => p.teamId === bluTeamId)
-            .map(p => p.playerId)
-            .map(playerId =>
-              this.store.select(playerById(playerId)).pipe(
-                tap(player => {
-                  if (!player) {
-                    this.store.dispatch(loadPlayer({ playerId }));
-                  }
-                }),
-              )
-            )
-        );
+        this.playersBlu = playersForTeam(bluTeamId);
       }),
     );
   }

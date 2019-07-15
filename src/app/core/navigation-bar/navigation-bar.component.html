@@ -11,7 +11,9 @@
       </li>
     </ul>
 
-    <app-steam-login-button *ngIf="!isAuthenticated"></app-steam-login-button>
+    <div class="navbar-text">
+      <app-steam-login-button *ngIf="!isAuthenticated"></app-steam-login-button>
+    </div>
     <h2 *ngIf="profile | async as _profile">{{ _profile.name }}</h2>
   </div>
 </nav>
