@@ -29,7 +29,6 @@ export class AppComponent implements OnInit, OnDestroy {
       filter(([, slot]) => !!slot),
       takeUntil(this.destroyed),
     ).subscribe(([state, slot]) => {
-      console.log(state, slot);
       if (state === 'ready' && !slot.playerReady) {
         this.modalService.show(QueueReadyUpDialogComponent, {
           keyboard: false,

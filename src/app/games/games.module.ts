@@ -17,9 +17,9 @@ import { GameDetailsComponent } from './game-details/game-details.component';
   ],
   imports: [
     CommonModule,
-    GamesRoutingModule,
     StoreModule.forFeature('games', reducer),
     EffectsModule.forFeature([GamesEffects]),
+    GamesRoutingModule,
   ],
 })
 export class GamesModule { }

@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { AppState } from '@app/app.state';
 import { Observable, zip } from 'rxjs';
 import { Game } from '../models/game';
@@ -45,12 +45,14 @@ export class GameDetailsComponent implements OnInit {
             .filter(p => p.teamId === teamId)
             .map(p => p.playerId)
             .map(playerId =>
-              this.store.select(playerById(playerId)).pipe(
+              this.store.pipe(
+                select(playerById(playerId)),
                 tap(player => {
                   if (!player) {
                     this.store.dispatch(loadPlayer({ playerId }));
                   }
                 }),
+                filter(player => !!player),
               )
             )
         );

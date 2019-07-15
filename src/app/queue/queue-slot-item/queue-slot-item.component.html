@@ -13,7 +13,9 @@
     <app-player-avatar [playerId]="slot.playerId"></app-player-avatar>
   </div>
 
-  <a href="#" *ngIf="slot.playerId; else addPrompt" class="text-white">
+  <a *ngIf="slot.playerId; else addPrompt"
+    class="text-white"
+    [routerLink]="['/player', slot.playerId]">
     <app-player-name [playerId]="slot.playerId"></app-player-name>
   </a>
 

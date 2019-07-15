@@ -1,0 +1,18 @@
+<div *ngIf="player | async as _player"
+  class="container">
+
+  <h4>
+    {{ _player.name }}
+    <small class="text-muted ml-2">
+      <a [href]="'http://steamcommunity.com/profiles/' + _player.steamId" target="_blank">steam</a>
+      &bull;
+      <!-- FIXME Pass ETF2L profile id once we have account verification done -->
+      <a href="http://etf2l.org/">etf2l</a>
+    </small>
+  </h4>
+
+  <div class="row">
+    <div class="col-1">Joined</div>
+    <div class="col">{{ _player.joinedAt | date:'medium' }}</div>
+  </div>
+</div>

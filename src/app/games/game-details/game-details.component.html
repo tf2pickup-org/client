@@ -18,8 +18,10 @@
     <div class="col">
       <div class="list-group list-group-flush" *ngIf="playersRed | async as _playersRed">
         <div class="team-header team-header-red">RED</div>
-        <a *ngFor="let player of _playersRed" href="#" class="list-group-item list-group-item-action">
-          {{ player?.name }}
+        <a *ngFor="let player of _playersRed"
+          class="list-group-item list-group-item-action"
+          [routerLink]="['/player', player.id]">
+          {{ player.name }}
         </a>
       </div>
     </div>
@@ -27,8 +29,10 @@
     <div class="col">
       <div class="list-group list-group-flush" *ngIf="playersBlu | async as _playersBlu">
         <div class="team-header team-header-blu">BLU</div>
-        <a *ngFor="let player of _playersBlu" href="#" class="list-group-item list-group-item-action">
-          {{ player?.name }}
+        <a *ngFor="let player of _playersBlu"
+          class="list-group-item list-group-item-action"
+          [routerLink]="['/player', player.id]">
+          {{ player.name }}
         </a>
       </div>
     </div>
