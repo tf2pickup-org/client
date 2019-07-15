@@ -6,6 +6,7 @@ import { AppState } from '@app/app.state';
 import { queueSlotsForClass } from '../queue.selectors';
 import { profile } from '@app/profile/profile.selectors';
 import { map, startWith, filter } from 'rxjs/operators';
+import { AuthService } from '@app/auth/auth.service';
 
 @Component({
   selector: 'app-queue-class-slot-list',
@@ -17,6 +18,7 @@ export class QueueClassSlotListComponent {
 
   currentPlayerId: string;
   slots: Observable<QueueSlot[]>;
+  disabled = !this.authService.authenticated;
 
   @Input()
   set gameClass(gameClass: string) {
@@ -25,6 +27,7 @@ export class QueueClassSlotListComponent {
 
   constructor(
     private store: Store<AppState>,
+    private authService: AuthService,
   ) {
     this.store.pipe(
       select(profile),

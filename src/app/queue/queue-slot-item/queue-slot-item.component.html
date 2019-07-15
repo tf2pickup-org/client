@@ -1,9 +1,12 @@
 <div
   class="queue-slot-item"
-  [class.free]="!slot.playerId"
-  [class.taken]="!!slot.playerId"
-  [class.by-me]="takenByMe"
-  [class.and-ready]="slot.playerReady"
+  [ngClass]="{
+    'free': !slot.playerId,
+    'disabled': disabled,
+    'taken': !!slot.playerId,
+    'by-me': takenByMe,
+    'and-ready': slot.playerReady
+  }"
   (click)="takeSlot()">
 
   <div class="avatar" *ngIf="slot.playerId">
