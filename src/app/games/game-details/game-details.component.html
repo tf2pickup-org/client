@@ -23,12 +23,18 @@
       <div class="col-8">
         <span *ngIf="_game.connectString; else noConnectString">
           <div class="input-group mb-3">
-            <input type="text" class="form-control" [value]="_game.connectString" readonly>
+            <input
+              type="text"
+              class="form-control"
+              [value]="_game.connectString"
+              readonly
+              #connectInput>
             <div class="input-group-append">
               <button
                 class="btn btn-outline-secondary"
                 type="button"
-                tooltip="Copy the connect string to the clipboard">copy</button>
+                tooltip="Copy the connect string to the clipboard"
+                (click)="copyConnectString()">copy</button>
               <button
                 class="btn btn-outline-primary"
                 type="button"

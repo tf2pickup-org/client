@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { AppState } from '@app/app.state';
 import { Observable, zip } from 'rxjs';
@@ -22,6 +22,9 @@ export class GameDetailsComponent implements OnInit {
   game: Observable<Game>;
   playersRed: Observable<Player[]>;
   playersBlu: Observable<Player[]>;
+
+  @ViewChild('connectInput', { static: false })
+  connectInput: ElementRef;
 
   constructor(
     private route: ActivatedRoute,
@@ -63,6 +66,13 @@ export class GameDetailsComponent implements OnInit {
         this.playersBlu = playersForTeam(bluTeamId);
       }),
     );
+  }
+
+  copyConnectString() {
+    const input = this.connectInput.nativeElement as HTMLInputElement;
+    input.focus();
+    input.select();
+    document.execCommand('copy');
   }
 
 }
