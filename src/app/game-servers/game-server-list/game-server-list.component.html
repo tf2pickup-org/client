@@ -1,7 +1,13 @@
 <div class="list-group">
   <div *ngFor="let server of servers | async"
-    class="list-group-item">
+    class="list-group-item d-flex justify-content-between">
     {{ server.name }}
+
+    <button *ngIf="isSuperUser | async"
+      type="button"
+      class="btn btn-danger btn-sm"
+      [disabled]="locked | async"
+      (click)="removeGameServer(server)">remove</button>
   </div>
 </div>
 

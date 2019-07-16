@@ -2,7 +2,7 @@ import { EntityState } from '@ngrx/entity';
 import { GameServer } from './models/game-server';
 import { adapter } from './game-servers.adapter';
 import { createReducer, on, Action } from '@ngrx/store';
-import { gameServersLoaded, gameServerAdded, addGameServer } from './game-servers.actions';
+import { gameServersLoaded, gameServerAdded, addGameServer, removeGameServer, gameServerRemoved } from './game-servers.actions';
 
 export interface State extends EntityState<GameServer> {
   loaded: boolean;
@@ -19,6 +19,8 @@ const gameServerReducer = createReducer(
   on(gameServersLoaded, (state, { gameServers }) => ({ ...adapter.addAll(gameServers, state), laoded: true })),
   on(addGameServer, state => ({ ...state, locked: true })),
   on(gameServerAdded, (state, { gameServer }) => ({ ...adapter.addOne(gameServer, state), locked: false })),
+  on(removeGameServer, state => ({ ...state, locked: true })),
+  on(gameServerRemoved, (state, { gameServerId }) => ({ ...adapter.removeOne(gameServerId, state), locked: false })),
 );
 
 export function reducer(state: State | undefined, action: Action) {

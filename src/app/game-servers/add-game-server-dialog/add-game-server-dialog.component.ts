@@ -16,10 +16,10 @@ import { first } from 'rxjs/operators';
 })
 export class AddGameServerDialogComponent {
 
-  private serverNameValue: string;
-  private addressValue: string;
-  private portValue = 27015;
-  private rconPasswordValue: string;
+  serverNameValue: string;
+  addressValue: string;
+  portValue = 27015;
+  rconPasswordValue: string;
   locked: Observable<boolean> = this.store.select(gameServersLocked);
 
   constructor(

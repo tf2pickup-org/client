@@ -22,4 +22,8 @@ export class GameServersService {
     return this.http.post<GameServer>(`${this.apiUrl}/game-servers`, gameServer);
   }
 
+  removeGameServer(gameServerId: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/game-servers/${gameServerId}`);
+  }
+
 }

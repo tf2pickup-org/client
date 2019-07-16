@@ -17,3 +17,13 @@ export const gameServerAdded = createAction(
   '[API] Game server added',
   props<{ gameServer: GameServer }>(),
 );
+
+export const removeGameServer = createAction(
+  '[Admin] Remove game server',
+  props<{ gameServerId: string }>(),
+);
+
+export const gameServerRemoved = createAction(
+  '[API] Game server removed',
+  props<{ gameServerId: string }>(),
+);
