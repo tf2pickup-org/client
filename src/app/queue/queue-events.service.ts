@@ -12,6 +12,7 @@ export class QueueEventsService {
   private _slotUpdate = new Subject<QueueSlot>();
   private _stateUpdate = new Subject<QueueState>();
   private _slotsReset = new Subject<QueueSlot[]>();
+  private _mapUpdate = new Subject<string>();
 
   get slotUpdate() {
     return this._slotUpdate.asObservable();
@@ -25,11 +26,16 @@ export class QueueEventsService {
     return this._slotsReset.asObservable();
   }
 
+  get mapUpdate() {
+    return this._mapUpdate.asObservable();
+  }
+
   constructor(
     private ioClientService: IoClientService,
   ) {
     this.ioClientService.socket.on('queue slot update', (slot: QueueSlot) => this._slotUpdate.next(slot));
     this.ioClientService.socket.on('queue state update', (state: QueueState) => this._stateUpdate.next(state));
     this.ioClientService.socket.on('queue slots reset', (slots: QueueSlot[]) => this._slotsReset.next(slots));
+    this.ioClientService.socket.on('queue map updated', (map: string) => this._mapUpdate.next(map));
   }
 }

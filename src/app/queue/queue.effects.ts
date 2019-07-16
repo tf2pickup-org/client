@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { loadQueue, queueLoaded, joinQueue, leaveQueue, queueSlotUpdated, queueStateUpdated, joinQueueError,
-    leaveQueueError, readyUp, readyUpError, queueSlotsRefreshed} from './queue.actions';
+    leaveQueueError, readyUp, readyUpError, queueSlotsRefreshed, queueMapUpdated} from './queue.actions';
 import { mergeMap, map, catchError } from 'rxjs/operators';
 import { QueueService } from './queue.service';
 import { QueueEventsService } from './queue-events.service';
@@ -59,6 +59,7 @@ export class QueueEffects {
     this.queueEventsService.slotUpdate.subscribe(slot => this.store.dispatch(queueSlotUpdated({ slot })));
     this.queueEventsService.stateUpdate.subscribe(queueState => this.store.dispatch(queueStateUpdated({ queueState })));
     this.queueEventsService.slotsReset.subscribe(slots => this.store.dispatch(queueSlotsRefreshed({ slots })));
+    this.queueEventsService.mapUpdate.subscribe(queueMap => this.store.dispatch(queueMapUpdated({ map: queueMap })));
   }
 
 }

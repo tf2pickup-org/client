@@ -6,4 +6,5 @@ export interface Queue {
   config: QueueConfig;
   slots: QueueSlot[];
   state: QueueState;
+  map: string;
 }

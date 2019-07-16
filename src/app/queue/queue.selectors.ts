@@ -32,3 +32,5 @@ export const mySlot = createSelector(
   queueSlots,
   (theProfile, slots) => theProfile && slots.find(s => s.playerId === theProfile.id)
 );
+
+export const queueMap = createSelector(queueFeature, feature => feature.map);

@@ -15,8 +15,9 @@
       Status: {{ _state }}
     </div>
 
-    <div class="col">
-      Next map: cp_badlands
+    <div *ngIf="map | async as _map"
+      class="col">
+      Next map: {{ _map }}
     </div>
   </div>
 </div>

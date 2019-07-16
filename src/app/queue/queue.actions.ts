@@ -51,3 +51,8 @@ export const readyUpError = createAction(
 
 export const queueLocked = createAction('[Queue] Queue locked');
 export const queueUnlocked = createAction('[Queue] Queue unlocked');
+
+export const queueMapUpdated = createAction(
+  '[WS] Queue map updated',
+  props<{ map: string }>(),
+);
