@@ -17,6 +17,7 @@ import { CoreModule } from './core/core.module';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { GamesModule } from './games/games.module';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { GameServersModule } from './game-servers/game-servers.module';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
     SharedModule,
     ProfileModule,
     GamesModule,
+    GameServersModule,
   ],
   providers: [
     { provide: API_URL, useValue: environment.apiUrl },

@@ -20,7 +20,7 @@ export class PlayerEffects {
       ofType(editPlayer),
       mergeMap(({ player }) => this.playersService.savePlayer(player).pipe(
         map(editedPlayer => playerEdited({ player: editedPlayer })),
-      ))
+      )),
     )
   );
 

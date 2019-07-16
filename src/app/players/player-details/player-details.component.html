@@ -11,7 +11,7 @@
       &bull;
       <a [href]="'http://logs.tf/profile/' + _player.steamId" target="_blank">logs</a>
 
-      <ng-container *ngIf="(profile | async)?.role === 'super-user'">
+      <ng-container *ngIf="isAdmin | async">
         &bull;
         <!-- <button type="button" class="btn btn-link">edit name</button> -->
         <a href="#" class="text-secondary" (click)="editPlayer($event)">edit</a>

@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AppState } from '@app/app.state';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Player } from '../models/player';
 import { map, switchMap, tap, first } from 'rxjs/operators';
@@ -10,7 +10,6 @@ import { loadPlayer } from '../players.actions';
 import { Game } from '@app/games/models/game';
 import { PlayersService } from '../players.service';
 import { profile } from '@app/profile/profile.selectors';
-import { Profile } from '@app/profile/models/profile';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { EditPlayerDialogComponent } from '../edit-player-dialog/edit-player-dialog.component';
 
@@ -24,7 +23,10 @@ export class PlayerDetailsComponent implements OnInit {
 
   player: Observable<Player>;
   games: Observable<Game[]>;
-  profile: Observable<Profile> = this.store.select(profile);
+  isAdmin: Observable<boolean> = this.store.pipe(
+    select(profile),
+    map(theProfile => theProfile && (theProfile.role === 'admin' || theProfile.role === 'super-user')),
+  );
 
   constructor(
     private route: ActivatedRoute,

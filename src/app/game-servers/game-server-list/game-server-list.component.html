@@ -1,0 +1,11 @@
+<div class="list-group">
+  <div *ngFor="let server of servers | async"
+    class="list-group-item">
+    {{ server.name }}
+  </div>
+</div>
+
+<button *ngIf="isSuperUser | async"
+  type="button"
+  class="btn btn-primary mt-5"
+  (click)="addGameServer()">add server</button>

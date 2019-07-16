@@ -1,0 +1,61 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">add game server</h4>
+</div>
+
+<div class="modal-body">
+  <div class="form-group row">
+    <label for="serverName" class="col-2 col-form-label">name</label>
+    <div class="col-10">
+      <input
+        type="text"
+        class="form-control"
+        id="serverName"
+        [(ngModel)]="serverNameValue">
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="address" class="col-2 col-form-label">address</label>
+    <div class="col-10">
+      <input
+        type="text"
+        class="form-control"
+        id="address"
+        [(ngModel)]="addressValue">
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="port" class="col-2 col-form-label">port</label>
+    <div class="col-10">
+      <input
+        type="number"
+        class="form-control"
+        id="port"
+        [(ngModel)]="portValue">
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="rconPassword" class="col-2 col-form-label">rcon</label>
+    <div class="col-10">
+      <input
+        type="text"
+        class="form-control"
+        id="rconPassword"
+        [(ngModel)]="rconPasswordValue">
+    </div>
+  </div>
+</div>
+
+<div class="modal-footer">
+  <button
+    type="button"
+    class="btn btn-primary"
+    (click)="add()"
+    [disabled]="locked | async">add server</button>
+  <button
+    type="button"
+    class="btn btn-danger"
+    (click)="bsModalRef.hide()">cancel</button>
+</div>
