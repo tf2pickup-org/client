@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { SteamLoginButtonComponent } from './steam-login-button.component';
+import { API_URL } from '@app/api-url';
+import { By } from '@angular/platform-browser';
 
 describe('SteamLoginButtonComponent', () => {
   let component: SteamLoginButtonComponent;
@@ -8,7 +9,10 @@ describe('SteamLoginButtonComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SteamLoginButtonComponent ]
+      declarations: [ SteamLoginButtonComponent ],
+      providers: [
+        { provide: API_URL, useValue: 'http://fake.host' },
+      ]
     })
     .compileComponents();
   }));
@@ -21,5 +25,10 @@ describe('SteamLoginButtonComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should redirect to the right location', () => {
+    const anchor = fixture.debugElement.query(By.css('a')).nativeElement as HTMLAnchorElement;
+    expect(anchor.href).toEqual('http://fake.host/auth/steam');
   });
 });

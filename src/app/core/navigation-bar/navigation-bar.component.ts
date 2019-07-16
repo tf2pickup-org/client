@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { AuthService } from '@app/auth/auth.service';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app.state';
@@ -10,7 +10,7 @@ import { profile } from '@app/profile/profile.selectors';
   styleUrls: ['./navigation-bar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NavigationBarComponent implements OnInit {
+export class NavigationBarComponent {
 
   isAuthenticated = this.authService.authenticated;
   profile = this.store.select(profile);
@@ -19,8 +19,5 @@ export class NavigationBarComponent implements OnInit {
     private authService: AuthService,
     private store: Store<AppState>,
   ) { }
-
-  ngOnInit() {
-  }
 
 }
