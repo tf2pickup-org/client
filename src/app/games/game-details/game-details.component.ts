@@ -4,12 +4,13 @@ import { AppState } from '@app/app.state';
 import { Observable, zip } from 'rxjs';
 import { Game } from '../models/game';
 import { ActivatedRoute } from '@angular/router';
-import { switchMap, map, tap, filter } from 'rxjs/operators';
+import { switchMap, map, tap, filter, first } from 'rxjs/operators';
 import { gameById } from '../games.selectors';
-import { loadGame } from '../games.actions';
+import { loadGame, forceEndGame } from '../games.actions';
 import { Player } from '@app/players/models/player';
 import { playerById } from '@app/players/players.selectors';
 import { loadPlayer } from '@app/players/players.actions';
+import { profile } from '@app/profile/profile.selectors';
 
 @Component({
   selector: 'app-game-details',
@@ -22,6 +23,10 @@ export class GameDetailsComponent implements OnInit {
   game: Observable<Game>;
   playersRed: Observable<Player[]>;
   playersBlu: Observable<Player[]>;
+  isAdmin: Observable<boolean> = this.store.pipe(
+    select(profile),
+    map(theProfile => theProfile && (theProfile.role === 'super-user' || theProfile.role === 'admin')),
+  );
 
   @ViewChild('connectInput', { static: false })
   connectInput: ElementRef;
@@ -73,6 +78,14 @@ export class GameDetailsComponent implements OnInit {
     input.focus();
     input.select();
     document.execCommand('copy');
+  }
+
+  forceEndGame(event: Event) {
+    event.preventDefault();
+
+    this.game.pipe(
+      first(),
+    ).subscribe(game => this.store.dispatch(forceEndGame({ gameId: game.id })));
   }
 
 }

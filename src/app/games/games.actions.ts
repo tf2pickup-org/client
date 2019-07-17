@@ -22,3 +22,8 @@ export const gameUpdated = createAction(
   '[WS] Game updated',
   props<{ game: Game }>(),
 );
+
+export const forceEndGame = createAction(
+  '[Admin] Force end game',
+  props<{ gameId: string }>(),
+);

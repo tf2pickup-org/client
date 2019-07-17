@@ -1,6 +1,14 @@
 <div *ngIf="game | async as _game"
   class="container">
-  <h4>Pickup #{{ _game.number }}</h4>
+  <h4>
+    Pickup #{{ _game.number }}
+    <ng-container *ngIf="isAdmin | async">
+      <small class="text-secondary ml-2">
+        &bull;
+        <a href="#" class="text-secondary" (click)="forceEndGame($event)">force end</a>
+      </small>
+    </ng-container>
+  </h4>
 
   <div class="row text-muted">
     <div class="col">launched</div>
@@ -11,7 +19,10 @@
   <div class="row">
     <div class="col">{{ _game.launchedAt | date:'medium' }}</div>
     <div class="col">{{ _game.map }}</div>
-    <div class="col">{{ _game.state }}</div>
+    <div class="col">
+      {{ _game.state }}
+      <span *ngIf="_game.error">({{ _game.error }})</span>
+    </div>
   </div>
 
   <ng-container *ngIf="_game.state === 'launching' || _game.state === 'started'">

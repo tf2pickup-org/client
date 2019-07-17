@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { GamesService } from './games.service';
-import { loadGames, gamesLoaded, gameAdded, loadGame, gameUpdated } from './games.actions';
+import { loadGames, gamesLoaded, gameAdded, loadGame, gameUpdated, forceEndGame } from './games.actions';
 import { mergeMap, map, filter, mapTo, withLatestFrom } from 'rxjs/operators';
 import { GamesEventsService } from './games-events.service';
 import { Store } from '@ngrx/store';
@@ -73,6 +73,15 @@ export class GamesEffects {
       map(([, { game }]) => game),
       filter(game => game.state === 'ended' || game.state === 'interrputed'),
       mapTo(queueUnlocked()),
+    )
+  );
+
+  forceEndGame = createEffect(() =>
+    this.actions.pipe(
+      ofType(forceEndGame),
+      mergeMap(({ gameId }) => this.gamesService.forceEndGame(gameId).pipe(
+        map(game => gameUpdated({ game })),
+      )),
     )
   );
 

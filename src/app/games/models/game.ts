@@ -13,4 +13,5 @@ export interface Game {
   demoUrl?: string;
   state: GameState;
   connectString: string;
+  error?: string;
 }
