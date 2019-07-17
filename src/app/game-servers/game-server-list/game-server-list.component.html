@@ -1,7 +1,11 @@
 <div class="list-group">
   <div *ngFor="let server of servers | async"
     class="list-group-item d-flex justify-content-between">
-    {{ server.name }}
+    <span>
+      {{ server.name }}
+      <span *ngIf="server.isOnline; else serverOffline" class="badge badge-success ml-2">online</span>
+      <ng-template #serverOffline><span class="badge badge-danger ml-2">offline</span></ng-template>
+    </span>
 
     <button *ngIf="isSuperUser | async"
       type="button"
