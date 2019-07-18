@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { GamesService } from './games.service';
-import { loadGames, gamesLoaded, gameAdded, loadGame, gameUpdated, forceEndGame } from './games.actions';
+import { loadGames, gamesLoaded, gameAdded, loadGame, gameUpdated, forceEndGame, gameCreated } from './games.actions';
 import { mergeMap, map, filter, mapTo, withLatestFrom } from 'rxjs/operators';
 import { GamesEventsService } from './games-events.service';
 import { Store } from '@ngrx/store';
@@ -56,7 +56,7 @@ export class GamesEffects {
     /* lock the queue when a game that I participate in starts */
     combineLatest(
       this.store.select(profile),
-      this.actions.pipe(ofType(gameAdded)),
+      this.actions.pipe(ofType(gameCreated)),
     ).pipe(
       filter(([theProfile, { game }]) => game.players.includes(theProfile.id)),
       mapTo(queueLocked()),
@@ -92,7 +92,7 @@ export class GamesEffects {
     private store: Store<AppState>,
     private router: Router,
   ) {
-    this.gamesEventsService.gameCreated.subscribe(game => this.store.dispatch(gameAdded({ game })));
+    this.gamesEventsService.gameCreated.subscribe(game => this.store.dispatch(gameCreated({ game })));
     this.gamesEventsService.gameUpdated.subscribe(game => this.store.dispatch(gameUpdated({ game })));
   }
 

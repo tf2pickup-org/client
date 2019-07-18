@@ -8,8 +8,13 @@ export const gamesLoaded = createAction(
   props<{ games: Game[] }>(),
 );
 
+export const gameCreated = createAction(
+  '[WS] Game created',
+  props<{ game: Game }>(),
+);
+
 export const gameAdded = createAction(
-  '[WS/API] Game added',
+  '[API] Game added',
   props<{ game: Game }>(),
 );
 
