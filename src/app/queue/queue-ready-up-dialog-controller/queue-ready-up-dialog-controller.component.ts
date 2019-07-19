@@ -22,7 +22,13 @@ export class QueueReadyUpDialogControllerComponent implements OnInit, OnDestroy 
   constructor(
     private store: Store<AppState>,
     private modalService: BsModalService,
-  ) { }
+  ) {
+    if ('Notification' in window && Notification.permission !== 'denied') {
+      if (Notification.permission === 'default') {
+        Notification.requestPermission();
+      }
+    }
+  }
 
   ngOnInit() {
     this.store.pipe(
@@ -35,7 +41,7 @@ export class QueueReadyUpDialogControllerComponent implements OnInit, OnDestroy 
           ignoreBackdropClick: true,
         });
 
-        this.playNotificationSound();
+        this.notify();
       } else {
         if (this.queueReadyUpDialogRef) {
           this.queueReadyUpDialogRef.hide();
@@ -49,8 +55,11 @@ export class QueueReadyUpDialogControllerComponent implements OnInit, OnDestroy 
     this.destroyed.unsubscribe();
   }
 
-  private playNotificationSound() {
+  private notify() {
     this.audio.play();
+    const notification = new Notification('Ready up!', {
+      body: 'A new pickup game is starting',
+    });
   }
 
 }
