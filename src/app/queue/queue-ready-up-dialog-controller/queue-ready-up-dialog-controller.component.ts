@@ -17,6 +17,7 @@ export class QueueReadyUpDialogControllerComponent implements OnInit, OnDestroy 
 
   private destroyed = new Subject<void>();
   private queueReadyUpDialogRef: BsModalRef;
+  private audio = new Audio('/assets/sounds/ready_up.wav');
 
   constructor(
     private store: Store<AppState>,
@@ -33,6 +34,8 @@ export class QueueReadyUpDialogControllerComponent implements OnInit, OnDestroy 
           keyboard: false,
           ignoreBackdropClick: true,
         });
+
+        this.playNotificationSound();
       } else {
         if (this.queueReadyUpDialogRef) {
           this.queueReadyUpDialogRef.hide();
@@ -44,6 +47,10 @@ export class QueueReadyUpDialogControllerComponent implements OnInit, OnDestroy 
   ngOnDestroy() {
     this.destroyed.next();
     this.destroyed.unsubscribe();
+  }
+
+  private playNotificationSound() {
+    this.audio.play();
   }
 
 }
