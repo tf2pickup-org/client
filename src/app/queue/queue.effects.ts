@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { loadQueue, queueLoaded, joinQueue, leaveQueue, queueSlotUpdated, queueStateUpdated, joinQueueError,
-    leaveQueueError, readyUp, readyUpError, queueSlotsRefreshed, queueMapUpdated} from './queue.actions';
-import { mergeMap, map, catchError } from 'rxjs/operators';
+    leaveQueueError, readyUp, readyUpError, queueSlotsRefreshed, queueMapUpdated, showReadyUpDialog,
+    hideReadyUpDialog} from './queue.actions';
+import { mergeMap, map, catchError, filter, withLatestFrom } from 'rxjs/operators';
 import { QueueService } from './queue.service';
 import { QueueEventsService } from './queue-events.service';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app.state';
 import { of } from 'rxjs';
+import { mySlot } from './queue.selectors';
 
 @Injectable()
 export class QueueEffects {
@@ -40,6 +42,16 @@ export class QueueEffects {
     )
   );
 
+  showReadyUpDialog = createEffect(() =>
+    this.actions.pipe(
+      ofType(queueStateUpdated),
+      filter(({ queueState }) => queueState === 'ready'),
+      withLatestFrom(this.store.select(mySlot)),
+      filter(([, slot]) => slot && !slot.playerReady),
+      map(() => showReadyUpDialog()),
+    )
+  );
+
   readyUp = createEffect(() =>
     this.actions.pipe(
       ofType(readyUp),
@@ -48,6 +60,16 @@ export class QueueEffects {
         catchError(error => of(readyUpError({ error }))),
       )),
     )
+  );
+
+  closeReadyUpDialog = createEffect(() =>
+    this.actions.pipe(
+      ofType(queueStateUpdated),
+      filter(({ queueState }) => queueState === 'waiting'),
+      withLatestFrom(this.store.select(mySlot)),
+      filter(([, slot]) => slot && !slot.playerReady),
+      map(() => hideReadyUpDialog()),
+    ),
   );
 
   constructor(

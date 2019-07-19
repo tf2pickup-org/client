@@ -3,9 +3,9 @@ import { Subject } from 'rxjs';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Store, select } from '@ngrx/store';
 import { AppState } from '@app/app.state';
-import { queueState, mySlot } from '../queue.selectors';
-import { withLatestFrom, takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { QueueReadyUpDialogComponent } from '../queue-ready-up-dialog/queue-ready-up-dialog.component';
+import { queueShowReadyUpDialog } from '../queue.selectors';
 
 @Component({
   selector: 'app-queue-ready-up-dialog-controller',
@@ -25,20 +25,18 @@ export class QueueReadyUpDialogControllerComponent implements OnInit, OnDestroy 
 
   ngOnInit() {
     this.store.pipe(
-      select(queueState),
-      withLatestFrom(this.store.select(mySlot)),
+      select(queueShowReadyUpDialog),
       takeUntil(this.destroyed),
-    ).subscribe(([state, slot]) => {
-      if (this.queueReadyUpDialogRef && !slot) {
-        this.queueReadyUpDialogRef.hide();
-        return;
-      }
-
-      if (state === 'ready' && !slot.playerReady) {
+    ).subscribe(show => {
+      if (show) {
         this.queueReadyUpDialogRef = this.modalService.show(QueueReadyUpDialogComponent, {
           keyboard: false,
           ignoreBackdropClick: true,
         });
+      } else {
+        if (this.queueReadyUpDialogRef) {
+          this.queueReadyUpDialogRef.hide();
+        }
       }
     });
   }

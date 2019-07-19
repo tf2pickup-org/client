@@ -34,3 +34,5 @@ export const mySlot = createSelector(
 );
 
 export const queueMap = createSelector(queueFeature, feature => feature.map);
+
+export const queueShowReadyUpDialog = createSelector(queueFeature, feature => feature.readyUpDialogShown);

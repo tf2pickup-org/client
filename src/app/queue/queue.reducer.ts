@@ -1,14 +1,13 @@
 import { createReducer, on, Action } from '@ngrx/store';
 import { queueLoaded, queueSlotsRefreshed, queueSlotUpdated, queueStateUpdated, queueLocked, queueUnlocked,
-  queueMapUpdated,
-  readyUp} from './queue.actions';
+  queueMapUpdated, readyUp, showReadyUpDialog, hideReadyUpDialog, leaveQueue} from './queue.actions';
 import { QueueSlot } from './models/queue-slot';
 import { profileLoaded } from '@app/profile/profile.actions';
 import { Queue } from './models/queue';
 
 export interface State extends Queue {
   locked: boolean; // is the queue locked for the current user
-  readyUpDialogVisible: boolean;
+  readyUpDialogShown: boolean;
 }
 
 export const initialState: State = {
@@ -17,7 +16,7 @@ export const initialState: State = {
   state: 'waiting',
   map: '',
   locked: true,
-  readyUpDialogVisible: false,
+  readyUpDialogShown: false,
 };
 
 function updateQueueSlot(slot: QueueSlot, state: State) {
@@ -35,7 +34,10 @@ const queueReducer = createReducer(
   on(queueLocked, state => ({ ...state, locked: true })),
   on(queueUnlocked, state => ({ ...state, locked: false })),
   on(queueMapUpdated, (state, { map }) => ({ ...state, map })),
-  on(readyUp, state => ({ ...state, readyUpDialogVisible: false })),
+  on(readyUp, state => ({ ...state, readyUpDialogShown: false })),
+  on(showReadyUpDialog, state => ({ ...state, readyUpDialogShown: true })),
+  on(hideReadyUpDialog, state => ({ ...state, readyUpDialogShown: false })),
+  on(leaveQueue, state => ({ ...state, readyUpDialogShown: false })),
 );
 
 export function reducer(state: State | undefined, action: Action) {

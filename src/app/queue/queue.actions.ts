@@ -56,3 +56,6 @@ export const queueMapUpdated = createAction(
   '[WS] Queue map updated',
   props<{ map: string }>(),
 );
+
+export const showReadyUpDialog = createAction('[Queue] Show ready up dialog');
+export const hideReadyUpDialog = createAction('[Queue] Hide ready up dialog');
