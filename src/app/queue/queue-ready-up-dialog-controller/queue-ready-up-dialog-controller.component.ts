@@ -17,7 +17,7 @@ export class QueueReadyUpDialogControllerComponent implements OnInit, OnDestroy 
 
   private destroyed = new Subject<void>();
   private queueReadyUpDialogRef: BsModalRef;
-  private audio = new Audio('/assets/sounds/ready_up.wav');
+  private audio = new Audio('/assets/sounds/ready_up_wonszu.wav');
 
   constructor(
     private store: Store<AppState>,
