@@ -1,5 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { AuthErrorComponent } from './auth-error.component';
 
 describe('AuthErrorComponent', () => {
