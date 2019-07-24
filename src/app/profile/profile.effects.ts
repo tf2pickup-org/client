@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Actions, OnInitEffects, createEffect, ofType } from '@ngrx/effects';
 import { ProfileService } from './profile.service';
-import { loadProfile, profileLoaded } from './profile.actions';
+import { loadProfile, profileLoaded, acceptRules } from './profile.actions';
 import { AuthService } from '@app/auth/auth.service';
-import { filter, mergeMap, map } from 'rxjs/operators';
+import { filter, mergeMap, map, switchMap, mapTo, tap } from 'rxjs/operators';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { AcceptRulesDialogComponent } from './accept-rules-dialog/accept-rules-dialog.component';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class ProfileEffects implements OnInitEffects {
@@ -17,14 +20,36 @@ export class ProfileEffects implements OnInitEffects {
     )
   );
 
+  acceptRules = createEffect(() =>
+    this.actions.pipe(
+      ofType(profileLoaded),
+      filter(({ profile }) => !profile.hasAcceptedRules),
+      switchMap(() => this.showAcceptRulesDialog().pipe(
+        mapTo(acceptRules()),
+      )),
+    ),
+  );
+
   constructor(
     private actions: Actions,
     private profileService: ProfileService,
     private authService: AuthService,
+    private modalService: BsModalService,
   ) { }
 
   ngrxOnInitEffects() {
     return loadProfile();
+  }
+
+  private showAcceptRulesDialog(): Observable<void> {
+    const modal = this.modalService.show(AcceptRulesDialogComponent, {
+      keyboard: false,
+      ignoreBackdropClick: true,
+    });
+
+    return (modal.content as AcceptRulesDialogComponent).rulesAccepted.asObservable().pipe(
+      tap(() => modal.hide()),
+    );
   }
 
 }

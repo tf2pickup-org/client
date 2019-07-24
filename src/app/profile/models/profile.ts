@@ -7,4 +7,5 @@ export interface Profile {
   joinedAt: Date;
   activeGameId: string;
   role: PlayerRole;
+  hasAcceptedRules: boolean;
 }

@@ -1,0 +1,17 @@
+<div class="modal-body" [ngSwitch]="phase | async">
+  <ng-container *ngSwitchCase="'mumble'">
+    <h4>Do you have Mumble?</h4>
+    <div class="row align-items-center">
+      <div class="col-8"><p><markdown src="/assets/documents/CONFIRM-MUMBLE.md"></markdown></p></div>
+      <div class="col-4"><img src="/assets/mumble-logo-png-transparent.png" width="128"></div>
+    </div>
+
+    <button type="button" class="btn btn-primary btn-block mt-4" (click)="step()">Yes, I confirm I have Mumble</button>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'rules'">
+    <h4>Accept rules</h4>
+    <p>rules etc</p>
+    <button type="button" class="btn btn-primary btn-block" (click)="step()">Okay, I accept these rules</button>
+  </ng-container>
+</div>

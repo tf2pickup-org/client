@@ -18,6 +18,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { GamesModule } from './games/games.module';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { GameServersModule } from './game-servers/game-servers.module';
+import { MarkdownModule } from 'ngx-markdown';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,8 @@ import { GameServersModule } from './game-servers/game-servers.module';
     StoreDevtoolsModule.instrument(),
     ModalModule.forRoot(),
     TooltipModule.forRoot(),
+    HttpClientModule,
+    MarkdownModule.forRoot({ loader: HttpClient }),
 
     AuthModule,
     CoreModule,

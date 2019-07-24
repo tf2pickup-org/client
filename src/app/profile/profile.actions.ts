@@ -7,3 +7,5 @@ export const profileLoaded = createAction(
   '[API] Profile loaded',
   props<{ profile: Profile }>(),
 );
+
+export const acceptRules = createAction('[Profile] Accept rules');
