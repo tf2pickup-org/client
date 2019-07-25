@@ -1,4 +1,5 @@
 <div
+  *ngIf="slot"
   class="queue-slot-item"
   [ngClass]="{
     'free': !slot.playerId,

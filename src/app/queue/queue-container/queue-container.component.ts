@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { AppState } from '@app/app.state';
 import { Observable } from 'rxjs';
 import { activeGame } from '@app/games/games.selectors';
