@@ -7,4 +7,5 @@ export interface Player {
   steamId: string;
   avatarUrl: string;
   role?: PlayerRole;
+  etf2lProfileId: number;
 }
