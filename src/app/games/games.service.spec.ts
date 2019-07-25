@@ -45,6 +45,10 @@ describe('GamesService', () => {
   });
 
   describe('#forceEndGame', () => {
-    it('shoudl call io api endpoint');
+    it('should call io api endpoint', inject([GamesService], (service: GamesService) => {
+      service.forceEndGame('FAKE_ID').subscribe();
+      httpController.expectOne('FAKE_URL/games/FAKE_ID?force_end');
+      expect().nothing();
+    }));
   });
 });

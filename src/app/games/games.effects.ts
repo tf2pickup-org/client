@@ -71,7 +71,7 @@ export class GamesEffects {
     ).pipe(
       filter(([theProfile, { game }]) => theProfile && game.players.includes(theProfile.id)),
       map(([, { game }]) => game),
-      filter(game => game.state === 'ended' || game.state === 'interrputed'),
+      filter(game => game.state === 'ended' || game.state === 'interrupted'),
       mapTo(queueUnlocked()),
     )
   );
@@ -79,10 +79,9 @@ export class GamesEffects {
   forceEndGame = createEffect(() =>
     this.actions.pipe(
       ofType(forceEndGame),
-      mergeMap(({ gameId }) => this.gamesService.forceEndGame(gameId).pipe(
-        map(game => gameUpdated({ game })),
-      )),
-    )
+      mergeMap(({ gameId }) => this.gamesService.forceEndGame(gameId)),
+    ),
+    { dispatch: false },
   );
 
   constructor(
