@@ -35,7 +35,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
       }
     }),
     EffectsModule.forRoot([]),
-    StoreDevtoolsModule.instrument(),
+    environment.production ? [] : StoreDevtoolsModule.instrument(),
     ModalModule.forRoot(),
     TooltipModule.forRoot(),
     HttpClientModule,
