@@ -8,6 +8,7 @@ import { reducer } from './games.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { GamesEffects } from './games.effects';
 import { GameDetailsComponent } from './game-details/game-details.component';
+import { SharedModule } from '@app/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { GameDetailsComponent } from './game-details/game-details.component';
     CommonModule,
     StoreModule.forFeature('games', reducer),
     EffectsModule.forFeature([GamesEffects]),
+    SharedModule,
     GamesRoutingModule,
   ],
 })

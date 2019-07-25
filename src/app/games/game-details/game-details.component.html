@@ -46,10 +46,11 @@
                 type="button"
                 tooltip="Copy the connect string to the clipboard"
                 (click)="copyConnectString()">copy</button>
-              <button
+              <a
+                [href]="_game.connectString | connectStringToLink"
                 class="btn btn-outline-primary"
                 type="button"
-                tooltip="Join the game straight away">join</button>
+                tooltip="Join the game straight away">join</a>
             </div>
           </div>
         </span>
