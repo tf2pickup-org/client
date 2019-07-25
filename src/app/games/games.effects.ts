@@ -45,7 +45,7 @@ export class GamesEffects {
   redirectToNewGame = createEffect(() =>
     /* when a game I am part of starts, redirect to its details page */
     this.actions.pipe(
-      ofType(gameAdded),
+      ofType(gameCreated),
       withLatestFrom(this.store.select(profile)),
       filter(([{ game }, theProfile]) => theProfile && game.players.includes(theProfile.id)),
       map(([{ game }]) => this.router.navigate(['/game', game.id])),
