@@ -49,9 +49,7 @@ export class PlayerDetailsComponent implements OnInit {
     );
   }
 
-  editPlayer(event: Event) {
-    event.preventDefault();
-
+  editPlayer() {
     this.player.pipe(first()).subscribe(player => {
       const initialState = { player };
       this.modalService.show(EditPlayerDialogComponent, { initialState });

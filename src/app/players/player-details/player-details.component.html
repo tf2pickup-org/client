@@ -5,15 +5,18 @@
     {{ _player.name }}
     <small class="text-muted ml-2">
       <a [href]="'http://steamcommunity.com/profiles/' + _player.steamId" target="_blank">steam</a>
-      &bull;
-      <a [href]="'http://etf2l.org/forum/user/' + _player.etf2lProfileId" target="_blank">etf2l</a>
+
+      <ng-container *ngIf="_player.etf2lProfileId">
+        &bull;
+        <a [href]="'http://etf2l.org/forum/user/' + _player.etf2lProfileId" target="_blank">etf2l</a>
+      </ng-container>
+
       &bull;
       <a [href]="'http://logs.tf/profile/' + _player.steamId" target="_blank">logs</a>
 
       <ng-container *ngIf="isAdmin | async">
         &bull;
-        <!-- <button type="button" class="btn btn-link">edit name</button> -->
-        <a href="#" class="text-secondary" (click)="editPlayer($event)">edit</a>
+        <a [routerLink]="" class="text-secondary" (click)="editPlayer()">edit</a>
       </ng-container>
     </small>
   </h4>
