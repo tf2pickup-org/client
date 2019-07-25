@@ -2,8 +2,10 @@ import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { GameServersService } from './game-servers.service';
 import { loadGameServers, gameServersLoaded, addGameServer, gameServerAdded, removeGameServer,
-  gameServerRemoved } from './game-servers.actions';
-import { mergeMap, map } from 'rxjs/operators';
+  gameServerRemoved, failedToAddGameServer} from './game-servers.actions';
+import { mergeMap, map, catchError } from 'rxjs/operators';
+import { of, throwError } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable()
 export class GameServersEffects {
@@ -22,6 +24,13 @@ export class GameServersEffects {
       ofType(addGameServer),
       mergeMap(({ gameServer }) => this.gameServersService.addGameServer(gameServer).pipe(
         map(addedGameServer => gameServerAdded({ gameServer: addedGameServer })),
+        catchError(error => {
+          if (error instanceof HttpErrorResponse && error.error) {
+            return of(failedToAddGameServer({ error: error.error.message }));
+          } else {
+            return throwError(error);
+          }
+        }),
       )),
     )
   );

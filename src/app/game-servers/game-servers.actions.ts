@@ -18,6 +18,11 @@ export const gameServerAdded = createAction(
   props<{ gameServer: GameServer }>(),
 );
 
+export const failedToAddGameServer = createAction(
+  '[API] Failed to add game server',
+  props<{ error: string }>(),
+);
+
 export const removeGameServer = createAction(
   '[Admin] Remove game server',
   props<{ gameServerId: string }>(),
