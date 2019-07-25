@@ -70,7 +70,7 @@
     <div class="row">
       <div class="col">
         <span *ngIf="_game.logsUrl; else noLogs">
-          {{ _game.logsUrl }}
+          <a href="_game.logsUrl" target="_blank">{{ _game.logsUrl }}</a>
         </span>
         <ng-template #noLogs>
           <span class="font-italic text-muted">unavailable</span>
@@ -79,7 +79,7 @@
 
       <div class="col">
         <span *ngIf="_game.demoUrl; else noDemo">
-          {{ _game.demoUrl }}
+          <a href="_game.demoUrl" target="_blank">{{ _game.demoUrl }}</a>
         </span>
         <ng-template #noDemo>
           <span class="font-italic text-muted">unavailable</span>
