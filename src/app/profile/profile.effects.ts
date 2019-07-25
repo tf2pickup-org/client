@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, OnInitEffects, createEffect, ofType } from '@ngrx/effects';
 import { ProfileService } from './profile.service';
-import { loadProfile, profileLoaded, acceptRules } from './profile.actions';
+import { loadProfile, profileLoaded, acceptRules, rulesAccepted } from './profile.actions';
 import { AuthService } from '@app/auth/auth.service';
 import { filter, mergeMap, map, switchMap, mapTo, tap } from 'rxjs/operators';
 import { BsModalService } from 'ngx-bootstrap/modal';
@@ -20,7 +20,7 @@ export class ProfileEffects implements OnInitEffects {
     )
   );
 
-  acceptRules = createEffect(() =>
+  promptUserToAcceptRules = createEffect(() =>
     this.actions.pipe(
       ofType(profileLoaded),
       filter(({ profile }) => !profile.hasAcceptedRules),
@@ -28,6 +28,15 @@ export class ProfileEffects implements OnInitEffects {
         mapTo(acceptRules()),
       )),
     ),
+  );
+
+  acceptRules = createEffect(() =>
+    this.actions.pipe(
+      ofType(acceptRules),
+      switchMap(() => this.profileService.acceptRules().pipe(
+        mapTo(rulesAccepted()),
+      )),
+    )
   );
 
   constructor(

@@ -9,3 +9,4 @@ export const profileLoaded = createAction(
 );
 
 export const acceptRules = createAction('[Profile] Accept rules');
+export const rulesAccepted = createAction('[Profile API] Rules accepted');

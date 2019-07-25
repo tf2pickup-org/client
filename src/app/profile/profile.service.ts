@@ -18,4 +18,8 @@ export class ProfileService {
     return this.http.get<Profile>(`${this.apiUrl}/profile`);
   }
 
+  acceptRules(): Observable<void> {
+    return this.http.put<void>(`${this.apiUrl}/profile?accept_terms`, { });
+  }
+
 }
