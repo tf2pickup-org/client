@@ -1,5 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
-  <a class="navbar-brand" routerLink="/">tf2pickup.pl</a>
+  <a class="navbar-brand" routerLink="/">
+    <img src="/assets/logo.png" height="36" width="190">
+  </a>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
@@ -16,6 +18,6 @@
       <app-steam-login-button *ngIf="!isAuthenticated"></app-steam-login-button>
     </div>
 
-    <h2 *ngIf="profile | async as _profile">{{ _profile.name }}</h2>
+    <h4 *ngIf="profile | async as _profile">{{ _profile.name }}</h4>
   </div>
 </nav>
