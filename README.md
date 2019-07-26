@@ -14,5 +14,9 @@
   <a href="https://codecov.io/gh/tf2pickup-pl/client">
     <img src="https://codecov.io/gh/tf2pickup-pl/client/branch/master/graph/badge.svg" alt="Codecov">
   </a>
+
+  <a href="https://opensource.org/licenses/MIT">
+    <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="MIT license">
+  </a>
 </p>
 
