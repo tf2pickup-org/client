@@ -17,6 +17,7 @@ export class AuthService {
 
   private http: HttpClient;
   private _authToken = new BehaviorSubject<string>(null);
+  private isRefreshingToken = false;
   refreshToken: string;
   authenticated: boolean;
 
@@ -28,7 +29,7 @@ export class AuthService {
     @Inject(API_URL) private apiUrl: string,
     httpBackend: HttpBackend,
   ) {
-    this.http = new HttpClient(httpBackend);
+    this.http = new HttpClient(httpBackend); // solves circular injection dependency problem
     this.retrieveTokens();
   }
 
@@ -38,13 +39,14 @@ export class AuthService {
   }
 
   reauth(): Observable<string> {
-    if (this._authToken.value !== null)  {
+    if (!this.isRefreshingToken)  {
+      this.isRefreshingToken = true;
       console.log('refreshing token');
       this._authToken.next(null);
       this.http.get<TokenPair>(`${this.apiUrl}/auth?refresh_token=${this.refreshToken}`).pipe(
         tap(({ refreshToken }) => this.refreshToken = refreshToken),
         tap(({ authToken }) => this._authToken.next(authToken)),
-      ).subscribe();
+      ).subscribe(() => this.isRefreshingToken = false);
     }
 
     return this.authToken;

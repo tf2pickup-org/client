@@ -31,9 +31,9 @@ export class QueueEventsService {
   }
 
   constructor(
-    private ioClientService: IoClientService,
+    private ws: IoClientService,
   ) {
-    this.ioClientService.socket.subscribe(socket => {
+    this.ws.socket.subscribe(socket => {
       socket.on('queue slot update', (slot: QueueSlot) => this._slotUpdate.next(slot));
       socket.on('queue state update', (state: QueueState) => this._stateUpdate.next(state));
       socket.on('queue slots reset', (slots: QueueSlot[]) => this._slotsReset.next(slots));
