@@ -22,8 +22,10 @@ export class GamesEventsService {
   constructor(
     private ioClientService: IoClientService,
   ) {
-    this.ioClientService.socket.on('game created', (game: Game) => this._gameCreated.next(game));
-    this.ioClientService.socket.on('game updated', (game: Game) => this._gameUpdated.next(game));
+    this.ioClientService.socket.subscribe(socket => {
+      socket.on('game created', (game: Game) => this._gameCreated.next(game));
+      socket.on('game updated', (game: Game) => this._gameUpdated.next(game));
+    });
   }
 
 }

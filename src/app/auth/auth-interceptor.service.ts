@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse } from '@angular/common/http';
 import { AuthService } from './auth.service';
-import { Observable, EMPTY, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
+import { catchError, switchMap, map, first } from 'rxjs/operators';
 
 @Injectable()
 export class AuthInterceptorService implements HttpInterceptor {
@@ -12,24 +12,36 @@ export class AuthInterceptorService implements HttpInterceptor {
   ) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    return next.handle(this.makeRequest(request)).pipe(
-      catchError(error => {
-        if (error instanceof HttpErrorResponse && error.status === 401) {
-          this.authService.login();
-          return EMPTY;
-        } else {
-          return throwError(error);
-        }
-      })
+    if (!this.authService.authenticated) {
+      return next.handle(request);
+    }
+
+    return this.authService.authToken.pipe(
+      first(),
+      map(token => this.applyAuthToken(request, token)),
+      switchMap(authorizedRequest => next.handle(authorizedRequest).pipe(
+        catchError(error => {
+          if (error instanceof HttpErrorResponse && error.status === 401) {
+            return this.reauth(request).pipe(
+              switchMap(req => next.handle(req)),
+            );
+          } else {
+            return throwError(error);
+          }
+        }),
+      )),
     );
   }
 
-  private makeRequest(request: HttpRequest<any>) {
-    return this.authService.authenticated ? request.clone({
-      setHeaders: {
-        Authorization: `Bearer ${this.authService.token}`,
-      }
-    }) : request;
+  private applyAuthToken(request: HttpRequest<any>, token: string): HttpRequest<any> {
+    return request.clone({ setHeaders: { Authorization: `Bearer ${token}` }});
+  }
+
+  private reauth(request: HttpRequest<any>): Observable<HttpRequest<any>> {
+    return this.authService.reauth().pipe(
+      first(),
+      map(token => this.applyAuthToken(request, token)),
+    );
   }
 
 }
