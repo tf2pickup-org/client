@@ -70,20 +70,25 @@ export class AuthService {
     if (!refreshToken) {
       if (params.has('refresh_token')) {
         refreshToken = params.get('refresh_token');
+        this.setRefreshToken(refreshToken);
       } else {
         this.authenticated = false;
         return;
       }
-    }
-
-    const decoded = jwt_decode(refreshToken) as { exp: number };
-    if (Date.now() >= decoded.exp * 1000) {
-      // the refresh token has expired
-      localStorage.removeItem('refresh_token');
-      this.authenticated = false;
-      return;
     } else {
-      this.setRefreshToken(refreshToken);
+      try {
+        const decoded = jwt_decode(refreshToken) as { exp: number };
+        if (Date.now() >= decoded.exp * 1000) {
+          // the refresh token has expired
+          localStorage.removeItem('refresh_token');
+          this.authenticated = false;
+          return;
+        }
+      } catch (error) { // failed to decode token
+        localStorage.removeItem('refresh_token');
+        this.authenticated = false;
+        return;
+      }
     }
 
     // and then try to find the auth token
