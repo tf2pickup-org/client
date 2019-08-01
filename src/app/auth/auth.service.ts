@@ -1,9 +1,9 @@
 import { Injectable, Inject } from '@angular/core';
-import { HttpParams, HttpClient, HttpBackend } from '@angular/common/http';
+import { HttpParams, HttpClient, HttpBackend, HttpErrorResponse } from '@angular/common/http';
 import { API_URL } from '@app/api-url';
 import * as jwt_decode from 'jwt-decode';
-import { Observable, BehaviorSubject } from 'rxjs';
-import { tap, mapTo, filter } from 'rxjs/operators';
+import { Observable, BehaviorSubject, EMPTY, throwError } from 'rxjs';
+import { tap, filter, catchError } from 'rxjs/operators';
 
 export interface TokenPair {
   refreshToken: string;
@@ -41,11 +41,18 @@ export class AuthService {
   reauth(): Observable<string> {
     if (!this.isRefreshingToken)  {
       this.isRefreshingToken = true;
-      console.log('refreshing token');
       this._authToken.next(null);
       this.http.get<TokenPair>(`${this.apiUrl}/auth?refresh_token=${this.refreshToken}`).pipe(
-        tap(({ refreshToken }) => this.refreshToken = refreshToken),
+        tap(({ refreshToken }) => this.setRefreshToken(refreshToken)),
         tap(({ authToken }) => this._authToken.next(authToken)),
+        catchError(error => {
+          if (error instanceof HttpErrorResponse && error.status === 400) {
+            this.login();
+            return EMPTY;
+          } else {
+            return throwError(error);
+          }
+        }),
       ).subscribe(() => this.isRefreshingToken = false);
     }
 
@@ -83,10 +90,7 @@ export class AuthService {
     if (params.has('auth_token')) {
       this._authToken.next(params.get('auth_token'));
     } else {
-      this.http.get<TokenPair>(`${this.apiUrl}/auth?refresh_token=${this.refreshToken}`).pipe(
-        tap(({ refreshToken }) => this.setRefreshToken(refreshToken)),
-        tap(({ authToken }) => this._authToken.next(authToken)),
-      ).subscribe();
+      this.reauth();
     }
 
     this.authenticated = true;
