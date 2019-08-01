@@ -3,11 +3,12 @@ import { AuthInterceptorService } from './auth-interceptor.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { AuthService } from './auth.service';
 import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
+import { of } from 'rxjs';
 
 class AuthServiceStub {
   authenticated = false;
-  token = 'FAKE_TOKEN';
-  login() { }
+  authToken = of('FAKE_TOKEN');
+  reauth() { }
 }
 
 describe('AuthInterceptorService', () => {
@@ -45,8 +46,9 @@ describe('AuthInterceptorService', () => {
     expect(request.request.headers.has('Authorization')).toEqual(false);
   });
 
-  it('should call AuthService.login() if the server responded with 401', () => {
-    const spy = spyOn(authService, 'login');
+  it('should call AuthService.reauth() if the server responded with 401', () => {
+    authService.authenticated = true;
+    const spy = spyOn(authService, 'reauth');
     http.get('FAKE_URL').subscribe();
     httpController.expectOne('FAKE_URL').error(null, { status: 401 });
     expect(spy).toHaveBeenCalled();
