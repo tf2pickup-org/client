@@ -83,6 +83,8 @@ export class AuthService {
           localStorage.removeItem('refresh_token');
           this.authenticated = false;
           return;
+        } else {
+          this.refreshToken = refreshToken;
         }
       } catch (error) { // failed to decode token
         localStorage.removeItem('refresh_token');
