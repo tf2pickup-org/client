@@ -18,6 +18,10 @@
       <app-steam-login-button *ngIf="!isAuthenticated"></app-steam-login-button>
     </div>
 
-    <h4 *ngIf="profile | async as _profile">{{ _profile.name }}</h4>
+    <span *ngIf="profile | async as _profile" class="profile-link">
+      <a [routerLink]="['/player', _profile.id]" class="text-dark navbar-light navbar-nav nav-link">
+        {{ _profile.name }}
+      </a>
+    </span>
   </div>
 </nav>

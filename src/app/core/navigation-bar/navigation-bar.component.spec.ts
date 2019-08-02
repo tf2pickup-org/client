@@ -50,11 +50,11 @@ describe('NavigationBarComponent', () => {
     expect(el).toBeTruthy();
   });
 
-  it('should render profile name in a h4 tag', () => {
-    store.setState({ profile: { profile: { name: 'FAKE_NAME' } } });
+  it('should render profile link', () => {
+    store.setState({ profile: { profile: { name: 'FAKE_NAME', id: 'FAKE_ID' } } });
     fixture.detectChanges();
-    const el = fixture.debugElement.query(By.css('h4'));
+    const el = fixture.debugElement.query(By.css('.profile-link a')).nativeElement as HTMLAnchorElement;
     expect(el).toBeTruthy();
-    expect((el.nativeElement as HTMLElement).innerText).toBe('FAKE_NAME');
+    expect(el.innerText.trim()).toBe('FAKE_NAME');
   });
 });
