@@ -6,7 +6,7 @@ import { AppState } from '@app/app.state';
 import { Observable } from 'rxjs';
 import { playersLocked, playerById } from '../players.selectors';
 import { editPlayer } from '../players.actions';
-import { first } from 'rxjs/operators';
+import { first, skip } from 'rxjs/operators';
 
 interface PlayerSkill {
   gameClass: string;
@@ -58,7 +58,8 @@ export class EditPlayerDialogComponent {
     if (JSON.stringify(editedPlayer) !== JSON.stringify(this.player)) {
       this.store.pipe(
         select(playerById(this.player.id)),
-        first(player => player && player.name === editedPlayer.name),
+        skip(1),
+        first(),
       ).subscribe(() => this.bsModalRef.hide());
 
       this.store.dispatch(editPlayer({ player: editedPlayer }));
