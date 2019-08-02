@@ -8,6 +8,11 @@ import { playersLocked, playerById } from '../players.selectors';
 import { editPlayer } from '../players.actions';
 import { first } from 'rxjs/operators';
 
+interface PlayerSkill {
+  gameClass: string;
+  value: number;
+}
+
 @Component({
   selector: 'app-edit-player-dialog',
   templateUrl: './edit-player-dialog.component.html',
@@ -21,6 +26,11 @@ export class EditPlayerDialogComponent {
   set player(player: Player) {
     this._player = player;
     this.playerNameValue = player.name;
+    this.playerSkill = Object.keys(player.skill)
+      .map(key => ({
+        gameClass: key,
+        value: player.skill[key],
+      }));
   }
 
   get player() {
@@ -28,6 +38,7 @@ export class EditPlayerDialogComponent {
   }
 
   playerNameValue: string;
+  playerSkill: PlayerSkill[];
   locked: Observable<boolean> = this.store.select(playersLocked);
 
   constructor(
@@ -36,7 +47,14 @@ export class EditPlayerDialogComponent {
   ) { }
 
   save() {
-    const editedPlayer = { ...this.player, name: this.playerNameValue };
+    const editedPlayer = {
+      ...this.player,
+      name: this.playerNameValue,
+      skill: this.playerSkill.reduce((obj, curr) => {
+        obj[curr.gameClass] = curr.value;
+        return obj;
+      }, { }),
+    };
     if (JSON.stringify(editedPlayer) !== JSON.stringify(this.player)) {
       this.store.pipe(
         select(playerById(this.player.id)),
