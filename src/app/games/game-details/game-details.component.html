@@ -95,7 +95,7 @@
         <a *ngFor="let player of _playersBlu"
           class="list-group-item list-group-item-action player-item"
           [routerLink]="['/player', player.id]">
-          <img [src]="'/assets/tf2-classfont/' + player.gameClass + '.svg'" class="class-icon">
+          <div class="class-icon" [inlineSVG]="'/assets/tf2-classfont/' + player.gameClass + '.svg'"></div>
           {{ player.name }}
         </a>
       </div>
@@ -107,7 +107,7 @@
         <a *ngFor="let player of _playersRed"
           class="list-group-item list-group-item-action player-item"
           [routerLink]="['/player', player.id]">
-          <img [src]="'/assets/tf2-classfont/' + player.gameClass + '.svg'" class="class-icon">
+          <div class="class-icon" [inlineSVG]="'/assets/tf2-classfont/' + player.gameClass + '.svg'"></div>
           {{ player.name }}
         </a>
       </div>
