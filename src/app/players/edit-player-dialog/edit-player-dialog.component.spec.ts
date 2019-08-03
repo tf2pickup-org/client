@@ -17,6 +17,10 @@ describe('EditPlayerDialogComponent', () => {
   let fixture: ComponentFixture<EditPlayerDialogComponent>;
   let store: MockStore<any>;
 
+  const player: Player = { id: 'FAKE_ID', name: 'FAKE_NAME', joinedAt: new Date(), steamId: 'FAKE_STEAM_ID',
+      avatarUrl: 'FAKE_AVATAR_URL', skill: { } };
+  const initialState = { players: { ids: ['FAKE_ID'], entities: { FAKE_ID: player } } };
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ EditPlayerDialogComponent ],
@@ -24,7 +28,7 @@ describe('EditPlayerDialogComponent', () => {
         FormsModule,
       ],
       providers: [
-        provideMockStore(),
+        provideMockStore({ initialState }),
         { provide: BsModalRef, useClass: BsModalRefStub },
       ]
     })
@@ -45,9 +49,6 @@ describe('EditPlayerDialogComponent', () => {
   });
 
   describe('#save()', () => {
-    const player: Player = { id: 'FAKE_ID', name: 'FAKE_NAME', joinedAt: new Date(), steamId: 'FAKE_STEAM_ID',
-      avatarUrl: 'FAKE_AVATAR_URL', skill: { } };
-
     beforeEach(() => {
       component.player = player;
     });
@@ -66,8 +67,6 @@ describe('EditPlayerDialogComponent', () => {
     });
 
     it('should eventually hide the dialog', () => {
-      store.setState({ players: { ids: ['FAKE_ID'], entities: { FAKE_ID: player } } });
-
       const spy = spyOn(TestBed.get(BsModalRef), 'hide');
       component.playerNameValue = 'FAKE_NAME_2';
       component.save();
