@@ -13,7 +13,7 @@ describe('AddGameServerDialogComponent', () => {
   let component: AddGameServerDialogComponent;
   let fixture: ComponentFixture<AddGameServerDialogComponent>;
   let store: MockStore<any>;
-  const initialState = { gameServers: { locked: false } };
+  const initialState = { gameServers: { ids: [], entities: [], locked: false, }};
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
