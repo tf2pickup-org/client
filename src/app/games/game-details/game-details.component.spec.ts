@@ -8,6 +8,7 @@ import { of } from 'rxjs';
 import { RouterTestingModule } from '@angular/router/testing';
 import { loadGame } from '../games.actions';
 import { Game } from '../models/game';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 const paramMap = of(convertToParamMap({ id: 'FAKE_ID' }));
 const theGame: Game = {
@@ -58,7 +59,8 @@ describe('GameDetailsComponent', () => {
       providers: [
         provideMockStore({ initialState }),
         { provide: ActivatedRoute, useValue: { paramMap } },
-      ]
+      ],
+      schemas: [ NO_ERRORS_SCHEMA ],
     })
     .compileComponents();
   }));
