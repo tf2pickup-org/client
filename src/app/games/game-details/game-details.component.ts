@@ -12,6 +12,10 @@ import { playerById } from '@app/players/players.selectors';
 import { loadPlayer } from '@app/players/players.actions';
 import { profile } from '@app/profile/profile.selectors';
 
+interface PlayerWithGameClass extends Player {
+  gameClass: string;
+}
+
 @Component({
   selector: 'app-game-details',
   templateUrl: './game-details.component.html',
@@ -21,8 +25,8 @@ import { profile } from '@app/profile/profile.selectors';
 export class GameDetailsComponent implements OnInit {
 
   game: Observable<Game>;
-  playersRed: Observable<Player[]>;
-  playersBlu: Observable<Player[]>;
+  playersRed: Observable<PlayerWithGameClass[]>;
+  playersBlu: Observable<PlayerWithGameClass[]>;
   isAdmin: Observable<boolean> = this.store.pipe(
     select(profile),
     map(theProfile => theProfile && (theProfile.role === 'super-user' || theProfile.role === 'admin')),
@@ -51,16 +55,16 @@ export class GameDetailsComponent implements OnInit {
         const playersForTeam = (teamId: string) => zip(
           ...game.slots
             .filter(p => p.teamId === teamId)
-            .map(p => p.playerId)
-            .map(playerId =>
+            .map(slot =>
               this.store.pipe(
-                select(playerById(playerId)),
+                select(playerById(slot.playerId)),
                 tap(player => {
                   if (!player) {
-                    this.store.dispatch(loadPlayer({ playerId }));
+                    this.store.dispatch(loadPlayer({ playerId: slot.playerId }));
                   }
                 }),
                 filter(player => !!player),
+                map(player => ({ ...player, gameClass: slot.gameClass })),
               )
             )
         );

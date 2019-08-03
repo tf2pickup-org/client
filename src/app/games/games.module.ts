@@ -9,6 +9,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { GamesEffects } from './games.effects';
 import { GameDetailsComponent } from './game-details/game-details.component';
 import { SharedModule } from '@app/shared/shared.module';
+import { InlineSVGModule } from 'ng-inline-svg';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,8 @@ import { SharedModule } from '@app/shared/shared.module';
     CommonModule,
     StoreModule.forFeature('games', reducer),
     EffectsModule.forFeature([GamesEffects]),
+    InlineSVGModule.forRoot(),
+
     SharedModule,
     GamesRoutingModule,
   ],
