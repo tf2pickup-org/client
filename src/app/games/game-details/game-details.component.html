@@ -93,8 +93,9 @@
       <div class="list-group list-group-flush" *ngIf="playersBlu | async as _playersBlu">
         <div class="team-header team-header-blu">BLU</div>
         <a *ngFor="let player of _playersBlu"
-          class="list-group-item list-group-item-action"
+          class="list-group-item list-group-item-action player-item"
           [routerLink]="['/player', player.id]">
+          <img [src]="'/assets/tf2-classfont/' + player.gameClass + '.svg'" class="class-icon">
           {{ player.name }}
         </a>
       </div>
@@ -104,8 +105,9 @@
       <div class="list-group list-group-flush" *ngIf="playersRed | async as _playersRed">
         <div class="team-header team-header-red">RED</div>
         <a *ngFor="let player of _playersRed"
-          class="list-group-item list-group-item-action"
+          class="list-group-item list-group-item-action player-item"
           [routerLink]="['/player', player.id]">
+          <img [src]="'/assets/tf2-classfont/' + player.gameClass + '.svg'" class="class-icon">
           {{ player.name }}
         </a>
       </div>
