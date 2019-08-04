@@ -1,4 +1,4 @@
-<div [formGroup]="form" class="input-group">
+<div *ngIf="form" [formGroup]="form" class="input-group">
   <div class="input-group-prepend">
     <span class="input-group-text">{{ gameClass }}</span>
   </div>
