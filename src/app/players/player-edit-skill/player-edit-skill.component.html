@@ -1,10 +1,11 @@
-<div *ngIf="form" [formGroup]="form" class="input-group">
-  <div class="input-group-prepend">
-    <span class="input-group-text">{{ gameClass }}</span>
+<div *ngIf="form" [formGroup]="form" class="form-group row">
+  <label [attr.for]="'rating_' + gameClass" class="col-4 col-form-label">{{ gameClass }}</label>
+  <div class="col-8">
+    <input
+      type="number"
+      [attr.id]="'rating_' + gameClass"
+      [formControlName]="gameClass"
+      class="form-control"
+      min="1" max="5">
   </div>
-  <input
-    type="number"
-    [formControlName]="gameClass"
-    class="form-control"
-    min="1" max="5">
 </div>
