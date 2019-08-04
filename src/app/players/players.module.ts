@@ -8,17 +8,17 @@ import { PlayerNameComponent } from './player-name/player-name.component';
 import { PlayerAvatarComponent } from './player-avatar/player-avatar.component';
 import { PlayerDetailsComponent } from './player-details/player-details.component';
 import { PlayersRoutingModule } from './players-routing.module';
-import { EditPlayerDialogComponent } from './edit-player-dialog/edit-player-dialog.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PlayerEditComponent } from './player-edit/player-edit.component';
+import { PlayerEditSkillComponent } from './player-edit-skill/player-edit-skill.component';
 
 @NgModule({
   declarations: [
     PlayerNameComponent,
     PlayerAvatarComponent,
     PlayerDetailsComponent,
-    EditPlayerDialogComponent,
     PlayerEditComponent,
+    PlayerEditSkillComponent,
   ],
   imports: [
     CommonModule,
@@ -32,8 +32,5 @@ import { PlayerEditComponent } from './player-edit/player-edit.component';
     PlayerNameComponent,
     PlayerAvatarComponent,
   ],
-  entryComponents: [
-    EditPlayerDialogComponent,
-  ]
 })
 export class PlayersModule { }

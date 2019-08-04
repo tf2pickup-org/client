@@ -15,5 +15,13 @@
         {{ (locked | async) ? 'saving...' : 'save' }}
       </button>
     </div>
+
+    <div *ngIf="skill" formArrayName="skill">
+      <h5>Skill</h5>
+
+      <div *ngFor="let gameClass of gameClasses | async" class="row">
+        <app-player-edit-skill [gameClass]="gameClass" [form]="skill" class="col-4"></app-player-edit-skill>
+      </div>
+    </div>
   </form>
 </div>

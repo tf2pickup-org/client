@@ -1,14 +1,14 @@
-import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map, switchMap, tap, filter, takeUntil } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app.state';
 import { playerById, playersLocked } from '../players.selectors';
-import { loadPlayer, editPlayer, playerEdited } from '../players.actions';
-import { FormBuilder, Validators } from '@angular/forms';
+import { loadPlayer, editPlayer, playerEdited, loadPlayerSkill } from '../players.actions';
+import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 import { Player } from '../models/player';
 import { Actions, ofType } from '@ngrx/effects';
-import { Subject, Observable } from 'rxjs';
+import { Subject, Observable, BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-player-edit',
@@ -24,6 +24,7 @@ export class PlayerEditComponent implements OnInit, OnDestroy {
     name: ['', Validators.required],
   });
   locked: Observable<boolean> = this.store.select(playersLocked);
+  gameClasses = new BehaviorSubject<string[]>([]);
 
   constructor(
     private route: ActivatedRoute,
@@ -31,15 +32,19 @@ export class PlayerEditComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private actions: Actions,
     private router: Router,
+    private changeDetector: ChangeDetectorRef,
   ) { }
 
   ngOnInit() {
-    this.route.paramMap.pipe(
+    const getPlayerId = this.route.paramMap.pipe(
       map(params => params.get('id')),
-      switchMap(id => this.store.select(playerById(id)).pipe(
+    );
+
+    getPlayerId.pipe(
+      switchMap(playerId => this.store.select(playerById(playerId)).pipe(
         tap(player => {
           if (!player) {
-            this.store.dispatch(loadPlayer({ playerId: id }));
+            this.store.dispatch(loadPlayer({ playerId }));
           }
         }),
       )),
@@ -47,15 +52,31 @@ export class PlayerEditComponent implements OnInit, OnDestroy {
       takeUntil(this.destroyed),
     ).subscribe(player => {
       this.originalPlayer = player;
-      this.player.setValue({
-        name: player.name,
-      });
 
+      if (this.player.get('skill')) {
+        this.player.removeControl('skill');
+      }
+
+      this.player.setValue({ name: player.name });
+
+      if (player.skill) {
+        this.player.addControl('skill', this.toFormGroup(player.skill));
+        this.gameClasses.next(Object.keys(player.skill));
+      }
+
+      this.changeDetector.markForCheck();
+    });
+
+    getPlayerId.pipe(
+      takeUntil(this.destroyed),
+    ).subscribe(playerId => this.store.dispatch(loadPlayerSkill({ playerId })));
+
+    getPlayerId.subscribe(playerId => {
       this.actions.pipe(
         ofType(playerEdited),
-        filter(action => action.player.id === player.id),
+        filter(action => action.player.id === playerId),
         takeUntil(this.destroyed),
-      ).subscribe(() => this.router.navigate(['/player', player.id]));
+      ).subscribe(() => this.router.navigate(['/player', playerId]));
     });
   }
 
@@ -67,6 +88,18 @@ export class PlayerEditComponent implements OnInit, OnDestroy {
   save() {
     const player: Player = { ...this.originalPlayer, ...this.player.value };
     this.store.dispatch(editPlayer({ player }));
+  }
+
+  get skill() {
+    return this.player.get('skill') as FormGroup;
+  }
+
+  private toFormGroup(skill: { [gameClass: string]: number }): FormGroup {
+    const group = { };
+    Object.keys(skill).forEach(gameClass => {
+      group[gameClass] = new FormControl(skill[gameClass]);
+    });
+    return new FormGroup(group);
   }
 
 }

@@ -1,0 +1,10 @@
+<div [formGroup]="form" class="input-group">
+  <div class="input-group-prepend">
+    <span class="input-group-text">{{ gameClass }}</span>
+  </div>
+  <input
+    type="number"
+    [formControlName]="gameClass"
+    class="form-control"
+    min="1" max="5">
+</div>
