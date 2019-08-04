@@ -4,14 +4,19 @@
 
 import { version } from 'package.json';
 
+const discordInvitation = 'https://discord.gg/YsAAAz';
+
 export const environment = {
   production: false,
   apiUrl: '/api', // goes via local proxy
   wsUrl: '/',
   version,
+  headerLinks: [
+    { name: 'discord', icon: '/assets/discord.svg', target: discordInvitation, tooltip: 'Join us on discord!' },
+  ],
   footerLinks: [
     { name: 'github', target: 'https://github.com/tf2pickup-pl' },
-    { name: 'discord', target: 'https://discord.gg/YsAAAz' },
+    { name: 'discord', target: discordInvitation },
   ],
 };
 

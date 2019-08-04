@@ -20,6 +20,19 @@
       <li class="nav-item">
         <a class="nav-link" routerLink="/rules" routerLinkActive="active">rules</a>
       </li>
+
+      <ng-container *ngFor="let link of links">
+        <a [href]="link.target" target="_blank"
+          [ngClass]="link.icon ? 'navbar-brand' : 'nav-link'">
+          <img *ngIf="link.icon; else text"
+            [src]="link.icon"
+            [attr.alt]="link.name"
+            [tooltip]="link.tooltip"
+            width="30" height="30"
+            class="d-inline-block align-top mx-1">
+          <ng-template #text>{{ link.name }}</ng-template>
+        </a>
+      </ng-container>
     </ul>
 
     <div class="navbar-text">
