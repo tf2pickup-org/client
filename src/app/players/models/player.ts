@@ -8,5 +8,5 @@ export interface Player {
   avatarUrl: string;
   role?: PlayerRole;
   etf2lProfileId?: number;
-  skill: { [gameClass: string]: number };
+  skill?: { [gameClass: string]: number };
 }

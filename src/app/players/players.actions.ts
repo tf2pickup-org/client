@@ -1,5 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { Player } from './models/player';
+import { PlayerSkill } from './models/player-skill';
 
 export const loadPlayer = createAction(
   '[Queue] Load player',
@@ -25,4 +26,14 @@ export const playerEdited = createAction(
 export const playerUpdated = createAction(
   '[WS] Player updated',
   props<{ player: Player }>(),
+);
+
+export const loadPlayerSkill = createAction(
+  '[Player edit] Load player skill',
+  props<{ playerId: string }>(),
+);
+
+export const playerSkillLoaded = createAction(
+  '[API] Player skill loaded',
+  props<{ playerSkill: PlayerSkill }>(),
 );
