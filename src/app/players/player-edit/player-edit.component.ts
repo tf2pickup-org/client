@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, OnDestroy, ChangeDetectorRef, HostListener } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map, switchMap, tap, filter, takeUntil } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
@@ -25,6 +25,11 @@ export class PlayerEditComponent implements OnInit, OnDestroy {
   });
   locked: Observable<boolean> = this.store.select(playersLocked);
   gameClasses = new BehaviorSubject<string[]>([]);
+
+  @HostListener('document:keydown.escape', ['$event'])
+  onKeyDown() {
+    this.cancel();
+  }
 
   constructor(
     private route: ActivatedRoute,
@@ -88,6 +93,10 @@ export class PlayerEditComponent implements OnInit, OnDestroy {
   save() {
     const player: Player = { ...this.originalPlayer, ...this.player.value };
     this.store.dispatch(editPlayer({ player }));
+  }
+
+  cancel() {
+    this.router.navigate(['/player', this.originalPlayer.id]);
   }
 
   get skill() {

@@ -11,6 +11,7 @@ import { PlayersRoutingModule } from './players-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PlayerEditComponent } from './player-edit/player-edit.component';
 import { PlayerEditSkillComponent } from './player-edit-skill/player-edit-skill.component';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
 @NgModule({
   declarations: [
@@ -24,8 +25,11 @@ import { PlayerEditSkillComponent } from './player-edit-skill/player-edit-skill.
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+
     StoreModule.forFeature('players', reducer),
     EffectsModule.forFeature([PlayerEffects]),
+    TooltipModule,
+
     PlayersRoutingModule,
   ],
   exports: [

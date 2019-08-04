@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container position-relative">
   <form [formGroup]="player" (ngSubmit)="save()">
     <div class="form-group row">
       <input
@@ -10,7 +10,7 @@
       <div class="col-1"></div>
       <button
         type="submit"
-        class="btn btn-primary col-2"
+        class="btn btn-primary col"
         [disabled]="!player.valid || player.pristine || (locked | async)">
         {{ (locked | async) ? 'saving...' : 'save' }}
       </button>
@@ -24,4 +24,14 @@
       </div>
     </div>
   </form>
+
+  <div class="close-anchor d-flex justify-content-center align-items-center">
+    <a
+      [routerLink]=""
+      class="text-secondary"
+      tooltip="Cancel"
+      (click)="cancel()">
+      <span class="oi oi-x"></span>
+    </a>
+  </div>
 </div>
