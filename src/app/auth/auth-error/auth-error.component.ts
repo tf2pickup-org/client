@@ -26,6 +26,10 @@ export class AuthErrorComponent implements OnInit {
         case 'not enough steam hours':
           this.errorMessage = 'You do not meet the required amount of hours in Team Fortress 2.';
           break;
+
+        case 'etf2l banned':
+          this.errorMessage = 'This account is banned.';
+          break;
       }
     }
   }
