@@ -14,16 +14,23 @@ import { Player } from '../models/player';
 const paramMap = of(convertToParamMap({ id: 'FAKE_ID' }));
 const actions = new Subject<Action>();
 
-class RouterStub {
-  navigate(params: string[]) { }
-}
-
 describe('PlayerEditComponent', () => {
   let component: PlayerEditComponent;
   let fixture: ComponentFixture<PlayerEditComponent>;
   let store: MockStore<any>;
   let storeDispatchSpy: jasmine.Spy;
-  const initialState = { players: { ids: [], entities: { } } };
+
+  const initialState = {
+    players: {
+      ids: [ 'FAKE_ID' ],
+      entities: {
+        FAKE_ID: {
+          id: 'FAKE_ID',
+          name: 'FAKE_NAME',
+        },
+      },
+    },
+  };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -36,7 +43,6 @@ describe('PlayerEditComponent', () => {
         { provide: ActivatedRoute, useValue: { paramMap } },
         provideMockStore({ initialState }),
         { provide: Actions, useValue: actions },
-        { provide: Router, useClass: RouterStub },
       ],
       schemas: [ NO_ERRORS_SCHEMA ],
     })
@@ -66,5 +72,13 @@ describe('PlayerEditComponent', () => {
     const spy = spyOn(TestBed.get(Router), 'navigate');
     actions.next(playerEdited({ player: { id: 'FAKE_ID' } } as { player: Player }));
     expect(spy).toHaveBeenCalledWith(['/player', 'FAKE_ID']);
+  });
+
+  describe('#cancel()', () => {
+    it('should navigate back to the player details page', () => {
+      const spy = spyOn(TestBed.get(Router), 'navigate');
+      component.cancel();
+      expect(spy).toHaveBeenCalledWith(['/player', 'FAKE_ID']);
+    });
   });
 });
