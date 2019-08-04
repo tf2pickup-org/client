@@ -1,5 +1,12 @@
 <footer class="footer">
   <div class="container">
-    <span class="text-muted">footer</span>
+    <span class="text-muted">
+      version {{ version }}
+
+      <ng-container *ngFor="let link of links">
+        &bull;
+        <a [href]="link.target" target="_blank">{{ link.name }}</a>
+      </ng-container>
+    </span>
   </div>
 </footer>
