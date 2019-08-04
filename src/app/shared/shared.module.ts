@@ -4,12 +4,14 @@ import { SteamLoginButtonComponent } from './steam-login-button/steam-login-butt
 import { ConnectStringToLinkPipe } from './connect-string-to-link.pipe';
 import { RulesComponent } from './rules/rules.component';
 import { MarkdownModule } from 'ngx-markdown';
+import { SafeMumbleUrlPipe } from './safe-mumble-url.pipe';
 
 @NgModule({
   declarations: [
     SteamLoginButtonComponent,
     ConnectStringToLinkPipe,
     RulesComponent,
+    SafeMumbleUrlPipe,
   ],
   imports: [
     CommonModule,
@@ -19,6 +21,7 @@ import { MarkdownModule } from 'ngx-markdown';
     SteamLoginButtonComponent,
     ConnectStringToLinkPipe,
     RulesComponent,
+    SafeMumbleUrlPipe,
   ]
 })
 export class SharedModule { }
