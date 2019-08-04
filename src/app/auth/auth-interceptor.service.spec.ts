@@ -3,12 +3,12 @@ import { AuthInterceptorService } from './auth-interceptor.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { AuthService } from './auth.service';
 import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
-import { of } from 'rxjs';
+import { of, NEVER } from 'rxjs';
 
 class AuthServiceStub {
   authenticated = false;
   authToken = of('FAKE_TOKEN');
-  reauth() { }
+  reauth() { return NEVER; }
 }
 
 describe('AuthInterceptorService', () => {
