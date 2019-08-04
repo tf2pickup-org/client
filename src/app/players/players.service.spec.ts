@@ -45,7 +45,7 @@ describe('PlayersService', () => {
   describe('#savePlayer()', () => {
     it('should call the endpoint', inject([PlayersService], (service: PlayersService) => {
       const player: Player = { id: 'FAKE_ID', name: 'FAKE_NAME', joinedAt: new Date(), steamId: 'FAKE_STEAM_ID',
-        avatarUrl: 'FAKE_AVATAR_URL', skill: { } };
+        avatarUrl: 'FAKE_AVATAR_URL', skill: { }, gameCount: 0 };
       service.savePlayer(player).subscribe();
       const req = httpContoller.expectOne('FAKE_URL/players/FAKE_ID');
       expect(req.request.method).toBe('PUT');
