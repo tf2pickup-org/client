@@ -3,6 +3,7 @@ import { AuthService } from '@app/auth/auth.service';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app.state';
 import { profile } from '@app/profile/profile.selectors';
+import { environment } from '@environment';
 
 @Component({
   selector: 'app-navigation-bar',
@@ -14,6 +15,7 @@ export class NavigationBarComponent {
 
   isAuthenticated = this.authService.authenticated;
   profile = this.store.select(profile);
+  links = environment.headerLinks;
 
   constructor(
     private authService: AuthService,

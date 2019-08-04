@@ -4,6 +4,7 @@ import { NavigationBarComponent } from './navigation-bar/navigation-bar.componen
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '@app/shared/shared.module';
 import { FooterComponent } from './footer/footer.component';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,8 @@ import { FooterComponent } from './footer/footer.component';
     CommonModule,
     RouterModule,
     SharedModule,
+
+    TooltipModule,
   ],
   exports: [
     NavigationBarComponent,
