@@ -2,7 +2,7 @@ import { EntityState } from '@ngrx/entity';
 import { Player } from './models/player';
 import { adapter } from './players.adapter';
 import { createReducer, Action, on } from '@ngrx/store';
-import { playerLoaded, editPlayer, playerUpdated, playerEdited, playerSkillLoaded } from './players.actions';
+import { playerLoaded, editPlayer, playerUpdated, playerEdited, playerSkillLoaded, playersLoaded } from './players.actions';
 
 export interface State extends EntityState<Player> {
   locked: boolean; // is player editing enabled or not
@@ -24,6 +24,7 @@ const playerReducer = createReducer(
       skill: playerSkill.skill,
     }
   }, state)),
+  on(playersLoaded, (state, { players }) => adapter.upsertMany(players, state)),
 );
 
 export function reducer(state: State | undefined, action: Action) {

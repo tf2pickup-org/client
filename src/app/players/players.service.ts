@@ -36,4 +36,8 @@ export class PlayersService {
     return this.http.put<PlayerSkill>(`${this.apiUrl}/players/${playerSkill.player}/skill`, playerSkill);
   }
 
+  fetchAllPlayers(): Observable<Player[]> {
+    return this.http.get<Player[]>(`${this.apiUrl}/players`);
+  }
+
 }

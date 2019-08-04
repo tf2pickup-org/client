@@ -12,6 +12,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PlayerEditComponent } from './player-edit/player-edit.component';
 import { PlayerEditSkillComponent } from './player-edit-skill/player-edit-skill.component';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { PlayerListComponent } from './player-list/player-list.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
     PlayerDetailsComponent,
     PlayerEditComponent,
     PlayerEditSkillComponent,
+    PlayerListComponent,
   ],
   imports: [
     CommonModule,
