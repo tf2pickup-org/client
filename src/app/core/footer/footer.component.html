@@ -1,14 +1,16 @@
 <footer class="footer">
   <div class="container">
     <span class="text-muted">
-      copyright &copy; 2019 tf2pickup.pl
-      &bull;
-      version {{ version }}
-
-      <ng-container *ngFor="let link of links">
+      <small>
+        copyright &copy; 2019 tf2pickup.pl
         &bull;
-        <a [href]="link.target" target="_blank">{{ link.name }}</a>
-      </ng-container>
+        version {{ version }}
+
+        <ng-container *ngFor="let link of links">
+          &bull;
+          <a [href]="link.target" target="_blank">{{ link.name }}</a>
+        </ng-container>
+      </small>
     </span>
   </div>
 </footer>
