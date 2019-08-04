@@ -1,0 +1,7 @@
+<div class="list-group list-group-flush">
+  <a *ngFor="let player of players | async"
+    [routerLink]="['/player', player.id]"
+    class="list-group-item list-group-item-action">
+    {{ player.name }}
+  </a>
+</div>
