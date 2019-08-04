@@ -54,6 +54,7 @@ export class ProfileEffects implements OnInitEffects {
     const modal = this.modalService.show(AcceptRulesDialogComponent, {
       keyboard: false,
       ignoreBackdropClick: true,
+      class: 'modal-lg',
     });
 
     return (modal.content as AcceptRulesDialogComponent).rulesAccepted.asObservable().pipe(
