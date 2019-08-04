@@ -5,7 +5,7 @@ import { PlayersService } from '../players.service';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
-import { convertToParamMap, ActivatedRoute } from '@angular/router';
+import { convertToParamMap, ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { loadPlayer } from '../players.actions';
 
@@ -15,6 +15,10 @@ class BsModalServiceStub {
 
 class PlayersServiceStub {
   fetchPlayerGames() { }
+}
+
+class RouterStub {
+  navigate(params: string[]) { }
 }
 
 const paramMap = of(convertToParamMap({ id: 'FAKE_ID' }));
@@ -38,6 +42,7 @@ describe('PlayerDetailsComponent', () => {
         { provide: PlayersService, useClass: PlayersServiceStub  },
         provideMockStore({ initialState }),
         { provide: ActivatedRoute, useValue: { paramMap } },
+        { provide: Router, useClass: RouterStub },
       ]
     })
     .compileComponents();
@@ -58,5 +63,14 @@ describe('PlayerDetailsComponent', () => {
 
   it('should load the player if it is not in the store yet', () => {
     expect(storeDispatchSpy).toHaveBeenCalledWith(loadPlayer({ playerId: 'FAKE_ID' }));
+  });
+
+  describe('#editPlayer()', () => {
+    it('redirects to edit player page', () => {
+      store.setState({ players: { ids: [ 'FAKE_ID' ], entities: { FAKE_ID: { id: 'FAKE_ID' } } } });
+      const spy = spyOn(TestBed.get(Router), 'navigate');
+      component.editPlayer();
+      expect(spy).toHaveBeenCalledWith(['/player', 'FAKE_ID', 'edit']);
+    });
   });
 });

@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AppState } from '@app/app.state';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -10,8 +10,6 @@ import { loadPlayer } from '../players.actions';
 import { Game } from '@app/games/models/game';
 import { PlayersService } from '../players.service';
 import { profile } from '@app/profile/profile.selectors';
-import { BsModalService } from 'ngx-bootstrap/modal';
-import { EditPlayerDialogComponent } from '../edit-player-dialog/edit-player-dialog.component';
 
 @Component({
   selector: 'app-player-details',
@@ -32,7 +30,7 @@ export class PlayerDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private store: Store<AppState>,
     private playersService: PlayersService,
-    private modalService: BsModalService,
+    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -51,8 +49,7 @@ export class PlayerDetailsComponent implements OnInit {
 
   editPlayer() {
     this.player.pipe(first()).subscribe(player => {
-      const initialState = { player };
-      this.modalService.show(EditPlayerDialogComponent, { initialState });
+      this.router.navigate(['/player', player.id, 'edit']);
     });
   }
 
