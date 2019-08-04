@@ -1,0 +1,27 @@
+<div class="container">
+  <form [formGroup]="player" (ngSubmit)="save()">
+    <div class="form-group row">
+      <input
+        type="text"
+        class="form-control form-control-lg col-9"
+        formControlName="name"
+        placeholder="player name"
+        required>
+      <div class="col-1"></div>
+      <button
+        type="submit"
+        class="btn btn-primary col-2"
+        [disabled]="!player.valid || player.pristine || (locked | async)">
+        {{ (locked | async) ? 'saving...' : 'save' }}
+      </button>
+    </div>
+
+    <div *ngIf="skill" formArrayName="skill">
+      <h5>Skill</h5>
+
+      <div *ngFor="let gameClass of gameClasses | async" class="row">
+        <app-player-edit-skill [gameClass]="gameClass" [form]="skill" class="col-4"></app-player-edit-skill>
+      </div>
+    </div>
+  </form>
+</div>

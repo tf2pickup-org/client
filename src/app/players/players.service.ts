@@ -4,6 +4,7 @@ import { Player } from './models/player';
 import { API_URL } from '@app/api-url';
 import { HttpClient } from '@angular/common/http';
 import { Game } from '@app/games/models/game';
+import { PlayerSkill } from './models/player-skill';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,14 @@ export class PlayersService {
 
   savePlayer(player: Player): Observable<Player> {
     return this.http.put<Player>(`${this.apiUrl}/players/${player.id}`, player);
+  }
+
+  fetchPlayerSkill(playerId: string): Observable<PlayerSkill> {
+    return this.http.get<PlayerSkill>(`${this.apiUrl}/players/${playerId}/skill`);
+  }
+
+  savePlayerSkill(playerSkill: PlayerSkill): Observable<PlayerSkill> {
+    return this.http.put<PlayerSkill>(`${this.apiUrl}/players/${playerSkill.player}/skill`, playerSkill);
   }
 
 }

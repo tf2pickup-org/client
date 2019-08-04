@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 import { FormsModule } from '@angular/forms';
 
 class BsModalRefStub {
-
+  hide() { }
 }
 
 describe('AddGameServerDialogComponent', () => {
