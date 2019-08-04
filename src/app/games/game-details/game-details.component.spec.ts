@@ -39,6 +39,7 @@ const theGame: Game = {
   number: 3,
   connectString: 'connect 192.168.1.101:27015; password FAKE_PASSWORD',
   error: 'ended by admin',
+  mumbleUrl: 'mumble://FAKE_MUMBLE_URL/FAKE_CHANNEL'
 };
 
 describe('GameDetailsComponent', () => {

@@ -59,6 +59,11 @@
         </ng-template>
       </div>
     </div>
+
+    <div class="mt-2" *ngIf="myMumbleUrl | async as _myMumbleUrl">
+      <span class="text-muted">mumble</span>
+      <a [href]="_myMumbleUrl | safeMumbleUrl" class="mx-2">join</a>
+    </div>
   </ng-container>
 
   <ng-container *ngIf="_game.state === 'ended'">

@@ -13,5 +13,6 @@ export interface Game {
   demoUrl?: string;
   state: GameState;
   connectString: string;
+  mumbleUrl: string;
   error?: string;
 }
