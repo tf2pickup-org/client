@@ -4,13 +4,14 @@ import { AppState } from '@app/app.state';
 import { Observable, zip } from 'rxjs';
 import { Game } from '../models/game';
 import { ActivatedRoute } from '@angular/router';
-import { switchMap, map, tap, filter, first } from 'rxjs/operators';
+import { switchMap, map, tap, filter, first, withLatestFrom } from 'rxjs/operators';
 import { gameById } from '../games.selectors';
 import { loadGame, forceEndGame } from '../games.actions';
 import { Player } from '@app/players/models/player';
 import { playerById } from '@app/players/players.selectors';
 import { loadPlayer } from '@app/players/players.actions';
 import { profile } from '@app/profile/profile.selectors';
+import * as urlParse from 'url-parse';
 
 interface PlayerWithGameClass extends Player {
   gameClass: string;
@@ -31,6 +32,7 @@ export class GameDetailsComponent implements OnInit {
     select(profile),
     map(theProfile => theProfile && (theProfile.role === 'super-user' || theProfile.role === 'admin')),
   );
+  myMumbleUrl: Observable<string>;
 
   @ViewChild('connectInput', { static: false })
   connectInput: ElementRef;
@@ -73,6 +75,22 @@ export class GameDetailsComponent implements OnInit {
         this.playersRed = playersForTeam(redTeamId);
         const bluTeamId = Object.keys(game.teams).find(key => game.teams[key] === 'BLU');
         this.playersBlu = playersForTeam(bluTeamId);
+      }),
+    );
+
+    this.myMumbleUrl = this.game.pipe(
+      filter(game => !!game),
+      withLatestFrom(this.store.select(profile).pipe(filter(p => !!p))),
+      map(([game, theProfile]) => {
+        const mySlot = game.slots.find(s => s.playerId === theProfile.id);
+        if (!mySlot) {
+          return null;
+        }
+
+        const team = game.teams[mySlot.teamId];
+        const url = urlParse(game.mumbleUrl);
+        url.set('username', theProfile.name);
+        return `${url.toString()}/${team}`;
       }),
     );
   }
