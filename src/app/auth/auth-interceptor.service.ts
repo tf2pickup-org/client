@@ -3,11 +3,13 @@ import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse
 import { AuthService } from './auth.service';
 import { Observable, throwError } from 'rxjs';
 import { catchError, switchMap, map, first } from 'rxjs/operators';
+import { TokenStoreService } from './token-store.service';
 
 @Injectable()
 export class AuthInterceptorService implements HttpInterceptor {
 
   constructor(
+    private tokenStore: TokenStoreService,
     private authService: AuthService,
   ) { }
 
@@ -16,20 +18,17 @@ export class AuthInterceptorService implements HttpInterceptor {
       return next.handle(request);
     }
 
-    return this.authService.authToken.pipe(
-      first(),
-      map(token => this.applyAuthToken(request, token)),
-      switchMap(authorizedRequest => next.handle(authorizedRequest).pipe(
-        catchError(error => {
-          if (error instanceof HttpErrorResponse && error.status === 401) {
-            return this.reauth(request).pipe(
-              switchMap(req => next.handle(req)),
-            );
-          } else {
-            return throwError(error);
-          }
-        }),
-      )),
+    const authorizedRequest = this.applyAuthToken(request, this.tokenStore.authToken);
+    return next.handle(authorizedRequest).pipe(
+      catchError(error => {
+        if (error instanceof HttpErrorResponse && error.status === 401) {
+          return this.reauth(request).pipe(
+            switchMap(req => next.handle(req)),
+          );
+        } else {
+          return throwError(error);
+        }
+      }),
     );
   }
 
@@ -39,7 +38,6 @@ export class AuthInterceptorService implements HttpInterceptor {
 
   private reauth(request: HttpRequest<any>): Observable<HttpRequest<any>> {
     return this.authService.reauth().pipe(
-      first(),
       map(token => this.applyAuthToken(request, token)),
     );
   }

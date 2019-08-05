@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '@app/app.state';
 import { loadQueue } from '@app/queue/queue.actions';
 import { of, Observable, ReplaySubject } from 'rxjs';
-import { first, map, switchMap } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { API_URL } from '@app/api-url';
 

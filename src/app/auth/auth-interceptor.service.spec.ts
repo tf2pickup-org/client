@@ -3,16 +3,22 @@ import { AuthInterceptorService } from './auth-interceptor.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { AuthService } from './auth.service';
 import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
-import { of, NEVER } from 'rxjs';
+import { of } from 'rxjs';
+import { TokenStoreService } from './token-store.service';
 
 class AuthServiceStub {
   authenticated = false;
-  authToken = of('FAKE_TOKEN');
-  reauth() { return NEVER; }
+  reauth() { return of('FAKE_AUTH_TOKEN'); }
+}
+
+class TokenStoreServiceStub {
+  refreshToken = 'FAKE_REFRESH_TOKEN';
+  authToken = 'FAKE_AUTH_TOKEN';
 }
 
 describe('AuthInterceptorService', () => {
   let authService: AuthServiceStub;
+  let tokenStoreService: TokenStoreServiceStub;
   let http: HttpClient;
   let httpController: HttpTestingController;
 
@@ -21,13 +27,15 @@ describe('AuthInterceptorService', () => {
       HttpClientTestingModule,
     ],
     providers: [
-      { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true },
       { provide: AuthService, useClass: AuthServiceStub },
+      { provide: TokenStoreService, useClass: TokenStoreServiceStub },
+      { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true },
     ]
   }));
 
   beforeEach(() => {
     authService = TestBed.get(AuthService);
+    tokenStoreService = TestBed.get(TokenStoreService);
     http = TestBed.get(HttpClient);
     httpController = TestBed.get(HttpTestingController);
   });
@@ -37,7 +45,7 @@ describe('AuthInterceptorService', () => {
     http.get('FAKE_URL').subscribe();
     const request = httpController.expectOne('FAKE_URL');
     expect(request.request.headers.has('Authorization')).toEqual(true);
-    expect(request.request.headers.get('Authorization')).toEqual('Bearer FAKE_TOKEN');
+    expect(request.request.headers.get('Authorization')).toEqual('Bearer FAKE_AUTH_TOKEN');
   });
 
   it('should not add the Authorization header if not logged in', () => {
@@ -46,11 +54,13 @@ describe('AuthInterceptorService', () => {
     expect(request.request.headers.has('Authorization')).toEqual(false);
   });
 
-  it('should call AuthService.reauth() if the server responded with 401', () => {
+  it('should refresh the auth token if the server responded with 401', () => {
     authService.authenticated = true;
-    const spy = spyOn(authService, 'reauth');
+    const spy = spyOn(authService, 'reauth').and.returnValue(of('FAKE_NEW_AUTH_TOKEN'));
     http.get('FAKE_URL').subscribe();
     httpController.expectOne('FAKE_URL').error(null, { status: 401 });
     expect(spy).toHaveBeenCalled();
+    const req = httpController.expectOne('FAKE_URL');
+    expect(req.request.headers.get('Authorization')).toEqual('Bearer FAKE_NEW_AUTH_TOKEN');
   });
 });
