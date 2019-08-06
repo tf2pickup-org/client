@@ -10,6 +10,7 @@ export class TokenStoreService {
 
   private readonly refreshTokenKey = 'refresh_token';
   private readonly authTokenKey = 'auth_token';
+  private readonly wsTokenKey = 'ws_token';
 
   constructor(
     @Inject(LOCAL_STORAGE) private storage: StorageService,
@@ -31,6 +32,14 @@ export class TokenStoreService {
 
   set authToken(authToken: string) {
     this.storage.set(this.authTokenKey, authToken);
+  }
+
+  get wsToken(): string {
+    return this.storage.get(this.wsTokenKey);
+  }
+
+  set wsToken(wsToken: string) {
+    this.storage.set(this.wsTokenKey, wsToken);
   }
 
   private retrieveTokens() {
