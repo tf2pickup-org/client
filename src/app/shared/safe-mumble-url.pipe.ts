@@ -1,5 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { SafeUrl, DomSanitizer } from '@angular/platform-browser';
+import * as urlParse from 'url-parse';
 
 @Pipe({
   name: 'safeMumbleUrl'
@@ -11,7 +12,12 @@ export class SafeMumbleUrlPipe implements PipeTransform {
   ) { }
 
   transform(value: string): SafeUrl {
-    return this.sanitizer.bypassSecurityTrustUrl(value);
+    const url = urlParse(value);
+    if (url.protocol === 'mumble:') {
+      return this.sanitizer.bypassSecurityTrustUrl(value);
+    } else {
+      return value;
+    }
   }
 
 }
