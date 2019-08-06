@@ -1,6 +1,6 @@
 import { version } from 'package.json';
 
-const discordInvitation = 'https://discord.gg/YsAAAz';
+const discordInvitation = 'https://discord.gg/UVFVfc4';
 
 export const environment = {
   production: true,
