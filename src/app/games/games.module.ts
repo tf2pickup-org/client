@@ -10,12 +10,14 @@ import { GamesEffects } from './games.effects';
 import { GameDetailsComponent } from './game-details/game-details.component';
 import { SharedModule } from '@app/shared/shared.module';
 import { InlineSVGModule } from 'ng-inline-svg';
+import { MumbleJoinButtonComponent } from './mumble-join-button/mumble-join-button.component';
 
 @NgModule({
   declarations: [
     GamesContainerComponent,
     GameListComponent,
     GameDetailsComponent,
+    MumbleJoinButtonComponent,
   ],
   imports: [
     CommonModule,
