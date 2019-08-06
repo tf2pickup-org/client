@@ -29,6 +29,7 @@
     "ng-inline-svg": "^8.5.1",
     "ngx-bootstrap": "^5.1.0",
     "ngx-markdown": "^8.1.0",
+    "ngx-webstorage-service": "^4.0.1",
     "open-iconic": "^1.1.1",
     "rxjs": "~6.5.2",
     "socket.io-client": "^2.2.0",
