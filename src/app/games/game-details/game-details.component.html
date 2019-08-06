@@ -58,11 +58,10 @@
           <span class="font-italic text-muted">not available yet</span>
         </ng-template>
       </div>
-    </div>
 
-    <div class="mt-2" *ngIf="myMumbleUrl | async as _myMumbleUrl">
-      <span class="text-muted">mumble</span>
-      <a [href]="_myMumbleUrl | safeMumbleUrl" class="mx-2">join</a>
+      <div class="col">
+        <app-mumble-join-button [gameId]="_game.id"></app-mumble-join-button>
+      </div>
     </div>
   </ng-container>
 

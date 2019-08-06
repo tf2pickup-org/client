@@ -26,7 +26,13 @@ describe('SafeMumbleUrlPipe', () => {
 
   it('should bypass security url check', () => {
     const spy = spyOn(TestBed.get(DomSanitizer), 'bypassSecurityTrustUrl');
-    pipe.transform('FAKE_URL');
-    expect(spy).toHaveBeenCalledWith('FAKE_URL');
+    pipe.transform('mumble://FAKE_URL');
+    expect(spy).toHaveBeenCalledWith('mumble://FAKE_URL');
+  });
+
+  it('should deny protocols other than mumble:', () => {
+    const spy = spyOn(TestBed.get(DomSanitizer), 'bypassSecurityTrustUrl');
+    pipe.transform('fakeprotocol://FAKE_URL');
+    expect(spy).not.toHaveBeenCalled();
   });
 });

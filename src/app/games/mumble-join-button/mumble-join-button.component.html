@@ -1,0 +1,4 @@
+<a *ngIf="myMumbleUrl | async as _myMumbleUrl"
+  class="btn btn-primary"
+  [href]="_myMumbleUrl | safeMumbleUrl"
+  role="button">join mumble</a>
