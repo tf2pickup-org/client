@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '@app/app.state';
 import { loadQueue } from '@app/queue/queue.actions';
 import { of, Observable, ReplaySubject } from 'rxjs';
-import { map, switchMap, tap } from 'rxjs/operators';
+import { map, switchMap, tap, first } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { API_URL } from '@app/api-url';
 import { TokenStoreService } from '@app/auth/token-store.service';
@@ -49,6 +49,7 @@ export class IoClientService {
 
   public call<T>(methodName: string, ...args: any[]): Observable<T> {
     return this.socket.pipe(
+      first(),
       switchMap(socket => callWsMethod<T>(socket, methodName, ...args)),
     );
   }
