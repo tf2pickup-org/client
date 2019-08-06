@@ -42,6 +42,10 @@ export class TokenStoreService {
     this.storage.set(this.wsTokenKey, wsToken);
   }
 
+  removeAllTokens() {
+    this.storage.clear();
+  }
+
   private retrieveTokens() {
     // gives access to params in the URL that could be passed from the backend
     const params = new HttpParams({
