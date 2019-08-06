@@ -11,8 +11,10 @@
           <a [href]="link.target" target="_blank">{{ link.name }}</a>
         </ng-container>
 
-        &bull;
-        <a [routerLink]="">logout</a>
+        <ng-container *ngIf="isAuthenticated">
+          &bull;
+          <a [routerLink]="" (click)="logout()">logout</a>
+        </ng-container>
       </small>
     </span>
   </div>
