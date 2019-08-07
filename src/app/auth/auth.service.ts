@@ -47,7 +47,7 @@ export class AuthService {
             return throwError(error);
           }
         }),
-        tap(() => () => this.isRefreshingToken = false),
+        tap(() => this.isRefreshingToken = false),
         map(({ authToken }) => authToken),
         tap(authToken => this.authToken.next(authToken)),
       );
