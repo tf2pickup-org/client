@@ -72,7 +72,7 @@ describe('MumbleJoinButtonComponent', () => {
     });
 
     it('should be empty unless the user is authenticated', () => {
-      store.setState({ ...initialState, profile: undefined });
+      store.setState({ ...initialState, profile: { profile: undefined } });
       component.gameId = 'FAKE_GAME_ID';
       fixture.detectChanges();
       expect(fixture.debugElement.query(By.css('a'))).toBeNull();
