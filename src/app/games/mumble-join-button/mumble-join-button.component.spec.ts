@@ -77,5 +77,28 @@ describe('MumbleJoinButtonComponent', () => {
       fixture.detectChanges();
       expect(fixture.debugElement.query(By.css('a'))).toBeNull();
     });
+
+    it('should not render unless the mumble url is specified', () => {
+      store.setState({ ...initialState, games: {
+        ids: [ 'FAKE_GAME_ID' ],
+        entities: {
+          FAKE_GAME_ID: {
+            slots: [
+              {
+                playerId: 'FAKE_PLAYER_ID',
+                teamId: 1,
+              },
+            ],
+            teams: {
+              0: 'BLU',
+              1: 'RED',
+            },
+            // no mumble url
+          }
+        },
+      }});
+      fixture.detectChanges();
+      expect(fixture.debugElement.query(By.css('a'))).toBeFalsy();
+    });
   });
 });
