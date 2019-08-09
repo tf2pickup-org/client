@@ -1,10 +1,11 @@
 import { Injectable, Inject } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of, zip } from 'rxjs';
 import { Player } from './models/player';
 import { API_URL } from '@app/api-url';
 import { HttpClient } from '@angular/common/http';
 import { Game } from '@app/games/models/game';
 import { PlayerSkill } from './models/player-skill';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -25,15 +26,25 @@ export class PlayersService {
   }
 
   savePlayer(player: Player): Observable<Player> {
-    return this.http.put<Player>(`${this.apiUrl}/players/${player.id}`, player);
+    const editedPlayer = {
+      name: player.name,
+    };
+
+    const editedSkill = {
+      player: player.id,
+      skill: player.skill,
+    };
+
+    return zip(
+      this.http.patch<Player>(`${this.apiUrl}/players/${player.id}`, editedPlayer),
+      this.http.put<PlayerSkill>(`${this.apiUrl}/players/${player.id}/skill`, editedSkill),
+    ).pipe(
+      map(([thePlayer, skill]) => ({ ...thePlayer, skill: skill.skill })),
+    );
   }
 
   fetchPlayerSkill(playerId: string): Observable<PlayerSkill> {
     return this.http.get<PlayerSkill>(`${this.apiUrl}/players/${playerId}/skill`);
-  }
-
-  savePlayerSkill(playerSkill: PlayerSkill): Observable<PlayerSkill> {
-    return this.http.put<PlayerSkill>(`${this.apiUrl}/players/${playerSkill.player}/skill`, playerSkill);
   }
 
   fetchAllPlayers(): Observable<Player[]> {
