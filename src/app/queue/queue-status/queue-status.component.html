@@ -7,17 +7,25 @@
     'bg-dark': _state === 'launching'
   }">
   <div class="row text-center">
-    <div class="col">
+    <div class="col-6">
       Players: {{ playerCount | async }} / {{ requiredPlayerCount | async }}
     </div>
 
-    <div class="col">
-      Status: {{ _state }}
-    </div>
-
     <div *ngIf="map | async as _map"
-      class="col">
+      class="col-6">
       Next map: {{ _map }}
+      <span>
+        <a *ngIf="isInQueue | async"
+          [routerLink]=""
+          class="badge ml-1"
+          [ngClass]="(votesForMapChange | async) ? 'badge-warning' : 'badge-light'"
+          tooltip="Vote for map change"
+          (click)="voteForMapChangeToggle()">
+          <span class="oi oi-loop-circular"></span>
+        </a>
+
+        <small class="ml-1">{{ mapChangeVoteTooltipText | async }}</small>
+      </span>
     </div>
   </div>
 </div>

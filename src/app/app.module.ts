@@ -21,6 +21,7 @@ import { GameServersModule } from './game-servers/game-servers.module';
 import { MarkdownModule } from 'ngx-markdown';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { InlineSVGModule } from 'ng-inline-svg';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { InlineSVGModule } from 'ng-inline-svg';
     HttpClientModule,
     MarkdownModule.forRoot({ loader: HttpClient }),
     InlineSVGModule.forRoot(),
+    ButtonsModule.forRoot(),
 
     AuthModule,
     CoreModule,

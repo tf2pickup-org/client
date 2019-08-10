@@ -33,4 +33,8 @@ export class QueueService {
     return this.ws.call<QueueSlot>('player ready');
   }
 
+  voteForMapChange(value: boolean): Observable<QueueSlot> {
+    return this.ws.call<QueueSlot>('vote for map change', value);
+  }
+
 }

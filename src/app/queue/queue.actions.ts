@@ -59,3 +59,5 @@ export const queueMapUpdated = createAction(
 
 export const showReadyUpDialog = createAction('[Queue] Show ready up dialog');
 export const hideReadyUpDialog = createAction('[Queue] Hide ready up dialog');
+
+export const toggleVoteForMapChange = createAction('[Queue] Toggle vote for map change');

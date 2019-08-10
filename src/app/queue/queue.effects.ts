@@ -9,7 +9,7 @@ import { QueueEventsService } from './queue-events.service';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app.state';
 import { of } from 'rxjs';
-import { mySlot } from './queue.selectors';
+import { mySlot, votesForMapChange, isInQueue } from './queue.selectors';
 
 @Injectable()
 export class QueueEffects {
@@ -77,6 +77,16 @@ export class QueueEffects {
       withLatestFrom(this.store.select(mySlot)),
       filter(([, slot]) => !slot || !slot.playerReady),
       map(() => hideReadyUpDialog()),
+    )
+  );
+
+  voteForMapChange = createEffect(() =>
+    this.store.select(votesForMapChange).pipe(
+      withLatestFrom(this.store.select(isInQueue)),
+      filter(([, _isInQueue]) => _isInQueue),
+      mergeMap(([value]) => this.queueService.voteForMapChange(value).pipe(
+        map(slot => queueSlotUpdated({ slot })),
+      ))
     )
   );
 
