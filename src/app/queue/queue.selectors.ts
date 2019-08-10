@@ -33,6 +33,12 @@ export const mySlot = createSelector(
   (theProfile, slots) => theProfile && slots.find(s => s.playerId === theProfile.id)
 );
 
+export const isInQueue = createSelector(mySlot, theSlot => !!theSlot);
 export const queueMap = createSelector(queueFeature, feature => feature.map);
-
 export const queueShowReadyUpDialog = createSelector(queueFeature, feature => feature.readyUpDialogShown);
+export const votesForMapChange = createSelector(queueFeature, feature => feature.votesForMapChange);
+
+export const mapChangeVoterCount = createSelector(
+  queueSlots,
+  slots => slots && slots.reduce((prev, curr) => curr.votesForMapChange ? prev + 1 : prev, 0)
+);

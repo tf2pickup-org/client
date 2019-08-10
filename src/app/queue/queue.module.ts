@@ -14,6 +14,9 @@ import { QueueSlotItemComponent } from './queue-slot-item/queue-slot-item.compon
 import { PlayersModule } from '@app/players/players.module';
 import { QueueReadyUpDialogComponent } from './queue-ready-up-dialog/queue-ready-up-dialog.component';
 import { QueueReadyUpDialogControllerComponent } from './queue-ready-up-dialog-controller/queue-ready-up-dialog-controller.component';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { FormsModule } from '@angular/forms';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
 
 @NgModule({
   declarations: [
@@ -27,9 +30,12 @@ import { QueueReadyUpDialogControllerComponent } from './queue-ready-up-dialog-c
   ],
   imports: [
     CommonModule,
+    FormsModule,
     HttpClientModule,
     StoreModule.forFeature('queue', reducer),
     EffectsModule.forFeature([QueueEffects]),
+    TooltipModule,
+    ButtonsModule,
 
     PlayersModule,
 
