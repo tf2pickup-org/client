@@ -1,3 +1,11 @@
+# [1.0.3](https://github.com/tf2pickup-pl/client/compare/1.0.2...1.0.3) (2019-08-10)
+
+### Features
+* Player stats ([#25](https://github.com/tf2pickup-pl/client/pull/25))
+
+### Fixes
+* Ready up state ([#26](https://github.com/tf2pickup-pl/client/pull/26))
+
 # [1.0.2](https://github.com/tf2pickup-pl/client/compare/1.0.1...1.0.2) (2019-08-07)
 
 ### Fixes
