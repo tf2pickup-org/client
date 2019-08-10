@@ -29,20 +29,23 @@ const queue: Queue = {
       {
         name: 'soldier',
         count: 1
-      }
+      },
     ],
+    nextMapSuccessfulVoteThreshold: 2,
   },
   slots: [
     {
       id: 0,
       gameClass: 'soldier',
       playerReady: false,
-      playerId: 'FAKE_ID'
+      playerId: 'FAKE_ID',
+      votesForMapChange: false,
     },
     {
       id: 1,
       gameClass: 'soldier',
-      playerReady: false
+      playerReady: false,
+      votesForMapChange: false,
     }
   ],
   state: 'waiting',
@@ -78,7 +81,7 @@ describe('QueueEffects', () => {
 
   describe('#joinQueue', () => {
     it('should attempt to join the queue', () => {
-      const slot: QueueSlot = { id: 1, gameClass: 'soldier', playerId: 'FAKE_ID_2', playerReady: false };
+      const slot: QueueSlot = { id: 1, gameClass: 'soldier', playerId: 'FAKE_ID_2', playerReady: false, votesForMapChange: false, };
       const spy = spyOn(queueService, 'joinQueue').and.returnValue(of(slot));
       effects.joinQueue.subscribe(action => expect(action).toEqual(queueSlotUpdated({ slot })));
       actions.next(joinQueue({ slotId: 1 }));

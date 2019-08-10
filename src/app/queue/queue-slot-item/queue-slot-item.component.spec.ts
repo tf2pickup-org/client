@@ -36,7 +36,7 @@ describe('QueueSlotItemComponent', () => {
   });
 
   it('should apply correct css classes', () => {
-    component.slot = { id: 0, gameClass: 'soldier', playerReady: false };
+    component.slot = { id: 0, gameClass: 'soldier', playerReady: false, votesForMapChange: false };
     fixture.detectChanges();
 
     const div = fixture.debugElement.query(By.css('.queue-slot-item')).nativeElement as HTMLElement;
@@ -51,7 +51,7 @@ describe('QueueSlotItemComponent', () => {
     fixture.detectChanges();
     expect(div.classList.contains('locked')).toBe(true);
 
-    component.slot = { id: 0, gameClass: 'soldier', playerReady: false, playerId: 'FAKE_ID' };
+    component.slot = { id: 0, gameClass: 'soldier', playerReady: false, playerId: 'FAKE_ID', votesForMapChange: false };
     fixture.detectChanges();
     expect(div.classList.contains('taken')).toBe(true);
 
@@ -59,14 +59,14 @@ describe('QueueSlotItemComponent', () => {
     fixture.detectChanges();
     expect(div.classList.contains('by-me')).toBe(true);
 
-    component.slot = { id: 0, gameClass: 'soldier', playerReady: true, playerId: 'FAKE_ID' };
+    component.slot = { id: 0, gameClass: 'soldier', playerReady: true, playerId: 'FAKE_ID', votesForMapChange: false };
     fixture.detectChanges();
     expect(div.classList.contains('and-ready')).toBe(true);
   });
 
   describe('#takeSlot()', () => {
     beforeEach(() => {
-      component.slot = { id: 0, gameClass: 'soldier', playerReady: false };
+      component.slot = { id: 0, gameClass: 'soldier', playerReady: false, votesForMapChange: false };
       fixture.detectChanges();
     });
 
@@ -84,7 +84,7 @@ describe('QueueSlotItemComponent', () => {
     });
 
     it('should do nothing if the slot is already occupied', () => {
-      component.slot = { id: 0, gameClass: 'soldier', playerReady: false, playerId: 'FAKE_ID' };
+      component.slot = { id: 0, gameClass: 'soldier', playerReady: false, playerId: 'FAKE_ID', votesForMapChange: false };
       const spy = spyOn(store, 'dispatch');
       component.takeSlot();
       expect(spy).not.toHaveBeenCalled();

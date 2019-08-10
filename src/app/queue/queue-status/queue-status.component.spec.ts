@@ -2,9 +2,11 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { QueueStatusComponent } from './queue-status.component';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { Store } from '@ngrx/store';
-import { queueCurrentPlayerCount, queueRequiredPlayerCount, queueState, queueMap } from '../queue.selectors';
+import { queueCurrentPlayerCount, queueRequiredPlayerCount, queueState, queueMap, mapChangeVoterCount,
+    isInQueue, queueConfig, votesForMapChange} from '../queue.selectors';
+import { RouterTestingModule } from '@angular/router/testing';
 
-describe('QueueStatusComponent', () => {
+fdescribe('QueueStatusComponent', () => {
   let component: QueueStatusComponent;
   let fixture: ComponentFixture<QueueStatusComponent>;
   let store: MockStore<any>;
@@ -12,8 +14,20 @@ describe('QueueStatusComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ QueueStatusComponent ],
+      imports: [ RouterTestingModule ],
       providers: [
-        provideMockStore(),
+        provideMockStore({
+          selectors: [
+            { selector: queueCurrentPlayerCount, value: 0 },
+            { selector: queueRequiredPlayerCount, value: 12 },
+            { selector: queueState, value: 'waiting' },
+            { selector: queueMap, value: 'FAKE_MAP' },
+            { selector: isInQueue, value: false },
+            { selector: mapChangeVoterCount, value: 0 },
+            { selector: queueConfig, value: { nextMapSuccessfulVoteThreshold: 7 } },
+            { selector: votesForMapChange, value: false },
+          ],
+        }),
       ],
     })
     .compileComponents();
@@ -21,10 +35,6 @@ describe('QueueStatusComponent', () => {
 
   beforeEach(() => {
     store = TestBed.get(Store);
-    store.overrideSelector(queueCurrentPlayerCount, 0);
-    store.overrideSelector(queueRequiredPlayerCount, 12);
-    store.overrideSelector(queueState, 'waiting');
-    store.overrideSelector(queueMap, 'FAKE_MAP');
 
     fixture = TestBed.createComponent(QueueStatusComponent);
     component = fixture.componentInstance;
