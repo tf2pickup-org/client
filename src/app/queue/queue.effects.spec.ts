@@ -49,7 +49,7 @@ const queue: Queue = {
   map: 'cp_badlands',
 };
 
-fdescribe('QueueEffects', () => {
+describe('QueueEffects', () => {
   const actions = new ReplaySubject<Action>(1);
   let queueService: QueueService;
   let effects: QueueEffects;
