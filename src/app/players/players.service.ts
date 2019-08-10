@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { Game } from '@app/games/models/game';
 import { PlayerSkill } from './models/player-skill';
 import { map } from 'rxjs/operators';
+import { PlayerStats } from './models/player-stats';
 
 @Injectable({
   providedIn: 'root'
@@ -49,6 +50,10 @@ export class PlayersService {
 
   fetchAllPlayers(): Observable<Player[]> {
     return this.http.get<Player[]>(`${this.apiUrl}/players`);
+  }
+
+  fetchPlayerStats(playerId: string): Observable<PlayerStats> {
+    return this.http.get<PlayerStats>(`${this.apiUrl}/players/${playerId}/stats`);
   }
 
 }

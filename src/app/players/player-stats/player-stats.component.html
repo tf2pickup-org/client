@@ -1,0 +1,13 @@
+<div *ngIf="playerStats" class="row align-items-center">
+  <div class="col">
+    <span class="text-muted">total</span>
+    <span class="font-weight-bold ml-2">{{ playerStats.gamesPlayed }}</span>
+  </div>
+
+  <div *ngFor="let classPlayed of playerStats.classesPlayed | keyvalue" class="col">
+    <div class="class-icon"
+      [inlineSVG]="'/assets/tf2-classfont/' + classPlayed.key + '.svg'"
+      [tooltip]="classPlayed.key"></div>
+    <span class="font-weight-bold">{{ classPlayed.value }}</span>
+  </div>
+</div>

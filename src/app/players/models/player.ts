@@ -1,4 +1,5 @@
 import { PlayerRole } from './player-role';
+import { PlayerStats } from './player-stats';
 
 export interface Player {
   id: string;
@@ -10,4 +11,5 @@ export interface Player {
   role?: PlayerRole;
   etf2lProfileId?: number;
   skill?: { [gameClass: string]: number };
+  stats?: PlayerStats;
 }

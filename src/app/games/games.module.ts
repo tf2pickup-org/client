@@ -23,7 +23,7 @@ import { MumbleJoinButtonComponent } from './mumble-join-button/mumble-join-butt
     CommonModule,
     StoreModule.forFeature('games', reducer),
     EffectsModule.forFeature([GamesEffects]),
-    InlineSVGModule.forRoot(),
+    InlineSVGModule,
 
     SharedModule,
     GamesRoutingModule,

@@ -8,13 +8,15 @@ import { of } from 'rxjs';
 import { convertToParamMap, ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { loadPlayer } from '../players.actions';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 class BsModalServiceStub {
 
 }
 
 class PlayersServiceStub {
-  fetchPlayerGames() { }
+  fetchPlayerGames() { return of([]); }
+  fetchPlayerStats() { return of({}) };
 }
 
 class RouterStub {
@@ -23,7 +25,7 @@ class RouterStub {
 
 const paramMap = of(convertToParamMap({ id: 'FAKE_ID' }));
 
-describe('PlayerDetailsComponent', () => {
+fdescribe('PlayerDetailsComponent', () => {
   let component: PlayerDetailsComponent;
   let fixture: ComponentFixture<PlayerDetailsComponent>;
   let store: MockStore<any>;
@@ -43,7 +45,8 @@ describe('PlayerDetailsComponent', () => {
         provideMockStore({ initialState }),
         { provide: ActivatedRoute, useValue: { paramMap } },
         { provide: Router, useClass: RouterStub },
-      ]
+      ],
+      schemas: [ NO_ERRORS_SCHEMA ],
     })
     .compileComponents();
   }));
@@ -63,6 +66,14 @@ describe('PlayerDetailsComponent', () => {
 
   it('should load the player if it is not in the store yet', () => {
     expect(storeDispatchSpy).toHaveBeenCalledWith(loadPlayer({ playerId: 'FAKE_ID' }));
+  });
+
+  it('should load player\'s games', () => {
+    expect(component.games).toBeTruthy();
+  });
+
+  it('should load  player\'s stats', () => {
+    expect(component.stats).toBeTruthy();
   });
 
   describe('#editPlayer()', () => {

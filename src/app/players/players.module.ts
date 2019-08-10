@@ -13,6 +13,8 @@ import { PlayerEditComponent } from './player-edit/player-edit.component';
 import { PlayerEditSkillComponent } from './player-edit-skill/player-edit-skill.component';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { PlayerListComponent } from './player-list/player-list.component';
+import { PlayerStatsComponent } from './player-stats/player-stats.component';
+import { InlineSVGModule } from 'ng-inline-svg';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,7 @@ import { PlayerListComponent } from './player-list/player-list.component';
     PlayerEditComponent,
     PlayerEditSkillComponent,
     PlayerListComponent,
+    PlayerStatsComponent,
   ],
   imports: [
     CommonModule,
@@ -31,6 +34,7 @@ import { PlayerListComponent } from './player-list/player-list.component';
     StoreModule.forFeature('players', reducer),
     EffectsModule.forFeature([PlayerEffects]),
     TooltipModule,
+    InlineSVGModule,
 
     PlayersRoutingModule,
   ],

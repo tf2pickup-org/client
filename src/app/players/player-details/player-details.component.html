@@ -28,7 +28,7 @@
 
   <div class="row">
     <div class="col">{{ _player.joinedAt | date:'medium' }}</div>
-    <div class="col">{{ _player.gameCount }}</div>
+    <div class="col"><app-player-stats [playerStats]="stats | async"></app-player-stats></div>
   </div>
 
   <h6 class="mt-5">Games</h6>
@@ -40,6 +40,7 @@
       #{{ game.number }} - {{ game.launchedAt | date:'medium' }} - {{ game.map }}
       <span *ngIf="game.state === 'launching'" class="badge badge-primary">launching</span>
       <span *ngIf="game.state === 'started'" class="badge badge-warning">in progress</span>
+      <span *ngIf="game.state === 'interrupted'" class="badge badge-danger">interrupted</span>
     </a>
   </div>
 </div>
