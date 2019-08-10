@@ -23,7 +23,7 @@ export class QueueStatusComponent {
   isInQueue: Observable<boolean> = this.store.select(isInQueue).pipe(debounceTime(100));
   mapChangeVoteTooltipText: Observable<string> =
     combineLatest([
-      this.store.select(mapChangeVoterCount),
+      this.store.select(mapChangeVoterCount).pipe(debounceTime(100)),
       this.store.select(queueConfig).pipe(filter(config => !!config)),
     ]).pipe(
       map(([count, config]) => `${count}/${config.nextMapSuccessfulVoteThreshold}`),
