@@ -15,7 +15,7 @@
       class="col-6">
       Next map: {{ _map }}
       <span>
-        <a *ngIf="isInQueue | async"
+        <a *ngIf="(isInQueue | async) && _state === 'waiting'"
           [routerLink]=""
           class="badge ml-1"
           [ngClass]="(votesForMapChange | async) ? 'badge-warning' : 'badge-light'"
