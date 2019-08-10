@@ -10,6 +10,7 @@ import { loadPlayer } from '../players.actions';
 import { Game } from '@app/games/models/game';
 import { PlayersService } from '../players.service';
 import { profile } from '@app/profile/profile.selectors';
+import { PlayerStats } from '../models/player-stats';
 
 @Component({
   selector: 'app-player-details',
@@ -21,6 +22,7 @@ export class PlayerDetailsComponent implements OnInit {
 
   player: Observable<Player>;
   games: Observable<Game[]>;
+  stats: Observable<PlayerStats>;
   isAdmin: Observable<boolean> = this.store.pipe(
     select(profile),
     map(theProfile => theProfile && (theProfile.role === 'admin' || theProfile.role === 'super-user')),
@@ -34,9 +36,15 @@ export class PlayerDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.player = this.route.paramMap.pipe(
+    const getPlayerId = this.route.paramMap.pipe(
       map(params => params.get('id')),
-      tap(id => this.games = this.playersService.fetchPlayerGames(id)),
+    );
+
+    this.player = getPlayerId.pipe(
+      tap(id => {
+        this.games = this.playersService.fetchPlayerGames(id);
+        this.stats = this.playersService.fetchPlayerStats(id);
+      }),
       switchMap(id => this.store.select(playerById(id)).pipe(
         tap(player => {
           if (!player) {

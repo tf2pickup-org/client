@@ -20,6 +20,7 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { GameServersModule } from './game-servers/game-servers.module';
 import { MarkdownModule } from 'ngx-markdown';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { InlineSVGModule } from 'ng-inline-svg';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
     TooltipModule.forRoot(),
     HttpClientModule,
     MarkdownModule.forRoot({ loader: HttpClient }),
+    InlineSVGModule.forRoot(),
 
     AuthModule,
     CoreModule,
