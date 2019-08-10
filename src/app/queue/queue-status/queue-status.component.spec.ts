@@ -6,7 +6,7 @@ import { queueCurrentPlayerCount, queueRequiredPlayerCount, queueState, queueMap
     isInQueue, queueConfig, votesForMapChange} from '../queue.selectors';
 import { RouterTestingModule } from '@angular/router/testing';
 
-fdescribe('QueueStatusComponent', () => {
+describe('QueueStatusComponent', () => {
   let component: QueueStatusComponent;
   let fixture: ComponentFixture<QueueStatusComponent>;
   let store: MockStore<any>;
