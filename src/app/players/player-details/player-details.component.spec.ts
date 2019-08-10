@@ -25,7 +25,7 @@ class RouterStub {
 
 const paramMap = of(convertToParamMap({ id: 'FAKE_ID' }));
 
-fdescribe('PlayerDetailsComponent', () => {
+describe('PlayerDetailsComponent', () => {
   let component: PlayerDetailsComponent;
   let fixture: ComponentFixture<PlayerDetailsComponent>;
   let store: MockStore<any>;
