@@ -22,6 +22,7 @@ export class MumbleJoinButtonComponent {
     this.myMumbleUrl = this.store.pipe(
       select(gameById(gameId)),
       filter(game => !!game),
+      filter(game => !!game.mumbleUrl),
       withLatestFrom(this.store.select(profile)),
       filter(([, theProfile]) => !!theProfile),
       map(([game, theProfile]) => {
