@@ -10,6 +10,7 @@ import { Action, Store } from '@ngrx/store';
 import { RouterTestingModule } from '@angular/router/testing';
 import { loadPlayerSkill, playerEdited } from '../players.actions';
 import { Player } from '../models/player';
+import { Location } from '@angular/common';
 
 const paramMap = of(convertToParamMap({ id: 'FAKE_ID' }));
 const actions = new Subject<Action>();
@@ -76,9 +77,9 @@ describe('PlayerEditComponent', () => {
 
   describe('#cancel()', () => {
     it('should navigate back to the player details page', () => {
-      const spy = spyOn(TestBed.get(Router), 'navigate');
+      const spy = spyOn(TestBed.get(Location), 'back');
       component.cancel();
-      expect(spy).toHaveBeenCalledWith(['/player', 'FAKE_ID']);
+      expect(spy).toHaveBeenCalled();
     });
   });
 });
