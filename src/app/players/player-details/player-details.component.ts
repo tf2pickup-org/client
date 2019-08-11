@@ -11,6 +11,8 @@ import { Game } from '@app/games/models/game';
 import { PlayersService } from '../players.service';
 import { profile } from '@app/profile/profile.selectors';
 import { PlayerStats } from '../models/player-stats';
+import { Title } from '@angular/platform-browser';
+import { environment } from '@environment';
 
 @Component({
   selector: 'app-player-details',
@@ -33,6 +35,7 @@ export class PlayerDetailsComponent implements OnInit {
     private store: Store<AppState>,
     private playersService: PlayersService,
     private router: Router,
+    private title: Title,
   ) { }
 
   ngOnInit() {
@@ -49,6 +52,8 @@ export class PlayerDetailsComponent implements OnInit {
         tap(player => {
           if (!player) {
             this.store.dispatch(loadPlayer({ playerId: id }));
+          } else {
+            this.title.setTitle(`${player.name} • ${environment.titleSuffix}`);
           }
         })
       ))

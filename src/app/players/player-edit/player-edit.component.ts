@@ -9,6 +9,8 @@ import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms'
 import { Player } from '../models/player';
 import { Actions, ofType } from '@ngrx/effects';
 import { Subject, Observable, BehaviorSubject } from 'rxjs';
+import { Title } from '@angular/platform-browser';
+import { environment } from '@environment';
 
 @Component({
   selector: 'app-player-edit',
@@ -38,6 +40,7 @@ export class PlayerEditComponent implements OnInit, OnDestroy {
     private actions: Actions,
     private router: Router,
     private changeDetector: ChangeDetectorRef,
+    private title: Title,
   ) { }
 
   ngOnInit() {
@@ -50,6 +53,8 @@ export class PlayerEditComponent implements OnInit, OnDestroy {
         tap(player => {
           if (!player) {
             this.store.dispatch(loadPlayer({ playerId }));
+          } else {
+            this.title.setTitle(`${player.name} • edit • ${environment.titleSuffix}`);
           }
         }),
       )),

@@ -6,6 +6,8 @@ import { gamesLoaded, allGames } from '../games.selectors';
 import { loadGames } from '../games.actions';
 import { Observable } from 'rxjs';
 import { Game } from '../models/game';
+import { Title } from '@angular/platform-browser';
+import { environment } from '@environment';
 
 @Component({
   selector: 'app-game-list',
@@ -19,6 +21,7 @@ export class GameListComponent implements OnInit {
 
   constructor(
     private store: Store<AppState>,
+    private title: Title,
   ) { }
 
   ngOnInit() {
@@ -30,6 +33,8 @@ export class GameListComponent implements OnInit {
         this.store.dispatch(loadGames());
       }
     });
+
+    this.title.setTitle(`games • ${environment.titleSuffix}`);
   }
 
 }

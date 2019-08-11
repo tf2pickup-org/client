@@ -11,6 +11,8 @@ import { Player } from '@app/players/models/player';
 import { playerById } from '@app/players/players.selectors';
 import { loadPlayer } from '@app/players/players.actions';
 import { profile } from '@app/profile/profile.selectors';
+import { Title } from '@angular/platform-browser';
+import { environment } from '@environment';
 
 interface PlayerWithGameClass extends Player {
   gameClass: string;
@@ -38,6 +40,7 @@ export class GameDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private store: Store<AppState>,
+    private title: Title,
   ) { }
 
   ngOnInit() {
@@ -47,6 +50,8 @@ export class GameDetailsComponent implements OnInit {
         tap(game => {
           if (!game) {
             this.store.dispatch(loadGame({ gameId: id }));
+          } else {
+            this.title.setTitle(`Pickup #${game.number} • ${environment.titleSuffix}`);
           }
         }),
       )),

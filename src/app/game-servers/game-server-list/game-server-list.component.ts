@@ -9,6 +9,8 @@ import { loadGameServers, removeGameServer } from '../game-servers.actions';
 import { profile } from '@app/profile/profile.selectors';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { AddGameServerDialogComponent } from '../add-game-server-dialog/add-game-server-dialog.component';
+import { Title } from '@angular/platform-browser';
+import { environment } from '@environment';
 
 @Component({
   selector: 'app-game-server-list',
@@ -28,6 +30,7 @@ export class GameServerListComponent implements OnInit {
   constructor(
     private store: Store<AppState>,
     private modalService: BsModalService,
+    private title: Title,
   ) { }
 
   ngOnInit() {
@@ -39,6 +42,8 @@ export class GameServerListComponent implements OnInit {
         this.store.dispatch(loadGameServers());
       }
     });
+
+    this.title.setTitle(`servers • ${environment.titleSuffix}`);
   }
 
   addGameServer() {
