@@ -55,10 +55,4 @@ export class PlayerDetailsComponent implements OnInit {
     );
   }
 
-  editPlayer() {
-    this.player.pipe(first()).subscribe(player => {
-      this.router.navigate(['/player', player.id, 'edit']);
-    });
-  }
-
 }

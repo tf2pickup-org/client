@@ -25,7 +25,7 @@ class RouterStub {
 
 const paramMap = of(convertToParamMap({ id: 'FAKE_ID' }));
 
-describe('PlayerDetailsComponent', () => {
+fdescribe('PlayerDetailsComponent', () => {
   let component: PlayerDetailsComponent;
   let fixture: ComponentFixture<PlayerDetailsComponent>;
   let store: MockStore<any>;
@@ -74,14 +74,5 @@ describe('PlayerDetailsComponent', () => {
 
   it('should load  player\'s stats', () => {
     expect(component.stats).toBeTruthy();
-  });
-
-  describe('#editPlayer()', () => {
-    it('redirects to edit player page', () => {
-      store.setState({ players: { ids: [ 'FAKE_ID' ], entities: { FAKE_ID: { id: 'FAKE_ID' } } } });
-      const spy = spyOn(TestBed.get(Router), 'navigate');
-      component.editPlayer();
-      expect(spy).toHaveBeenCalledWith(['/player', 'FAKE_ID', 'edit']);
-    });
   });
 });
