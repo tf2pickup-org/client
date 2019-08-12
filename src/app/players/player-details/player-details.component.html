@@ -16,7 +16,7 @@
 
       <ng-container *ngIf="isAdmin | async">
         &bull;
-        <a [routerLink]="" class="text-secondary" (click)="editPlayer()">edit</a>
+        <a [routerLink]="['/player', _player.id, 'edit']" class="text-secondary">edit</a>
       </ng-container>
     </small>
   </h4>
