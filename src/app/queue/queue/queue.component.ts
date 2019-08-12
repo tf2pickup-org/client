@@ -1,9 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { queueClasses } from '../queue.selectors';
-import { GameClass } from '../models/game-class';
 
 @Component({
   selector: 'app-queue',
@@ -13,7 +11,7 @@ import { GameClass } from '../models/game-class';
 })
 export class QueueComponent {
 
-  queueClasses: Observable<GameClass[]> = this.store.select(queueClasses);
+  queueClasses = this.store.select(queueClasses);
 
   constructor(
     private store: Store<AppState>,

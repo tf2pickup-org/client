@@ -18,6 +18,7 @@ export const environment = {
     { name: 'github', target: 'https://github.com/tf2pickup-pl' },
     { name: 'discord', target: discordInvitation },
   ],
+  titleSuffix: 'tf2pickup.pl • dev',
 };
 
 /*

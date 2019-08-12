@@ -5,6 +5,8 @@ import { AppState } from '@app/app.state';
 import { allPlayers } from '../players.selectors';
 import { Player } from '../models/player';
 import { loadPlayers } from '../players.actions';
+import { Title } from '@angular/platform-browser';
+import { environment } from '@environment';
 
 @Component({
   selector: 'app-player-list',
@@ -18,10 +20,12 @@ export class PlayerListComponent implements OnInit {
 
   constructor(
     private store: Store<AppState>,
+    private title: Title,
   ) { }
 
   ngOnInit() {
     this.store.dispatch(loadPlayers());
+    this.title.setTitle(`players • ${environment.titleSuffix}`);
   }
 
 }
