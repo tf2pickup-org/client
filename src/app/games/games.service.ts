@@ -26,4 +26,8 @@ export class GamesService {
     return this.http.put<void>(`${this.apiUrl}/games/${gameId}?force_end`, { });
   }
 
+  reinitializeServer(gameId: string): Observable<void> {
+    return this.http.put<void>(`${this.apiUrl}/games/${gameId}?reinitialize_server`, { });
+  }
+
 }

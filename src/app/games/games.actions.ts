@@ -32,3 +32,8 @@ export const forceEndGame = createAction(
   '[Admin] Force end game',
   props<{ gameId: string }>(),
 );
+
+export const reinitializeServer = createAction(
+  '[Admin] Re-initialize server',
+  props<{ gameId: string }>(),
+);

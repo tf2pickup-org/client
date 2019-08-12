@@ -5,7 +5,9 @@
     <ng-container *ngIf="(isAdmin | async) && (_game.state === 'launching' || _game.state === 'started')">
       <small class="text-secondary ml-2">
         &bull;
-        <a href="#" class="text-secondary" (click)="forceEndGame($event)">force end</a>
+        <a [routerLink]="" class="text-secondary" (click)="reinitializeServer()">reinitialize server</a>
+        &bull;
+        <a [routerLink]="" class="text-secondary" (click)="forceEndGame()">force end</a>
       </small>
     </ng-container>
   </h4>
