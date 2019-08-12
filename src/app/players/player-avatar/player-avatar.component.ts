@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { select, Store } from '@ngrx/store';
-import { playerById } from '../players.selectors';
+import { playerById } from '../selectors';
 import { filter, map } from 'rxjs/operators';
 import { AppState } from '@app/app.state';
 

@@ -1,0 +1,14 @@
+<div *ngIf="playerBan"
+  class="d-flex flex-column">
+  <div class="d-flex flex-row justify-content-between">
+    <div>
+      <h6>{{ playerBan.reason }} <small class="text-muted">by <app-player-name [playerId]="playerBan.admin"></app-player-name></small></h6>
+    </div>
+    <button *ngIf="!expired"
+      type="button"
+      class="btn btn-danger btn-sm"
+      (click)="revoke.emit(playerBan)">revoke</button>
+  </div>
+  <div><span class="text-muted">starts</span> {{ playerBan.start | date: 'medium' }}</div>
+  <div><span class="text-muted">ends</span> {{ playerBan.end | date: 'medium' }}</div>
+</div>

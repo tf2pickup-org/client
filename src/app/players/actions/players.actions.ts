@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
-import { Player } from './models/player';
-import { PlayerSkill } from './models/player-skill';
+import { Player } from '../models/player';
+import { PlayerSkill } from '../models/player-skill';
 
 export const loadPlayer = createAction(
   '[Queue] Load player',
