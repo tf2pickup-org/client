@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { AppState } from '@app/app.state';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -34,7 +34,6 @@ export class PlayerDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private store: Store<AppState>,
     private playersService: PlayersService,
-    private router: Router,
     private title: Title,
   ) { }
 
@@ -58,12 +57,6 @@ export class PlayerDetailsComponent implements OnInit {
         })
       ))
     );
-  }
-
-  editPlayer() {
-    this.player.pipe(first()).subscribe(player => {
-      this.router.navigate(['/player', player.id, 'edit']);
-    });
   }
 
 }

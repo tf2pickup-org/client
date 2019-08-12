@@ -1,26 +1,18 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { PlayerDetailsComponent } from './player-details.component';
-import { BsModalService } from 'ngx-bootstrap/modal';
 import { PlayersService } from '../players.service';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
-import { convertToParamMap, ActivatedRoute, Router } from '@angular/router';
+import { convertToParamMap, ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { loadPlayer } from '../players.actions';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-
-class BsModalServiceStub {
-
-}
+import { By } from '@angular/platform-browser';
 
 class PlayersServiceStub {
   fetchPlayerGames() { return of([]); }
-  fetchPlayerStats() { return of({}) };
-}
-
-class RouterStub {
-  navigate(params: string[]) { }
+  fetchPlayerStats() { return of({}); }
 }
 
 const paramMap = of(convertToParamMap({ id: 'FAKE_ID' }));
@@ -31,7 +23,13 @@ describe('PlayerDetailsComponent', () => {
   let store: MockStore<any>;
   let storeDispatchSpy: jasmine.Spy;
 
-  const initialState = { players: { ids: [], entities: { } } };
+  const initialState = {
+    players: {
+      ids: [],
+      entities: { },
+    },
+    profile: { profile: { }},
+  };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -40,11 +38,9 @@ describe('PlayerDetailsComponent', () => {
         RouterTestingModule,
       ],
       providers: [
-        { provide: BsModalService, useClass: BsModalServiceStub },
         { provide: PlayersService, useClass: PlayersServiceStub  },
         provideMockStore({ initialState }),
         { provide: ActivatedRoute, useValue: { paramMap } },
-        { provide: Router, useClass: RouterStub },
       ],
       schemas: [ NO_ERRORS_SCHEMA ],
     })
@@ -76,12 +72,41 @@ describe('PlayerDetailsComponent', () => {
     expect(component.stats).toBeTruthy();
   });
 
-  describe('#editPlayer()', () => {
-    it('redirects to edit player page', () => {
-      store.setState({ players: { ids: [ 'FAKE_ID' ], entities: { FAKE_ID: { id: 'FAKE_ID' } } } });
-      const spy = spyOn(TestBed.get(Router), 'navigate');
-      component.editPlayer();
-      expect(spy).toHaveBeenCalledWith(['/player', 'FAKE_ID', 'edit']);
+  describe('when player loaded', () => {
+    const stateWithFakePlayer = {
+      ...initialState,
+      players: {
+        ids: [
+          'FAKE_ID',
+        ],
+        entities: {
+          FAKE_ID: {
+            joinedAt: '2019-08-09T20:45:56.785Z',
+            steamId: '76561198977546450',
+            name: 'niewielki',
+            avatarUrl: 'FAKE_URL',
+            role: null,
+            hasAcceptedRules: true,
+            etf2lProfileId: 12345,
+            id: 'FAKE_ID',
+          }
+        },
+        locked: false
+      },
+    };
+
+    beforeEach(() => {
+      store.setState(stateWithFakePlayer);
+      fixture.detectChanges();
     });
+
+    it('should be aware of the logged-in player role', () => {
+      expect(fixture.debugElement.query(By.css('h4 small a.text-secondary'))).toBeNull();
+      store.setState({ ...stateWithFakePlayer, profile: { profile: { role: 'admin' } } });
+      fixture.detectChanges();
+      expect(fixture.debugElement.query(By.css('h4 small a.text-secondary'))).toBeTruthy();
+    });
+
   });
+
 });

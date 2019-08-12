@@ -11,6 +11,7 @@ import { Actions, ofType } from '@ngrx/effects';
 import { Subject, Observable, BehaviorSubject } from 'rxjs';
 import { Title } from '@angular/platform-browser';
 import { environment } from '@environment';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-player-edit',
@@ -41,6 +42,7 @@ export class PlayerEditComponent implements OnInit, OnDestroy {
     private router: Router,
     private changeDetector: ChangeDetectorRef,
     private title: Title,
+    private location: Location,
   ) { }
 
   ngOnInit() {
@@ -101,7 +103,7 @@ export class PlayerEditComponent implements OnInit, OnDestroy {
   }
 
   cancel() {
-    this.router.navigate(['/player', this.originalPlayer.id]);
+    this.location.back();
   }
 
   get skill() {
