@@ -25,8 +25,10 @@ describe('PlayerDetailsComponent', () => {
 
   const initialState = {
     players: {
-      ids: [],
-      entities: { },
+      players: {
+        ids: [],
+        entities: { },
+      }
     },
     profile: { profile: { }},
   };
@@ -60,38 +62,45 @@ describe('PlayerDetailsComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should load the player if it is not in the store yet', () => {
-    expect(storeDispatchSpy).toHaveBeenCalledWith(loadPlayer({ playerId: 'FAKE_ID' }));
-  });
+  describe('#ngOnInit()', () => {
+    it('should load the player if it is not in the store yet', () => {
+      component.ngOnInit();
+      expect(storeDispatchSpy).toHaveBeenCalledWith(loadPlayer({ playerId: 'FAKE_ID' }));
+    });
 
-  it('should load player\'s games', () => {
-    expect(component.games).toBeTruthy();
-  });
+    it('should load player\'s games', () => {
+      component.ngOnInit();
+      expect(component.games).toBeTruthy();
+    });
 
-  it('should load  player\'s stats', () => {
-    expect(component.stats).toBeTruthy();
+    it('should load player\'s stats', () => {
+      component.ngOnInit();
+      expect(component.stats).toBeTruthy();
+    });
   });
 
   describe('when player loaded', () => {
     const stateWithFakePlayer = {
       ...initialState,
       players: {
-        ids: [
-          'FAKE_ID',
-        ],
-        entities: {
-          FAKE_ID: {
-            joinedAt: '2019-08-09T20:45:56.785Z',
-            steamId: '76561198977546450',
-            name: 'niewielki',
-            avatarUrl: 'FAKE_URL',
-            role: null,
-            hasAcceptedRules: true,
-            etf2lProfileId: 12345,
-            id: 'FAKE_ID',
-          }
+        players: {
+          ids: [
+            'FAKE_ID',
+          ],
+          entities: {
+            FAKE_ID: {
+              joinedAt: '2019-08-09T20:45:56.785Z',
+              steamId: '76561198977546450',
+              name: 'niewielki',
+              avatarUrl: 'FAKE_URL',
+              role: null,
+              hasAcceptedRules: true,
+              etf2lProfileId: 12345,
+              id: 'FAKE_ID',
+            }
+          },
+          locked: false
         },
-        locked: false
       },
     };
 
