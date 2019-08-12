@@ -54,10 +54,10 @@ export class GamesEffects {
 
   lockQueue = createEffect(() =>
     /* lock the queue when a game that I participate in starts */
-    combineLatest(
+    combineLatest([
       this.store.select(profile),
       this.actions.pipe(ofType(gameCreated)),
-    ).pipe(
+    ]).pipe(
       filter(([theProfile, { game }]) => game.players.includes(theProfile.id)),
       mapTo(queueLocked()),
     )
@@ -65,10 +65,10 @@ export class GamesEffects {
 
   unlockQueue = createEffect(() =>
     /* unlock the queue when a game that I participated in ends */
-    combineLatest(
+    combineLatest([
       this.store.select(profile),
       this.actions.pipe(ofType(gameUpdated)),
-    ).pipe(
+    ]).pipe(
       filter(([theProfile, { game }]) => theProfile && game.players.includes(theProfile.id)),
       map(([, { game }]) => game),
       filter(game => game.state === 'ended' || game.state === 'interrupted'),
