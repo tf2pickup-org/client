@@ -4,7 +4,7 @@ import { AppState } from '@app/app.state';
 import { Observable, zip } from 'rxjs';
 import { Game } from '../models/game';
 import { ActivatedRoute } from '@angular/router';
-import { switchMap, map, tap, filter, first } from 'rxjs/operators';
+import { switchMap, map, tap, filter, first, pairwise } from 'rxjs/operators';
 import { gameById } from '../games.selectors';
 import { loadGame, forceEndGame } from '../games.actions';
 import { Player } from '@app/players/models/player';
@@ -26,6 +26,7 @@ interface PlayerWithGameClass extends Player {
 })
 export class GameDetailsComponent implements OnInit {
 
+  private audio = new Audio('/assets/sounds/fight.wav');
   game: Observable<Game>;
   playersRed: Observable<PlayerWithGameClass[]>;
   playersBlu: Observable<PlayerWithGameClass[]>;
@@ -80,6 +81,18 @@ export class GameDetailsComponent implements OnInit {
         this.playersBlu = playersForTeam(bluTeamId);
       }),
     );
+
+    // play sound when the connect is available
+    this.game.pipe(
+      map(game => game.connectString),
+      pairwise(),
+      filter(([a, b])  => !a && !!b),
+    ).subscribe(() => {
+      this.audio.play();
+      const notification = new Notification('Join the game', {
+        body: 'The server is ready. Join the game!',
+      });
+    });
   }
 
   copyConnectString() {
