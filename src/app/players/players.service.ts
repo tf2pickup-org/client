@@ -7,6 +7,7 @@ import { Game } from '@app/games/models/game';
 import { PlayerSkill } from './models/player-skill';
 import { map } from 'rxjs/operators';
 import { PlayerStats } from './models/player-stats';
+import { PlayerBan } from './models/player-ban';
 
 @Injectable({
   providedIn: 'root'
@@ -54,6 +55,18 @@ export class PlayersService {
 
   fetchPlayerStats(playerId: string): Observable<PlayerStats> {
     return this.http.get<PlayerStats>(`${this.apiUrl}/players/${playerId}/stats`);
+  }
+
+  fetchPlayerBans(playerId: string): Observable<PlayerBan[]> {
+    return this.http.get<PlayerBan[]>(`${this.apiUrl}/players/${playerId}/bans`);
+  }
+
+  addPlayerBan(playerBan: Partial<PlayerBan>): Observable<PlayerBan> {
+    return this.http.post<PlayerBan>(`${this.apiUrl}/players/${playerBan.player}/bans`, playerBan);
+  }
+
+  revokePlayerBan(playerBan: PlayerBan): Observable<PlayerBan> {
+    return this.http.put<PlayerBan>(`${this.apiUrl}/players/${playerBan.player}/bans?revoke`, { ...playerBan });
   }
 
 }

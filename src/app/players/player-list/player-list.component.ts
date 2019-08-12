@@ -2,9 +2,9 @@ import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app.state';
-import { allPlayers } from '../players.selectors';
+import { allPlayers } from '../selectors';
 import { Player } from '../models/player';
-import { loadPlayers } from '../players.actions';
+import { loadPlayers } from '../actions';
 import { Title } from '@angular/platform-browser';
 import { environment } from '@environment';
 

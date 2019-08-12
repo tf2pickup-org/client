@@ -1,0 +1,53 @@
+<div *ngIf="player | async as _player"
+  class="container position-relative">
+  <form [formGroup]="banForm" (ngSubmit)="submit()">
+
+    <div class="row justify-content-between">
+      <h4 class="col-9">
+        {{ _player.name }}
+      </h4>
+      <button
+        type="submit"
+        class="btn btn-danger col-2"
+        [disabled]="!banForm.valid || (isSubmitLocked | async)">add ban</button>
+    </div>
+
+    <div class="form-group row align-items-center mt-4">
+      <label
+        for="length"
+        class="col-2 col-form-label">
+        {{ lengthLabel | async }}
+      </label>
+      <div class="col">
+        <input
+          type="range"
+          formControlName="length"
+          id="length"
+          class="form-control-range"
+          min="0"
+          [max]="lengthValues.length - 1"
+          tooltip="Ban length">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <input
+        type="text"
+        class="form-control"
+        id="reason"
+        formControlName="reason"
+        placeholder="Reason...">
+    </div>
+
+  </form>
+
+  <div class="close-anchor d-flex justify-content-center align-items-center">
+    <a
+      [routerLink]=""
+      class="text-secondary"
+      tooltip="Cancel"
+      (click)="cancel()">
+      <span class="oi oi-x"></span>
+    </a>
+  </div>
+</div>

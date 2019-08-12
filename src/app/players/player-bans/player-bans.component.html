@@ -1,0 +1,28 @@
+<div *ngIf="player | async as _player"
+  class="container position-relative">
+
+  <div class="row">
+    <h4 class="col-10">
+      {{ _player.name }}
+      <small class="text-secondary">bans</small>
+    </h4>
+    <a [routerLink]="['/player/', _player.id, 'bans', 'add']" class="btn btn-danger col-2">add ban</a>
+  </div>
+
+  <div class="my-4 list-group list-group-flush">
+    <app-player-ban-item *ngFor="let ban of bans | async"
+      [playerBan]="ban"
+      (revoke)="revoke($event)"
+      class="list-group-item"></app-player-ban-item>
+  </div>
+
+  <div class="close-anchor d-flex justify-content-center align-items-center">
+    <a
+      [routerLink]=""
+      class="text-secondary"
+      tooltip="Back"
+      (click)="back()">
+      <span class="oi oi-chevron-left"></span>
+    </a>
+  </div>
+</div>

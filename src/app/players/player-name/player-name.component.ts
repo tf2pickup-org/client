@@ -2,9 +2,9 @@ import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { AppState } from '@app/app.state';
 import { Observable } from 'rxjs';
-import { playerById } from '../players.selectors';
+import { playerById } from '../selectors';
 import { tap, map, filter } from 'rxjs/operators';
-import { loadPlayer } from '../players.actions';
+import { loadPlayer } from '../actions';
 
 @Component({
   selector: 'app-player-name',
@@ -18,6 +18,10 @@ export class PlayerNameComponent {
 
   @Input()
   set playerId(playerId: string) {
+    if (!playerId) {
+      return;
+    }
+
     this.name = this.store.pipe(
       select(playerById(playerId)),
       tap(player => {

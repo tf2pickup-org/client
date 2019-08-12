@@ -8,7 +8,7 @@ import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { Actions } from '@ngrx/effects';
 import { Action, Store } from '@ngrx/store';
 import { RouterTestingModule } from '@angular/router/testing';
-import { loadPlayerSkill, playerEdited } from '../players.actions';
+import { loadPlayerSkill, playerEdited } from '../actions';
 import { Player } from '../models/player';
 import { Location } from '@angular/common';
 
@@ -23,11 +23,13 @@ describe('PlayerEditComponent', () => {
 
   const initialState = {
     players: {
-      ids: [ 'FAKE_ID' ],
-      entities: {
-        FAKE_ID: {
-          id: 'FAKE_ID',
-          name: 'FAKE_NAME',
+      players: {
+        ids: [ 'FAKE_ID' ],
+        entities: {
+          FAKE_ID: {
+            id: 'FAKE_ID',
+            name: 'FAKE_NAME',
+          },
         },
       },
     },

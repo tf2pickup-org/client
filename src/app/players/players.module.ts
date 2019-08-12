@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
-import { reducer } from './players.reducer';
+import { reducer } from './reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { PlayerEffects } from './players.effects';
 import { PlayerNameComponent } from './player-name/player-name.component';
@@ -15,6 +15,9 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { PlayerListComponent } from './player-list/player-list.component';
 import { PlayerStatsComponent } from './player-stats/player-stats.component';
 import { InlineSVGModule } from 'ng-inline-svg';
+import { PlayerBansComponent } from './player-bans/player-bans.component';
+import { PlayerBanItemComponent } from './player-ban-item/player-ban-item.component';
+import { AddPlayerBanComponent } from './add-player-ban/add-player-ban.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +28,9 @@ import { InlineSVGModule } from 'ng-inline-svg';
     PlayerEditSkillComponent,
     PlayerListComponent,
     PlayerStatsComponent,
+    PlayerBansComponent,
+    PlayerBanItemComponent,
+    AddPlayerBanComponent,
   ],
   imports: [
     CommonModule,

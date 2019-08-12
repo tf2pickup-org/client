@@ -5,8 +5,8 @@ import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Player } from '../models/player';
 import { map, switchMap, tap, first } from 'rxjs/operators';
-import { playerById } from '../players.selectors';
-import { loadPlayer } from '../players.actions';
+import { playerById } from '../selectors';
+import { loadPlayer } from '../actions';
 import { Game } from '@app/games/models/game';
 import { PlayersService } from '../players.service';
 import { profile } from '@app/profile/profile.selectors';
@@ -54,8 +54,8 @@ export class PlayerDetailsComponent implements OnInit {
           } else {
             this.title.setTitle(`${player.name} • ${environment.titleSuffix}`);
           }
-        })
-      ))
+        }),
+      )),
     );
   }
 

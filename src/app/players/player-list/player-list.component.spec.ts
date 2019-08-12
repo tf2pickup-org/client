@@ -4,7 +4,7 @@ import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { AppState } from '@app/app.state';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Store } from '@ngrx/store';
-import { allPlayers } from '../players.selectors';
+import { allPlayers } from '../selectors';
 
 describe('PlayerListComponent', () => {
   let component: PlayerListComponent;

@@ -4,6 +4,7 @@ import { queueLoaded, queueSlotsRefreshed, queueSlotUpdated, queueStateUpdated, 
 import { QueueSlot } from './models/queue-slot';
 import { profileLoaded } from '@app/profile/profile.actions';
 import { Queue } from './models/queue';
+import { Profile } from '@app/profile/models/profile';
 
 export interface State extends Queue {
   locked: boolean; // is the queue locked for the current user
@@ -26,13 +27,17 @@ function updateQueueSlot(slot: QueueSlot, state: State) {
   return { ...state, slots };
 }
 
+function isQueueLocked(profile: Profile): boolean {
+  return profile ? (!!profile.activeGameId || profile.bans.length > 0) : true;
+}
+
 const queueReducer = createReducer(
   initialState,
   on(queueLoaded, (state, { queue }) => ({ ...state, ...queue })),
   on(queueSlotsRefreshed, (state, { slots }) => ({ ...state, slots })),
   on(queueSlotUpdated, (state, { slot }) => updateQueueSlot(slot, state)),
   on(queueStateUpdated, (state, { queueState }) => ({ ...state, state: queueState })),
-  on(profileLoaded, (state, { profile }) => ({ ...state, locked: profile ? !!profile.activeGameId : true })),
+  on(profileLoaded, (state, { profile }) => ({ ...state, locked: isQueueLocked(profile) })),
   on(queueLocked, state => ({ ...state, locked: true })),
   on(queueUnlocked, state => ({ ...state, locked: false })),
   on(queueMapUpdated, (state, { map }) => ({ ...state, map, votesForMapChange: false })),
