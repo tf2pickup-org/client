@@ -17,6 +17,7 @@ import { QueueReadyUpDialogControllerComponent } from './queue-ready-up-dialog-c
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { FormsModule } from '@angular/forms';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
+import { QueueAlertsComponent } from './queue-alerts/queue-alerts.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { ButtonsModule } from 'ngx-bootstrap/buttons';
     QueueSlotItemComponent,
     QueueReadyUpDialogComponent,
     QueueReadyUpDialogControllerComponent,
+    QueueAlertsComponent,
   ],
   imports: [
     CommonModule,

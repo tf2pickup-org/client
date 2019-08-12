@@ -1,0 +1,14 @@
+<div *ngFor="let ban of bans | async"
+  class="alert alert-danger"
+  role="alert">
+  <div>Ban issued by <strong><app-player-name [playerId]="ban.admin"></app-player-name></strong></div>
+  <div>Expires: <strong>{{ ban.end | date:'medium' }}</strong></div>
+  <div>Reason: <strong>{{ ban.reason }}</strong></div>
+</div>
+
+<div
+  *ngIf="activeGame | async as _activeGame"
+  class="alert alert-primary"
+  role="alert">
+  Click <a [routerLink]="['/game', _activeGame.id]">here</a> to go back to your game.
+</div>
