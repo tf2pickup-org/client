@@ -1,3 +1,15 @@
+# [1.1.0](https://github.com/tf2pickup-pl/client/compare/1.0.3...1.1.0) (2019-08-13)
+
+### Features
+* Vote for map change ([#27](https://github.com/tf2pickup-pl/client/pull/27))
+* Player count in document title ([#29](https://github.com/tf2pickup-pl/client/pull/29))
+* Player ban support ([#30](https://github.com/tf2pickup-pl/client/pull/30))
+* Game ready notification ([#31](https://github.com/tf2pickup-pl/client/pull/31))
+* Reinitialize server button ([#32](https://github.com/tf2pickup-pl/client/pull/32))
+
+### Fixes
+* Player details cancel button navigates back in history instead of always going back to the profile page ([#28](https://github.com/tf2pickup-pl/client/pull/28))
+
 # [1.0.3](https://github.com/tf2pickup-pl/client/compare/1.0.2...1.0.3) (2019-08-10)
 
 ### Features
