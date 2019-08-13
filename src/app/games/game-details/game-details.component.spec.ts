@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 import { ActivatedRoute, convertToParamMap } from '@angular/router';
 import { of } from 'rxjs';
 import { RouterTestingModule } from '@angular/router/testing';
-import { loadGame } from '../games.actions';
+import { loadGame, forceEndGame, reinitializeServer } from '../games.actions';
 import { Game } from '../models/game';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
@@ -83,17 +83,38 @@ describe('GameDetailsComponent', () => {
     expect(storeDispatchSpy).toHaveBeenCalledWith(loadGame({ gameId: 'FAKE_ID' }));
   });
 
-  it('should retrieve the game from the store', async(() => {
-    store.setState({
-      games: {
-        ids: ['FAKE_ID'],
-        entities: { FAKE_ID: theGame },
-        loaded: true,
-      },
+  describe('with game', () => {
+    beforeEach(() => {
+      store.setState({
+        games: {
+          ids: ['FAKE_ID'],
+          entities: { FAKE_ID: theGame },
+          loaded: true,
+        },
+        profile: { profile: { id: 'FAKE_PROFILE_ID' } },
+        players: { players: { ids: [], entities: { } } },
+      });
+      fixture.detectChanges();
     });
 
-    component.game.subscribe(game => expect(game).toEqual(theGame));
-  }));
+    it('should retrieve the game from the store', async(() => {
+      component.game.subscribe(game => expect(game).toEqual(theGame));
+    }));
+
+    describe('#reinitializeServer()', () => {
+      it('should dispatch the reinitializeServer action', async(() => {
+        component.reinitializeServer();
+        expect(storeDispatchSpy).toHaveBeenCalledWith(reinitializeServer({ gameId: 'FAKE_ID' }));
+      }));
+    });
+
+    describe('#forceEndGame()', () => {
+      it('should dispatch the forceEndGame action', async(() => {
+        component.forceEndGame();
+        expect(storeDispatchSpy).toHaveBeenCalledWith(forceEndGame({ gameId: 'FAKE_ID' }));
+      }));
+    });
+  });
 
   it('should retrieve players of each team');
 });

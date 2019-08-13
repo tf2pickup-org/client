@@ -6,7 +6,7 @@ import { Game } from '../models/game';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap, map, tap, filter, first, pairwise } from 'rxjs/operators';
 import { gameById } from '../games.selectors';
-import { loadGame, forceEndGame } from '../games.actions';
+import { loadGame, forceEndGame, reinitializeServer } from '../games.actions';
 import { Player } from '@app/players/models/player';
 import { playerById } from '@app/players/selectors';
 import { loadPlayer } from '@app/players/actions';
@@ -102,9 +102,13 @@ export class GameDetailsComponent implements OnInit {
     document.execCommand('copy');
   }
 
-  forceEndGame(event: Event) {
-    event.preventDefault();
+  reinitializeServer() {
+    this.game.pipe(
+      first(),
+    ).subscribe(game => this.store.dispatch(reinitializeServer({ gameId: game.id  })));
+  }
 
+  forceEndGame() {
     this.game.pipe(
       first(),
     ).subscribe(game => this.store.dispatch(forceEndGame({ gameId: game.id })));
