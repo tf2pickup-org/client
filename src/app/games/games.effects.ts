@@ -2,13 +2,11 @@ import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { GamesService } from './games.service';
 import { loadGames, gamesLoaded, gameAdded, loadGame, gameUpdated, forceEndGame, gameCreated, reinitializeServer } from './games.actions';
-import { mergeMap, map, filter, mapTo, withLatestFrom } from 'rxjs/operators';
+import { mergeMap, map, filter, withLatestFrom } from 'rxjs/operators';
 import { GamesEventsService } from './games-events.service';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app.state';
-import { combineLatest } from 'rxjs';
 import { profile } from '@app/profile/profile.selectors';
-import { queueLocked, queueUnlocked } from '@app/queue/queue.actions';
 import { profileLoaded } from '@app/profile/profile.actions';
 import { Router } from '@angular/router';
 
@@ -50,30 +48,6 @@ export class GamesEffects {
       filter(([{ game }, theProfile]) => theProfile && game.players.includes(theProfile.id)),
       map(([{ game }]) => this.router.navigate(['/game', game.id])),
     ), { dispatch: false }
-  );
-
-  lockQueue = createEffect(() =>
-    /* lock the queue when a game that I participate in starts */
-    combineLatest([
-      this.store.select(profile),
-      this.actions.pipe(ofType(gameCreated)),
-    ]).pipe(
-      filter(([theProfile, { game }]) => game.players.includes(theProfile.id)),
-      mapTo(queueLocked()),
-    )
-  );
-
-  unlockQueue = createEffect(() =>
-    /* unlock the queue when a game that I participated in ends */
-    combineLatest([
-      this.store.select(profile),
-      this.actions.pipe(ofType(gameUpdated)),
-    ]).pipe(
-      filter(([theProfile, { game }]) => theProfile && game.players.includes(theProfile.id)),
-      map(([, { game }]) => game),
-      filter(game => game.state === 'ended' || game.state === 'interrupted'),
-      mapTo(queueUnlocked()),
-    )
   );
 
   forceEndGame = createEffect(() =>

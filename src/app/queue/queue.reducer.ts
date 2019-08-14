@@ -1,13 +1,10 @@
 import { createReducer, on, Action } from '@ngrx/store';
-import { queueLoaded, queueSlotsRefreshed, queueSlotUpdated, queueStateUpdated, queueLocked, queueUnlocked,
-  queueMapUpdated, readyUp, showReadyUpDialog, hideReadyUpDialog, leaveQueue, toggleVoteForMapChange} from './queue.actions';
+import { queueLoaded, queueSlotsRefreshed, queueSlotUpdated, queueStateUpdated, queueMapUpdated, readyUp,
+    showReadyUpDialog, hideReadyUpDialog, leaveQueue, toggleVoteForMapChange} from './queue.actions';
 import { QueueSlot } from './models/queue-slot';
-import { profileLoaded } from '@app/profile/profile.actions';
 import { Queue } from './models/queue';
-import { Profile } from '@app/profile/models/profile';
 
 export interface State extends Queue {
-  locked: boolean; // is the queue locked for the current user
   readyUpDialogShown: boolean;
   votesForMapChange: boolean;
 }
@@ -17,7 +14,6 @@ export const initialState: State = {
   slots: [],
   state: 'waiting',
   map: '',
-  locked: true,
   readyUpDialogShown: false,
   votesForMapChange: false,
 };
@@ -27,19 +23,12 @@ function updateQueueSlot(slot: QueueSlot, state: State) {
   return { ...state, slots };
 }
 
-function isQueueLocked(profile: Profile): boolean {
-  return profile ? (!!profile.activeGameId || profile.bans.length > 0) : true;
-}
-
 const queueReducer = createReducer(
   initialState,
   on(queueLoaded, (state, { queue }) => ({ ...state, ...queue })),
   on(queueSlotsRefreshed, (state, { slots }) => ({ ...state, slots })),
   on(queueSlotUpdated, (state, { slot }) => updateQueueSlot(slot, state)),
   on(queueStateUpdated, (state, { queueState }) => ({ ...state, state: queueState })),
-  on(profileLoaded, (state, { profile }) => ({ ...state, locked: isQueueLocked(profile) })),
-  on(queueLocked, state => ({ ...state, locked: true })),
-  on(queueUnlocked, state => ({ ...state, locked: false })),
   on(queueMapUpdated, (state, { map }) => ({ ...state, map, votesForMapChange: false })),
   on(readyUp, state => ({ ...state, readyUpDialogShown: false })),
   on(showReadyUpDialog, state => ({ ...state, readyUpDialogShown: true })),

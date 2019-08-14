@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Actions, OnInitEffects, createEffect, ofType } from '@ngrx/effects';
 import { ProfileService } from './profile.service';
-import { loadProfile, profileLoaded, acceptRules, rulesAccepted } from './profile.actions';
+import { loadProfile, profileLoaded, acceptRules, rulesAccepted, profileUpdated } from './profile.actions';
 import { AuthService } from '@app/auth/auth.service';
 import { filter, mergeMap, map, switchMap, mapTo, tap } from 'rxjs/operators';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { AcceptRulesDialogComponent } from './accept-rules-dialog/accept-rules-dialog.component';
 import { Observable } from 'rxjs';
+import { ProfileEventsService } from './profile-events.service';
+import { Store } from '@ngrx/store';
+import { AppState } from '@app/app.state';
 
 @Injectable()
 export class ProfileEffects implements OnInitEffects {
@@ -44,7 +47,11 @@ export class ProfileEffects implements OnInitEffects {
     private profileService: ProfileService,
     private authService: AuthService,
     private modalService: BsModalService,
-  ) { }
+    private profileEventsService: ProfileEventsService,
+    private store: Store<AppState>,
+  ) {
+    this.profileEventsService.profileUpdated.subscribe(profileChanges => this.store.dispatch(profileUpdated({ profileChanges })));
+  }
 
   ngrxOnInitEffects() {
     return loadProfile();
