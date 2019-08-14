@@ -9,6 +9,8 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { loadGame, forceEndGame, reinitializeServer } from '../games.actions';
 import { Game } from '../models/game';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { GamesService } from '../games.service';
+import { profile } from '@app/profile/profile.selectors';
 
 const paramMap = of(convertToParamMap({ id: 'FAKE_ID' }));
 const theGame: Game = {
@@ -42,6 +44,10 @@ const theGame: Game = {
   mumbleUrl: 'mumble://FAKE_MUMBLE_URL/FAKE_CHANNEL'
 };
 
+class GamesServiceStub {
+
+}
+
 describe('GameDetailsComponent', () => {
   let component: GameDetailsComponent;
   let fixture: ComponentFixture<GameDetailsComponent>;
@@ -58,8 +64,14 @@ describe('GameDetailsComponent', () => {
         SharedModule,
       ],
       providers: [
-        provideMockStore({ initialState }),
+        provideMockStore({
+          initialState,
+          selectors: [
+            { selector: profile, value: null },
+          ],
+        }),
         { provide: ActivatedRoute, useValue: { paramMap } },
+        { provide: GamesService, useClass: GamesServiceStub  },
       ],
       schemas: [ NO_ERRORS_SCHEMA ],
     })
@@ -92,7 +104,26 @@ describe('GameDetailsComponent', () => {
           loaded: true,
         },
         profile: { profile: { id: 'FAKE_PROFILE_ID' } },
-        players: { players: { ids: [], entities: { } } },
+        players: {
+          players: {
+            ids: [
+              'FAKE_PLAYER_ID_1',
+              'FAKE_PLAYER_ID_2',
+            ],
+            entities: {
+              FAKE_PLAYER_ID_1: {
+                id: 'FAKE_PLAYER_ID_1',
+                name: 'FAKE_PLAYER_1',
+                gameClass: 'soldier',
+              },
+              FAKE_PLAYER_ID_2: {
+                id: 'FAKE_PLAYER_ID_2',
+                name: 'FAKE_PLAYER_2',
+                gameClass: 'soldier',
+              },
+            },
+          },
+        },
       });
       fixture.detectChanges();
     });
@@ -114,7 +145,23 @@ describe('GameDetailsComponent', () => {
         expect(storeDispatchSpy).toHaveBeenCalledWith(forceEndGame({ gameId: 'FAKE_ID' }));
       }));
     });
-  });
 
-  it('should retrieve players of each team');
+    it('should retrieve players of each team', () => {
+      component.playersRed.subscribe(players => expect(players).toEqual([{
+        id: 'FAKE_PLAYER_ID_1',
+        playerId: 'FAKE_PLAYER_ID_1',
+        name: 'FAKE_PLAYER_1',
+        gameClass: 'soldier',
+        teamId: '0',
+      }] as any));
+
+      component.playersBlu.subscribe(players => expect(players).toEqual([{
+        id: 'FAKE_PLAYER_ID_2',
+        playerId: 'FAKE_PLAYER_ID_2',
+        name: 'FAKE_PLAYER_2',
+        gameClass: 'soldier',
+        teamId: '1',
+      }] as any));
+    });
+  });
 });

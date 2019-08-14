@@ -30,4 +30,8 @@ export class GamesService {
     return this.http.put<void>(`${this.apiUrl}/games/${gameId}?reinitialize_server`, { });
   }
 
+  fetchGameSkills(gameId: string): Observable<{ [playerId: string]: number }> {
+    return this.http.get<{ [playerId: string]: number }>(`${this.apiUrl}/games/${gameId}/skills`);
+  }
+
 }
