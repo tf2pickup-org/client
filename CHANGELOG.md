@@ -1,3 +1,9 @@
+# [1.1.1](https://github.com/tf2pickup-pl/client/compare/1.1.1...1.1.2) (2019-08-14)
+
+### Fixes
+* Fix game skills sometimes not being rendered at all ([f97950e](https://github.com/tf2pickup-pl/client/commit/f97950ef3e41a537e4087ef2f2a1e9ff1be05986))
+* Remove console.log() call ([8dc3bb0](https://github.com/tf2pickup-pl/client/commit/8dc3bb0e9d2cff0d24b96bf1ec298be1b1105ccb))
+
 # [1.1.1](https://github.com/tf2pickup-pl/client/compare/1.1.0...1.1.1) (2019-08-14)
 
 ### Features
