@@ -4,6 +4,11 @@ import { API_URL } from '@app/api-url';
 import { Observable } from 'rxjs';
 import { Game } from './models/game';
 
+interface PaginatedGameListResponse {
+  results: Game[];
+  itemCount: number;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -14,8 +19,8 @@ export class GamesService {
     @Inject(API_URL) private apiUrl: string,
   ) { }
 
-  fetchGames(): Observable<Game[]> {
-    return this.http.get<Game[]>(`${this.apiUrl}/games`);
+  fetchGames(offset: number, limit: number = 10): Observable<PaginatedGameListResponse> {
+    return this.http.get<PaginatedGameListResponse>(`${this.apiUrl}/games?offset=${offset}&limit=${limit}`);
   }
 
   fetchGame(gameId: string): Observable<Game> {

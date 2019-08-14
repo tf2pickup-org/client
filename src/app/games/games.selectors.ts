@@ -5,7 +5,6 @@ import { adapter } from './games.adapter';
 import { profile } from '@app/profile/profile.selectors';
 
 const gamesFeature = createFeatureSelector<AppState, State>('games');
-export const gamesLoaded = createSelector(gamesFeature, games => games.loaded);
 
 const { selectAll, selectEntities } = adapter.getSelectors();
 export const allGames = createSelector(gamesFeature, selectAll);

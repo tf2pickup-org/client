@@ -2,11 +2,6 @@ import { TestBed, inject } from '@angular/core/testing';
 import { GamesService } from './games.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { API_URL } from '@app/api-url';
-import { IoClientService } from '@app/core/io-client.service';
-
-class IoClientServiceStub {
-
-}
 
 describe('GamesService', () => {
   let httpController: HttpTestingController;
@@ -15,13 +10,14 @@ describe('GamesService', () => {
     imports: [ HttpClientTestingModule ],
     providers: [
       { provide: API_URL, useValue: 'FAKE_URL' },
-      { provide: IoClientService, useClass: IoClientServiceStub },
     ]
   }));
 
   beforeEach(() => {
     httpController = TestBed.get(HttpTestingController);
   });
+
+  afterEach(() => httpController.verify());
 
   it('should be created', () => {
     const service: GamesService = TestBed.get(GamesService);
@@ -30,8 +26,12 @@ describe('GamesService', () => {
 
   describe('#fetchGames()', () => {
     it('should call api endpoint', inject([GamesService], (service: GamesService) => {
-      service.fetchGames().subscribe();
-      httpController.expectOne('FAKE_URL/games');
+      service.fetchGames(0).subscribe();
+      httpController.expectOne('FAKE_URL/games?offset=0&limit=10');
+
+      service.fetchGames(28, 35).subscribe();
+      httpController.expectOne('FAKE_URL/games?offset=28&limit=35');
+
       expect().nothing();
     }));
   });
