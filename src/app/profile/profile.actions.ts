@@ -10,3 +10,8 @@ export const profileLoaded = createAction(
 
 export const acceptRules = createAction('[Profile] Accept rules');
 export const rulesAccepted = createAction('[Profile API] Rules accepted');
+
+export const profileUpdated = createAction(
+  '[WS] Profile updated',
+  props<{ profileChanges: Partial<Profile> }>(),
+);
