@@ -102,7 +102,9 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
     );
 
     // fetch game skills if the current user is an admin
-    this.isAdmin.pipe(
+    this.players.pipe(
+      first(),
+      switchMap(() => this.isAdmin),
       filter(isAdmin => isAdmin),
       switchMap(() => getGameId),
       switchMap(gameId => this.gamesService.fetchGameSkills(gameId)),
