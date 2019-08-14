@@ -17,6 +17,7 @@ export const environment = {
   footerLinks: [
     { name: 'github', target: 'https://github.com/tf2pickup-pl' },
     { name: 'discord', target: discordInvitation },
+    { name: 'changelog', target: 'https://github.com/tf2pickup-pl/client/blob/master/CHANGELOG.md' },
   ],
   titleSuffix: 'tf2pickup.pl • dev',
 };
