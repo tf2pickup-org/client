@@ -103,6 +103,7 @@
           [routerLink]="['/player', player.id]">
           <div class="class-icon" [inlineSVG]="'/assets/tf2-classfont/' + player.gameClass + '.svg'"></div>
           {{ player.name }}
+          <span *ngIf="player.classSkill" class="badge badge-secondary mx-2">{{ player.classSkill }}</span>
         </a>
       </div>
     </div>
@@ -115,6 +116,7 @@
           [routerLink]="['/player', player.id]">
           <div class="class-icon" [inlineSVG]="'/assets/tf2-classfont/' + player.gameClass + '.svg'"></div>
           {{ player.name }}
+          <span *ngIf="player.classSkill" class="badge badge-secondary mx-2">{{ player.classSkill }}</span>
         </a>
       </div>
     </div>
