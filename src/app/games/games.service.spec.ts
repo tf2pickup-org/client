@@ -44,10 +44,26 @@ describe('GamesService', () => {
     }));
   });
 
-  describe('#forceEndGame', () => {
-    it('should call io api endpoint', inject([GamesService], (service: GamesService) => {
+  describe('#forceEndGame()', () => {
+    it('should call api endpoint', inject([GamesService], (service: GamesService) => {
       service.forceEndGame('FAKE_ID').subscribe();
       httpController.expectOne('FAKE_URL/games/FAKE_ID?force_end');
+      expect().nothing();
+    }));
+  });
+
+  describe('#reinitializeServer()', () => {
+    it('should call api endpoint', inject([GamesService], (service: GamesService) => {
+      service.reinitializeServer('FAKE_ID').subscribe();
+      httpController.expectOne('FAKE_URL/games/FAKE_ID?reinitialize_server');
+      expect().nothing();
+    }));
+  });
+
+  describe('#fetchGameSkills()', () => {
+    it('should call api endpoint', inject([GamesService], (service: GamesService) => {
+      service.fetchGameSkills('FAKE_ID').subscribe();
+      httpController.expectOne('FAKE_URL/games/FAKE_ID/skills');
       expect().nothing();
     }));
   });
