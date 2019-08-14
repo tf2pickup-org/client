@@ -11,6 +11,7 @@ import { GameDetailsComponent } from './game-details/game-details.component';
 import { SharedModule } from '@app/shared/shared.module';
 import { InlineSVGModule } from 'ng-inline-svg';
 import { MumbleJoinButtonComponent } from './mumble-join-button/mumble-join-button.component';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { MumbleJoinButtonComponent } from './mumble-join-button/mumble-join-butt
     StoreModule.forFeature('games', reducer),
     EffectsModule.forFeature([GamesEffects]),
     InlineSVGModule,
+    PaginationModule,
 
     SharedModule,
     GamesRoutingModule,
