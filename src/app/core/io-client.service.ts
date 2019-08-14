@@ -98,7 +98,6 @@ export class IoClientService {
         } else {
           // refresh ws token when the current one expires
           const timeout = decoded.exp * 1000 - Date.now();
-          console.log(`will refresh ws token in ${timeout} milliseconds`);
           setTimeout(() => this.refreshToken().subscribe(), timeout);
           return of(this.tokenStore.wsToken);
         }
@@ -119,7 +118,6 @@ export class IoClientService {
         try {
           const decoded = jwt_decode(wsToken) as { exp: number };
           const timeout = decoded.exp * 1000 - Date.now();
-          console.log(`will refresh ws token in ${timeout} milliseconds`);
           setTimeout(() => this.refreshToken().subscribe(), timeout);
         } catch (error) {
           console.error(error);
