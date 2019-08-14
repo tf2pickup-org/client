@@ -1,3 +1,9 @@
+# [1.1.1](https://github.com/tf2pickup-pl/client/compare/1.1.0...1.1.1) (2019-08-14)
+
+### Features
+* Handle profile updates ([#33](https://github.com/tf2pickup-pl/client/pull/33))
+* Display assigned skills for each player in the game details page ([#34](https://github.com/tf2pickup-pl/client/pull/34))
+
 # [1.1.0](https://github.com/tf2pickup-pl/client/compare/1.0.3...1.1.0) (2019-08-13)
 
 ### Features
