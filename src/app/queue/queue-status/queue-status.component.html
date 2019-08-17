@@ -1,6 +1,6 @@
 <div
   *ngIf="state | async as _state"
-  class="p-3 mt-2 mb-4 text-white rounded"
+  class="p-3 my-2 text-white rounded"
   [ngClass]="{
     'bg-info' :_state === 'waiting',
     'bg-success': _state === 'ready',
@@ -14,18 +14,6 @@
     <div *ngIf="map | async as _map"
       class="col-6">
       Next map: {{ _map }}
-      <span>
-        <a *ngIf="(isInQueue | async) && _state === 'waiting'"
-          [routerLink]=""
-          class="badge ml-1"
-          [ngClass]="(votesForMapChange | async) ? 'badge-warning' : 'badge-light'"
-          tooltip="Vote for map change"
-          (click)="voteForMapChangeToggle()">
-          <span class="oi oi-loop-circular"></span>
-        </a>
-
-        <small class="ml-1">{{ mapChangeVoteTooltipText | async }}</small>
-      </span>
     </div>
   </div>
 </div>
