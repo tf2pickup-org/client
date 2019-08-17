@@ -46,4 +46,12 @@
       <span *ngIf="game.state === 'interrupted'" class="badge badge-danger">interrupted</span>
     </a>
   </div>
+
+  <div class="d-flex justify-content-center my-4">
+    <pagination *ngIf="gameCount | async as _gameCount"
+      [totalItems]="_gameCount"
+      (pageChanged)="pageChanged($event)"
+      previousText="&lsaquo;"
+      nextText="&rsaquo;"></pagination>
+  </div>
 </div>

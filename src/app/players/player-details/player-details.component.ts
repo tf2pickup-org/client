@@ -2,9 +2,9 @@ import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AppState } from '@app/app.state';
 import { Store, select } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, ReplaySubject, BehaviorSubject } from 'rxjs';
 import { Player } from '../models/player';
-import { map, switchMap, tap, first } from 'rxjs/operators';
+import { map, switchMap, tap, first, withLatestFrom, mergeMap } from 'rxjs/operators';
 import { playerById } from '../selectors';
 import { loadPlayer } from '../actions';
 import { Game } from '@app/games/models/game';
@@ -22,8 +22,11 @@ import { environment } from '@environment';
 })
 export class PlayerDetailsComponent implements OnInit {
 
+  private readonly gamesPerPage = 10;
+  private page = new BehaviorSubject<number>(0);
+  games = new ReplaySubject<Game[]>(1);
+  gameCount = new ReplaySubject<number>(1);
   player: Observable<Player>;
-  games: Observable<Game[]>;
   stats: Observable<PlayerStats>;
   isAdmin: Observable<boolean> = this.store.pipe(
     select(profile),
@@ -43,20 +46,29 @@ export class PlayerDetailsComponent implements OnInit {
     );
 
     this.player = getPlayerId.pipe(
-      tap(id => {
-        this.games = this.playersService.fetchPlayerGames(id);
-        this.stats = this.playersService.fetchPlayerStats(id);
-      }),
-      switchMap(id => this.store.select(playerById(id)).pipe(
+      tap(playerId => this.stats = this.playersService.fetchPlayerStats(playerId)),
+      switchMap(playerId => this.store.select(playerById(playerId)).pipe(
         tap(player => {
           if (!player) {
-            this.store.dispatch(loadPlayer({ playerId: id }));
+            this.store.dispatch(loadPlayer({ playerId }));
           } else {
             this.title.setTitle(`${player.name} • ${environment.titleSuffix}`);
           }
         }),
       )),
     );
+
+    this.page.pipe(
+      withLatestFrom(getPlayerId),
+      switchMap(([page, playerId]) => this.playersService.fetchPlayerGames(playerId, page * this.gamesPerPage, this.gamesPerPage)),
+    ).subscribe(response => {
+      this.gameCount.next(response.itemCount);
+      this.games.next(response.results);
+    });
+  }
+
+  pageChanged(event: { page: number }) {
+    this.page.next(event.page - 1);
   }
 
 }

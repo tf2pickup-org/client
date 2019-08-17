@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { PlayerDetailsComponent } from './player-details.component';
 import { PlayersService } from '../players.service';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
@@ -22,6 +22,7 @@ describe('PlayerDetailsComponent', () => {
   let fixture: ComponentFixture<PlayerDetailsComponent>;
   let store: MockStore<any>;
   let storeDispatchSpy: jasmine.Spy;
+  let fetchPlayerStatsSpy: jasmine.Spy;
 
   const initialState = {
     players: {
@@ -51,7 +52,8 @@ describe('PlayerDetailsComponent', () => {
 
   beforeEach(() => {
     store = TestBed.get(Store);
-    storeDispatchSpy = spyOn(store, 'dispatch');
+    storeDispatchSpy = spyOn(store, 'dispatch').and.callThrough();
+    fetchPlayerStatsSpy = spyOn(TestBed.get(PlayersService), 'fetchPlayerStats').and.callThrough();
 
     fixture = TestBed.createComponent(PlayerDetailsComponent);
     component = fixture.componentInstance;
@@ -64,18 +66,11 @@ describe('PlayerDetailsComponent', () => {
 
   describe('#ngOnInit()', () => {
     it('should load the player if it is not in the store yet', () => {
-      component.ngOnInit();
       expect(storeDispatchSpy).toHaveBeenCalledWith(loadPlayer({ playerId: 'FAKE_ID' }));
     });
 
-    it('should load player\'s games', () => {
-      component.ngOnInit();
-      expect(component.games).toBeTruthy();
-    });
-
     it('should load player\'s stats', () => {
-      component.ngOnInit();
-      expect(component.stats).toBeTruthy();
+      expect(fetchPlayerStatsSpy).toHaveBeenCalledWith('FAKE_ID');
     });
   });
 
@@ -115,7 +110,16 @@ describe('PlayerDetailsComponent', () => {
       fixture.detectChanges();
       expect(fixture.debugElement.query(By.css('h4 small a.text-secondary'))).toBeTruthy();
     });
-
   });
 
+  describe('#pageChanged()', () => {
+    it('should load a given page', () => {
+      const spy = spyOn(TestBed.get(PlayersService), 'fetchPlayerGames').and.returnValue(of({ itemCount: 50, results: [] }));
+      component.pageChanged({ page: 1 });
+      expect(spy).toHaveBeenCalledWith('FAKE_ID', 0, 10);
+
+      component.pageChanged({ page: 5 });
+      expect(spy).toHaveBeenCalledWith('FAKE_ID', 40, 10);
+    });
+  });
 });
