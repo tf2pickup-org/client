@@ -1,0 +1,6 @@
+<button
+  type="button"
+  class="btn btn-sm"
+  [disabled]="!(isInQueue | async)"
+  [ngClass]="(votesForMapChange | async) ? 'btn-dark' : 'btn-primary'"
+  (click)="voteForMapChangeToggle()">Vote for map change ({{ statusText | async }})</button>
