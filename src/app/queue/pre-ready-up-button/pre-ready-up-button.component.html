@@ -1,0 +1,6 @@
+<button
+  type="button"
+  class="btn btn-sm"
+  [ngClass]="(preReadied | async) ? 'btn-dark' : 'btn-primary'"
+  [disabled]="!(isInQueue | async)"
+  (click)="preReadyToggle()">{{ text | async }}</button>

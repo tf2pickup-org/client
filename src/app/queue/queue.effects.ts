@@ -2,14 +2,17 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { loadQueue, queueLoaded, joinQueue, leaveQueue, queueSlotUpdated, queueStateUpdated, joinQueueError,
     leaveQueueError, readyUp, readyUpError, queueSlotsRefreshed, queueMapUpdated, showReadyUpDialog,
-    hideReadyUpDialog } from './queue.actions';
-import { mergeMap, map, catchError, filter, withLatestFrom } from 'rxjs/operators';
+    hideReadyUpDialog,
+    togglePreReady,
+    preReadyTimeoutReset,
+    preReadyTimeoutCountDown} from './queue.actions';
+import { mergeMap, map, catchError, filter, withLatestFrom, switchMap, mapTo, takeUntil } from 'rxjs/operators';
 import { QueueService } from './queue.service';
 import { QueueEventsService } from './queue-events.service';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app.state';
-import { of } from 'rxjs';
-import { mySlot, votesForMapChange, isInQueue } from './queue.selectors';
+import { of, timer } from 'rxjs';
+import { mySlot, votesForMapChange, isInQueue, isPreReadied, preReadyTimeout } from './queue.selectors';
 
 @Injectable()
 export class QueueEffects {
@@ -87,6 +90,21 @@ export class QueueEffects {
       mergeMap(([value]) => this.queueService.voteForMapChange(value).pipe(
         map(slot => queueSlotUpdated({ slot })),
       ))
+    )
+  );
+
+  resetPreReadyCountdown = createEffect(() =>
+    this.actions.pipe(
+      ofType(togglePreReady),
+      map(() => preReadyTimeoutReset()),
+    )
+  );
+
+  startPreReadyCounting = createEffect(() =>
+    timer(1000, 1000).pipe(
+      withLatestFrom(this.store.select(isPreReadied)),
+      filter(([, preReadied]) => preReadied),
+      mapTo(preReadyTimeoutCountDown()),
     )
   );
 

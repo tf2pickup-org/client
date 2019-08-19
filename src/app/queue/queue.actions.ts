@@ -58,3 +58,6 @@ export const showReadyUpDialog = createAction('[Queue] Show ready up dialog');
 export const hideReadyUpDialog = createAction('[Queue] Hide ready up dialog');
 
 export const toggleVoteForMapChange = createAction('[Queue] Toggle vote for map change');
+export const togglePreReady = createAction('[Queeu] Toggle pre-ready up');
+export const preReadyTimeoutReset = createAction('[Queue] Pre-ready timer reset');
+export const preReadyTimeoutCountDown = createAction('[Queue] Pre-ready timeout count down');
