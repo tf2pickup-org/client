@@ -17,8 +17,8 @@ export class PreReadyUpButtonComponent {
   isInQueue = this.store.select(isInQueue).pipe(debounceTime(100));
   preReadied = this.store.select(isPreReadied);
   timeout = this.store.select(preReadyTimeout);
-  text: Observable<string> = combineLatest([this.preReadied, this.timeout]).pipe(
-    map(([preReadied, timeout]) => preReadied ? `${timeout}` : 'Pre-ready up'),
+  text: Observable<string | number> = combineLatest([this.preReadied, this.timeout]).pipe(
+    map(([preReadied, timeout]) => preReadied ? timeout : 'Pre-ready up'),
   );
 
   constructor(

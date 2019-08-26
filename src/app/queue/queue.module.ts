@@ -21,6 +21,7 @@ import { QueueAlertsComponent } from './queue-alerts/queue-alerts.component';
 import { QueueAddonsComponent } from './queue-addons/queue-addons.component';
 import { VoteForMapChangeButtonComponent } from './vote-for-map-change-button/vote-for-map-change-button.component';
 import { PreReadyUpButtonComponent } from './pre-ready-up-button/pre-ready-up-button.component';
+import { SecondsPipe } from './seconds.pipe';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { PreReadyUpButtonComponent } from './pre-ready-up-button/pre-ready-up-bu
     QueueAddonsComponent,
     VoteForMapChangeButtonComponent,
     PreReadyUpButtonComponent,
+    SecondsPipe,
   ],
   imports: [
     CommonModule,

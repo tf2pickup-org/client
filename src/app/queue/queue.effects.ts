@@ -6,13 +6,14 @@ import { loadQueue, queueLoaded, joinQueue, leaveQueue, queueSlotUpdated, queueS
     togglePreReady,
     preReadyTimeoutReset,
     preReadyTimeoutCountDown} from './queue.actions';
-import { mergeMap, map, catchError, filter, withLatestFrom, switchMap, mapTo, takeUntil } from 'rxjs/operators';
+import { mergeMap, map, catchError, filter, withLatestFrom, switchMap, mapTo, takeUntil, tap } from 'rxjs/operators';
 import { QueueService } from './queue.service';
 import { QueueEventsService } from './queue-events.service';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app.state';
 import { of, timer } from 'rxjs';
 import { mySlot, votesForMapChange, isInQueue, isPreReadied, preReadyTimeout } from './queue.selectors';
+import { PreReadyCountdownService } from './pre-ready-countdown.service';
 
 @Injectable()
 export class QueueEffects {
@@ -101,10 +102,23 @@ export class QueueEffects {
   );
 
   startPreReadyCounting = createEffect(() =>
-    timer(1000, 1000).pipe(
-      withLatestFrom(this.store.select(isPreReadied)),
-      filter(([, preReadied]) => preReadied),
-      mapTo(preReadyTimeoutCountDown()),
+    this.store.select(isPreReadied).pipe(
+      filter(preReadied => preReadied),
+      tap(() => this.preReadyCountdownService.start()),
+    ), { dispatch: false },
+  );
+
+  stopPreReadyCounting = createEffect(() =>
+    this.store.select(isPreReadied).pipe(
+      filter(preReadied => !preReadied),
+      tap(() => this.preReadyCountdownService.stop()),
+    ), { dispatch: false },
+  );
+
+  preReadyTimeout = createEffect(() =>
+    this.store.select(preReadyTimeout).pipe(
+      filter(value => value <= 1),
+      mapTo(togglePreReady()),
     )
   );
 
@@ -113,6 +127,7 @@ export class QueueEffects {
     private queueService: QueueService,
     private queueEventsService: QueueEventsService,
     private store: Store<AppState>,
+    private preReadyCountdownService: PreReadyCountdownService,
   ) {
     this.queueEventsService.slotUpdate.subscribe(slot => this.store.dispatch(queueSlotUpdated({ slot })));
     this.queueEventsService.stateUpdate.subscribe(queueState => this.store.dispatch(queueStateUpdated({ queueState })));
