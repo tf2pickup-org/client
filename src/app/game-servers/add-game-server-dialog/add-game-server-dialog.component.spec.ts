@@ -45,7 +45,7 @@ describe('AddGameServerDialogComponent', () => {
       component.portValue = 12345;
       component.rconPasswordValue = 'FAKE_PASSWORD';
 
-      const spy = spyOn(store, 'dispatch');
+      const spy = spyOn(store, 'dispatch') as any;
       component.add();
       expect(spy).toHaveBeenCalledWith({
         gameServer: { name: 'FAKE_NAME', address: 'FAKE_ADDRESS', port: 12345, rconPassword: 'FAKE_PASSWORD' },
