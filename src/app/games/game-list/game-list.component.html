@@ -1,4 +1,4 @@
-<div class="list-group">
+<div class="list-group list-group-flush">
   <a *ngFor="let game of games | async"
     [routerLink]="['/game', game.id]"
     class="list-group-item list-group-item-action">
@@ -6,4 +6,12 @@
     <span *ngIf="game.state === 'launching'" class="badge badge-primary">launching</span>
     <span *ngIf="game.state === 'started'" class="badge badge-warning">in progress</span>
   </a>
+</div>
+
+<div class="d-flex justify-content-center my-4">
+  <pagination *ngIf="gameCount | async as _gameCount"
+    [totalItems]="_gameCount"
+    (pageChanged)="pageChanged($event)"
+    previousText="&lsaquo;"
+    nextText="&rsaquo;"></pagination>
 </div>

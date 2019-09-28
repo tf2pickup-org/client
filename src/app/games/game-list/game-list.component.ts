@@ -1,13 +1,10 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { Store, select } from '@ngrx/store';
-import { AppState } from '@app/app.state';
-import { first } from 'rxjs/operators';
-import { gamesLoaded, allGames } from '../games.selectors';
-import { loadGames } from '../games.actions';
-import { Observable } from 'rxjs';
+import { ReplaySubject, BehaviorSubject } from 'rxjs';
 import { Game } from '../models/game';
 import { Title } from '@angular/platform-browser';
 import { environment } from '@environment';
+import { GamesService } from '../games.service';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-game-list',
@@ -17,24 +14,29 @@ import { environment } from '@environment';
 })
 export class GameListComponent implements OnInit {
 
-  games: Observable<Game[]> = this.store.select(allGames);
+  private readonly gamesPerPage = 10;
+  private page = new BehaviorSubject<number>(0);
+  gameCount = new ReplaySubject<number>(1);
+  games = new ReplaySubject<Game[]>(1);
 
   constructor(
-    private store: Store<AppState>,
     private title: Title,
-  ) { }
+    private gamesService: GamesService,
+  ) {
+    this.page.pipe(
+      switchMap(page => this.gamesService.fetchGames(page * this.gamesPerPage, this.gamesPerPage)),
+    ).subscribe(response => {
+      this.gameCount.next(response.itemCount);
+      this.games.next(response.results);
+    });
+  }
 
   ngOnInit() {
-    this.store.pipe(
-      select(gamesLoaded),
-      first(),
-    ).subscribe(loaded => {
-      if (!loaded) {
-        this.store.dispatch(loadGames());
-      }
-    });
-
     this.title.setTitle(`games • ${environment.titleSuffix}`);
+  }
+
+  pageChanged(event: { page: number }) {
+    this.page.next(event.page - 1);
   }
 
 }

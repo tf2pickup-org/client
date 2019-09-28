@@ -8,6 +8,7 @@ import { PlayerSkill } from './models/player-skill';
 import { map } from 'rxjs/operators';
 import { PlayerStats } from './models/player-stats';
 import { PlayerBan } from './models/player-ban';
+import { PaginatedList } from '@app/core/models/paginated-list';
 
 @Injectable({
   providedIn: 'root'
@@ -23,8 +24,8 @@ export class PlayersService {
     return this.http.get<Player>(`${this.apiUrl}/players/${playerId}`);
   }
 
-  fetchPlayerGames(playerId: string): Observable<Game[]> {
-    return this.http.get<Game[]>(`${this.apiUrl}/players/${playerId}/games`);
+  fetchPlayerGames(playerId: string, offset: number, limit: number = 10): Observable<PaginatedList<Game>> {
+    return this.http.get<PaginatedList<Game>>(`${this.apiUrl}/players/${playerId}/games?offset=${offset}&limit=${limit}`);
   }
 
   savePlayer(player: Player): Observable<Player> {
