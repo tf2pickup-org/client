@@ -1,6 +1,3 @@
-
-[![Greenkeeper badge](https://badges.greenkeeper.io/tf2pickup-pl/client.svg)](https://greenkeeper.io/)
-
 <h1 align="center">
   <a href="https://tf2pickup.pl">
     <img src="https://raw.githubusercontent.com/tf2pickup-pl/client/master/images/logo-gh.png" alt="tf2pickup.pl logo" width="800">
@@ -20,6 +17,10 @@
 
   <a href="https://opensource.org/licenses/MIT">
     <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="MIT license">
+  </a>
+
+  <a href="https://greenkeeper.io/">
+    <img src="https://badges.greenkeeper.io/tf2pickup-pl/client.svg" alt="Greenkeeper">
   </a>
 </p>
 
