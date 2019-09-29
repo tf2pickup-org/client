@@ -1,4 +1,12 @@
-# [1.1.1](https://github.com/tf2pickup-pl/client/compare/1.1.1...1.1.2) (2019-08-14)
+# [1.2.0](https://github.com/tf2pickup-pl/client/compare/1.1.2...1.2.0) (2019-09-29)
+
+### Features
+* Lists pagination ([f5ab98](https://github.com/tf2pickup-pl/client/commit/f5ab987bb18b8a9541906728763a3167e5b9f1f4))
+
+### Fixes
+* PlayerEditComponent margin fix ([eac9d6](https://github.com/tf2pickup-pl/client/commit/eac9d670b982245c4b2f737a240dd267ad56fb70))
+
+# [1.1.2](https://github.com/tf2pickup-pl/client/compare/1.1.1...1.1.2) (2019-08-14)
 
 ### Fixes
 * Fix game skills sometimes not being rendered at all ([f97950e](https://github.com/tf2pickup-pl/client/commit/f97950ef3e41a537e4087ef2f2a1e9ff1be05986))
