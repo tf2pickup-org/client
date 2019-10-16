@@ -2,11 +2,8 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { loadQueue, queueLoaded, joinQueue, leaveQueue, queueSlotUpdated, queueStateUpdated, joinQueueError,
     leaveQueueError, readyUp, readyUpError, queueSlotsRefreshed, queueMapUpdated, showReadyUpDialog,
-    hideReadyUpDialog,
-    togglePreReady,
-    preReadyTimeoutReset,
-    preReadyTimeoutCountDown} from './queue.actions';
-import { mergeMap, map, catchError, filter, withLatestFrom, switchMap, mapTo, takeUntil, tap } from 'rxjs/operators';
+    hideReadyUpDialog, togglePreReady, preReadyTimeoutReset, stopPreReady } from './queue.actions';
+import { mergeMap, map, catchError, filter, withLatestFrom, mapTo, tap } from 'rxjs/operators';
 import { QueueService } from './queue.service';
 import { QueueEventsService } from './queue-events.service';
 import { Store } from '@ngrx/store';
@@ -101,18 +98,25 @@ export class QueueEffects {
     )
   );
 
-  startPreReadyCounting = createEffect(() =>
+  startPreReadyCountdown = createEffect(() =>
     this.store.select(isPreReadied).pipe(
       filter(preReadied => preReadied),
       tap(() => this.preReadyCountdownService.start()),
     ), { dispatch: false },
   );
 
-  stopPreReadyCounting = createEffect(() =>
+  stopPreReadyCountdown = createEffect(() =>
     this.store.select(isPreReadied).pipe(
       filter(preReadied => !preReadied),
       tap(() => this.preReadyCountdownService.stop()),
     ), { dispatch: false },
+  );
+
+  cancelPreReadyOnQueueLeave = createEffect(() =>
+    this.store.select(isInQueue).pipe(
+      filter(inQueue => !inQueue),
+      map(() => stopPreReady()),
+    )
   );
 
   preReadyTimeout = createEffect(() =>

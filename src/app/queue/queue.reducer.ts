@@ -1,7 +1,7 @@
 import { createReducer, on, Action } from '@ngrx/store';
 import { queueLoaded, queueSlotsRefreshed, queueSlotUpdated, queueStateUpdated, queueMapUpdated, readyUp,
     showReadyUpDialog, hideReadyUpDialog, leaveQueue, toggleVoteForMapChange, togglePreReady, preReadyTimeoutReset,
-    preReadyTimeoutCountDown } from './queue.actions';
+    preReadyTimeoutCountDown, stopPreReady } from './queue.actions';
 import { QueueSlot } from './models/queue-slot';
 import { Queue } from './models/queue';
 
@@ -41,6 +41,7 @@ const queueReducer = createReducer(
   on(leaveQueue, state => ({ ...state, readyUpDialogShown: false, votesForMapChange: false })),
   on(toggleVoteForMapChange, state => ({ ...state, votesForMapChange: !state.votesForMapChange })),
   on(togglePreReady, state => ({ ...state, preReady: !state.preReady })),
+  on(stopPreReady, state => ({ ...state, preReady: false })),
   on(preReadyTimeoutReset, state => ({ ...state, preReadyTimeout: 180 })),
   on(preReadyTimeoutCountDown, state => ({ ...state, preReadyTimeout: state.preReadyTimeout - 1 })),
 );
