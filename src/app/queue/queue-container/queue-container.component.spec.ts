@@ -6,6 +6,11 @@ import { Title } from '@angular/platform-browser';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Store } from '@ngrx/store';
+import { AuthService } from '@app/auth/auth.service';
+
+class AuthServiceStub {
+  authenticated = false;
+}
 
 describe('QueueContainerComponent', () => {
   let component: QueueContainerComponent;
@@ -26,6 +31,7 @@ describe('QueueContainerComponent', () => {
             { selector: queueCurrentPlayerCount, value: 5 },
           ]
         }),
+        { provide: AuthService, useClass: AuthServiceStub },
       ],
       schemas: [ NO_ERRORS_SCHEMA ],
     })
