@@ -1,6 +1,6 @@
 <div>
   <app-queue-alerts></app-queue-alerts>
   <app-queue-status></app-queue-status>
-  <app-queue-addons></app-queue-addons>
+  <app-queue-addons *ngIf="authenticated"></app-queue-addons>
   <app-queue></app-queue>
 </div>
