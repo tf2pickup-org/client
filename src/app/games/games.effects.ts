@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { GamesService } from './games.service';
-import { gameAdded, loadGame, gameUpdated, forceEndGame, gameCreated, reinitializeServer } from './games.actions';
+import { gameAdded, loadGame, gameUpdated, forceEndGame, gameCreated, reinitializeServer, ownGameAdded } from './games.actions';
 import { mergeMap, map, filter, withLatestFrom } from 'rxjs/operators';
 import { GamesEventsService } from './games-events.service';
 import { Store } from '@ngrx/store';
@@ -31,13 +31,21 @@ export class GamesEffects {
     )
   );
 
-  redirectToNewGame = createEffect(() =>
-    /* when a game I am part of starts, redirect to its details page */
+  ownGameStarted = createEffect(() =>
     this.actions.pipe(
       ofType(gameCreated),
       withLatestFrom(this.store.select(profile)),
       filter(([{ game }, theProfile]) => theProfile && game.players.includes(theProfile.id)),
-      map(([{ game }]) => this.router.navigate(['/game', game.id])),
+      map(([{ game }]) => game.id),
+      map(gameId => ownGameAdded({ gameId })),
+    )
+  );
+
+  redirectToNewGame = createEffect(() =>
+    /* when a game I am part of starts, redirect to its details page */
+    this.actions.pipe(
+      ofType(ownGameAdded),
+      map(({ gameId }) => this.router.navigate(['/game', gameId])),
     ), { dispatch: false }
   );
 

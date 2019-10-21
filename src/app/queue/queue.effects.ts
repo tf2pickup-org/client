@@ -11,6 +11,7 @@ import { AppState } from '@app/app.state';
 import { of, timer } from 'rxjs';
 import { mySlot, votesForMapChange, isInQueue, isPreReadied, preReadyTimeout } from './queue.selectors';
 import { PreReadyCountdownService } from './pre-ready-countdown.service';
+import { ownGameAdded } from '@app/games/games.actions';
 
 @Injectable()
 export class QueueEffects {
@@ -57,7 +58,9 @@ export class QueueEffects {
       filter(queueState => queueState === 'ready'),
       withLatestFrom(this.store.select(mySlot)),
       filter(([, slot]) => slot && !slot.playerReady),
-      map(() => showReadyUpDialog()),
+      withLatestFrom(this.store.select(isPreReadied)),
+      map(([, preReadied]) => preReadied),
+      map(preReadied => preReadied ? readyUp() : showReadyUpDialog()),
     )
   );
 
@@ -115,6 +118,13 @@ export class QueueEffects {
   cancelPreReadyOnQueueLeave = createEffect(() =>
     this.store.select(isInQueue).pipe(
       filter(inQueue => !inQueue),
+      map(() => stopPreReady()),
+    )
+  );
+
+  cancelPreReadyOnGameLaunch = createEffect(() =>
+    this.actions.pipe(
+      ofType(ownGameAdded),
       map(() => stopPreReady()),
     )
   );

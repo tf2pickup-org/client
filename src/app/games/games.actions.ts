@@ -11,6 +11,11 @@ export const gameAdded = createAction(
   props<{ game: Game }>(),
 );
 
+export const ownGameAdded = createAction(
+  '[Games] Own game started',
+  props<{ gameId: string }>(),
+);
+
 export const loadGame = createAction(
   '[Games] Load game',
   props<{ gameId: string }>(),
