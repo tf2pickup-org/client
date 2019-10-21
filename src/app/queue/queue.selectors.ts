@@ -41,3 +41,6 @@ export const mapChangeVoterCount = createSelector(
   queueSlots,
   slots => slots && slots.reduce((prev, curr) => curr.votesForMapChange ? prev + 1 : prev, 0)
 );
+
+export const isPreReadied = createSelector(queueFeature, feature => feature.preReady);
+export const preReadyTimeout = createSelector(queueFeature, feature => feature.preReadyTimeout);
