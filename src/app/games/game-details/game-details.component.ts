@@ -4,7 +4,7 @@ import { AppState } from '@app/app.state';
 import { Observable, Subject, ReplaySubject, combineLatest } from 'rxjs';
 import { Game } from '../models/game';
 import { ActivatedRoute } from '@angular/router';
-import { switchMap, map, tap, filter, first, pairwise, withLatestFrom, shareReplay, takeUntil, defaultIfEmpty, startWith } from 'rxjs/operators';
+import { switchMap, map, tap, filter, first, pairwise, shareReplay, takeUntil, startWith } from 'rxjs/operators';
 import { gameById } from '../games.selectors';
 import { loadGame, forceEndGame, reinitializeServer } from '../games.actions';
 import { Player } from '@app/players/models/player';
