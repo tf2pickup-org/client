@@ -1,3 +1,15 @@
+# [1.3.0](https://github.com/tf2pickup-pl/client/compare/1.2.0...1.3.0) (2019-10-23)
+
+### Features
+* Pre-ready up ([0b5b8a](https://github.com/tf2pickup-pl/client/commit/0b5b8a507e69b1e24ecbe930a449c6041164dd38))
+
+### Fixes
+* Missing skill badges ([095362](https://github.com/tf2pickup-pl/client/commit/09536272c0863c12c969c70c79de53e144527e07))
+
+### Packages
+* Update angular to 8.2.11 and ngrx to 8.4.0 ([5a3deae](https://github.com/tf2pickup-pl/client/commit/5a3deaeaf744824576c3da7e953a9590bd1fc6f4))
+* Update karma to version 4.4.1 ([63a56c8](https://github.com/tf2pickup-pl/client/commit/63a56c8889e7670fe68650608abd17f92cf2d4c3))
+
 # [1.2.0](https://github.com/tf2pickup-pl/client/compare/1.1.2...1.2.0) (2019-09-29)
 
 ### Features
