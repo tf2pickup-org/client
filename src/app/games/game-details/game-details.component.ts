@@ -4,7 +4,7 @@ import { AppState } from '@app/app.state';
 import { Observable, Subject, ReplaySubject, combineLatest } from 'rxjs';
 import { Game } from '../models/game';
 import { ActivatedRoute } from '@angular/router';
-import { switchMap, map, tap, filter, first, pairwise, withLatestFrom, shareReplay, takeUntil } from 'rxjs/operators';
+import { switchMap, map, tap, filter, first, pairwise, shareReplay, takeUntil, startWith } from 'rxjs/operators';
 import { gameById } from '../games.selectors';
 import { loadGame, forceEndGame, reinitializeServer } from '../games.actions';
 import { Player } from '@app/players/models/player';
@@ -79,13 +79,30 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
       map(player => ({ ...player, ...slot })),
     );
 
-    // load all players
-    this.game.pipe(
+    const resolvePlayers = this.game.pipe(
       switchMap(game => combineLatest([
         ...game.slots.map(slot => resolveGamePlayer(slot))
-      ])),
+      ])));
+
+    const resolveSkills = this.isAdmin.pipe(
+      filter(isAdmin => isAdmin),
+      switchMap(() => getGameId),
+      switchMap(gameId => this.gamesService.fetchGameSkills(gameId)),
+      filter(skills => !!skills),
+    );
+
+    // load all players
+    // tslint:disable-next-line: deprecation
+    combineLatest([ resolvePlayers, resolveSkills.pipe(startWith(null)) ]).pipe(
       takeUntil(this.destroyed),
-    ).subscribe(players => this.players.next(players));
+    ).subscribe(([players, skills]) => {
+      if (skills) {
+        const playersWithSkills = players.map(player => ({ ...player, classSkill: skills[player.id] || undefined }));
+        this.players.next(playersWithSkills);
+      } else {
+        this.players.next(players);
+      }
+    });
 
     // get team id for the given team name
     const getTeamId = (teamName: string) => this.game.pipe(
@@ -100,21 +117,6 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
     this.playersBlu = combineLatest([this.players, getTeamId('BLU')]).pipe(
       map(([allPlayers, bluTeamId]) => allPlayers.filter(p => p.teamId === bluTeamId)),
     );
-
-    // fetch game skills if the current user is an admin
-    this.players.pipe(
-      first(),
-      switchMap(() => this.isAdmin),
-      filter(isAdmin => isAdmin),
-      switchMap(() => getGameId),
-      switchMap(gameId => this.gamesService.fetchGameSkills(gameId)),
-      filter(skills => !!skills),
-      withLatestFrom(this.players),
-      takeUntil(this.destroyed),
-    ).subscribe(([skills, players]) => {
-      const playersWithSkills = players.map(player => ({ ...player, classSkill: skills[player.id] || undefined }));
-      this.players.next(playersWithSkills);
-    });
 
     // play sound when the connect is available
     this.game.pipe(

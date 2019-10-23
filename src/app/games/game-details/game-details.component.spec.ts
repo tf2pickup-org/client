@@ -2,15 +2,17 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { GameDetailsComponent } from './game-details.component';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { SharedModule } from '@app/shared/shared.module';
-import { Store } from '@ngrx/store';
+import { Store, MemoizedSelector } from '@ngrx/store';
 import { ActivatedRoute, convertToParamMap } from '@angular/router';
-import { of } from 'rxjs';
+import { of, NEVER } from 'rxjs';
 import { RouterTestingModule } from '@angular/router/testing';
 import { loadGame, forceEndGame, reinitializeServer } from '../games.actions';
 import { Game } from '../models/game';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { GamesService } from '../games.service';
 import { profile } from '@app/profile/profile.selectors';
+import { Profile } from '@app/profile/models/profile';
+import { AppState } from '@app/app.state';
 
 const paramMap = of(convertToParamMap({ id: 'FAKE_ID' }));
 const theGame: Game = {
@@ -45,7 +47,7 @@ const theGame: Game = {
 };
 
 class GamesServiceStub {
-
+  fetchGameSkills(gameId: string) { }
 }
 
 describe('GameDetailsComponent', () => {
@@ -53,6 +55,7 @@ describe('GameDetailsComponent', () => {
   let fixture: ComponentFixture<GameDetailsComponent>;
   let store: MockStore<any>;
   let storeDispatchSpy: jasmine.Spy;
+  let profileSelector: MemoizedSelector<AppState, Partial<Profile>>;
 
   const initialState = { games: { ids: [], entities: { }, loaded: false } };
 
@@ -66,9 +69,6 @@ describe('GameDetailsComponent', () => {
       providers: [
         provideMockStore({
           initialState,
-          selectors: [
-            { selector: profile, value: null },
-          ],
         }),
         { provide: ActivatedRoute, useValue: { paramMap } },
         { provide: GamesService, useClass: GamesServiceStub  },
@@ -81,6 +81,7 @@ describe('GameDetailsComponent', () => {
   beforeEach(() => {
     store = TestBed.get(Store);
     storeDispatchSpy = spyOn(store, 'dispatch');
+    profileSelector = store.overrideSelector(profile, null);
 
     fixture = TestBed.createComponent(GameDetailsComponent);
     component = fixture.componentInstance;
@@ -162,6 +163,13 @@ describe('GameDetailsComponent', () => {
         gameClass: 'soldier',
         teamId: '1',
       }] as any));
+    });
+
+    it('should fetch skill of each player if the current user is an admin', () => {
+      const spy = spyOn(TestBed.get(GamesService), 'fetchGameSkills').and.returnValue(NEVER);
+      profileSelector.setResult({ id: 'FAKE_PROFILE_ID', role: 'admin' });
+      store.refreshState();
+      expect(spy).toHaveBeenCalledWith('FAKE_ID');
     });
   });
 });
