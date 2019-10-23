@@ -3,7 +3,7 @@ import { VoteForMapChangeButtonComponent } from './vote-for-map-change-button.co
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { AppState } from '@app/app.state';
 import { MemoizedSelector, Store } from '@ngrx/store';
-import { isInQueue, mapChangeVoterCount, queueConfig } from '../queue.selectors';
+import { isInQueue, mapChangeVoterCount, queueConfig, votesForMapChange } from '../queue.selectors';
 import { By } from '@angular/platform-browser';
 
 describe('VoteForMapChangeButtonComponent', () => {
@@ -21,6 +21,7 @@ describe('VoteForMapChangeButtonComponent', () => {
           selectors: [
             { selector: mapChangeVoterCount, value: 2 },
             { selector: queueConfig, value: { nextMapSuccessfulVoteThreshold: 12 } },
+            { selector: votesForMapChange, value: false },
           ]
         }),
       ]
