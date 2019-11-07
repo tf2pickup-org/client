@@ -23,6 +23,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { InlineSVGModule } from 'ng-inline-svg';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { HallOfFameModule } from './hall-of-fame/hall-of-fame.module';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
     ProfileModule,
     GamesModule,
     GameServersModule,
+    HallOfFameModule,
   ],
   providers: [
     { provide: API_URL, useValue: environment.apiUrl },
