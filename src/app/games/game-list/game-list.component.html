@@ -1,5 +1,5 @@
 <div class="list-group list-group-flush">
-  <a *ngFor="let game of games | async"
+  <a *ngFor="let game of games | async | paginate: { itemsPerPage: gamesPerPage, currentPage: (page | async), totalItems: (gameCount | async) }"
     [routerLink]="['/game', game.id]"
     class="list-group-item list-group-item-action">
     #{{ game.number }} - {{ game.launchedAt | date:'medium' }} - {{ game.map }}
@@ -8,10 +8,31 @@
   </a>
 </div>
 
-<div class="d-flex justify-content-center my-4">
-  <pagination *ngIf="gameCount | async as _gameCount"
-    [totalItems]="_gameCount"
-    (pageChanged)="pageChanged($event)"
-    previousText="&lsaquo;"
-    nextText="&rsaquo;"></pagination>
-</div>
+<pagination-template #p="paginationApi" (pageChange)="getPage($event)">
+  <nav class="my-3">
+    <ul class="pagination justify-content-center">
+      <li class="page-item" [class.disabled]="p.isFirstPage()">
+        <a class="page-link" aria-label="Previous" [routerLink]="" (click)="p.previous()">
+          <span aria-hidden="true">&laquo;</span>
+          <span class="sr-only">Previous</span>
+        </a>
+      </li>
+
+      <li
+        *ngFor="let page of p.pages"
+        class="page-item"
+        [class.active]="p.getCurrent() === page.value">
+        <a class="page-link" [routerLink]="" (click)="p.setCurrent(page.value)">
+          {{ page.label }}
+        </a>
+      </li>
+
+      <li class="page-item" [class.disabled]="p.isLastPage()">
+        <a class="page-link" aria-label="Next" [routerLink]="" (click)="p.next()">
+          <span aria-hidden="true">&raquo;</span>
+          <span class="sr-only">Next</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</pagination-template>

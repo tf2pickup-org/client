@@ -4,7 +4,7 @@ import { Game } from '../models/game';
 import { Title } from '@angular/platform-browser';
 import { environment } from '@environment';
 import { GamesService } from '../games.service';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-game-list',
@@ -14,8 +14,8 @@ import { switchMap } from 'rxjs/operators';
 })
 export class GameListComponent implements OnInit {
 
-  private readonly gamesPerPage = 10;
-  private page = new BehaviorSubject<number>(0);
+  readonly gamesPerPage = 10;
+  page = new BehaviorSubject<number>(1);
   gameCount = new ReplaySubject<number>(1);
   games = new ReplaySubject<Game[]>(1);
 
@@ -24,6 +24,7 @@ export class GameListComponent implements OnInit {
     private gamesService: GamesService,
   ) {
     this.page.pipe(
+      map(page => page - 1),
       switchMap(page => this.gamesService.fetchGames(page * this.gamesPerPage, this.gamesPerPage)),
     ).subscribe(response => {
       this.gameCount.next(response.itemCount);
@@ -35,8 +36,8 @@ export class GameListComponent implements OnInit {
     this.title.setTitle(`games • ${environment.titleSuffix}`);
   }
 
-  pageChanged(event: { page: number }) {
-    this.page.next(event.page - 1);
+  getPage(page: number) {
+    this.page.next(page);
   }
 
 }

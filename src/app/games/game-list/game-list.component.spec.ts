@@ -3,24 +3,26 @@ import { GameListComponent } from './game-list.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { GamesService } from '../games.service';
 import { NEVER, of } from 'rxjs';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 class GamesServiceStub {
   fetchGames() { return NEVER; }
 }
 
-describe('GameListComponent', () => {
+fdescribe('GameListComponent', () => {
   let component: GameListComponent;
   let fixture: ComponentFixture<GameListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ GameListComponent ],
-      imports: [ RouterTestingModule ],
+      imports: [
+        RouterTestingModule,
+        NgxPaginationModule,
+      ],
       providers: [
         { provide: GamesService, useClass: GamesServiceStub },
       ],
-      schemas: [ NO_ERRORS_SCHEMA ],
     })
     .compileComponents();
   }));
@@ -38,10 +40,10 @@ describe('GameListComponent', () => {
   describe('#pageChanged()', () => {
     it('should load a given page', () => {
       const spy = spyOn(TestBed.get(GamesService), 'fetchGames').and.returnValue(of({ itemCount: 50, results: [] }));
-      component.pageChanged({ page: 1 });
+      component.getPage(1);
       expect(spy).toHaveBeenCalledWith(0, 10);
 
-      component.pageChanged({ page: 5 });
+      component.getPage(5);
       expect(spy).toHaveBeenCalledWith(40, 10);
     });
   });
