@@ -22,7 +22,7 @@ import { MarkdownModule } from 'ngx-markdown';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { InlineSVGModule } from 'ng-inline-svg';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
-import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -45,7 +45,7 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
     MarkdownModule.forRoot({ loader: HttpClient }),
     InlineSVGModule.forRoot(),
     ButtonsModule.forRoot(),
-    PaginationModule.forRoot(),
+    NgxPaginationModule,
 
     AuthModule,
     CoreModule,
