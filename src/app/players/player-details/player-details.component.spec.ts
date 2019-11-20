@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { PlayerDetailsComponent } from './player-details.component';
 import { PlayersService } from '../players.service';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
@@ -11,7 +11,6 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
 class PlayersServiceStub {
-  fetchPlayerGames() { return of([]); }
   fetchPlayerStats() { return of({}); }
 }
 
@@ -31,7 +30,7 @@ describe('PlayerDetailsComponent', () => {
         entities: { },
       }
     },
-    profile: { profile: { }},
+    profile: { profile: { } },
   };
 
   beforeEach(async(() => {
@@ -109,17 +108,6 @@ describe('PlayerDetailsComponent', () => {
       store.setState({ ...stateWithFakePlayer, profile: { profile: { role: 'admin' } } });
       fixture.detectChanges();
       expect(fixture.debugElement.query(By.css('h4 small a.text-secondary'))).toBeTruthy();
-    });
-  });
-
-  describe('#pageChanged()', () => {
-    it('should load a given page', () => {
-      const spy = spyOn(TestBed.get(PlayersService), 'fetchPlayerGames').and.returnValue(of({ itemCount: 50, results: [] }));
-      component.pageChanged({ page: 1 });
-      expect(spy).toHaveBeenCalledWith('FAKE_ID', 0, 10);
-
-      component.pageChanged({ page: 5 });
-      expect(spy).toHaveBeenCalledWith('FAKE_ID', 40, 10);
     });
   });
 });

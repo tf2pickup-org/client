@@ -2,12 +2,11 @@ import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AppState } from '@app/app.state';
 import { Store, select } from '@ngrx/store';
-import { Observable, ReplaySubject, BehaviorSubject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Player } from '../models/player';
-import { map, switchMap, tap, first, withLatestFrom, mergeMap } from 'rxjs/operators';
+import { map, switchMap, tap } from 'rxjs/operators';
 import { playerById } from '../selectors';
 import { loadPlayer } from '../actions';
-import { Game } from '@app/games/models/game';
 import { PlayersService } from '../players.service';
 import { profile } from '@app/profile/profile.selectors';
 import { PlayerStats } from '../models/player-stats';
@@ -22,10 +21,6 @@ import { environment } from '@environment';
 })
 export class PlayerDetailsComponent implements OnInit {
 
-  private readonly gamesPerPage = 10;
-  private page = new BehaviorSubject<number>(0);
-  games = new ReplaySubject<Game[]>(1);
-  gameCount = new ReplaySubject<number>(1);
   player: Observable<Player>;
   stats: Observable<PlayerStats>;
   isAdmin: Observable<boolean> = this.store.pipe(
@@ -57,18 +52,6 @@ export class PlayerDetailsComponent implements OnInit {
         }),
       )),
     );
-
-    this.page.pipe(
-      withLatestFrom(getPlayerId),
-      switchMap(([page, playerId]) => this.playersService.fetchPlayerGames(playerId, page * this.gamesPerPage, this.gamesPerPage)),
-    ).subscribe(response => {
-      this.gameCount.next(response.itemCount);
-      this.games.next(response.results);
-    });
-  }
-
-  pageChanged(event: { page: number }) {
-    this.page.next(event.page - 1);
   }
 
 }

@@ -30,5 +30,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     SharedModule,
     GamesRoutingModule,
   ],
+  exports: [
+    GameListComponent,
+  ],
 })
 export class GamesModule { }

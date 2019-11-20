@@ -1,10 +1,10 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { ReplaySubject, BehaviorSubject } from 'rxjs';
+import { Component, ChangeDetectionStrategy, Input, OnInit } from '@angular/core';
+import { ReplaySubject, BehaviorSubject, Observable } from 'rxjs';
 import { Game } from '../models/game';
-import { Title } from '@angular/platform-browser';
-import { environment } from '@environment';
 import { GamesService } from '../games.service';
 import { switchMap, map } from 'rxjs/operators';
+import { PlayersService } from '@app/players/players.service';
+import { PaginatedList } from '@app/core/models/paginated-list';
 
 @Component({
   selector: 'app-game-list',
@@ -19,21 +19,30 @@ export class GameListComponent implements OnInit {
   gameCount = new ReplaySubject<number>(1);
   games = new ReplaySubject<Game[]>(1);
 
+  @Input()
+  playerId?: string;
+
   constructor(
-    private title: Title,
     private gamesService: GamesService,
-  ) {
+    private playersService: PlayersService,
+  ) { }
+
+  ngOnInit() {
     this.page.pipe(
       map(page => page - 1),
-      switchMap(page => this.gamesService.fetchGames(page * this.gamesPerPage, this.gamesPerPage)),
+      switchMap(page => this.fetchGames(page * this.gamesPerPage, this.gamesPerPage)),
     ).subscribe(response => {
       this.gameCount.next(response.itemCount);
       this.games.next(response.results);
     });
   }
 
-  ngOnInit() {
-    this.title.setTitle(`games • ${environment.titleSuffix}`);
+  private fetchGames(offset: number, limit: number): Observable<PaginatedList<Game>> {
+    if (!!this.playerId) {
+      return this.playersService.fetchPlayerGames(this.playerId, offset, limit);
+    } else {
+      return this.gamesService.fetchGames(offset, limit);
+    }
   }
 
   getPage(page: number) {

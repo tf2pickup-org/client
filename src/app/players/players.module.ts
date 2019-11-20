@@ -18,7 +18,7 @@ import { InlineSVGModule } from 'ng-inline-svg';
 import { PlayerBansComponent } from './player-bans/player-bans.component';
 import { PlayerBanItemComponent } from './player-ban-item/player-ban-item.component';
 import { AddPlayerBanComponent } from './add-player-ban/add-player-ban.component';
-import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { GamesModule } from '@app/games/games.module';
 
 @NgModule({
   declarations: [
@@ -42,7 +42,8 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
     EffectsModule.forFeature([PlayerEffects]),
     TooltipModule,
     InlineSVGModule,
-    PaginationModule,
+
+    GamesModule,
 
     PlayersRoutingModule,
   ],
