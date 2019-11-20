@@ -14,7 +14,7 @@ export class TitleControllerComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private titleService: Title,
+    private title: Title,
   ) { }
 
   ngOnInit() {
@@ -22,7 +22,7 @@ export class TitleControllerComponent implements OnInit {
       filter(event => event instanceof RoutesRecognized),
       map((event: RoutesRecognized) => event.state.root.firstChild.data.title),
       filter(title => !!title),
-    ).subscribe(title => this.titleService.setTitle(`${title} • ${environment.titleSuffix}`));
+    ).subscribe(title => this.title.setTitle(`${title} • ${environment.titleSuffix}`));
   }
 
 }
