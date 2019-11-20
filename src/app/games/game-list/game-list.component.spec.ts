@@ -14,7 +14,7 @@ class PlayersServiceStub {
   fetchPlayerGames() { return NEVER; }
 }
 
-fdescribe('GameListComponent', () => {
+describe('GameListComponent', () => {
   let component: GameListComponent;
   let fixture: ComponentFixture<GameListComponent>;
 
