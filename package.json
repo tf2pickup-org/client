@@ -12,17 +12,17 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/common": "^8.2.11",
-    "@angular/compiler": "^8.2.11",
-    "@angular/core": "^8.2.11",
-    "@angular/forms": "^8.2.11",
-    "@angular/platform-browser": "^8.2.11",
-    "@angular/platform-browser-dynamic": "^8.2.11",
-    "@angular/router": "^8.2.11",
-    "@ngrx/effects": "^8.4.0",
-    "@ngrx/entity": "^8.4.0",
-    "@ngrx/store": "^8.4.0",
-    "@ngrx/store-devtools": "^8.4.0",
+    "@angular/common": "^8.2.14",
+    "@angular/compiler": "^8.2.14",
+    "@angular/core": "^8.2.14",
+    "@angular/forms": "^8.2.14",
+    "@angular/platform-browser": "^8.2.14",
+    "@angular/platform-browser-dynamic": "^8.2.14",
+    "@angular/router": "^8.2.14",
+    "@ngrx/effects": "^8.5.1",
+    "@ngrx/entity": "^8.5.1",
+    "@ngrx/store": "^8.5.1",
+    "@ngrx/store-devtools": "^8.5.1",
     "bootstrap": "^4.3.1",
     "jwt-decode": "^2.2.0",
     "ng-inline-svg": "^9.0.1",
@@ -38,10 +38,10 @@
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.803.12",
-    "@angular/cli": "^8.3.12",
-    "@angular/compiler-cli": "^8.2.11",
-    "@angular/language-service": "^8.2.11",
+    "@angular-devkit/build-angular": "^0.803.19",
+    "@angular/cli": "^8.3.19",
+    "@angular/compiler-cli": "^8.2.14",
+    "@angular/language-service": "^8.2.14",
     "@types/jasmine": "^3.4.1",
     "@types/jasminewd2": "^2.0.7",
     "@types/jwt-decode": "^2.2.1",
@@ -60,6 +60,6 @@
     "protractor": "~5.4.0",
     "ts-node": "~8.5.0",
     "tslint": "~5.20.0",
-    "typescript": "~3.5.3"
+    "typescript": "~3.7.2"
   }
 }
