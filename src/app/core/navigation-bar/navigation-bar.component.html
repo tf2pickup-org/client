@@ -21,6 +21,10 @@
         <a class="nav-link" routerLink="/rules" routerLinkActive="active">rules</a>
       </li>
 
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/hall-of-fame" routerLinkActive="active">hall of fame</a>
+      </li>
+
       <ng-container *ngFor="let link of links">
         <a [href]="link.target" target="_blank"
           [ngClass]="link.icon ? 'navbar-brand' : 'nav-link'">
