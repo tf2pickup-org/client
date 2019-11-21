@@ -1,3 +1,9 @@
+# [1.4.0](https://github.com/tf2pickup-pl/client/compare/1.3.0...1.4.0) (2019-11-21)
+
+### Features
+* Hall of Fame ([65b584d](https://github.com/tf2pickup-pl/client/commit/65b584dd12cd5b0c6e321245b820f09c16e11e56))
+* New game list pagination ([1d63b5a](https://github.com/tf2pickup-pl/client/commit/1d63b5aac7c29834ef8dd49bc5b9d8b75789ba7f))
+
 # [1.3.0](https://github.com/tf2pickup-pl/client/compare/1.2.0...1.3.0) (2019-10-23)
 
 ### Features
