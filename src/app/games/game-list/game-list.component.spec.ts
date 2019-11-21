@@ -3,10 +3,15 @@ import { GameListComponent } from './game-list.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { GamesService } from '../games.service';
 import { NEVER, of } from 'rxjs';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { PlayersService } from '@app/players/players.service';
 
 class GamesServiceStub {
   fetchGames() { return NEVER; }
+}
+
+class PlayersServiceStub {
+  fetchPlayerGames() { return NEVER; }
 }
 
 describe('GameListComponent', () => {
@@ -16,11 +21,14 @@ describe('GameListComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ GameListComponent ],
-      imports: [ RouterTestingModule ],
+      imports: [
+        RouterTestingModule,
+        NgxPaginationModule,
+      ],
       providers: [
         { provide: GamesService, useClass: GamesServiceStub },
+        { provide: PlayersService, useClass: PlayersServiceStub },
       ],
-      schemas: [ NO_ERRORS_SCHEMA ],
     })
     .compileComponents();
   }));
@@ -35,14 +43,29 @@ describe('GameListComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('#pageChanged()', () => {
-    it('should load a given page', () => {
-      const spy = spyOn(TestBed.get(GamesService), 'fetchGames').and.returnValue(of({ itemCount: 50, results: [] }));
-      component.pageChanged({ page: 1 });
-      expect(spy).toHaveBeenCalledWith(0, 10);
+  describe('#getPage()', () => {
+    describe('without playerId', () => {
+      it('should load a given page', () => {
+        const spy = spyOn(TestBed.get(GamesService), 'fetchGames').and.returnValue(of({ itemCount: 50, results: [] }));
+        component.getPage(1);
+        expect(spy).toHaveBeenCalledWith(0, 10);
 
-      component.pageChanged({ page: 5 });
-      expect(spy).toHaveBeenCalledWith(40, 10);
+        component.getPage(5);
+        expect(spy).toHaveBeenCalledWith(40, 10);
+      });
+    });
+
+    describe('with playerId', () => {
+      beforeEach(() => component.playerId = 'FAKE_PLAYER_ID');
+
+      it('should load a given page', () => {
+        const spy = spyOn(TestBed.get(PlayersService), 'fetchPlayerGames').and.returnValue(of({ itemCount: 50, results: [] }));
+        component.getPage(1);
+        expect(spy).toHaveBeenCalledWith('FAKE_PLAYER_ID', 0, 10);
+
+        component.getPage(3);
+        expect(spy).toHaveBeenCalledWith('FAKE_PLAYER_ID', 20, 10);
+      });
     });
   });
 

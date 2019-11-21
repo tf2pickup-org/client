@@ -11,7 +11,7 @@ import { GameDetailsComponent } from './game-details/game-details.component';
 import { SharedModule } from '@app/shared/shared.module';
 import { InlineSVGModule } from 'ng-inline-svg';
 import { MumbleJoinButtonComponent } from './mumble-join-button/mumble-join-button.component';
-import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -25,10 +25,13 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
     StoreModule.forFeature('games', reducer),
     EffectsModule.forFeature([GamesEffects]),
     InlineSVGModule,
-    PaginationModule,
+    NgxPaginationModule,
 
     SharedModule,
     GamesRoutingModule,
+  ],
+  exports: [
+    GameListComponent,
   ],
 })
 export class GamesModule { }

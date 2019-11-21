@@ -5,11 +5,13 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from '@app/shared/shared.module';
 import { FooterComponent } from './footer/footer.component';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { TitleControllerComponent } from './title-controller/title-controller.component';
 
 @NgModule({
   declarations: [
     NavigationBarComponent,
     FooterComponent,
+    TitleControllerComponent,
   ],
   imports: [
     CommonModule,
@@ -21,6 +23,7 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
   exports: [
     NavigationBarComponent,
     FooterComponent,
+    TitleControllerComponent,
   ],
 })
 export class CoreModule { }
