@@ -8,7 +8,7 @@
     'by-me': takenByMe,
     'and-ready': slot.playerReady
   }"
-  (click)="takeSlot()">
+  (click)="takeSlot.emit(slot)">
 
   <div class="avatar" *ngIf="slot.playerId">
     <app-player-avatar [playerId]="slot.playerId"></app-player-avatar>
@@ -26,8 +26,18 @@
 
   <button *ngIf="!locked && takenByMe && !slot.playerReady"
     type="button"
-    class="btn btn-light btn-sm leave-btn"
-    (click)="freeSlot($event)">
+    class="btn btn-light btn-sm slot-action-btn"
+    (click)="emitFreeSlot($event)"
+    tooltip="Free this slot">
     <span class="oi oi-minus"></span>
+  </button>
+
+  <button *ngIf="canHaveFriend && slot.playerId && !takenByMe"
+    type="button"
+    class="btn btn-sm slot-action-btn"
+    [ngClass]="isFriend ? 'btn-danger' : 'btn-light'"
+    [tooltip]="isFriend ? 'Marked as friend' : 'Mark as a friend'"
+    (click)="emitMarkFriend(slot.playerId, $event)">
+    <span class="oi oi-heart"></span>
   </button>
 </div>

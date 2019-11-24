@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { loadQueue, queueLoaded, joinQueue, leaveQueue, queueSlotUpdated, queueStateUpdated, joinQueueError,
     leaveQueueError, readyUp, readyUpError, queueSlotsRefreshed, queueMapUpdated, showReadyUpDialog,
-    hideReadyUpDialog, togglePreReady, preReadyTimeoutReset, stopPreReady } from './queue.actions';
+    hideReadyUpDialog, togglePreReady, preReadyTimeoutReset, stopPreReady, markFriend } from './queue.actions';
 import { mergeMap, map, catchError, filter, withLatestFrom, mapTo, tap } from 'rxjs/operators';
 import { QueueService } from './queue.service';
 import { QueueEventsService } from './queue-events.service';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app.state';
-import { of, timer } from 'rxjs';
+import { of } from 'rxjs';
 import { mySlot, votesForMapChange, isInQueue, isPreReadied, preReadyTimeout } from './queue.selectors';
 import { PreReadyCountdownService } from './pre-ready-countdown.service';
 import { ownGameAdded } from '@app/games/games.actions';
@@ -133,6 +133,15 @@ export class QueueEffects {
     this.store.select(preReadyTimeout).pipe(
       filter(value => value <= 1),
       mapTo(togglePreReady()),
+    )
+  );
+
+  markFriend = createEffect(() =>
+    this.actions.pipe(
+      ofType(markFriend),
+      mergeMap(({ friendId }) => this.queueService.markFriend(friendId).pipe(
+        map(slot => queueSlotUpdated({ slot })),
+      ))
     )
   );
 

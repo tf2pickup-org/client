@@ -1,22 +1,15 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { QueueSlotItemComponent } from './queue-slot-item.component';
 import { NO_ERRORS_SCHEMA, ChangeDetectionStrategy } from '@angular/core';
-import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { By } from '@angular/platform-browser';
-import { Store } from '@ngrx/store';
-import { joinQueue, leaveQueue } from '../queue.actions';
 
 describe('QueueSlotItemComponent', () => {
   let component: QueueSlotItemComponent;
   let fixture: ComponentFixture<QueueSlotItemComponent>;
-  let store: MockStore<any>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ QueueSlotItemComponent ],
-      providers: [
-        provideMockStore(),
-      ],
       schemas: [ NO_ERRORS_SCHEMA ],
     })
     // https://github.com/angular/angular/issues/12313
@@ -25,7 +18,6 @@ describe('QueueSlotItemComponent', () => {
   }));
 
   beforeEach(() => {
-    store = TestBed.get(Store);
     fixture = TestBed.createComponent(QueueSlotItemComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -64,38 +56,39 @@ describe('QueueSlotItemComponent', () => {
     expect(div.classList.contains('and-ready')).toBe(true);
   });
 
-  describe('#takeSlot()', () => {
+  describe('#takeSlot', () => {
+    let takeSlotBtn: HTMLElement;
+
     beforeEach(() => {
       component.slot = { id: 0, gameClass: 'soldier', playerReady: false, votesForMapChange: false };
       fixture.detectChanges();
+
+      takeSlotBtn = fixture.debugElement.query(By.css('div.queue-slot-item')).nativeElement;
     });
 
-    it('should dispatch joinQueue action', () => {
-      const spy = spyOn(store, 'dispatch');
-      component.takeSlot();
-      expect(spy).toHaveBeenCalledWith(joinQueue({ slotId: 0 }));
-    });
-
-    it('should do nothing if the queue is locked', () => {
-      component.locked = true;
-      const spy = spyOn(store, 'dispatch');
-      component.takeSlot();
-      expect(spy).not.toHaveBeenCalled();
-    });
-
-    it('should do nothing if the slot is already occupied', () => {
-      component.slot = { id: 0, gameClass: 'soldier', playerReady: false, playerId: 'FAKE_ID', votesForMapChange: false };
-      const spy = spyOn(store, 'dispatch');
-      component.takeSlot();
-      expect(spy).not.toHaveBeenCalled();
+    it('should be emitted when the slot is clicked', () => {
+      component.takeSlot.subscribe(slot => expect(slot).toEqual(component.slot));
+      takeSlotBtn.click();
     });
   });
 
-  describe('#freeSlot()', () => {
-    it('should dispatch leaveQueue action', () => {
-      const spy = spyOn(store, 'dispatch');
-      component.freeSlot({ stopPropagation: () => {} } as Event);
-      expect(spy).toHaveBeenCalledWith(leaveQueue());
+  describe('#freeSlot', () => {
+    let freeSlotBtn: HTMLButtonElement;
+
+    beforeEach(() => {
+      component.slot = { id: 0, gameClass: 'soldier', playerReady: false, votesForMapChange: false, playerId: 'FAKE_PLAYER_ID' };
+      component.takenByMe = true;
+      component.canHaveFriend = false;
+      fixture.detectChanges();
+
+      freeSlotBtn = fixture.debugElement.query(By.css('button.btn-light')).nativeElement as HTMLButtonElement;
+    });
+
+    it('should be emitted when the free slot button is clicked', () =>  {
+      let emitted = false;
+      component.freeSlot.subscribe(() => emitted = true);
+      freeSlotBtn.click();
+      expect(emitted).toBe(true);
     });
   });
 });
