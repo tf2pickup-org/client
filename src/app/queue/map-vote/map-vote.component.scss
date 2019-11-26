@@ -1,0 +1,12 @@
+.map-thumbnail-container {
+  width: 300px;
+  height: 169px;
+  border-radius: 1em;
+  background-clip: padding-box;
+
+  .vote-count-overlay {
+    width: 100%;
+    background-color: var(--light);
+    opacity: 0.6;
+  }
+}
