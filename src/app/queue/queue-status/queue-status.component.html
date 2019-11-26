@@ -1,19 +1,10 @@
 <div
   *ngIf="state | async as _state"
-  class="p-3 my-2 text-white rounded"
+  class="p-3 my-2 text-white rounded text-center"
   [ngClass]="{
     'bg-info' :_state === 'waiting',
     'bg-success': _state === 'ready',
     'bg-dark': _state === 'launching'
   }">
-  <div class="row text-center">
-    <div class="col-6">
-      Players: {{ playerCount | async }} / {{ requiredPlayerCount | async }}
-    </div>
-
-    <div *ngIf="map | async as _map"
-      class="col-6">
-      Next map: {{ _map }}
-    </div>
-  </div>
+  Players: {{ playerCount | async }} / {{ requiredPlayerCount | async }}
 </div>
