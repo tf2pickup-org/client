@@ -131,8 +131,14 @@ describe('QueueSlotItemComponent', () => {
       markFriendBtn = fixture.debugElement.query(By.css('button.slot-action-btn')).nativeElement as HTMLButtonElement;
     });
 
-    it('should be emiited when the mark friend button is pressed', () => {
+    it('should emit friend player id', () => {
       component.markFriend.subscribe(value => expect(value).toBe('FAKE_PLAYER_ID'));
+      markFriendBtn.click();
+    });
+
+    it('should emit null', () => {
+      component.isFriend = true;
+      component.markFriend.subscribe(value => expect(value).toBe(null));
       markFriendBtn.click();
     });
   });

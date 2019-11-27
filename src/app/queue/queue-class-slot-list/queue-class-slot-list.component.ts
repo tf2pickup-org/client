@@ -23,7 +23,7 @@ export class QueueClassSlotListComponent implements OnInit, OnDestroy {
   locked: Observable<boolean> = this.store.select(queueLocked);
   isMedic: Observable<boolean> = this.store.pipe(
     select(mySlot),
-    map(slot => slot && slot.gameClass === 'medic'),
+    map(slot => !!slot && slot.gameClass === 'medic'),
   );
   friendId: Observable<string> = this.store.pipe(
     select(mySlot),
