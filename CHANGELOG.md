@@ -1,3 +1,8 @@
+# [1.5.0](https://github.com/tf2pickup-pl/client/compare/1.4.0...1.5.0) (2019-11-27)
+
+### Features
+* Mark player as a friend ([d765800](https://github.com/tf2pickup-pl/client/commit/d76580072501265fc1e4e4a46ff04d7629272849))
+
 # [1.4.0](https://github.com/tf2pickup-pl/client/compare/1.3.0...1.4.0) (2019-11-21)
 
 ### Features
