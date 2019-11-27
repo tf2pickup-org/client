@@ -51,9 +51,35 @@ describe('QueueSlotItemComponent', () => {
     fixture.detectChanges();
     expect(div.classList.contains('by-me')).toBe(true);
 
-    component.slot = { id: 0, gameClass: 'soldier', playerReady: true, playerId: 'FAKE_ID', votesForMapChange: false };
+    component.slot.playerReady = true;
     fixture.detectChanges();
     expect(div.classList.contains('and-ready')).toBe(true);
+
+    expect(fixture.debugElement.query(By.css('button.slot-action-btn'))).toBeFalsy();
+
+    component.slot.playerReady = false;
+    component.locked = false;
+    fixture.detectChanges();
+    expect(fixture.debugElement.query(By.css('button.slot-action-btn')).nativeElement).toBeTruthy();
+
+    component.slot.playerReady = true;
+    fixture.detectChanges();
+    expect(fixture.debugElement.query(By.css('button.slot-action-btn'))).toBeFalsy();
+
+    // mark friend button
+    component.takenByMe = false;
+    component.canHaveFriend = true;
+    component.isFriend = false;
+    fixture.detectChanges();
+    const markFriendBtn = fixture.debugElement.query(By.css('button.slot-action-btn')).nativeElement as HTMLButtonElement;
+    expect(markFriendBtn).toBeTruthy();
+    expect(markFriendBtn.classList.contains('btn-light')).toBe(true);
+    expect(markFriendBtn.classList.contains('btn-danger')).toBe(false);
+
+    component.isFriend = true;
+    fixture.detectChanges();
+    expect(markFriendBtn.classList.contains('btn-light')).toBe(false);
+    expect(markFriendBtn.classList.contains('btn-danger')).toBe(true);
   });
 
   describe('#takeSlot', () => {
@@ -89,6 +115,25 @@ describe('QueueSlotItemComponent', () => {
       component.freeSlot.subscribe(() => emitted = true);
       freeSlotBtn.click();
       expect(emitted).toBe(true);
+    });
+  });
+
+  describe('#markFriend', () => {
+    let markFriendBtn: HTMLButtonElement;
+
+    beforeEach(() => {
+      component.slot = { id: 0, gameClass: 'soldier', playerReady: false, votesForMapChange: false, playerId: 'FAKE_PLAYER_ID' };
+      component.takenByMe = false;
+      component.canHaveFriend = true;
+      component.isFriend = false;
+      fixture.detectChanges();
+
+      markFriendBtn = fixture.debugElement.query(By.css('button.slot-action-btn')).nativeElement as HTMLButtonElement;
+    });
+
+    it('should be emiited when the mark friend button is pressed', () => {
+      component.markFriend.subscribe(value => expect(value).toBe('FAKE_PLAYER_ID'));
+      markFriendBtn.click();
     });
   });
 });

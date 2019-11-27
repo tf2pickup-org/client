@@ -5,7 +5,7 @@ import { ReplaySubject, Subject, of } from 'rxjs';
 import { Action } from '@ngrx/store';
 import { QueueEventsService } from './queue-events.service';
 import { QueueService } from './queue.service';
-import { queueLoaded, loadQueue, queueSlotUpdated, joinQueue, joinQueueError } from './queue.actions';
+import { queueLoaded, loadQueue, queueSlotUpdated, joinQueue, joinQueueError, markFriend } from './queue.actions';
 import { Queue } from './models/queue';
 import { provideMockStore } from '@ngrx/store/testing';
 import { QueueSlot } from './models/queue-slot';
@@ -13,6 +13,7 @@ import { QueueSlot } from './models/queue-slot';
 class QueueServiceStub {
   fetchQueue() { }
   joinQueue(slotId: string) { }
+  markFriend(friendId: string) { }
 }
 
 class QueueEventsServiceStub {
@@ -81,7 +82,7 @@ describe('QueueEffects', () => {
 
   describe('#joinQueue', () => {
     it('should attempt to join the queue', () => {
-      const slot: QueueSlot = { id: 1, gameClass: 'soldier', playerId: 'FAKE_ID_2', playerReady: false, votesForMapChange: false, };
+      const slot: QueueSlot = { id: 1, gameClass: 'soldier', playerId: 'FAKE_ID_2', playerReady: false, votesForMapChange: false };
       const spy = spyOn(queueService, 'joinQueue').and.returnValue(of(slot));
       effects.joinQueue.subscribe(action => expect(action).toEqual(queueSlotUpdated({ slot })));
       actions.next(joinQueue({ slotId: 1 }));
@@ -96,5 +97,15 @@ describe('QueueEffects', () => {
       });
       actions.next(joinQueue({ slotId: 1 }));
     }));
+  });
+
+  describe('#markFriend', () => {
+    it('should call the service', () => {
+      const slot: QueueSlot = { id: 1, gameClass: 'soldier', playerId: 'FAKE_ID_2', playerReady: false, votesForMapChange: false, friend: 'FAKE_FRIEND_ID' };
+      const spy = spyOn(queueService, 'markFriend').and.returnValue(of(slot));
+      effects.markFriend.subscribe(action => expect(action).toEqual(queueSlotUpdated({ slot })));
+      actions.next(markFriend({ friendId: 'FAKE_FRIEND_ID' }));
+      expect(spy).toHaveBeenCalledWith('FAKE_FRIEND_ID');
+    });
   });
 });
