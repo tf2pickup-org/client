@@ -4,4 +4,5 @@ export interface QueueSlot {
   playerId?: string;
   playerReady: boolean;
   votesForMapChange: boolean;
+  friend?: string;
 }

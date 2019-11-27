@@ -5,11 +5,12 @@ import { API_URL } from '@app/api-url';
 import { IoClientService } from '@app/core/io-client.service';
 
 class IoClientServiceStub {
-
+  call(methodName: string, ...args: any[]) { }
 }
 
 describe('QueueService', () => {
   let httpController: HttpTestingController;
+  let ioClientService: IoClientServiceStub;
 
   beforeEach(() => TestBed.configureTestingModule({
     imports: [ HttpClientTestingModule ],
@@ -21,6 +22,7 @@ describe('QueueService', () => {
 
   beforeEach(() => {
     httpController = TestBed.get(HttpTestingController);
+    ioClientService = TestBed.get(IoClientService);
   });
 
   it('should be created', () => {
@@ -33,6 +35,46 @@ describe('QueueService', () => {
       service.fetchQueue().subscribe();
       httpController.expectOne('FAKE_URL/queue');
       expect().nothing();
+    }));
+  });
+
+  describe('#joinQueue()', () => {
+    it('should call the endpoint', inject([QueueService], (service: QueueService) => {
+      const spy = spyOn(ioClientService, 'call');
+      service.joinQueue(11);
+      expect(spy).toHaveBeenCalledWith('join queue', 11);
+    }));
+  });
+
+  describe('#leaveQueue()', () => {
+    it('should call the endpoint', inject([QueueService], (service: QueueService) => {
+      const spy = spyOn(ioClientService, 'call');
+      service.leaveQueue();
+      expect(spy).toHaveBeenCalledWith('leave queue');
+    }));
+  });
+
+  describe('#readyUp()', () => {
+    it('should call the endpoint', inject([QueueService], (service: QueueService) => {
+      const spy = spyOn(ioClientService, 'call');
+      service.readyUp();
+      expect(spy).toHaveBeenCalledWith('player ready');
+    }));
+  });
+
+  describe('#voteForMapChange()', () => {
+    it('should call the endpoint', inject([QueueService], (service: QueueService) => {
+      const spy = spyOn(ioClientService, 'call');
+      service.voteForMapChange(true);
+      expect(spy).toHaveBeenCalledWith('vote for map change', true);
+    }));
+  });
+
+  describe('#markFriend()', () => {
+    it('should call the endpoint', inject([QueueService], (service: QueueService) => {
+      const spy = spyOn(ioClientService, 'call');
+      service.markFriend('FAKE_ID');
+      expect(spy).toHaveBeenCalledWith('mark friend', 'FAKE_ID');
     }));
   });
 });

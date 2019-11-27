@@ -1,8 +1,5 @@
-import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { QueueSlot } from '../models/queue-slot';
-import { Store } from '@ngrx/store';
-import { AppState } from '@app/app.state';
-import { joinQueue, leaveQueue } from '../queue.actions';
 
 @Component({
   selector: 'app-queue-slot-item',
@@ -21,18 +18,28 @@ export class QueueSlotItemComponent {
   @Input()
   locked = false;
 
-  constructor(
-    private store: Store<AppState>,
-  ) { }
+  @Input()
+  canHaveFriend = false;
 
-  takeSlot() {
-    if (!this.locked && !this.slot.playerId) {
-      this.store.dispatch(joinQueue({ slotId: this.slot.id }));
-    }
+  @Input()
+  isFriend = false;
+
+  @Output()
+  takeSlot = new EventEmitter<QueueSlot>();
+
+  @Output()
+  freeSlot = new EventEmitter<void>();
+
+  @Output()
+  markFriend = new EventEmitter<string>();
+
+  emitFreeSlot(event: Event) {
+    this.freeSlot.emit();
+    event.stopPropagation();
   }
 
-  freeSlot(event: Event) {
-    this.store.dispatch(leaveQueue());
+  emitMarkFriend(friendId: string, event: Event) {
+    this.markFriend.emit(this.isFriend ? null : friendId);
     event.stopPropagation();
   }
 

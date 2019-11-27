@@ -62,3 +62,8 @@ export const togglePreReady = createAction('[Queue] Toggle pre-ready up');
 export const stopPreReady = createAction('[Queue] Stop pre-ready');
 export const preReadyTimeoutReset = createAction('[Queue] Pre-ready timer reset');
 export const preReadyTimeoutCountDown = createAction('[Queue] Pre-ready timeout count down');
+
+export const markFriend = createAction(
+  '[Queue] Mark friend',
+  props<{ friendId: string }>(),
+);
