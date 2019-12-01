@@ -1,4 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { AppState } from '@app/app.state';
+import { mapVoteResults } from '../queue.selectors';
 
 @Component({
   selector: 'app-map-vote',
@@ -8,7 +11,11 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 })
 export class MapVoteComponent implements OnInit {
 
-  constructor() { }
+  results = this.store.select(mapVoteResults);
+
+  constructor(
+    private store: Store<AppState>,
+  ) { }
 
   ngOnInit() {
   }

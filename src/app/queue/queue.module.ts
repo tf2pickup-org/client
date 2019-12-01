@@ -19,7 +19,6 @@ import { FormsModule } from '@angular/forms';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { QueueAlertsComponent } from './queue-alerts/queue-alerts.component';
 import { QueueAddonsComponent } from './queue-addons/queue-addons.component';
-import { VoteForMapChangeButtonComponent } from './vote-for-map-change-button/vote-for-map-change-button.component';
 import { PreReadyUpButtonComponent } from './pre-ready-up-button/pre-ready-up-button.component';
 import { SecondsPipe } from './seconds.pipe';
 import { MapVoteComponent } from './map-vote/map-vote.component';
@@ -35,7 +34,6 @@ import { MapVoteComponent } from './map-vote/map-vote.component';
     QueueReadyUpDialogControllerComponent,
     QueueAlertsComponent,
     QueueAddonsComponent,
-    VoteForMapChangeButtonComponent,
     PreReadyUpButtonComponent,
     SecondsPipe,
     MapVoteComponent,

@@ -2,6 +2,7 @@ import { createAction, props } from '@ngrx/store';
 import { Queue } from './models/queue';
 import { QueueSlot } from './models/queue-slot';
 import { QueueState } from './models/queue-state';
+import { MapVoteResult } from './models/map-vote-result';
 
 export const loadQueue = createAction('[Init] Load queue');
 
@@ -49,9 +50,9 @@ export const readyUpError = createAction(
   props<{ error: string }>(),
 );
 
-export const queueMapUpdated = createAction(
-  '[WS] Queue map updated',
-  props<{ map: string }>(),
+export const mapVoteResultsUpdated = createAction(
+  '[WS] Map vote results update',
+  props<{ results: MapVoteResult[] }>(),
 );
 
 export const showReadyUpDialog = createAction('[Queue] Show ready up dialog');
