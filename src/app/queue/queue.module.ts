@@ -22,6 +22,7 @@ import { QueueAddonsComponent } from './queue-addons/queue-addons.component';
 import { PreReadyUpButtonComponent } from './pre-ready-up-button/pre-ready-up-button.component';
 import { SecondsPipe } from './seconds.pipe';
 import { MapVoteComponent } from './map-vote/map-vote.component';
+import { MapVoteButtonComponent } from './map-vote-button/map-vote-button.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { MapVoteComponent } from './map-vote/map-vote.component';
     PreReadyUpButtonComponent,
     SecondsPipe,
     MapVoteComponent,
+    MapVoteButtonComponent,
   ],
   imports: [
     CommonModule,

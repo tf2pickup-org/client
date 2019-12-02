@@ -34,6 +34,10 @@ export const mySlot = createSelector(
 
 export const isInQueue = createSelector(mySlot, theSlot => !!theSlot);
 export const mapVoteResults = createSelector(queueFeature, feature => feature.mapVoteResults);
+export const mapVoteTotalCount = createSelector(
+  mapVoteResults,
+  results => results.reduce((a, b) => a + b.voteCount, 0)
+);
 
 export const mapVoteOptions = createSelector(
   mapVoteResults,

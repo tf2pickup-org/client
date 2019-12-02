@@ -55,6 +55,11 @@ export const mapVoteResultsUpdated = createAction(
   props<{ results: MapVoteResult[] }>(),
 );
 
+export const voteForMap = createAction(
+  '[Queue] Vote for map',
+  props<{ map: string }>(),
+);
+
 export const showReadyUpDialog = createAction('[Queue] Show ready up dialog');
 export const hideReadyUpDialog = createAction('[Queue] Hide ready up dialog');
 

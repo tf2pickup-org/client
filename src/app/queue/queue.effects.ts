@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { loadQueue, queueLoaded, joinQueue, leaveQueue, queueSlotUpdated, queueStateUpdated, joinQueueError,
     leaveQueueError, readyUp, readyUpError, queueSlotsRefreshed, showReadyUpDialog,
-    hideReadyUpDialog, togglePreReady, preReadyTimeoutReset, stopPreReady } from './queue.actions';
+    hideReadyUpDialog, togglePreReady, preReadyTimeoutReset, stopPreReady, voteForMap, mapVoteResultsUpdated } from './queue.actions';
 import { mergeMap, map, catchError, filter, withLatestFrom, mapTo, tap } from 'rxjs/operators';
 import { QueueService } from './queue.service';
 import { QueueEventsService } from './queue-events.service';
@@ -135,6 +135,13 @@ export class QueueEffects {
     )
   );
 
+  voteForMap = createEffect(() =>
+    this.actions.pipe(
+      ofType(voteForMap),
+      mergeMap(({ map }) => this.queueService.voteForMap(map)),
+    ), { dispatch: false }
+  );
+
   constructor(
     private actions: Actions,
     private queueService: QueueService,
@@ -145,6 +152,7 @@ export class QueueEffects {
     this.queueEventsService.slotUpdate.subscribe(slot => this.store.dispatch(queueSlotUpdated({ slot })));
     this.queueEventsService.stateUpdate.subscribe(queueState => this.store.dispatch(queueStateUpdated({ queueState })));
     this.queueEventsService.slotsReset.subscribe(slots => this.store.dispatch(queueSlotsRefreshed({ slots })));
+    this.queueEventsService.mapVoteResultsUpdate.subscribe(results => this.store.dispatch(mapVoteResultsUpdated({ results })));
   }
 
 }

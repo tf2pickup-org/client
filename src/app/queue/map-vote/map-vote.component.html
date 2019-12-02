@@ -1,15 +1,13 @@
 <div class="bg-light p-3 rounded d-flex flex-column align-items-center">
   <span class="text-secondary font-italic mb-2">vote for the next map</span>
   <div class="row">
-    <div *ngFor="let result of results | async"
+    <div *ngFor="let result of results | async; index as i"
       class="col d-flex flex-column align-items-center">
-      <div class="map-thumbnail-container" style="background-image: url('/assets/map-thumbnails/process.png');">
-        <div class="vote-count-overlay"
-          [style.height.%]="100 - (result.voteCount / 12 * 100)"></div>
-      </div>
-      <button type="button" class="mt-2 btn btn-sm btn-outline-dark">
-        {{ result.map }}
-      </button>
-    </div>
+      <span class="mb-1">{{ result.map }}</span>
+      <app-map-vote-button
+        [map]="result.map"
+        [active]="i === 2"
+        (voteToggle)="voteForMap(result.map)"></app-map-vote-button>
+      <span class="mt-1 font-weight-bold">{{ result.voteCount / totalVoteCount | percent }}</span>
   </div>
 </div>

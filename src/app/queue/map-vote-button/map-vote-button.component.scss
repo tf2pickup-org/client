@@ -1,0 +1,16 @@
+.map-thumbnail-btn {
+  display: block;
+  padding: 0px;
+  width: 300px;
+  height: 160px;
+  border-radius: 0.25rem;
+  border: none;
+
+  &.active {
+    box-shadow: 0 0 3px 3px var(--green);
+  }
+
+  &:hover {
+    box-shadow: 0 0 3px 3px var(--yellow);
+  }
+}

@@ -33,8 +33,8 @@ export class QueueService {
     return this.ws.call<QueueSlot>('player ready');
   }
 
-  voteForMapChange(value: boolean): Observable<QueueSlot> {
-    return this.ws.call<QueueSlot>('vote for map change', value);
+  voteForMap(map: string): Observable<void> {
+    return this.ws.call<void>('vote for map', map);
   }
 
   markFriend(friendId: string): Observable<QueueSlot> {

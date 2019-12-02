@@ -1,7 +1,10 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Component, ChangeDetectionStrategy, OnInit, OnDestroy } from '@angular/core';
+import { Store, select } from '@ngrx/store';
 import { AppState } from '@app/app.state';
-import { mapVoteResults } from '../queue.selectors';
+import { mapVoteResults, mapVoteTotalCount } from '../queue.selectors';
+import { voteForMap } from '../queue.actions';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-map-vote',
@@ -9,15 +12,30 @@ import { mapVoteResults } from '../queue.selectors';
   styleUrls: ['./map-vote.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MapVoteComponent implements OnInit {
+export class MapVoteComponent implements OnInit, OnDestroy {
 
   results = this.store.select(mapVoteResults);
+  totalVoteCount = 12;
+  private destroyed = new Subject<void>();
 
   constructor(
     private store: Store<AppState>,
   ) { }
 
   ngOnInit() {
+    this.store.pipe(
+      select(mapVoteTotalCount),
+      takeUntil(this.destroyed),
+    ).subscribe(v => this.totalVoteCount = v);
+  }
+
+  ngOnDestroy() {
+    this.destroyed.next();
+    this.destroyed.unsubscribe();
+  }
+
+  voteForMap(map: string) {
+    this.store.dispatch(voteForMap({ map }));
   }
 
 }
