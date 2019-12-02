@@ -28,7 +28,7 @@
     "ng-inline-svg": "^9.1.0",
     "ngx-bootstrap": "^5.2.0",
     "ngx-markdown": "^8.2.1",
-    "ngx-pagination": "^4.1.0",
+    "ngx-pagination": "^5.0.0",
     "ngx-webstorage-service": "^4.1.0",
     "open-iconic": "^1.1.1",
     "rxjs": "^6.5.3",
