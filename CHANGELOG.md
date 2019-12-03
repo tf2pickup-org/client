@@ -1,3 +1,11 @@
+# [1.5.0](https://github.com/tf2pickup-pl/client/compare/1.5.0...1.5.1) (2019-12-03)
+
+### Fixes
+* Handle usernames with spaces in mumble links ([90d7c44](https://github.com/tf2pickup-pl/client/commit/90d7c443c68dea30bf1084efaa6e0e5f6939c24c))
+
+### Packages
+* Update ngx-pagination to version 5.0.0 ([dcd9bf1](https://github.com/tf2pickup-pl/client/commit/dcd9bf1d361265c5837591b902fbbe0606eea820))
+
 # [1.5.0](https://github.com/tf2pickup-pl/client/compare/1.4.0...1.5.0) (2019-11-27)
 
 ### Features
