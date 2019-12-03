@@ -21,6 +21,7 @@ import { AddPlayerBanComponent } from './add-player-ban/add-player-ban.component
 import { GamesModule } from '@app/games/games.module';
 import { SteamProfileLinkPipe } from './steam-profile-link.pipe';
 import { Etf2lProfileLinkPipe } from './etf2l-profile-link.pipe';
+import { LogsTfProfileLinkPipe } from './logs-tf-profile-link.pipe';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { Etf2lProfileLinkPipe } from './etf2l-profile-link.pipe';
     AddPlayerBanComponent,
     SteamProfileLinkPipe,
     Etf2lProfileLinkPipe,
+    LogsTfProfileLinkPipe,
   ],
   imports: [
     CommonModule,

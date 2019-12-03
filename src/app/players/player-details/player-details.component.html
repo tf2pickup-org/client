@@ -13,7 +13,7 @@
       </ng-container>
 
       &bull;
-      <a [href]="'http://logs.tf/profile/' + _player.steamId" target="_blank">logs</a>
+      <a [href]="_player.steamId | logsTfProfileLink" target="_blank">logs</a>
 
       <ng-container *ngIf="isAdmin | async">
         &bull;
