@@ -8,6 +8,6 @@
         [map]="result.map"
         [active]="result.map === (mapVote | async)"
         (voteToggle)="voteForMap(result.map)"></app-map-vote-button>
-      <span class="mt-1 font-weight-bold">{{ result.voteCount / totalVoteCount | percent }}</span>
+      <span class="mt-1 font-weight-bold">{{ result.votePercent | percent }}</span>
   </div>
 </div>

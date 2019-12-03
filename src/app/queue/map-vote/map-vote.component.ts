@@ -1,10 +1,10 @@
-import { Component, ChangeDetectionStrategy, OnInit, OnDestroy } from '@angular/core';
-import { Store, select } from '@ngrx/store';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { AppState } from '@app/app.state';
 import { mapVoteResults, mapVoteTotalCount, mapVote } from '../queue.selectors';
 import { voteForMap } from '../queue.actions';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { combineLatest } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-map-vote',
@@ -12,31 +12,19 @@ import { takeUntil } from 'rxjs/operators';
   styleUrls: ['./map-vote.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MapVoteComponent implements OnInit, OnDestroy {
+export class MapVoteComponent {
 
-  results = this.store.select(mapVoteResults);
-  totalVoteCount = 12;
+  results = combineLatest([ this.store.select(mapVoteResults), this.store.select(mapVoteTotalCount) ]).pipe(
+    map(([ results, total ]) => results.map(r => ({ ...r, votePercent: total > 0 ? r.voteCount / total : 0 }))),
+  );
   mapVote = this.store.select(mapVote);
-  private destroyed = new Subject<void>();
 
   constructor(
     private store: Store<AppState>,
   ) { }
 
-  ngOnInit() {
-    this.store.pipe(
-      select(mapVoteTotalCount),
-      takeUntil(this.destroyed),
-    ).subscribe(v => this.totalVoteCount = v);
-  }
-
-  ngOnDestroy() {
-    this.destroyed.next();
-    this.destroyed.unsubscribe();
-  }
-
-  voteForMap(map: string) {
-    this.store.dispatch(voteForMap({ map }));
+  voteForMap(aMap: string) {
+    this.store.dispatch(voteForMap({ map: aMap }));
   }
 
 }
