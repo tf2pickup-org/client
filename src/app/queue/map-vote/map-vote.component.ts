@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy, OnInit, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { AppState } from '@app/app.state';
-import { mapVoteResults, mapVoteTotalCount } from '../queue.selectors';
+import { mapVoteResults, mapVoteTotalCount, mapVote } from '../queue.selectors';
 import { voteForMap } from '../queue.actions';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -16,6 +16,7 @@ export class MapVoteComponent implements OnInit, OnDestroy {
 
   results = this.store.select(mapVoteResults);
   totalVoteCount = 12;
+  mapVote = this.store.select(mapVote);
   private destroyed = new Subject<void>();
 
   constructor(

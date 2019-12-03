@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { loadQueue, queueLoaded, joinQueue, leaveQueue, queueSlotUpdated, queueStateUpdated, joinQueueError,
     leaveQueueError, readyUp, readyUpError, queueSlotsRefreshed, showReadyUpDialog,
-    hideReadyUpDialog, togglePreReady, preReadyTimeoutReset, stopPreReady, voteForMap, mapVoteResultsUpdated } from './queue.actions';
+    hideReadyUpDialog, togglePreReady, preReadyTimeoutReset, stopPreReady, voteForMap, mapVoteResultsUpdated,
+    mapVoted } from './queue.actions';
 import { mergeMap, map, catchError, filter, withLatestFrom, mapTo, tap } from 'rxjs/operators';
 import { QueueService } from './queue.service';
 import { QueueEventsService } from './queue-events.service';
@@ -138,8 +139,10 @@ export class QueueEffects {
   voteForMap = createEffect(() =>
     this.actions.pipe(
       ofType(voteForMap),
-      mergeMap(({ map }) => this.queueService.voteForMap(map)),
-    ), { dispatch: false }
+      mergeMap(({ map: aMap }) => this.queueService.voteForMap(aMap).pipe(
+        map(theMap => mapVoted({ map: theMap })),
+      )),
+    )
   );
 
   constructor(

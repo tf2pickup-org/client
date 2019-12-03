@@ -10,7 +10,7 @@
     box-shadow: 0 0 3px 3px var(--green);
   }
 
-  &:hover {
+  &:not(.active):hover {
     box-shadow: 0 0 3px 3px var(--yellow);
   }
 }

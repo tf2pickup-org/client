@@ -44,6 +44,8 @@ export const mapVoteOptions = createSelector(
   results => results.map(r => r.map)
 );
 
+export const mapVote = createSelector(queueFeature, feature => feature.mapVote);
+
 export const queueShowReadyUpDialog = createSelector(queueFeature, feature => feature.readyUpDialogShown);
 
 export const isPreReadied = createSelector(queueFeature, feature => feature.preReady);
