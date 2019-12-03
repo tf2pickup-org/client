@@ -5,7 +5,7 @@
     {{ _player.name }}
     <span *ngIf="_player.role" class="badge badge-warning">admin</span>
     <small class="text-muted ml-2">
-      <a [href]="'http://steamcommunity.com/profiles/' + _player.steamId" target="_blank">steam</a>
+      <a [href]="_player.steamId | steamProfileLink" target="_blank">steam</a>
 
       <ng-container *ngIf="_player.etf2lProfileId">
         &bull;

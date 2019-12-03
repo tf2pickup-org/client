@@ -19,6 +19,7 @@ import { PlayerBansComponent } from './player-bans/player-bans.component';
 import { PlayerBanItemComponent } from './player-ban-item/player-ban-item.component';
 import { AddPlayerBanComponent } from './add-player-ban/add-player-ban.component';
 import { GamesModule } from '@app/games/games.module';
+import { SteamProfileLinkPipe } from './steam-profile-link.pipe';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { GamesModule } from '@app/games/games.module';
     PlayerBansComponent,
     PlayerBanItemComponent,
     AddPlayerBanComponent,
+    SteamProfileLinkPipe,
   ],
   imports: [
     CommonModule,
