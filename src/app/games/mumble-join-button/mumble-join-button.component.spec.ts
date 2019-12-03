@@ -97,8 +97,22 @@ describe('MumbleJoinButtonComponent', () => {
           }
         },
       }});
+      component.gameId = 'FAKE_GAME_ID';
       fixture.detectChanges();
       expect(fixture.debugElement.query(By.css('a'))).toBeFalsy();
+    });
+
+    it('should replace username spaces with underscores', () => {
+      store.setState({ ...initialState, profile: {
+        profile: {
+          id: 'FAKE_PLAYER_ID',
+          name: 'name with  spaces',
+        }
+      }});
+      component.gameId = 'FAKE_GAME_ID';
+      fixture.detectChanges();
+      const el = fixture.debugElement.query(By.css('a')).nativeElement as HTMLAnchorElement;
+      expect(el.href).toBe('mumble://name_with_spaces@melkor.tf/tf2pickup/5/RED');
     });
   });
 });

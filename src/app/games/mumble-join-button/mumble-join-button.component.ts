@@ -33,7 +33,7 @@ export class MumbleJoinButtonComponent {
 
         const team = game.teams[mySlot.teamId];
         const url = urlParse(game.mumbleUrl);
-        url.set('username', theProfile.name);
+        url.set('username', theProfile.name.replace(/\s+/g, '_'));
         return `${url.toString()}/${team}`;
       }),
     );
