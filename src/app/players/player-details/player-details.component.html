@@ -9,7 +9,7 @@
 
       <ng-container *ngIf="_player.etf2lProfileId">
         &bull;
-        <a [href]="'http://etf2l.org/forum/user/' + _player.etf2lProfileId" target="_blank">etf2l</a>
+        <a [href]="_player.etf2lProfileId | etf2lProfileLink" target="_blank">etf2l</a>
       </ng-container>
 
       &bull;

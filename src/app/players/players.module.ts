@@ -20,6 +20,7 @@ import { PlayerBanItemComponent } from './player-ban-item/player-ban-item.compon
 import { AddPlayerBanComponent } from './add-player-ban/add-player-ban.component';
 import { GamesModule } from '@app/games/games.module';
 import { SteamProfileLinkPipe } from './steam-profile-link.pipe';
+import { Etf2lProfileLinkPipe } from './etf2l-profile-link.pipe';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { SteamProfileLinkPipe } from './steam-profile-link.pipe';
     PlayerBanItemComponent,
     AddPlayerBanComponent,
     SteamProfileLinkPipe,
+    Etf2lProfileLinkPipe,
   ],
   imports: [
     CommonModule,
