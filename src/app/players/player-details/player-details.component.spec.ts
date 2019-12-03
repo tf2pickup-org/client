@@ -9,6 +9,9 @@ import { Store } from '@ngrx/store';
 import { loadPlayer } from '../actions';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { By } from '@angular/platform-browser';
+import { Etf2lProfileLinkPipe } from '../etf2l-profile-link.pipe';
+import { LogsTfProfileLinkPipe } from '../logs-tf-profile-link.pipe';
+import { SteamProfileLinkPipe } from '../steam-profile-link.pipe';
 
 class PlayersServiceStub {
   fetchPlayerStats() { return of({}); }
@@ -35,7 +38,12 @@ describe('PlayerDetailsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PlayerDetailsComponent ],
+      declarations: [
+        Etf2lProfileLinkPipe,
+        LogsTfProfileLinkPipe,
+        SteamProfileLinkPipe,
+        PlayerDetailsComponent,
+      ],
       imports: [
         RouterTestingModule,
       ],
