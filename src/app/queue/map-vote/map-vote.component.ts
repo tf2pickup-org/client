@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { AppState } from '@app/app.state';
-import { mapVoteResults, mapVoteTotalCount, mapVote } from '../queue.selectors';
+import { mapVoteResults, mapVoteTotalCount, mapVote, isInQueue } from '../queue.selectors';
 import { voteForMap } from '../queue.actions';
 import { combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -18,6 +18,10 @@ export class MapVoteComponent {
     map(([ results, total ]) => results.map(r => ({ ...r, votePercent: total > 0 ? r.voteCount / total : 0 }))),
   );
   mapVote = this.store.select(mapVote);
+  disabled = this.store.pipe(
+    select(isInQueue),
+    map(value => !value),
+  );
 
   constructor(
     private store: Store<AppState>,

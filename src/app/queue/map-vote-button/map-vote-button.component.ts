@@ -15,6 +15,9 @@ export class MapVoteButtonComponent {
   @Input()
   active = false;
 
+  @Input()
+  disabled = true;
+
   @Output()
   voteToggle = new EventEmitter<boolean>();
 

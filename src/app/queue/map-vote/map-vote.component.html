@@ -7,6 +7,7 @@
       <app-map-vote-button
         [map]="result.map"
         [active]="result.map === (mapVote | async)"
+        [disabled]="disabled | async"
         (voteToggle)="voteForMap(result.map)"></app-map-vote-button>
       <span class="mt-1 font-weight-bold">{{ result.votePercent | percent }}</span>
   </div>

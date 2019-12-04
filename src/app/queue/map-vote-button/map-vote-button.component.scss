@@ -6,11 +6,13 @@
   border-radius: 0.25rem;
   border: none;
 
-  &.active {
-    box-shadow: 0 0 3px 3px var(--green);
-  }
+  &:not(:disabled) {
+    &.active {
+      box-shadow: 0 0 5px 5px var(--green);
+    }
 
-  &:not(.active):hover {
-    box-shadow: 0 0 3px 3px var(--yellow);
+    &:not(.active):hover {
+      box-shadow: 0 0 3px 3px var(--yellow);
+    }
   }
 }
