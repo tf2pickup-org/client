@@ -1,9 +1,10 @@
 import { createReducer, on, Action } from '@ngrx/store';
 import { queueLoaded, queueSlotsRefreshed, queueSlotUpdated, queueStateUpdated, readyUp, showReadyUpDialog,
-    hideReadyUpDialog, leaveQueue, togglePreReady, preReadyTimeoutReset,
-    preReadyTimeoutCountDown, stopPreReady, mapVoteResultsUpdated, mapVoted } from './queue.actions';
+    hideReadyUpDialog, leaveQueue, togglePreReady, preReadyTimeoutReset, preReadyTimeoutCountDown, stopPreReady,
+    mapVoteResultsUpdated, mapVoted, mapVoteReset } from './queue.actions';
 import { QueueSlot } from './models/queue-slot';
 import { Queue } from './models/queue';
+import { profileLoaded } from '@app/profile/profile.actions';
 
 export interface State extends Queue {
   readyUpDialogShown: boolean;
@@ -30,6 +31,7 @@ function updateQueueSlot(slot: QueueSlot, state: State) {
 const queueReducer = createReducer(
   initialState,
   on(queueLoaded, (state, { queue }) => ({ ...state, ...queue })),
+  on(profileLoaded, (state, { profile }) => ({ ...state, mapVote: profile.mapVote })),
   on(queueSlotsRefreshed, (state, { slots }) => ({ ...state, slots })),
   on(queueSlotUpdated, (state, { slot }) => updateQueueSlot(slot, state)),
   on(queueStateUpdated, (state, { queueState }) => ({ ...state, state: queueState })),
@@ -43,6 +45,7 @@ const queueReducer = createReducer(
   on(preReadyTimeoutReset, state => ({ ...state, preReadyTimeout: 180 })),
   on(preReadyTimeoutCountDown, state => ({ ...state, preReadyTimeout: state.preReadyTimeout - 1 })),
   on(mapVoted, (state, { map }) => ({ ...state, mapVote: map })),
+  on(mapVoteReset, state => ({ ...state, mapVote: undefined })),
 );
 
 export function reducer(state: State | undefined, action: Action) {
