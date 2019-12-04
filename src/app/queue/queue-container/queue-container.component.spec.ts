@@ -54,11 +54,10 @@ describe('QueueContainerComponent', () => {
   });
 
   describe('ngOnInit()', () => {
-    it('should set the page title', fakeAsync(() => {
+    it('should set the page title', () => {
       component.ngOnInit();
-      tick(200);
       expect(setTitleSpy).toHaveBeenCalled();
       expect(setTitleSpy.calls.mostRecent().args[0]).toMatch(/^\[5\/12\]/);
-    }));
+    });
   });
 });

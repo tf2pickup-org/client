@@ -10,21 +10,16 @@ import { MapVoteResult } from './models/map-vote-result';
 })
 export class QueueEventsService {
 
-  private _slotUpdate = new Subject<QueueSlot>();
+  private _slotsUpdate = new Subject<QueueSlot[]>();
   private _stateUpdate = new Subject<QueueState>();
-  private _slotsReset = new Subject<QueueSlot[]>();
   private _mapVoteResultsUpdate = new Subject<MapVoteResult[]>();
 
-  get slotUpdate() {
-    return this._slotUpdate.asObservable();
+  get slotsUpdate() {
+    return this._slotsUpdate.asObservable();
   }
 
   get stateUpdate() {
     return this._stateUpdate.asObservable();
-  }
-
-  get slotsReset() {
-    return this._slotsReset.asObservable();
   }
 
   get mapVoteResultsUpdate() {
@@ -35,9 +30,8 @@ export class QueueEventsService {
     private ws: IoClientService,
   ) {
     this.ws.socket.subscribe(socket => {
-      socket.on('queue slot update', (slot: QueueSlot) => this._slotUpdate.next(slot));
+      socket.on('queue slots update', (slots: QueueSlot[]) => this._slotsUpdate.next(slots));
       socket.on('queue state update', (state: QueueState) => this._stateUpdate.next(state));
-      socket.on('queue slots reset', (slots: QueueSlot[]) => this._slotsReset.next(slots));
       socket.on('map vote results update', (results: MapVoteResult[]) => this._mapVoteResultsUpdate.next(results));
     });
   }

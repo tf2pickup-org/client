@@ -21,11 +21,6 @@ export const joinQueueError = createAction(
   props<{ error: string }>(),
 );
 
-export const queueSlotsRefreshed = createAction(
-  '[API] Queue slots refreshed',
-  props<{ slots: QueueSlot[] }>(),
-);
-
 export const leaveQueue = createAction('[Queue] Leave queue');
 
 export const leaveQueueError = createAction(
@@ -33,13 +28,8 @@ export const leaveQueueError = createAction(
   props<{ error: string }>(),
 );
 
-export const queueSlotUpdated = createAction(
-  '[WS] Queue slot updated',
-  props<{ slot: QueueSlot }>(),
-);
-
 export const queueSlotsUpdated = createAction(
-  '[WS] Multiple queue slots updated',
+  '[WS] Queue slots updated',
   props<{ slots: QueueSlot[] }>(),
 );
 

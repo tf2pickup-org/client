@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { loadQueue, queueLoaded, joinQueue, leaveQueue, queueSlotUpdated, queueStateUpdated, joinQueueError,
-    leaveQueueError, readyUp, readyUpError, queueSlotsRefreshed, showReadyUpDialog,
-    hideReadyUpDialog, togglePreReady, preReadyTimeoutReset, stopPreReady, voteForMap, mapVoteResultsUpdated,
-    mapVoted, mapVoteReset, queueSlotsUpdated } from './queue.actions';
+import { loadQueue, queueLoaded, joinQueue, leaveQueue, queueStateUpdated, joinQueueError, leaveQueueError, readyUp, readyUpError,
+  showReadyUpDialog, hideReadyUpDialog, togglePreReady, preReadyTimeoutReset, stopPreReady, voteForMap, mapVoteResultsUpdated, mapVoted,
+  mapVoteReset, queueSlotsUpdated } from './queue.actions';
 import { mergeMap, map, catchError, filter, withLatestFrom, mapTo, tap } from 'rxjs/operators';
 import { QueueService } from './queue.service';
 import { QueueEventsService } from './queue-events.service';
@@ -39,7 +38,7 @@ export class QueueEffects {
     this.actions.pipe(
       ofType(leaveQueue),
       mergeMap(() => this.queueService.leaveQueue().pipe(
-        map(slot => queueSlotUpdated({ slot })),
+        map(slot => queueSlotsUpdated({ slots: [ slot ] })),
         catchError(error => of(leaveQueueError({ error }))),
       )),
     )
@@ -69,7 +68,7 @@ export class QueueEffects {
     this.actions.pipe(
       ofType(readyUp),
       mergeMap(() => this.queueService.readyUp().pipe(
-        map(slot => queueSlotUpdated({ slot })),
+        map(slot => queueSlotsUpdated({ slots: [ slot ] })),
         catchError(error => of(readyUpError({ error }))),
       )),
     )
@@ -131,7 +130,7 @@ export class QueueEffects {
     this.actions.pipe(
       ofType(markFriend),
       mergeMap(({ friendId }) => this.queueService.markFriend(friendId).pipe(
-        map(slot => queueSlotUpdated({ slot })),
+        map(slot => queueSlotsUpdated({ slots: [ slot ] })),
       ))
     )
   );
@@ -159,9 +158,8 @@ export class QueueEffects {
     private store: Store<AppState>,
     private preReadyCountdownService: PreReadyCountdownService,
   ) {
-    this.queueEventsService.slotUpdate.subscribe(slot => this.store.dispatch(queueSlotUpdated({ slot })));
+    this.queueEventsService.slotsUpdate.subscribe(slots => this.store.dispatch(queueSlotsUpdated({ slots })));
     this.queueEventsService.stateUpdate.subscribe(queueState => this.store.dispatch(queueStateUpdated({ queueState })));
-    this.queueEventsService.slotsReset.subscribe(slots => this.store.dispatch(queueSlotsRefreshed({ slots })));
     this.queueEventsService.mapVoteResultsUpdate.subscribe(results => this.store.dispatch(mapVoteResultsUpdated({ results })));
   }
 
