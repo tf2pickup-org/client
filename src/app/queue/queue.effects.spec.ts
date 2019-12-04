@@ -50,7 +50,7 @@ const queue: Queue = {
     }
   ],
   state: 'waiting',
-  map: 'cp_badlands',
+  mapVoteResults: [],
 };
 
 describe('QueueEffects', () => {

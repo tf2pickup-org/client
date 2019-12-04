@@ -50,9 +50,9 @@ describe('QueueEventsService', () => {
       ioClientService.socket.subscribe(socket => socket.emit('queue slots reset', slots));
     });
 
-    it('should forward queue map updated', () => {
-      service.mapUpdate.subscribe(event => expect(event).toEqual('FAKE_MAP'));
-      ioClientService.socket.subscribe(socket => socket.emit('queue map updated', 'FAKE_MAP'));
+    it('should forward map vote results updated', () => {
+      service.mapVoteResultsUpdate.subscribe(event => expect(event).toEqual([]));
+      ioClientService.socket.subscribe(socket => socket.emit('map vote results update', []));
     });
   });
 });
