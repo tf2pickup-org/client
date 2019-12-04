@@ -2,25 +2,34 @@ import { TestBed, async } from '@angular/core/testing';
 import { QueueEffects } from './queue.effects';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { ReplaySubject, Subject, of } from 'rxjs';
-import { Action } from '@ngrx/store';
+import { Action, Store } from '@ngrx/store';
 import { QueueEventsService } from './queue-events.service';
 import { QueueService } from './queue.service';
-import { queueLoaded, loadQueue, queueSlotUpdated, joinQueue, joinQueueError, markFriend } from './queue.actions';
+import { queueLoaded, loadQueue, queueSlotUpdated, joinQueue, joinQueueError, markFriend, mapVoteReset, voteForMap, mapVoted,
+  mapVoteResultsUpdated } from './queue.actions';
 import { Queue } from './models/queue';
 import { provideMockStore } from '@ngrx/store/testing';
 import { QueueSlot } from './models/queue-slot';
+import { ownGameAdded } from '@app/games/games.actions';
+import { PreReadyCountdownService } from './pre-ready-countdown.service';
+import { MapVoteResult } from './models/map-vote-result';
 
 class QueueServiceStub {
   fetchQueue() { }
   joinQueue(slotId: string) { }
   markFriend(friendId: string) { }
+  voteForMap(map: string) { }
 }
 
 class QueueEventsServiceStub {
   slotUpdate = new Subject<any>();
   stateUpdate = new Subject<any>();
   slotsReset = new Subject<any>();
-  mapUpdate = new  Subject<any>();
+  mapVoteResultsUpdate = new Subject<any>();
+}
+
+class PreReadyCountdownServiceStub {
+
 }
 
 const queue: Queue = {
@@ -65,6 +74,7 @@ describe('QueueEffects', () => {
       { provide: QueueService, useClass: QueueServiceStub },
       { provide: QueueEventsService, useClass: QueueEventsServiceStub },
       provideMockStore(),
+      { provide: PreReadyCountdownService, useClass: PreReadyCountdownServiceStub },
     ],
   }));
 
@@ -78,6 +88,17 @@ describe('QueueEffects', () => {
     effects.loadQueue.subscribe(action => expect(action).toEqual(queueLoaded({ queue })));
     actions.next(loadQueue());
     expect(spy).toHaveBeenCalled();
+  });
+
+  it('should handle queue events', () => {
+    const store = TestBed.get(Store);
+    const queueEvents = TestBed.get(QueueEventsService) as QueueEventsServiceStub;
+    const spy = spyOn(store, 'dispatch');
+
+    const results: MapVoteResult[] = [ { map: 'cp_fake_rc1', voteCount: 5 } ];
+    queueEvents.mapVoteResultsUpdate.next(results);
+
+    expect(spy).toHaveBeenCalledWith(mapVoteResultsUpdated({ results }));
   });
 
   describe('#joinQueue', () => {
@@ -106,6 +127,22 @@ describe('QueueEffects', () => {
       effects.markFriend.subscribe(action => expect(action).toEqual(queueSlotUpdated({ slot })));
       actions.next(markFriend({ friendId: 'FAKE_FRIEND_ID' }));
       expect(spy).toHaveBeenCalledWith('FAKE_FRIEND_ID');
+    });
+  });
+
+  describe('#voteForMap', () => {
+    it('should attempt to vote for the given map', () => {
+      const spy = spyOn(queueService, 'voteForMap').and.returnValue(of('FAKE_MAP'));
+      effects.voteForMap.subscribe(action => expect(action).toEqual(mapVoted({ map: 'FAKE_MAP' })));
+      actions.next(voteForMap({ map: 'FAKE_MAP' }));
+      expect(spy).toHaveBeenCalledWith('FAKE_MAP');
+    });
+  });
+
+  describe('#resetMapVote', () => {
+    it('should reset map vote', () => {
+      effects.resetMapVote.subscribe(action => expect(action).toEqual(mapVoteReset()));
+      actions.next(ownGameAdded({ gameId: 'FAKE_GAME_ID' }));
     });
   });
 });

@@ -65,6 +65,8 @@ export const mapVoted = createAction(
   props<{ map: string }>(),
 );
 
+export const mapVoteReset = createAction('[Queue] Map vote reset');
+
 export const showReadyUpDialog = createAction('[Queue] Show ready up dialog');
 export const hideReadyUpDialog = createAction('[Queue] Hide ready up dialog');
 
