@@ -21,8 +21,8 @@ export class QueueService {
     return this.http.get<Queue>(`${this.apiUrl}/queue`);
   }
 
-  joinQueue(slotId: number): Observable<QueueSlot> {
-    return this.ws.call<QueueSlot>('join queue', slotId);
+  joinQueue(slotId: number): Observable<QueueSlot[]> {
+    return this.ws.call<QueueSlot[]>('join queue', slotId);
   }
 
   leaveQueue(): Observable<QueueSlot> {

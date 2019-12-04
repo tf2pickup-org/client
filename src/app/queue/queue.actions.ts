@@ -38,6 +38,11 @@ export const queueSlotUpdated = createAction(
   props<{ slot: QueueSlot }>(),
 );
 
+export const queueSlotsUpdated = createAction(
+  '[WS] Multiple queue slots updated',
+  props<{ slots: QueueSlot[] }>(),
+);
+
 export const queueStateUpdated = createAction(
   '[WS] Queue state updated',
   props<{ queueState: QueueState }>(),
