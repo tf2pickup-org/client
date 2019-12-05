@@ -22,8 +22,9 @@ describe('MapThumbnailService', () => {
         'cp_snakewater_final1',
         'cp_sunshine',
       ].forEach(map => {
-        expect(map).toBeTruthy();
-        expect(map === 'unknown').toBe(false);
+        const thumbnail = service.getMapThumbnail(map);
+        expect(thumbnail).toBeTruthy();
+        expect(thumbnail === 'unknown').toBe(false);
       });
     }));
 
