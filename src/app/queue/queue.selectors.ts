@@ -39,11 +39,6 @@ export const mapVoteTotalCount = createSelector(
   results => results.reduce((a, b) => a + b.voteCount, 0)
 );
 
-export const mapVoteOptions = createSelector(
-  mapVoteResults,
-  results => results.map(r => r.map)
-);
-
 export const mapVote = createSelector(queueFeature, feature => feature.mapVote);
 
 export const queueShowReadyUpDialog = createSelector(queueFeature, feature => feature.readyUpDialogShown);
