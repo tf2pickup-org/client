@@ -31,7 +31,7 @@ export class MapThumbnailService {
         return 'sunshine';
 
       default:
-        return null;
+        return 'unknown';
     }
   }
 

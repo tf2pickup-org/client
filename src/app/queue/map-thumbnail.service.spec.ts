@@ -1,5 +1,4 @@
-import { TestBed } from '@angular/core/testing';
-
+import { TestBed, inject } from '@angular/core/testing';
 import { MapThumbnailService } from './map-thumbnail.service';
 
 describe('MapThumbnailService', () => {
@@ -8,5 +7,11 @@ describe('MapThumbnailService', () => {
   it('should be created', () => {
     const service: MapThumbnailService = TestBed.get(MapThumbnailService);
     expect(service).toBeTruthy();
+  });
+
+  describe('#getMapThumbnail()', () => {
+    it('should return unknown.png for unknown map', inject([MapThumbnailService], (service: MapThumbnailService) => {
+      expect(service.getMapThumbnail('some fake map')).toEqual('unknown');
+    }));
   });
 });
