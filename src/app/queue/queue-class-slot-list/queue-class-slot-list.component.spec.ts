@@ -7,8 +7,7 @@ import { AppState } from '@app/app.state';
 import { Store, MemoizedSelector } from '@ngrx/store';
 import { joinQueue, markFriend } from '../queue.actions';
 import { mySlot } from '../queue.selectors';
-import { QueueSlot } from '../models/queue-slot';
-import { pairwise, toArray, take } from 'rxjs/operators';
+import { toArray, take } from 'rxjs/operators';
 
 describe('QueueClassSlotListComponent', () => {
   let component: QueueClassSlotListComponent;
@@ -84,7 +83,7 @@ describe('QueueClassSlotListComponent', () => {
   describe('#joinQueue()', () => {
     it('should dispatch the joinQueue action', () => {
       const spy = spyOn(store, 'dispatch');
-      component.joinQueue({ id: 0, gameClass: 'soldier', playerReady: false, votesForMapChange: false });
+      component.joinQueue({ id: 0, gameClass: 'soldier', playerReady: false });
       expect(spy).toHaveBeenCalledWith(joinQueue({ slotId: 0 }));
     });
   });

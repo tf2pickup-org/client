@@ -28,7 +28,7 @@ describe('QueueSlotItemComponent', () => {
   });
 
   it('should apply correct css classes', () => {
-    component.slot = { id: 0, gameClass: 'soldier', playerReady: false, votesForMapChange: false };
+    component.slot = { id: 0, gameClass: 'soldier', playerReady: false };
     fixture.detectChanges();
 
     const div = fixture.debugElement.query(By.css('.queue-slot-item')).nativeElement as HTMLElement;
@@ -43,7 +43,7 @@ describe('QueueSlotItemComponent', () => {
     fixture.detectChanges();
     expect(div.classList.contains('locked')).toBe(true);
 
-    component.slot = { id: 0, gameClass: 'soldier', playerReady: false, playerId: 'FAKE_ID', votesForMapChange: false };
+    component.slot = { id: 0, gameClass: 'soldier', playerReady: false, playerId: 'FAKE_ID' };
     fixture.detectChanges();
     expect(div.classList.contains('taken')).toBe(true);
 
@@ -86,9 +86,8 @@ describe('QueueSlotItemComponent', () => {
     let takeSlotBtn: HTMLElement;
 
     beforeEach(() => {
-      component.slot = { id: 0, gameClass: 'soldier', playerReady: false, votesForMapChange: false };
+      component.slot = { id: 0, gameClass: 'soldier', playerReady: false };
       fixture.detectChanges();
-
       takeSlotBtn = fixture.debugElement.query(By.css('div.queue-slot-item')).nativeElement;
     });
 
@@ -102,7 +101,7 @@ describe('QueueSlotItemComponent', () => {
     let freeSlotBtn: HTMLButtonElement;
 
     beforeEach(() => {
-      component.slot = { id: 0, gameClass: 'soldier', playerReady: false, votesForMapChange: false, playerId: 'FAKE_PLAYER_ID' };
+      component.slot = { id: 0, gameClass: 'soldier', playerReady: false, playerId: 'FAKE_PLAYER_ID' };
       component.takenByMe = true;
       component.canHaveFriend = false;
       fixture.detectChanges();
@@ -122,7 +121,7 @@ describe('QueueSlotItemComponent', () => {
     let markFriendBtn: HTMLButtonElement;
 
     beforeEach(() => {
-      component.slot = { id: 0, gameClass: 'soldier', playerReady: false, votesForMapChange: false, playerId: 'FAKE_PLAYER_ID' };
+      component.slot = { id: 0, gameClass: 'soldier', playerReady: false, playerId: 'FAKE_PLAYER_ID' };
       component.takenByMe = false;
       component.canHaveFriend = true;
       component.isFriend = false;

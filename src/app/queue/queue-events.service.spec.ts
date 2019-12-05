@@ -31,7 +31,7 @@ describe('QueueEventsService', () => {
     });
 
     it('should forward queue slots update', () => {
-      const slot: QueueSlot = { id: 0, gameClass: 'scout', playerReady: false, votesForMapChange: false };
+      const slot: QueueSlot = { id: 0, gameClass: 'scout', playerReady: false };
       service.slotsUpdate.subscribe(event => expect(event).toEqual([ slot ]));
       ioClientService.socket.subscribe(socket => socket.emit('queue slots update', [ slot ]));
     });
@@ -39,15 +39,6 @@ describe('QueueEventsService', () => {
     it('should forward queue state update', () => {
       service.stateUpdate.subscribe(event => expect(event).toEqual('ready'));
       ioClientService.socket.subscribe(socket => socket.emit('queue state update', 'ready'));
-    });
-
-    it('should forward queue slots reset', () => {
-      const slots: QueueSlot[] = [
-        { id: 0, gameClass: 'scout', playerReady: false, votesForMapChange: false },
-        { id: 1, gameClass: 'soldier', playerReady: false, votesForMapChange: false },
-      ];
-      service.slotsUpdate.subscribe(event => expect(event).toEqual(slots));
-      ioClientService.socket.subscribe(socket => socket.emit('queue slots update', slots));
     });
 
     it('should forward map vote results updated', () => {

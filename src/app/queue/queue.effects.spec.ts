@@ -24,7 +24,6 @@ class QueueServiceStub {
 class QueueEventsServiceStub {
   slotsUpdate = new Subject<any>();
   stateUpdate = new Subject<any>();
-  slotsReset = new Subject<any>();
   mapVoteResultsUpdate = new Subject<any>();
 }
 
@@ -49,13 +48,11 @@ const queue: Queue = {
       gameClass: 'soldier',
       playerReady: false,
       playerId: 'FAKE_ID',
-      votesForMapChange: false,
     },
     {
       id: 1,
       gameClass: 'soldier',
       playerReady: false,
-      votesForMapChange: false,
     }
   ],
   state: 'waiting',
@@ -95,19 +92,25 @@ describe('QueueEffects', () => {
     const queueEvents = TestBed.get(QueueEventsService) as QueueEventsServiceStub;
     const spy = spyOn(store, 'dispatch');
 
+    const slots: QueueSlot[] = [
+      { id: 0, gameClass: 'soldier', playerId: 'FAKE_ID_1', playerReady: false, },
+      { id: 1, gameClass: 'medic', playerId: 'FAKE_ID_2', playerReady: true, }
+    ];
+    queueEvents.slotsUpdate.next(slots);
+    expect(spy).toHaveBeenCalledWith(queueSlotsUpdated({ slots }));
+
     const results: MapVoteResult[] = [ { map: 'cp_fake_rc1', voteCount: 5 } ];
     queueEvents.mapVoteResultsUpdate.next(results);
-
     expect(spy).toHaveBeenCalledWith(mapVoteResultsUpdated({ results }));
   });
 
   describe('#joinQueue', () => {
     it('should attempt to join the queue', () => {
-      const slot: QueueSlot = { id: 1, gameClass: 'soldier', playerId: 'FAKE_ID_2', playerReady: false, votesForMapChange: false, };
+      const slot: QueueSlot = { id: 1, gameClass: 'soldier', playerId: 'FAKE_ID_2', playerReady: false, };
       const spy = spyOn(queueService, 'joinQueue').and.returnValue(of([ slot ]));
       effects.joinQueue.subscribe(action => expect(action).toEqual(queueSlotsUpdated({ slots: [ slot ] })));
       actions.next(joinQueue({ slotId: 1 }));
-      expect(spy).toHaveBeenCalled();
+      expect(spy).toHaveBeenCalledWith(1);
     });
 
     xit('should handle errors', async(done => {
@@ -122,7 +125,7 @@ describe('QueueEffects', () => {
 
   describe('#markFriend', () => {
     it('should call the service', () => {
-      const slot: QueueSlot = { id: 1, gameClass: 'soldier', playerId: 'FAKE_ID_2', playerReady: false, votesForMapChange: false, friend: 'FAKE_FRIEND_ID' };
+      const slot: QueueSlot = { id: 1, gameClass: 'soldier', playerId: 'FAKE_ID_2', playerReady: false, friend: 'FAKE_FRIEND_ID' };
       const spy = spyOn(queueService, 'markFriend').and.returnValue(of(slot));
       effects.markFriend.subscribe(action => expect(action).toEqual(queueSlotsUpdated({ slots: [ slot ] })));
       actions.next(markFriend({ friendId: 'FAKE_FRIEND_ID' }));
