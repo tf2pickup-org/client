@@ -62,11 +62,11 @@ describe('QueueService', () => {
     }));
   });
 
-  describe('#voteForMapChange()', () => {
+  describe('#voteForMap()', () => {
     it('should call the endpoint', inject([QueueService], (service: QueueService) => {
       const spy = spyOn(ioClientService, 'call');
-      service.voteForMapChange(true);
-      expect(spy).toHaveBeenCalledWith('vote for map change', true);
+      service.voteForMap('cp_fake_rc1');
+      expect(spy).toHaveBeenCalledWith('vote for map', 'cp_fake_rc1');
     }));
   });
 
