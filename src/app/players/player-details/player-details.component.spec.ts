@@ -9,6 +9,9 @@ import { Store } from '@ngrx/store';
 import { loadPlayer } from '../actions';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { By } from '@angular/platform-browser';
+import { Etf2lProfileLinkPipe } from '../etf2l-profile-link.pipe';
+import { LogsTfProfileLinkPipe } from '../logs-tf-profile-link.pipe';
+import { SteamProfileLinkPipe } from '../steam-profile-link.pipe';
 
 class PlayersServiceStub {
   fetchPlayerStats() { return of({}); }
@@ -35,7 +38,12 @@ describe('PlayerDetailsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PlayerDetailsComponent ],
+      declarations: [
+        Etf2lProfileLinkPipe,
+        LogsTfProfileLinkPipe,
+        SteamProfileLinkPipe,
+        PlayerDetailsComponent,
+      ],
       imports: [
         RouterTestingModule,
       ],
@@ -87,7 +95,7 @@ describe('PlayerDetailsComponent', () => {
               steamId: '76561198977546450',
               name: 'niewielki',
               avatarUrl: 'FAKE_URL',
-              role: null,
+              role: 'admin',
               hasAcceptedRules: true,
               etf2lProfileId: 12345,
               id: 'FAKE_ID',
@@ -108,6 +116,13 @@ describe('PlayerDetailsComponent', () => {
       store.setState({ ...stateWithFakePlayer, profile: { profile: { role: 'admin' } } });
       fixture.detectChanges();
       expect(fixture.debugElement.query(By.css('h4 small a.text-secondary'))).toBeTruthy();
+    });
+
+    it('should render admin badge', () => {
+      const badge = fixture.debugElement.query(By.css('h4 span.badge')).nativeElement as HTMLElement;
+      expect(badge).toBeTruthy();
+      expect(badge.classList.contains('badge-warning')).toBe(true);
+      expect(badge.innerText).toEqual('admin');
     });
   });
 });

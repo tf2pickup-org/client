@@ -3,16 +3,17 @@
 
   <h4>
     {{ _player.name }}
+    <span *ngIf="_player.role" class="badge badge-warning">admin</span>
     <small class="text-muted ml-2">
-      <a [href]="'http://steamcommunity.com/profiles/' + _player.steamId" target="_blank">steam</a>
+      <a [href]="_player.steamId | steamProfileLink" target="_blank">steam</a>
 
       <ng-container *ngIf="_player.etf2lProfileId">
         &bull;
-        <a [href]="'http://etf2l.org/forum/user/' + _player.etf2lProfileId" target="_blank">etf2l</a>
+        <a [href]="_player.etf2lProfileId | etf2lProfileLink" target="_blank">etf2l</a>
       </ng-container>
 
       &bull;
-      <a [href]="'http://logs.tf/profile/' + _player.steamId" target="_blank">logs</a>
+      <a [href]="_player.steamId | logsTfProfileLink" target="_blank">logs</a>
 
       <ng-container *ngIf="isAdmin | async">
         &bull;

@@ -3,5 +3,6 @@
     [routerLink]="['/player', player.id]"
     class="list-group-item list-group-item-action">
     {{ player.name }}
+    <span *ngIf="!!player.role" class="ml-1 badge badge-warning">admin</span>
   </a>
 </div>
