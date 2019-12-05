@@ -52,9 +52,12 @@ export class TokenStoreService {
       fromString: window.location.search.substr(1),
     });
 
+    let needsToRemoveHash = false;
+
     // first try to find the refresh token
     if (params.has('refresh_token')) {
       this.refreshToken = params.get('refresh_token');
+      needsToRemoveHash = true;
     }
 
     if (this.refreshToken) {
@@ -75,9 +78,12 @@ export class TokenStoreService {
     // and then try to find the auth token
     if (params.has('auth_token')) {
       this.authToken = params.get('auth_token');
+      needsToRemoveHash = true;
     }
 
-    this.removeHash();
+    if (needsToRemoveHash) {
+      this.removeHash();
+    }
   }
 
   private removeHash() {

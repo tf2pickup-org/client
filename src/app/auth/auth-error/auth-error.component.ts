@@ -20,7 +20,7 @@ export class AuthErrorComponent implements OnInit {
       const error = params.get('error');
       switch (error) {
         case 'no etf2l profile':
-          this.errorMessage = 'You do not have an ETF2L profile.';
+          this.errorMessage = 'No valid ETF2L profile found for this Steam account.';
           break;
 
         case 'not enough steam hours':
