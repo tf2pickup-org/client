@@ -37,7 +37,7 @@ export class MapThumbnailService {
 
   getMapThumbnailPath(map: string) {
     const thumbnail = this.getMapThumbnail(map);
-    return thumbnail ? `/assets/map-thumbnails/${thumbnail}.png` : '';
+    return `/assets/map-thumbnails/${thumbnail}.png`;
   }
 
 }
