@@ -6,7 +6,7 @@ import { loadQueue, queueLoaded, joinQueue, leaveQueue, queueStateUpdated, joinQ
 import { mergeMap, map, catchError, filter, withLatestFrom, mapTo, tap } from 'rxjs/operators';
 import { QueueService } from './queue.service';
 import { QueueEventsService } from './queue-events.service';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { AppState } from '@app/app.state';
 import { of } from 'rxjs';
 import { mySlot, isInQueue, isPreReadied, preReadyTimeout } from './queue.selectors';
@@ -75,11 +75,9 @@ export class QueueEffects {
   );
 
   closeReadyUpDialog = createEffect(() =>
-    this.actions.pipe(
-      ofType(queueStateUpdated),
-      filter(({ queueState }) => queueState === 'waiting'),
-      withLatestFrom(this.store.select(mySlot)),
-      filter(([, slot]) => !slot || !slot.playerReady),
+    this.store.pipe(
+      select(mySlot),
+      filter(slot => !slot),
       map(() => hideReadyUpDialog()),
     )
   );

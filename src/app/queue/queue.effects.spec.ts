@@ -2,17 +2,19 @@ import { TestBed, async } from '@angular/core/testing';
 import { QueueEffects } from './queue.effects';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { ReplaySubject, Subject, of } from 'rxjs';
-import { Action, Store } from '@ngrx/store';
+import { Action, Store, select } from '@ngrx/store';
 import { QueueEventsService } from './queue-events.service';
 import { QueueService } from './queue.service';
 import { queueLoaded, loadQueue, joinQueue, joinQueueError, markFriend, mapVoteReset, voteForMap, mapVoted, mapVoteResultsUpdated,
-  queueSlotsUpdated } from './queue.actions';
+  queueSlotsUpdated, hideReadyUpDialog } from './queue.actions';
 import { Queue } from './models/queue';
-import { provideMockStore } from '@ngrx/store/testing';
+import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { QueueSlot } from './models/queue-slot';
 import { ownGameAdded } from '@app/games/games.actions';
 import { PreReadyCountdownService } from './pre-ready-countdown.service';
 import { MapVoteResult } from './models/map-vote-result';
+import { AppState } from '@app/app.state';
+import { mySlot } from './queue.selectors';
 
 class QueueServiceStub {
   fetchQueue() { }
@@ -63,6 +65,7 @@ describe('QueueEffects', () => {
   const actions = new ReplaySubject<Action>(1);
   let queueService: QueueService;
   let effects: QueueEffects;
+  let store: MockStore<AppState>;
 
   beforeEach(() => TestBed.configureTestingModule({
     providers: [
@@ -78,6 +81,7 @@ describe('QueueEffects', () => {
   beforeEach(() => {
     queueService = TestBed.get(QueueService);
     effects = TestBed.get(QueueEffects);
+    store = TestBed.get(Store);
   });
 
   it('should load the queue', () => {
@@ -88,7 +92,6 @@ describe('QueueEffects', () => {
   });
 
   it('should handle queue events', () => {
-    const store = TestBed.get(Store);
     const queueEvents = TestBed.get(QueueEventsService) as QueueEventsServiceStub;
     const spy = spyOn(store, 'dispatch');
 
@@ -121,6 +124,25 @@ describe('QueueEffects', () => {
       });
       actions.next(joinQueue({ slotId: 1 }));
     }));
+  });
+
+  describe('#closeReadyUpDialog', () => {
+    it('should emit whenever user loses the slot', () => {
+      let n = 0;
+      effects.closeReadyUpDialog.subscribe(action => {
+        expect(action).toEqual(hideReadyUpDialog());
+        n += 1;
+        if (n > 1) {
+          fail();
+        }
+      });
+
+      const slot: QueueSlot = { id: 1, gameClass: 'soldier', playerId: 'FAKE_ID_2', playerReady: false, };
+      const selector = store.overrideSelector(mySlot, slot);
+      selector.setResult(null);
+      store.refreshState();
+      expect().nothing();
+    });
   });
 
   describe('#markFriend', () => {
