@@ -1,4 +1,5 @@
-import { queueRequiredPlayerCount, queueCurrentPlayerCount, queueSlotsForClass, mySlot, mapVoteResults, mapVoteTotalCount, mapVote } from './queue.selectors';
+import { queueRequiredPlayerCount, queueCurrentPlayerCount, queueSlotsForClass, mySlot, mapVoteResults, mapVoteTotalCount, mapVote,
+    isPreReadied } from './queue.selectors';
 import { QueueSlot } from './models/queue-slot';
 
 describe('queue selectors', () => {
@@ -80,6 +81,13 @@ describe('queue selectors', () => {
   describe('mapVote', () => {
     it('should return mapVote', () => {
       expect(mapVote.projector({ mapVote: 'fake_map' })).toEqual('fake_map');
+    });
+  });
+
+  describe('isPreReadied', () => {
+    it('should return preReady', () => {
+      expect(isPreReadied.projector({ preReady: true })).toEqual(true);
+      expect(isPreReadied.projector({ preReady: false })).toEqual(false);
     });
   });
 });

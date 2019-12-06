@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { PreReadyUpButtonComponent } from './pre-ready-up-button.component';
 import { SecondsPipe } from '../seconds.pipe';
 import { provideMockStore } from '@ngrx/store/testing';
-import { isInQueue, isPreReadied, preReadyTimeout } from '../queue.selectors';
+import { isInQueue, isPreReadied } from '../queue.selectors';
 import { Store } from '@ngrx/store';
 import { togglePreReady } from '../queue.actions';
 import { By } from '@angular/platform-browser';
@@ -22,7 +22,6 @@ describe('PreReadyUpButtonComponent', () => {
           selectors: [
             { selector: isInQueue, value: false },
             { selector: isPreReadied, value: false },
-            { selector: preReadyTimeout, value: 90 },
           ]
         }),
       ],

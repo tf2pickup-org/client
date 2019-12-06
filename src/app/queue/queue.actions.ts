@@ -66,9 +66,8 @@ export const showReadyUpDialog = createAction('[Queue] Show ready up dialog');
 export const hideReadyUpDialog = createAction('[Queue] Hide ready up dialog');
 
 export const togglePreReady = createAction('[Queue] Toggle pre-ready up');
+export const startPreReady = createAction('[Queue] Start pre-ready');
 export const stopPreReady = createAction('[Queue] Stop pre-ready');
-export const preReadyTimeoutReset = createAction('[Queue] Pre-ready timer reset');
-export const preReadyTimeoutCountDown = createAction('[Queue] Pre-ready timeout count down');
 
 export const markFriend = createAction(
   '[Queue] Mark friend',

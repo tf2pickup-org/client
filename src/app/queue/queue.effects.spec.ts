@@ -1,20 +1,20 @@
 import { TestBed, async } from '@angular/core/testing';
 import { QueueEffects } from './queue.effects';
 import { provideMockActions } from '@ngrx/effects/testing';
-import { ReplaySubject, Subject, of } from 'rxjs';
-import { Action, Store, select } from '@ngrx/store';
+import { ReplaySubject, Subject, of, noop } from 'rxjs';
+import { Action, Store, select, MemoizedSelector } from '@ngrx/store';
 import { QueueEventsService } from './queue-events.service';
 import { QueueService } from './queue.service';
 import { queueLoaded, loadQueue, joinQueue, joinQueueError, markFriend, mapVoteReset, voteForMap, mapVoted, mapVoteResultsUpdated,
-  queueSlotsUpdated, hideReadyUpDialog } from './queue.actions';
+  queueSlotsUpdated, hideReadyUpDialog, showReadyUpDialog, readyUp, queueStateUpdated } from './queue.actions';
 import { Queue } from './models/queue';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { QueueSlot } from './models/queue-slot';
 import { ownGameAdded } from '@app/games/games.actions';
-import { PreReadyCountdownService } from './pre-ready-countdown.service';
 import { MapVoteResult } from './models/map-vote-result';
 import { AppState } from '@app/app.state';
-import { mySlot } from './queue.selectors';
+import { mySlot, isPreReadied } from './queue.selectors';
+import { PreReadyService } from './pre-ready.service';
 
 class QueueServiceStub {
   fetchQueue() { }
@@ -29,7 +29,7 @@ class QueueEventsServiceStub {
   mapVoteResultsUpdate = new Subject<any>();
 }
 
-class PreReadyCountdownServiceStub {
+class PreReadyServiceStub {
 
 }
 
@@ -74,7 +74,7 @@ describe('QueueEffects', () => {
       { provide: QueueService, useClass: QueueServiceStub },
       { provide: QueueEventsService, useClass: QueueEventsServiceStub },
       provideMockStore({}),
-      { provide: PreReadyCountdownService, useClass: PreReadyCountdownServiceStub },
+      { provide: PreReadyService, useClass: PreReadyServiceStub },
     ],
   }));
 
@@ -124,6 +124,35 @@ describe('QueueEffects', () => {
       });
       actions.next(joinQueue({ slotId: 1 }));
     }));
+  });
+
+  describe('#showReadyUpDialog', () => {
+    const slot: QueueSlot = { id: 1, gameClass: 'soldier', playerId: 'FAKE_ID_2', playerReady: false, };
+    let mySlotSelector: MemoizedSelector<AppState, QueueSlot>;
+    let preReadiedSelector: MemoizedSelector<AppState, boolean>;
+
+    beforeEach(() => {
+      mySlotSelector = store.overrideSelector(mySlot, slot);
+      preReadiedSelector = store.overrideSelector(isPreReadied, false);
+    });
+
+    it('should show ready up dialog if the user is in the queue but not readied up', () => {
+      effects.showReadyUpDialog.subscribe(action => expect(action).toEqual(showReadyUpDialog()));
+      actions.next(queueLoaded({ queue: { ...queue, state: 'ready' }}));
+    });
+
+    it('should not show ready up dialog if the user is already readied up', () => {
+      mySlotSelector.setResult({ ...slot, playerReady: true });
+      effects.showReadyUpDialog.subscribe(() => fail());
+      actions.next(queueLoaded({ queue: { ...queue, state: 'ready' }}));
+      expect().nothing();
+    });
+
+    it('should ready up without showing the dialog if the user is pre-readied', () => {
+      preReadiedSelector.setResult(true);
+      effects.showReadyUpDialog.subscribe(action => expect(action).toEqual(readyUp()));
+      actions.next(queueStateUpdated({ queueState: 'ready' }));
+    });
   });
 
   describe('#closeReadyUpDialog', () => {
