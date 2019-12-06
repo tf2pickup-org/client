@@ -1,16 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { loadQueue, queueLoaded, joinQueue, leaveQueue, queueStateUpdated, joinQueueError, leaveQueueError, readyUp, readyUpError,
-  showReadyUpDialog, hideReadyUpDialog, togglePreReady, preReadyTimeoutReset, stopPreReady, voteForMap, mapVoteResultsUpdated, mapVoted,
-  mapVoteReset, queueSlotsUpdated, markFriend } from './queue.actions';
+  showReadyUpDialog, hideReadyUpDialog, stopPreReady, voteForMap, mapVoteResultsUpdated, mapVoted,
+  mapVoteReset, queueSlotsUpdated, markFriend, startPreReady } from './queue.actions';
 import { mergeMap, map, catchError, filter, withLatestFrom, mapTo, tap } from 'rxjs/operators';
 import { QueueService } from './queue.service';
 import { QueueEventsService } from './queue-events.service';
 import { Store, select } from '@ngrx/store';
 import { AppState } from '@app/app.state';
 import { of } from 'rxjs';
-import { mySlot, isInQueue, isPreReadied, preReadyTimeout } from './queue.selectors';
-import { PreReadyCountdownService } from './pre-ready-countdown.service';
+import { mySlot, isInQueue, isPreReadied } from './queue.selectors';
 import { ownGameAdded } from '@app/games/games.actions';
 
 @Injectable()
@@ -74,33 +73,19 @@ export class QueueEffects {
     )
   );
 
+  autoPreReady = createEffect(() =>
+    this.actions.pipe(
+      ofType(readyUp),
+      mapTo(startPreReady()),
+    )
+  );
+
   closeReadyUpDialog = createEffect(() =>
     this.store.pipe(
       select(mySlot),
       filter(slot => !slot),
       map(() => hideReadyUpDialog()),
     )
-  );
-
-  resetPreReadyCountdown = createEffect(() =>
-    this.actions.pipe(
-      ofType(togglePreReady),
-      map(() => preReadyTimeoutReset()),
-    )
-  );
-
-  startPreReadyCountdown = createEffect(() =>
-    this.store.select(isPreReadied).pipe(
-      filter(preReadied => preReadied),
-      tap(() => this.preReadyCountdownService.start()),
-    ), { dispatch: false },
-  );
-
-  stopPreReadyCountdown = createEffect(() =>
-    this.store.select(isPreReadied).pipe(
-      filter(preReadied => !preReadied),
-      tap(() => this.preReadyCountdownService.stop()),
-    ), { dispatch: false },
   );
 
   cancelPreReadyOnQueueLeave = createEffect(() =>
@@ -114,13 +99,6 @@ export class QueueEffects {
     this.actions.pipe(
       ofType(ownGameAdded),
       map(() => stopPreReady()),
-    )
-  );
-
-  preReadyTimeout = createEffect(() =>
-    this.store.select(preReadyTimeout).pipe(
-      filter(value => value <= 1),
-      mapTo(togglePreReady()),
     )
   );
 
@@ -154,7 +132,6 @@ export class QueueEffects {
     private queueService: QueueService,
     private queueEventsService: QueueEventsService,
     private store: Store<AppState>,
-    private preReadyCountdownService: PreReadyCountdownService,
   ) {
     this.queueEventsService.slotsUpdate.subscribe(slots => this.store.dispatch(queueSlotsUpdated({ slots })));
     this.queueEventsService.stateUpdate.subscribe(queueState => this.store.dispatch(queueStateUpdated({ queueState })));
