@@ -12,7 +12,7 @@ import { isPreReadied } from './queue.selectors';
 export class PreReadyService {
 
   private readonly defaultTmeout = 180; // 3 minutes
-  private _timeout = new BehaviorSubject<number>(1000);
+  private _timeout = new BehaviorSubject<number>(this.defaultTmeout);
   private isCounting = false;
 
   get timeout() {
