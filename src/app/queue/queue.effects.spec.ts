@@ -61,6 +61,11 @@ const queue: Queue = {
   mapVoteResults: [],
 };
 
+const initialState = {
+  profile: { id: 'FAKE_ID' },
+  queue
+};
+
 describe('QueueEffects', () => {
   const actions = new ReplaySubject<Action>(1);
   let queueService: QueueService;
@@ -73,7 +78,7 @@ describe('QueueEffects', () => {
       provideMockActions(() => actions.asObservable()),
       { provide: QueueService, useClass: QueueServiceStub },
       { provide: QueueEventsService, useClass: QueueEventsServiceStub },
-      provideMockStore({}),
+      provideMockStore({ initialState }),
       { provide: PreReadyService, useClass: PreReadyServiceStub },
     ],
   }));
@@ -157,6 +162,9 @@ describe('QueueEffects', () => {
 
   describe('#closeReadyUpDialog', () => {
     it('should emit whenever user loses the slot', () => {
+      const slot: QueueSlot = { id: 1, gameClass: 'soldier', playerId: 'FAKE_ID_2', playerReady: false, };
+      const selector = store.overrideSelector(mySlot, slot);
+
       let n = 0;
       effects.closeReadyUpDialog.subscribe(action => {
         expect(action).toEqual(hideReadyUpDialog());
@@ -166,8 +174,6 @@ describe('QueueEffects', () => {
         }
       });
 
-      const slot: QueueSlot = { id: 1, gameClass: 'soldier', playerId: 'FAKE_ID_2', playerReady: false, };
-      const selector = store.overrideSelector(mySlot, slot);
       selector.setResult(null);
       store.refreshState();
       expect().nothing();
