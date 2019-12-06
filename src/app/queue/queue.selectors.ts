@@ -33,14 +33,15 @@ export const mySlot = createSelector(
 );
 
 export const isInQueue = createSelector(mySlot, theSlot => !!theSlot);
-export const queueMap = createSelector(queueFeature, feature => feature.map);
-export const queueShowReadyUpDialog = createSelector(queueFeature, feature => feature.readyUpDialogShown);
-export const votesForMapChange = createSelector(queueFeature, feature => feature.votesForMapChange);
-
-export const mapChangeVoterCount = createSelector(
-  queueSlots,
-  slots => slots && slots.reduce((prev, curr) => curr.votesForMapChange ? prev + 1 : prev, 0)
+export const mapVoteResults = createSelector(queueFeature, feature => feature.mapVoteResults);
+export const mapVoteTotalCount = createSelector(
+  mapVoteResults,
+  results => results.reduce((a, b) => a + b.voteCount, 0)
 );
+
+export const mapVote = createSelector(queueFeature, feature => feature.mapVote);
+
+export const queueShowReadyUpDialog = createSelector(queueFeature, feature => feature.readyUpDialogShown);
 
 export const isPreReadied = createSelector(queueFeature, feature => feature.preReady);
 export const preReadyTimeout = createSelector(queueFeature, feature => feature.preReadyTimeout);

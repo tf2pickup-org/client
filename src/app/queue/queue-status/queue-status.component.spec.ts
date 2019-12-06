@@ -4,7 +4,7 @@ import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { Store } from '@ngrx/store';
 import { RouterTestingModule } from '@angular/router/testing';
 import { By } from '@angular/platform-browser';
-import { queueCurrentPlayerCount, queueRequiredPlayerCount, queueMap } from '../queue.selectors';
+import { queueCurrentPlayerCount, queueRequiredPlayerCount } from '../queue.selectors';
 
 describe('QueueStatusComponent', () => {
   let component: QueueStatusComponent;
@@ -23,7 +23,6 @@ describe('QueueStatusComponent', () => {
           selectors: [
             { selector: queueCurrentPlayerCount, value: 2 },
             { selector: queueRequiredPlayerCount, value: 12 },
-            { selector: queueMap, value: 'SOME_FAKE_MAP' },
           ],
         }),
       ],

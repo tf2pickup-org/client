@@ -19,9 +19,10 @@ import { FormsModule } from '@angular/forms';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { QueueAlertsComponent } from './queue-alerts/queue-alerts.component';
 import { QueueAddonsComponent } from './queue-addons/queue-addons.component';
-import { VoteForMapChangeButtonComponent } from './vote-for-map-change-button/vote-for-map-change-button.component';
 import { PreReadyUpButtonComponent } from './pre-ready-up-button/pre-ready-up-button.component';
 import { SecondsPipe } from './seconds.pipe';
+import { MapVoteComponent } from './map-vote/map-vote.component';
+import { MapVoteButtonComponent } from './map-vote-button/map-vote-button.component';
 
 @NgModule({
   declarations: [
@@ -34,9 +35,10 @@ import { SecondsPipe } from './seconds.pipe';
     QueueReadyUpDialogControllerComponent,
     QueueAlertsComponent,
     QueueAddonsComponent,
-    VoteForMapChangeButtonComponent,
     PreReadyUpButtonComponent,
     SecondsPipe,
+    MapVoteComponent,
+    MapVoteButtonComponent,
   ],
   imports: [
     CommonModule,

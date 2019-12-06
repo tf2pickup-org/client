@@ -12,4 +12,5 @@ export interface Profile {
   hasAcceptedRules: boolean;
   etf2lProfileId: number;
   bans: PlayerBan[];
+  mapVote?: string;
 }

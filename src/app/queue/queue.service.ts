@@ -21,8 +21,8 @@ export class QueueService {
     return this.http.get<Queue>(`${this.apiUrl}/queue`);
   }
 
-  joinQueue(slotId: number): Observable<QueueSlot> {
-    return this.ws.call<QueueSlot>('join queue', slotId);
+  joinQueue(slotId: number): Observable<QueueSlot[]> {
+    return this.ws.call<QueueSlot[]>('join queue', slotId);
   }
 
   leaveQueue(): Observable<QueueSlot> {
@@ -33,8 +33,8 @@ export class QueueService {
     return this.ws.call<QueueSlot>('player ready');
   }
 
-  voteForMapChange(value: boolean): Observable<QueueSlot> {
-    return this.ws.call<QueueSlot>('vote for map change', value);
+  voteForMap(map: string): Observable<string> {
+    return this.ws.call<string>('vote for map', map);
   }
 
   markFriend(friendId: string): Observable<QueueSlot> {

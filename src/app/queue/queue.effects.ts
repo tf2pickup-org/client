@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { loadQueue, queueLoaded, joinQueue, leaveQueue, queueSlotUpdated, queueStateUpdated, joinQueueError,
-    leaveQueueError, readyUp, readyUpError, queueSlotsRefreshed, queueMapUpdated, showReadyUpDialog,
-    hideReadyUpDialog, togglePreReady, preReadyTimeoutReset, stopPreReady, markFriend } from './queue.actions';
+import { loadQueue, queueLoaded, joinQueue, leaveQueue, queueStateUpdated, joinQueueError, leaveQueueError, readyUp, readyUpError,
+  showReadyUpDialog, hideReadyUpDialog, togglePreReady, preReadyTimeoutReset, stopPreReady, voteForMap, mapVoteResultsUpdated, mapVoted,
+  mapVoteReset, queueSlotsUpdated, markFriend } from './queue.actions';
 import { mergeMap, map, catchError, filter, withLatestFrom, mapTo, tap } from 'rxjs/operators';
 import { QueueService } from './queue.service';
 import { QueueEventsService } from './queue-events.service';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { AppState } from '@app/app.state';
 import { of } from 'rxjs';
-import { mySlot, votesForMapChange, isInQueue, isPreReadied, preReadyTimeout } from './queue.selectors';
+import { mySlot, isInQueue, isPreReadied, preReadyTimeout } from './queue.selectors';
 import { PreReadyCountdownService } from './pre-ready-countdown.service';
 import { ownGameAdded } from '@app/games/games.actions';
 
@@ -28,7 +28,7 @@ export class QueueEffects {
     this.actions.pipe(
       ofType(joinQueue),
       mergeMap(({ slotId }) => this.queueService.joinQueue(slotId).pipe(
-        map(slot => queueSlotUpdated({ slot })),
+        map(slots => queueSlotsUpdated({ slots })),
         catchError(error => of(joinQueueError({ error }))),
       )),
     )
@@ -38,7 +38,7 @@ export class QueueEffects {
     this.actions.pipe(
       ofType(leaveQueue),
       mergeMap(() => this.queueService.leaveQueue().pipe(
-        map(slot => queueSlotUpdated({ slot })),
+        map(slot => queueSlotsUpdated({ slots: [ slot ] })),
         catchError(error => of(leaveQueueError({ error }))),
       )),
     )
@@ -68,29 +68,17 @@ export class QueueEffects {
     this.actions.pipe(
       ofType(readyUp),
       mergeMap(() => this.queueService.readyUp().pipe(
-        map(slot => queueSlotUpdated({ slot })),
+        map(slot => queueSlotsUpdated({ slots: [ slot ] })),
         catchError(error => of(readyUpError({ error }))),
       )),
     )
   );
 
   closeReadyUpDialog = createEffect(() =>
-    this.actions.pipe(
-      ofType(queueStateUpdated),
-      filter(({ queueState }) => queueState === 'waiting'),
-      withLatestFrom(this.store.select(mySlot)),
-      filter(([, slot]) => !slot || !slot.playerReady),
+    this.store.pipe(
+      select(mySlot),
+      filter(slot => !slot),
       map(() => hideReadyUpDialog()),
-    )
-  );
-
-  voteForMapChange = createEffect(() =>
-    this.store.select(votesForMapChange).pipe(
-      withLatestFrom(this.store.select(isInQueue)),
-      filter(([, _isInQueue]) => _isInQueue),
-      mergeMap(([value]) => this.queueService.voteForMapChange(value).pipe(
-        map(slot => queueSlotUpdated({ slot })),
-      ))
     )
   );
 
@@ -140,8 +128,24 @@ export class QueueEffects {
     this.actions.pipe(
       ofType(markFriend),
       mergeMap(({ friendId }) => this.queueService.markFriend(friendId).pipe(
-        map(slot => queueSlotUpdated({ slot })),
+        map(slot => queueSlotsUpdated({ slots: [ slot ] })),
       ))
+    )
+  );
+
+  voteForMap = createEffect(() =>
+    this.actions.pipe(
+      ofType(voteForMap),
+      mergeMap(({ map: aMap }) => this.queueService.voteForMap(aMap).pipe(
+        map(theMap => mapVoted({ map: theMap })),
+      )),
+    )
+  );
+
+  resetMapVote = createEffect(() =>
+    this.actions.pipe(
+      ofType(ownGameAdded),
+      mapTo(mapVoteReset()),
     )
   );
 
@@ -152,10 +156,9 @@ export class QueueEffects {
     private store: Store<AppState>,
     private preReadyCountdownService: PreReadyCountdownService,
   ) {
-    this.queueEventsService.slotUpdate.subscribe(slot => this.store.dispatch(queueSlotUpdated({ slot })));
+    this.queueEventsService.slotsUpdate.subscribe(slots => this.store.dispatch(queueSlotsUpdated({ slots })));
     this.queueEventsService.stateUpdate.subscribe(queueState => this.store.dispatch(queueStateUpdated({ queueState })));
-    this.queueEventsService.slotsReset.subscribe(slots => this.store.dispatch(queueSlotsRefreshed({ slots })));
-    this.queueEventsService.mapUpdate.subscribe(queueMap => this.store.dispatch(queueMapUpdated({ map: queueMap })));
+    this.queueEventsService.mapVoteResultsUpdate.subscribe(results => this.store.dispatch(mapVoteResultsUpdated({ results })));
   }
 
 }

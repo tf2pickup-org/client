@@ -1,4 +1,4 @@
-import { queueRequiredPlayerCount, queueCurrentPlayerCount, queueSlotsForClass, mySlot } from './queue.selectors';
+import { queueRequiredPlayerCount, queueCurrentPlayerCount, queueSlotsForClass, mySlot, mapVoteResults, mapVoteTotalCount, mapVote } from './queue.selectors';
 import { QueueSlot } from './models/queue-slot';
 
 describe('queue selectors', () => {
@@ -45,6 +45,41 @@ describe('queue selectors', () => {
           { }
         ],
       )).toEqual({ gameClass: 'soldier', playerId: 'FAKE_ID' } as QueueSlot);
+    });
+  });
+
+  const results = [
+    {
+      map: 'cp_process_final',
+      voteCount: 1,
+    },
+    {
+      map: 'cp_reckoner_rc2',
+      voteCount: 1,
+    },
+    {
+      map: 'cp_snakewater_final1',
+      voteCount: 0,
+    }
+  ];
+
+  describe('mapVoteResults', () => {
+    it('should return results', () => {
+      expect(mapVoteResults.projector({
+        mapVoteResults: results
+      })).toEqual(results);
+    });
+  });
+
+  describe('mapVoteTotalCount', () => {
+    it('should calculate the correct value', () => {
+      expect(mapVoteTotalCount.projector(results)).toEqual(2);
+    });
+  });
+
+  describe('mapVote', () => {
+    it('should return mapVote', () => {
+      expect(mapVote.projector({ mapVote: 'fake_map' })).toEqual('fake_map');
     });
   });
 });

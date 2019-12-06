@@ -2,6 +2,7 @@ import { createAction, props } from '@ngrx/store';
 import { Queue } from './models/queue';
 import { QueueSlot } from './models/queue-slot';
 import { QueueState } from './models/queue-state';
+import { MapVoteResult } from './models/map-vote-result';
 
 export const loadQueue = createAction('[Init] Load queue');
 
@@ -20,11 +21,6 @@ export const joinQueueError = createAction(
   props<{ error: string }>(),
 );
 
-export const queueSlotsRefreshed = createAction(
-  '[API] Queue slots refreshed',
-  props<{ slots: QueueSlot[] }>(),
-);
-
 export const leaveQueue = createAction('[Queue] Leave queue');
 
 export const leaveQueueError = createAction(
@@ -32,9 +28,9 @@ export const leaveQueueError = createAction(
   props<{ error: string }>(),
 );
 
-export const queueSlotUpdated = createAction(
-  '[WS] Queue slot updated',
-  props<{ slot: QueueSlot }>(),
+export const queueSlotsUpdated = createAction(
+  '[WS] Queue slots updated',
+  props<{ slots: QueueSlot[] }>(),
 );
 
 export const queueStateUpdated = createAction(
@@ -49,15 +45,26 @@ export const readyUpError = createAction(
   props<{ error: string }>(),
 );
 
-export const queueMapUpdated = createAction(
-  '[WS] Queue map updated',
+export const mapVoteResultsUpdated = createAction(
+  '[WS] Map vote results update',
+  props<{ results: MapVoteResult[] }>(),
+);
+
+export const voteForMap = createAction(
+  '[Queue] Vote for map',
   props<{ map: string }>(),
 );
+
+export const mapVoted = createAction(
+  '[WS] Voted for map',
+  props<{ map: string }>(),
+);
+
+export const mapVoteReset = createAction('[Queue] Map vote reset');
 
 export const showReadyUpDialog = createAction('[Queue] Show ready up dialog');
 export const hideReadyUpDialog = createAction('[Queue] Hide ready up dialog');
 
-export const toggleVoteForMapChange = createAction('[Queue] Toggle vote for map change');
 export const togglePreReady = createAction('[Queue] Toggle pre-ready up');
 export const stopPreReady = createAction('[Queue] Stop pre-ready');
 export const preReadyTimeoutReset = createAction('[Queue] Pre-ready timer reset');

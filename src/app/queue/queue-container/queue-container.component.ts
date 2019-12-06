@@ -4,7 +4,7 @@ import { AppState } from '@app/app.state';
 import { combineLatest, Subject } from 'rxjs';
 import { queueRequiredPlayerCount, queueCurrentPlayerCount } from '../queue.selectors';
 import { Title } from '@angular/platform-browser';
-import { map, debounceTime, takeUntil } from 'rxjs/operators';
+import { map, takeUntil, filter } from 'rxjs/operators';
 import { environment } from '@environment';
 import { AuthService } from '@app/auth/auth.service';
 
@@ -30,9 +30,8 @@ export class QueueContainerComponent implements OnInit, OnDestroy {
   ngOnInit() {
     combineLatest([
       this.currentPlayerCount,
-      this.requiredPlayerCount,
+      this.requiredPlayerCount.pipe(filter(value => value !== null)),
     ]).pipe(
-      debounceTime(100),
       map(([current, required]) => `[${current}/${required}]`),
       takeUntil(this.destroyed),
     ).subscribe(text => this.title.setTitle(`${text} ${environment.titleSuffix}`));
