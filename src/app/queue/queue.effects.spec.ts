@@ -73,7 +73,7 @@ describe('QueueEffects', () => {
       provideMockActions(() => actions.asObservable()),
       { provide: QueueService, useClass: QueueServiceStub },
       { provide: QueueEventsService, useClass: QueueEventsServiceStub },
-      provideMockStore(),
+      provideMockStore({}),
       { provide: PreReadyCountdownService, useClass: PreReadyCountdownServiceStub },
     ],
   }));
