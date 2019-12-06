@@ -4,6 +4,7 @@ import { queueLoaded, queueStateUpdated, readyUp, showReadyUpDialog, hideReadyUp
 import { QueueSlot } from './models/queue-slot';
 import { Queue } from './models/queue';
 import { profileLoaded } from '@app/profile/profile.actions';
+import { ownGameAdded } from '@app/games/games.actions';
 
 export interface State extends Queue {
   readyUpDialogShown: boolean;
@@ -38,7 +39,7 @@ const queueReducer = createReducer(
   on(readyUp, state => ({ ...state, readyUpDialogShown: false })),
   on(showReadyUpDialog, state => ({ ...state, readyUpDialogShown: true })),
   on(hideReadyUpDialog, state => ({ ...state, readyUpDialogShown: false })),
-  on(leaveQueue, state => ({ ...state, readyUpDialogShown: false, mapVote: undefined })),
+  on(leaveQueue, state => ({ ...state, readyUpDialogShown: false })),
   on(togglePreReady, state => ({ ...state, preReady: !state.preReady })),
   on(startPreReady, state => ({ ...state, preReady: true })),
   on(stopPreReady, state => ({ ...state, preReady: false })),
