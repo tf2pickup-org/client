@@ -1,3 +1,13 @@
+# [1.6.0](https://github.com/tf2pickup-pl/client/compare/1.5.1...1.6.0) (2019-12-06)
+
+### Features
+* Admin badges ([cf0740d](https://github.com/tf2pickup-pl/client/commit/cf0740d9cabe388a4ad29cb71bcb78b3d8a6c52a))
+* New map vote system ([20b2ba9](https://github.com/tf2pickup-pl/client/commit/20b2ba9680bfea42265f8af4346ef193d091a179))
+
+### Fixes
+* Handle auth errors properly ([b48e4ba](https://github.com/tf2pickup-pl/client/commit/b48e4ba943cc4d7ed898eab1d16eec514d854e03))
+* Pre-ready fine-tuning ([59a812e](https://github.com/tf2pickup-pl/client/commit/59a812e84f1edcb0d85a161f42c53461a03a87fb))
+
 # [1.5.0](https://github.com/tf2pickup-pl/client/compare/1.5.0...1.5.1) (2019-12-03)
 
 ### Fixes
