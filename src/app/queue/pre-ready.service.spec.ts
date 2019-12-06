@@ -34,13 +34,13 @@ describe('PreReadyService', () => {
       take(3),
       toArray(),
     ).subscribe(values => {
-      expect(values).toEqual([ 180, 180, 179 ]);
+      expect(values).toEqual([ 300, 300, 299 ]);
       done();
     });
 
     isPreReadiedSelector.setResult(true);
     store.refreshState();
-    tick(1000 * 181);
+    tick(1000 * 301);
 
     expect(spy).toHaveBeenCalledWith(stopPreReady());
   }))());
