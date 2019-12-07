@@ -1,3 +1,8 @@
+# [1.6.1](https://github.com/tf2pickup-pl/client/compare/1.6.0...1.6.1) (2019-12-07)
+
+### Fixes
+* Reset map vote whenever own slot is lost ([2be32fc](https://github.com/tf2pickup-pl/client/commit/2be32fc82e1d370ddc776977fe0346841180cc05))
+
 # [1.6.0](https://github.com/tf2pickup-pl/client/compare/1.5.1...1.6.0) (2019-12-06)
 
 ### Features
@@ -8,7 +13,7 @@
 * Handle auth errors properly ([b48e4ba](https://github.com/tf2pickup-pl/client/commit/b48e4ba943cc4d7ed898eab1d16eec514d854e03))
 * Pre-ready fine-tuning ([59a812e](https://github.com/tf2pickup-pl/client/commit/59a812e84f1edcb0d85a161f42c53461a03a87fb))
 
-# [1.5.0](https://github.com/tf2pickup-pl/client/compare/1.5.0...1.5.1) (2019-12-03)
+# [1.5.1](https://github.com/tf2pickup-pl/client/compare/1.5.0...1.5.1) (2019-12-03)
 
 ### Fixes
 * Handle usernames with spaces in mumble links ([90d7c44](https://github.com/tf2pickup-pl/client/commit/90d7c443c68dea30bf1084efaa6e0e5f6939c24c))
