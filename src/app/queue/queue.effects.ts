@@ -121,8 +121,9 @@ export class QueueEffects {
   );
 
   resetMapVote = createEffect(() =>
-    this.actions.pipe(
-      ofType(ownGameAdded),
+    this.store.pipe(
+      select(mySlot),
+      filter(slot => !slot),
       mapTo(mapVoteReset()),
     )
   );
