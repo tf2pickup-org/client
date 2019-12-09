@@ -45,7 +45,7 @@
     "@types/jasmine": "^3.4.6",
     "@types/jasminewd2": "^2.0.8",
     "@types/jwt-decode": "^2.2.1",
-    "@types/node": "^12.12.11",
+    "@types/node": "^12.12.15",
     "@types/socket.io-client": "^1.4.32",
     "@types/url-parse": "^1.4.3",
     "codelyzer": "^5.2.0",
