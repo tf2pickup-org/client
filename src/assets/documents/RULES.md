@@ -1,11 +1,11 @@
-1. The main language used on mumble and in the game is **Polish**. Do not add to the pickup queue if you are not comfortable with using Polish for the in-game communication.
-2. _tf2pickup.pl_ was created with Team Fortress 2 **competitive gameplay** in mind.
-3. _tf2pickup.pl_ is not the place to learn Team Fortress 2 competitive basics. It is expected of every player to know the 6v6 lineup as well as responsibilities of each class. One must also know the basics of the class they are going to play (i.e. rollout for soldiers or demo, healing order for medic, etc.).
-4. **Mumble is obligatory**. Do not add to the pickup queue if you do not have the Mumble application installed and configured properly. Please make sure your voice is clear and audible.
-5. Take the pickup matches seriously. Do not mess around and waste the game for the rest of players. **Ruining the pickup matches will be punished**.
-6. Readying up for the pickup means you can play the entire 30 minutes of the match. Not joining the game, leaving the pickup mid-game or not being able to focus on the match will be punished.
-    1. If you are forced to leave the game, find a substitute player for yourself and give him all the game details. Also, let your team know you are to be replaced.
-7. Offclassing is limited to flank classes (scouts and/or roamer). The engineer and pyro can be used to defend, and heavy to defend or attack last point. Sniper and spy can be taken to attack or defend last as well as break stalemates during the match. **Offclassing to mid is strictly prohibited.**
-8. **Swapping classes or teams is prohibited.**
-9. All forms of cheating, using alternate accounts and attempts to utilize unfair advantages against other players will be punished.
-10. Bans will be given and taken down at the will of admins. There is no guarantee you will receive the same ban length for the same misbehaviour as the other player.
+1. The main language used on mumble and in the game is Spanish. Do not add to the pickup queue if you are not comfortable with using Spanish for the in-game communication.
+2. _tf2pickup.es_ fue creado con el juego competitivo Team Fortress 2 en mente.
+3. _tf2pickup.es_ no es lugar para aprender los conceptos básicos del competitivo de Team Fortress 2. Se espera que cada jugador conozca la alineación de 6v6, así como las responsabilidades de cada clase. También se deben conocer los conceptos básicos de la clase que se va a jugar (es decir, rollouts para soldados y demoman, orden de curación para médicos, etc.).
+4. **Mumble es obligatorio**. No te añadas a la pickup si no tienes la aplicación Mumble instalada y configurada correctamente. Asegúrate de que tu voz sea clara y audible.
+5. Tómate los partidos de pickup en serio. No pierdas el tiempo ni malgastes la partida para el resto de jugadores. **Arruinar las partidas de pickup será castigado.**
+6. Darle a "Listo" en la pickup significa que puedes jugar los 30 minutos completos de una partida. No unirse al juego, abandonar la pickup en mitad de la partida o no poder concentrarse en la partida será castigado.
+    1. Si te ves obligado a salir de la partida, busca un sustituto y dale todos los detalles del juego. Además, informa a tu equipo de que debes ser reemplazado.
+7. El offclassing se limita a las clases del flanco (scouts o roamer). El ingeniero y el pyro se pueden usar para defender, y heavy ​​para defender o atacar el último punto. Se puede llevar sniper o spy para atacar o defender en último, así como a romper stalemates durante la partida. **Se prohíbe estrictamente el offclassing a mid.**
+8. **El intercambio de clases o equipos con otros jugadores está prohibido.**
+9. Todas las formas de hacks, el uso de cuentas alternativas y los intentos de utilizar ventajas injustas contra otros jugadores serán castigados.
+10. Los bans serán dados y eliminados a voluntad de los admins. No hay garantía de que recibas la misma duración de ban por la misma infracción que otro jugador.
