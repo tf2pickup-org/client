@@ -2,12 +2,16 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { GameListComponent } from './game-list.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { GamesService } from '../games.service';
-import { NEVER, of } from 'rxjs';
+import { NEVER, of, Subject } from 'rxjs';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { PlayersService } from '@app/players/players.service';
+import { By } from '@angular/platform-browser';
+import { PaginatedList } from '@app/core/models/paginated-list';
+import { Game } from '../models/game';
 
 class GamesServiceStub {
-  fetchGames() { return NEVER; }
+  results = new Subject<PaginatedList<Game>>();
+  fetchGames() { return this.results.asObservable(); }
 }
 
 class PlayersServiceStub {
@@ -17,6 +21,7 @@ class PlayersServiceStub {
 describe('GameListComponent', () => {
   let component: GameListComponent;
   let fixture: ComponentFixture<GameListComponent>;
+  let gamesService: GamesServiceStub;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -37,10 +42,30 @@ describe('GameListComponent', () => {
     fixture = TestBed.createComponent(GameListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+
+    gamesService = TestBed.get(GamesService);
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should not render pagination controls unless there is more than 1 page', () => {
+    gamesService.results.next({ itemCount: 10, results: [] });
+    fixture.detectChanges();
+    expect(fixture.debugElement.query(By.css('nav'))).toBeFalsy();
+  });
+
+  it('should display \'no games\' text when there are no games', () => {
+    gamesService.results.next({ itemCount: 0, results: [] });
+    fixture.detectChanges();
+    expect(fixture.debugElement.query(By.css('div>span.text-muted'))).toBeTruthy();
+  });
+
+  it('should render pagination controls when there are more pages', () => {
+    gamesService.results.next({ itemCount: 11, results: [] });
+    fixture.detectChanges();
+    expect(fixture.debugElement.query(By.css('nav'))).toBeTruthy();
   });
 
   describe('#getPage()', () => {

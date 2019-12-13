@@ -8,8 +8,13 @@
   </a>
 </div>
 
+<div *ngIf="(gameCount | async) === 0"
+  class="d-flex flex-row justify-content-center">
+  <span class="text-muted">no games</span>
+</div>
+
 <pagination-template #p="paginationApi" (pageChange)="getPage($event)">
-  <nav class="my-3">
+  <nav *ngIf="p.pages.length > 1" class="my-3">
     <ul class="pagination justify-content-center">
       <li class="page-item" [class.disabled]="p.isFirstPage()">
         <a class="page-link" aria-label="Previous" [routerLink]="" (click)="p.previous()">
