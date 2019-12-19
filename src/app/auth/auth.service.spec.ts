@@ -37,7 +37,7 @@ describe('AuthService', () => {
     it('should call endpoint', inject([AuthService], (service: AuthService) => {
       service.reauth().subscribe();
       const req = httpContoller.expectOne('FAKE_URL/auth?refresh_token=FAKE_REFRESH_TOKEN');
-      expect(req.request.method).toBe('GET');
+      expect(req.request.method).toBe('POST');
     }));
 
     it('should emit the new token', async(inject([AuthService], (service: AuthService) => {

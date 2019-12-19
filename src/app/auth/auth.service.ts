@@ -36,7 +36,7 @@ export class AuthService {
   reauth(): Observable<string> {
     if (!this.isRefreshingToken) {
       this.isRefreshingToken = true;
-      return this.http.get<TokenPair>(`${this.apiUrl}/auth?refresh_token=${this.tokenStore.refreshToken}`).pipe(
+      return this.http.post<TokenPair>(`${this.apiUrl}/auth?refresh_token=${this.tokenStore.refreshToken}`, { }).pipe(
         tap(({ refreshToken }) => this.tokenStore.refreshToken = refreshToken),
         tap(({ authToken }) => this.tokenStore.authToken = authToken),
         catchError(error => {
