@@ -34,11 +34,11 @@ export class QueueService {
   }
 
   voteForMap(map: string): Observable<string> {
-    return this.ws.call<string>('vote for map', map);
+    return this.ws.call<string>('vote for map', { map });
   }
 
-  markFriend(friendId: string): Observable<QueueSlot> {
-    return this.ws.call<QueueSlot>('mark friend', friendId);
+  markFriend(friendPlayerId: string): Observable<QueueSlot> {
+    return this.ws.call<QueueSlot>('mark friend', { friendPlayerId });
   }
 
 }
