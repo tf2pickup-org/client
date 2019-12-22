@@ -42,7 +42,7 @@ describe('QueueService', () => {
     it('should call the endpoint', inject([QueueService], (service: QueueService) => {
       const spy = spyOn(ioClientService, 'call');
       service.joinQueue(11);
-      expect(spy).toHaveBeenCalledWith('join queue', 11);
+      expect(spy).toHaveBeenCalledWith('join queue', { slotId: 11 });
     }));
   });
 
