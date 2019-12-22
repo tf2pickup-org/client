@@ -14,13 +14,10 @@ import * as jwt_decode from 'jwt-decode';
 
 function callWsMethod<T>(socket: SocketIOClient.Socket, methodName: string, ...args: any[]): Observable<T> {
   return new Observable(observer => {
-    socket.emit(methodName, ...args, (response: { value?: T, error?: string }) => {
-      if (response.error) {
-        observer.error(response.error);
-      } else if (response.value) {
-        observer.next(response.value);
-        observer.complete();
-      }
+    const _args = args.length > 0 ? args : [{ }]; // we need to pass at least one argument due to NestJS limitation
+    socket.emit(methodName, ..._args, (response: T) => {
+      observer.next(response);
+      observer.complete();
     });
   });
 }
@@ -84,6 +81,9 @@ export class IoClientService {
       });
       socket.on('reconnect_attempt', () => {
         socket.io.opts.query = `auth_token=${this.tokenStore.wsToken}`;
+      });
+      socket.on('exception', ({ message }) => {
+        console.error(message);
       });
       this._socket.next(socket);
     });

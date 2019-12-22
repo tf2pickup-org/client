@@ -22,7 +22,7 @@ export class QueueService {
   }
 
   joinQueue(slotId: number): Observable<QueueSlot[]> {
-    return this.ws.call<QueueSlot[]>('join queue', slotId);
+    return this.ws.call<QueueSlot[]>('join queue', { slotId });
   }
 
   leaveQueue(): Observable<QueueSlot> {
