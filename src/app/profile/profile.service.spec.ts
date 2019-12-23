@@ -34,7 +34,7 @@ describe('ProfileService', () => {
     it('should call the endpoint', inject([ProfileService], (service: ProfileService) => {
       service.acceptRules().subscribe();
       const req = httpController.expectOne('FAKE_URL/profile?accept_terms');
-      expect(req.request.method).toBe('PUT');
+      expect(req.request.method).toBe('POST');
     }));
   });
 });
