@@ -48,7 +48,7 @@
     "@types/node": "12.12.17",
     "@types/socket.io-client": "1.4.32",
     "@types/url-parse": "1.4.3",
-    "codelyzer": "5.2.0",
+    "codelyzer": "5.2.1",
     "jasmine-core": "3.5.0",
     "jasmine-spec-reporter": "4.2.1",
     "karma": "4.4.1",
