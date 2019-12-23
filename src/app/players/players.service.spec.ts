@@ -55,7 +55,7 @@ describe('PlayersService', () => {
       expect(req.request.body).toEqual({ name: 'FAKE_NAME' });
       const req2 = httpContoller.expectOne('FAKE_URL/players/FAKE_ID/skill');
       expect(req2.request.method).toBe('PUT');
-      expect(req2.request.body).toEqual({ player: 'FAKE_ID', skill: player.skill });
+      expect(req2.request.body).toEqual(player.skill);
     }));
   });
 

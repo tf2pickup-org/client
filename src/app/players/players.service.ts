@@ -33,21 +33,18 @@ export class PlayersService {
       name: player.name,
     };
 
-    const editedSkill = {
-      player: player.id,
-      skill: player.skill,
-    };
-
     return zip(
       this.http.patch<Player>(`${this.apiUrl}/players/${player.id}`, editedPlayer),
-      this.http.put<PlayerSkill>(`${this.apiUrl}/players/${player.id}/skill`, editedSkill),
+      this.http.put<PlayerSkill>(`${this.apiUrl}/players/${player.id}/skill`, player.skill),
     ).pipe(
       map(([thePlayer, skill]) => ({ ...thePlayer, skill: skill.skill })),
     );
   }
 
   fetchPlayerSkill(playerId: string): Observable<PlayerSkill> {
-    return this.http.get<PlayerSkill>(`${this.apiUrl}/players/${playerId}/skill`);
+    return this.http.get<{ [gameClass: string]: number }>(`${this.apiUrl}/players/${playerId}/skill`).pipe(
+      map(skill => ({ player: playerId, skill })),
+    );
   }
 
   fetchAllPlayers(): Observable<Player[]> {
