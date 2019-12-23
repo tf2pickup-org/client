@@ -18,9 +18,5 @@
   <a href="https://opensource.org/licenses/MIT">
     <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="MIT license">
   </a>
-
-  <a href="https://greenkeeper.io/">
-    <img src="https://badges.greenkeeper.io/tf2pickup-pl/client.svg" alt="Greenkeeper">
-  </a>
 </p>
 
