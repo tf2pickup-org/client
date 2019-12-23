@@ -31,7 +31,7 @@ describe('QueueEventsService', () => {
     });
 
     it('should forward queue slots update', () => {
-      const slot: QueueSlot = { id: 0, gameClass: 'scout', playerReady: false };
+      const slot: QueueSlot = { id: 0, gameClass: 'scout', ready: false };
       service.slotsUpdate.subscribe(event => expect(event).toEqual([ slot ]));
       ioClientService.socket.subscribe(socket => socket.emit('queue slots update', [ slot ]));
     });

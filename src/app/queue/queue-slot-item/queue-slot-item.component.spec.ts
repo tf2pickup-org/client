@@ -28,7 +28,7 @@ describe('QueueSlotItemComponent', () => {
   });
 
   it('should apply correct css classes', () => {
-    component.slot = { id: 0, gameClass: 'soldier', playerReady: false };
+    component.slot = { id: 0, gameClass: 'soldier', ready: false };
     fixture.detectChanges();
 
     const div = fixture.debugElement.query(By.css('.queue-slot-item')).nativeElement as HTMLElement;
@@ -43,7 +43,7 @@ describe('QueueSlotItemComponent', () => {
     fixture.detectChanges();
     expect(div.classList.contains('locked')).toBe(true);
 
-    component.slot = { id: 0, gameClass: 'soldier', playerReady: false, playerId: 'FAKE_ID' };
+    component.slot = { id: 0, gameClass: 'soldier', ready: false, playerId: 'FAKE_ID' };
     fixture.detectChanges();
     expect(div.classList.contains('taken')).toBe(true);
 
@@ -51,18 +51,18 @@ describe('QueueSlotItemComponent', () => {
     fixture.detectChanges();
     expect(div.classList.contains('by-me')).toBe(true);
 
-    component.slot.playerReady = true;
+    component.slot.ready = true;
     fixture.detectChanges();
     expect(div.classList.contains('and-ready')).toBe(true);
 
     expect(fixture.debugElement.query(By.css('button.slot-action-btn'))).toBeFalsy();
 
-    component.slot.playerReady = false;
+    component.slot.ready = false;
     component.locked = false;
     fixture.detectChanges();
     expect(fixture.debugElement.query(By.css('button.slot-action-btn')).nativeElement).toBeTruthy();
 
-    component.slot.playerReady = true;
+    component.slot.ready = true;
     fixture.detectChanges();
     expect(fixture.debugElement.query(By.css('button.slot-action-btn'))).toBeFalsy();
 
@@ -86,7 +86,7 @@ describe('QueueSlotItemComponent', () => {
     let takeSlotBtn: HTMLElement;
 
     beforeEach(() => {
-      component.slot = { id: 0, gameClass: 'soldier', playerReady: false };
+      component.slot = { id: 0, gameClass: 'soldier', ready: false };
       fixture.detectChanges();
       takeSlotBtn = fixture.debugElement.query(By.css('div.queue-slot-item')).nativeElement;
     });
@@ -101,7 +101,7 @@ describe('QueueSlotItemComponent', () => {
     let freeSlotBtn: HTMLButtonElement;
 
     beforeEach(() => {
-      component.slot = { id: 0, gameClass: 'soldier', playerReady: false, playerId: 'FAKE_PLAYER_ID' };
+      component.slot = { id: 0, gameClass: 'soldier', ready: false, playerId: 'FAKE_PLAYER_ID' };
       component.takenByMe = true;
       component.canHaveFriend = false;
       fixture.detectChanges();
@@ -121,7 +121,7 @@ describe('QueueSlotItemComponent', () => {
     let markFriendBtn: HTMLButtonElement;
 
     beforeEach(() => {
-      component.slot = { id: 0, gameClass: 'soldier', playerReady: false, playerId: 'FAKE_PLAYER_ID' };
+      component.slot = { id: 0, gameClass: 'soldier', ready: false, playerId: 'FAKE_PLAYER_ID' };
       component.takenByMe = false;
       component.canHaveFriend = true;
       component.isFriend = false;

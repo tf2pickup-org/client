@@ -6,7 +6,7 @@
     'locked': locked,
     'taken': !!slot.playerId,
     'by-me': takenByMe,
-    'and-ready': slot.playerReady
+    'and-ready': slot.ready
   }"
   (click)="takeSlot.emit(slot)">
 
@@ -24,7 +24,7 @@
     <span class="oi oi-plus text-secondary add-prompt"></span>
   </ng-template>
 
-  <button *ngIf="!locked && takenByMe && !slot.playerReady"
+  <button *ngIf="!locked && takenByMe && !slot.ready"
     type="button"
     class="btn btn-light btn-sm slot-action-btn"
     (click)="emitFreeSlot($event)"
