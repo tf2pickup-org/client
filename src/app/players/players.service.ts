@@ -64,7 +64,7 @@ export class PlayersService {
   }
 
   revokePlayerBan(playerBan: PlayerBan): Observable<PlayerBan> {
-    return this.http.put<PlayerBan>(`${this.apiUrl}/players/${playerBan.player}/bans?revoke`, { ...playerBan });
+    return this.http.post<PlayerBan>(`${this.apiUrl}/players/${playerBan.player}/bans/${playerBan.id}?revoke`, { });
   }
 
 }
