@@ -35,7 +35,7 @@ describe('GameServersService', () => {
 
   describe('#addGameServer()', () => {
     it('should call the endpoint', inject([GameServersService], (service: GameServersService) => {
-      const server: GameServer = { name: 'FAKE_NAME', address: 'FAKE_ADDRESS', port: 1234 };
+      const server: GameServer = { name: 'FAKE_NAME', address: 'FAKE_ADDRESS', port: '1234' };
       service.addGameServer(server).subscribe();
       const req = httpController.expectOne('FAKE_URL/game-servers');
       expect(req.request.method).toBe('POST');

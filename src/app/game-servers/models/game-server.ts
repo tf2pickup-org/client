@@ -2,7 +2,7 @@ export interface GameServer {
   id?: string;
   name: string;
   address: string;
-  port: number;
+  port: string;
   rconPassword?: string;
   isOnline?: boolean;
 }
