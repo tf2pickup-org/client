@@ -47,24 +47,24 @@ describe('GamesService', () => {
   describe('#forceEndGame()', () => {
     it('should call api endpoint', inject([GamesService], (service: GamesService) => {
       service.forceEndGame('FAKE_ID').subscribe();
-      httpController.expectOne('FAKE_URL/games/FAKE_ID?force_end');
-      expect().nothing();
+      const req = httpController.expectOne('FAKE_URL/games/FAKE_ID?force_end');
+      expect(req.request.method).toBe('POST');
     }));
   });
 
   describe('#reinitializeServer()', () => {
     it('should call api endpoint', inject([GamesService], (service: GamesService) => {
       service.reinitializeServer('FAKE_ID').subscribe();
-      httpController.expectOne('FAKE_URL/games/FAKE_ID?reinitialize_server');
-      expect().nothing();
+      const req = httpController.expectOne('FAKE_URL/games/FAKE_ID?reinitialize_server');
+      expect(req.request.method).toBe('POST');
     }));
   });
 
   describe('#fetchGameSkills()', () => {
     it('should call api endpoint', inject([GamesService], (service: GamesService) => {
       service.fetchGameSkills('FAKE_ID').subscribe();
-      httpController.expectOne('FAKE_URL/games/FAKE_ID/skills');
-      expect().nothing();
+      const req = httpController.expectOne('FAKE_URL/games/FAKE_ID/skills');
+      expect(req.request.method).toBe('GET');
     }));
   });
 });
