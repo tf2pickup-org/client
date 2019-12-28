@@ -39,6 +39,6 @@ describe('PlayerEditSkillComponent', () => {
     const el = fixture.debugElement.query(By.css('input[type=number]')).nativeElement as HTMLInputElement;
     expect(el).toBeTruthy();
     expect(el.min).toBe('1');
-    expect(el.max).toBe('5');
+    expect(el.max).toBe('7');
   });
 });
