@@ -15,6 +15,11 @@
           &bull;
           <a [routerLink]="" (click)="logout()">logout</a>
         </ng-container>
+
+        <ng-container *ngIf="isAdmin | async">
+          &bull;
+          <a routerLink="/player-skill-dump" class="text-secondary">player skills</a>
+        </ng-container>
       </small>
     </span>
   </div>
