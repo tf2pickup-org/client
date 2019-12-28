@@ -11,3 +11,8 @@ export const isAdmin = createSelector(
   profile,
   theProfile => theProfile && (theProfile.role === 'admin' || theProfile.role === 'super-user'),
 );
+
+export const isSuperUser = createSelector(
+  profile,
+  theProfile => theProfile && theProfile.role === 'super-user'
+);

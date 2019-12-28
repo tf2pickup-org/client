@@ -1,4 +1,4 @@
-import { isProfileLoaded, isAdmin } from './profile.selectors';
+import { isProfileLoaded, isAdmin, isSuperUser } from './profile.selectors';
 
 describe('profile selectors', () => {
   describe('isProfileLoaded', () => {
@@ -15,6 +15,16 @@ describe('profile selectors', () => {
       expect(isAdmin.projector({ role: 'whatever' })).toBe(false);
       expect(isAdmin.projector({ role: 'admin' })).toBe(true);
       expect(isAdmin.projector({ role: 'super-user' })).toBe(true);
+    });
+  });
+
+  describe('isSuperUser', () => {
+    it('should return the correct value', () => {
+      expect(isSuperUser.projector(null)).toBeFalsy();
+      expect(isSuperUser.projector({ })).toBe(false);
+      expect(isSuperUser.projector({ role: 'something' })).toBe(false);
+      expect(isSuperUser.projector({ role: 'super-user' })).toBe(true);
+      expect(isSuperUser.projector({ role: 'admin' })).toBe(false);
     });
   });
 });
