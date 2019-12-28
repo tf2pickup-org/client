@@ -10,7 +10,7 @@ import { map } from 'rxjs/operators';
 interface PlayerRow {
   id: string;
   name: string;
-  [gameclass: string]: string;
+  [gameclass: string]: any;
 }
 
 @Component({
