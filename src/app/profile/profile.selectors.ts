@@ -6,3 +6,8 @@ const profileFeature = createFeatureSelector<AppState, State>('profile');
 
 export const isProfileLoaded = createSelector(profileFeature, feature => feature.loaded);
 export const profile = createSelector(profileFeature, feature => feature.profile);
+
+export const isAdmin = createSelector(
+  profile,
+  theProfile => theProfile && (theProfile.role === 'admin' || theProfile.role === 'super-user'),
+);

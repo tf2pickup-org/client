@@ -10,11 +10,13 @@ import { loadGame, forceEndGame, reinitializeServer } from '../games.actions';
 import { Player } from '@app/players/models/player';
 import { playerById } from '@app/players/selectors';
 import { loadPlayer } from '@app/players/actions';
-import { profile } from '@app/profile/profile.selectors';
+import { isAdmin } from '@app/profile/profile.selectors';
 import { Title } from '@angular/platform-browser';
 import { environment } from '@environment';
 import { GamePlayer } from '../models/game-player';
 import { GamesService } from '../games.service';
+import { gameServerById } from '@app/game-servers/game-servers.selectors';
+import { loadGameServer } from '@app/game-servers/game-servers.actions';
 
 type ResolvedGamePlayer = Player & GamePlayer & { classSkill?: number };
 
@@ -30,12 +32,10 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
   private audio = new Audio('/assets/sounds/fight.wav');
   private players = new ReplaySubject<ResolvedGamePlayer[]>(1);
   game: Observable<Game>;
+  gameServerName: Observable<string>;
   playersRed: Observable<ResolvedGamePlayer[]>;
   playersBlu: Observable<ResolvedGamePlayer[]>;
-  isAdmin: Observable<boolean> = this.store.pipe(
-    select(profile),
-    map(theProfile => theProfile && (theProfile.role === 'super-user' || theProfile.role === 'admin')),
-  );
+  isAdmin: Observable<boolean> = this.store.select(isAdmin);
 
   @ViewChild('connectInput', { static: false })
   connectInput: ElementRef;
@@ -67,6 +67,20 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
       shareReplay(),
     );
 
+    // load game server
+    this.gameServerName = this.game.pipe(
+      map(game => game?.gameServer),
+      filter(gameServerId => !!gameServerId),
+      switchMap(gameServerId => this.store.select(gameServerById(gameServerId)).pipe(
+        tap(gameServer => {
+          if (!gameServer) {
+            this.store.dispatch(loadGameServer({ gameServerId }));
+          }
+        }),
+      )),
+      map(gameServer => gameServer?.name),
+    );
+
     // resolve game slot into a real player
     const resolveGamePlayer = (slot: GamePlayer) => this.store.pipe(
       select(playerById(slot.playerId)),
@@ -85,7 +99,7 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
       ])));
 
     const resolveSkills = this.isAdmin.pipe(
-      filter(isAdmin => isAdmin),
+      filter(_isAdmin => _isAdmin),
       switchMap(() => getGameId),
       switchMap(gameId => this.gamesService.fetchGameSkills(gameId)),
       filter(skills => !!skills),

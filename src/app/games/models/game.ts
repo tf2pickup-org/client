@@ -15,4 +15,5 @@ export interface Game {
   connectString: string;
   mumbleUrl: string;
   error?: string;
+  gameServer?: string;
 }

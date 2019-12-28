@@ -15,12 +15,14 @@
   <div class="row text-muted">
     <div class="col">launched</div>
     <div class="col">map</div>
+    <div class="col">server</div>
     <div class="col">state</div>
   </div>
 
   <div class="row">
     <div class="col">{{ _game.launchedAt | date:'medium' }}</div>
     <div class="col">{{ _game.map }}</div>
+    <div class="col">{{ gameServerName | async }} </div>
     <div class="col">
       {{ _game.state }}
       <span *ngIf="_game.error">({{ _game.error }})</span>
