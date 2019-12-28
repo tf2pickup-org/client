@@ -3,7 +3,8 @@ import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { PlayersService } from './players.service';
 import { map, mergeMap } from 'rxjs/operators';
 import { loadPlayer, playerLoaded, playerEdited, editPlayer, playerSkillLoaded, loadPlayerSkill, loadPlayers,
-  playersLoaded, loadPlayerBans, playerBansLoaded, revokePlayerBan, playerBanUpdated, addPlayerBan, playerBanAdded } from './actions';
+  playersLoaded, loadPlayerBans, playerBansLoaded, revokePlayerBan, playerBanUpdated, addPlayerBan, playerBanAdded, loadAllPlayerSkills,
+  allPlayerSkillsLoaded } from './actions';
 
 @Injectable()
 export class PlayerEffects {
@@ -39,6 +40,15 @@ export class PlayerEffects {
       ofType(loadPlayers),
       mergeMap(() => this.playersService.fetchAllPlayers().pipe(
         map(players => playersLoaded({ players })),
+      )),
+    )
+  );
+
+  loadAllPlayerSkills = createEffect(() =>
+    this.actions.pipe(
+      ofType(loadAllPlayerSkills),
+      mergeMap(() => this.playersService.fetchAllPlayerSkills().pipe(
+        map(playerSkills => allPlayerSkillsLoaded({ playerSkills })),
       )),
     )
   );

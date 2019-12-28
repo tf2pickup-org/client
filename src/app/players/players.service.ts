@@ -41,6 +41,10 @@ export class PlayersService {
     );
   }
 
+  fetchAllPlayerSkills(): Observable<PlayerSkill[]> {
+    return this.http.get<PlayerSkill[]>(`${this.apiUrl}/players/all/skill`);
+  }
+
   fetchPlayerSkill(playerId: string): Observable<PlayerSkill> {
     return this.http.get<{ [gameClass: string]: number }>(`${this.apiUrl}/players/${playerId}/skill`).pipe(
       map(skill => ({ player: playerId, skill })),
