@@ -50,4 +50,12 @@ describe('GameServersService', () => {
       expect(req.request.method).toBe('DELETE');
     }));
   });
+
+  describe('#fetchGameServer()', () => {
+    it('should call the endpoint', inject([GameServersService], (service: GameServersService) => {
+      service.fetchGameServer('FAKE_ID').subscribe();
+      const req = httpController.expectOne('FAKE_URL/game-servers/FAKE_ID');
+      expect(req.request.method).toBe('GET');
+    }));
+  });
 });

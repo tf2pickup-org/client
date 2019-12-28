@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { GameServersService } from './game-servers.service';
 import { loadGameServers, gameServersLoaded, addGameServer, gameServerAdded, removeGameServer,
-  gameServerRemoved, failedToAddGameServer} from './game-servers.actions';
+  gameServerRemoved, failedToAddGameServer, loadGameServer, gameServerLoaded} from './game-servers.actions';
 import { mergeMap, map, catchError } from 'rxjs/operators';
 import { of, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -15,6 +15,15 @@ export class GameServersEffects {
       ofType(loadGameServers),
       mergeMap(() => this.gameServersService.fetchGameServers().pipe(
         map(gameServers => gameServersLoaded({ gameServers })),
+      )),
+    )
+  );
+
+  loadGameServer = createEffect(() =>
+    this.actions.pipe(
+      ofType(loadGameServer),
+      mergeMap(({ gameServerId }) => this.gameServersService.fetchGameServer(gameServerId).pipe(
+        map(gameServer => gameServerLoaded({ gameServer })),
       )),
     )
   );
