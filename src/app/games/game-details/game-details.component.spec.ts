@@ -50,7 +50,7 @@ class GamesServiceStub {
   fetchGameSkills(gameId: string) { }
 }
 
-fdescribe('GameDetailsComponent', () => {
+describe('GameDetailsComponent', () => {
   let component: GameDetailsComponent;
   let fixture: ComponentFixture<GameDetailsComponent>;
   let store: MockStore<any>;
