@@ -56,7 +56,7 @@ export class QueueEffects {
       }),
       filter(queueState => queueState === 'ready'),
       withLatestFrom(this.store.select(mySlot)),
-      filter(([, slot]) => slot && !slot.playerReady),
+      filter(([, slot]) => slot && !slot.ready),
       withLatestFrom(this.store.select(isPreReadied)),
       map(([, preReadied]) => preReadied),
       map(preReadied => preReadied ? readyUp() : showReadyUpDialog()),

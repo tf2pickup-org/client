@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { map, switchMap, tap, first, filter, takeUntil } from 'rxjs/operators';
+import { map, switchMap, tap, first, filter, takeUntil, withLatestFrom } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app.state';
 import { playerById, playerBansLocked } from '../selectors';
@@ -10,6 +10,7 @@ import { Observable, BehaviorSubject, Subject } from 'rxjs';
 import { Player } from '../models/player';
 import { Actions, ofType } from '@ngrx/effects';
 import { Location } from '@angular/common';
+import { profile } from '@app/profile/profile.selectors';
 
 @Component({
   selector: 'app-add-player-ban',
@@ -94,6 +95,8 @@ export class AddPlayerBanComponent implements OnInit, OnDestroy {
         end: this.getBanEnd(),
         reason: this.banForm.get('reason').value,
       })),
+      withLatestFrom(this.store.select(profile)),
+      map(([playerBan, theProfile]) => ({ ...playerBan, admin: theProfile.id })),
     ).subscribe(playerBan => this.store.dispatch(addPlayerBan({ playerBan })));
   }
 

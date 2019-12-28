@@ -24,11 +24,11 @@ export class GamesService {
   }
 
   forceEndGame(gameId: string): Observable<void> {
-    return this.http.put<void>(`${this.apiUrl}/games/${gameId}?force_end`, { });
+    return this.http.post<void>(`${this.apiUrl}/games/${gameId}?force_end`, { });
   }
 
   reinitializeServer(gameId: string): Observable<void> {
-    return this.http.put<void>(`${this.apiUrl}/games/${gameId}?reinitialize_server`, { });
+    return this.http.post<void>(`${this.apiUrl}/games/${gameId}?reinitialize_server`, { });
   }
 
   fetchGameSkills(gameId: string): Observable<{ [playerId: string]: number }> {

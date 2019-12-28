@@ -48,13 +48,13 @@ const queue: Queue = {
     {
       id: 0,
       gameClass: 'soldier',
-      playerReady: false,
+      ready: false,
       playerId: 'FAKE_ID',
     },
     {
       id: 1,
       gameClass: 'soldier',
-      playerReady: false,
+      ready: false,
     }
   ],
   state: 'waiting',
@@ -101,8 +101,8 @@ describe('QueueEffects', () => {
     const spy = spyOn(store, 'dispatch');
 
     const slots: QueueSlot[] = [
-      { id: 0, gameClass: 'soldier', playerId: 'FAKE_ID_1', playerReady: false, },
-      { id: 1, gameClass: 'medic', playerId: 'FAKE_ID_2', playerReady: true, }
+      { id: 0, gameClass: 'soldier', playerId: 'FAKE_ID_1', ready: false, },
+      { id: 1, gameClass: 'medic', playerId: 'FAKE_ID_2', ready: true, }
     ];
     queueEvents.slotsUpdate.next(slots);
     expect(spy).toHaveBeenCalledWith(queueSlotsUpdated({ slots }));
@@ -114,7 +114,7 @@ describe('QueueEffects', () => {
 
   describe('#joinQueue', () => {
     it('should attempt to join the queue', () => {
-      const slot: QueueSlot = { id: 1, gameClass: 'soldier', playerId: 'FAKE_ID_2', playerReady: false, };
+      const slot: QueueSlot = { id: 1, gameClass: 'soldier', playerId: 'FAKE_ID_2', ready: false, };
       const spy = spyOn(queueService, 'joinQueue').and.returnValue(of([ slot ]));
       effects.joinQueue.subscribe(action => expect(action).toEqual(queueSlotsUpdated({ slots: [ slot ] })));
       actions.next(joinQueue({ slotId: 1 }));
@@ -132,7 +132,7 @@ describe('QueueEffects', () => {
   });
 
   describe('#showReadyUpDialog', () => {
-    const slot: QueueSlot = { id: 1, gameClass: 'soldier', playerId: 'FAKE_ID_2', playerReady: false, };
+    const slot: QueueSlot = { id: 1, gameClass: 'soldier', playerId: 'FAKE_ID_2', ready: false, };
     let mySlotSelector: MemoizedSelector<AppState, QueueSlot>;
     let preReadiedSelector: MemoizedSelector<AppState, boolean>;
 
@@ -147,7 +147,7 @@ describe('QueueEffects', () => {
     });
 
     it('should not show ready up dialog if the user is already readied up', () => {
-      mySlotSelector.setResult({ ...slot, playerReady: true });
+      mySlotSelector.setResult({ ...slot, ready: true });
       effects.showReadyUpDialog.subscribe(() => fail());
       actions.next(queueLoaded({ queue: { ...queue, state: 'ready' }}));
       expect().nothing();
@@ -162,7 +162,7 @@ describe('QueueEffects', () => {
 
   describe('#closeReadyUpDialog', () => {
     it('should emit whenever user loses the slot', () => {
-      const slot: QueueSlot = { id: 1, gameClass: 'soldier', playerId: 'FAKE_ID_2', playerReady: false, };
+      const slot: QueueSlot = { id: 1, gameClass: 'soldier', playerId: 'FAKE_ID_2', ready: false, };
       const selector = store.overrideSelector(mySlot, slot);
 
       let n = 0;
@@ -182,7 +182,7 @@ describe('QueueEffects', () => {
 
   describe('#markFriend', () => {
     it('should call the service', () => {
-      const slot: QueueSlot = { id: 1, gameClass: 'soldier', playerId: 'FAKE_ID_2', playerReady: false, friend: 'FAKE_FRIEND_ID' };
+      const slot: QueueSlot = { id: 1, gameClass: 'soldier', playerId: 'FAKE_ID_2', ready: false, friend: 'FAKE_FRIEND_ID' };
       const spy = spyOn(queueService, 'markFriend').and.returnValue(of(slot));
       effects.markFriend.subscribe(action => expect(action).toEqual(queueSlotsUpdated({ slots: [ slot ] })));
       actions.next(markFriend({ friendId: 'FAKE_FRIEND_ID' }));

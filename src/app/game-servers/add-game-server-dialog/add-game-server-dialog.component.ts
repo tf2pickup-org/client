@@ -31,7 +31,7 @@ export class AddGameServerDialogComponent {
     const gameServer: GameServer = {
       name: this.serverNameValue,
       address: this.addressValue,
-      port: this.portValue,
+      port: `${this.portValue}`,
       rconPassword: this.rconPasswordValue,
     };
 

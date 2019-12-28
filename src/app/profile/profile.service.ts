@@ -19,7 +19,7 @@ export class ProfileService {
   }
 
   acceptRules(): Observable<void> {
-    return this.http.put<void>(`${this.apiUrl}/profile?accept_terms`, { });
+    return this.http.post<void>(`${this.apiUrl}/profile?accept_terms`, { });
   }
 
 }

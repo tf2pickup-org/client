@@ -55,7 +55,7 @@ describe('PlayersService', () => {
       expect(req.request.body).toEqual({ name: 'FAKE_NAME' });
       const req2 = httpContoller.expectOne('FAKE_URL/players/FAKE_ID/skill');
       expect(req2.request.method).toBe('PUT');
-      expect(req2.request.body).toEqual({ player: 'FAKE_ID', skill: player.skill });
+      expect(req2.request.body).toEqual(player.skill);
     }));
   });
 
@@ -93,9 +93,9 @@ describe('PlayersService', () => {
 
   describe('#addPlayerBan()', () => {
     it('should call the endpoint', inject([PlayersService], (service: PlayersService) => {
-      const ban = { player: 'FAKE_ID', reason: 'FAKE_REASON' };
+      const ban = { id: 'FAKE_BAN_ID', player: 'FAKE_PLAYER_ID', reason: 'FAKE_REASON' };
       service.addPlayerBan(ban).subscribe();
-      const req = httpContoller.expectOne('FAKE_URL/players/FAKE_ID/bans');
+      const req = httpContoller.expectOne('FAKE_URL/players/FAKE_PLAYER_ID/bans');
       expect(req.request.method).toBe('POST');
       expect(req.request.body).toEqual(ban);
     }));
@@ -113,9 +113,8 @@ describe('PlayersService', () => {
       };
 
       service.revokePlayerBan(ban).subscribe();
-      const req = httpContoller.expectOne('FAKE_URL/players/FAKE_PLAYER_ID/bans?revoke');
-      expect(req.request.method).toBe('PUT');
-      expect(req.request.body).toEqual(ban);
+      const req = httpContoller.expectOne('FAKE_URL/players/FAKE_PLAYER_ID/bans/FAKE_BAN_ID?revoke');
+      expect(req.request.method).toBe('POST');
     }));
   });
 });

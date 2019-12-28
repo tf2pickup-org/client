@@ -42,7 +42,7 @@ describe('QueueService', () => {
     it('should call the endpoint', inject([QueueService], (service: QueueService) => {
       const spy = spyOn(ioClientService, 'call');
       service.joinQueue(11);
-      expect(spy).toHaveBeenCalledWith('join queue', 11);
+      expect(spy).toHaveBeenCalledWith('join queue', { slotId: 11 });
     }));
   });
 
@@ -66,7 +66,7 @@ describe('QueueService', () => {
     it('should call the endpoint', inject([QueueService], (service: QueueService) => {
       const spy = spyOn(ioClientService, 'call');
       service.voteForMap('cp_fake_rc1');
-      expect(spy).toHaveBeenCalledWith('vote for map', 'cp_fake_rc1');
+      expect(spy).toHaveBeenCalledWith('vote for map', { map: 'cp_fake_rc1' });
     }));
   });
 
@@ -74,7 +74,7 @@ describe('QueueService', () => {
     it('should call the endpoint', inject([QueueService], (service: QueueService) => {
       const spy = spyOn(ioClientService, 'call');
       service.markFriend('FAKE_ID');
-      expect(spy).toHaveBeenCalledWith('mark friend', 'FAKE_ID');
+      expect(spy).toHaveBeenCalledWith('mark friend', { friendPlayerId: 'FAKE_ID' });
     }));
   });
 });

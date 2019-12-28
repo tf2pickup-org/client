@@ -83,7 +83,7 @@ describe('QueueClassSlotListComponent', () => {
   describe('#joinQueue()', () => {
     it('should dispatch the joinQueue action', () => {
       const spy = spyOn(store, 'dispatch');
-      component.joinQueue({ id: 0, gameClass: 'soldier', playerReady: false });
+      component.joinQueue({ id: 0, gameClass: 'soldier', ready: false });
       expect(spy).toHaveBeenCalledWith(joinQueue({ slotId: 0 }));
     });
   });
