@@ -1,3 +1,13 @@
+# [1.6.2](https://github.com/tf2pickup-pl/client/compare/1.6.1...1.6.2) (2019-12-28)
+
+### Features
+* Adapt to the new server architecture ([c0a448b](https://github.com/tf2pickup-pl/client/commit/c0a448b58cad44d4c0c8994e661a6a35f436b622))
+* Show game server name in game details page ([2294b0a](https://github.com/tf2pickup-pl/client/commit/2294b0ac89fae61115911dc6e5640bdc685a8c44))
+* Update skill range ([b334e8c](https://github.com/tf2pickup-pl/client/commit/b334e8cf003cdf9d4508597f4d1cb5dfa0e395ca))
+
+### Fixes
+* Don't display pagination controls when game list is empty ([2920222](https://github.com/tf2pickup-pl/client/commit/292022266098620a819118024689210b1f11385a))
+
 # [1.6.1](https://github.com/tf2pickup-pl/client/compare/1.6.0...1.6.1) (2019-12-07)
 
 ### Fixes
