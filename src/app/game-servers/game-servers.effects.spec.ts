@@ -1,14 +1,19 @@
-import { ReplaySubject, of } from 'rxjs';
+import { ReplaySubject, of, throwError } from 'rxjs';
 import { Action } from '@ngrx/store';
 import { TestBed } from '@angular/core/testing';
 import { GameServersEffects } from './game-servers.effects';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { GameServersService } from './game-servers.service';
-import { gameServersLoaded, loadGameServers, gameServerLoaded, loadGameServer } from './game-servers.actions';
+import { gameServersLoaded, loadGameServers, gameServerLoaded, loadGameServer, gameServerAdded, addGameServer, failedToAddGameServer,
+  gameServerRemoved, removeGameServer } from './game-servers.actions';
+import { GameServer } from './models/game-server';
+import { HttpErrorResponse } from '@angular/common/http';
 
 class GameServersServiceStub {
   fetchGameServers() { return of([]); }
   fetchGameServer(gameServerId: string) { return of({ id: 'FAKE_ID', name: 'FAKE_NAME' }); }
+  addGameServer(gameServer: GameServer) { return of(gameServer); }
+  removeGameServer(gameServerId: string) { return of(); }
 }
 
 describe('GameServersEffects', () => {
@@ -33,7 +38,7 @@ describe('GameServersEffects', () => {
     expect(effects).toBeTruthy();
   });
 
-  describe('#loadGameServers', () => {
+  describe('loadGameServers', () => {
     it('should attempt to fetch all game servers', () => {
       const spy = spyOn(gameServersService, 'fetchGameServers').and.callThrough();
       effects.loadGameServers.subscribe(action => expect(action).toEqual(gameServersLoaded({ gameServers: [] })));
@@ -42,12 +47,39 @@ describe('GameServersEffects', () => {
     });
   });
 
-  describe('#loadGameServer', () => {
+  describe('loadGameServer', () => {
     it('should attempt to fetch the given game server', () => {
       const spy = spyOn(gameServersService, 'fetchGameServer').and.callThrough();
       effects.loadGameServer.subscribe(action =>
         expect(action).toEqual(gameServerLoaded({ gameServer: { id: 'FAKE_ID', name: 'FAKE_NAME' } } as any)));
       actions.next(loadGameServer({ gameServerId: 'FAKE_ID' }));
+      expect(spy).toHaveBeenCalledWith('FAKE_ID');
+    });
+  });
+
+  describe('addGameServer', () => {
+    const gameServer: GameServer = { name: 'some name', address: '127.0.0.1', port: '27015', rconPassword: '123456' };
+
+    it('should add the given server', () => {
+      const spy = spyOn(gameServersService, 'addGameServer').and.callThrough();
+      effects.addGameServer.subscribe(action => expect(action).toEqual(gameServerAdded({ gameServer })));
+      actions.next(addGameServer({ gameServer }));
+      expect(spy).toHaveBeenCalledWith(gameServer);
+    });
+
+    it('should handle errors', () => {
+      spyOn(gameServersService, 'addGameServer')
+        .and.returnValue(throwError(new HttpErrorResponse({ error: { message: 'haha failed' } })));
+      effects.addGameServer.subscribe(action => expect(action).toEqual(failedToAddGameServer({ error: 'haha failed' })));
+      actions.next(addGameServer({ gameServer }));
+    });
+  });
+
+  describe('removeGameServer', () => {
+    it('should remove the  game server', () => {
+      const spy = spyOn(gameServersService, 'removeGameServer').and.callThrough();
+      effects.removeGameServer.subscribe(action => expect(action).toEqual(gameServerRemoved({ gameServerId: 'FAKE_ID' })));
+      actions.next(removeGameServer({ gameServerId: 'FAKE_ID' }));
       expect(spy).toHaveBeenCalledWith('FAKE_ID');
     });
   });

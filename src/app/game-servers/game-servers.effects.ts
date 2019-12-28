@@ -34,7 +34,7 @@ export class GameServersEffects {
       mergeMap(({ gameServer }) => this.gameServersService.addGameServer(gameServer).pipe(
         map(addedGameServer => gameServerAdded({ gameServer: addedGameServer })),
         catchError(error => {
-          if (error instanceof HttpErrorResponse && error.error) {
+          if (error instanceof HttpErrorResponse) {
             return of(failedToAddGameServer({ error: error.error.message }));
           } else {
             return throwError(error);
