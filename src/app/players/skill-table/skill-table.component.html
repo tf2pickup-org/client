@@ -1,0 +1,6 @@
+<div class="container">
+  <ngx-datatable class="bootstrap"
+    [columns]="columns | async"
+    [rows]="players | async"
+    [sorts]="[{prop: 'name', dir: 'asc'}]"></ngx-datatable>
+</div>

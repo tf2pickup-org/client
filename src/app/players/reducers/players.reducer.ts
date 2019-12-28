@@ -2,7 +2,7 @@ import { EntityState } from '@ngrx/entity';
 import { Player } from '../models/player';
 import { playersAdapter as adapter } from '../adapters';
 import { createReducer, Action, on } from '@ngrx/store';
-import { playerLoaded, editPlayer, playerUpdated, playerEdited, playerSkillLoaded, playersLoaded } from '../actions';
+import { playerLoaded, editPlayer, playerUpdated, playerEdited, playerSkillLoaded, playersLoaded, allPlayerSkillsLoaded } from '../actions';
 import { PlayerSkill } from '../models/player-skill';
 
 export interface State extends EntityState<Player> {
@@ -22,6 +22,15 @@ function insertPlayerSkill(playerSkill: PlayerSkill, state: State): State {
   }, state);
 }
 
+function insertAllPlayerSkills(playerSkills: PlayerSkill[], state: State): State {
+  return adapter.updateMany(playerSkills.map(skill => ({
+    id: skill.player,
+    changes: {
+      skill: skill.skill,
+    },
+  })), state);
+}
+
 const playerReducer = createReducer(
   initialState,
   on(playerLoaded, (state, { player }) => adapter.upsertOne(player, state)),
@@ -29,6 +38,7 @@ const playerReducer = createReducer(
   on(playerUpdated, (state, { player }) => adapter.upsertOne(player, state)),
   on(playerEdited, (state, { player }) => ({ ...adapter.upsertOne(player, state), locked: false })),
   on(playerSkillLoaded, (state, { playerSkill }) => insertPlayerSkill(playerSkill, state)),
+  on(allPlayerSkillsLoaded, (state, { playerSkills }) => insertAllPlayerSkills(playerSkills, state)),
   on(playersLoaded, (state, { players }) => adapter.upsertMany(players, state)),
 );
 

@@ -59,6 +59,14 @@ describe('PlayersService', () => {
     }));
   });
 
+  describe('#fetchAllPlayerSkills()', () => {
+    it('should call the endpoint', inject([PlayersService], (service: PlayersService) => {
+      service.fetchAllPlayerSkills().subscribe();
+      const req = httpContoller.expectOne('FAKE_URL/players/all/skill');
+      expect(req.request.method).toBe('GET');
+    }));
+  });
+
   describe('#fetchPlayerSkill()', () => {
     it('should call the endpoint', inject([PlayersService], (service: PlayersService) => {
       service.fetchPlayerSkill('FAKE_ID').subscribe();

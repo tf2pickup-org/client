@@ -22,6 +22,8 @@ import { GamesModule } from '@app/games/games.module';
 import { SteamProfileLinkPipe } from './steam-profile-link.pipe';
 import { Etf2lProfileLinkPipe } from './etf2l-profile-link.pipe';
 import { LogsTfProfileLinkPipe } from './logs-tf-profile-link.pipe';
+import { SkillTableComponent } from './skill-table/skill-table.component';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,7 @@ import { LogsTfProfileLinkPipe } from './logs-tf-profile-link.pipe';
     SteamProfileLinkPipe,
     Etf2lProfileLinkPipe,
     LogsTfProfileLinkPipe,
+    SkillTableComponent,
   ],
   imports: [
     CommonModule,
@@ -48,6 +51,7 @@ import { LogsTfProfileLinkPipe } from './logs-tf-profile-link.pipe';
     EffectsModule.forFeature([PlayerEffects]),
     TooltipModule,
     InlineSVGModule,
+    NgxDatatableModule,
 
     GamesModule,
 

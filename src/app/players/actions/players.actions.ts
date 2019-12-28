@@ -44,3 +44,10 @@ export const playersLoaded = createAction(
   '[API] All players loaded',
   props<{ players: Player[] }>(),
 );
+
+export const loadAllPlayerSkills = createAction('[Player skill table] Load all player skills');
+
+export const allPlayerSkillsLoaded = createAction(
+  '[API] All player skills loaded',
+  props<{ playerSkills: PlayerSkill[] }>(),
+);
