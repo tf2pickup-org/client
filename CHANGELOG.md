@@ -1,3 +1,11 @@
+# [1.6.3](https://github.com/tf2pickup-pl/client/compare/1.6.2...1.6.3) (2019-12-29)
+
+### Features
+* Player skill table ([3bcab46](https://github.com/tf2pickup-pl/client/commit/3bcab4688aa501513b26142044540d84a3849b9a))
+
+### Other
+* GameServers cleanup ([e146aa5](https://github.com/tf2pickup-pl/client/commit/e146aa504e37b6624abcdeefc21af9821219cef6))
+
 # [1.6.2](https://github.com/tf2pickup-pl/client/compare/1.6.1...1.6.2) (2019-12-28)
 
 ### Features
