@@ -38,6 +38,11 @@ export const playerSkillLoaded = createAction(
   props<{ playerSkill: PlayerSkill }>(),
 );
 
+export const failedToLoadPlayerSkill = createAction(
+  '[API] Failed to load player skill',
+  props<{ error: any }>(),
+);
+
 export const loadPlayers = createAction('[Player list] Load all players');
 
 export const playersLoaded = createAction(

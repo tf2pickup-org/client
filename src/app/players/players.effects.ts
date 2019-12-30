@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { PlayersService } from './players.service';
-import { map, mergeMap } from 'rxjs/operators';
+import { map, mergeMap, catchError } from 'rxjs/operators';
 import { loadPlayer, playerLoaded, playerEdited, editPlayer, playerSkillLoaded, loadPlayerSkill, loadPlayers,
   playersLoaded, loadPlayerBans, playerBansLoaded, revokePlayerBan, playerBanUpdated, addPlayerBan, playerBanAdded, loadAllPlayerSkills,
-  allPlayerSkillsLoaded } from './actions';
+  allPlayerSkillsLoaded,
+  failedToLoadPlayerSkill} from './actions';
+import { of } from 'rxjs';
 
 @Injectable()
 export class PlayerEffects {
@@ -31,6 +33,7 @@ export class PlayerEffects {
       ofType(loadPlayerSkill),
       mergeMap(({ playerId }) => this.playersService.fetchPlayerSkill(playerId).pipe(
         map(playerSkill => playerSkillLoaded({ playerSkill })),
+        catchError(error => of(failedToLoadPlayerSkill({ error }))),
       )),
     )
   );
