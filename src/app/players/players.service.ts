@@ -5,10 +5,13 @@ import { API_URL } from '@app/api-url';
 import { HttpClient } from '@angular/common/http';
 import { Game } from '@app/games/models/game';
 import { PlayerSkill } from './models/player-skill';
-import { map } from 'rxjs/operators';
+import { map, filter, first } from 'rxjs/operators';
 import { PlayerStats } from './models/player-stats';
 import { PlayerBan } from './models/player-ban';
 import { PaginatedList } from '@app/core/models/paginated-list';
+import { Store, select } from '@ngrx/store';
+import { AppState } from '@app/app.state';
+import { queueConfig } from '@app/queue/queue.selectors';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +21,7 @@ export class PlayersService {
   constructor(
     private http: HttpClient,
     @Inject(API_URL) private apiUrl: string,
+    private store: Store<AppState>,
   ) { }
 
   fetchPlayer(playerId: string): Observable<Player> {
@@ -69,6 +73,17 @@ export class PlayersService {
 
   revokePlayerBan(playerBan: PlayerBan): Observable<PlayerBan> {
     return this.http.post<PlayerBan>(`${this.apiUrl}/players/${playerBan.player}/bans/${playerBan.id}?revoke`, { });
+  }
+
+  defaultSkill(playerId: string): Observable<PlayerSkill> {
+    return this.store.pipe(
+      select(queueConfig),
+      first(config => !!config),
+      map(config => ({
+        player: playerId,
+        skill: config.classes.reduce((_skill, curr) => { _skill[curr.name] = 1; return _skill; }, { }),
+      })),
+    );
   }
 
 }
