@@ -38,6 +38,11 @@ export const playerSkillLoaded = createAction(
   props<{ playerSkill: PlayerSkill }>(),
 );
 
+export const initializeDefaultPlayerSkill = createAction(
+  '[API] Initialize player skill with default values',
+  props<{ playerId: string }>(),
+);
+
 export const failedToLoadPlayerSkill = createAction(
   '[API] Failed to load player skill',
   props<{ error: any }>(),

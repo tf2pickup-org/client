@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { PlayersService } from './players.service';
-import { map, mergeMap, catchError } from 'rxjs/operators';
+import { map, mergeMap, catchError, switchMap } from 'rxjs/operators';
 import { loadPlayer, playerLoaded, playerEdited, editPlayer, playerSkillLoaded, loadPlayerSkill, loadPlayers,
   playersLoaded, loadPlayerBans, playerBansLoaded, revokePlayerBan, playerBanUpdated, addPlayerBan, playerBanAdded, loadAllPlayerSkills,
-  allPlayerSkillsLoaded,
-  failedToLoadPlayerSkill} from './actions';
-import { of } from 'rxjs';
+  allPlayerSkillsLoaded, failedToLoadPlayerSkill, initializeDefaultPlayerSkill } from './actions';
+import { of, throwError } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable()
 export class PlayerEffects {
@@ -33,8 +33,26 @@ export class PlayerEffects {
       ofType(loadPlayerSkill),
       mergeMap(({ playerId }) => this.playersService.fetchPlayerSkill(playerId).pipe(
         map(playerSkill => playerSkillLoaded({ playerSkill })),
-        catchError(error => of(failedToLoadPlayerSkill({ error }))),
+        catchError(error => {
+          if (error instanceof HttpErrorResponse) {
+            if (error.status === 404) {
+              return of(initializeDefaultPlayerSkill({ playerId }));
+            } else {
+              return of(failedToLoadPlayerSkill({ error }));
+            }
+          } else {
+            return throwError(error);
+          }
+        }),
       )),
+    )
+  );
+
+  initializeDefaultPlayerSkill = createEffect(() =>
+    this.actions.pipe(
+      ofType(initializeDefaultPlayerSkill),
+      switchMap(({ playerId }) => this.playersService.defaultSkill(playerId)),
+      map(playerSkill => playerSkillLoaded({ playerSkill })),
     )
   );
 
