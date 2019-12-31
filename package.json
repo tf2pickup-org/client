@@ -26,7 +26,7 @@
     "@swimlane/ngx-datatable": "16.0.2",
     "bootstrap": "4.4.1",
     "jwt-decode": "2.2.0",
-    "ng-inline-svg": "9.1.0",
+    "ng-inline-svg": "9.2.0",
     "ngx-bootstrap": "5.2.0",
     "ngx-markdown": "8.2.1",
     "ngx-pagination": "5.0.0",
