@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { map, switchMap, tap, filter, takeUntil } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app.state';
-import { playerById, playersLocked } from '../selectors';
+import { playerById, playersLocked, playerSkillByPlayerId } from '../selectors';
 import { loadPlayer, editPlayer, playerEdited, loadPlayerSkill } from '../actions';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 import { Player } from '../models/player';
@@ -64,18 +64,17 @@ export class PlayerEditComponent implements OnInit, OnDestroy {
       takeUntil(this.destroyed),
     ).subscribe(player => {
       this.originalPlayer = player;
-
-      if (this.player.get('skill')) {
-        this.player.removeControl('skill');
-      }
-
       this.player.setValue({ name: player.name });
+      this.changeDetector.markForCheck();
+    });
 
-      if (player.skill) {
-        this.player.addControl('skill', this.toFormGroup(player.skill));
-        this.gameClasses.next(Object.keys(player.skill));
-      }
-
+    getPlayerId.pipe(
+      switchMap(playerId => this.store.select(playerSkillByPlayerId(playerId))),
+      filter(skill => !!skill),
+      takeUntil(this.destroyed),
+    ).subscribe(skill => {
+      this.player.addControl('skill', this.toFormGroup(skill));
+      this.gameClasses.next(Object.keys(skill));
       this.changeDetector.markForCheck();
     });
 
