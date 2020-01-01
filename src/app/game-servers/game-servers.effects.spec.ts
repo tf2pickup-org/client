@@ -17,9 +17,11 @@ class GameServersServiceStub {
 }
 
 describe('GameServersEffects', () => {
-  const actions = new ReplaySubject<Action>(1);
+  let actions: ReplaySubject<Action>;
   let effects: GameServersEffects;
   let gameServersService: GameServersServiceStub;
+
+  beforeEach(() => actions = new ReplaySubject<Action>(1));
 
   beforeEach(() => TestBed.configureTestingModule({
     providers: [
@@ -33,6 +35,8 @@ describe('GameServersEffects', () => {
     effects = TestBed.get(GameServersEffects);
     gameServersService = TestBed.get(GameServersService);
   });
+
+  afterEach(() => actions.complete());
 
   it('should be created', () => {
     expect(effects).toBeTruthy();
