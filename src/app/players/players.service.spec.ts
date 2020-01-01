@@ -3,9 +3,38 @@ import { PlayersService } from './players.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { API_URL } from '@app/api-url';
 import { Player } from './models/player';
+import { provideMockStore, MockStore } from '@ngrx/store/testing';
+import { MemoizedSelector, Store } from '@ngrx/store';
+import { AppState } from '@app/app.state';
+import { QueueConfig } from '@app/queue/models/queue-config';
+import { queueConfig } from '@app/queue/queue.selectors';
+
+const initialQueueConfig = {
+  teamCount: 2,
+    classes: [
+      {
+        name: 'scout',
+        count: 2
+      },
+      {
+        name: 'soldier',
+        count: 2
+      },
+      {
+        name: 'demoman',
+        count: 1
+      },
+      {
+        name: 'medic',
+        count: 1
+      }
+    ],
+};
 
 describe('PlayersService', () => {
   let httpContoller: HttpTestingController;
+  let store: MockStore<AppState>;
+  let queueConfigSelector: MemoizedSelector<AppState, QueueConfig>;
 
   beforeEach(() => TestBed.configureTestingModule({
     imports: [
@@ -13,11 +42,15 @@ describe('PlayersService', () => {
     ],
     providers: [
       { provide: API_URL, useValue: 'FAKE_URL' },
+      provideMockStore(),
     ]
   }));
 
-
-  beforeEach(() => httpContoller = TestBed.get(HttpTestingController));
+  beforeEach(() => {
+    httpContoller = TestBed.get(HttpTestingController);
+    store = TestBed.get(Store);
+    queueConfigSelector = store.overrideSelector(queueConfig, initialQueueConfig as QueueConfig);
+  });
   afterEach(() => httpContoller.verify());
 
   it('should be created', () => {
@@ -123,6 +156,22 @@ describe('PlayersService', () => {
       service.revokePlayerBan(ban).subscribe();
       const req = httpContoller.expectOne('FAKE_URL/players/FAKE_PLAYER_ID/bans/FAKE_BAN_ID?revoke');
       expect(req.request.method).toBe('POST');
+    }));
+  });
+
+  describe('#defaultSkill()', () => {
+    it('should init default config', inject([PlayersService], (service: PlayersService) => {
+      service.defaultSkill('FAKE_PLAYER_ID').subscribe(playerSkill => {
+        expect(playerSkill).toEqual({
+          player: 'FAKE_PLAYER_ID',
+          skill: {
+            scout:  1,
+            soldier: 1,
+            demoman: 1,
+            medic: 1,
+          },
+        });
+      });
     }));
   });
 });

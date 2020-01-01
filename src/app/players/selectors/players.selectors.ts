@@ -9,4 +9,12 @@ const { selectEntities, selectAll } = playersAdapter.getSelectors();
 const playerEntities = createSelector(players, selectEntities);
 export const allPlayers = createSelector(players, selectAll);
 
-export const playerById = (playerId: string) => createSelector(playerEntities, entites => entites[playerId]);
+export const playerById = (playerId: string) => createSelector(
+  playerEntities,
+  entites => entites[playerId]
+);
+
+export const playerSkillByPlayerId = (playerId: string) => createSelector(
+  playerById(playerId),
+  player => player?.skill
+);
