@@ -1,3 +1,8 @@
+# [1.6.4](https://github.com/tf2pickup-pl/client/compare/1.6.3...1.6.4) (2020-01-01)
+
+### Fixes
+* Edit skills for players with previously unassigned skills ([25b8e52](https://github.com/tf2pickup-pl/client/commit/25b8e523881a9fdfd7cfba5492c2232d97811fe7))
+
 # [1.6.3](https://github.com/tf2pickup-pl/client/compare/1.6.2...1.6.3) (2019-12-29)
 
 ### Features
