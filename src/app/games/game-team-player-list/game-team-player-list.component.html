@@ -1,0 +1,21 @@
+<div class="list-group list-group-flush" *ngIf="players">
+  <div class="team-header"
+    [ngClass]="{
+      'team-header-blu': team === 'blu',
+      'team-header-red': team === 'red'
+    }">
+    {{ team === 'blu' && 'BLU' || 'RED' }}
+  </div>
+
+  <a *ngFor="let player of players"
+    class="list-group-item list-group-item-action player-item"
+    [routerLink]="['/player', player.id]">
+    <div class="class-icon" [inlineSVG]="'/assets/tf2-classfont/' + player.gameClass + '.svg'"></div>
+    {{ player.name }}
+    <span *ngIf="player.classSkill" class="badge badge-secondary mx-2">{{ player.classSkill }}</span>
+    <div class="flex-fill"></div>
+    <app-player-connection-status
+      [connectionStatus]="player.connectionStatus"
+      class="mx-3"></app-player-connection-status>
+  </a>
+</div>

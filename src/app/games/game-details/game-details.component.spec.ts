@@ -24,12 +24,14 @@ const theGame: Game = {
     {
       playerId: 'FAKE_PLAYER_ID_1',
       gameClass: 'soldier',
-      teamId: '0'
+      teamId: '0',
+      connectionStatus: 'offline',
     },
     {
       playerId: 'FAKE_PLAYER_ID_2',
       gameClass: 'soldier',
-      teamId: '1'
+      teamId: '1',
+      connectionStatus: 'offline',
     }
   ],
   map: 'cp_sunshine',
@@ -164,6 +166,7 @@ describe('GameDetailsComponent', () => {
         name: 'FAKE_PLAYER_1',
         gameClass: 'soldier',
         teamId: '0',
+        connectionStatus: 'offline',
       }] as any));
 
       component.playersBlu.subscribe(players => expect(players).toEqual([{
@@ -172,6 +175,7 @@ describe('GameDetailsComponent', () => {
         name: 'FAKE_PLAYER_2',
         gameClass: 'soldier',
         teamId: '1',
+        connectionStatus: 'offline',
       }] as any));
     });
 

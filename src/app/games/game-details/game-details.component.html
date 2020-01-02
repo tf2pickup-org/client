@@ -12,123 +12,32 @@
     </ng-container>
   </h4>
 
-  <div class="row text-muted">
-    <div class="col">launched</div>
-    <div class="col">map</div>
-    <div class="col">server</div>
-    <div class="col">state</div>
-  </div>
+  <app-game-basic-info
+    [launchedAt]="_game.launchedAt"
+    [map]="_game.map"
+    [gameServerName]="gameServerName | async"
+    [state]="_game.state"
+    [error]="_game.error"></app-game-basic-info>
 
-  <div class="row">
-    <div class="col">{{ _game.launchedAt | date:'medium' }}</div>
-    <div class="col">{{ _game.map }}</div>
-    <div class="col">{{ gameServerName | async }} </div>
-    <div class="col">
-      {{ _game.state }}
-      <span *ngIf="_game.error">({{ _game.error }})</span>
-    </div>
-  </div>
+  <app-join-game-info *ngIf="_game.state === 'launching' || _game.state === 'started'"
+    [gameId]="_game.id"
+    [connectString]="_game.connectString"></app-join-game-info>
 
-  <ng-container *ngIf="_game.state === 'launching' || _game.state === 'started'">
-    <div class="row text-muted mt-2">
-      <div class="col">connect</div>
-    </div>
-
-    <div class="row">
-      <div class="col-8">
-        <span *ngIf="_game.connectString; else noConnectString">
-          <div class="input-group mb-3">
-            <input
-              type="text"
-              class="form-control"
-              [value]="_game.connectString"
-              readonly
-              #connectInput>
-            <div class="input-group-append">
-              <button
-                class="btn btn-outline-secondary"
-                type="button"
-                tooltip="Copy the connect string to the clipboard"
-                (click)="copyConnectString()">copy</button>
-              <a
-                [href]="_game.connectString | connectStringToLink"
-                class="btn btn-outline-primary"
-                type="button"
-                tooltip="Join the game straight away">join</a>
-            </div>
-          </div>
-        </span>
-        <ng-template #noConnectString>
-          <span class="font-italic text-muted">not available yet</span>
-        </ng-template>
-      </div>
-
-      <div class="col">
-        <app-mumble-join-button [gameId]="_game.id"></app-mumble-join-button>
-      </div>
-    </div>
-  </ng-container>
-
-  <ng-container *ngIf="_game.state === 'ended'">
-    <div class="row text-muted mt-2">
-      <div class="col">logs</div>
-      <div class="col">demo</div>
-    </div>
-
-    <div class="row">
-      <div class="col">
-        <span *ngIf="_game.logsUrl; else noLogs">
-          <a [href]="_game.logsUrl" target="_blank">{{ _game.logsUrl }}</a>
-        </span>
-        <ng-template #noLogs>
-          <span class="font-italic text-muted">unavailable</span>
-        </ng-template>
-      </div>
-
-      <div class="col">
-        <span *ngIf="_game.demoUrl; else noDemo">
-          <a [href]="_game.demoUrl" target="_blank">{{ _game.demoUrl }}</a>
-        </span>
-        <ng-template #noDemo>
-          <span class="font-italic text-muted">unavailable</span>
-        </ng-template>
-      </div>
-    </div>
-  </ng-container>
+  <app-game-summary *ngIf="_game.state === 'ended'"
+    [logsUrl]="_game.logsUrl"
+    [demoUrl]="_game.demoUrl"></app-game-summary>
 
   <div class="row mt-4">
     <div class="col">
-      <div class="list-group list-group-flush" *ngIf="playersBlu | async as _playersBlu">
-        <div class="team-header team-header-blu">BLU</div>
-        <a *ngFor="let player of _playersBlu"
-          class="list-group-item list-group-item-action player-item"
-          [routerLink]="['/player', player.id]">
-          <div class="class-icon" [inlineSVG]="'/assets/tf2-classfont/' + player.gameClass + '.svg'"></div>
-          {{ player.name }}
-          <span *ngIf="player.classSkill" class="badge badge-secondary mx-2">{{ player.classSkill }}</span>
-          <div class="flex-fill"></div>
-          <app-player-connection-status
-            [connectionStatus]="player.connectionStatus"
-            class="mx-3"></app-player-connection-status>
-        </a>
-      </div>
+      <app-game-team-player-list
+        [players]="playersBlu | async"
+        team="blu"></app-game-team-player-list>
     </div>
 
     <div class="col">
-      <div class="list-group list-group-flush" *ngIf="playersRed | async as _playersRed">
-        <div class="team-header team-header-red">RED</div>
-        <a *ngFor="let player of _playersRed"
-          class="list-group-item list-group-item-action player-item"
-          [routerLink]="['/player', player.id]">
-          <div class="class-icon" [inlineSVG]="'/assets/tf2-classfont/' + player.gameClass + '.svg'"></div>
-          {{ player.name }}
-          <span *ngIf="player.classSkill" class="badge badge-secondary mx-2">{{ player.classSkill }}</span>
-          <div class="flex-fill"></div>
-          <app-player-connection-status
-            [connectionStatus]="player.connectionStatus"
-            class="mx-3"></app-player-connection-status>
-        </a>
-      </div>
+      <app-game-team-player-list
+        [players]="playersRed | async"
+        team="red"></app-game-team-player-list>
     </div>
   </div>
 </div>

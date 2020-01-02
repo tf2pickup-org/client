@@ -2,7 +2,7 @@
   class="badge"
   [ngClass]="{
     'badge-success': connectionStatus === 'connected',
-    'badge-secondary': connectionStatus === 'joining',
+    'badge-warning': connectionStatus === 'joining',
     'badge-danger': connectionStatus === 'offline'
   }">
   {{ connectionStatus }}
