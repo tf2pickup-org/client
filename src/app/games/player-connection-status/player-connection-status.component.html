@@ -1,0 +1,9 @@
+<span
+  class="badge"
+  [ngClass]="{
+    'badge-success': connectionStatus === 'connected',
+    'badge-secondary': connectionStatus === 'joining',
+    'badge-danger': connectionStatus === 'offline'
+  }">
+  {{ connectionStatus }}
+</span>

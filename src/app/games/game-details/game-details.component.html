@@ -106,6 +106,10 @@
           <div class="class-icon" [inlineSVG]="'/assets/tf2-classfont/' + player.gameClass + '.svg'"></div>
           {{ player.name }}
           <span *ngIf="player.classSkill" class="badge badge-secondary mx-2">{{ player.classSkill }}</span>
+          <div class="flex-fill"></div>
+          <app-player-connection-status
+            [connectionStatus]="player.connectionStatus"
+            class="mx-3"></app-player-connection-status>
         </a>
       </div>
     </div>
@@ -119,6 +123,10 @@
           <div class="class-icon" [inlineSVG]="'/assets/tf2-classfont/' + player.gameClass + '.svg'"></div>
           {{ player.name }}
           <span *ngIf="player.classSkill" class="badge badge-secondary mx-2">{{ player.classSkill }}</span>
+          <div class="flex-fill"></div>
+          <app-player-connection-status
+            [connectionStatus]="player.connectionStatus"
+            class="mx-3"></app-player-connection-status>
         </a>
       </div>
     </div>

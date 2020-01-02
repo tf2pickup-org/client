@@ -12,6 +12,7 @@ import { SharedModule } from '@app/shared/shared.module';
 import { InlineSVGModule } from 'ng-inline-svg';
 import { MumbleJoinButtonComponent } from './mumble-join-button/mumble-join-button.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { PlayerConnectionStatusComponent } from './player-connection-status/player-connection-status.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     GameListComponent,
     GameDetailsComponent,
     MumbleJoinButtonComponent,
+    PlayerConnectionStatusComponent,
   ],
   imports: [
     CommonModule,
