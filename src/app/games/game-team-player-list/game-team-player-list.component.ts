@@ -15,4 +15,7 @@ export class GameTeamPlayerListComponent {
   @Input()
   team: 'blu' | 'red';
 
+  @Input()
+  showPlayerConnectionStatus = false;
+
 }

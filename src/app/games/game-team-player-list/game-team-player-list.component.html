@@ -14,7 +14,7 @@
     {{ player.name }}
     <span *ngIf="player.classSkill" class="badge badge-secondary mx-2">{{ player.classSkill }}</span>
     <div class="flex-fill"></div>
-    <app-player-connection-status
+    <app-player-connection-status *ngIf="showPlayerConnectionStatus"
       [connectionStatus]="player.connectionStatus"
       class="mx-3"></app-player-connection-status>
   </a>

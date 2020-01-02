@@ -34,6 +34,7 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
   playersRed: Observable<ResolvedGamePlayer[]>;
   playersBlu: Observable<ResolvedGamePlayer[]>;
   isAdmin: Observable<boolean> = this.store.select(isAdmin);
+  isRunning: Observable<boolean>;
 
   constructor(
     private route: ActivatedRoute,
@@ -61,6 +62,8 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
       filter(game => !!game),
       shareReplay(),
     );
+
+    this.isRunning = this.game.pipe(map(game => game.state === 'launching' || game.state === 'started'));
 
     // load game server
     this.gameServerName = this.game.pipe(

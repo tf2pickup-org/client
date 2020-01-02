@@ -2,7 +2,7 @@
   class="container">
   <h4>
     Pickup #{{ _game.number }}
-    <ng-container *ngIf="(isAdmin | async) && (_game.state === 'launching' || _game.state === 'started')">
+    <ng-container *ngIf="(isAdmin | async) && (isRunning | async)">
       <small class="text-secondary ml-2">
         &bull;
         <a [routerLink]="" class="text-secondary" (click)="reinitializeServer()">reinitialize server</a>
@@ -31,13 +31,15 @@
     <div class="col">
       <app-game-team-player-list
         [players]="playersBlu | async"
-        team="blu"></app-game-team-player-list>
+        team="blu"
+        [showPlayerConnectionStatus]="isRunning | async"></app-game-team-player-list>
     </div>
 
     <div class="col">
       <app-game-team-player-list
         [players]="playersRed | async"
-        team="red"></app-game-team-player-list>
+        team="red"
+        [showPlayerConnectionStatus]="isRunning | async"></app-game-team-player-list>
     </div>
   </div>
 </div>
