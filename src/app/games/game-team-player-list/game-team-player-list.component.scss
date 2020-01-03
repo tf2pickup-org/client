@@ -1,0 +1,31 @@
+@import "~bootstrap/scss/bootstrap";
+
+.team-header {
+  color: theme-color("light");
+  text-align: center;
+  font-size: 200%;
+  font-weight: bold;
+
+  &.team-header-red {
+    background-color: #ff6868;
+  }
+
+  &.team-header-blu {
+    background-color: #71afff;
+  }
+}
+
+.player-item {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  padding: 0;
+  height: 3rem;
+
+  .class-icon {
+    width: 30px;
+    height: 30px;
+    margin: 0 .75rem;
+    fill: gray("800");
+  }
+}

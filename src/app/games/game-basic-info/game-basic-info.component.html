@@ -1,0 +1,16 @@
+<div class="row text-muted">
+  <div class="col">launched</div>
+  <div class="col">map</div>
+  <div class="col">server</div>
+  <div class="col">state</div>
+</div>
+
+<div class="row">
+  <div class="col">{{ launchedAt | date:'medium' }}</div>
+  <div class="col">{{ map }}</div>
+  <div class="col">{{ gameServerName }} </div>
+  <div class="col">
+    {{ state }}
+    <span *ngIf="error">({{ error }})</span>
+  </div>
+</div>

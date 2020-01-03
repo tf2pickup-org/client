@@ -12,6 +12,11 @@ import { SharedModule } from '@app/shared/shared.module';
 import { InlineSVGModule } from 'ng-inline-svg';
 import { MumbleJoinButtonComponent } from './mumble-join-button/mumble-join-button.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { PlayerConnectionStatusComponent } from './player-connection-status/player-connection-status.component';
+import { GameBasicInfoComponent } from './game-basic-info/game-basic-info.component';
+import { JoinGameInfoComponent } from './join-game-info/join-game-info.component';
+import { GameSummaryComponent } from './game-summary/game-summary.component';
+import { GameTeamPlayerListComponent } from './game-team-player-list/game-team-player-list.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +24,11 @@ import { NgxPaginationModule } from 'ngx-pagination';
     GameListComponent,
     GameDetailsComponent,
     MumbleJoinButtonComponent,
+    PlayerConnectionStatusComponent,
+    GameBasicInfoComponent,
+    JoinGameInfoComponent,
+    GameSummaryComponent,
+    GameTeamPlayerListComponent,
   ],
   imports: [
     CommonModule,

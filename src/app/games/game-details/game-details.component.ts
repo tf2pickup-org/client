@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { AppState } from '@app/app.state';
 import { Observable, Subject, ReplaySubject, combineLatest } from 'rxjs';
@@ -7,7 +7,6 @@ import { ActivatedRoute } from '@angular/router';
 import { switchMap, map, tap, filter, first, pairwise, shareReplay, takeUntil, startWith } from 'rxjs/operators';
 import { gameById } from '../games.selectors';
 import { loadGame, forceEndGame, reinitializeServer } from '../games.actions';
-import { Player } from '@app/players/models/player';
 import { playerById } from '@app/players/selectors';
 import { loadPlayer } from '@app/players/actions';
 import { isAdmin } from '@app/profile/profile.selectors';
@@ -17,8 +16,7 @@ import { GamePlayer } from '../models/game-player';
 import { GamesService } from '../games.service';
 import { gameServerById } from '@app/game-servers/game-servers.selectors';
 import { loadGameServer } from '@app/game-servers/game-servers.actions';
-
-type ResolvedGamePlayer = Player & GamePlayer & { classSkill?: number };
+import { ResolvedGamePlayer } from '../models/resolved-game-player';
 
 @Component({
   selector: 'app-game-details',
@@ -36,9 +34,7 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
   playersRed: Observable<ResolvedGamePlayer[]>;
   playersBlu: Observable<ResolvedGamePlayer[]>;
   isAdmin: Observable<boolean> = this.store.select(isAdmin);
-
-  @ViewChild('connectInput', { static: false })
-  connectInput: ElementRef;
+  isRunning: Observable<boolean>;
 
   constructor(
     private route: ActivatedRoute,
@@ -66,6 +62,8 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
       filter(game => !!game),
       shareReplay(),
     );
+
+    this.isRunning = this.game.pipe(map(game => game.state === 'launching' || game.state === 'started'));
 
     // load game server
     this.gameServerName = this.game.pipe(
@@ -140,22 +138,12 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
       takeUntil(this.destroyed),
     ).subscribe(() => {
       this.audio.play();
-      const notification = new Notification('Join the game', {
-        body: 'The server is ready. Join the game!',
-      });
     });
   }
 
   ngOnDestroy() {
     this.destroyed.next();
     this.destroyed.unsubscribe();
-  }
-
-  copyConnectString() {
-    const input = this.connectInput.nativeElement as HTMLInputElement;
-    input.focus();
-    input.select();
-    document.execCommand('copy');
   }
 
   reinitializeServer() {
