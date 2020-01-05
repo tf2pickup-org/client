@@ -67,4 +67,20 @@ describe('GamesService', () => {
       expect(req.request.method).toBe('GET');
     }));
   });
+
+  describe('#requestSubstitute()', () => {
+    it('should call api endpoint', inject([GamesService], (service: GamesService) => {
+      service.requestSubstitute('FAKE_GAME_ID', 'FAKE_PLAYER_ID').subscribe();
+      const req = httpController.expectOne('FAKE_URL/games/FAKE_GAME_ID?substitute_player=FAKE_PLAYER_ID');
+      expect(req.request.method).toBe('POST');
+    }));
+  });
+
+  describe('#cancelSubstitutionRequest()', () => {
+    it('should call api endpoint', inject([GamesService], (service: GamesService) => {
+      service.cancelSubstitutionRequest('FAKE_GAME_ID', 'FAKE_PLAYER_ID').subscribe();
+      const req = httpController.expectOne('FAKE_URL/games/FAKE_GAME_ID?substitute_player_cancel=FAKE_PLAYER_ID');
+      expect(req.request.method).toBe('POST');
+    }));
+  });
 });

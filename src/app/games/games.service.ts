@@ -35,4 +35,12 @@ export class GamesService {
     return this.http.get<{ [playerId: string]: number }>(`${this.apiUrl}/games/${gameId}/skills`);
   }
 
+  requestSubstitute(gameId: string, playerId: string): Observable<void> {
+    return this.http.post<void>(`${this.apiUrl}/games/${gameId}?substitute_player=${playerId}`, { });
+  }
+
+  cancelSubstitutionRequest(gameId: string, playerId: string): Observable<void> {
+    return this.http.post<void>(`${this.apiUrl}/games/${gameId}?substitute_player_cancel=${playerId}`, { });
+  }
+
 }
