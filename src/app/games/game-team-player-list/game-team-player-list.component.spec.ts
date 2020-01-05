@@ -37,7 +37,7 @@ describe('GameTeamPlayerListComponent', () => {
     beforeEach(() => {
       component.players = [
         { id: 'PLAYER_ID', name: 'FAKE_PLAYER', joinedAt: new Date(), steamId: 'FAKE_STEAM_ID', avatarUrl: 'FAKE_AVATAR_URL', gameCount: 0,
-          playerId: 'FAKE_PLAYER_ID', teamId: '1', gameClass: 'scout', connectionStatus: 'offline' },
+          playerId: 'FAKE_PLAYER_ID', teamId: '1', gameClass: 'scout', connectionStatus: 'offline', status: 'active' },
       ];
       fixture.detectChanges();
     });
@@ -55,6 +55,40 @@ describe('GameTeamPlayerListComponent', () => {
       fixture.detectChanges();
       expect(div.classList.contains('team-header-red')).toBeTrue();
       expect(div.innerText).toEqual('RED');
+    });
+
+    it('should apply css class for players that are looking for substitutes', () => {
+      const item = fixture.debugElement.query(By.css('.player-item')).nativeElement as HTMLElement;
+      expect(item).toBeDefined();
+      expect(item.classList.contains('list-group-item-warning')).toBe(false);
+
+      component.players[0].status = 'waiting for substitute';
+      fixture.detectChanges();
+      expect(item.classList.contains('list-group-item-warning')).toBe(true);
+    });
+
+    it('should not render admin buttons', () => {
+      expect(fixture.debugElement.query(By.css('div>a>button'))).toBeNull();
+    });
+
+    describe('when admin', () => {
+      beforeEach(() => {
+        component.showAdminActionButtons = true;
+        fixture.detectChanges();
+      });
+
+      it('should render admin buttons', () => {
+        expect(fixture.debugElement.query(By.css('div>a>button'))).toBeDefined();
+      });
+
+      it('should trigger the requestSubstituteToggle event', done => {
+        const button = fixture.debugElement.query(By.css('div>a>button')).nativeElement as HTMLButtonElement;
+        component.requestSubstituteToggle.subscribe(playerId => {
+          expect(playerId).toBe('PLAYER_ID');
+          done();
+        });
+        button.click();
+      });
     });
   });
 });

@@ -8,7 +8,8 @@
   </div>
 
   <a *ngFor="let player of players"
-    class="list-group-item list-group-item-action player-item"
+    class="list-group-item list-group-item-action player-item pr-2"
+    [class.list-group-item-warning]="player.status === 'waiting for substitute'"
     [routerLink]="['/player', player.id]">
     <div class="class-icon" [inlineSVG]="'/assets/tf2-classfont/' + player.gameClass + '.svg'"></div>
     {{ player.name }}
@@ -16,6 +17,18 @@
     <div class="flex-fill"></div>
     <app-player-connection-status *ngIf="showPlayerConnectionStatus"
       [connectionStatus]="player.connectionStatus"
-      class="mx-3"></app-player-connection-status>
+      class="mx-1"></app-player-connection-status>
+
+    <span *ngIf="player.status === 'waiting for substitute'"
+      class="badge badge-warning">waiting for substitute</span>
+
+    <ng-container *ngIf="showAdminActionButtons">
+      <button type="button" class="btn btn-link btn-sm"
+        [tooltip]="player.status === 'active' ? 'Request substitute' : 'Cancel substitute request'"
+        (click)="emitRequestSubstituteToggle($event, player)">
+        <span class="oi oi-transfer" *ngIf="player.status === 'active'"></span>
+        <span class="oi oi-circle-x" *ngIf="player.status === 'waiting for substitute'"></span>
+      </button>
+    </ng-container>
   </a>
 </div>
