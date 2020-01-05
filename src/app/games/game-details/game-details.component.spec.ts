@@ -6,7 +6,7 @@ import { Store, MemoizedSelector } from '@ngrx/store';
 import { ActivatedRoute, convertToParamMap } from '@angular/router';
 import { of, NEVER } from 'rxjs';
 import { RouterTestingModule } from '@angular/router/testing';
-import { loadGame, forceEndGame, reinitializeServer } from '../games.actions';
+import { loadGame, forceEndGame, reinitializeServer, requestSubsituteToggle } from '../games.actions';
 import { Game } from '../models/game';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { GamesService } from '../games.service';
@@ -26,12 +26,14 @@ const theGame: Game = {
       gameClass: 'soldier',
       teamId: '0',
       connectionStatus: 'offline',
+      status: 'active',
     },
     {
       playerId: 'FAKE_PLAYER_ID_2',
       gameClass: 'soldier',
       teamId: '1',
       connectionStatus: 'offline',
+      status: 'active',
     }
   ],
   map: 'cp_sunshine',
@@ -118,11 +120,13 @@ describe('GameDetailsComponent', () => {
                 id: 'FAKE_PLAYER_ID_1',
                 name: 'FAKE_PLAYER_1',
                 gameClass: 'soldier',
+                status: 'active',
               },
               FAKE_PLAYER_ID_2: {
                 id: 'FAKE_PLAYER_ID_2',
                 name: 'FAKE_PLAYER_2',
                 gameClass: 'soldier',
+                status: 'active',
               },
             },
           },
@@ -167,6 +171,7 @@ describe('GameDetailsComponent', () => {
         gameClass: 'soldier',
         teamId: '0',
         connectionStatus: 'offline',
+        status: 'active',
       }] as any));
 
       component.playersBlu.subscribe(players => expect(players).toEqual([{
@@ -176,6 +181,7 @@ describe('GameDetailsComponent', () => {
         gameClass: 'soldier',
         teamId: '1',
         connectionStatus: 'offline',
+        status: 'active',
       }] as any));
     });
 
@@ -184,6 +190,13 @@ describe('GameDetailsComponent', () => {
       isAdminSelector.setResult(true);
       store.refreshState();
       expect(spy).toHaveBeenCalledWith('FAKE_ID');
+    });
+
+    describe('#requestSubstituteToggle()', () => {
+      it('should dispatch action', () => {
+        component.requestSubstituteToggle('FAKE_PLAYER_ID');
+        expect(storeDispatchSpy).toHaveBeenCalledWith(requestSubsituteToggle({ gameId: 'FAKE_ID', playerId: 'FAKE_PLAYER_ID' }));
+      });
     });
   });
 });
