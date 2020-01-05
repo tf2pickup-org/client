@@ -22,3 +22,8 @@ export const activeGame = createSelector(
   activeGames,
   (theProfile, games) => theProfile && games && games.find(g => g.players.includes(theProfile.id))
 );
+
+export const playerSlot = (gameId: string, playerId: string) => createSelector(
+  gameById(gameId),
+  game => game?.slots.find(s => s.playerId === playerId)
+);
