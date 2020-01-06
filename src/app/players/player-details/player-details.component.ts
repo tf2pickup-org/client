@@ -8,7 +8,7 @@ import { map, switchMap, tap } from 'rxjs/operators';
 import { playerById } from '../selectors';
 import { loadPlayer } from '../actions';
 import { PlayersService } from '../players.service';
-import { profile } from '@app/profile/profile.selectors';
+import { profile, isAdmin, isSuperUser } from '@app/profile/profile.selectors';
 import { PlayerStats } from '../models/player-stats';
 import { Title } from '@angular/platform-browser';
 import { environment } from '@environment';
@@ -23,10 +23,8 @@ export class PlayerDetailsComponent implements OnInit {
 
   player: Observable<Player>;
   stats: Observable<PlayerStats>;
-  isAdmin: Observable<boolean> = this.store.pipe(
-    select(profile),
-    map(theProfile => theProfile && (theProfile.role === 'admin' || theProfile.role === 'super-user')),
-  );
+  isAdmin: Observable<boolean> = this.store.select(isAdmin);
+  isSuperUser: Observable<boolean> = this.store.select(isSuperUser);
 
   constructor(
     private route: ActivatedRoute,

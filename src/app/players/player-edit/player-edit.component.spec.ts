@@ -8,7 +8,7 @@ import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { Actions } from '@ngrx/effects';
 import { Action, Store } from '@ngrx/store';
 import { RouterTestingModule } from '@angular/router/testing';
-import { loadPlayerSkill, playerEdited, loadPlayer, editPlayer } from '../actions';
+import { loadPlayerSkill, playerEdited, loadPlayer, setPlayerName, setPlayerSkill } from '../actions';
 import { Location } from '@angular/common';
 import { Title } from '@angular/platform-browser';
 
@@ -72,12 +72,6 @@ describe('PlayerEditComponent', () => {
     expect(storeDispatchSpy).toHaveBeenCalledWith(loadPlayer({ playerId: 'FAKE_ID' }));
   });
 
-  it('should redirect to the player details after saving is done', () => {
-    const spy = spyOn(TestBed.get(Router), 'navigate');
-    actions.next(playerEdited({ player: { id: 'FAKE_ID' } } as any));
-    expect(spy).toHaveBeenCalledWith(['/player', 'FAKE_ID']);
-  });
-
   describe('#cancel()', () => {
     it('should navigate back to the player details page', () => {
       const spy = spyOn(TestBed.get(Location), 'back');
@@ -123,17 +117,33 @@ describe('PlayerEditComponent', () => {
     });
 
     describe('#save()', () => {
-      it('should dispatch the editPlayer action', () => {
+      it('should dispatch the setPlayerName action', () => {
         component.player.value.name = 'maly2';
         component.save();
-        expect(storeDispatchSpy).toHaveBeenCalledWith(
-          editPlayer({
-            player: {
-              id: 'FAKE_ID',
-              name: 'maly2',
-            } as any
-          })
-        );
+        expect(storeDispatchSpy).toHaveBeenCalledWith(setPlayerName({ playerId: 'FAKE_ID', name: 'maly2' }));
+      });
+
+      it('should redirect to the player details after saving is done', () => {
+        const spy = spyOn(TestBed.get(Router), 'navigate');
+        component.player.value.name = 'maly2';
+        component.save();
+        actions.next(playerEdited({ player: { id: 'FAKE_ID' } } as any));
+        expect(spy).toHaveBeenCalledWith(['/player', 'FAKE_ID']);
+      });
+
+      it('should do nothing if the name has not changed', () => {
+        component.save();
+        expect(storeDispatchSpy).not.toHaveBeenCalledWith(setPlayerName({ playerId: 'FAKE_ID', name: 'maly' }));
+      });
+    });
+
+    describe('and with skill', () => {
+      describe('#save()', () => {
+        it('should dispatch the setPlayerSkill action', () => {
+          component.player.value.skill = { demoman: 5 };
+          component.save();
+          expect(storeDispatchSpy).toHaveBeenCalledWith(setPlayerSkill({ playerId: 'FAKE_ID', skill: { demoman: 5 }}));
+        });
       });
     });
   });

@@ -1,14 +1,14 @@
 import { Component, OnInit, ChangeDetectionStrategy, OnDestroy, ChangeDetectorRef, HostListener } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { map, switchMap, tap, filter, takeUntil } from 'rxjs/operators';
-import { Store } from '@ngrx/store';
+import { map, switchMap, tap, filter, takeUntil, first } from 'rxjs/operators';
+import { Store, Action } from '@ngrx/store';
 import { AppState } from '@app/app.state';
 import { playerById, playersLocked, playerSkillByPlayerId } from '../selectors';
-import { loadPlayer, editPlayer, playerEdited, loadPlayerSkill } from '../actions';
+import { loadPlayer, playerEdited, loadPlayerSkill, setPlayerName, setPlayerSkill, playerSkillEdited } from '../actions';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 import { Player } from '../models/player';
 import { Actions, ofType } from '@ngrx/effects';
-import { Subject, Observable, BehaviorSubject } from 'rxjs';
+import { Subject, Observable, BehaviorSubject, zip } from 'rxjs';
 import { Title } from '@angular/platform-browser';
 import { environment } from '@environment';
 import { Location } from '@angular/common';
@@ -61,6 +61,7 @@ export class PlayerEditComponent implements OnInit, OnDestroy {
         }),
       )),
       filter(player => !!player),
+      first(),
       takeUntil(this.destroyed),
     ).subscribe(player => {
       this.originalPlayer = player;
@@ -71,6 +72,7 @@ export class PlayerEditComponent implements OnInit, OnDestroy {
     getPlayerId.pipe(
       switchMap(playerId => this.store.select(playerSkillByPlayerId(playerId))),
       filter(skill => !!skill),
+      first(),
       takeUntil(this.destroyed),
     ).subscribe(skill => {
       this.player.addControl('skill', this.toFormGroup(skill));
@@ -81,14 +83,6 @@ export class PlayerEditComponent implements OnInit, OnDestroy {
     getPlayerId.pipe(
       takeUntil(this.destroyed),
     ).subscribe(playerId => this.store.dispatch(loadPlayerSkill({ playerId })));
-
-    getPlayerId.subscribe(playerId => {
-      this.actions.pipe(
-        ofType(playerEdited),
-        filter(action => action.player.id === playerId),
-        takeUntil(this.destroyed),
-      ).subscribe(() => this.router.navigate(['/player', playerId]));
-    });
   }
 
   ngOnDestroy() {
@@ -97,8 +91,36 @@ export class PlayerEditComponent implements OnInit, OnDestroy {
   }
 
   save() {
-    const player: Player = { ...this.originalPlayer, ...this.player.value };
-    this.store.dispatch(editPlayer({ player }));
+    const observables: Observable<any>[] = [];
+    const actions: Action[] = [];
+
+    if (this.player.value.name !== this.originalPlayer.name) {
+      actions.push(setPlayerName({ playerId: this.originalPlayer.id, name: this.player.value.name }));
+      observables.push(
+        this.actions.pipe(
+          ofType(playerEdited),
+          filter(action => action.player.id === this.originalPlayer.id),
+          first(),
+        )
+      );
+    }
+
+    if (JSON.stringify(this.player.value.skill) !== JSON.stringify(this.originalPlayer.skill)) {
+      actions.push(setPlayerSkill({ playerId: this.originalPlayer.id, skill: this.player.value.skill }));
+      observables.push(
+        this.actions.pipe(
+          ofType(playerSkillEdited),
+          filter(action => action.playerId === this.originalPlayer.id),
+          first(),
+        )
+      );
+    }
+
+    zip(...observables).pipe(
+      takeUntil(this.destroyed),
+    ).subscribe(() => this.router.navigate(['/player', this.originalPlayer.id]));
+
+    actions.forEach(action => this.store.dispatch(action));
   }
 
   cancel() {

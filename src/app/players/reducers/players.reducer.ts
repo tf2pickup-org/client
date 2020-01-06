@@ -2,7 +2,8 @@ import { EntityState } from '@ngrx/entity';
 import { Player } from '../models/player';
 import { playersAdapter as adapter } from '../adapters';
 import { createReducer, Action, on } from '@ngrx/store';
-import { playerLoaded, editPlayer, playerUpdated, playerEdited, playerSkillLoaded, playersLoaded, allPlayerSkillsLoaded } from '../actions';
+import { playerLoaded, playerUpdated, playerEdited, playerSkillLoaded, playersLoaded, allPlayerSkillsLoaded, setPlayerName,
+  setPlayerRole, setPlayerSkill, playerSkillEdited } from '../actions';
 import { PlayerSkill } from '../models/player-skill';
 
 export interface State extends EntityState<Player> {
@@ -13,12 +14,10 @@ const initialState: State = adapter.getInitialState({
   locked: false,
 });
 
-function insertPlayerSkill(playerSkill: PlayerSkill, state: State): State {
+function updatePlayerSkill(playerId: string, skill: { [gameClass: string]: number }, state: State): State {
   return adapter.updateOne({
-    id: playerSkill.player,
-    changes: {
-      skill: playerSkill.skill,
-    }
+    id: playerId,
+    changes: { skill },
   }, state);
 }
 
@@ -34,11 +33,18 @@ function insertAllPlayerSkills(playerSkills: PlayerSkill[], state: State): State
 const playerReducer = createReducer(
   initialState,
   on(playerLoaded, (state, { player }) => adapter.upsertOne(player, state)),
-  on(editPlayer, state => ({ ...state, locked: true })),
   on(playerUpdated, (state, { player }) => adapter.upsertOne(player, state)),
+
+  on(setPlayerName, state => ({ ...state, locked: true })),
+  on(setPlayerRole, state => ({ ...state, locked: true })),
   on(playerEdited, (state, { player }) => ({ ...adapter.upsertOne(player, state), locked: false })),
-  on(playerSkillLoaded, (state, { playerSkill }) => insertPlayerSkill(playerSkill, state)),
+
+  on(playerSkillLoaded, (state, { playerId, skill }) => updatePlayerSkill(playerId, skill, state)),
+  on(setPlayerSkill, state => ({ ...state, locked: true })),
+  on(playerSkillEdited, (state, { playerId, skill }) => ({ ...updatePlayerSkill(playerId, skill, state), locked: false })),
+
   on(allPlayerSkillsLoaded, (state, { playerSkills }) => insertAllPlayerSkills(playerSkills, state)),
+
   on(playersLoaded, (state, { players }) => adapter.upsertMany(players, state)),
 );
 

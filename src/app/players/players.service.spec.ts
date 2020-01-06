@@ -78,17 +78,30 @@ describe('PlayersService', () => {
     }));
   });
 
-  describe('#savePlayer()', () => {
+  describe('#setPlayerName()', () => {
     it('should call the endpoint', inject([PlayersService], (service: PlayersService) => {
-      const player: Player = { id: 'FAKE_ID', name: 'FAKE_NAME', joinedAt: new Date(), steamId: 'FAKE_STEAM_ID',
-        avatarUrl: 'FAKE_AVATAR_URL', skill: { soldier: 3 }, gameCount: 0 };
-      service.savePlayer(player).subscribe();
-      const req = httpContoller.expectOne('FAKE_URL/players/FAKE_ID');
+      service.setPlayerName('FAKE_PLAYER_ID', 'ho ho ho').subscribe();
+      const req = httpContoller.expectOne('FAKE_URL/players/FAKE_PLAYER_ID');
       expect(req.request.method).toBe('PATCH');
-      expect(req.request.body).toEqual({ name: 'FAKE_NAME' });
-      const req2 = httpContoller.expectOne('FAKE_URL/players/FAKE_ID/skill');
-      expect(req2.request.method).toBe('PUT');
-      expect(req2.request.body).toEqual(player.skill);
+      expect(req.request.body).toEqual({ name: 'ho ho ho' });
+    }));
+  });
+
+  describe('#setPlayerRole()', () => {
+    it('should call the endpoint', inject([PlayersService], (service: PlayersService) => {
+      service.setPlayerRole('FAKE_PLAYER_ID', 'admin').subscribe();
+      const req = httpContoller.expectOne('FAKE_URL/players/FAKE_PLAYER_ID');
+      expect(req.request.method).toBe('PATCH');
+      expect(req.request.body).toEqual({ role: 'admin' });
+    }));
+  });
+
+  describe('#setPlayerSkill()', () => {
+    it('should call the endpoint', inject([PlayersService], (service: PlayersService) => {
+      service.setPlayerSkill('FAKE_PLAYER_ID', { demoman: 3 }).subscribe();
+      const req = httpContoller.expectOne('FAKE_URL/players/FAKE_PLAYER_ID/skill');
+      expect(req.request.method).toBe('PUT');
+      expect(req.request.body).toEqual({ demoman: 3 });
     }));
   });
 
@@ -103,8 +116,8 @@ describe('PlayersService', () => {
   describe('#fetchPlayerSkill()', () => {
     it('should call the endpoint', inject([PlayersService], (service: PlayersService) => {
       service.fetchPlayerSkill('FAKE_ID').subscribe();
-      httpContoller.expectOne('FAKE_URL/players/FAKE_ID/skill');
-      expect().nothing();
+      const req = httpContoller.expectOne('FAKE_URL/players/FAKE_ID/skill');
+      expect(req.request.method).toBe('GET');
     }));
   });
 
@@ -163,13 +176,10 @@ describe('PlayersService', () => {
     it('should init default config', inject([PlayersService], (service: PlayersService) => {
       service.defaultSkill('FAKE_PLAYER_ID').subscribe(playerSkill => {
         expect(playerSkill).toEqual({
-          player: 'FAKE_PLAYER_ID',
-          skill: {
-            scout:  1,
-            soldier: 1,
-            demoman: 1,
-            medic: 1,
-          },
+          scout:  1,
+          soldier: 1,
+          demoman: 1,
+          medic: 1,
         });
       });
     }));
