@@ -1,6 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 import { Player } from '../models/player';
 import { PlayerSkill } from '../models/player-skill';
+import { PlayerRole } from '../models/player-role';
 
 export const loadPlayer = createAction(
   '[Queue] Load player',
@@ -12,14 +13,29 @@ export const playerLoaded = createAction(
   props<{ player: Player }>(),
 );
 
-export const editPlayer = createAction(
-  '[Player] Edit player',
-  props<{ player: Player }>(),
+export const setPlayerName = createAction(
+  '[Player] Set player name',
+  props<{ playerId: string, name: string }>(),
+);
+
+export const setPlayerRole = createAction(
+  '[Player] Set player role',
+  props<{ playerId: string, role: PlayerRole }>(),
 );
 
 export const playerEdited = createAction(
   '[API] Player edited successfully',
   props<{ player: Player }>(),
+);
+
+export const setPlayerSkill = createAction(
+  '[Player] Set player skill',
+  props<{ playerId: string, skill: { [gameClass: string]: number } }>(),
+);
+
+export const playerSkillEdited = createAction(
+  '[API] Player skill edited successfully',
+  props<{ playerId: string, skill: { [gameClass: string]: number } }>(),
 );
 
 // fixme: this will be used when player synchronization is implemented
@@ -35,7 +51,7 @@ export const loadPlayerSkill = createAction(
 
 export const playerSkillLoaded = createAction(
   '[API] Player skill loaded',
-  props<{ playerSkill: PlayerSkill }>(),
+  props<{ playerId: string, skill: { [gameClass: string]: number } }>(),
 );
 
 export const initializeDefaultPlayerSkill = createAction(

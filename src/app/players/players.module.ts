@@ -24,6 +24,7 @@ import { Etf2lProfileLinkPipe } from './etf2l-profile-link.pipe';
 import { LogsTfProfileLinkPipe } from './logs-tf-profile-link.pipe';
 import { SkillTableComponent } from './skill-table/skill-table.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { EditPlayerRoleDialogComponent } from './edit-player-role-dialog/edit-player-role-dialog.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     Etf2lProfileLinkPipe,
     LogsTfProfileLinkPipe,
     SkillTableComponent,
+    EditPlayerRoleDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -60,6 +62,9 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
   exports: [
     PlayerNameComponent,
     PlayerAvatarComponent,
+  ],
+  entryComponents: [
+    EditPlayerRoleDialogComponent,
   ],
 })
 export class PlayersModule { }

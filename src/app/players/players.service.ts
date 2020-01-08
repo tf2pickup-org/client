@@ -12,6 +12,7 @@ import { PaginatedList } from '@app/core/models/paginated-list';
 import { Store, select } from '@ngrx/store';
 import { AppState } from '@app/app.state';
 import { queueConfig } from '@app/queue/queue.selectors';
+import { PlayerRole } from './models/player-role';
 
 @Injectable({
   providedIn: 'root'
@@ -32,27 +33,24 @@ export class PlayersService {
     return this.http.get<PaginatedList<Game>>(`${this.apiUrl}/players/${playerId}/games?offset=${offset}&limit=${limit}`);
   }
 
-  savePlayer(player: Player): Observable<Player> {
-    const editedPlayer = {
-      name: player.name,
-    };
+  setPlayerName(playerId: string, name: string): Observable<Player> {
+    return this.http.patch<Player>(`${this.apiUrl}/players/${playerId}`, { name });
+  }
 
-    return zip(
-      this.http.patch<Player>(`${this.apiUrl}/players/${player.id}`, editedPlayer),
-      this.http.put<PlayerSkill>(`${this.apiUrl}/players/${player.id}/skill`, player.skill),
-    ).pipe(
-      map(([thePlayer, skill]) => ({ ...thePlayer, skill: skill.skill })),
-    );
+  setPlayerRole(playerId: string, role: PlayerRole): Observable<Player> {
+    return this.http.patch<Player>(`${this.apiUrl}/players/${playerId}`, { role });
+  }
+
+  setPlayerSkill(playerId: string, skill: { [gameClass: string]: number }) {
+    return this.http.put<{ [gameClass: string]: number }>(`${this.apiUrl}/players/${playerId}/skill`, skill);
   }
 
   fetchAllPlayerSkills(): Observable<PlayerSkill[]> {
     return this.http.get<PlayerSkill[]>(`${this.apiUrl}/players/all/skill`);
   }
 
-  fetchPlayerSkill(playerId: string): Observable<PlayerSkill> {
-    return this.http.get<{ [gameClass: string]: number }>(`${this.apiUrl}/players/${playerId}/skill`).pipe(
-      map(skill => ({ player: playerId, skill })),
-    );
+  fetchPlayerSkill(playerId: string): Observable<{ [gameClass: string]: number }> {
+    return this.http.get<{ [gameClass: string]: number }>(`${this.apiUrl}/players/${playerId}/skill`);
   }
 
   fetchAllPlayers(): Observable<Player[]> {
@@ -75,14 +73,11 @@ export class PlayersService {
     return this.http.post<PlayerBan>(`${this.apiUrl}/players/${playerBan.player}/bans/${playerBan.id}?revoke`, { });
   }
 
-  defaultSkill(playerId: string): Observable<PlayerSkill> {
+  defaultSkill(playerId: string): Observable<{ [gameClass: string]: number }> {
     return this.store.pipe(
       select(queueConfig),
       first(config => !!config),
-      map(config => ({
-        player: playerId,
-        skill: config.classes.reduce((_skill, curr) => { _skill[curr.name] = 1; return _skill; }, { }),
-      })),
+      map(config => config.classes.reduce((_skill, curr) => { _skill[curr.name] = 1; return _skill; }, { })),
     );
   }
 

@@ -22,6 +22,11 @@
         &bull;
         <a [routerLink]="['/player', _player.id, 'bans']" class="text-danger">bans</a>
       </ng-container>
+
+      <ng-container *ngIf="isSuperUser | async">
+        &bull;
+        <a [routerLink]="" class="text-dark" (click)="openEditPlayerRoleDialog()">roles</a>
+      </ng-container>
     </small>
   </h4>
 
