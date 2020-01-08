@@ -12,12 +12,18 @@ import { By } from '@angular/platform-browser';
 import { Etf2lProfileLinkPipe } from '../etf2l-profile-link.pipe';
 import { LogsTfProfileLinkPipe } from '../logs-tf-profile-link.pipe';
 import { SteamProfileLinkPipe } from '../steam-profile-link.pipe';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { EditPlayerRoleDialogComponent } from '../edit-player-role-dialog/edit-player-role-dialog.component';
 
 class PlayersServiceStub {
   fetchPlayerStats() { return of({}); }
 }
 
 const paramMap = of(convertToParamMap({ id: 'FAKE_ID' }));
+
+class BsModalServiceStub {
+  show(component: any, config: any) { }
+}
 
 describe('PlayerDetailsComponent', () => {
   let component: PlayerDetailsComponent;
@@ -51,6 +57,7 @@ describe('PlayerDetailsComponent', () => {
         { provide: PlayersService, useClass: PlayersServiceStub  },
         provideMockStore({ initialState }),
         { provide: ActivatedRoute, useValue: { paramMap } },
+        { provide: BsModalService, useClass: BsModalServiceStub },
       ],
       schemas: [ NO_ERRORS_SCHEMA ],
     })
@@ -72,7 +79,7 @@ describe('PlayerDetailsComponent', () => {
   });
 
   describe('#ngOnInit()', () => {
-    it('should load the player if it is not in the store yet', () => {
+    it('should load the player', () => {
       expect(storeDispatchSpy).toHaveBeenCalledWith(loadPlayer({ playerId: 'FAKE_ID' }));
     });
 
@@ -123,6 +130,22 @@ describe('PlayerDetailsComponent', () => {
       expect(badge).toBeTruthy();
       expect(badge.classList.contains('badge-warning')).toBe(true);
       expect(badge.innerText).toEqual('admin');
+    });
+
+    describe('#openEditPlayerRoleDialog()', () => {
+      it('should open the dialog with the player in the initial state', () => {
+        const spy = spyOn(TestBed.get(BsModalService), 'show').and.callThrough();
+        component.openEditPlayerRoleDialog();
+        expect(spy).toHaveBeenCalledWith(EditPlayerRoleDialogComponent, {
+          initialState: {
+            player: jasmine.objectContaining({
+              id: 'FAKE_ID',
+              role: 'admin',
+              name: 'niewielki',
+            })
+          },
+        });
+      });
     });
   });
 });
