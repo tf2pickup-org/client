@@ -1,6 +1,5 @@
 import { Component, ChangeDetectionStrategy, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { AppState } from '@app/app.state';
 import { combineLatest, Subject } from 'rxjs';
 import { queueRequiredPlayerCount, queueCurrentPlayerCount } from '../queue.selectors';
 import { Title } from '@angular/platform-browser';
@@ -22,7 +21,7 @@ export class QueueContainerComponent implements OnInit, OnDestroy {
   authenticated = this.authService.authenticated;
 
   constructor(
-    private store: Store<AppState>,
+    private store: Store<{}>,
     private title: Title,
     private authService: AuthService,
   ) { }

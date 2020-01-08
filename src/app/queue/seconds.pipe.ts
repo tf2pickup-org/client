@@ -7,7 +7,7 @@ import { isNumber } from 'util';
 export class SecondsPipe implements PipeTransform {
 
   transform(value: any): string {
-    if (!isNumber(value)) {
+    if (isNaN(value)) {
       return value;
     }
 

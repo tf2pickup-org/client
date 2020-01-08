@@ -2,7 +2,6 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { isInQueue, isPreReadied } from '../queue.selectors';
 import { debounceTime, map } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
-import { AppState } from '@app/app.state';
 import { togglePreReady } from '../queue.actions';
 import { Observable, combineLatest } from 'rxjs';
 import { PreReadyService } from '../pre-ready.service';
@@ -23,7 +22,7 @@ export class PreReadyUpButtonComponent {
   );
 
   constructor(
-    private store: Store<AppState>,
+    private store: Store<{}>,
     private preReadyService: PreReadyService,
   ) { }
 

@@ -3,7 +3,6 @@ import { AuthService } from '@app/auth/auth.service';
 import * as socketIo from 'socket.io-client';
 import { WS_URL } from '@app/ws-url';
 import { Store } from '@ngrx/store';
-import { AppState } from '@app/app.state';
 import { loadQueue } from '@app/queue/queue.actions';
 import { of, Observable, ReplaySubject } from 'rxjs';
 import { map, switchMap, tap, first } from 'rxjs/operators';
@@ -36,7 +35,7 @@ export class IoClientService {
   constructor(
     private authService: AuthService,
     @Inject(WS_URL) private wsUrl: string,
-    private store: Store<AppState>,
+    private store: Store<{}>,
     private http: HttpClient,
     @Inject(API_URL) private apiUrl: string,
     private tokenStore: TokenStoreService,

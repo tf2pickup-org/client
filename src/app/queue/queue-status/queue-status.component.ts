@@ -1,7 +1,6 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
-import { AppState } from 'src/app/app.state';
 import { queueCurrentPlayerCount, queueRequiredPlayerCount, queueState } from '../queue.selectors';
 import { startWith } from 'rxjs/operators';
 
@@ -24,7 +23,7 @@ export class QueueStatusComponent {
   state = this.store.select(queueState);
 
   constructor(
-    private store: Store<AppState>,
+    private store: Store<{}>,
   ) { }
 
 }

@@ -1,7 +1,6 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { activeGame } from '@app/games/games.selectors';
 import { Store, select } from '@ngrx/store';
-import { AppState } from '@app/app.state';
 import { profile } from '@app/profile/profile.selectors';
 import { map, filter } from 'rxjs/operators';
 
@@ -21,7 +20,7 @@ export class QueueAlertsComponent {
   );
 
   constructor(
-    private store: Store<AppState>,
+    private store: Store<{}>,
   ) { }
 
 }

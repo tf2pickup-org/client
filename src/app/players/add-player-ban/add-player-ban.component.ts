@@ -2,7 +2,6 @@ import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/
 import { ActivatedRoute, Router } from '@angular/router';
 import { map, switchMap, tap, first, filter, takeUntil, withLatestFrom } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
-import { AppState } from '@app/app.state';
 import { playerById, playerBansLocked } from '../selectors';
 import { loadPlayer, addPlayerBan, playerBanAdded } from '../actions';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -45,7 +44,7 @@ export class AddPlayerBanComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
-    private store: Store<AppState>,
+    private store: Store<{}>,
     private formBuilder: FormBuilder,
     private router: Router,
     private actions: Actions,

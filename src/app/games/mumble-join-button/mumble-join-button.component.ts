@@ -1,6 +1,5 @@
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { AppState } from '@app/app.state';
 import { Observable } from 'rxjs';
 import { gameById } from '../games.selectors';
 import { filter, withLatestFrom, map } from 'rxjs/operators';
@@ -40,7 +39,7 @@ export class MumbleJoinButtonComponent {
   }
 
   constructor(
-    private store: Store<AppState>,
+    private store: Store<{}>,
   ) { }
 
 }

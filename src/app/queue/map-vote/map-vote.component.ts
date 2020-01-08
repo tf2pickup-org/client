@@ -1,6 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { AppState } from '@app/app.state';
 import { mapVoteResults, mapVoteTotalCount, mapVote, isInQueue } from '../queue.selectors';
 import { voteForMap } from '../queue.actions';
 import { combineLatest } from 'rxjs';
@@ -24,7 +23,7 @@ export class MapVoteComponent {
   );
 
   constructor(
-    private store: Store<AppState>,
+    private store: Store<{}>,
   ) { }
 
   voteForMap(aMap: string) {

@@ -2,7 +2,6 @@ import { Component, Input, ChangeDetectionStrategy, OnInit, OnDestroy } from '@a
 import { Observable, Subject } from 'rxjs';
 import { QueueSlot } from '../models/queue-slot';
 import { Store, select } from '@ngrx/store';
-import { AppState } from '@app/app.state';
 import { queueSlotsForClass, mySlot } from '../queue.selectors';
 import { profile } from '@app/profile/profile.selectors';
 import { takeUntil, map } from 'rxjs/operators';
@@ -36,7 +35,7 @@ export class QueueClassSlotListComponent implements OnInit, OnDestroy {
   }
 
   constructor(
-    private store: Store<AppState>,
+    private store: Store<{}>,
   ) { }
 
   ngOnInit() {

@@ -5,7 +5,6 @@ import { gameAdded, loadGame, gameUpdated, forceEndGame, gameCreated, reinitiali
 import { mergeMap, map, filter, withLatestFrom } from 'rxjs/operators';
 import { GamesEventsService } from './games-events.service';
 import { Store } from '@ngrx/store';
-import { AppState } from '@app/app.state';
 import { profile } from '@app/profile/profile.selectors';
 import { profileLoaded } from '@app/profile/profile.actions';
 import { Router } from '@angular/router';
@@ -69,7 +68,7 @@ export class GamesEffects {
     private actions: Actions,
     private gamesService: GamesService,
     private gamesEventsService: GamesEventsService,
-    private store: Store<AppState>,
+    private store: Store<{}>,
     private router: Router,
   ) {
     this.gamesEventsService.gameCreated.subscribe(game => this.store.dispatch(gameCreated({ game })));
