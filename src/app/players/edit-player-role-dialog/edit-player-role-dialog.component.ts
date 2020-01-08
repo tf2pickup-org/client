@@ -17,18 +17,18 @@ import { setPlayerRole } from '../actions';
 export class EditPlayerRoleDialogComponent {
 
   readonly roles = [
-    { text: 'no role', value: null },
+    { text: 'no role', value: 'no role' },
     { text: 'admin', value: 'admin' },
     { text: 'super user', value: 'super-user' },
   ];
 
-  selectedRole: PlayerRole;
+  selectedRole: PlayerRole | 'no role';
   locked = this.store.select(playersLocked);
   private _player: Player;
 
   set player(player: Player) {
     this._player = player;
-    this.selectedRole = player.role;
+    this.selectedRole = player.role ?? 'no role';
   }
 
   constructor(
@@ -37,13 +37,14 @@ export class EditPlayerRoleDialogComponent {
   ) { }
 
   saveRole() {
+    console.log(this.selectedRole);
     this.store.pipe(
       select(playerById(this._player.id)),
       filter(p => p.role === this.selectedRole),
       first(),
     ).subscribe(() => this.bsModalRef.hide());
 
-    this.store.dispatch(setPlayerRole({ playerId: this._player.id, role: this.selectedRole }));
+    this.store.dispatch(setPlayerRole({ playerId: this._player.id, role: this.selectedRole === 'no role' ? null : this.selectedRole }));
   }
 
 }

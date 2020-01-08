@@ -123,5 +123,11 @@ describe('EditPlayerRoleDialogComponent', () => {
 
       expect(spy).toHaveBeenCalled();
     });
+
+    it('should save null role as well', () => {
+      component.selectedRole = 'no role';
+      component.saveRole();
+      expect(storeDispatchSpy).toHaveBeenCalledWith(setPlayerRole({ playerId: 'FAKE_PLAYER_ID', role: null }));
+    });
   });
 });
