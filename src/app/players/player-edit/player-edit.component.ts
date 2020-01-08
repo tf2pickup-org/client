@@ -99,6 +99,7 @@ export class PlayerEditComponent implements OnInit, OnDestroy {
         this.actions.pipe(
           ofType(playerEdited),
           filter(action => action.player.id === this.originalPlayer.id),
+          // tslint:disable-next-line: rxjs-no-unsafe-first
           first(),
         )
       );
@@ -110,6 +111,7 @@ export class PlayerEditComponent implements OnInit, OnDestroy {
         this.actions.pipe(
           ofType(playerSkillEdited),
           filter(action => action.playerId === this.originalPlayer.id),
+          // tslint:disable-next-line: rxjs-no-unsafe-first
           first(),
         )
       );

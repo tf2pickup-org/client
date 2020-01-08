@@ -3,7 +3,6 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 import { Player } from '../models/player';
 import { PlayerRole } from '../models/player-role';
 import { Store, select } from '@ngrx/store';
-import { AppState } from '@app/app.state';
 import { playersLocked, playerById } from '../selectors';
 import { filter, first, tap } from 'rxjs/operators';
 import { setPlayerRole } from '../actions';
@@ -33,7 +32,7 @@ export class EditPlayerRoleDialogComponent {
 
   constructor(
     public bsModalRef: BsModalRef,
-    private store: Store<AppState>,
+    private store: Store<{}>,
   ) { }
 
   saveRole() {
