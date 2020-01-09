@@ -2,7 +2,6 @@ import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/
 import { Subject } from 'rxjs';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Store, select } from '@ngrx/store';
-import { AppState } from '@app/app.state';
 import { takeUntil } from 'rxjs/operators';
 import { QueueReadyUpDialogComponent } from '../queue-ready-up-dialog/queue-ready-up-dialog.component';
 import { queueShowReadyUpDialog } from '../queue.selectors';
@@ -20,7 +19,7 @@ export class QueueReadyUpDialogControllerComponent implements OnInit, OnDestroy 
   private audio = new Audio('/assets/sounds/ready_up.wav');
 
   constructor(
-    private store: Store<AppState>,
+    private store: Store<{}>,
     private modalService: BsModalService,
   ) {
     if ('Notification' in window && Notification.permission !== 'denied') {

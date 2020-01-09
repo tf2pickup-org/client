@@ -9,7 +9,6 @@ import { AcceptRulesDialogComponent } from './accept-rules-dialog/accept-rules-d
 import { Observable } from 'rxjs';
 import { ProfileEventsService } from './profile-events.service';
 import { Store } from '@ngrx/store';
-import { AppState } from '@app/app.state';
 
 @Injectable()
 export class ProfileEffects implements OnInitEffects {
@@ -48,7 +47,7 @@ export class ProfileEffects implements OnInitEffects {
     private authService: AuthService,
     private modalService: BsModalService,
     private profileEventsService: ProfileEventsService,
-    private store: Store<AppState>,
+    private store: Store<{}>,
   ) {
     this.profileEventsService.profileUpdated.subscribe(profileChanges => this.store.dispatch(profileUpdated({ profileChanges })));
   }

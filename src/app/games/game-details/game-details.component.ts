@@ -1,6 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { AppState } from '@app/app.state';
 import { Observable, Subject, ReplaySubject, combineLatest } from 'rxjs';
 import { Game } from '../models/game';
 import { ActivatedRoute } from '@angular/router';
@@ -38,7 +37,7 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
-    private store: Store<AppState>,
+    private store: Store<{}>,
     private title: Title,
     private gamesService: GamesService,
   ) { }

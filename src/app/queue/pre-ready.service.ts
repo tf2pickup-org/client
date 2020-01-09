@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { AppState } from '@app/app.state';
 import { timer, BehaviorSubject } from 'rxjs';
 import { takeWhile, finalize, debounceTime } from 'rxjs/operators';
 import { stopPreReady } from './queue.actions';
@@ -20,7 +19,7 @@ export class PreReadyService {
   }
 
   constructor(
-    private store: Store<AppState>,
+    private store: Store<{}>,
   ) {
     this.store.pipe(
       select(isPreReadied),

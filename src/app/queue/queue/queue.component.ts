@@ -1,6 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { AppState } from 'src/app/app.state';
 import { queueClasses } from '../queue.selectors';
 
 @Component({
@@ -14,7 +13,7 @@ export class QueueComponent {
   queueClasses = this.store.select(queueClasses);
 
   constructor(
-    private store: Store<AppState>,
+    private store: Store<{}>,
   ) { }
 
 }

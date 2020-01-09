@@ -2,7 +2,6 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { GameServer } from '../models/game-server';
 import { Store, select } from '@ngrx/store';
-import { AppState } from '@app/app.state';
 import { addGameServer } from '../game-servers.actions';
 import { Observable } from 'rxjs';
 import { gameServersLocked, gameServerByName } from '../game-servers.selectors';
@@ -24,7 +23,7 @@ export class AddGameServerDialogComponent {
 
   constructor(
     public bsModalRef: BsModalRef,
-    private store: Store<AppState>,
+    private store: Store<{}>,
   ) { }
 
   add() {

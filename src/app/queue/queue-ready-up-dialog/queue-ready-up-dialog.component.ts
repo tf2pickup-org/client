@@ -1,6 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { AppState } from '@app/app.state';
 import { leaveQueue, readyUp } from '../queue.actions';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 
@@ -13,7 +12,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 export class QueueReadyUpDialogComponent {
 
   constructor(
-    private store: Store<AppState>,
+    private store: Store<{}>,
     private bsModalRef: BsModalRef,
   ) { }
 

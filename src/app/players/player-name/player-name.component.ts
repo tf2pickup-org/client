@@ -1,6 +1,5 @@
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { AppState } from '@app/app.state';
 import { Observable } from 'rxjs';
 import { playerById } from '../selectors';
 import { tap, map, filter } from 'rxjs/operators';
@@ -35,7 +34,7 @@ export class PlayerNameComponent {
   }
 
   constructor(
-    private store: Store<AppState>,
+    private store: Store<{}>,
   ) { }
 
 }

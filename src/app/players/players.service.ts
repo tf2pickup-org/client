@@ -5,12 +5,11 @@ import { API_URL } from '@app/api-url';
 import { HttpClient } from '@angular/common/http';
 import { Game } from '@app/games/models/game';
 import { PlayerSkill } from './models/player-skill';
-import { map, filter, first } from 'rxjs/operators';
+import { map, first } from 'rxjs/operators';
 import { PlayerStats } from './models/player-stats';
 import { PlayerBan } from './models/player-ban';
 import { PaginatedList } from '@app/core/models/paginated-list';
 import { Store, select } from '@ngrx/store';
-import { AppState } from '@app/app.state';
 import { queueConfig } from '@app/queue/queue.selectors';
 import { PlayerRole } from './models/player-role';
 
@@ -22,7 +21,7 @@ export class PlayersService {
   constructor(
     private http: HttpClient,
     @Inject(API_URL) private apiUrl: string,
-    private store: Store<AppState>,
+    private store: Store<{}>,
   ) { }
 
   fetchPlayer(playerId: string): Observable<Player> {

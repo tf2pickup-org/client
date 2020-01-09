@@ -2,5 +2,5 @@
   type="button"
   class="btn btn-sm pre-ready-up-btn"
   [ngClass]="(preReadied | async) ? 'btn-dark' : 'btn-primary'"
-  [disabled]="!(isInQueue | async)"
+  [disabled]="(isInQueue | async) === false"
   (click)="preReadyToggle()">{{ text | async | seconds }}</button>

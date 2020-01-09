@@ -5,7 +5,6 @@ import { PlayerBan } from '../models/player-ban';
 import { Observable, Subject } from 'rxjs';
 import { Player } from '../models/player';
 import { Store } from '@ngrx/store';
-import { AppState } from '@app/app.state';
 import { playerById, playerBans } from '../selectors';
 import { loadPlayer, revokePlayerBan, loadPlayerBans } from '../actions';
 import { Location } from '@angular/common';
@@ -24,7 +23,7 @@ export class PlayerBansComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
-    private store: Store<AppState>,
+    private store: Store<{}>,
     private location: Location,
   ) { }
 

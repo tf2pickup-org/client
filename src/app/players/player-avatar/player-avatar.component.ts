@@ -3,7 +3,6 @@ import { Observable } from 'rxjs';
 import { select, Store } from '@ngrx/store';
 import { playerById } from '../selectors';
 import { filter, map } from 'rxjs/operators';
-import { AppState } from '@app/app.state';
 
 @Component({
   selector: 'app-player-avatar',
@@ -25,7 +24,7 @@ export class PlayerAvatarComponent {
   }
 
   constructor(
-    private store: Store<AppState>,
+    private store: Store<{}>,
   ) { }
 
 }

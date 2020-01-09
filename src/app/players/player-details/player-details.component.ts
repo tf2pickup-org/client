@@ -1,6 +1,5 @@
 import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AppState } from '@app/app.state';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Player } from '../models/player';
@@ -30,7 +29,7 @@ export class PlayerDetailsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private store: Store<AppState>,
+    private store: Store<{}>,
     private playersService: PlayersService,
     private title: Title,
     private modalService: BsModalService,

@@ -1,6 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { AppState } from '@app/app.state';
 import { GameServer } from '../models/game-server';
 import { allGameServers, gameServersLoaded, gameServersLocked } from '../game-servers.selectors';
 import { first } from 'rxjs/operators';
@@ -22,7 +21,7 @@ export class GameServerListComponent implements OnInit {
   locked = this.store.select(gameServersLocked);
 
   constructor(
-    private store: Store<AppState>,
+    private store: Store<{}>,
     private modalService: BsModalService,
   ) { }
 

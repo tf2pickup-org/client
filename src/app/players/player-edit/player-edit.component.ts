@@ -2,7 +2,6 @@ import { Component, OnInit, ChangeDetectionStrategy, OnDestroy, ChangeDetectorRe
 import { ActivatedRoute, Router } from '@angular/router';
 import { map, switchMap, tap, filter, takeUntil, first } from 'rxjs/operators';
 import { Store, Action } from '@ngrx/store';
-import { AppState } from '@app/app.state';
 import { playerById, playersLocked, playerSkillByPlayerId } from '../selectors';
 import { loadPlayer, playerEdited, loadPlayerSkill, setPlayerName, setPlayerSkill, playerSkillEdited } from '../actions';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
@@ -36,7 +35,7 @@ export class PlayerEditComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
-    private store: Store<AppState>,
+    private store: Store<{}>,
     private formBuilder: FormBuilder,
     private actions: Actions,
     private router: Router,
@@ -100,6 +99,7 @@ export class PlayerEditComponent implements OnInit, OnDestroy {
         this.actions.pipe(
           ofType(playerEdited),
           filter(action => action.player.id === this.originalPlayer.id),
+          // tslint:disable-next-line: rxjs-no-unsafe-first
           first(),
         )
       );
@@ -111,6 +111,7 @@ export class PlayerEditComponent implements OnInit, OnDestroy {
         this.actions.pipe(
           ofType(playerSkillEdited),
           filter(action => action.playerId === this.originalPlayer.id),
+          // tslint:disable-next-line: rxjs-no-unsafe-first
           first(),
         )
       );

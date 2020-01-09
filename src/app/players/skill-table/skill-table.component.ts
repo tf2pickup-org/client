@@ -1,6 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { AppState } from '@app/app.state';
 import { allPlayers } from '../selectors';
 import { loadPlayers, loadAllPlayerSkills } from '../actions';
 import { Observable } from 'rxjs';
@@ -40,7 +39,7 @@ export class SkillTableComponent implements OnInit {
   );
 
   constructor(
-    private store: Store<AppState>,
+    private store: Store<{}>,
   ) { }
 
   ngOnInit() {

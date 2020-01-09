@@ -7,7 +7,6 @@ import { mergeMap, map, catchError, filter, withLatestFrom, mapTo, tap } from 'r
 import { QueueService } from './queue.service';
 import { QueueEventsService } from './queue-events.service';
 import { Store, select } from '@ngrx/store';
-import { AppState } from '@app/app.state';
 import { of } from 'rxjs';
 import { mySlot, isInQueue, isPreReadied } from './queue.selectors';
 import { ownGameAdded } from '@app/games/games.actions';
@@ -132,7 +131,7 @@ export class QueueEffects {
     private actions: Actions,
     private queueService: QueueService,
     private queueEventsService: QueueEventsService,
-    private store: Store<AppState>,
+    private store: Store<{}>,
   ) {
     this.queueEventsService.slotsUpdate.subscribe(slots => this.store.dispatch(queueSlotsUpdated({ slots })));
     this.queueEventsService.stateUpdate.subscribe(queueState => this.store.dispatch(queueStateUpdated({ queueState })));

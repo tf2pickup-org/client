@@ -1,7 +1,6 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { AuthService } from '@app/auth/auth.service';
 import { Store } from '@ngrx/store';
-import { AppState } from '@app/app.state';
 import { profile } from '@app/profile/profile.selectors';
 import { environment } from '@environment';
 
@@ -19,7 +18,7 @@ export class NavigationBarComponent {
 
   constructor(
     private authService: AuthService,
-    private store: Store<AppState>,
+    private store: Store<{}>,
   ) { }
 
 }
