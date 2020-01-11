@@ -22,12 +22,19 @@ export class GameTeamPlayerListComponent {
   showAdminActionButtons = false;
 
   @Output()
-  requestSubstituteToggle = new EventEmitter<string>();
+  requestSubstitute = new EventEmitter<string>();
 
-  emitRequestSubstituteToggle(event: Event, player: ResolvedGamePlayer) {
+  @Output()
+  replacePlayer = new EventEmitter<string>();
+
+  emitRequestSubstitute(event: Event, player: ResolvedGamePlayer) {
     event.preventDefault();
     event.stopPropagation();
-    this.requestSubstituteToggle.emit(player.id);
+    this.requestSubstitute.emit(player.id);
+  }
+
+  emitReplacePlayer(player: ResolvedGamePlayer) {
+    this.replacePlayer.emit(player.id);
   }
 
 }

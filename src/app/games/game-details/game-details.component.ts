@@ -5,7 +5,7 @@ import { Game } from '../models/game';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap, map, tap, filter, first, pairwise, shareReplay, takeUntil, startWith, withLatestFrom } from 'rxjs/operators';
 import { gameById } from '../games.selectors';
-import { loadGame, forceEndGame, reinitializeServer, requestSubsituteToggle, replacePlayer } from '../games.actions';
+import { loadGame, forceEndGame, reinitializeServer, requestSubstitute, replacePlayer } from '../games.actions';
 import { playerById } from '@app/players/selectors';
 import { loadPlayer } from '@app/players/actions';
 import { isAdmin, profile } from '@app/profile/profile.selectors';
@@ -160,10 +160,10 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
     ).subscribe(game => this.store.dispatch(forceEndGame({ gameId: game.id })));
   }
 
-  requestSubstituteToggle(playerId: string) {
+  requestSubstitute(playerId: string) {
     this.game.pipe(
       first(),
-    ).subscribe(game => this.store.dispatch(requestSubsituteToggle({ gameId: game.id, playerId })));
+    ).subscribe(game => this.store.dispatch(requestSubstitute({ gameId: game.id, playerId })));
   }
 
   replacePlayer(playerId: string) {
