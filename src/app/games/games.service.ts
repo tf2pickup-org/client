@@ -43,4 +43,8 @@ export class GamesService {
     return this.http.post<void>(`${this.apiUrl}/games/${gameId}?substitute_player_cancel=${playerId}`, { });
   }
 
+  replacePlayer(gameId: string, replaceeId: string, replacementId: string): Observable<void> {
+    return this.http.post<void>(`${this.apiUrl}/games/${gameId}?replace_player=${replaceeId}&replacement_player=${replacementId}`, { });
+  }
+
 }

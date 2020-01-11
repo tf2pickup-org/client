@@ -83,4 +83,10 @@ describe('GamesService', () => {
       expect(req.request.method).toBe('POST');
     }));
   });
+
+  describe('#replacePlayer()', () => {
+    it('should call api endpoint', inject([GamesService], (service: GamesService) => {
+      service.replacePlayer('FAKE_GAME_ID', 'FAKE_REPLACEE_ID', 'FAKE_REPLACEMENT_ID');
+    }));
+  });
 });

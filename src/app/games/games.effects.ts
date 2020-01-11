@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { GamesService } from './games.service';
 import { gameAdded, loadGame, gameUpdated, forceEndGame, gameCreated, reinitializeServer, ownGameAdded, requestSubsituteToggle,
-  requestSubstitute, cancelSubstitutionRequest } from './games.actions';
+  requestSubstitute, cancelSubstitutionRequest, replacePlayer } from './games.actions';
 import { mergeMap, map, filter, withLatestFrom, first } from 'rxjs/operators';
 import { GamesEventsService } from './games-events.service';
 import { Store, select } from '@ngrx/store';
@@ -98,6 +98,13 @@ export class GamesEffects {
     this.actions.pipe(
       ofType(cancelSubstitutionRequest),
       mergeMap(({ gameId, playerId }) => this.gamesService.cancelSubstitutionRequest(gameId, playerId)),
+    ), { dispatch: false },
+  );
+
+  replacePlayer = createEffect(() =>
+    this.actions.pipe(
+      ofType(replacePlayer),
+      mergeMap(({ gameId, replaceeId, replacementId }) => this.gamesService.replacePlayer(gameId, replaceeId, replacementId)),
     ), { dispatch: false },
   );
 
