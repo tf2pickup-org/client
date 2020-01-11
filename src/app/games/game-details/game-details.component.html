@@ -33,7 +33,7 @@
         [players]="playersBlu | async"
         team="blu"
         [showPlayerConnectionStatus]="isRunning | async"
-        [showAdminActionButtons]="isAdmin | async"
+        [showAdminActionButtons]="(isAdmin | async) && (isRunning | async)"
         (requestSubstitute)="requestSubstitute($event)"
         (replacePlayer)="replacePlayer($event)"
         [locked]="isLocked | async"></app-game-team-player-list>
@@ -44,7 +44,7 @@
         [players]="playersRed | async"
         team="red"
         [showPlayerConnectionStatus]="isRunning | async"
-        [showAdminActionButtons]="isAdmin | async"
+        [showAdminActionButtons]="(isAdmin | async) && (isRunning | async)"
         (requestSubstitute)="requestSubstitute($event)"
         (replacePlayer)="replacePlayer($event)"
         [locked]="isLocked | async"></app-game-team-player-list>

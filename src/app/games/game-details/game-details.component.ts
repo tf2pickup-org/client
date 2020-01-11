@@ -3,12 +3,12 @@ import { Store, select } from '@ngrx/store';
 import { Observable, Subject, ReplaySubject, combineLatest } from 'rxjs';
 import { Game } from '../models/game';
 import { ActivatedRoute } from '@angular/router';
-import { switchMap, map, tap, filter, first, pairwise, shareReplay, takeUntil, startWith, withLatestFrom } from 'rxjs/operators';
+import { switchMap, map, tap, filter, first, pairwise, shareReplay, takeUntil, startWith } from 'rxjs/operators';
 import { gameById, isPlayingGame } from '../games.selectors';
 import { loadGame, forceEndGame, reinitializeServer, requestSubstitute, replacePlayer } from '../games.actions';
 import { playerById } from '@app/players/selectors';
 import { loadPlayer } from '@app/players/actions';
-import { isAdmin } from '@app/profile/profile.selectors';
+import { isAdmin, profile } from '@app/profile/profile.selectors';
 import { Title } from '@angular/platform-browser';
 import { environment } from '@environment';
 import { GamePlayer } from '../models/game-player';
@@ -25,16 +25,16 @@ import { ResolvedGamePlayer } from '../models/resolved-game-player';
 })
 export class GameDetailsComponent implements OnInit, OnDestroy {
 
-  private destroyed = new Subject<void>();
-  private audio = new Audio('/assets/sounds/fight.wav');
-  private players = new ReplaySubject<ResolvedGamePlayer[]>(1);
+  isAdmin: Observable<boolean> = this.store.select(isAdmin);
   game: Observable<Game>;
   gameServerName: Observable<string>;
   playersRed: Observable<ResolvedGamePlayer[]>;
   playersBlu: Observable<ResolvedGamePlayer[]>;
-  isAdmin: Observable<boolean> = this.store.select(isAdmin);
   isRunning: Observable<boolean>;
-  isLocked = this.store.select(isPlayingGame);
+  isLocked: Observable<boolean>;
+  private destroyed = new Subject<void>();
+  private audio = new Audio('/assets/sounds/fight.wav');
+  private players = new ReplaySubject<ResolvedGamePlayer[]>(1);
 
   constructor(
     private route: ActivatedRoute,
@@ -64,6 +64,19 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
     );
 
     this.isRunning = this.game.pipe(map(game => game.state === 'launching' || game.state === 'started'));
+
+    this.isLocked = combineLatest([
+      this.isRunning,
+      this.store.select(isPlayingGame),
+      this.store.select(profile),
+    ]).pipe(
+      map(([thisGameRunning, hasActiveGame, theProfile]) => {
+        return thisGameRunning && // the game is still active
+          theProfile.bans.length === 0 && // the player isn't banned
+          !hasActiveGame; // isn't involved in any game
+      }),
+      map(canSub => !canSub),
+    );
 
     // load game server
     this.gameServerName = this.game.pipe(
