@@ -35,7 +35,8 @@
         [showPlayerConnectionStatus]="isRunning | async"
         [showAdminActionButtons]="isAdmin | async"
         (requestSubstitute)="requestSubstitute($event)"
-        (replacePlayer)="replacePlayer($event)"></app-game-team-player-list>
+        (replacePlayer)="replacePlayer($event)"
+        [locked]="isLocked | async"></app-game-team-player-list>
     </div>
 
     <div class="col">
@@ -45,7 +46,8 @@
         [showPlayerConnectionStatus]="isRunning | async"
         [showAdminActionButtons]="isAdmin | async"
         (requestSubstitute)="requestSubstitute($event)"
-        (replacePlayer)="replacePlayer($event)"></app-game-team-player-list>
+        (replacePlayer)="replacePlayer($event)"
+        [locked]="isLocked | async"></app-game-team-player-list>
     </div>
   </div>
 </div>

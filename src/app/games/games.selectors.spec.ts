@@ -1,4 +1,4 @@
-import { gameById, activeGames, playerSlot } from './games.selectors';
+import { gameById, activeGames, playerSlot, isPlayingGame } from './games.selectors';
 
 describe('games selectors', () => {
   describe('gameById', () => {
@@ -19,6 +19,13 @@ describe('games selectors', () => {
         { id: '2', number: 2, state: 'started' },
         { id: '3', number: 3, state: 'launching' },
       ] as any);
+    });
+  });
+
+  describe('isPlayingGame', () => {
+    it('should return true if there is an active game', () => {
+      expect(isPlayingGame.projector(null)).toBe(false);
+      expect(isPlayingGame.projector({ id: 1, number: 1, state: 'started' })).toBe(true);
     });
   });
 

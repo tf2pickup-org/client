@@ -101,6 +101,15 @@ describe('GameTeamPlayerListComponent', () => {
         });
         button.click();
       });
+
+      it('should be disabled if the locked=true', () => {
+        const button = fixture.debugElement.query(By.css('.player-item.looking-for-substitute')).nativeElement as HTMLButtonElement;
+        expect(button.disabled).toBe(false);
+
+        component.locked = true;
+        fixture.detectChanges();
+        expect(button.disabled).toBe(true);
+      });
     });
   });
 });

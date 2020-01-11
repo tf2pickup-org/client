@@ -4,7 +4,7 @@ import { Observable, Subject, ReplaySubject, combineLatest } from 'rxjs';
 import { Game } from '../models/game';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap, map, tap, filter, first, pairwise, shareReplay, takeUntil, startWith, withLatestFrom } from 'rxjs/operators';
-import { gameById } from '../games.selectors';
+import { gameById, isPlayingGame } from '../games.selectors';
 import { loadGame, forceEndGame, reinitializeServer, requestSubstitute, replacePlayer } from '../games.actions';
 import { playerById } from '@app/players/selectors';
 import { loadPlayer } from '@app/players/actions';
@@ -34,6 +34,7 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
   playersBlu: Observable<ResolvedGamePlayer[]>;
   isAdmin: Observable<boolean> = this.store.select(isAdmin);
   isRunning: Observable<boolean>;
+  isLocked = this.store.select(isPlayingGame);
 
   constructor(
     private route: ActivatedRoute,

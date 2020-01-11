@@ -21,6 +21,9 @@ export class GameTeamPlayerListComponent {
   @Input()
   showAdminActionButtons = false;
 
+  @Input()
+  locked = false;
+
   @Output()
   requestSubstitute = new EventEmitter<string>();
 

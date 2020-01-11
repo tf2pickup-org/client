@@ -34,7 +34,8 @@
       <button type="button"
         class="list-group-item list-group-item-action list-group-item-warning player-item looking-for-substitute"
         (click)="emitReplacePlayer(player)"
-        tooltip="Replace this player">
+        tooltip="Replace this player"
+        [disabled]="locked">
         <div class="class-icon" [inlineSVG]="'/assets/tf2-classfont/' + player.gameClass + '.svg'"></div>
         <span class="oi oi-plus"></span>
         <div class="dummy"></div>
