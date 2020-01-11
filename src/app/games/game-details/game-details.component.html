@@ -34,7 +34,8 @@
         team="blu"
         [showPlayerConnectionStatus]="isRunning | async"
         [showAdminActionButtons]="isAdmin | async"
-        (requestSubstituteToggle)="requestSubstituteToggle($event)"></app-game-team-player-list>
+        (requestSubstituteToggle)="requestSubstituteToggle($event)"
+        (replacePlayer)="replacePlayer($event)"></app-game-team-player-list>
     </div>
 
     <div class="col">
@@ -43,7 +44,8 @@
         team="red"
         [showPlayerConnectionStatus]="isRunning | async"
         [showAdminActionButtons]="isAdmin | async"
-        (requestSubstituteToggle)="requestSubstituteToggle($event)"></app-game-team-player-list>
+        (requestSubstituteToggle)="requestSubstituteToggle($event)"
+        (replacePlayer)="replacePlayer($event)"></app-game-team-player-list>
     </div>
   </div>
 </div>

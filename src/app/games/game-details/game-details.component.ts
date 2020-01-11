@@ -3,12 +3,12 @@ import { Store, select } from '@ngrx/store';
 import { Observable, Subject, ReplaySubject, combineLatest } from 'rxjs';
 import { Game } from '../models/game';
 import { ActivatedRoute } from '@angular/router';
-import { switchMap, map, tap, filter, first, pairwise, shareReplay, takeUntil, startWith } from 'rxjs/operators';
+import { switchMap, map, tap, filter, first, pairwise, shareReplay, takeUntil, startWith, withLatestFrom } from 'rxjs/operators';
 import { gameById } from '../games.selectors';
-import { loadGame, forceEndGame, reinitializeServer, requestSubsituteToggle } from '../games.actions';
+import { loadGame, forceEndGame, reinitializeServer, requestSubsituteToggle, replacePlayer } from '../games.actions';
 import { playerById } from '@app/players/selectors';
 import { loadPlayer } from '@app/players/actions';
-import { isAdmin } from '@app/profile/profile.selectors';
+import { isAdmin, profile } from '@app/profile/profile.selectors';
 import { Title } from '@angular/platform-browser';
 import { environment } from '@environment';
 import { GamePlayer } from '../models/game-player';
@@ -91,9 +91,12 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
     );
 
     const resolvePlayers = this.game.pipe(
-      switchMap(game => combineLatest([
-        ...game.slots.map(slot => resolveGamePlayer(slot))
-      ])));
+      map(game => game.slots),
+      map(slots => slots.filter(s => s.status === 'active' || s.status === 'waiting for substitute')),
+      switchMap(slots => combineLatest([
+        ...slots.map(slot => resolveGamePlayer(slot))
+      ]),
+    ));
 
     const resolveSkills = this.isAdmin.pipe(
       filter(_isAdmin => _isAdmin),
@@ -161,6 +164,17 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
     this.game.pipe(
       first(),
     ).subscribe(game => this.store.dispatch(requestSubsituteToggle({ gameId: game.id, playerId })));
+  }
+
+  replacePlayer(playerId: string) {
+    this.game.pipe(
+      first(),
+      withLatestFrom(this.store.select(profile)),
+    ).subscribe(([game, theProfile]) => this.store.dispatch(replacePlayer({
+      gameId: game.id,
+      replaceeId: playerId,
+      replacementId: theProfile?.id,
+    })));
   }
 
 }

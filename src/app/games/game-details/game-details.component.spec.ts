@@ -6,7 +6,7 @@ import { Store, MemoizedSelector } from '@ngrx/store';
 import { ActivatedRoute, convertToParamMap } from '@angular/router';
 import { of, NEVER } from 'rxjs';
 import { RouterTestingModule } from '@angular/router/testing';
-import { loadGame, forceEndGame, reinitializeServer, requestSubsituteToggle } from '../games.actions';
+import { loadGame, forceEndGame, reinitializeServer, requestSubsituteToggle, replacePlayer } from '../games.actions';
 import { Game } from '../models/game';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { GamesService } from '../games.service';
@@ -196,6 +196,13 @@ describe('GameDetailsComponent', () => {
       it('should dispatch action', () => {
         component.requestSubstituteToggle('FAKE_PLAYER_ID');
         expect(storeDispatchSpy).toHaveBeenCalledWith(requestSubsituteToggle({ gameId: 'FAKE_ID', playerId: 'FAKE_PLAYER_ID' }));
+      });
+    });
+
+    describe('#replacePlayer()', () => {
+      it('should dispatch action', () => {
+        component.replacePlayer('FAKE_REPLACEE_ID');
+        expect(storeDispatchSpy).toHaveBeenCalledWith(replacePlayer({ gameId: 'FAKE_ID', replaceeId: 'FAKE_REPLACEE_ID', replacementId: 'FAKE_PROFILE_ID' }));
       });
     });
   });
