@@ -8,7 +8,7 @@ import { gameById } from '../games.selectors';
 import { loadGame, forceEndGame, reinitializeServer, requestSubstitute, replacePlayer } from '../games.actions';
 import { playerById } from '@app/players/selectors';
 import { loadPlayer } from '@app/players/actions';
-import { isAdmin, profile } from '@app/profile/profile.selectors';
+import { isAdmin } from '@app/profile/profile.selectors';
 import { Title } from '@angular/platform-browser';
 import { environment } from '@environment';
 import { GamePlayer } from '../models/game-player';
@@ -151,30 +151,29 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
   reinitializeServer() {
     this.game.pipe(
       first(),
-    ).subscribe(game => this.store.dispatch(reinitializeServer({ gameId: game.id  })));
+      map(game => game.id),
+    ).subscribe(gameId => this.store.dispatch(reinitializeServer({ gameId  })));
   }
 
   forceEndGame() {
     this.game.pipe(
       first(),
-    ).subscribe(game => this.store.dispatch(forceEndGame({ gameId: game.id })));
+      map(game => game.id),
+    ).subscribe(gameId => this.store.dispatch(forceEndGame({ gameId })));
   }
 
   requestSubstitute(playerId: string) {
     this.game.pipe(
       first(),
-    ).subscribe(game => this.store.dispatch(requestSubstitute({ gameId: game.id, playerId })));
+      map(game =>  game.id),
+    ).subscribe(gameId => this.store.dispatch(requestSubstitute({ gameId, playerId })));
   }
 
-  replacePlayer(playerId: string) {
+  replacePlayer(replaceeId: string) {
     this.game.pipe(
       first(),
-      withLatestFrom(this.store.select(profile)),
-    ).subscribe(([game, theProfile]) => this.store.dispatch(replacePlayer({
-      gameId: game.id,
-      replaceeId: playerId,
-      replacementId: theProfile?.id,
-    })));
+      map(game => game.id),
+    ).subscribe(gameId => this.store.dispatch(replacePlayer({ gameId, replaceeId })));
   }
 
 }

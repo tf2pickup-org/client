@@ -202,7 +202,7 @@ describe('GameDetailsComponent', () => {
     describe('#replacePlayer()', () => {
       it('should dispatch action', () => {
         component.replacePlayer('FAKE_REPLACEE_ID');
-        expect(storeDispatchSpy).toHaveBeenCalledWith(replacePlayer({ gameId: 'FAKE_ID', replaceeId: 'FAKE_REPLACEE_ID', replacementId: 'FAKE_PROFILE_ID' }));
+        expect(storeDispatchSpy).toHaveBeenCalledWith(replacePlayer({ gameId: 'FAKE_ID', replaceeId: 'FAKE_REPLACEE_ID' }));
       });
     });
   });

@@ -2,6 +2,12 @@ import { TestBed, inject } from '@angular/core/testing';
 import { GamesService } from './games.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { API_URL } from '@app/api-url';
+import { IoClientService } from '@app/core/io-client.service';
+import { NEVER } from 'rxjs';
+
+class IoClientServiceStub {
+  call() { return NEVER; }
+}
 
 describe('GamesService', () => {
   let httpController: HttpTestingController;
@@ -10,6 +16,7 @@ describe('GamesService', () => {
     imports: [ HttpClientTestingModule ],
     providers: [
       { provide: API_URL, useValue: 'FAKE_URL' },
+      { provide: IoClientService, useClass: IoClientServiceStub },
     ]
   }));
 
@@ -85,8 +92,10 @@ describe('GamesService', () => {
   });
 
   describe('#replacePlayer()', () => {
-    it('should call api endpoint', inject([GamesService], (service: GamesService) => {
-      service.replacePlayer('FAKE_GAME_ID', 'FAKE_REPLACEE_ID', 'FAKE_REPLACEMENT_ID');
+    it('should call ws method', inject([GamesService], (service: GamesService) => {
+      const spy = spyOn(TestBed.get(IoClientService), 'call');
+      service.replacePlayer('FAKE_GAME_ID', 'FAKE_PLAYER_ID');
+      expect(spy).toHaveBeenCalledWith('replace player', { gameId: 'FAKE_GAME_ID', replaceeId: 'FAKE_PLAYER_ID' });
     }));
   });
 });

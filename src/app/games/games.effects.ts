@@ -1,16 +1,14 @@
 import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { GamesService } from './games.service';
-import { gameAdded, loadGame, gameUpdated, forceEndGame, gameCreated, reinitializeServer, ownGameAdded, requestSubsituteToggle,
-  requestSubstitute, cancelSubstitutionRequest, replacePlayer } from './games.actions';
-import { mergeMap, map, filter, withLatestFrom, first } from 'rxjs/operators';
+import { gameAdded, loadGame, gameUpdated, forceEndGame, gameCreated, reinitializeServer, ownGameAdded, requestSubstitute,
+  cancelSubstitutionRequest, replacePlayer } from './games.actions';
+import { mergeMap, map, filter, withLatestFrom } from 'rxjs/operators';
 import { GamesEventsService } from './games-events.service';
-import { Store, select } from '@ngrx/store';
-import { AppState } from '@app/app.state';
+import { Store } from '@ngrx/store';
 import { profile } from '@app/profile/profile.selectors';
 import { profileLoaded } from '@app/profile/profile.actions';
 import { Router } from '@angular/router';
-import { playerSlot } from './games.selectors';
 
 @Injectable()
 export class GamesEffects {
@@ -67,26 +65,6 @@ export class GamesEffects {
     { dispatch: false },
   );
 
-  requestSubsituteToggle = createEffect(() =>
-    this.actions.pipe(
-      ofType(requestSubsituteToggle),
-      mergeMap(({ gameId, playerId }) => this.store.pipe(
-        first(),
-        select(playerSlot(gameId, playerId)),
-        map(slot =>  {
-          switch (slot.status) {
-            case 'active':
-              return requestSubstitute({ gameId, playerId });
-            case 'waiting for substitute':
-              return cancelSubstitutionRequest({ gameId, playerId });
-            case 'replaced':
-              throw new Error('cannot be');
-          }
-        }),
-      )),
-    )
-  );
-
   requestSubstitute = createEffect(() =>
     this.actions.pipe(
       ofType(requestSubstitute),
@@ -104,8 +82,10 @@ export class GamesEffects {
   replacePlayer = createEffect(() =>
     this.actions.pipe(
       ofType(replacePlayer),
-      mergeMap(({ gameId, replaceeId, replacementId }) => this.gamesService.replacePlayer(gameId, replaceeId, replacementId)),
-    ), { dispatch: false },
+      mergeMap(({ gameId, replaceeId }) => this.gamesService.replacePlayer(gameId, replaceeId).pipe(
+        map(game => gameUpdated({ game })),
+      )),
+    ),
   );
 
   constructor(
