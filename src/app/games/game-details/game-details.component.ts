@@ -4,7 +4,7 @@ import { Observable, Subject, ReplaySubject, combineLatest } from 'rxjs';
 import { Game } from '../models/game';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap, map, tap, filter, first, pairwise, shareReplay, takeUntil, startWith } from 'rxjs/operators';
-import { gameById, isPlayingGame } from '../games.selectors';
+import { gameById, isPlayingGame, activeGame } from '../games.selectors';
 import { loadGame, forceEndGame, reinitializeServer, requestSubstitute, replacePlayer } from '../games.actions';
 import { playerById } from '@app/players/selectors';
 import { loadPlayer } from '@app/players/actions';
@@ -69,11 +69,13 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
       this.isRunning,
       this.store.select(isPlayingGame),
       this.store.select(profile),
+      this.game,
+      this.store.select(activeGame),
     ]).pipe(
-      map(([thisGameRunning, hasActiveGame, theProfile]) => {
+      map(([thisGameRunning, hasActiveGame, theProfile, theGame, theActiveGame]) => {
         return thisGameRunning && // the game is still active
           theProfile.bans.length === 0 && // the player isn't banned
-          !hasActiveGame; // isn't involved in any game
+          (!hasActiveGame || theGame.id === theActiveGame.id); // isn't involved in any game
       }),
       map(canSub => !canSub),
     );
