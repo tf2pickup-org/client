@@ -1,8 +1,8 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { activeGame } from '@app/games/games.selectors';
 import { Store, select } from '@ngrx/store';
-import { profile } from '@app/profile/profile.selectors';
-import { map, filter } from 'rxjs/operators';
+import { bans } from '@app/profile/profile.selectors';
+import { substituteRequests } from '../queue.selectors';
 
 @Component({
   selector: 'app-queue-alerts',
@@ -13,11 +13,8 @@ import { map, filter } from 'rxjs/operators';
 export class QueueAlertsComponent {
 
   activeGame = this.store.select(activeGame);
-  bans = this.store.pipe(
-    select(profile),
-    filter(theProfile => !!theProfile),
-    map(theProfile => theProfile.bans),
-  );
+  bans = this.store.select(bans);
+  substituteRequests = this.store.select(substituteRequests);
 
   constructor(
     private store: Store<{}>,

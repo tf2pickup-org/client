@@ -12,3 +12,14 @@
   role="alert">
   Click <a [routerLink]="['/game', _activeGame.id]">here</a> to go back to your game.
 </div>
+
+<div *ngFor="let sr of substituteRequests | async"
+  class="alert alert-warning"
+  role="alert">
+  <h4 class="alert-heading">Substitute needed</h4>
+  <p>Team <strong>{{ sr.team }}</strong> needs a substitute for <strong>{{ sr.gameClass }}</strong> in game #{{ sr.gameNumber }}.</p>
+  <hr>
+  <p class="mb-0">
+    <a [routerLink]="['/game', sr.gameId]" class="alert-link">View game details</a>
+  </p>
+</div>
