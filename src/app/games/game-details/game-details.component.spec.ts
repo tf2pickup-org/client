@@ -12,6 +12,10 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { GamesService } from '../games.service';
 import { isAdmin } from '@app/profile/profile.selectors';
 import { AppState } from '@app/app.state';
+import { MockComponent } from 'ng-mocks';
+import { GameBasicInfoComponent } from '../game-basic-info/game-basic-info.component';
+import { By } from '@angular/platform-browser';
+import { JoinGameInfoComponent } from '../join-game-info/join-game-info.component';
 
 const paramMap = of(convertToParamMap({ id: 'FAKE_ID' }));
 const theGame: Game = {
@@ -65,7 +69,11 @@ describe('GameDetailsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GameDetailsComponent ],
+      declarations: [
+        GameDetailsComponent,
+        MockComponent(GameBasicInfoComponent),
+        MockComponent(JoinGameInfoComponent),
+      ],
       imports: [
         RouterTestingModule,
         SharedModule,
@@ -204,6 +212,15 @@ describe('GameDetailsComponent', () => {
         component.replacePlayer('FAKE_REPLACEE_ID');
         expect(storeDispatchSpy).toHaveBeenCalledWith(replacePlayer({ gameId: 'FAKE_ID', replaceeId: 'FAKE_REPLACEE_ID' }));
       });
+    });
+
+    it('should render game basic info', () => {
+      const gameBasicInfo = fixture.debugElement.query(By.css('app-game-basic-info')).componentInstance as GameBasicInfoComponent;
+      expect(gameBasicInfo.launchedAt).toEqual(jasmine.any(Date));
+      expect(gameBasicInfo.map).toEqual('cp_sunshine');
+      expect(gameBasicInfo.gameServerName).toEqual('FAKE_GAME_SERVER_NAME');
+      expect(gameBasicInfo.state).toEqual('interrupted');
+      expect(gameBasicInfo.error).toEqual('ended by admin');
     });
   });
 });
