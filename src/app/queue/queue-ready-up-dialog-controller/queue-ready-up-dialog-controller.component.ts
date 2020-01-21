@@ -5,6 +5,8 @@ import { Store, select } from '@ngrx/store';
 import { takeUntil } from 'rxjs/operators';
 import { QueueReadyUpDialogComponent } from '../queue-ready-up-dialog/queue-ready-up-dialog.component';
 import { queueShowReadyUpDialog } from '../queue.selectors';
+import { NotificationsService } from '@app/notifications/notifications.service';
+import { SoundPlayerService, Sound } from '@app/notifications/sound-player.service';
 
 @Component({
   selector: 'app-queue-ready-up-dialog-controller',
@@ -16,18 +18,13 @@ export class QueueReadyUpDialogControllerComponent implements OnInit, OnDestroy 
 
   private destroyed = new Subject<void>();
   private queueReadyUpDialogRef: BsModalRef;
-  private audio = new Audio('/assets/sounds/ready_up.wav');
 
   constructor(
     private store: Store<{}>,
     private modalService: BsModalService,
-  ) {
-    if ('Notification' in window && Notification.permission !== 'denied') {
-      if (Notification.permission === 'default') {
-        Notification.requestPermission();
-      }
-    }
-  }
+    private notificationsService: NotificationsService,
+    private soundPlayerService: SoundPlayerService,
+  ) { }
 
   ngOnInit() {
     this.store.pipe(
@@ -55,10 +52,10 @@ export class QueueReadyUpDialogControllerComponent implements OnInit, OnDestroy 
   }
 
   private notify() {
-    this.audio.play();
-    const notification = new Notification('Ready up!', {
+    this.notificationsService.showNotification('Ready up!', {
       body: 'A new pickup game is starting',
     });
+    this.soundPlayerService.playSound(Sound.ReadyUp);
   }
 
 }

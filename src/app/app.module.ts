@@ -24,6 +24,7 @@ import { InlineSVGModule } from 'ng-inline-svg';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { HallOfFameModule } from './hall-of-fame/hall-of-fame.module';
+import { NotificationsModule } from './notifications/notifications.module';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { HallOfFameModule } from './hall-of-fame/hall-of-fame.module';
     GamesModule,
     GameServersModule,
     HallOfFameModule,
+    NotificationsModule,
   ],
   providers: [
     { provide: API_URL, useValue: environment.apiUrl },

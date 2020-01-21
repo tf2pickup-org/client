@@ -16,6 +16,7 @@ import { GamesService } from '../games.service';
 import { gameServerById } from '@app/game-servers/game-servers.selectors';
 import { loadGameServer } from '@app/game-servers/game-servers.actions';
 import { ResolvedGamePlayer } from '../models/resolved-game-player';
+import { SoundPlayerService, Sound } from '@app/notifications/sound-player.service';
 
 @Component({
   selector: 'app-game-details',
@@ -33,7 +34,6 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
   isRunning: Observable<boolean>;
   isLocked: Observable<boolean>;
   private destroyed = new Subject<void>();
-  private audio = new Audio('/assets/sounds/fight.wav');
   private players = new ReplaySubject<ResolvedGamePlayer[]>(1);
 
   constructor(
@@ -41,6 +41,7 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
     private store: Store<{}>,
     private title: Title,
     private gamesService: GamesService,
+    private soundPlayerService: SoundPlayerService,
   ) { }
 
   ngOnInit() {
@@ -155,7 +156,7 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
       filter(([a, b])  => !a && !!b),
       takeUntil(this.destroyed),
     ).subscribe(() => {
-      this.audio.play();
+      this.soundPlayerService.playSound(Sound.Fight);
     });
   }
 
