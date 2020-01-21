@@ -6,7 +6,7 @@ import { Action, Store, select, MemoizedSelector } from '@ngrx/store';
 import { QueueEventsService } from './queue-events.service';
 import { QueueService } from './queue.service';
 import { queueLoaded, loadQueue, joinQueue, joinQueueError, markFriend, mapVoteReset, voteForMap, mapVoted, mapVoteResultsUpdated,
-  queueSlotsUpdated, hideReadyUpDialog, showReadyUpDialog, readyUp, queueStateUpdated } from './queue.actions';
+  queueSlotsUpdated, hideReadyUpDialog, showReadyUpDialog, readyUp, queueStateUpdated, substituteRequestsUpdated } from './queue.actions';
 import { Queue } from './models/queue';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { QueueSlot } from './models/queue-slot';
@@ -27,6 +27,7 @@ class QueueEventsServiceStub {
   slotsUpdate = new Subject<any>();
   stateUpdate = new Subject<any>();
   mapVoteResultsUpdate = new Subject<any>();
+  substituteRequests = new Subject<any>();
 }
 
 class PreReadyServiceStub {
@@ -110,6 +111,17 @@ describe('QueueEffects', () => {
     const results: MapVoteResult[] = [ { map: 'cp_fake_rc1', voteCount: 5 } ];
     queueEvents.mapVoteResultsUpdate.next(results);
     expect(spy).toHaveBeenCalledWith(mapVoteResultsUpdated({ results }));
+
+    const substituteRequests = [
+      {
+        gameId: 'FAKE_GAME_ID',
+        gameNumber: 515,
+        gameClass: 'soldier',
+        team: 'BLU'
+      }
+    ];
+    queueEvents.substituteRequests.next(substituteRequests);
+    expect(spy).toHaveBeenCalledWith(substituteRequestsUpdated({ substituteRequests }));
   });
 
   describe('#joinQueue', () => {

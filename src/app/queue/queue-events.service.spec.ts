@@ -45,5 +45,10 @@ describe('QueueEventsService', () => {
       service.mapVoteResultsUpdate.subscribe(event => expect(event).toEqual([]));
       ioClientService.socket.subscribe(socket => socket.emit('map vote results update', []));
     });
+
+    it('should forward substitute requests updates', () => {
+      service.substituteRequests.subscribe(requests => expect(requests).toEqual([]));
+      ioClientService.socket.subscribe(socket => socket.emit('substitute requests update', []));
+    });
   });
 });
