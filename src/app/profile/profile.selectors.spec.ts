@@ -1,4 +1,4 @@
-import { isProfileLoaded, isAdmin, isSuperUser, bans } from './profile.selectors';
+import { isProfileLoaded, isAdmin, isSuperUser, bans, isBanned } from './profile.selectors';
 
 describe('profile selectors', () => {
   describe('isProfileLoaded', () => {
@@ -33,6 +33,14 @@ describe('profile selectors', () => {
       expect(bans.projector(undefined)).toBeUndefined();
       expect(bans.projector(null)).toBeUndefined();
       expect(bans.projector({ bans: [] })).toEqual([]);
+    });
+  });
+
+  describe('isBanned', () => {
+    it('should return true if the player has at least one ban', () => {
+      expect(isBanned.projector(null)).toBe(false);
+      expect(isBanned.projector([])).toBe(false);
+      expect(isBanned.projector([ { } ])).toBe(true);
     });
   });
 });

@@ -8,7 +8,7 @@ import { gameById, isPlayingGame, activeGame } from '../games.selectors';
 import { loadGame, forceEndGame, reinitializeServer, requestSubstitute, replacePlayer } from '../games.actions';
 import { playerById } from '@app/players/selectors';
 import { loadPlayer } from '@app/players/actions';
-import { isAdmin, profile } from '@app/profile/profile.selectors';
+import { isAdmin, profile, isBanned } from '@app/profile/profile.selectors';
 import { Title } from '@angular/platform-browser';
 import { environment } from '@environment';
 import { GamePlayer } from '../models/game-player';
@@ -69,13 +69,13 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
     this.isLocked = combineLatest([
       this.isRunning,
       this.store.select(isPlayingGame),
-      this.store.select(profile),
+      this.store.select(isBanned),
       this.game,
       this.store.select(activeGame),
     ]).pipe(
-      map(([thisGameRunning, hasActiveGame, theProfile, theGame, theActiveGame]) => {
+      map(([thisGameRunning, hasActiveGame, banned, theGame, theActiveGame]) => {
         return thisGameRunning && // the game is still active
-          theProfile.bans.length === 0 && // the player isn't banned
+          !banned &&
           (!hasActiveGame || theGame.id === theActiveGame.id); // isn't involved in any game
       }),
       map(canSub => !canSub),

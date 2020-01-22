@@ -21,3 +21,8 @@ export const bans = createSelector(
   profile,
   theProfile => theProfile?.bans
 );
+
+export const isBanned = createSelector(
+  bans,
+  theseBans => theseBans?.length > 0
+);
