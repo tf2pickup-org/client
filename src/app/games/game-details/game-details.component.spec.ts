@@ -18,10 +18,11 @@ import { By } from '@angular/platform-browser';
 import { JoinGameInfoComponent } from '../join-game-info/join-game-info.component';
 import { SoundPlayerService, Sound } from '@app/notifications/sound-player.service';
 import { GameSummaryComponent } from '../game-summary/game-summary.component';
+import { merge } from 'lodash';
 
 const paramMap = of(convertToParamMap({ id: 'FAKE_ID' }));
 
-const makeStateWithGame = (overrides?: any) => ({
+const makeStateWithGame = (overrides?: any) => merge({
   games: {
     ids: ['FAKE_ID'],
     entities: {
@@ -97,8 +98,7 @@ const makeStateWithGame = (overrides?: any) => ({
       FAKE_GAME_SERVER_ID: { id: 'FAKE_GAME_SERVER_ID', name: 'FAKE_GAME_SERVER_NAME' },
     },
   },
-  ...overrides,
-});
+}, overrides);
 
 class GamesServiceStub {
   fetchGameSkills(gameId: string) { }
