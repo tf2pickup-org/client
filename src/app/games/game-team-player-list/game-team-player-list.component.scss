@@ -22,6 +22,16 @@
   padding: 0;
   height: 3rem;
 
+  &.looking-for-substitute {
+    justify-content: space-between;
+
+    .dummy {
+      width: 30px;
+      height: 30px;
+      margin: 0 .75rem;
+    }
+  }
+
   .class-icon {
     width: 30px;
     height: 30px;

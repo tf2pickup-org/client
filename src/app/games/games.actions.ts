@@ -35,3 +35,18 @@ export const reinitializeServer = createAction(
   '[Admin] Re-initialize server',
   props<{ gameId: string }>(),
 );
+
+export const requestSubstitute = createAction(
+  '[Admin] Request substitute',
+  props<{ gameId: string, playerId: string }>(),
+);
+
+export const cancelSubstitutionRequest = createAction(
+  '[Admin] Cancel substitution request',
+  props<{ gameId: string, playerId: string }>(),
+);
+
+export const replacePlayer = createAction(
+  '[Games] Replace player',
+  props<{ gameId: string, replaceeId: string }>(),
+);

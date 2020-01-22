@@ -4,11 +4,11 @@ import { Observable, Subject, ReplaySubject, combineLatest } from 'rxjs';
 import { Game } from '../models/game';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap, map, tap, filter, first, pairwise, shareReplay, takeUntil, startWith } from 'rxjs/operators';
-import { gameById } from '../games.selectors';
-import { loadGame, forceEndGame, reinitializeServer } from '../games.actions';
+import { gameById, isPlayingGame, activeGame } from '../games.selectors';
+import { loadGame, forceEndGame, reinitializeServer, requestSubstitute, replacePlayer } from '../games.actions';
 import { playerById } from '@app/players/selectors';
 import { loadPlayer } from '@app/players/actions';
-import { isAdmin } from '@app/profile/profile.selectors';
+import { isAdmin, profile, isBanned } from '@app/profile/profile.selectors';
 import { Title } from '@angular/platform-browser';
 import { environment } from '@environment';
 import { GamePlayer } from '../models/game-player';
@@ -16,6 +16,7 @@ import { GamesService } from '../games.service';
 import { gameServerById } from '@app/game-servers/game-servers.selectors';
 import { loadGameServer } from '@app/game-servers/game-servers.actions';
 import { ResolvedGamePlayer } from '../models/resolved-game-player';
+import { SoundPlayerService, Sound } from '@app/notifications/sound-player.service';
 
 @Component({
   selector: 'app-game-details',
@@ -25,21 +26,22 @@ import { ResolvedGamePlayer } from '../models/resolved-game-player';
 })
 export class GameDetailsComponent implements OnInit, OnDestroy {
 
-  private destroyed = new Subject<void>();
-  private audio = new Audio('/assets/sounds/fight.wav');
-  private players = new ReplaySubject<ResolvedGamePlayer[]>(1);
+  isAdmin: Observable<boolean> = this.store.select(isAdmin);
   game: Observable<Game>;
   gameServerName: Observable<string>;
   playersRed: Observable<ResolvedGamePlayer[]>;
   playersBlu: Observable<ResolvedGamePlayer[]>;
-  isAdmin: Observable<boolean> = this.store.select(isAdmin);
   isRunning: Observable<boolean>;
+  isLocked: Observable<boolean>;
+  private destroyed = new Subject<void>();
+  private players = new ReplaySubject<ResolvedGamePlayer[]>(1);
 
   constructor(
     private route: ActivatedRoute,
     private store: Store<{}>,
     private title: Title,
     private gamesService: GamesService,
+    private soundPlayerService: SoundPlayerService,
   ) { }
 
   ngOnInit() {
@@ -63,6 +65,21 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
     );
 
     this.isRunning = this.game.pipe(map(game => game.state === 'launching' || game.state === 'started'));
+
+    this.isLocked = combineLatest([
+      this.isRunning,
+      this.store.select(isPlayingGame),
+      this.store.select(isBanned),
+      this.game,
+      this.store.select(activeGame),
+    ]).pipe(
+      map(([thisGameRunning, hasActiveGame, banned, theGame, theActiveGame]) => {
+        return thisGameRunning && // the game is still active
+          !banned &&
+          (!hasActiveGame || theGame.id === theActiveGame.id); // isn't involved in any game
+      }),
+      map(canSub => !canSub),
+    );
 
     // load game server
     this.gameServerName = this.game.pipe(
@@ -91,9 +108,12 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
     );
 
     const resolvePlayers = this.game.pipe(
-      switchMap(game => combineLatest([
-        ...game.slots.map(slot => resolveGamePlayer(slot))
-      ])));
+      map(game => game.slots),
+      map(slots => slots.filter(s => s.status === 'active' || s.status === 'waiting for substitute')),
+      switchMap(slots => combineLatest([
+        ...slots.map(slot => resolveGamePlayer(slot))
+      ]),
+    ));
 
     const resolveSkills = this.isAdmin.pipe(
       filter(_isAdmin => _isAdmin),
@@ -136,7 +156,7 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
       filter(([a, b])  => !a && !!b),
       takeUntil(this.destroyed),
     ).subscribe(() => {
-      this.audio.play();
+      this.soundPlayerService.playSound(Sound.Fight);
     });
   }
 
@@ -148,13 +168,29 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
   reinitializeServer() {
     this.game.pipe(
       first(),
-    ).subscribe(game => this.store.dispatch(reinitializeServer({ gameId: game.id  })));
+      map(game => game.id),
+    ).subscribe(gameId => this.store.dispatch(reinitializeServer({ gameId  })));
   }
 
   forceEndGame() {
     this.game.pipe(
       first(),
-    ).subscribe(game => this.store.dispatch(forceEndGame({ gameId: game.id })));
+      map(game => game.id),
+    ).subscribe(gameId => this.store.dispatch(forceEndGame({ gameId })));
+  }
+
+  requestSubstitute(playerId: string) {
+    this.game.pipe(
+      first(),
+      map(game =>  game.id),
+    ).subscribe(gameId => this.store.dispatch(requestSubstitute({ gameId, playerId })));
+  }
+
+  replacePlayer(replaceeId: string) {
+    this.game.pipe(
+      first(),
+      map(game => game.id),
+    ).subscribe(gameId => this.store.dispatch(replacePlayer({ gameId, replaceeId })));
   }
 
 }

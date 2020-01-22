@@ -1,6 +1,6 @@
 import { createReducer, on, Action } from '@ngrx/store';
 import { queueLoaded, queueStateUpdated, readyUp, showReadyUpDialog, hideReadyUpDialog, leaveQueue, togglePreReady,
-  stopPreReady, mapVoteResultsUpdated, mapVoted, mapVoteReset, queueSlotsUpdated, startPreReady } from './queue.actions';
+  stopPreReady, mapVoteResultsUpdated, mapVoted, mapVoteReset, queueSlotsUpdated, startPreReady, substituteRequestsUpdated } from './queue.actions';
 import { QueueSlot } from './models/queue-slot';
 import { Queue } from './models/queue';
 import { profileLoaded } from '@app/profile/profile.actions';
@@ -45,6 +45,7 @@ const queueReducer = createReducer(
   on(stopPreReady, state => ({ ...state, preReady: false })),
   on(mapVoted, (state, { map }) => ({ ...state, mapVote: map })),
   on(mapVoteReset, state => ({ ...state, mapVote: undefined })),
+  on(substituteRequestsUpdated, (state, { substituteRequests }) => ({ ...state, substituteRequests })),
 );
 
 export function reducer(state: State | undefined, action: Action) {

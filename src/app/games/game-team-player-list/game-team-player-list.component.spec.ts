@@ -37,12 +37,12 @@ describe('GameTeamPlayerListComponent', () => {
     beforeEach(() => {
       component.players = [
         { id: 'PLAYER_ID', name: 'FAKE_PLAYER', joinedAt: new Date(), steamId: 'FAKE_STEAM_ID', avatarUrl: 'FAKE_AVATAR_URL', gameCount: 0,
-          playerId: 'FAKE_PLAYER_ID', teamId: '1', gameClass: 'scout', connectionStatus: 'offline' },
+          playerId: 'FAKE_PLAYER_ID', teamId: '1', gameClass: 'scout', connectionStatus: 'offline', status: 'active' },
       ];
       fixture.detectChanges();
     });
 
-    it('should apply correct css classes for red and blu', () => {
+    it('should apply correct css classes for red and blu team headers', () => {
       const div = fixture.debugElement.query(By.css('.team-header')).nativeElement as HTMLDivElement;
       expect(div).toBeDefined();
 
@@ -55,6 +55,61 @@ describe('GameTeamPlayerListComponent', () => {
       fixture.detectChanges();
       expect(div.classList.contains('team-header-red')).toBeTrue();
       expect(div.innerText).toEqual('RED');
+    });
+
+    it('should not render admin buttons', () => {
+      expect(fixture.debugElement.query(By.css('div>a>button'))).toBeNull();
+    });
+
+    describe('when admin', () => {
+      beforeEach(() => {
+        component.showAdminActionButtons = true;
+        fixture.detectChanges();
+      });
+
+      it('should render admin buttons', () => {
+        expect(fixture.debugElement.query(By.css('.btn-request-substitute'))).toBeDefined();
+      });
+
+      it('should trigger the requestSubstitute event', done => {
+        const button = fixture.debugElement.query(By.css('.btn-request-substitute')).nativeElement as HTMLButtonElement;
+        component.requestSubstitute.subscribe((playerId: string) => {
+          expect(playerId).toEqual('PLAYER_ID');
+          done();
+        });
+        button.click();
+      });
+    });
+
+    describe('when looking for substitute', () => {
+      beforeEach(() => {
+        component.players[0].status = 'waiting for substitute';
+        fixture.detectChanges();
+      });
+
+      it('should apply css class for players that are looking for substitutes', () => {
+        const item = fixture.debugElement.query(By.css('.player-item.looking-for-substitute')).nativeElement as HTMLElement;
+        expect(item).toBeDefined();
+        expect(item.classList.contains('list-group-item-warning')).toBe(true);
+      });
+
+      it('should trigger the replacePlayer event', done => {
+        const button = fixture.debugElement.query(By.css('.player-item.looking-for-substitute')).nativeElement as HTMLButtonElement;
+        component.replacePlayer.subscribe((playerId: string) => {
+          expect(playerId).toEqual('PLAYER_ID');
+          done();
+        });
+        button.click();
+      });
+
+      it('should be disabled if the locked=true', () => {
+        const button = fixture.debugElement.query(By.css('.player-item.looking-for-substitute')).nativeElement as HTMLButtonElement;
+        expect(button.disabled).toBe(false);
+
+        component.locked = true;
+        fixture.detectChanges();
+        expect(button.disabled).toBe(true);
+      });
     });
   });
 });

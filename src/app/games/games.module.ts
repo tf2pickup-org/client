@@ -17,6 +17,7 @@ import { GameBasicInfoComponent } from './game-basic-info/game-basic-info.compon
 import { JoinGameInfoComponent } from './join-game-info/join-game-info.component';
 import { GameSummaryComponent } from './game-summary/game-summary.component';
 import { GameTeamPlayerListComponent } from './game-team-player-list/game-team-player-list.component';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { GameTeamPlayerListComponent } from './game-team-player-list/game-team-p
     EffectsModule.forFeature([GamesEffects]),
     InlineSVGModule,
     NgxPaginationModule,
+    TooltipModule,
 
     SharedModule,
     GamesRoutingModule,

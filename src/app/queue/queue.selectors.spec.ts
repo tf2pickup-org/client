@@ -1,5 +1,5 @@
 import { queueRequiredPlayerCount, queueCurrentPlayerCount, queueSlotsForClass, mySlot, mapVoteResults, mapVoteTotalCount, mapVote,
-    isPreReadied } from './queue.selectors';
+  isPreReadied, substituteRequests } from './queue.selectors';
 import { QueueSlot } from './models/queue-slot';
 
 describe('queue selectors', () => {
@@ -88,6 +88,21 @@ describe('queue selectors', () => {
     it('should return preReady', () => {
       expect(isPreReadied.projector({ preReady: true })).toEqual(true);
       expect(isPreReadied.projector({ preReady: false })).toEqual(false);
+    });
+  });
+
+  describe('substituteRequests', () => {
+    const requests = [
+      {
+        gameId: '5e1fb93d9cacb6d6e08bc6bf',
+        gameNumber: 514,
+        gameClass: 'soldier',
+        team: 'BLU'
+      }
+    ];
+
+    it('should return substitute requests', () => {
+      expect(substituteRequests.projector({ substituteRequests: requests })).toEqual(requests);
     });
   });
 });

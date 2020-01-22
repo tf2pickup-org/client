@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { ResolvedGamePlayer } from '../models/resolved-game-player';
 
 @Component({
@@ -17,5 +17,27 @@ export class GameTeamPlayerListComponent {
 
   @Input()
   showPlayerConnectionStatus = false;
+
+  @Input()
+  showAdminActionButtons = false;
+
+  @Input()
+  locked = false;
+
+  @Output()
+  requestSubstitute = new EventEmitter<string>();
+
+  @Output()
+  replacePlayer = new EventEmitter<string>();
+
+  emitRequestSubstitute(event: Event, player: ResolvedGamePlayer) {
+    event.preventDefault();
+    event.stopPropagation();
+    this.requestSubstitute.emit(player.id);
+  }
+
+  emitReplacePlayer(player: ResolvedGamePlayer) {
+    this.replacePlayer.emit(player.id);
+  }
 
 }

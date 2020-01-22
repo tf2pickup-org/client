@@ -16,3 +16,13 @@ export const isSuperUser = createSelector(
   profile,
   theProfile => theProfile && theProfile.role === 'super-user'
 );
+
+export const bans = createSelector(
+  profile,
+  theProfile => theProfile?.bans
+);
+
+export const isBanned = createSelector(
+  bans,
+  theseBans => theseBans?.length > 0
+);

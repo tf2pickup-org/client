@@ -5,4 +5,5 @@ export interface GamePlayer {
   teamId: string;
   gameClass: string;
   connectionStatus: PlayerConnectionStatus;
+  status: 'active' | 'waiting for substitute' | 'replaced';
 }

@@ -7,15 +7,39 @@
     {{ team === 'blu' && 'BLU' || 'RED' }}
   </div>
 
-  <a *ngFor="let player of players"
-    class="list-group-item list-group-item-action player-item"
-    [routerLink]="['/player', player.id]">
-    <div class="class-icon" [inlineSVG]="'/assets/tf2-classfont/' + player.gameClass + '.svg'"></div>
-    {{ player.name }}
-    <span *ngIf="player.classSkill" class="badge badge-secondary mx-2">{{ player.classSkill }}</span>
-    <div class="flex-fill"></div>
-    <app-player-connection-status *ngIf="showPlayerConnectionStatus"
-      [connectionStatus]="player.connectionStatus"
-      class="mx-3"></app-player-connection-status>
-  </a>
+  <ng-container *ngFor="let player of players">
+    <ng-container *ngIf="player.status !== 'waiting for substitute'; else waitingForSubSlot">
+      <a class="list-group-item list-group-item-action player-item pr-2"
+        [routerLink]="['/player', player.id]">
+
+        <div class="class-icon" [inlineSVG]="'/assets/tf2-classfont/' + player.gameClass + '.svg'"></div>
+        {{ player.name }}
+        <span *ngIf="player.classSkill" class="badge badge-secondary mx-2">{{ player.classSkill }}</span>
+        <div class="flex-fill"></div>
+        <app-player-connection-status *ngIf="showPlayerConnectionStatus"
+          [connectionStatus]="player.connectionStatus"
+          class="mx-1"></app-player-connection-status>
+
+        <ng-container *ngIf="showAdminActionButtons">
+          <button type="button" class="btn btn-link btn-sm btn-request-substitute"
+            tooltip="Request substitute"
+            (click)="emitRequestSubstitute($event, player)">
+            <span class="oi oi-transfer"></span>
+          </button>
+        </ng-container>
+      </a>
+    </ng-container>
+
+    <ng-template #waitingForSubSlot>
+      <button type="button"
+        class="list-group-item list-group-item-action list-group-item-warning player-item looking-for-substitute"
+        (click)="emitReplacePlayer(player)"
+        tooltip="Replace this player"
+        [disabled]="locked">
+        <div class="class-icon" [inlineSVG]="'/assets/tf2-classfont/' + player.gameClass + '.svg'"></div>
+        <span class="oi oi-plus"></span>
+        <div class="dummy"></div>
+      </button>
+    </ng-template>
+  </ng-container>
 </div>

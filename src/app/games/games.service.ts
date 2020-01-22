@@ -4,6 +4,7 @@ import { API_URL } from '@app/api-url';
 import { Observable } from 'rxjs';
 import { Game } from './models/game';
 import { PaginatedList } from '@app/core/models/paginated-list';
+import { IoClientService } from '@app/core/io-client.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,7 @@ export class GamesService {
   constructor(
     private http: HttpClient,
     @Inject(API_URL) private apiUrl: string,
+    private ws: IoClientService,
   ) { }
 
   fetchGames(offset: number, limit: number = 10): Observable<PaginatedList<Game>> {
@@ -33,6 +35,18 @@ export class GamesService {
 
   fetchGameSkills(gameId: string): Observable<{ [playerId: string]: number }> {
     return this.http.get<{ [playerId: string]: number }>(`${this.apiUrl}/games/${gameId}/skills`);
+  }
+
+  requestSubstitute(gameId: string, playerId: string): Observable<void> {
+    return this.http.post<void>(`${this.apiUrl}/games/${gameId}?substitute_player=${playerId}`, { });
+  }
+
+  cancelSubstitutionRequest(gameId: string, playerId: string): Observable<void> {
+    return this.http.post<void>(`${this.apiUrl}/games/${gameId}?substitute_player_cancel=${playerId}`, { });
+  }
+
+  replacePlayer(gameId: string, replaceeId: string): Observable<Game> {
+    return this.ws.call<Game>('replace player', { gameId, replaceeId });
   }
 
 }

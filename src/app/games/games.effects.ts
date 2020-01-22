@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { GamesService } from './games.service';
-import { gameAdded, loadGame, gameUpdated, forceEndGame, gameCreated, reinitializeServer, ownGameAdded } from './games.actions';
+import { gameAdded, loadGame, gameUpdated, forceEndGame, gameCreated, reinitializeServer, ownGameAdded, requestSubstitute,
+  cancelSubstitutionRequest, replacePlayer } from './games.actions';
 import { mergeMap, map, filter, withLatestFrom } from 'rxjs/operators';
 import { GamesEventsService } from './games-events.service';
 import { Store } from '@ngrx/store';
@@ -62,6 +63,29 @@ export class GamesEffects {
       mergeMap(({ gameId }) => this.gamesService.reinitializeServer(gameId)),
     ),
     { dispatch: false },
+  );
+
+  requestSubstitute = createEffect(() =>
+    this.actions.pipe(
+      ofType(requestSubstitute),
+      mergeMap(({ gameId, playerId }) => this.gamesService.requestSubstitute(gameId, playerId)),
+    ), { dispatch: false },
+  );
+
+  cancelSubstitutionRequest = createEffect(() =>
+    this.actions.pipe(
+      ofType(cancelSubstitutionRequest),
+      mergeMap(({ gameId, playerId }) => this.gamesService.cancelSubstitutionRequest(gameId, playerId)),
+    ), { dispatch: false },
+  );
+
+  replacePlayer = createEffect(() =>
+    this.actions.pipe(
+      ofType(replacePlayer),
+      mergeMap(({ gameId, replaceeId }) => this.gamesService.replacePlayer(gameId, replaceeId).pipe(
+        map(game => gameUpdated({ game })),
+      )),
+    ),
   );
 
   constructor(
