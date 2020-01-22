@@ -7,7 +7,7 @@ import { environment } from '@environment';
 export class NotificationsService {
 
   private readonly defaultNotificationOptions: NotificationOptions = {
-    icon: `${environment.apiUrl}/assets/android-icon-192x192.png`,
+    icon: `/assets/android-icon-48x48.png`,
   };
 
   constructor() {
