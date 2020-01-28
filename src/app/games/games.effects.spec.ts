@@ -7,7 +7,9 @@ import { GamesService } from './games.service';
 import { GamesEventsService } from './games-events.service';
 import { RouterTestingModule } from '@angular/router/testing';
 import { provideMockStore } from '@ngrx/store/testing';
-import { requestSubstitute, cancelSubstitutionRequest, replacePlayer, gameUpdated } from './games.actions';
+import { requestSubstitute, cancelSubstitutionRequest, replacePlayer, gameUpdated, loadGame } from './games.actions';
+import { routerNavigatedAction } from '@ngrx/router-store';
+import { NavigationEnd } from '@angular/router';
 
 const fakeGame = {
   players: [
@@ -92,6 +94,29 @@ describe('GamesEffects', () => {
   });
 
   afterEach(() => actions.complete());
+
+  describe('loadRoutedGame', () => {
+    it('should load the given game', () => {
+      effects.loadRoutedGame.subscribe(action => expect(action).toEqual(loadGame({ gameId: 'FAKE_GAME_ID' })));
+      actions.next(routerNavigatedAction({
+        payload: {
+          routerState: {
+            url: '/game/FAKE_GAME_ID',
+            root: {
+              children: [
+                {
+                  params: {
+                    id: 'FAKE_GAME_ID',
+                  },
+                } as any,
+              ],
+            } as any,
+          },
+          event: { } as NavigationEnd,
+        },
+      }));
+    });
+  });
 
   describe('requestSubstitute', () => {
     it('should call service', () => {

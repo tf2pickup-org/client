@@ -4,11 +4,11 @@ import { Observable, Subject, ReplaySubject, combineLatest } from 'rxjs';
 import { Game } from '../models/game';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap, map, tap, filter, first, pairwise, shareReplay, takeUntil, startWith } from 'rxjs/operators';
-import { gameById, isPlayingGame, activeGame } from '../games.selectors';
-import { loadGame, forceEndGame, reinitializeServer, requestSubstitute, replacePlayer } from '../games.actions';
+import { gameById, isGameRunning } from '../games.selectors';
+import { forceEndGame, reinitializeServer, requestSubstitute, replacePlayer, loadGame } from '../games.actions';
 import { playerById } from '@app/players/selectors';
 import { loadPlayer } from '@app/players/actions';
-import { isAdmin, profile, isBanned } from '@app/profile/profile.selectors';
+import { isAdmin, isBanned } from '@app/profile/profile.selectors';
 import { Title } from '@angular/platform-browser';
 import { environment } from '@environment';
 import { GamePlayer } from '../models/game-player';
@@ -17,6 +17,7 @@ import { gameServerById } from '@app/game-servers/game-servers.selectors';
 import { loadGameServer } from '@app/game-servers/game-servers.actions';
 import { ResolvedGamePlayer } from '../models/resolved-game-player';
 import { SoundPlayerService, Sound } from '@app/notifications/sound-player.service';
+import { canSubstituteInGame } from '@app/selectors';
 
 @Component({
   selector: 'app-game-details',
@@ -26,13 +27,40 @@ import { SoundPlayerService, Sound } from '@app/notifications/sound-player.servi
 })
 export class GameDetailsComponent implements OnInit, OnDestroy {
 
+  gameId = new ReplaySubject<string>(1);
+
+  game = this.gameId.pipe(
+    switchMap(gameId => this.store.select(gameById(gameId))),
+    filter(game => !!game),
+    shareReplay(),
+  );
+
+  isRunning = this.gameId.pipe(
+    switchMap(gameId => this.store.select(isGameRunning(gameId))),
+  );
+
+  isLocked = this.gameId.pipe(
+    switchMap(gameId => this.store.select(canSubstituteInGame(gameId))),
+    map(canSub => !canSub),
+  );
+
+  gameServerName = this.game.pipe(
+    map(game => game.gameServer),
+    filter(gameServerId => !!gameServerId),
+    switchMap(gameServerId => this.store.pipe(
+      select(gameServerById(gameServerId)),
+      tap(gameServer => {
+        if (!gameServer) {
+          this.store.dispatch(loadGameServer({ gameServerId }));
+        }
+      }),
+    )),
+    map(gameServer => gameServer?.name),
+  );
+
   isAdmin: Observable<boolean> = this.store.select(isAdmin);
-  game: Observable<Game>;
-  gameServerName: Observable<string>;
   playersRed: Observable<ResolvedGamePlayer[]>;
   playersBlu: Observable<ResolvedGamePlayer[]>;
-  isRunning: Observable<boolean>;
-  isLocked: Observable<boolean>;
   private destroyed = new Subject<void>();
   private players = new ReplaySubject<ResolvedGamePlayer[]>(1);
 
@@ -45,55 +73,14 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    const getGameId = this.route.paramMap.pipe(
+    this.route.paramMap.pipe(
       map(params => params.get('id')),
-    );
+      takeUntil(this.destroyed),
+    ).subscribe(gameId => this.gameId.next(gameId));
 
-    // retrieve the game
-    this.game = getGameId.pipe(
-      switchMap(gameId => this.store.select(gameById(gameId)).pipe(
-        tap(game => {
-          if (!game) {
-            this.store.dispatch(loadGame({ gameId }));
-          } else {
-            this.title.setTitle(`Pickup #${game.number} • ${environment.titleSuffix}`);
-          }
-        }),
-      )),
-      filter(game => !!game),
-      shareReplay(),
-    );
-
-    this.isRunning = this.game.pipe(map(game => game.state === 'launching' || game.state === 'started'));
-
-    this.isLocked = combineLatest([
-      this.isRunning,
-      this.store.select(isPlayingGame),
-      this.store.select(isBanned),
-      this.game,
-      this.store.select(activeGame),
-    ]).pipe(
-      map(([thisGameRunning, hasActiveGame, banned, theGame, theActiveGame]) => {
-        return thisGameRunning && // the game is still active
-          !banned &&
-          (!hasActiveGame || theGame.id === theActiveGame.id); // isn't involved in any game
-      }),
-      map(canSub => !canSub),
-    );
-
-    // load game server
-    this.gameServerName = this.game.pipe(
-      map(game => game?.gameServer),
-      filter(gameServerId => !!gameServerId),
-      switchMap(gameServerId => this.store.select(gameServerById(gameServerId)).pipe(
-        tap(gameServer => {
-          if (!gameServer) {
-            this.store.dispatch(loadGameServer({ gameServerId }));
-          }
-        }),
-      )),
-      map(gameServer => gameServer?.name),
-    );
+    this.game.pipe(
+      takeUntil(this.destroyed),
+    ).subscribe(game => this.title.setTitle(`Pickup #${game.number} • ${environment.titleSuffix}`));
 
     // resolve game slot into a real player
     const resolveGamePlayer = (slot: GamePlayer) => this.store.pipe(
@@ -117,7 +104,7 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
 
     const resolveSkills = this.isAdmin.pipe(
       filter(_isAdmin => _isAdmin),
-      switchMap(() => getGameId),
+      switchMap(() => this.gameId),
       switchMap(gameId => this.gamesService.fetchGameSkills(gameId)),
       filter(skills => !!skills),
     );

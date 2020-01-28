@@ -7,7 +7,6 @@ import { ActivatedRoute, convertToParamMap } from '@angular/router';
 import { of, NEVER } from 'rxjs';
 import { RouterTestingModule } from '@angular/router/testing';
 import { loadGame, forceEndGame, reinitializeServer, replacePlayer, requestSubstitute } from '../games.actions';
-import { Game } from '../models/game';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { GamesService } from '../games.service';
 import { isAdmin } from '@app/profile/profile.selectors';
@@ -154,10 +153,6 @@ describe('GameDetailsComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('should load the game if it is not in the store yet', () => {
-    expect(storeDispatchSpy).toHaveBeenCalledWith(loadGame({ gameId: 'FAKE_ID' }));
   });
 
   describe('with game', () => {

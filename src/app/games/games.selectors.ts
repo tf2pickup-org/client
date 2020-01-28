@@ -32,3 +32,8 @@ export const playerSlot = (gameId: string, playerId: string) => createSelector(
   gameById(gameId),
   game => game?.slots.find(s => s.playerId === playerId)
 );
+
+export const isGameRunning = (gameId: string) => createSelector(
+  gameById(gameId),
+  game => /launching|started/.test(game.state)
+);

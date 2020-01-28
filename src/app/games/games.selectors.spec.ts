@@ -1,4 +1,4 @@
-import { gameById, activeGames, playerSlot, isPlayingGame } from './games.selectors';
+import { gameById, activeGames, playerSlot, isPlayingGame, isGameRunning } from './games.selectors';
 
 describe('games selectors', () => {
   describe('gameById', () => {
@@ -24,8 +24,11 @@ describe('games selectors', () => {
 
   describe('isPlayingGame', () => {
     it('should return true if there is an active game', () => {
-      expect(isPlayingGame.projector(null)).toBe(false);
       expect(isPlayingGame.projector({ id: 1, number: 1, state: 'started' })).toBe(true);
+    });
+
+    it('should return false if there is no active game for the current user', () => {
+      expect(isPlayingGame.projector(null)).toBe(false);
     });
   });
 
@@ -37,6 +40,24 @@ describe('games selectors', () => {
           { playerId: 'FAKE_PLAYER_ID' },
         ],
       })).toBeDefined();
+    });
+  });
+
+  describe('isGameRunning', () => {
+    it('should return true if the game is launching', () => {
+      expect(isGameRunning('FAKE_GAME_ID').projector({ state: 'launching' })).toBe(true);
+    });
+
+    it('should return true if the game has started', () => {
+      expect(isGameRunning('FAKE_GAME_ID').projector({ state: 'started' })).toBe(true);
+    });
+
+    it('should return false if the game has ended', () => {
+      expect(isGameRunning('FAKE_GAME_ID').projector({ state: 'ended' })).toBe(false);
+    });
+
+    it('should return false if the game has been interrupted', () => {
+      expect(isGameRunning('FAKE_GAME_ID').projector({ state: 'interrupted' })).toBe(false);
     });
   });
 });

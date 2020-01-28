@@ -1,6 +1,6 @@
 import { createSelector } from '@ngrx/store';
-import { profile } from './profile/profile.selectors';
-import { activeGame } from './games/games.selectors';
+import { profile, isBanned } from './profile/profile.selectors';
+import { activeGame, isGameRunning, isPlayingGame, gameById } from './games/games.selectors';
 
 // some root-state selectors
 
@@ -12,5 +12,17 @@ export const queueLocked = createSelector(
       || !!game // user has active game going on
       || theProfile.bans && theProfile.bans.length > 0 // user is banned
       ;
+  }
+);
+
+export const canSubstituteInGame = (gameId: string) => createSelector(
+  isGameRunning(gameId),
+  isBanned,
+  activeGame,
+  gameById(gameId),
+  (gameRunning, banned, theActiveGame, game) => {
+    return gameRunning &&
+      !banned &&
+      (!theActiveGame || theActiveGame.id === game.id);
   }
 );
