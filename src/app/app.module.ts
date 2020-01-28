@@ -25,6 +25,7 @@ import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { HallOfFameModule } from './hall-of-fame/hall-of-fame.module';
 import { NotificationsModule } from './notifications/notifications.module';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { NotificationsModule } from './notifications/notifications.module';
         strictActionImmutability: true,
       },
     }),
+    StoreRouterConnectingModule.forRoot(),
     EffectsModule.forRoot([]),
     environment.production ? [] : StoreDevtoolsModule.instrument(),
     ModalModule.forRoot(),
