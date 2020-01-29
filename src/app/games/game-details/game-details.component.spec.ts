@@ -18,6 +18,7 @@ import { JoinGameInfoComponent } from '../join-game-info/join-game-info.componen
 import { SoundPlayerService, Sound } from '@app/notifications/sound-player.service';
 import { GameSummaryComponent } from '../game-summary/game-summary.component';
 import { merge } from 'lodash';
+import { WatchGameInfoComponent } from '../watch-game-info/watch-game-info.component';
 
 const paramMap = of(convertToParamMap({ id: 'FAKE_ID' }));
 
@@ -59,6 +60,7 @@ const makeStateWithGame = (overrides?: any) => merge({
         error: 'ended by admin',
         mumbleUrl: null,
         gameServer: 'FAKE_GAME_SERVER_ID',
+        stvConnectString: null,
       },
     },
     loaded: true,
@@ -124,6 +126,7 @@ describe('GameDetailsComponent', () => {
         MockComponent(GameBasicInfoComponent),
         MockComponent(JoinGameInfoComponent),
         MockComponent(GameSummaryComponent),
+        MockComponent(WatchGameInfoComponent),
       ],
       imports: [
         RouterTestingModule,
@@ -270,6 +273,26 @@ describe('GameDetailsComponent', () => {
 
       it('should not render game join info', () => {
         expect(fixture.debugElement.query(By.css('app-join-game-info'))).toBeNull();
+      });
+
+      describe('when the stv connect string is available', () => {
+        beforeEach(() => {
+          store.setState(makeStateWithGame({
+            profile: {
+              profile: { id: 'SOME_OTHER_GUY' }
+            }, games: {
+              entities: {
+                FAKE_ID: { stvConnectString: 'connect 192.168.1.101:27020; password tv' },
+              },
+            },
+          }));
+          fixture.detectChanges();
+        });
+
+        it('should render WatchGameInfoComponent', () => {
+          const watchGameInfo = fixture.debugElement.query(By.css('app-watch-game-info')).componentInstance as WatchGameInfoComponent;
+          expect(watchGameInfo.stvConnectString).toEqual('connect 192.168.1.101:27020; password tv');
+        });
       });
     });
 
