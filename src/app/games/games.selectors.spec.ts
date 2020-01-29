@@ -1,4 +1,6 @@
-import { gameById, activeGames, playerSlot, isPlayingGame } from './games.selectors';
+import { gameById, activeGames, playerSlot, isPlayingGame, isGameRunning, isMyGame, mumbleUrl } from './games.selectors';
+import { Game } from './models/game';
+import { Profile } from '@app/profile/models/profile';
 
 describe('games selectors', () => {
   describe('gameById', () => {
@@ -24,8 +26,11 @@ describe('games selectors', () => {
 
   describe('isPlayingGame', () => {
     it('should return true if there is an active game', () => {
-      expect(isPlayingGame.projector(null)).toBe(false);
       expect(isPlayingGame.projector({ id: 1, number: 1, state: 'started' })).toBe(true);
+    });
+
+    it('should return false if there is no active game for the current user', () => {
+      expect(isPlayingGame.projector(null)).toBe(false);
     });
   });
 
@@ -37,6 +42,103 @@ describe('games selectors', () => {
           { playerId: 'FAKE_PLAYER_ID' },
         ],
       })).toBeDefined();
+    });
+  });
+
+  describe('isGameRunning', () => {
+    it('should return true if the game is launching', () => {
+      expect(isGameRunning('FAKE_GAME_ID').projector({ state: 'launching' })).toBe(true);
+    });
+
+    it('should return true if the game has started', () => {
+      expect(isGameRunning('FAKE_GAME_ID').projector({ state: 'started' })).toBe(true);
+    });
+
+    it('should return false if the game has ended', () => {
+      expect(isGameRunning('FAKE_GAME_ID').projector({ state: 'ended' })).toBe(false);
+    });
+
+    it('should return false if the game has been interrupted', () => {
+      expect(isGameRunning('FAKE_GAME_ID').projector({ state: 'interrupted' })).toBe(false);
+    });
+  });
+
+  describe('isMyGame', () => {
+    const game: Partial<Game> = {
+      id: 'FAKE_GAME_ID',
+      slots: [
+        {
+          playerId: 'ACTIVE_PLAYER_ID',
+          teamId: '1',
+          gameClass: 'soldier',
+          connectionStatus: 'offline',
+          status: 'active',
+        },
+        {
+          playerId: 'REPLACED_PLAYER_ID',
+          teamId: '2',
+          gameClass: 'soldier',
+          connectionStatus: 'offline',
+          status: 'replaced',
+        },
+      ],
+    };
+
+    it('should return false if the user is not logged in', () => {
+      expect(isMyGame('FAKE_GAME_ID').projector(null, game)).toBe(false);
+    });
+
+    it('should return false if the user is not part of the game', () => {
+      expect(isMyGame('FAKE_GAME_ID').projector({ id: 'SOME_OTHER_USER' }, game)).toBe(false);
+    });
+
+    it('should return false if the user has been replaced', () => {
+      expect(isMyGame('FAKE_GAME_ID').projector({ id: 'REPLACED_PLAYER_ID' }, game)).toBe(false);
+    });
+
+    it('should return true if the user is part of the game', () => {
+      expect(isMyGame('FAKE_GAME_ID').projector({ id: 'ACTIVE_PLAYER_ID' }, game)).toBe(true);
+    });
+  });
+
+  describe('mumbleUrl', () => {
+    const game: Partial<Game> = {
+      slots: [
+        {
+          playerId: 'FAKE_PLAYER_ID',
+          teamId: '1',
+          gameClass: 'soldier',
+          connectionStatus: 'offline',
+          status: 'active',
+        },
+      ],
+      teams: {
+        0: 'BLU',
+        1: 'RED',
+      },
+      mumbleUrl: 'mumble://melkor.tf/tf2pickup/5',
+    };
+
+    const profile: Partial<Profile> = {
+      id: 'FAKE_PLAYER_ID',
+      name: 'FAKE_PLAYER_NAME',
+    };
+
+    it('should construct the proper mumble url for the given game', () => {
+      expect(mumbleUrl('FAKE_GAME_ID').projector(game, profile)).toEqual('mumble://FAKE_PLAYER_NAME@melkor.tf/tf2pickup/5/RED');
+    });
+
+    it('should return null if the user is not logged in', () => {
+      expect(mumbleUrl('FAKE_GAME_ID').projector(game, null)).toBe(null);
+    });
+
+    it('should return null if the mumble url is not defined', () => {
+      expect(mumbleUrl('FAKE_GAME_ID').projector({ ...game, mumbleUrl: null }, profile)).toBe(null);
+    });
+
+    it('should replace username spaces with underscores', () => {
+      expect(mumbleUrl('FAKE_GAME_ID').projector(game, { ...profile, name: 'name with  spaces' }))
+        .toEqual('mumble://name_with_spaces@melkor.tf/tf2pickup/5/RED');
     });
   });
 });

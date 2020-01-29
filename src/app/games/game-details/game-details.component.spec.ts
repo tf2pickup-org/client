@@ -7,7 +7,6 @@ import { ActivatedRoute, convertToParamMap } from '@angular/router';
 import { of, NEVER } from 'rxjs';
 import { RouterTestingModule } from '@angular/router/testing';
 import { loadGame, forceEndGame, reinitializeServer, replacePlayer, requestSubstitute } from '../games.actions';
-import { Game } from '../models/game';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { GamesService } from '../games.service';
 import { isAdmin } from '@app/profile/profile.selectors';
@@ -19,6 +18,7 @@ import { JoinGameInfoComponent } from '../join-game-info/join-game-info.componen
 import { SoundPlayerService, Sound } from '@app/notifications/sound-player.service';
 import { GameSummaryComponent } from '../game-summary/game-summary.component';
 import { merge } from 'lodash';
+import { WatchGameInfoComponent } from '../watch-game-info/watch-game-info.component';
 
 const paramMap = of(convertToParamMap({ id: 'FAKE_ID' }));
 
@@ -58,15 +58,17 @@ const makeStateWithGame = (overrides?: any) => merge({
         number: 3,
         connectString: null,
         error: 'ended by admin',
-        mumbleUrl: 'mumble://FAKE_MUMBLE_URL/FAKE_CHANNEL',
+        mumbleUrl: null,
         gameServer: 'FAKE_GAME_SERVER_ID',
+        stvConnectString: null,
       },
     },
     loaded: true,
   },
   profile: {
     profile: {
-      id: 'FAKE_PROFILE_ID',
+      id: 'FAKE_PLAYER_ID_1',
+      name: 'FAKE_PLAYER_NAME_1',
       bans: [],
     },
   },
@@ -124,6 +126,7 @@ describe('GameDetailsComponent', () => {
         MockComponent(GameBasicInfoComponent),
         MockComponent(JoinGameInfoComponent),
         MockComponent(GameSummaryComponent),
+        MockComponent(WatchGameInfoComponent),
       ],
       imports: [
         RouterTestingModule,
@@ -154,10 +157,6 @@ describe('GameDetailsComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('should load the game if it is not in the store yet', () => {
-    expect(storeDispatchSpy).toHaveBeenCalledWith(loadGame({ gameId: 'FAKE_ID' }));
   });
 
   describe('with game', () => {
@@ -239,10 +238,62 @@ describe('GameDetailsComponent', () => {
       expect(gameBasicInfo.state).toEqual('launching');
     });
 
-    it('should render game join info', () => {
-      const joinGameInfo = fixture.debugElement.query(By.css('app-join-game-info')).componentInstance as JoinGameInfoComponent;
-      expect(joinGameInfo.gameId).toEqual('FAKE_ID');
-      expect(joinGameInfo.connectString).toEqual(null);
+    describe('when the current user is part of the game', () => {
+      describe('when the connect string is available', () => {
+        beforeEach(() => {
+          store.setState(makeStateWithGame({ games: { entities: { FAKE_ID: { connectString: 'connect 192.168.1.101:27015; password FAKE_PASSWORD' } } } }));
+          fixture.detectChanges();
+        });
+
+        it('should pass the connect string to the JoinGameInfoComponent', () => {
+          const joinGameInfo = fixture.debugElement.query(By.css('app-join-game-info')).componentInstance as JoinGameInfoComponent;
+          expect(joinGameInfo.connectString).toEqual('connect 192.168.1.101:27015; password FAKE_PASSWORD');
+        });
+      });
+
+      describe('when the mumble url is available', () => {
+        beforeEach(() => {
+          store.setState(makeStateWithGame({ games: { entities: { FAKE_ID: { mumbleUrl: 'mumble://melkor.tf/tf2pickup/5' } } } }));
+          fixture.detectChanges();
+        });
+
+        it('should pass the mumble url to the MumbleJoinButtonComponent', () => {
+          const mumbleJoinButton = fixture.debugElement.query(By.css('app-join-game-info'))
+            .componentInstance as JoinGameInfoComponent;
+          expect(mumbleJoinButton.mumbleUrl).toEqual('mumble://FAKE_PLAYER_NAME_1@melkor.tf/tf2pickup/5/RED');
+        });
+      });
+    });
+
+    describe('when the current user is not a part of the game', () => {
+      beforeEach(() => {
+        store.setState(makeStateWithGame({ profile: { profile: { id: 'SOME_OTHER_GUY' } } }));
+        fixture.detectChanges();
+      });
+
+      it('should not render game join info', () => {
+        expect(fixture.debugElement.query(By.css('app-join-game-info'))).toBeNull();
+      });
+
+      describe('when the stv connect string is available', () => {
+        beforeEach(() => {
+          store.setState(makeStateWithGame({
+            profile: {
+              profile: { id: 'SOME_OTHER_GUY' }
+            }, games: {
+              entities: {
+                FAKE_ID: { stvConnectString: 'connect 192.168.1.101:27020; password tv' },
+              },
+            },
+          }));
+          fixture.detectChanges();
+        });
+
+        it('should render WatchGameInfoComponent', () => {
+          const watchGameInfo = fixture.debugElement.query(By.css('app-watch-game-info')).componentInstance as WatchGameInfoComponent;
+          expect(watchGameInfo.stvConnectString).toEqual('connect 192.168.1.101:27020; password tv');
+        });
+      });
     });
 
     describe('that has already ended', () => {

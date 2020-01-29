@@ -19,9 +19,14 @@
     [state]="_game.state"
     [error]="_game.error"></app-game-basic-info>
 
-  <app-join-game-info *ngIf="_game.state === 'launching' || _game.state === 'started'"
-    [gameId]="_game.id"
-    [connectString]="_game.connectString"></app-join-game-info>
+  <ng-container *ngIf="isRunning | async">
+    <app-join-game-info *ngIf="isMyGame | async; else watchGameInfo"
+      [mumbleUrl]="mumbleUrl | async"
+      [connectString]="_game.connectString"></app-join-game-info>
+    <ng-template #watchGameInfo>
+      <app-watch-game-info [stvConnectString]="_game.stvConnectString"></app-watch-game-info>
+    </ng-template>
+  </ng-container>
 
   <app-game-summary *ngIf="_game.state === 'ended'"
     [logsUrl]="_game.logsUrl"

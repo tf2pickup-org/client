@@ -3,12 +3,13 @@ import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { GamesService } from './games.service';
 import { gameAdded, loadGame, gameUpdated, forceEndGame, gameCreated, reinitializeServer, ownGameAdded, requestSubstitute,
   cancelSubstitutionRequest, replacePlayer } from './games.actions';
-import { mergeMap, map, filter, withLatestFrom } from 'rxjs/operators';
+import { mergeMap, map, filter, withLatestFrom, tap } from 'rxjs/operators';
 import { GamesEventsService } from './games-events.service';
 import { Store } from '@ngrx/store';
 import { profile } from '@app/profile/profile.selectors';
 import { profileLoaded } from '@app/profile/profile.actions';
 import { Router } from '@angular/router';
+import { routerNavigatedAction } from '@ngrx/router-store';
 
 @Injectable()
 export class GamesEffects {
@@ -28,6 +29,15 @@ export class GamesEffects {
       ofType(profileLoaded),
       filter(({ profile: theProfile }) => !!theProfile && !!theProfile.activeGameId),
       map(({ profile: theProfile }) => loadGame({ gameId: theProfile.activeGameId })),
+    )
+  );
+
+  loadRoutedGame = createEffect(() =>
+    this.actions.pipe(
+      ofType(routerNavigatedAction),
+      filter(({ payload }) => /^\/game\/.+$/.test(payload.routerState.url)),
+      map(({ payload }) => payload.routerState.root.children[0].params.id),
+      map(gameId => loadGame({ gameId })),
     )
   );
 
