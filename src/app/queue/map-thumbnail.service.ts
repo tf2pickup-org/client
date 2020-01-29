@@ -5,34 +5,18 @@ import { Injectable } from '@angular/core';
 })
 export class MapThumbnailService {
 
+  private mapMatchers: { regex: RegExp, thumbnailName: string }[] = [
+    { regex: /cp_(bad|pro)lands/, thumbnailName: 'badlands' },
+    { regex: /cp_granary/,        thumbnailName: 'granary' },
+    { regex: /cp_gullywash/,      thumbnailName: 'gullywash' },
+    { regex: /cp_process/,        thumbnailName: 'process' },
+    { regex: /cp_reckoner/,       thumbnailName: 'reckoner' },
+    { regex: /cp_snakewater/,     thumbnailName: 'snakewater' },
+    { regex: /cp_sunshine/,       thumbnailName: 'sunshine' },
+  ];
+
   getMapThumbnail(map: string) {
-    switch (map) {
-      case 'cp_badlands':
-      case 'cp_prolands_rc2t':
-        return 'badlands';
-
-      case 'cp_granary':
-      case 'cp_granary_pro_rc8':
-        return 'granary';
-
-      case 'cp_gullywash_final1':
-        return 'gullywash';
-
-      case 'cp_process_final':
-        return 'process';
-
-      case 'cp_reckoner_rc2':
-        return 'reckoner';
-
-      case 'cp_snakewater_final1':
-        return 'snakewater';
-
-      case 'cp_sunshine':
-        return 'sunshine';
-
-      default:
-        return 'unknown';
-    }
+    return this.mapMatchers.find(m => m.regex.test(map))?.thumbnailName || 'unknown';
   }
 
   getMapThumbnailPath(map: string) {
