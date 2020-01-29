@@ -9,7 +9,7 @@ import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 export class JoinGameInfoComponent {
 
   @Input()
-  gameId: string;
+  mumbleUrl: string;
 
   @Input()
   connectString: string;

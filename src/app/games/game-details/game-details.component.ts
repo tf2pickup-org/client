@@ -4,7 +4,7 @@ import { Observable, Subject, ReplaySubject, combineLatest } from 'rxjs';
 import { Game } from '../models/game';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap, map, tap, filter, first, pairwise, shareReplay, takeUntil, startWith } from 'rxjs/operators';
-import { gameById, isGameRunning, isMyGame } from '../games.selectors';
+import { gameById, isGameRunning, isMyGame, mumbleUrl } from '../games.selectors';
 import { forceEndGame, reinitializeServer, requestSubstitute, replacePlayer, loadGame } from '../games.actions';
 import { playerById } from '@app/players/selectors';
 import { loadPlayer } from '@app/players/actions';
@@ -60,6 +60,10 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
 
   isMyGame = this.gameId.pipe(
     switchMap(gameId => this.store.select(isMyGame(gameId))),
+  );
+
+  mumbleUrl = this.gameId.pipe(
+    switchMap(gameId => this.store.select(mumbleUrl(gameId))),
   );
 
   isAdmin: Observable<boolean> = this.store.select(isAdmin);

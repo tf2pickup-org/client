@@ -21,7 +21,7 @@
 
   <ng-container *ngIf="isRunning | async">
     <app-join-game-info *ngIf="isMyGame | async"
-      [gameId]="_game.id"
+      [mumbleUrl]="mumbleUrl | async"
       [connectString]="_game.connectString"></app-join-game-info>
   </ng-container>
 

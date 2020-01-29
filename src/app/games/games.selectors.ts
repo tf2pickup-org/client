@@ -3,6 +3,7 @@ import { AppState } from '@app/app.state';
 import { State } from './games.reducer';
 import { adapter } from './games.adapter';
 import { profile } from '@app/profile/profile.selectors';
+import * as urlParse from 'url-parse';
 
 const gamesFeature = createFeatureSelector<AppState, State>('games');
 
@@ -42,4 +43,24 @@ export const isMyGame = (gameId: string) => createSelector(
   profile,
   gameById(gameId),
   (theProfile, game) => !!game?.slots.find(s => s.playerId === theProfile?.id)?.status.match(/active|waiting for substitute/)
+);
+
+export const mumbleUrl = (gameId: string) => createSelector(
+  gameById(gameId),
+  profile,
+  (game, theProfile) => {
+    if (!game?.mumbleUrl) {
+      return null;
+    }
+
+    const mySlot = game?.slots.find(s => s.playerId === theProfile?.id);
+    if (!mySlot) {
+      return null;
+    }
+
+    const team = game.teams[mySlot.teamId];
+    const url = urlParse(game.mumbleUrl);
+    url.set('username', theProfile.name.replace(/\s+/g, '_'));
+    return `${url.toString()}/${team}`;
+  }
 );

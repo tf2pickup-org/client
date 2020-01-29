@@ -1,42 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { MumbleJoinButtonComponent } from './mumble-join-button.component';
-import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { SharedModule } from '@app/shared/shared.module';
-import { By } from '@angular/platform-browser';
 import { ChangeDetectionStrategy } from '@angular/core';
-import { Store } from '@ngrx/store';
 
 describe('MumbleJoinButtonComponent', () => {
   let component: MumbleJoinButtonComponent;
   let fixture: ComponentFixture<MumbleJoinButtonComponent>;
-  let store: MockStore<any>;
-
-  const initialState = {
-    games: {
-      ids: [ 'FAKE_GAME_ID' ],
-      entities: {
-        FAKE_GAME_ID: {
-          slots: [
-            {
-              playerId: 'FAKE_PLAYER_ID',
-              teamId: 1,
-            },
-          ],
-          teams: {
-            0: 'BLU',
-            1: 'RED',
-          },
-          mumbleUrl: 'mumble://melkor.tf/tf2pickup/5',
-        }
-      },
-    },
-    profile: {
-      profile: {
-        id: 'FAKE_PLAYER_ID',
-        name: 'FAKE_PLAYER_NAME',
-      }
-    },
-  };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -45,7 +14,7 @@ describe('MumbleJoinButtonComponent', () => {
         SharedModule,
       ],
       providers: [
-        provideMockStore({ initialState }),
+
       ],
     })
     .overrideComponent(MumbleJoinButtonComponent, { set: { changeDetection: ChangeDetectionStrategy.Default } })
@@ -53,7 +22,6 @@ describe('MumbleJoinButtonComponent', () => {
   }));
 
   beforeEach(() => {
-    store = TestBed.get(Store);
     fixture = TestBed.createComponent(MumbleJoinButtonComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -61,58 +29,5 @@ describe('MumbleJoinButtonComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  describe('mumble url', () => {
-    it('should be created properly', () => {
-      component.gameId = 'FAKE_GAME_ID';
-      fixture.detectChanges();
-      const el = fixture.debugElement.query(By.css('a')).nativeElement as HTMLAnchorElement;
-      expect(el.href).toBe('mumble://FAKE_PLAYER_NAME@melkor.tf/tf2pickup/5/RED');
-    });
-
-    it('should be empty unless the user is authenticated', () => {
-      store.setState({ ...initialState, profile: { profile: undefined } });
-      component.gameId = 'FAKE_GAME_ID';
-      fixture.detectChanges();
-      expect(fixture.debugElement.query(By.css('a'))).toBeNull();
-    });
-
-    it('should not render unless the mumble url is specified', () => {
-      store.setState({ ...initialState, games: {
-        ids: [ 'FAKE_GAME_ID' ],
-        entities: {
-          FAKE_GAME_ID: {
-            slots: [
-              {
-                playerId: 'FAKE_PLAYER_ID',
-                teamId: 1,
-              },
-            ],
-            teams: {
-              0: 'BLU',
-              1: 'RED',
-            },
-            // no mumble url
-          }
-        },
-      }});
-      component.gameId = 'FAKE_GAME_ID';
-      fixture.detectChanges();
-      expect(fixture.debugElement.query(By.css('a'))).toBeFalsy();
-    });
-
-    it('should replace username spaces with underscores', () => {
-      store.setState({ ...initialState, profile: {
-        profile: {
-          id: 'FAKE_PLAYER_ID',
-          name: 'name with  spaces',
-        }
-      }});
-      component.gameId = 'FAKE_GAME_ID';
-      fixture.detectChanges();
-      const el = fixture.debugElement.query(By.css('a')).nativeElement as HTMLAnchorElement;
-      expect(el.href).toBe('mumble://name_with_spaces@melkor.tf/tf2pickup/5/RED');
-    });
   });
 });

@@ -48,16 +48,16 @@ describe('JoinGameInfoComponent', () => {
     });
   });
 
-  describe('with gameId', () => {
+  describe('with mumbleUrl', () => {
     beforeEach(() => {
-      component.gameId = 'FAKE_GAME_ID';
+      component.mumbleUrl = 'FAKE_MUMBLE_URL';
       fixture.detectChanges();
     });
 
     it('should render MumbleJoinButton', () => {
       const mumbleJoinButton = fixture.debugElement.query(By.css('app-mumble-join-button')).componentInstance as MumbleJoinButtonComponent;
       expect(mumbleJoinButton).toBeDefined();
-      expect(mumbleJoinButton.gameId).toEqual('FAKE_GAME_ID');
+      expect(mumbleJoinButton.mumbleUrl).toEqual('FAKE_MUMBLE_URL');
     });
   });
 });

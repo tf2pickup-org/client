@@ -1,5 +1,6 @@
-import { gameById, activeGames, playerSlot, isPlayingGame, isGameRunning, isMyGame } from './games.selectors';
+import { gameById, activeGames, playerSlot, isPlayingGame, isGameRunning, isMyGame, mumbleUrl } from './games.selectors';
 import { Game } from './models/game';
+import { Profile } from '@app/profile/models/profile';
 
 describe('games selectors', () => {
   describe('gameById', () => {
@@ -97,6 +98,47 @@ describe('games selectors', () => {
 
     it('should return true if the user is part of the game', () => {
       expect(isMyGame('FAKE_GAME_ID').projector({ id: 'ACTIVE_PLAYER_ID' }, game)).toBe(true);
+    });
+  });
+
+  describe('mumbleUrl', () => {
+    const game: Partial<Game> = {
+      slots: [
+        {
+          playerId: 'FAKE_PLAYER_ID',
+          teamId: '1',
+          gameClass: 'soldier',
+          connectionStatus: 'offline',
+          status: 'active',
+        },
+      ],
+      teams: {
+        0: 'BLU',
+        1: 'RED',
+      },
+      mumbleUrl: 'mumble://melkor.tf/tf2pickup/5',
+    };
+
+    const profile: Partial<Profile> = {
+      id: 'FAKE_PLAYER_ID',
+      name: 'FAKE_PLAYER_NAME',
+    };
+
+    it('should construct the proper mumble url for the given game', () => {
+      expect(mumbleUrl('FAKE_GAME_ID').projector(game, profile)).toEqual('mumble://FAKE_PLAYER_NAME@melkor.tf/tf2pickup/5/RED');
+    });
+
+    it('should return null if the user is not logged in', () => {
+      expect(mumbleUrl('FAKE_GAME_ID').projector(game, null)).toBe(null);
+    });
+
+    it('should return null if the mumble url is not defined', () => {
+      expect(mumbleUrl('FAKE_GAME_ID').projector({ ...game, mumbleUrl: null }, profile)).toBe(null);
+    });
+
+    it('should replace username spaces with underscores', () => {
+      expect(mumbleUrl('FAKE_GAME_ID').projector(game, { ...profile, name: 'name with  spaces' }))
+        .toEqual('mumble://name_with_spaces@melkor.tf/tf2pickup/5/RED');
     });
   });
 });

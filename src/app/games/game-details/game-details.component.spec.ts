@@ -57,7 +57,7 @@ const makeStateWithGame = (overrides?: any) => merge({
         number: 3,
         connectString: null,
         error: 'ended by admin',
-        mumbleUrl: 'mumble://FAKE_MUMBLE_URL/FAKE_CHANNEL',
+        mumbleUrl: null,
         gameServer: 'FAKE_GAME_SERVER_ID',
       },
     },
@@ -66,6 +66,7 @@ const makeStateWithGame = (overrides?: any) => merge({
   profile: {
     profile: {
       id: 'FAKE_PLAYER_ID_1',
+      name: 'FAKE_PLAYER_NAME_1',
       bans: [],
     },
   },
@@ -234,29 +235,41 @@ describe('GameDetailsComponent', () => {
       expect(gameBasicInfo.state).toEqual('launching');
     });
 
-    describe('with connect string', () => {
-      beforeEach(() => {
-        store.setState(makeStateWithGame({ games: { entities: { FAKE_ID: { connectString: 'connect 192.168.1.101:27015; password FAKE_PASSWORD' } } } }));
-        fixture.detectChanges();
-      });
+    describe('when the current user is part of the game', () => {
+      describe('when the connect string is available', () => {
+        beforeEach(() => {
+          store.setState(makeStateWithGame({ games: { entities: { FAKE_ID: { connectString: 'connect 192.168.1.101:27015; password FAKE_PASSWORD' } } } }));
+          fixture.detectChanges();
+        });
 
-      describe('when the current user is part of the game', () => {
-        it('should render game join info', () => {
+        it('should pass the connect string to the JoinGameInfoComponent', () => {
           const joinGameInfo = fixture.debugElement.query(By.css('app-join-game-info')).componentInstance as JoinGameInfoComponent;
-          expect(joinGameInfo.gameId).toEqual('FAKE_ID');
           expect(joinGameInfo.connectString).toEqual('connect 192.168.1.101:27015; password FAKE_PASSWORD');
         });
       });
 
-      describe('when the current user is not a part of the game', () => {
+      describe('when the mumble url is available', () => {
         beforeEach(() => {
-          store.setState(makeStateWithGame({ profile: { profile: { id: 'SOME_OTHER_GUY' } } }));
+          store.setState(makeStateWithGame({ games: { entities: { FAKE_ID: { mumbleUrl: 'mumble://melkor.tf/tf2pickup/5' } } } }));
           fixture.detectChanges();
         });
 
-        it('should not render game join info', () => {
-          expect(fixture.debugElement.query(By.css('app-join-game-info'))).toBeNull();
+        it('should pass the mumble url to the MumbleJoinButtonComponent', () => {
+          const mumbleJoinButton = fixture.debugElement.query(By.css('app-join-game-info'))
+            .componentInstance as JoinGameInfoComponent;
+          expect(mumbleJoinButton.mumbleUrl).toEqual('mumble://FAKE_PLAYER_NAME_1@melkor.tf/tf2pickup/5/RED');
         });
+      });
+    });
+
+    describe('when the current user is not a part of the game', () => {
+      beforeEach(() => {
+        store.setState(makeStateWithGame({ profile: { profile: { id: 'SOME_OTHER_GUY' } } }));
+        fixture.detectChanges();
+      });
+
+      it('should not render game join info', () => {
+        expect(fixture.debugElement.query(By.css('app-join-game-info'))).toBeNull();
       });
     });
 
