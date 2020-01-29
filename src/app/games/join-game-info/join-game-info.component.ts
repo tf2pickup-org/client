@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 
 @Component({
   selector: 'app-join-game-info',
@@ -8,20 +8,10 @@ import { Component, ChangeDetectionStrategy, Input, ViewChild, ElementRef } from
 })
 export class JoinGameInfoComponent {
 
-  @ViewChild('connectInput', { static: false })
-  connectInput: ElementRef;
-
   @Input()
   gameId: string;
 
   @Input()
   connectString: string;
-
-  copyConnectString() {
-    const input = this.connectInput.nativeElement as HTMLInputElement;
-    input.focus();
-    input.select();
-    document.execCommand('copy');
-  }
 
 }

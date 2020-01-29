@@ -18,6 +18,7 @@ import { JoinGameInfoComponent } from './join-game-info/join-game-info.component
 import { GameSummaryComponent } from './game-summary/game-summary.component';
 import { GameTeamPlayerListComponent } from './game-team-player-list/game-team-player-list.component';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { ConnectStringComponent } from './connect-string/connect-string.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
     JoinGameInfoComponent,
     GameSummaryComponent,
     GameTeamPlayerListComponent,
+    ConnectStringComponent,
   ],
   imports: [
     CommonModule,
