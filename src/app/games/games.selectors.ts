@@ -14,13 +14,13 @@ export const gameById = (gameId: string) => createSelector(gameEntities, entitie
 
 export const activeGames = createSelector(
   allGames,
-  games => games && games.filter(g => g.state === 'launching' || g.state === 'started')
+  games => games?.filter(g => /launching|started/.test(g.state))
 );
 
 export const activeGame = createSelector(
   profile,
   activeGames,
-  (theProfile, games) => theProfile && games && games.find(g => g.players.includes(theProfile.id))
+  (theProfile, games) => theProfile && games?.find(g => g.players.includes(theProfile.id))
 );
 
 export const isPlayingGame = createSelector(
@@ -36,4 +36,10 @@ export const playerSlot = (gameId: string, playerId: string) => createSelector(
 export const isGameRunning = (gameId: string) => createSelector(
   gameById(gameId),
   game => /launching|started/.test(game.state)
+);
+
+export const isMyGame = (gameId: string) => createSelector(
+  profile,
+  gameById(gameId),
+  (theProfile, game) => !!game?.slots.find(s => s.playerId === theProfile?.id)?.status.match(/active|waiting for substitute/)
 );

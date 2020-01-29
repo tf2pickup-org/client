@@ -65,7 +65,7 @@ const makeStateWithGame = (overrides?: any) => merge({
   },
   profile: {
     profile: {
-      id: 'FAKE_PROFILE_ID',
+      id: 'FAKE_PLAYER_ID_1',
       bans: [],
     },
   },
@@ -234,10 +234,30 @@ describe('GameDetailsComponent', () => {
       expect(gameBasicInfo.state).toEqual('launching');
     });
 
-    it('should render game join info', () => {
-      const joinGameInfo = fixture.debugElement.query(By.css('app-join-game-info')).componentInstance as JoinGameInfoComponent;
-      expect(joinGameInfo.gameId).toEqual('FAKE_ID');
-      expect(joinGameInfo.connectString).toEqual(null);
+    describe('with connect string', () => {
+      beforeEach(() => {
+        store.setState(makeStateWithGame({ games: { entities: { FAKE_ID: { connectString: 'connect 192.168.1.101:27015; password FAKE_PASSWORD' } } } }));
+        fixture.detectChanges();
+      });
+
+      describe('when the current user is part of the game', () => {
+        it('should render game join info', () => {
+          const joinGameInfo = fixture.debugElement.query(By.css('app-join-game-info')).componentInstance as JoinGameInfoComponent;
+          expect(joinGameInfo.gameId).toEqual('FAKE_ID');
+          expect(joinGameInfo.connectString).toEqual('connect 192.168.1.101:27015; password FAKE_PASSWORD');
+        });
+      });
+
+      describe('when the current user is not a part of the game', () => {
+        beforeEach(() => {
+          store.setState(makeStateWithGame({ profile: { profile: { id: 'SOME_OTHER_GUY' } } }));
+          fixture.detectChanges();
+        });
+
+        it('should not render game join info', () => {
+          expect(fixture.debugElement.query(By.css('app-join-game-info'))).toBeNull();
+        });
+      });
     });
 
     describe('that has already ended', () => {

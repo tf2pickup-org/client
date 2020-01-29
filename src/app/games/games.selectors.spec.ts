@@ -1,4 +1,5 @@
-import { gameById, activeGames, playerSlot, isPlayingGame, isGameRunning } from './games.selectors';
+import { gameById, activeGames, playerSlot, isPlayingGame, isGameRunning, isMyGame } from './games.selectors';
+import { Game } from './models/game';
 
 describe('games selectors', () => {
   describe('gameById', () => {
@@ -58,6 +59,44 @@ describe('games selectors', () => {
 
     it('should return false if the game has been interrupted', () => {
       expect(isGameRunning('FAKE_GAME_ID').projector({ state: 'interrupted' })).toBe(false);
+    });
+  });
+
+  describe('isMyGame', () => {
+    const game: Partial<Game> = {
+      id: 'FAKE_GAME_ID',
+      slots: [
+        {
+          playerId: 'ACTIVE_PLAYER_ID',
+          teamId: '1',
+          gameClass: 'soldier',
+          connectionStatus: 'offline',
+          status: 'active',
+        },
+        {
+          playerId: 'REPLACED_PLAYER_ID',
+          teamId: '2',
+          gameClass: 'soldier',
+          connectionStatus: 'offline',
+          status: 'replaced',
+        },
+      ],
+    };
+
+    it('should return false if the user is not logged in', () => {
+      expect(isMyGame('FAKE_GAME_ID').projector(null, game)).toBe(false);
+    });
+
+    it('should return false if the user is not part of the game', () => {
+      expect(isMyGame('FAKE_GAME_ID').projector({ id: 'SOME_OTHER_USER' }, game)).toBe(false);
+    });
+
+    it('should return false if the user has been replaced', () => {
+      expect(isMyGame('FAKE_GAME_ID').projector({ id: 'REPLACED_PLAYER_ID' }, game)).toBe(false);
+    });
+
+    it('should return true if the user is part of the game', () => {
+      expect(isMyGame('FAKE_GAME_ID').projector({ id: 'ACTIVE_PLAYER_ID' }, game)).toBe(true);
     });
   });
 });
