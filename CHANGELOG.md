@@ -1,3 +1,8 @@
+# [1.6.5](https://github.com/tf2pickup-pl/client/compare/1.6.4...1.6.5) (2020-01-30)
+
+### Fixes
+* Better map thumbnail mapping ([f57215d](https://github.com/tf2pickup-pl/client/commit/f57215d931b47a080585734a40853162019552bb))
+
 # [1.6.4](https://github.com/tf2pickup-pl/client/compare/1.6.3...1.6.4) (2020-01-01)
 
 ### Fixes
