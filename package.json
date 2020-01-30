@@ -21,7 +21,7 @@
     "@angular/router": "8.2.14",
     "@ngrx/effects": "8.6.0",
     "@ngrx/entity": "8.6.0",
-    "@ngrx/router-store": "^8.6.0",
+    "@ngrx/router-store": "8.6.0",
     "@ngrx/store": "8.6.0",
     "@ngrx/store-devtools": "8.6.0",
     "@swimlane/ngx-datatable": "16.0.3",
