@@ -8,7 +8,7 @@ import { Component, ChangeDetectionStrategy, Input, ViewChild, ElementRef } from
 })
 export class ConnectStringComponent {
 
-  @ViewChild('connectInput', { static: false })
+  @ViewChild('connectInput')
   connectInput: ElementRef;
 
   @Input()
