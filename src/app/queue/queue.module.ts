@@ -61,8 +61,5 @@ import { QueueSlotContainerComponent } from './queue-slot-container/queue-slot-c
     QueueReadyUpDialogControllerComponent,
     QueueNotificationsControllerComponent,
   ],
-  entryComponents: [
-    QueueReadyUpDialogComponent,
-  ],
 })
 export class QueueModule { }

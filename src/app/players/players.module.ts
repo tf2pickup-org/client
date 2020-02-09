@@ -63,8 +63,5 @@ import { EditPlayerRoleDialogComponent } from './edit-player-role-dialog/edit-pl
     PlayerNameComponent,
     PlayerAvatarComponent,
   ],
-  entryComponents: [
-    EditPlayerRoleDialogComponent,
-  ],
 })
 export class PlayersModule { }
