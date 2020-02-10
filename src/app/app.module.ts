@@ -37,7 +37,8 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
     StoreModule.forRoot({}, {
       runtimeChecks: {
         strictStateImmutability: true,
-        strictActionImmutability: true,
+        // disabled until https://github.com/ngrx/platform/issues/2109 is resolved
+        /* strictActionImmutability: true, */
       },
     }),
     StoreRouterConnectingModule.forRoot(),
