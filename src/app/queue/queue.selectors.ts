@@ -26,6 +26,11 @@ export const queueSlotsForClass = (gameClass: string) => createSelector(
   slots => slots && slots.filter(s => s.gameClass === gameClass)
 );
 
+export const slotById = (slotId: number) => createSelector(
+  queueSlots,
+  slots => slots.find(s => s.id === slotId)
+);
+
 export const mySlot = createSelector(
   profile,
   queueSlots,
@@ -44,3 +49,5 @@ export const queueShowReadyUpDialog = createSelector(queueFeature, feature => fe
 export const isPreReadied = createSelector(queueFeature, feature => feature.preReady);
 
 export const substituteRequests = createSelector(queueFeature, feature => feature.substituteRequests);
+
+export const queueFriendships = createSelector(queueFeature, feature => feature.friendships);

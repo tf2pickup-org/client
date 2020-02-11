@@ -1,5 +1,5 @@
 import { queueRequiredPlayerCount, queueCurrentPlayerCount, queueSlotsForClass, mySlot, mapVoteResults, mapVoteTotalCount, mapVote,
-  isPreReadied, substituteRequests } from './queue.selectors';
+  isPreReadied, substituteRequests, slotById, queueFriendships } from './queue.selectors';
 import { QueueSlot } from './models/queue-slot';
 
 describe('queue selectors', () => {
@@ -32,6 +32,15 @@ describe('queue selectors', () => {
           { }
         ],
       )).toEqual([{ gameClass: 'soldier' }] as QueueSlot[]);
+    });
+  });
+
+  describe('slotById', () => {
+    it('should return the right slot', () => {
+      expect(slotById(1).projector([
+        { id: 0, gameClass: 'scout' },
+        { id: 1, gameClass: 'soldier' },
+      ])).toEqual({ id: 1, gameClass: 'soldier' } as any);
     });
   });
 
@@ -103,6 +112,13 @@ describe('queue selectors', () => {
 
     it('should return substitute requests', () => {
       expect(substituteRequests.projector({ substituteRequests: requests })).toEqual(requests);
+    });
+  });
+
+  describe('friendships', () => {
+    it('should pluck friendships', () => {
+      const friendships = [{ sourcePlayerId: 'SOURCE_PLAYER_ID', targetPlayerId: 'TARGET_PLAYER_ID' }];
+      expect(queueFriendships.projector({ slots: [], state: 'waiting', friendships })).toEqual(friendships);
     });
   });
 });
