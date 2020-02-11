@@ -138,6 +138,7 @@ export class QueueEffects {
     this.queueEventsService.mapVoteResultsUpdate.subscribe(results => this.store.dispatch(mapVoteResultsUpdated({ results })));
     this.queueEventsService.substituteRequests.subscribe(substituteRequests =>
         this.store.dispatch(substituteRequestsUpdated({ substituteRequests })));
+    this.queueEventsService.friendshipsUpdate.subscribe(friendships => this.store.dispatch(friendshipsUpdated({ friendships })));
   }
 
 }
