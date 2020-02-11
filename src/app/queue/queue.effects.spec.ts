@@ -6,7 +6,7 @@ import { Action, Store, select, MemoizedSelector } from '@ngrx/store';
 import { QueueEventsService } from './queue-events.service';
 import { QueueService } from './queue.service';
 import { queueLoaded, loadQueue, joinQueue, joinQueueError, markFriend, mapVoteReset, voteForMap, mapVoted, mapVoteResultsUpdated,
-  queueSlotsUpdated, hideReadyUpDialog, showReadyUpDialog, readyUp, queueStateUpdated, substituteRequestsUpdated } from './queue.actions';
+  queueSlotsUpdated, hideReadyUpDialog, showReadyUpDialog, readyUp, queueStateUpdated, substituteRequestsUpdated, friendshipsUpdated } from './queue.actions';
 import { Queue } from './models/queue';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { QueueSlot } from './models/queue-slot';
@@ -60,6 +60,7 @@ const queue: Queue = {
   ],
   state: 'waiting',
   mapVoteResults: [],
+  friendships: [],
 };
 
 const initialState = {
@@ -194,9 +195,9 @@ describe('QueueEffects', () => {
 
   describe('#markFriend', () => {
     it('should call the service', () => {
-      const slot: QueueSlot = { id: 1, gameClass: 'soldier', playerId: 'FAKE_ID_2', ready: false, friend: 'FAKE_FRIEND_ID' };
-      const spy = spyOn(queueService, 'markFriend').and.returnValue(of(slot));
-      effects.markFriend.subscribe(action => expect(action).toEqual(queueSlotsUpdated({ slots: [ slot ] })));
+      const friendships = [ { sourcePlayerId: 'FAKE_PLAYER_ID', targetPlayerId: 'FAKE_FRIEND_ID' } ];
+      const spy = spyOn(queueService, 'markFriend').and.returnValue(of(friendships));
+      effects.markFriend.subscribe(action => expect(action).toEqual(friendshipsUpdated({ friendships })));
       actions.next(markFriend({ friendId: 'FAKE_FRIEND_ID' }));
       expect(spy).toHaveBeenCalledWith('FAKE_FRIEND_ID');
     });

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { loadQueue, queueLoaded, joinQueue, leaveQueue, queueStateUpdated, joinQueueError, leaveQueueError, readyUp, readyUpError,
   showReadyUpDialog, hideReadyUpDialog, stopPreReady, voteForMap, mapVoteResultsUpdated, mapVoted,
-  mapVoteReset, queueSlotsUpdated, markFriend, startPreReady, substituteRequestsUpdated } from './queue.actions';
+  mapVoteReset, queueSlotsUpdated, markFriend, startPreReady, substituteRequestsUpdated, friendshipsUpdated } from './queue.actions';
 import { mergeMap, map, catchError, filter, withLatestFrom, mapTo } from 'rxjs/operators';
 import { QueueService } from './queue.service';
 import { QueueEventsService } from './queue-events.service';
@@ -105,7 +105,7 @@ export class QueueEffects {
     this.actions.pipe(
       ofType(markFriend),
       mergeMap(({ friendId }) => this.queueService.markFriend(friendId).pipe(
-        map(slot => queueSlotsUpdated({ slots: [ slot ] })),
+        map(friendships => friendshipsUpdated({ friendships })),
       ))
     )
   );
