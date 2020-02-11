@@ -1,5 +1,6 @@
 import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { QueueSlot } from '../models/queue-slot';
+import { FriendFlags } from '../friend-flags';
 
 @Component({
   selector: 'app-queue-slot-item',
@@ -13,16 +14,13 @@ export class QueueSlotItemComponent {
   slot: QueueSlot;
 
   @Input()
+  locked = true;
+
+  @Input()
   takenByMe = false;
 
   @Input()
-  locked = false;
-
-  @Input()
-  canHaveFriend = false;
-
-  @Input()
-  isFriend = false;
+  friendFlags: FriendFlags = { canMarkAsFriend: false };
 
   @Output()
   takeSlot = new EventEmitter<QueueSlot>();
@@ -39,7 +37,7 @@ export class QueueSlotItemComponent {
   }
 
   emitMarkFriend(friendId: string, event: Event) {
-    this.markFriend.emit(this.isFriend ? null : friendId);
+    this.markFriend.emit(this.friendFlags.markedByMe ? null : friendId);
     event.stopPropagation();
   }
 

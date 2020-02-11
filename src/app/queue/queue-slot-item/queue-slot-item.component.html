@@ -26,17 +26,18 @@
 
   <button *ngIf="!locked && takenByMe && !slot.ready"
     type="button"
-    class="btn btn-light btn-sm slot-action-btn"
+    class="btn btn-light btn-sm slot-action-btn free-slot-btn"
     (click)="emitFreeSlot($event)"
     tooltip="Free this slot">
     <span class="oi oi-minus"></span>
   </button>
 
-  <button *ngIf="canHaveFriend && slot.playerId && !takenByMe"
+  <button *ngIf="friendFlags.canMarkAsFriend && slot.playerId && !takenByMe"
     type="button"
-    class="btn btn-sm slot-action-btn"
-    [ngClass]="isFriend ? 'btn-danger' : 'btn-light'"
-    [tooltip]="isFriend ? 'Marked as friend' : 'Mark as a friend'"
+    class="btn btn-sm slot-action-btn mark-as-friend-btn"
+    [ngClass]="friendFlags.markedByMe ? 'btn-danger' : 'btn-light'"
+    [tooltip]="friendFlags.markedByMe ? 'Marked as friend' : 'Mark as a friend'"
+    [disabled]="!!friendFlags.markedBy"
     (click)="emitMarkFriend(slot.playerId, $event)">
     <span class="oi oi-heart"></span>
   </button>
