@@ -1,11 +1,4 @@
 <div class="d-flex flex-column">
-  <app-queue-slot-item *ngFor="let slot of slots | async"
-    [slot]="slot"
-    [takenByMe]="slot.playerId === currentPlayerId"
-    [locked]="locked | async"
-    [canHaveFriend]="(isMedic | async) && slot.gameClass !== 'medic'"
-    [isFriend]="(friendId | async) === slot.playerId"
-    (takeSlot)="joinQueue($event)"
-    (freeSlot)="leaveQueue()"
-    (markFriend)="markFriend($event)"></app-queue-slot-item>
+  <app-queue-slot-container *ngFor="let slot of slots | async"
+    [slotId]="slot.id"></app-queue-slot-container>
 </div>
