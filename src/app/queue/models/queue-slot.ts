@@ -3,5 +3,4 @@ export interface QueueSlot {
   gameClass: string;
   playerId?: string;
   ready: boolean;
-  friend?: string;
 }

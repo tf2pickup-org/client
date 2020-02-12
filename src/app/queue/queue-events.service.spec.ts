@@ -50,5 +50,10 @@ describe('QueueEventsService', () => {
       service.substituteRequests.subscribe(requests => expect(requests).toEqual([]));
       ioClientService.socket.subscribe(socket => socket.emit('substitute requests update', []));
     });
+
+    it('should forward friendships updates', () => {
+      service.friendshipsUpdate.subscribe(friendships => expect(friendships).toEqual([]));
+      ioClientService.socket.subscribe(socket => socket.emit('friendships update', []));
+    });
   });
 });

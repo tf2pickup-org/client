@@ -1,0 +1,8 @@
+<app-queue-slot-item
+  [slot]="slot | async"
+  [locked]="locked | async"
+  [takenByMe]="takenByMe | async"
+  [friendFlags]="friendFlags | async"
+  (takeSlot)="joinQueue($event)"
+  (freeSlot)="leaveQueue()"
+  (markFriend)="markFriend($event)"></app-queue-slot-item>

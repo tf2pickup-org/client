@@ -1,12 +1,8 @@
-import { Component, Input, ChangeDetectionStrategy, OnInit, OnDestroy } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Observable } from 'rxjs';
 import { QueueSlot } from '../models/queue-slot';
-import { Store, select } from '@ngrx/store';
-import { queueSlotsForClass, mySlot } from '../queue.selectors';
-import { profile } from '@app/profile/profile.selectors';
-import { takeUntil, map } from 'rxjs/operators';
-import { queueLocked } from '@app/selectors';
-import { joinQueue, leaveQueue, markFriend } from '../queue.actions';
+import { Store } from '@ngrx/store';
+import { queueSlotsForClass } from '../queue.selectors';
 
 @Component({
   selector: 'app-queue-class-slot-list',
@@ -14,20 +10,9 @@ import { joinQueue, leaveQueue, markFriend } from '../queue.actions';
   styleUrls: ['./queue-class-slot-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class QueueClassSlotListComponent implements OnInit, OnDestroy {
+export class QueueClassSlotListComponent {
 
-  private destroyed = new Subject<void>();
-  currentPlayerId: string;
   slots: Observable<QueueSlot[]>;
-  locked: Observable<boolean> = this.store.select(queueLocked);
-  isMedic: Observable<boolean> = this.store.pipe(
-    select(mySlot),
-    map(slot => !!slot && slot.gameClass === 'medic'),
-  );
-  friendId: Observable<string> = this.store.pipe(
-    select(mySlot),
-    map(slot => slot && slot.friend),
-  );
 
   @Input()
   set gameClass(gameClass: string) {
@@ -37,33 +22,5 @@ export class QueueClassSlotListComponent implements OnInit, OnDestroy {
   constructor(
     private store: Store<{}>,
   ) { }
-
-  ngOnInit() {
-    this.store.pipe(
-      select(profile),
-      takeUntil(this.destroyed),
-    ).subscribe(theProfile => {
-      if (theProfile) {
-        this.currentPlayerId = theProfile.id;
-      }
-    });
-  }
-
-  ngOnDestroy() {
-    this.destroyed.next();
-    this.destroyed.unsubscribe();
-  }
-
-  joinQueue(slot: QueueSlot) {
-    this.store.dispatch(joinQueue({ slotId: slot.id }));
-  }
-
-  leaveQueue() {
-    this.store.dispatch(leaveQueue());
-  }
-
-  markFriend(playerId: string) {
-    this.store.dispatch(markFriend({ friendId: playerId }));
-  }
 
 }

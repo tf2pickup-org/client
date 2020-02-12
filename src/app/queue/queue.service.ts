@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { API_URL } from '@app/api-url';
 import { QueueSlot } from './models/queue-slot';
 import { IoClientService } from '@app/core/io-client.service';
+import { Friendship } from './models/friendship';
 
 @Injectable({
   providedIn: 'root'
@@ -37,8 +38,8 @@ export class QueueService {
     return this.ws.call<string>('vote for map', { map });
   }
 
-  markFriend(friendPlayerId: string): Observable<QueueSlot> {
-    return this.ws.call<QueueSlot>('mark friend', { friendPlayerId });
+  markFriend(friendPlayerId: string): Observable<Friendship[]> {
+    return this.ws.call<Friendship[]>('mark friend', { friendPlayerId });
   }
 
 }

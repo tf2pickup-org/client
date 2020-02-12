@@ -6,7 +6,7 @@ import { Action, Store, select, MemoizedSelector } from '@ngrx/store';
 import { QueueEventsService } from './queue-events.service';
 import { QueueService } from './queue.service';
 import { queueLoaded, loadQueue, joinQueue, joinQueueError, markFriend, mapVoteReset, voteForMap, mapVoted, mapVoteResultsUpdated,
-  queueSlotsUpdated, hideReadyUpDialog, showReadyUpDialog, readyUp, queueStateUpdated, substituteRequestsUpdated } from './queue.actions';
+  queueSlotsUpdated, hideReadyUpDialog, showReadyUpDialog, readyUp, queueStateUpdated, substituteRequestsUpdated, friendshipsUpdated } from './queue.actions';
 import { Queue } from './models/queue';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { QueueSlot } from './models/queue-slot';
@@ -16,18 +16,12 @@ import { AppState } from '@app/app.state';
 import { mySlot, isPreReadied } from './queue.selectors';
 import { PreReadyService } from './pre-ready.service';
 
-class QueueServiceStub {
-  fetchQueue() { }
-  joinQueue(slotId: string) { }
-  markFriend(friendId: string) { }
-  voteForMap(map: string) { }
-}
-
 class QueueEventsServiceStub {
   slotsUpdate = new Subject<any>();
   stateUpdate = new Subject<any>();
   mapVoteResultsUpdate = new Subject<any>();
   substituteRequests = new Subject<any>();
+  friendshipsUpdate = new Subject<any>();
 }
 
 class PreReadyServiceStub {
@@ -60,6 +54,7 @@ const queue: Queue = {
   ],
   state: 'waiting',
   mapVoteResults: [],
+  friendships: [],
 };
 
 const initialState = {
@@ -69,15 +64,24 @@ const initialState = {
 
 describe('QueueEffects', () => {
   const actions = new ReplaySubject<Action>(1);
-  let queueService: QueueService;
+  let queueServiceStub: jasmine.SpyObj<QueueService>;
   let effects: QueueEffects;
   let store: MockStore<AppState>;
+
+  beforeEach(() => {
+    queueServiceStub = jasmine.createSpyObj<QueueService>('QueueService', [
+      'fetchQueue',
+      'joinQueue',
+      'markFriend',
+      'voteForMap',
+    ]);
+  });
 
   beforeEach(() => TestBed.configureTestingModule({
     providers: [
       QueueEffects,
       provideMockActions(() => actions.asObservable()),
-      { provide: QueueService, useClass: QueueServiceStub },
+      { provide: QueueService, useValue: queueServiceStub },
       { provide: QueueEventsService, useClass: QueueEventsServiceStub },
       provideMockStore({ initialState }),
       { provide: PreReadyService, useClass: PreReadyServiceStub },
@@ -85,16 +89,15 @@ describe('QueueEffects', () => {
   }));
 
   beforeEach(() => {
-    queueService = TestBed.get(QueueService);
     effects = TestBed.get(QueueEffects);
     store = TestBed.get(Store);
   });
 
   it('should load the queue', () => {
-    const spy = spyOn(queueService, 'fetchQueue').and.returnValue(of(queue));
+    queueServiceStub.fetchQueue.and.returnValue(of(queue));
     effects.loadQueue.subscribe(action => expect(action).toEqual(queueLoaded({ queue })));
     actions.next(loadQueue());
-    expect(spy).toHaveBeenCalled();
+    expect(queueServiceStub.fetchQueue).toHaveBeenCalled();
   });
 
   it('should handle queue events', () => {
@@ -122,25 +125,29 @@ describe('QueueEffects', () => {
     ];
     queueEvents.substituteRequests.next(substituteRequests);
     expect(spy).toHaveBeenCalledWith(substituteRequestsUpdated({ substituteRequests }));
+
+    const friendships = [{ sourcePlayerId: 'FAKE_SOURCE', targetPlayerId: 'FAKE_TARGET' }];
+    queueEvents.friendshipsUpdate.next(friendships);
+    expect(spy).toHaveBeenCalledWith(friendshipsUpdated({ friendships }));
   });
 
   describe('#joinQueue', () => {
     it('should attempt to join the queue', () => {
       const slot: QueueSlot = { id: 1, gameClass: 'soldier', playerId: 'FAKE_ID_2', ready: false, };
-      const spy = spyOn(queueService, 'joinQueue').and.returnValue(of([ slot ]));
+      queueServiceStub.joinQueue.and.returnValue(of([ slot ]));
       effects.joinQueue.subscribe(action => expect(action).toEqual(queueSlotsUpdated({ slots: [ slot ] })));
       actions.next(joinQueue({ slotId: 1 }));
-      expect(spy).toHaveBeenCalledWith(1);
+      expect(queueServiceStub.joinQueue).toHaveBeenCalledWith(1);
     });
 
-    xit('should handle errors', async(done => {
-      spyOn(queueService, 'joinQueue').and.throwError('FAKE_ERROR');
+    xit('should handle errors', done => {
+      queueServiceStub.joinQueue.and.throwError('FAKE_ERROR');
       effects.joinQueue.subscribe(action => {
         expect(action).toEqual(joinQueueError({ error: 'FAKE_ERROR' }));
         done();
       });
       actions.next(joinQueue({ slotId: 1 }));
-    }));
+    });
   });
 
   describe('#showReadyUpDialog', () => {
@@ -194,20 +201,20 @@ describe('QueueEffects', () => {
 
   describe('#markFriend', () => {
     it('should call the service', () => {
-      const slot: QueueSlot = { id: 1, gameClass: 'soldier', playerId: 'FAKE_ID_2', ready: false, friend: 'FAKE_FRIEND_ID' };
-      const spy = spyOn(queueService, 'markFriend').and.returnValue(of(slot));
-      effects.markFriend.subscribe(action => expect(action).toEqual(queueSlotsUpdated({ slots: [ slot ] })));
+      const friendships = [ { sourcePlayerId: 'FAKE_PLAYER_ID', targetPlayerId: 'FAKE_FRIEND_ID' } ];
+      queueServiceStub.markFriend.and.returnValue(of(friendships));
+      effects.markFriend.subscribe(action => expect(action).toEqual(friendshipsUpdated({ friendships })));
       actions.next(markFriend({ friendId: 'FAKE_FRIEND_ID' }));
-      expect(spy).toHaveBeenCalledWith('FAKE_FRIEND_ID');
+      expect(queueServiceStub.markFriend).toHaveBeenCalledWith('FAKE_FRIEND_ID');
     });
   });
 
   describe('#voteForMap', () => {
     it('should attempt to vote for the given map', () => {
-      const spy = spyOn(queueService, 'voteForMap').and.returnValue(of('FAKE_MAP'));
+      queueServiceStub.voteForMap.and.returnValue(of('FAKE_MAP'));
       effects.voteForMap.subscribe(action => expect(action).toEqual(mapVoted({ map: 'FAKE_MAP' })));
       actions.next(voteForMap({ map: 'FAKE_MAP' }));
-      expect(spy).toHaveBeenCalledWith('FAKE_MAP');
+      expect(queueServiceStub.voteForMap).toHaveBeenCalledWith('FAKE_MAP');
     });
   });
 

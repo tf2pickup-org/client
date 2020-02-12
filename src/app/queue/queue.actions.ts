@@ -4,6 +4,7 @@ import { QueueSlot } from './models/queue-slot';
 import { QueueState } from './models/queue-state';
 import { MapVoteResult } from './models/map-vote-result';
 import { SubstituteRequest } from './models/substitute-request';
+import { Friendship } from './models/friendship';
 
 export const loadQueue = createAction('[Init] Load queue');
 
@@ -78,4 +79,9 @@ export const markFriend = createAction(
 export const substituteRequestsUpdated = createAction(
   '[WS] Substitute requests updated',
   props<{ substituteRequests: SubstituteRequest[] }>(),
+);
+
+export const friendshipsUpdated = createAction(
+  '[API] Friendships updated',
+  props<{ friendships: Friendship[] }>(),
 );
