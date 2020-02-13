@@ -37,12 +37,12 @@
     "open-iconic": "1.1.1",
     "rxjs": "6.5.4",
     "socket.io-client": "2.3.0",
-    "tslib": "^1.10.0",
+    "tslib": "1.10.0",
     "url-parse": "1.4.7",
-    "zone.js": "~0.10.2"
+    "zone.js": "0.10.2"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.900.1",
+    "@angular-devkit/build-angular": "0.900.1",
     "@angular/cli": "9.0.1",
     "@angular/compiler-cli": "9.0.0",
     "@angular/language-service": "9.0.0",
@@ -50,10 +50,10 @@
     "@types/jasminewd2": "2.0.8",
     "@types/jwt-decode": "2.2.1",
     "@types/lodash": "4.14.149",
-    "@types/node": "^12.11.1",
+    "@types/node": "12.12.21",
     "@types/socket.io-client": "1.4.32",
     "@types/url-parse": "1.4.3",
-    "codelyzer": "^5.1.2",
+    "codelyzer": "5.2.1",
     "jasmine-core": "3.5.0",
     "jasmine-spec-reporter": "4.2.1",
     "karma": "4.4.1",
