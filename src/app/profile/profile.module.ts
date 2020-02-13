@@ -17,8 +17,5 @@ import { MarkdownModule } from 'ngx-markdown';
     EffectsModule.forFeature([ProfileEffects]),
     MarkdownModule.forChild(),
   ],
-  entryComponents: [
-    AcceptRulesDialogComponent,
-  ]
 })
 export class ProfileModule { }

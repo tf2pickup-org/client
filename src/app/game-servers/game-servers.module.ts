@@ -22,8 +22,5 @@ import { FormsModule } from '@angular/forms';
 
     GameServersRoutingModule,
   ],
-  entryComponents: [
-    AddGameServerDialogComponent,
-  ]
 })
 export class GameServersModule { }

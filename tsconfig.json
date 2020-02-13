@@ -23,8 +23,5 @@
       "@app/*": [ "src/app/*" ],
       "@environment": [ "src/environments/environment" ]
     }
-  },
-  "angularCompilerOptions": {
-    "disableTypeScriptVersionCheck": true
   }
 }

@@ -57,6 +57,10 @@
                   "type": "initial",
                   "maximumWarning": "2mb",
                   "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
                 }
               ]
             }
@@ -123,6 +127,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "tf2pickuppl"
+    }
+  },
+  "defaultProject": "tf2pickuppl",
+  "cli": {
+    "analytics": "8a092075-4fff-4660-a469-14cb4418eca0"
+  }
 }
