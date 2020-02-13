@@ -17,11 +17,11 @@ describe('AuthService', () => {
     providers: [
       { provide: API_URL, useValue: 'FAKE_URL' },
       { provide: TokenStoreService, useClass: TokenStoreServiceStub },
-    ]
+    ],
   }));
 
   beforeEach(() => {
-    httpContoller = TestBed.get(HttpTestingController);
+    httpContoller = TestBed.inject(HttpTestingController);
   });
 
   it('should be created', () => {
@@ -49,6 +49,21 @@ describe('AuthService', () => {
       expect(tokenStore.refreshToken).toEqual('FAKE_NEW_REFRESH_TOKEN');
       expect(tokenStore.authToken).toEqual('FAKE_NEW_AUTH_TOKEN');
     })));
+
+    it('should call login() when the server returns 400', inject([AuthService], (service: AuthService) => {
+      const spy = spyOn(service, 'login');
+      service.reauth().subscribe(fail, fail);
+      const req = httpContoller.expectOne('FAKE_URL/auth?refresh_token=FAKE_REFRESH_TOKEN');
+      req.error(null, { status: 400 });
+      expect(spy).toHaveBeenCalled();
+    }));
+
+    it('should rethrow server other server errors', done => inject([AuthService], (service: AuthService) => {
+      service.reauth().subscribe(fail, done);
+      const req = httpContoller.expectOne('FAKE_URL/auth?refresh_token=FAKE_REFRESH_TOKEN');
+      req.error(null, { status: 500 });
+      expect().nothing();
+    })());
   });
 
 });
