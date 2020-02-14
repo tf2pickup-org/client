@@ -1,3 +1,11 @@
+# [2.0.0](https://github.com/tf2pickup-pl/client/compare/1.6.4...2.0.0) (2020-02-14)
+
+### Features
+* Player substitutes ([1cef41f](https://github.com/tf2pickup-pl/client/commit/1cef41f09382c616db32cd954142f472b7e94600))
+* Player connection status ([7f5d054](https://github.com/tf2pickup-pl/client/commit/7f5d054d838d7ae8886e935940acf0c7b95544c0))
+* Provide the STV connect string ([ef45911](https://github.com/tf2pickup-pl/client/commit/ef459111f312ed685e34de0a51e60d65fd999e82))
+* Player role edit ([cb549a6](https://github.com/tf2pickup-pl/client/commit/cb549a6a1e16c2464401616f690391f9c842e313))
+
 # [1.6.4](https://github.com/tf2pickup-pl/client/compare/1.6.3...1.6.4) (2020-01-01)
 
 ### Fixes
