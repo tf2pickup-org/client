@@ -13,9 +13,6 @@ export class GameTeamPlayerListComponent {
   players: ResolvedGamePlayer[];
 
   @Input()
-  team: 'blu' | 'red';
-
-  @Input()
   showPlayerConnectionStatus = false;
 
   @Input()

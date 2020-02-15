@@ -1,0 +1,13 @@
+<div *ngIf="team"
+  class="team-header"
+  [ngClass]="{
+    'team-header-blu': team === 'blu',
+    'team-header-red': team === 'red'
+  }">
+  <span class="team-name">
+    {{ team === 'blu' && 'BLU' || 'RED' }}
+  </span>
+
+  <span *ngIf="score !== undefined"
+    class="badge badge-light ml-2 team-score">{{ score }}</span>
+</div>

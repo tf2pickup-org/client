@@ -1,4 +1,4 @@
-import { gameById, activeGames, playerSlot, isPlayingGame, isGameRunning, isMyGame, mumbleUrl } from './games.selectors';
+import { gameById, activeGames, playerSlot, isPlayingGame, isGameRunning, isMyGame, mumbleUrl, gameScore } from './games.selectors';
 import { Game } from './models/game';
 import { Profile } from '@app/profile/models/profile';
 
@@ -139,6 +139,28 @@ describe('games selectors', () => {
     it('should replace username spaces with underscores', () => {
       expect(mumbleUrl('FAKE_GAME_ID').projector(game, { ...profile, name: 'name with  spaces' }))
         .toEqual('mumble://name_with_spaces@melkor.tf/tf2pickup/5/RED');
+    });
+  });
+
+  describe('gameScore', () => {
+    it('should return score for RED', () => {
+      expect(gameScore('FAKE_GAME_ID', 'red').projector({
+        teams: { 0: 'RED', 1: 'BLU' },
+        score: { 0: 5, 1: 3 },
+      })).toBe(5);
+    });
+
+    it('should return score for BLU', () => {
+      expect(gameScore('FAKE_GAME_ID', 'blu').projector({
+        teams: { 0: 'RED', 1: 'BLU' },
+        score: { 0: 5, 1: 3 },
+      })).toBe(3);
+    });
+
+    it('should return null if there is no score reported', () => {
+      expect(gameScore('FAKE_GAME_ID', 'red').projector({
+        teams: { 0: 'RED', 1: 'BLU' },
+      })).toBeUndefined();
     });
   });
 });

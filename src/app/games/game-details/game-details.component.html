@@ -34,9 +34,11 @@
 
   <div class="row mt-4">
     <div class="col">
+      <app-game-team-header
+        team="blu"
+        [score]="scoreBlu | async"></app-game-team-header>
       <app-game-team-player-list
         [players]="playersBlu | async"
-        team="blu"
         [showPlayerConnectionStatus]="isRunning | async"
         [showAdminActionButtons]="(isAdmin | async) && (isRunning | async)"
         (requestSubstitute)="requestSubstitute($event)"
@@ -45,9 +47,11 @@
     </div>
 
     <div class="col">
+      <app-game-team-header
+        team="red"
+        [score]="scoreRed | async"></app-game-team-header>
       <app-game-team-player-list
         [players]="playersRed | async"
-        team="red"
         [showPlayerConnectionStatus]="isRunning | async"
         [showAdminActionButtons]="(isAdmin | async) && (isRunning | async)"
         (requestSubstitute)="requestSubstitute($event)"

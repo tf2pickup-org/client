@@ -64,3 +64,11 @@ export const mumbleUrl = (gameId: string) => createSelector(
     return `${url.toString()}/${team}`;
   }
 );
+
+export const gameScore = (gameId: string, team: 'blu' | 'red') => createSelector(
+  gameById(gameId),
+  game => {
+    const teamId = Object.keys(game.teams).find(key => game.teams[key].toLowerCase() === team);
+    return game.score?.[teamId];
+  }
+);
