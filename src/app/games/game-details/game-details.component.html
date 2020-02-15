@@ -34,7 +34,9 @@
 
   <div class="row mt-4">
     <div class="col">
-      <app-game-team-header team="blu"></app-game-team-header>
+      <app-game-team-header
+        team="blu"
+        [score]="scoreBlu | async"></app-game-team-header>
       <app-game-team-player-list
         [players]="playersBlu | async"
         [showPlayerConnectionStatus]="isRunning | async"
@@ -45,7 +47,9 @@
     </div>
 
     <div class="col">
-      <app-game-team-header team="red"></app-game-team-header>
+      <app-game-team-header
+        team="red"
+        [score]="scoreRed | async"></app-game-team-header>
       <app-game-team-player-list
         [players]="playersRed | async"
         [showPlayerConnectionStatus]="isRunning | async"

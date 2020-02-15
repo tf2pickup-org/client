@@ -3,8 +3,14 @@
 .team-header {
   color: theme-color("light");
   text-align: center;
-  font-size: 200%;
-  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .team-name {
+    font-size: 200%;
+    font-weight: bold;
+  }
 
   &.team-header-red {
     background-color: #ff6868;
@@ -12,5 +18,9 @@
 
   &.team-header-blu {
     background-color: #71afff;
+  }
+
+  .team-score {
+    font-size: 110%;
   }
 }

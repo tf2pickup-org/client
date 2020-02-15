@@ -60,5 +60,18 @@ describe('GameTeamHeaderComponent', () => {
     it('should say BLU', () => {
       expect(header.innerText).toEqual('BLU');
     });
+
+    describe('with score', () => {
+      beforeEach(() => {
+        component.score = 5;
+        fixture.detectChanges();
+      });
+
+      it('should render the score', () => {
+        const badge = fixture.debugElement.query(By.css('.team-score')).nativeElement as HTMLElement;
+        expect(badge.innerText).toEqual('5');
+        expect(badge.classList.contains('badge')).toBe(true);
+      });
+    });
   });
 });
