@@ -6,8 +6,8 @@ import { Store, MemoizedSelector } from '@ngrx/store';
 import { ActivatedRoute, convertToParamMap } from '@angular/router';
 import { of, NEVER } from 'rxjs';
 import { RouterTestingModule } from '@angular/router/testing';
-import { loadGame, forceEndGame, reinitializeServer, replacePlayer, requestSubstitute } from '../games.actions';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { forceEndGame, reinitializeServer, replacePlayer, requestSubstitute } from '../games.actions';
+import { NO_ERRORS_SCHEMA, ChangeDetectionStrategy } from '@angular/core';
 import { GamesService } from '../games.service';
 import { isAdmin } from '@app/profile/profile.selectors';
 import { AppState } from '@app/app.state';
@@ -19,6 +19,7 @@ import { SoundPlayerService, Sound } from '@app/notifications/sound-player.servi
 import { GameSummaryComponent } from '../game-summary/game-summary.component';
 import { merge } from 'lodash';
 import { WatchGameInfoComponent } from '../watch-game-info/watch-game-info.component';
+import { GameTeamHeaderComponent } from '../game-team-header/game-team-header.component';
 
 const paramMap = of(convertToParamMap({ id: 'FAKE_ID' }));
 
@@ -127,6 +128,7 @@ describe('GameDetailsComponent', () => {
         MockComponent(JoinGameInfoComponent),
         MockComponent(GameSummaryComponent),
         MockComponent(WatchGameInfoComponent),
+        MockComponent(GameTeamHeaderComponent),
       ],
       imports: [
         RouterTestingModule,
@@ -142,11 +144,13 @@ describe('GameDetailsComponent', () => {
       ],
       schemas: [ NO_ERRORS_SCHEMA ],
     })
+    // https://github.com/angular/angular/issues/12313
+    .overrideComponent(GameDetailsComponent, { set: { changeDetection: ChangeDetectionStrategy.Default } })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    store = TestBed.get(Store);
+    store = TestBed.inject(Store) as MockStore<{}>;
     storeDispatchSpy = spyOn(store, 'dispatch');
     isAdminSelector = store.overrideSelector(isAdmin, false);
 
@@ -210,7 +214,7 @@ describe('GameDetailsComponent', () => {
     });
 
     it('should fetch skill of each player if the current user is an admin', () => {
-      const spy = spyOn(TestBed.get(GamesService), 'fetchGameSkills').and.returnValue(NEVER);
+      const spy = spyOn(TestBed.inject(GamesService), 'fetchGameSkills').and.returnValue(NEVER);
       isAdminSelector.setResult(true);
       store.refreshState();
       expect(spy).toHaveBeenCalledWith('FAKE_ID');
@@ -313,10 +317,29 @@ describe('GameDetailsComponent', () => {
     });
 
     it('should play a sound when the connect is available', () => {
-      const spy = spyOn(TestBed.get(SoundPlayerService), 'playSound');
+      const spy = spyOn(TestBed.inject(SoundPlayerService), 'playSound');
       store.setState(makeStateWithGame({ games: { entities: { FAKE_ID: { connectString: 'connect 192.168.1.101:27015; password FAKE_PASSWORD' } } } }));
       fixture.detectChanges();
       expect(spy).toHaveBeenCalledWith(Sound.Fight);
+    });
+
+    describe('when the score is defined', () => {
+      beforeEach(() => {
+        store.setState(makeStateWithGame({ games: { entities: { FAKE_ID: { score: { 0: 3, 1: 5 } } } } }));
+        fixture.detectChanges();
+      });
+
+      it('should render BLU score', () => {
+        const gameTeamHeader = fixture.debugElement.query(By.css('app-game-team-header[team=blu]'))
+          .componentInstance as GameTeamHeaderComponent;
+        expect(gameTeamHeader.score).toBe(5);
+      });
+
+      it('should render RED score', () => {
+        const gameTeamHeader = fixture.debugElement.query(By.css('app-game-team-header[team=red]'))
+          .componentInstance as GameTeamHeaderComponent;
+        expect(gameTeamHeader.score).toBe(3);
+      });
     });
   });
 });
