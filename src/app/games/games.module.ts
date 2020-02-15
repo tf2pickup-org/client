@@ -20,6 +20,7 @@ import { GameTeamPlayerListComponent } from './game-team-player-list/game-team-p
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ConnectStringComponent } from './connect-string/connect-string.component';
 import { WatchGameInfoComponent } from './watch-game-info/watch-game-info.component';
+import { GameTeamHeaderComponent } from './game-team-header/game-team-header.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { WatchGameInfoComponent } from './watch-game-info/watch-game-info.compon
     GameTeamPlayerListComponent,
     ConnectStringComponent,
     WatchGameInfoComponent,
+    GameTeamHeaderComponent,
   ],
   imports: [
     CommonModule,

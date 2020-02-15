@@ -42,21 +42,6 @@ describe('GameTeamPlayerListComponent', () => {
       fixture.detectChanges();
     });
 
-    it('should apply correct css classes for red and blu team headers', () => {
-      const div = fixture.debugElement.query(By.css('.team-header')).nativeElement as HTMLDivElement;
-      expect(div).toBeDefined();
-
-      component.team = 'blu';
-      fixture.detectChanges();
-      expect(div.classList.contains('team-header-blu')).toBeTrue();
-      expect(div.innerText).toEqual('BLU');
-
-      component.team = 'red';
-      fixture.detectChanges();
-      expect(div.classList.contains('team-header-red')).toBeTrue();
-      expect(div.innerText).toEqual('RED');
-    });
-
     it('should not render admin buttons', () => {
       expect(fixture.debugElement.query(By.css('div>a>button'))).toBeNull();
     });

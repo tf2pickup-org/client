@@ -1,0 +1,8 @@
+<div *ngIf="team"
+  class="team-header"
+  [ngClass]="{
+    'team-header-blu': team === 'blu',
+    'team-header-red': team === 'red'
+  }">
+  {{ team === 'blu' && 'BLU' || 'RED' }}
+</div>

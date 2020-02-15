@@ -1,12 +1,4 @@
 <div class="list-group list-group-flush" *ngIf="players">
-  <div class="team-header"
-    [ngClass]="{
-      'team-header-blu': team === 'blu',
-      'team-header-red': team === 'red'
-    }">
-    {{ team === 'blu' && 'BLU' || 'RED' }}
-  </div>
-
   <ng-container *ngFor="let player of players">
     <ng-container *ngIf="player.status !== 'waiting for substitute'; else waitingForSubSlot">
       <a class="list-group-item list-group-item-action player-item pr-2"
