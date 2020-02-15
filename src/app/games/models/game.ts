@@ -17,4 +17,5 @@ export interface Game {
   error?: string;
   gameServer?: string;
   stvConnectString?: string;
+  score?: { [teamId: string]: number };
 }
