@@ -1,3 +1,8 @@
+# [2.1.0](https://github.com/tf2pickup-pl/client/compare/2.0.0...2.1.0) (2020-02-16)
+
+### Features
+* Match score ([dc8c783](https://github.com/tf2pickup-pl/client/commit/dc8c7834d6bacee4caaa89881958f8c356b203f7))
+
 # [2.0.0](https://github.com/tf2pickup-pl/client/compare/1.6.4...2.0.0) (2020-02-14)
 
 ### Features
