@@ -1,13 +1,6 @@
-import { isProfileLoaded, isAdmin, isSuperUser, bans, isBanned } from './profile.selectors';
+import { isAdmin, isSuperUser, bans, isBanned } from './profile.selectors';
 
 describe('profile selectors', () => {
-  describe('isProfileLoaded', () => {
-    it('should return the correct value', () => {
-      expect(isProfileLoaded.projector({ loaded: false })).toBe(false);
-      expect(isProfileLoaded.projector({ loaded: true })).toBe(true);
-    });
-  });
-
   describe('isAdmin', () => {
     it('should return the correct value', () => {
       expect(isAdmin.projector(null)).toBeFalsy();
