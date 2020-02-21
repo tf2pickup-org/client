@@ -67,11 +67,9 @@ const makeStateWithGame = (overrides?: any) => merge({
     loaded: true,
   },
   profile: {
-    profile: {
-      id: 'FAKE_PLAYER_ID_1',
-      name: 'FAKE_PLAYER_NAME_1',
-      bans: [],
-    },
+    id: 'FAKE_PLAYER_ID_1',
+    name: 'FAKE_PLAYER_NAME_1',
+    bans: [],
   },
   players: {
     players: {
@@ -271,7 +269,7 @@ describe('GameDetailsComponent', () => {
 
     describe('when the current user is not a part of the game', () => {
       beforeEach(() => {
-        store.setState(makeStateWithGame({ profile: { profile: { id: 'SOME_OTHER_GUY' } } }));
+        store.setState(makeStateWithGame({ profile: { id: 'SOME_OTHER_GUY' } }));
         fixture.detectChanges();
       });
 
@@ -282,9 +280,8 @@ describe('GameDetailsComponent', () => {
       describe('when the stv connect string is available', () => {
         beforeEach(() => {
           store.setState(makeStateWithGame({
-            profile: {
-              profile: { id: 'SOME_OTHER_GUY' }
-            }, games: {
+            profile: { id: 'SOME_OTHER_GUY' },
+            games: {
               entities: {
                 FAKE_ID: { stvConnectString: 'connect 192.168.1.101:27020; password tv' },
               },

@@ -21,9 +21,7 @@ describe('AddPlayerBanComponent', () => {
 
   const initialState = {
     profile: {
-      profile: {
-        id: 'FAKE_ADMIN_ID',
-      }
+      id: 'FAKE_ADMIN_ID',
     },
     players: {
       bans: {
@@ -80,7 +78,7 @@ describe('AddPlayerBanComponent', () => {
       reasonDiv.dispatchEvent(new Event('input'));
       fixture.detectChanges();
 
-      const spy = spyOn(TestBed.get(Store), 'dispatch').and.callThrough();
+      const spy = spyOn(TestBed.inject(Store), 'dispatch').and.callThrough();
       component.submit();
       expect(spy).toHaveBeenCalledWith(addPlayerBan({ playerBan: {
         player: 'FAKE_ID',
@@ -94,7 +92,7 @@ describe('AddPlayerBanComponent', () => {
 
   describe('#cancel()', () => {
     it('should call location.back()', () => {
-      const spy = spyOn(TestBed.get(Location), 'back');
+      const spy = spyOn(TestBed.inject(Location), 'back');
       component.cancel();
       expect(spy).toHaveBeenCalled();
     });

@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { JoinGameInfoComponent } from './join-game-info.component';
-import { NO_ERRORS_SCHEMA, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy } from '@angular/core';
 import { ConnectStringToLinkPipe } from '@app/shared/connect-string-to-link.pipe';
 import { MockComponent } from 'ng-mocks';
 import { ConnectStringComponent } from '../connect-string/connect-string.component';
