@@ -1,7 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable, Subject, ReplaySubject, combineLatest } from 'rxjs';
-import { Game } from '../models/game';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap, map, tap, filter, first, pairwise, shareReplay, takeUntil, startWith } from 'rxjs/operators';
 import { gameById, isGameRunning, isMyGame, mumbleUrl, gameScore } from '../games.selectors';

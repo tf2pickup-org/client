@@ -33,7 +33,7 @@ describe('NavigationBarComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
 
-    store = TestBed.get(Store);
+    store = TestBed.inject(Store) as MockStore<any>;
   });
 
   it('should create', () => {
@@ -51,7 +51,7 @@ describe('NavigationBarComponent', () => {
   });
 
   it('should render profile link', () => {
-    store.setState({ profile: { profile: { name: 'FAKE_NAME', id: 'FAKE_ID' } } });
+    store.setState({ profile: { name: 'FAKE_NAME', id: 'FAKE_ID' } });
     fixture.detectChanges();
     const el = fixture.debugElement.query(By.css('.profile-link a')).nativeElement as HTMLAnchorElement;
     expect(el).toBeTruthy();

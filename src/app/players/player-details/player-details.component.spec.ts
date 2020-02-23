@@ -39,7 +39,7 @@ describe('PlayerDetailsComponent', () => {
         entities: { },
       }
     },
-    profile: { profile: { } },
+    profile: { },
   };
 
   beforeEach(async(() => {
@@ -65,9 +65,9 @@ describe('PlayerDetailsComponent', () => {
   }));
 
   beforeEach(() => {
-    store = TestBed.get(Store);
+    store = TestBed.inject(Store) as MockStore<{ }>;
     storeDispatchSpy = spyOn(store, 'dispatch').and.callThrough();
-    fetchPlayerStatsSpy = spyOn(TestBed.get(PlayersService), 'fetchPlayerStats').and.callThrough();
+    fetchPlayerStatsSpy = spyOn(TestBed.inject(PlayersService), 'fetchPlayerStats').and.callThrough();
 
     fixture = TestBed.createComponent(PlayerDetailsComponent);
     component = fixture.componentInstance;
@@ -120,7 +120,7 @@ describe('PlayerDetailsComponent', () => {
 
     it('should be aware of the logged-in player role', () => {
       expect(fixture.debugElement.query(By.css('h4 small a.text-secondary'))).toBeNull();
-      store.setState({ ...stateWithFakePlayer, profile: { profile: { role: 'admin' } } });
+      store.setState({ ...stateWithFakePlayer, profile: { role: 'admin' } });
       fixture.detectChanges();
       expect(fixture.debugElement.query(By.css('h4 small a.text-secondary'))).toBeTruthy();
     });
@@ -134,7 +134,7 @@ describe('PlayerDetailsComponent', () => {
 
     describe('#openEditPlayerRoleDialog()', () => {
       it('should open the dialog with the player in the initial state', () => {
-        const spy = spyOn(TestBed.get(BsModalService), 'show').and.callThrough();
+        const spy = spyOn(TestBed.inject(BsModalService), 'show').and.callThrough();
         component.openEditPlayerRoleDialog();
         expect(spy).toHaveBeenCalledWith(EditPlayerRoleDialogComponent, {
           initialState: {

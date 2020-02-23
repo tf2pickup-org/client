@@ -2,14 +2,13 @@
   class="container">
   <h4>
     Pickup #{{ _game.number }}
-    <ng-container *ngIf="(isAdmin | async) && (isRunning | async)">
-      <small class="text-secondary ml-2">
-        &bull;
-        <a [routerLink]="" class="text-secondary" (click)="reinitializeServer()">reinitialize server</a>
-        &bull;
-        <a [routerLink]="" class="text-secondary" (click)="forceEndGame()">force end</a>
-      </small>
-    </ng-container>
+    <small *ngIf="(isAdmin | async) && (isRunning | async)"
+      class="text-secondary ml-2 admin-buttons">
+      &bull;
+      <a [routerLink]="" class="text-secondary reinitialize-server-btn" (click)="reinitializeServer()">reinitialize server</a>
+      &bull;
+      <a [routerLink]="" class="text-secondary force-end-btn" (click)="forceEndGame()">force end</a>
+    </small>
   </h4>
 
   <app-game-basic-info
@@ -33,7 +32,7 @@
     [demoUrl]="_game.demoUrl"></app-game-summary>
 
   <div class="row mt-4">
-    <div class="col">
+    <div class="col team-blu">
       <app-game-team-header
         team="blu"
         [score]="scoreBlu | async"></app-game-team-header>
@@ -46,7 +45,7 @@
         [locked]="isLocked | async"></app-game-team-player-list>
     </div>
 
-    <div class="col">
+    <div class="col team-red">
       <app-game-team-header
         team="red"
         [score]="scoreRed | async"></app-game-team-header>

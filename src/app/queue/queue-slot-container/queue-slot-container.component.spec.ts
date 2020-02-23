@@ -65,12 +65,9 @@ const initialState = {
     friendships: [],
   },
   profile: {
-    loaded: true,
-    profile: {
-      name: 'maly',
-      id: 'FAKE_MEDIC_1_ID',
-      activeGameId: null,
-    }
+    name: 'maly',
+    id: 'FAKE_MEDIC_1_ID',
+    activeGameId: null,
   },
 };
 
@@ -135,9 +132,7 @@ describe('QueueSlotContainerComponent', () => {
     it('should return canMarkAsFriend: false if I\'m not a medic', () => {
       store.setState(merge(cloneDeep(initialState), {
         profile: {
-          profile: {
-            id: 'FAKE_SOLDIER_ID',
-          },
+          id: 'FAKE_SOLDIER_ID',
         },
       }));
 
