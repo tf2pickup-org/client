@@ -2,15 +2,13 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { GameDetailsComponent } from './game-details.component';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { SharedModule } from '@app/shared/shared.module';
-import { Store, MemoizedSelector } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { ActivatedRoute, convertToParamMap } from '@angular/router';
 import { of, NEVER } from 'rxjs';
 import { RouterTestingModule } from '@angular/router/testing';
 import { forceEndGame, reinitializeServer, replacePlayer, requestSubstitute } from '../games.actions';
-import { NO_ERRORS_SCHEMA, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy } from '@angular/core';
 import { GamesService } from '../games.service';
-import { isAdmin } from '@app/profile/profile.selectors';
-import { AppState } from '@app/app.state';
 import { MockComponent } from 'ng-mocks';
 import { GameBasicInfoComponent } from '../game-basic-info/game-basic-info.component';
 import { By } from '@angular/platform-browser';
@@ -20,6 +18,7 @@ import { GameSummaryComponent } from '../game-summary/game-summary.component';
 import { merge } from 'lodash';
 import { WatchGameInfoComponent } from '../watch-game-info/watch-game-info.component';
 import { GameTeamHeaderComponent } from '../game-team-header/game-team-header.component';
+import { GameTeamPlayerListComponent } from '../game-team-player-list/game-team-player-list.component';
 
 const paramMap = of(convertToParamMap({ id: 'FAKE_ID' }));
 
@@ -70,6 +69,7 @@ const makeStateWithGame = (overrides?: any) => merge({
     id: 'FAKE_PLAYER_ID_1',
     name: 'FAKE_PLAYER_NAME_1',
     bans: [],
+    role: null,
   },
   players: {
     players: {
@@ -114,7 +114,6 @@ describe('GameDetailsComponent', () => {
   let fixture: ComponentFixture<GameDetailsComponent>;
   let store: MockStore<any>;
   let storeDispatchSpy: jasmine.Spy;
-  let isAdminSelector: MemoizedSelector<AppState, boolean>;
 
   const initialState = { games: { ids: [], entities: { }, loaded: false } };
 
@@ -127,6 +126,7 @@ describe('GameDetailsComponent', () => {
         MockComponent(GameSummaryComponent),
         MockComponent(WatchGameInfoComponent),
         MockComponent(GameTeamHeaderComponent),
+        MockComponent(GameTeamPlayerListComponent),
       ],
       imports: [
         RouterTestingModule,
@@ -140,7 +140,6 @@ describe('GameDetailsComponent', () => {
         { provide: GamesService, useClass: GamesServiceStub  },
         { provide: SoundPlayerService, useClass: SoundPlayerServiceStub },
       ],
-      schemas: [ NO_ERRORS_SCHEMA ],
     })
     // https://github.com/angular/angular/issues/12313
     .overrideComponent(GameDetailsComponent, { set: { changeDetection: ChangeDetectionStrategy.Default } })
@@ -150,7 +149,6 @@ describe('GameDetailsComponent', () => {
   beforeEach(() => {
     store = TestBed.inject(Store) as MockStore<{}>;
     storeDispatchSpy = spyOn(store, 'dispatch');
-    isAdminSelector = store.overrideSelector(isAdmin, false);
 
     fixture = TestBed.createComponent(GameDetailsComponent);
     component = fixture.componentInstance;
@@ -168,66 +166,88 @@ describe('GameDetailsComponent', () => {
     });
 
     it('should retrieve the game from the store', () => {
-      component.game.subscribe(game => expect(game.id).toEqual('FAKE_ID'));
+      const h4 = fixture.debugElement.query(By.css('h4')).nativeElement as HTMLElement;
+      expect(h4.innerText).toMatch(/Pickup #3/);
     });
 
-    it('should retrieve the game server name', () => {
-      component.gameServerName.subscribe(name => expect(name).toEqual('FAKE_GAME_SERVER_NAME'));
-    });
+    describe('when logged in as an admin', () => {
+      let fetchGameSkillsSpy: jasmine.Spy;
 
-    describe('#reinitializeServer()', () => {
-      it('should dispatch the reinitializeServer action', () => {
-        component.reinitializeServer();
+      beforeEach(() => {
+        fetchGameSkillsSpy = spyOn(TestBed.inject(GamesService), 'fetchGameSkills').and.returnValue(NEVER);
+        store.setState(makeStateWithGame({ profile: { role: 'admin' } }));
+        fixture.detectChanges();
+      });
+
+      it('should render admin buttons', () => {
+        expect(fixture.debugElement.query(By.css('.admin-buttons'))).toBeTruthy();
+      });
+
+      it('should be able to reinitialize the server', () => {
+        const btn = fixture.debugElement.query(By.css('.reinitialize-server-btn')).nativeElement as HTMLAnchorElement;
+        expect(btn).toBeTruthy();
+        btn.click();
         expect(storeDispatchSpy).toHaveBeenCalledWith(reinitializeServer({ gameId: 'FAKE_ID' }));
       });
-    });
 
-    describe('#forceEndGame()', () => {
-      it('should dispatch the forceEndGame action', () => {
-        component.forceEndGame();
+      it('should be able to force end the game', () => {
+        const btn = fixture.debugElement.query(By.css('.force-end-btn')).nativeElement as HTMLAnchorElement;
+        expect(btn).toBeTruthy();
+        btn.click();
         expect(storeDispatchSpy).toHaveBeenCalledWith(forceEndGame({ gameId: 'FAKE_ID' }));
+      });
+
+      it('should fetch skill of each player if the current user is an admin', () => {
+        expect(fetchGameSkillsSpy).toHaveBeenCalledWith('FAKE_ID');
       });
     });
 
     it('should retrieve players of each team', () => {
-      component.playersRed.subscribe(players => expect(players).toEqual([{
-        id: 'FAKE_PLAYER_ID_1',
-        playerId: 'FAKE_PLAYER_ID_1',
-        name: 'FAKE_PLAYER_1',
-        gameClass: 'soldier',
-        teamId: '0',
-        connectionStatus: 'offline',
-        status: 'active',
-      }] as any));
+      const teamBlu = fixture.debugElement.query(By.css('.team-blu app-game-team-player-list'))
+        .componentInstance as GameTeamPlayerListComponent;
 
-      component.playersBlu.subscribe(players => expect(players).toEqual([{
-        id: 'FAKE_PLAYER_ID_2',
-        playerId: 'FAKE_PLAYER_ID_2',
-        name: 'FAKE_PLAYER_2',
-        gameClass: 'soldier',
-        teamId: '1',
-        connectionStatus: 'offline',
-        status: 'active',
-      }] as any));
+      expect(teamBlu.players[0]).toEqual(
+        {
+          id: 'FAKE_PLAYER_ID_2',
+          playerId: 'FAKE_PLAYER_ID_2',
+          name: 'FAKE_PLAYER_2',
+          gameClass: 'soldier',
+          teamId: '1',
+          connectionStatus: 'offline',
+          status: 'active',
+        } as any
+      );
+
+      const playersRed = fixture.debugElement.query(By.css('.team-red app-game-team-player-list'))
+        .componentInstance as GameTeamPlayerListComponent;
+
+      expect(playersRed.players).toEqual([
+        {
+          id: 'FAKE_PLAYER_ID_1',
+          playerId: 'FAKE_PLAYER_ID_1',
+          name: 'FAKE_PLAYER_1',
+          gameClass: 'soldier',
+          teamId: '0',
+          connectionStatus: 'offline',
+          status: 'active',
+        } as any
+      ]);
     });
 
-    it('should fetch skill of each player if the current user is an admin', () => {
-      const spy = spyOn(TestBed.inject(GamesService), 'fetchGameSkills').and.returnValue(NEVER);
-      isAdminSelector.setResult(true);
-      store.refreshState();
-      expect(spy).toHaveBeenCalledWith('FAKE_ID');
-    });
+    describe('app-game-team-player-list', () => {
+      let gameTeamPlayerList: GameTeamPlayerListComponent;
 
-    describe('#requestSubstitute()', () => {
-      it('should dispatch action', () => {
-        component.requestSubstitute('FAKE_PLAYER_ID');
+      beforeEach(() => {
+        gameTeamPlayerList = fixture.debugElement.query(By.css('app-game-team-player-list')).componentInstance;
+      });
+
+      it('should request substitute', () => {
+        gameTeamPlayerList.requestSubstitute.emit('FAKE_PLAYER_ID');
         expect(storeDispatchSpy).toHaveBeenCalledWith(requestSubstitute({ gameId: 'FAKE_ID', playerId: 'FAKE_PLAYER_ID' }));
       });
-    });
 
-    describe('#replacePlayer()', () => {
-      it('should dispatch action', () => {
-        component.replacePlayer('FAKE_REPLACEE_ID');
+      it('should repalce player', () => {
+        gameTeamPlayerList.replacePlayer.emit('FAKE_REPLACEE_ID');
         expect(storeDispatchSpy).toHaveBeenCalledWith(replacePlayer({ gameId: 'FAKE_ID', replaceeId: 'FAKE_REPLACEE_ID' }));
       });
     });

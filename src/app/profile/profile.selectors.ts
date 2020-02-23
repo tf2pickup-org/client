@@ -6,7 +6,7 @@ export const profile = createFeatureSelector<AppState, State>('profile');
 
 export const isAdmin = createSelector(
   profile,
-  theProfile => !!theProfile?.role?.match(/admin|super-user/)
+  theProfile =>  /^(admin|super-user)$/.test(theProfile?.role)
 );
 
 export const isSuperUser = createSelector(
