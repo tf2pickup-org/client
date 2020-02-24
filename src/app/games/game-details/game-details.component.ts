@@ -17,6 +17,7 @@ import { loadGameServer } from '@app/game-servers/game-servers.actions';
 import { ResolvedGamePlayer } from '../models/resolved-game-player';
 import { SoundPlayerService, Sound } from '@app/notifications/sound-player.service';
 import { canSubstituteInGame } from '@app/selectors';
+import { tf2ClassPriority } from '../tf2-class-priority';
 
 @Component({
   selector: 'app-game-details',
@@ -25,6 +26,9 @@ import { canSubstituteInGame } from '@app/selectors';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GameDetailsComponent implements OnInit, OnDestroy {
+
+  private destroyed = new Subject<void>();
+  private players = new ReplaySubject<ResolvedGamePlayer[]>(1);
 
   gameId = new ReplaySubject<string>(1);
 
@@ -76,8 +80,6 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
   isAdmin: Observable<boolean> = this.store.select(isAdmin);
   playersRed: Observable<ResolvedGamePlayer[]>;
   playersBlu: Observable<ResolvedGamePlayer[]>;
-  private destroyed = new Subject<void>();
-  private players = new ReplaySubject<ResolvedGamePlayer[]>(1);
 
   constructor(
     private route: ActivatedRoute,
@@ -145,10 +147,12 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
     // divide players into red and blu
     this.playersRed = combineLatest([this.players, getTeamId('RED')]).pipe(
       map(([allPlayers, redTeamId]) => allPlayers.filter(p => p.teamId === redTeamId)),
+      map(players => this.sortPlayers(players)),
     );
 
     this.playersBlu = combineLatest([this.players, getTeamId('BLU')]).pipe(
       map(([allPlayers, bluTeamId]) => allPlayers.filter(p => p.teamId === bluTeamId)),
+      map(players => this.sortPlayers(players)),
     );
 
     // play sound when the connect is available
@@ -193,6 +197,10 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
       first(),
       map(game => game.id),
     ).subscribe(gameId => this.store.dispatch(replacePlayer({ gameId, replaceeId })));
+  }
+
+  private sortPlayers(players: ResolvedGamePlayer[]): ResolvedGamePlayer[] {
+    return players.sort((a, b) => tf2ClassPriority.get(b.gameClass) - tf2ClassPriority.get(a.gameClass));
   }
 
 }
