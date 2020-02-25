@@ -1,3 +1,8 @@
+# [2.1.1](https://github.com/tf2pickup-pl/client/compare/2.1.0...2.1.1) (2020-02-26)
+
+### Fixes
+* Sort game slots ([7da3513](https://github.com/tf2pickup-pl/client/commit/7da3513bc0cd528d0e18465c1d7783a173cb1abe))
+
 # [2.1.0](https://github.com/tf2pickup-pl/client/compare/2.0.0...2.1.0) (2020-02-16)
 
 ### Features
