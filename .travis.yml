@@ -2,10 +2,8 @@ language: node_js
 node_js:
  - node
 dist: trusty
-sudo: true
 addons:
   chrome: stable
-
 before_script:
  - npm install -g @angular/cli codecov
 
@@ -16,3 +14,16 @@ script:
 
 after_success:
  - codecov
+
+deploy:
+  provider: releases
+  token: $GITHUB_API_KEY
+  file: dist/tf2pickup/**/*
+  file_glob: true
+  skip_cleanup: true
+  on:
+    tags: true
+
+env:
+  global:
+    secure: a85NpaC+tYGxiA0K7xCT2wbxnutSyMgDwuUn6UVbGa63YiWMlSslLa1EAkaPhfUQsFg7y9RAK6gjCl3FodJFNYKuYlSl+xrAcsXkM8xgz7Gf3kSTvArlDYbp/cO9I7wIsE0KJeJsffEdlTbsyxZPVoSQX8jitgbZ45V2tGZ0nOAye4uWpF7khOdgIs0JHrlBy+m/nd5ZQ6Y18vHItAf91um1CJwYSI6+LaFMYgYTgnL0MhQOM7O3IvT1Aik6yE8OLApUnpCl4R0bLd1JaCeaW0dp+Gj7h2PWw/IvjxVSV3wbMQuN38woyDjJGkN1GUtmGmc2hNtW76mfKUv5fG1eDvETHgzY1NsKcsKRgSlay3FvAtGqz6RXOoQY/gKmEz2lfVweSrv1RYruLDRclKEayZI3elWwBpV6UeXyqTU8l70rjTIwA1fXY0sSjX12GWdT6YvZt/GDXxrax/ZrNyjIiodW0kcwsxCrNw0o/33d0e8Y1UmNn+Nevs/NdVoEERDayksJ+xMp8j51CCBx1KWBSi824AuvgOtgndP/8mwoEc/ZzemQarHjW2JahHSRS4huGGQ2Wjcnnrc2x57lXpxKNkm8y+Z9dxs7lsf16P2pWcU0NJEkmn+LFAZgA5FcE4jFAy/RENuN312xOIUUCkgJhYK/Jeu2ciAZuP9sb05LnUk=
