@@ -18,7 +18,7 @@ after_success:
 deploy:
   provider: releases
   token: $GITHUB_API_KEY
-  file: dist/tf2pickup/**/*
+  file: dist/tf2pickuppl/**/*
   file_glob: true
   skip_cleanup: true
   on:
