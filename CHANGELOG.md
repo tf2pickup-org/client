@@ -1,3 +1,8 @@
+# [2.1.2](https://github.com/tf2pickup-pl/client/compare/2.1.1...2.1.2) (2020-02-28)
+
+### Fixes
+* Downgrade typescript to version 3.7.5 ([f2ecf19](https://github.com/tf2pickup-pl/client/commit/f2ecf199ee4698b37cab821d1d176e6cc863a6a3))
+
 # [2.1.1](https://github.com/tf2pickup-pl/client/compare/2.1.0...2.1.1) (2020-02-26)
 
 ### Fixes
