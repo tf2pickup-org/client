@@ -26,7 +26,7 @@ export class QueueSlotContainerComponent {
   );
 
   takenByMe = combineLatest([this._slotId, this.store.select(mySlot)]).pipe(
-    map(([slotId, slot]) => slotId === slot.id),
+    map(([slotId, slot]) => slotId === slot?.id),
   );
 
   canMarkAsFriend = combineLatest([this.store.select(mySlot), this.slot]).pipe(
