@@ -1,3 +1,8 @@
+# [2.1.3](https://github.com/tf2pickup-pl/client/compare/2.1.2...2.1.3) (2020-03-02)
+
+### Fixes
+* Handle mySlot being null ([7781c52](https://github.com/tf2pickup-pl/client/commit/7781c5276b575d53ebe57ead5d01dce912ddd1ef))
+
 # [2.1.2](https://github.com/tf2pickup-pl/client/compare/2.1.1...2.1.2) (2020-02-28)
 
 ### Fixes
