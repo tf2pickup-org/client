@@ -16,7 +16,7 @@ after_success:
  - codecov
 
 before_deploy:
- - tar dist/tf2pickuppl -zcvf tf2pickuppl_client-${TRAVIS_TAG}-${TRAVIS_BUILD_NUMBER}.tar.gz .
+ - tar -C dist/tf2pickuppl -zcvf tf2pickuppl_client-${TRAVIS_TAG}-${TRAVIS_BUILD_NUMBER}.tar.gz .
 
 deploy:
   provider: releases
