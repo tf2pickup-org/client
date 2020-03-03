@@ -1,3 +1,8 @@
+# [2.1.4](https://github.com/tf2pickup-pl/client/compare/2.1.3...2.1.4) (2020-03-03)
+
+### Features
+* Handle the 'not enough tf2 hours' error ([8c12577](https://github.com/tf2pickup-pl/client/commit/8c12577ca019d657e7cce55c2f680df53d01c708))
+
 # [2.1.3](https://github.com/tf2pickup-pl/client/compare/2.1.2...2.1.3) (2020-03-02)
 
 ### Fixes
