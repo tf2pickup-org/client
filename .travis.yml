@@ -15,11 +15,14 @@ script:
 after_success:
  - codecov
 
+before_deploy:
+ - cd dist/tf2pickuppl
+ - tar -zcf tf2pickuppl_client-${TRAVIS_TAG}-${TRAVIS_BUILD_NUMBER}.tar.gz .
+
 deploy:
   provider: releases
   token: $GITHUB_API_KEY
-  file: dist/tf2pickuppl/**/*
-  file_glob: true
+  file: ${TRAVIS_BUILD_DIR}/dist/tf2pickuppl/tf2pickuppl_client-${TRAVIS_TAG}-${TRAVIS_BUILD_NUMBER}.tar.gz
   skip_cleanup: true
   on:
     tags: true
