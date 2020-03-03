@@ -30,6 +30,10 @@ export class AuthErrorComponent implements OnInit {
         case 'etf2l banned':
           this.errorMessage = 'This account is banned.';
           break;
+        
+        case 'not enough tf2 hours':
+          this.errorMessage = 'You do not meet the minimum required hours in TF2.';
+          break;
       }
     }
   }
