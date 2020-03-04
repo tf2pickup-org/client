@@ -19,7 +19,7 @@ async function configureTestingModule(httpParams: HttpParams) {
   return { fixture, errorMessage };
 }
 
-fdescribe('AuthErrorComponent', () => {
+describe('AuthErrorComponent', () => {
   const testErrors = [
     {
       key: 'no etf2l profile',
@@ -45,13 +45,13 @@ fdescribe('AuthErrorComponent', () => {
 
   let errorMessage: HTMLElement;
 
-  for (let error of testErrors) {
+  for (const error of testErrors) {
     describe(`when the error='${error.key}'`, () => {
       beforeEach(async () => {
         const r = await configureTestingModule(new HttpParams().set('error', error.key));
         errorMessage = r.errorMessage;
       });
-  
+
       it('should render the error message', () => {
         expect(errorMessage.innerText).toEqual(error.message);
       });
