@@ -1,3 +1,7 @@
+# [2.1.5](https://github.com/tf2pickup-pl/client/compare/2.1.4...2.1.5) (2020-03-04)
+
+* Profile creation error handling fixes ([5da19e6](https://github.com/tf2pickup-pl/client/commit/5da19e62cf9559db6308a76c7bead6788cdd7edf))
+
 # [2.1.4](https://github.com/tf2pickup-pl/client/compare/2.1.3...2.1.4) (2020-03-03)
 
 ### Features
