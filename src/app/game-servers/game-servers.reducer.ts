@@ -17,7 +17,7 @@ const initialState: State = adapter.getInitialState({
 
 const gameServerReducer = createReducer(
   initialState,
-  on(gameServersLoaded, (state, { gameServers }) => ({ ...adapter.addAll(gameServers, state), loaded: true })),
+  on(gameServersLoaded, (state, { gameServers }) => ({ ...adapter.setAll(gameServers, state), loaded: true })),
   on(gameServerLoaded, (state, { gameServer }) => ({ ...adapter.upsertOne(gameServer, state) })),
   on(addGameServer, state => ({ ...state, locked: true })),
   on(gameServerAdded, (state, { gameServer }) => ({ ...adapter.addOne(gameServer, state), locked: false })),
