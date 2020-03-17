@@ -34,13 +34,7 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot({}, {
-      runtimeChecks: {
-        strictStateImmutability: true,
-        // disabled until https://github.com/ngrx/platform/issues/2109 is resolved
-        /* strictActionImmutability: true, */
-      },
-    }),
+    StoreModule.forRoot({}),
     StoreRouterConnectingModule.forRoot(),
     EffectsModule.forRoot([]),
     environment.production ? [] : StoreDevtoolsModule.instrument(),
