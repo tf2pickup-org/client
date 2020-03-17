@@ -29,7 +29,7 @@
     "jwt-decode": "2.2.0",
     "lodash": "4.17.15",
     "ng-inline-svg": "10.0.0",
-    "ngrx-tslint-rules": "1.16.1",
+    "ngrx-tslint-rules": "2.0.0",
     "ngx-bootstrap": "5.5.0",
     "ngx-markdown": "9.0.0",
     "ngx-pagination": "5.0.0",
