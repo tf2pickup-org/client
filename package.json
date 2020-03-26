@@ -53,7 +53,7 @@
     "@types/node": "12.12.31",
     "@types/socket.io-client": "1.4.32",
     "@types/url-parse": "1.4.3",
-    "codelyzer": "5.2.1",
+    "codelyzer": "5.2.2",
     "jasmine-core": "3.5.0",
     "jasmine-spec-reporter": "5.0.1",
     "karma": "4.4.1",
