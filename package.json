@@ -24,7 +24,7 @@
     "@ngrx/router-store": "9.1.0",
     "@ngrx/store": "9.1.0",
     "@ngrx/store-devtools": "9.1.0",
-    "@swimlane/ngx-datatable": "16.1.1",
+    "@swimlane/ngx-datatable": "17.0.0",
     "bootstrap": "4.4.1",
     "jwt-decode": "2.2.0",
     "lodash": "4.17.15",
