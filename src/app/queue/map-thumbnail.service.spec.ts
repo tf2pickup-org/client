@@ -21,6 +21,17 @@ describe('MapThumbnailService', () => {
         'cp_reckoner_rc2',
         'cp_snakewater_final1',
         'cp_sunshine',
+        'koth_product_rcx',
+        'koth_warmtic_b6',
+        'koth_coalplant_b8',
+        'pl_prowater_b6',
+        'cp_gullywash_final1',
+        'pl_upward',
+        'pl_borneo',
+        'pl_swiftwater_final1',
+        'pl_vigil_rc6',
+        'cp_propaganda_b16',
+        'pl_barnblitz_pro6',
       ].forEach(map => {
         const thumbnail = service.getMapThumbnail(map);
         expect(thumbnail).toBeTruthy();

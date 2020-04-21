@@ -13,6 +13,16 @@ export class MapThumbnailService {
     { regex: /cp_reckoner/,       thumbnailName: 'reckoner' },
     { regex: /cp_snakewater/,     thumbnailName: 'snakewater' },
     { regex: /cp_sunshine/,       thumbnailName: 'sunshine' },
+    { regex: /pl_barnblitz/,      thumbnailName: 'barnblitz' },
+    { regex: /pl_borneo/,         thumbnailName: 'borneo' },
+    { regex: /koth_coalplant/,    thumbnailName: 'coalplant' },
+    { regex: /koth_product/,      thumbnailName: 'product' },
+    { regex: /cp_propaganda/,     thumbnailName: 'propaganda' },
+    { regex: /pl_(bad|pro)water/, thumbnailName: 'prowater' },
+    { regex: /pl_swiftwater/,     thumbnailName: 'swiftwater' },
+    { regex: /pl_upward/,         thumbnailName: 'upward' },
+    { regex: /pl_vigil/,          thumbnailName: 'vigil' },
+    { regex: /koth_warmtic/,      thumbnailName: 'warmtic' },
   ];
 
   getMapThumbnail(map: string) {
