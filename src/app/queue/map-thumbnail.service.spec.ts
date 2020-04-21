@@ -5,7 +5,7 @@ describe('MapThumbnailService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: MapThumbnailService = TestBed.get(MapThumbnailService);
+    const service: MapThumbnailService = TestBed.inject(MapThumbnailService);
     expect(service).toBeTruthy();
   });
 
@@ -32,6 +32,9 @@ describe('MapThumbnailService', () => {
         'pl_vigil_rc6',
         'cp_propaganda_b16',
         'pl_barnblitz_pro6',
+        'koth_clearcut_b14',
+        'cp_villa_b12',
+        'koth_bagel_fall_b7',
       ].forEach(map => {
         const thumbnail = service.getMapThumbnail(map);
         expect(thumbnail).toBeTruthy();
