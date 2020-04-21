@@ -8,7 +8,7 @@ import { QueueClassSlotListComponent } from '../queue-class-slot-list/queue-clas
 import { By } from '@angular/platform-browser';
 import { GameClass } from '../models/game-class';
 
-fdescribe('QueueComponent', () => {
+describe('QueueComponent', () => {
   let component: QueueComponent;
   let fixture: ComponentFixture<QueueComponent>;
   let store: MockStore<any>;
