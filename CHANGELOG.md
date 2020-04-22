@@ -1,5 +1,12 @@
+# [2.2.0](https://github.com/tf2pickup-pl/client/compare/2.1.5...2.2.0) (2020-04-22)
+
+### Features
+* 9v9 gamemode adaptation ([2c9e02b](https://github.com/tf2pickup-pl/client/commit/2c9e02b548434bb3ece7d2c215bb07cdf60d8b4a))
+* Add ETF2L season 36 preseason cup maps thumbnails ([70d7688](https://github.com/tf2pickup-pl/client/commit/70d7688ad7ca6d68dad4725e788746501907050b))
+
 # [2.1.5](https://github.com/tf2pickup-pl/client/compare/2.1.4...2.1.5) (2020-03-04)
 
+### Fixes
 * Profile creation error handling fixes ([5da19e6](https://github.com/tf2pickup-pl/client/commit/5da19e62cf9559db6308a76c7bead6788cdd7edf))
 
 # [2.1.4](https://github.com/tf2pickup-pl/client/compare/2.1.3...2.1.4) (2020-03-03)
