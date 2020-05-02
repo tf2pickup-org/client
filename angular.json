@@ -36,11 +36,11 @@
             ]
           },
           "configurations": {
-            "production": {
+            "tf2pickup.pl": {
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "with": "src/environments/tf2pickup.pl.ts"
                 }
               ],
               "optimization": true,
