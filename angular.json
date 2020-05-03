@@ -117,7 +117,7 @@
                 },
                 {
                   "glob": "favicon.ico",
-                  "input": "src/assets/",
+                  "input": "src/assets/custom/tf2pickup.es",
                   "output": "/"
                 },
                 {
