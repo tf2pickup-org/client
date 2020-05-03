@@ -29,6 +29,11 @@
                 "input": "src/assets/",
                 "output": "/assets/",
                 "ignore": [ "custom/**/*" ]
+              },
+              {
+                "glob": "favicon.ico",
+                "input": "src/assets/",
+                "output": "/"
               }
             ],
             "styles": [
@@ -83,6 +88,11 @@
                   "input": "src/assets/",
                   "output": "/assets/",
                   "ignore": [ "custom/**/*" ]
+                },
+                {
+                  "glob": "favicon.ico",
+                  "input": "src/assets/",
+                  "output": "/"
                 },
                 {
                   "glob": "**/*",
