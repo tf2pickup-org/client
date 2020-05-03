@@ -1,3 +1,8 @@
+# [2.3.0](https://github.com/tf2pickup-pl/client/compare/2.2.0...2.3.0) (2020-05-03)
+
+### Features
+* Multi-environment deploy ([2e12e71](https://github.com/tf2pickup-pl/client/commit/2e12e71339b5ed1db8fdee255f9e0bb2e3017c63))
+
 # [2.2.0](https://github.com/tf2pickup-pl/client/compare/2.1.5...2.2.0) (2020-04-22)
 
 ### Features
