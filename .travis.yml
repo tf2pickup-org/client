@@ -10,18 +10,21 @@ before_script:
 script:
  - npm run test:ci
  - npm run lint
- - ng build --prod
+ - npm run build:all
 
 after_success:
  - codecov
 
 before_deploy:
- - tar -C dist/tf2pickuppl -zcvf tf2pickuppl_client-${TRAVIS_TAG}-${TRAVIS_BUILD_NUMBER}.tar.gz .
+ - tar -C dist/tf2pickup.pl -zcvf tf2pickup_pl_client-${TRAVIS_TAG}-${TRAVIS_BUILD_NUMBER}.tar.gz .
+ - tar -C dist/hl.tf2pickup.pl -xcvf hl_tf2pickup_pl_client-${TRAVIS_TAG}-${TRAVIS_BUILD_NUMBER}.tar.gz .
 
 deploy:
   provider: releases
   token: $GITHUB_API_KEY
-  file: tf2pickuppl_client-${TRAVIS_TAG}-${TRAVIS_BUILD_NUMBER}.tar.gz
+  file:
+    - tf2pickup_pl_client-${TRAVIS_TAG}-${TRAVIS_BUILD_NUMBER}.tar.gz
+    - hl_tf2pickup_pl_client-${TRAVIS_TAG}-${TRAVIS_BUILD_NUMBER}.tar.gz
   skip_cleanup: true
   on:
     tags: true
