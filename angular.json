@@ -24,8 +24,12 @@
             "tsConfig": "tsconfig.app.json",
             "aot": true,
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              {
+                "glob": "**/*",
+                "input": "src/assets/",
+                "output": "/assets/",
+                "ignore": [ "custom/**/*" ]
+              }
             ],
             "styles": [
               "src/styles.scss",
@@ -89,6 +93,19 @@
                 {
                   "type": "anyComponentStyle",
                   "maximumWarning": "6kb"
+                }
+              ],
+              "assets": [
+                {
+                  "glob": "**/*",
+                  "input": "src/assets/",
+                  "output": "/assets/",
+                  "ignore": [ "custom/**/*" ]
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/assets/custom/hl.tf2pickup.pl",
+                  "output": "/assets/"
                 }
               ]
             }
