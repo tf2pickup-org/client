@@ -54,6 +54,11 @@ describe('QueueSlotItemComponent', () => {
       it('should apply correct css classes', () => {
         expect(div.classList.contains('locked')).toBe(false);
       });
+
+      it('should emit takeSlot when clicked', done => {
+        component.takeSlot.subscribe(done);
+        div.click();
+      });
     });
 
     describe('with a player occupying the slot', () => {
@@ -64,6 +69,19 @@ describe('QueueSlotItemComponent', () => {
 
       it('should mark as taken', () => {
         expect(div.classList.contains('taken')).toBe(true);
+      });
+
+      it('should not emit takeSlot when clicked', done => {
+        let emitted = false;
+        component.takeSlot.subscribe(() => emitted = true);
+        setTimeout(() => {
+          if (emitted) {
+            done.fail();
+          } else {
+            done();
+          }
+        }, 100);
+        div.click();
       });
 
       describe('when readied up', () => {
@@ -89,8 +107,24 @@ describe('QueueSlotItemComponent', () => {
           expect(div.classList.contains('by-me')).toBe(true);
         });
 
-        it('should render the free slot button', () => {
-          expect(fixture.debugElement.query(By.css('.free-slot-btn')).nativeElement).toBeTruthy();
+        it('should render the free slot button', done => {
+          const freeSlotBtn = fixture.debugElement.query(By.css('.free-slot-btn')).nativeElement as HTMLButtonElement;
+          expect(freeSlotBtn).toBeTruthy();
+          component.freeSlot.subscribe(done);
+          freeSlotBtn.click();
+        });
+
+        it('should not emit takeSlot when clicked', done => {
+          let emitted = false;
+          component.takeSlot.subscribe(() => emitted = true);
+          setTimeout(() => {
+            if (emitted) {
+              done.fail();
+            } else {
+              done();
+            }
+          }, 100);
+          div.click();
         });
 
         describe('when readied up', () => {
@@ -120,6 +154,14 @@ describe('QueueSlotItemComponent', () => {
           expect(markAsFriendBtn.disabled).toBe(false);
         });
 
+        it('should emit friend player id', done => {
+          component.markFriend.subscribe(value => {
+            expect(value).toBe('FAKE_PLAYER_ID');
+            done();
+          });
+          markAsFriendBtn.click();
+        });
+
         describe('when not marked by me', () => {
           it('should apply correct css class', () => {
             expect(markAsFriendBtn.classList.contains('btn-light')).toBe(true);
@@ -136,6 +178,14 @@ describe('QueueSlotItemComponent', () => {
           it('should apply correct css classes', () => {
             expect(markAsFriendBtn.classList.contains('btn-light')).toBe(false);
             expect(markAsFriendBtn.classList.contains('btn-danger')).toBe(true);
+          });
+
+          it('should emit markFriend(null)', done => {
+            component.markFriend.subscribe(value => {
+              expect(value).toBe(null);
+              done();
+            });
+            markAsFriendBtn.click();
           });
         });
 
@@ -155,74 +205,6 @@ describe('QueueSlotItemComponent', () => {
           });
         });
       });
-    });
-  });
-
-  describe('takeSlot', () => {
-    let takeSlotBtn: HTMLElement;
-
-    beforeEach(() => {
-      component.locked = false;
-      component.slot = { id: 0, gameClass: 'soldier', ready: false };
-      fixture.detectChanges();
-      takeSlotBtn = fixture.debugElement.query(By.css('div.queue-slot-item')).nativeElement;
-    });
-
-    it('should be emitted when the slot is clicked', done => {
-      component.takeSlot.subscribe(slot => {
-        expect(slot).toEqual(component.slot);
-        done();
-      });
-      takeSlotBtn.click();
-    });
-  });
-
-  describe('freeSlot', () => {
-    let freeSlotBtn: HTMLButtonElement;
-
-    beforeEach(() => {
-      component.locked = false;
-      component.slot = { id: 0, gameClass: 'soldier', ready: false, playerId: 'FAKE_PLAYER_ID' };
-      component.takenByMe = true;
-      fixture.detectChanges();
-
-      freeSlotBtn = fixture.debugElement.query(By.css('button.free-slot-btn')).nativeElement as HTMLButtonElement;
-    });
-
-    it('should be emitted when the free slot button is clicked', done =>  {
-      component.freeSlot.subscribe(done);
-      freeSlotBtn.click();
-      expect().nothing();
-    });
-  });
-
-  describe('markFriend', () => {
-    let markFriendBtn: HTMLButtonElement;
-
-    beforeEach(() => {
-      component.locked = false;
-      component.slot = { id: 0, gameClass: 'soldier', ready: false, playerId: 'FAKE_PLAYER_ID' };
-      component.friendFlags = { canMarkAsFriend: true };
-      fixture.detectChanges();
-
-      markFriendBtn = fixture.debugElement.query(By.css('button.slot-action-btn')).nativeElement as HTMLButtonElement;
-    });
-
-    it('should emit friend player id', done => {
-      component.markFriend.subscribe(value => {
-        expect(value).toBe('FAKE_PLAYER_ID');
-        done();
-      });
-      markFriendBtn.click();
-    });
-
-    it('should emit null', done => {
-      component.friendFlags = { canMarkAsFriend: true, markedByMe: true };
-      component.markFriend.subscribe(value => {
-        expect(value).toBe(null);
-        done();
-      });
-      markFriendBtn.click();
     });
   });
 });
