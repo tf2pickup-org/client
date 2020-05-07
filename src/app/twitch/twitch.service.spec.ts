@@ -2,6 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { TwitchService } from './twitch.service';
 import { HttpTestingController, HttpClientTestingModule } from '@angular/common/http/testing';
 import { API_URL } from '@app/api-url';
+import { provideMockStore } from '@ngrx/store/testing';
 
 describe('TwitchService', () => {
   let service: TwitchService;
@@ -14,6 +15,7 @@ describe('TwitchService', () => {
       ],
       providers: [
         { provide: API_URL, useValue: 'FAKE_URL' },
+        provideMockStore(),
       ],
     });
 
