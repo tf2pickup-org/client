@@ -1,21 +1,23 @@
-<div class="list-group">
-  <div *ngFor="let server of servers | async"
-    class="list-group-item d-flex justify-content-between">
-    <span>
-      {{ server.name }}
-      <span *ngIf="server.isOnline; else serverOffline" class="badge badge-success ml-2">online</span>
-      <ng-template #serverOffline><span class="badge badge-danger ml-2">offline</span></ng-template>
-    </span>
+<div class="container py-5">
+  <div class="list-group">
+    <div *ngFor="let server of servers | async"
+      class="list-group-item d-flex justify-content-between">
+      <span>
+        {{ server.name }}
+        <span *ngIf="server.isOnline; else serverOffline" class="badge badge-success ml-2">online</span>
+        <ng-template #serverOffline><span class="badge badge-danger ml-2">offline</span></ng-template>
+      </span>
 
-    <button *ngIf="isSuperUser | async"
-      type="button"
-      class="btn btn-danger btn-sm remove-game-server-btn"
-      [disabled]="locked | async"
-      (click)="removeGameServer(server)">remove</button>
+      <button *ngIf="isSuperUser | async"
+        type="button"
+        class="btn btn-danger btn-sm remove-game-server-btn"
+        [disabled]="locked | async"
+        (click)="removeGameServer(server)">remove</button>
+    </div>
   </div>
-</div>
 
-<button *ngIf="isSuperUser | async"
-  type="button"
-  class="btn btn-primary mt-5 add-game-server-btn"
-  (click)="addGameServer()">add server</button>
+  <button *ngIf="isSuperUser | async"
+    type="button"
+    class="btn btn-primary mt-5 add-game-server-btn"
+    (click)="addGameServer()">add server</button>
+</div>
