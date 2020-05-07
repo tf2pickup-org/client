@@ -5,11 +5,14 @@ import { TwitchStreamListItemComponent } from './twitch-stream-list-item/twitch-
 import { StoreModule } from '@ngrx/store';
 import { reducer } from './twitch.reducer';
 import { PlayersModule } from '@app/players/players.module';
+import { EffectsModule } from '@ngrx/effects';
+import { TwitchEffects } from './twitch.effects';
 
 @NgModule({
   imports: [
     CommonModule,
     StoreModule.forFeature('twitch', reducer),
+    EffectsModule.forFeature([TwitchEffects]),
 
     PlayersModule,
   ],

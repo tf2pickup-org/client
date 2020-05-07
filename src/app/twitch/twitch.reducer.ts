@@ -1,25 +1,18 @@
 import { TwitchStream } from './models/twitch-stream';
-import { createReducer, Action } from '@ngrx/store';
+import { createReducer, Action, on } from '@ngrx/store';
+import { twitchStreamsLoaded } from './twitch.actions';
 
 export interface State {
   streams: TwitchStream[];
 }
 
 const initialState: State = {
-  streams: [
-    {
-      playerId: '5d448875b963ff7e00c6b6b3',
-      id: '1481304945',
-      userName: 'kazachuu',
-      title: 'Virtus.pro 1-1 Team Spirit | BO3 | KVYZEE & Shadowehh | WePlay! Pushka League',
-      viewerCount: 43170,
-      thumbnailUrl: 'https://static-cdn.jtvnw.net/previews-ttv/live_user_weplayesport_ru-{width}x{height}.jpg',
-    },
-  ]
+  streams: [],
 };
 
 const twitchReducer = createReducer(
   initialState,
+  on(twitchStreamsLoaded, (state, { twitchStreams }) => ({ ...state, streams: twitchStreams })),
 );
 
 export function reducer(state: State | undefined, action: Action) {
