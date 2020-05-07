@@ -1,7 +1,17 @@
-<div>
-  <app-queue-alerts></app-queue-alerts>
-  <app-queue-status></app-queue-status>
-  <app-map-vote></app-map-vote>
-  <app-queue-addons *ngIf="authenticated"></app-queue-addons>
-  <app-queue></app-queue>
+<div class="container-fluid py-3">
+  <div class="d-flex flex-row justify-content-around">
+    <div class="column-sidebar">
+      <app-twitch-stream-list></app-twitch-stream-list>
+    </div>
+
+    <div class="queue-container">
+      <app-queue-alerts></app-queue-alerts>
+      <app-queue-status></app-queue-status>
+      <app-map-vote></app-map-vote>
+      <app-queue-addons *ngIf="authenticated"></app-queue-addons>
+      <app-queue></app-queue>
+    </div>
+
+    <div class="column-sidebar"></div>
+  </div>
 </div>

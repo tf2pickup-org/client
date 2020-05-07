@@ -3,6 +3,7 @@ import { State as PlayersState } from './players/reducers';
 import { State as ProfileState } from './profile/profile.reducer';
 import { State as GamesState } from './games/games.reducer';
 import { State as GameServersState } from './game-servers/game-servers.reducer';
+import { State as TwitchState } from './twitch/twitch.reducer';
 
 export interface AppState {
   queue: QueueState;
@@ -10,4 +11,5 @@ export interface AppState {
   profile: ProfileState;
   games: GamesState;
   gameServers: GameServersState;
+  twitch: TwitchState;
 }

@@ -1,0 +1,62 @@
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { TwitchStreamListItemComponent } from './twitch-stream-list-item.component';
+import { By } from '@angular/platform-browser';
+import { ChangeDetectionStrategy } from '@angular/core';
+import { MockComponent } from 'ng-mocks';
+import { PlayerNameComponent } from '@app/players/player-name/player-name.component';
+
+describe('TwitchStreamListItemComponent', () => {
+  let component: TwitchStreamListItemComponent;
+  let fixture: ComponentFixture<TwitchStreamListItemComponent>;
+
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [
+        TwitchStreamListItemComponent,
+        MockComponent(PlayerNameComponent),
+      ],
+    })
+    // https://github.com/angular/angular/issues/12313
+    .overrideComponent(TwitchStreamListItemComponent, { set: { changeDetection: ChangeDetectionStrategy.Default } })
+    .compileComponents();
+  }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(TwitchStreamListItemComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+
+  describe('with a valid twitch stream', () => {
+    beforeEach(() => {
+      component.stream = {
+        playerId: 'FAKE_PLAYER_ID',
+        id: '1481304945',
+        userName: 'FAKE_TWITCH_USER_NAME',
+        title: 'Virtus.pro 1-1 Team Spirit | BO3 | KVYZEE & Shadowehh | WePlay! Pushka League',
+        viewerCount: 43170,
+        thumbnailUrl: 'https://static-cdn.jtvnw.net/previews-ttv/live_user_weplayesport_ru-{width}x{height}.jpg',
+      };
+      fixture.detectChanges();
+    });
+
+    it('should link to the user\'s channel', () => {
+      const anchor = fixture.debugElement.query(By.css('a')).nativeElement as HTMLAnchorElement;
+      expect(anchor.href).toEqual('https://www.twitch.tv/FAKE_TWITCH_USER_NAME');
+    });
+
+    it('should replace thumbnail height and width', () => {
+      const img = fixture.debugElement.query(By.css('img.card-img-top')).nativeElement as HTMLImageElement;
+      expect(img.src).toEqual('https://static-cdn.jtvnw.net/previews-ttv/live_user_weplayesport_ru-254x160.jpg');
+    });
+
+    it('should render player name', () => {
+      const playerNameComponent = fixture.debugElement.query(By.css('app-player-name')).componentInstance as PlayerNameComponent;
+      expect(playerNameComponent.playerId).toEqual('FAKE_PLAYER_ID');
+    });
+  });
+});
