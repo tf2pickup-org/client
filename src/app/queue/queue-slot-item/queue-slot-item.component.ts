@@ -31,6 +31,12 @@ export class QueueSlotItemComponent {
   @Output()
   markFriend = new EventEmitter<string>();
 
+  maybeTakeSlot() {
+    if (!this.locked && !this.slot?.playerId && !this.takenByMe) {
+      this.takeSlot.emit(this.slot);
+    }
+  }
+
   emitFreeSlot(event: Event) {
     this.freeSlot.emit();
     event.stopPropagation();
