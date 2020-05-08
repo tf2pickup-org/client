@@ -8,7 +8,7 @@
     'by-me': takenByMe,
     'and-ready': slot.ready
   }"
-  (click)="takeSlot.emit(slot)">
+  (click)="maybeTakeSlot()">
 
   <div class="avatar" *ngIf="slot.playerId">
     <app-player-avatar [playerId]="slot.playerId"></app-player-avatar>
