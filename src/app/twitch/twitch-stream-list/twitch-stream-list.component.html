@@ -1,0 +1,5 @@
+<div class="d-flex flex-column py-2">
+  <app-twitch-stream-list-item *ngFor="let stream of streams | async"
+    [stream]="stream"
+    class="mb-1"></app-twitch-stream-list-item>
+</div>

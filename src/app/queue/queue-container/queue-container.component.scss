@@ -1,0 +1,30 @@
+@import "~bootstrap/scss/bootstrap";
+
+.column-sidebar {
+  display: none;
+  width: 16rem;
+
+  @include media-breakpoint-up(xl) {
+    display: block;
+  }
+}
+
+.queue-container {
+  width: 100%;
+
+  @include media-breakpoint-up(sm) {
+    max-width: 540px;
+  }
+
+  @include media-breakpoint-up(md) {
+    max-width: 720px;
+  }
+
+  @include media-breakpoint-up(lg) {
+    max-width: 960px;
+  }
+
+  @include media-breakpoint-up(xl) {
+    max-width: 1140px;
+  }
+}

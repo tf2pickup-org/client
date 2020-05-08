@@ -28,7 +28,9 @@
                 "glob": "**/*",
                 "input": "src/assets/",
                 "output": "/assets/",
-                "ignore": [ "custom/**/*" ]
+                "ignore": [
+                  "custom/**/*"
+                ]
               },
               {
                 "glob": "favicon.ico",
@@ -87,7 +89,9 @@
                   "glob": "**/*",
                   "input": "src/assets/",
                   "output": "/assets/",
-                  "ignore": [ "custom/**/*" ]
+                  "ignore": [
+                    "custom/**/*"
+                  ]
                 },
                 {
                   "glob": "favicon.ico",
@@ -113,7 +117,9 @@
                   "glob": "**/*",
                   "input": "src/assets/",
                   "output": "/assets/",
-                  "ignore": [ "custom/**/*" ]
+                  "ignore": [
+                    "custom/**/*"
+                  ]
                 },
                 {
                   "glob": "favicon.ico",
@@ -194,6 +200,7 @@
   },
   "defaultProject": "tf2pickuppl",
   "cli": {
+    "defaultCollection": "@ngrx/schematics",
     "analytics": "8a092075-4fff-4660-a469-14cb4418eca0"
   }
 }

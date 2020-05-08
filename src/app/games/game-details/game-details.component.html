@@ -1,5 +1,5 @@
 <div *ngIf="game | async as _game"
-  class="container">
+  class="container py-5">
   <h4>
     Pickup #{{ _game.number }}
     <small *ngIf="(isAdmin | async) && (isRunning | async)"

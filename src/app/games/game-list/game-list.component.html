@@ -1,16 +1,18 @@
-<div class="list-group list-group-flush">
-  <a *ngFor="let game of games | async | paginate: { itemsPerPage: gamesPerPage, currentPage: (page | async), totalItems: (gameCount | async) }"
-    [routerLink]="['/game', game.id]"
-    class="list-group-item list-group-item-action">
-    #{{ game.number }} - {{ game.launchedAt | date:'medium' }} - {{ game.map }}
-    <span *ngIf="game.state === 'launching'" class="badge badge-primary">launching</span>
-    <span *ngIf="game.state === 'started'" class="badge badge-warning">in progress</span>
-  </a>
-</div>
+<div class="container py-3">
+  <div class="list-group list-group-flush">
+    <a *ngFor="let game of games | async | paginate: { itemsPerPage: gamesPerPage, currentPage: (page | async), totalItems: (gameCount | async) }"
+      [routerLink]="['/game', game.id]"
+      class="list-group-item list-group-item-action">
+      #{{ game.number }} - {{ game.launchedAt | date:'medium' }} - {{ game.map }}
+      <span *ngIf="game.state === 'launching'" class="badge badge-primary">launching</span>
+      <span *ngIf="game.state === 'started'" class="badge badge-warning">in progress</span>
+    </a>
+  </div>
 
-<div *ngIf="(gameCount | async) === 0"
-  class="d-flex flex-row justify-content-center">
-  <span class="text-muted">no games</span>
+  <div *ngIf="(gameCount | async) === 0"
+    class="d-flex flex-row justify-content-center">
+    <span class="text-muted">no games</span>
+  </div>
 </div>
 
 <pagination-template #p="paginationApi" (pageChange)="getPage($event)">
