@@ -39,14 +39,23 @@
       </ng-container>
     </ul>
 
-    <div class="navbar-text">
-      <app-steam-login-button *ngIf="!isAuthenticated"></app-steam-login-button>
-    </div>
-
-    <span *ngIf="profile | async as _profile" class="profile-link">
-      <a [routerLink]="['/player', _profile.id]" class="text-dark navbar-light navbar-nav nav-link">
-        {{ _profile.name }}
+    <ng-container *ngIf="isAuthenticated; else notAuthenticated">
+      <a routerLink="/settings"
+        class="text-dark navbar-light navbar-nav nav-link">
+        <span class="oi oi-cog"></span>
       </a>
-    </span>
+
+      <span *ngIf="profile | async as _profile" class="profile-link">
+        <a [routerLink]="['/player', _profile.id]" class="text-dark navbar-light navbar-nav nav-link">
+          {{ _profile.name }}
+        </a>
+      </span>
+    </ng-container>
+
+    <ng-template #notAuthenticated>
+      <div class="navbar-text">
+        <app-steam-login-button></app-steam-login-button>
+      </div>
+    </ng-template>
   </div>
 </nav>
