@@ -18,7 +18,7 @@ export class NavigationBarComponent {
 
   constructor(
     private authService: AuthService,
-    private store: Store<{}>,
+    private store: Store,
   ) { }
 
 }
