@@ -1,1 +1,31 @@
+<div class="container py-5">
+  <h5>Linked accounts</h5>
 
+  <div class="card text-white bg-twitch">
+    <div class="row no-gutters">
+      <div class="col-auto d-flex justify-content-center align-items-center" style="width: 6rem;">
+        <img src="/assets/TwitchGlitchWhite.svg" width="64" height="64">
+      </div>
+      <div class="col">
+      <div class="card-body">
+        <h5 class="card-title"><a href="https://www.twitch.tv/" class="text-white">twitch.tv</a></h5>
+        <p class="card-text">Your streams will be displayed on the main page.</p>
+
+        <p *ngIf="twitchTvProfile | async as _twitchTvProfile; else noTwitchTvProfile"
+          class="card-text twitch-profile-info">
+          <strong>Logged in as
+            <a [href]="twitchTvProfileLink | async"
+              class="text-light"
+              target="_blank">
+              {{ _twitchTvProfile.displayName }}
+            </a>
+          </strong>
+        </p>
+
+        <ng-template #noTwitchTvProfile>
+          <button class="btn btn-light login-via-twitch" (click)="loginViaTwitchTv()">Login via twitch.tv</button>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>
