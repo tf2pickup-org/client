@@ -23,3 +23,8 @@ export const isBanned = createSelector(
   bans,
   theseBans => theseBans?.length > 0
 );
+
+export const twitchTvUser = createSelector(
+  profile,
+  theProfile => theProfile?.twitchTvUser
+);
