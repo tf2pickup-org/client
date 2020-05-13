@@ -13,4 +13,11 @@ export interface Profile {
   etf2lProfileId: number;
   bans: PlayerBan[];
   mapVote?: string;
+
+  twitchTvUser?: {
+    userId: string;
+    login: string;
+    displayName: string;
+    profileImageUrl: string;
+  };
 }
