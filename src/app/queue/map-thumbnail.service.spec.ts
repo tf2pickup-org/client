@@ -35,6 +35,7 @@ describe('MapThumbnailService', () => {
         'koth_clearcut_b14',
         'cp_villa_b12',
         'koth_bagel_fall_b7',
+        'cp_metalworks',
       ].forEach(map => {
         const thumbnail = service.getMapThumbnail(map);
         expect(thumbnail).toBeTruthy();
