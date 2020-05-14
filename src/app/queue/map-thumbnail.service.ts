@@ -26,6 +26,8 @@ export class MapThumbnailService {
     { regex: /koth_clearcut/,     thumbnailName: 'clearcut' },
     { regex: /cp_villa/,          thumbnailName: 'villa' },
     { regex: /koth_bagel/,        thumbnailName: 'bagel' },
+    { regex: /cp_metalworks/,     thumbnailName: 'metalworks' },
+    { regex: /koth_lakeside/,     thumbnailName: 'lakeside' },
   ];
 
   getMapThumbnail(map: string) {
