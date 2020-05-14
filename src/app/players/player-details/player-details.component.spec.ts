@@ -14,6 +14,7 @@ import { LogsTfProfileLinkPipe } from '../logs-tf-profile-link.pipe';
 import { SteamProfileLinkPipe } from '../steam-profile-link.pipe';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { EditPlayerRoleDialogComponent } from '../edit-player-role-dialog/edit-player-role-dialog.component';
+import { TwitchTvProfileLinkPipe } from '../twitch-tv-profile-link.pipe';
 
 class PlayersServiceStub {
   fetchPlayerStats() { return of({}); }
@@ -49,6 +50,7 @@ describe('PlayerDetailsComponent', () => {
         LogsTfProfileLinkPipe,
         SteamProfileLinkPipe,
         PlayerDetailsComponent,
+        TwitchTvProfileLinkPipe,
       ],
       imports: [
         RouterTestingModule,
@@ -89,6 +91,17 @@ describe('PlayerDetailsComponent', () => {
   });
 
   describe('when player loaded', () => {
+    const player = {
+      joinedAt: '2019-08-09T20:45:56.785Z',
+      steamId: '76561198977546450',
+      name: 'niewielki',
+      avatarUrl: 'FAKE_URL',
+      role: 'admin',
+      hasAcceptedRules: true,
+      etf2lProfileId: 12345,
+      id: 'FAKE_ID',
+    }
+
     const stateWithFakePlayer = {
       ...initialState,
       players: {
@@ -97,16 +110,7 @@ describe('PlayerDetailsComponent', () => {
             'FAKE_ID',
           ],
           entities: {
-            FAKE_ID: {
-              joinedAt: '2019-08-09T20:45:56.785Z',
-              steamId: '76561198977546450',
-              name: 'niewielki',
-              avatarUrl: 'FAKE_URL',
-              role: 'admin',
-              hasAcceptedRules: true,
-              etf2lProfileId: 12345,
-              id: 'FAKE_ID',
-            }
+            FAKE_ID: player,
           },
           locked: false
         },
@@ -130,6 +134,31 @@ describe('PlayerDetailsComponent', () => {
       expect(badge).toBeTruthy();
       expect(badge.classList.contains('badge-warning')).toBe(true);
       expect(badge.innerText).toEqual('admin');
+    });
+
+    describe('with twitch.tv profile', () => {
+      beforeEach(() => {
+        store.setState({...initialState,
+          players: {
+            players: {
+              ids: [
+                'FAKE_ID',
+              ],
+              entities: {
+                FAKE_ID: { ...player, twitchTvUser: { login: 'FAKE_TWITCH_LOGIN' } },
+              },
+              locked: false
+            },
+          },
+        });
+        fixture.detectChanges();
+      });
+
+      it('should render a link to the twitch.tv profile', () => {
+        const anchor = fixture.debugElement.query(By.css('a.text-twitch')).nativeElement as HTMLAnchorElement;
+        expect(anchor).toBeTruthy();
+        expect(anchor.href).toEqual('https://www.twitch.tv/FAKE_TWITCH_LOGIN/');
+      });
     });
 
     describe('#openEditPlayerRoleDialog()', () => {
