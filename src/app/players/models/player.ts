@@ -12,4 +12,10 @@ export interface Player {
   etf2lProfileId?: number;
   skill?: { [gameClass: string]: number };
   stats?: PlayerStats;
+  twitchTvUser?: {
+    userId: string;
+    login: string;
+    displayName: string;
+    profileImageUrl: string;
+  };
 }
