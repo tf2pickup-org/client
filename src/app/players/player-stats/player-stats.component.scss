@@ -1,5 +1,12 @@
 @import "~bootstrap/scss/bootstrap";
 
+.col.narrow {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
 .class-icon {
   display: inline-block;
   width: 30px;

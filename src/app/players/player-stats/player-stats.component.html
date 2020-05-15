@@ -1,10 +1,16 @@
 <div *ngIf="playerStats" class="row align-items-center">
-  <div class="col">
+  <div class="col" [class.narrow]="isNarrow">
     <span class="text-muted">total</span>
-    <span class="font-weight-bold ml-2">{{ playerStats.gamesPlayed }}</span>
+    <span
+      class="font-weight-bold"
+      [class.ml-2]="!isNarrow">
+      {{ playerStats.gamesPlayed }}
+    </span>
   </div>
 
-  <div *ngFor="let classPlayed of playerStats.classesPlayed | keyvalue" class="col">
+  <div *ngFor="let classPlayed of playerStats.classesPlayed | keyvalue"
+    class="col"
+    [class.narrow]="isNarrow">
     <div class="class-icon"
       [inlineSVG]="'/assets/tf2-classfont/' + classPlayed.key + '.svg'"
       [tooltip]="classPlayed.key"></div>
