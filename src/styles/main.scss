@@ -1,5 +1,15 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap&subset=latin-ext');
+@import 'theme';
+
+$enable-shadows: true;
 @import '~bootstrap/scss/bootstrap';
+
+body {
+  background-image: url(/assets/bg_night_blur.png);
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
 
 @import '~@swimlane/ngx-datatable/index';
 @import '~@swimlane/ngx-datatable/themes/bootstrap';
