@@ -39,9 +39,14 @@
               }
             ],
             "styles": [
-              "src/styles.scss",
+              "src/styles/main.scss",
               "node_modules/open-iconic/font/css/open-iconic-bootstrap.min.css"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/styles"
+              ]
+            },
             "scripts": [
               "node_modules/marked/lib/marked.js"
             ]
@@ -164,7 +169,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles/main.scss"
             ],
             "scripts": []
           }
