@@ -12,4 +12,8 @@ export class PlayerStatsComponent {
   @Input()
   playerStats: PlayerStats;
 
+  get isNarrow() {
+    return Object.keys(this.playerStats.classesPlayed).length > 6;
+  }
+
 }
