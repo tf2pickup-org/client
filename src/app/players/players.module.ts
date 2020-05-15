@@ -25,6 +25,7 @@ import { LogsTfProfileLinkPipe } from './logs-tf-profile-link.pipe';
 import { SkillTableComponent } from './skill-table/skill-table.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { EditPlayerRoleDialogComponent } from './edit-player-role-dialog/edit-player-role-dialog.component';
+import { TwitchTvProfileLinkPipe } from './twitch-tv-profile-link.pipe';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { EditPlayerRoleDialogComponent } from './edit-player-role-dialog/edit-pl
     LogsTfProfileLinkPipe,
     SkillTableComponent,
     EditPlayerRoleDialogComponent,
+    TwitchTvProfileLinkPipe,
   ],
   imports: [
     CommonModule,

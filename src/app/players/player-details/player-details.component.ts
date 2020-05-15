@@ -29,7 +29,7 @@ export class PlayerDetailsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private store: Store<{}>,
+    private store: Store,
     private playersService: PlayersService,
     private title: Title,
     private modalService: BsModalService,

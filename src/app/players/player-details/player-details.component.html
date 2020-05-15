@@ -15,6 +15,11 @@
       &bull;
       <a [href]="_player.steamId | logsTfProfileLink" target="_blank">logs</a>
 
+      <ng-container *ngIf="_player.twitchTvUser">
+        &bull;
+        <a [href]="_player.twitchTvUser.login | twitchTvProfileLink" target="_blank" class="text-twitch">twitch</a>
+      </ng-container>
+
       <ng-container *ngIf="isAdmin | async">
         &bull;
         <a [routerLink]="['/player', _player.id, 'edit']" class="text-secondary">edit</a>
