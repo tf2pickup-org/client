@@ -1,3 +1,12 @@
+# [2.4.0](https://github.com/tf2pickup-pl/client/compare/2.3.0...2.4.0) (2020-05-16)
+
+### Features
+* twitch.tv integration ([a220cec](https://github.com/tf2pickup-pl/client/commit/a220cecae6cd40ad1bc40f2e2e65bdbf739ee595), [e055312](https://github.com/tf2pickup-pl/client/commit/e0553125f351c74c0ce2fcca52e5185d1684828f), [e86baca](https://github.com/tf2pickup-pl/client/commit/e86bacac00794da94e5c1db99ba2300fe919da93))
+
+### Fixes
+* Render stats for 9v9 ([0f19897](https://github.com/tf2pickup-pl/client/commit/0f1989724687ea16623a562f78c4b3a7a4ce7621))
+* Disable click events on disabled queue items ([102dc4d](https://github.com/tf2pickup-pl/client/commit/102dc4de4e33790c7ecef57297fa6a5a0d50ac6c))
+
 # [2.3.0](https://github.com/tf2pickup-pl/client/compare/2.2.0...2.3.0) (2020-05-03)
 
 ### Features
