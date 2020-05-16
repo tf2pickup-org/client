@@ -1,7 +1,3 @@
-// This file can be replaced during build by using the `fileReplacements` array.
-// `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
-// The list of file replacements can be found in `angular.json`.
-
 import { version } from 'package.json';
 
 const discordInvitation = 'https://discord.gg/UVFVfc4';
@@ -12,7 +8,7 @@ export const environment = {
   wsUrl: '/',
   version,
   headerLinks: [
-    { name: 'discord', icon: '/assets/discord.svg', target: discordInvitation, tooltip: 'Join us on discord!' },
+    { name: 'discord', icon: '/assets/ui_icon_discord.png', target: discordInvitation, tooltip: 'Join us on discord!' },
   ],
   footerLinks: [
     { name: 'github', target: 'https://github.com/tf2pickup-pl' },

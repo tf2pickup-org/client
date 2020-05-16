@@ -8,7 +8,7 @@ export const environment = {
   wsUrl: 'https://api.hl.tf2pickup.pl',
   version,
   headerLinks: [
-    { name: 'discord', icon: '/assets/discord.svg', target: discordInvitation, tooltip: 'Join us on discord!' },
+    { name: 'discord', icon: '/assets/ui_icon_discord.png', target: discordInvitation, tooltip: 'Join us on discord!' },
   ],
   footerLinks: [
     { name: 'github', target: 'https://github.com/tf2pickup-pl' },

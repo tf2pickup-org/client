@@ -1,4 +1,88 @@
-.profile-link {
-  font-size: 130%;
-  font-weight: bold;
+@import 'utils/font-size';
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins/border-radius';
+
+$navigation-bar-background: #0a1a33;
+$navigation-bar-link-background: #050f1e;
+
+$navigation-bar-link-height: 5.125rem;
+$navigation-bar-height: 5.9rem;
+
+$navigation-bar-border-radius: 2.8125rem;
+
+.navigation-bar {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  background-color: $navigation-bar-background;
+  max-height: $navigation-bar-height;
+  min-height: $navigation-bar-height;
+  box-shadow: 0 0 .5rem rgba(0, 0, 0, 0.5);
+  @include border-bottom-radius($navigation-bar-border-radius);
+
+  .logo:focus {
+    outline: none;
+  }
+
+  .links {
+    display: flex;
+    flex-flow: row nowrap;
+    list-style: none;
+    padding: 0 1rem;
+
+    a {
+      color: #ffffff;
+
+      &:hover {
+        color: #ffffff;
+        text-decoration: none;
+      }
+    }
+
+    .link-item {
+      @include font-size(1.8);
+      font-weight: bold;
+
+      .link {
+        display: block;
+        position: relative;
+        background-color: $navigation-bar-link-background;
+        box-shadow: 0 0 .5rem rgba(0, 0, 0, 0.5);
+        height: $navigation-bar-link-height;
+        line-height: $navigation-bar-link-height;
+        border-radius: .3125rem .3125rem 2.5rem .3125rem;
+        transition: 0.1s;
+        padding: 0 2rem;
+        z-index: 1;
+
+        &.icon {
+          padding: 0 1.4rem;
+          line-height: $navigation-bar-link-height * 0.9;
+        }
+
+        &:hover {
+          height: $navigation-bar-height;
+          padding-top: ($navigation-bar-height - $navigation-bar-link-height);
+        }
+
+        &:focus {
+          outline: none;
+        }
+
+        &.active {
+          background-color: $navigation-bar-background;
+          height: $navigation-bar-height;
+          padding-top: ($navigation-bar-height - $navigation-bar-link-height);
+          box-shadow: .5rem .5rem .5rem -.5rem rgba(0, 0, 0, 0.5);
+          z-index: 0;
+        }
+      }
+    }
+  }
+
+  .profile-link {
+    font-size: 1.8em;
+    font-weight: 700;
+  }
 }

@@ -1,61 +1,62 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
-  <a class="navbar-brand" routerLink="/">
-    <img src="/assets/logo.png" height="36">
+<nav class="navigation-bar">
+  <a class="align-self-center mx-2 logo" routerLink="/">
+    <img src="/assets/tf2pickup_logo_white.png" width="420" height="78">
   </a>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/games" routerLinkActive="active">games</a>
-      </li>
+  <ul class="links">
+    <li class="link-item">
+      <a class="link" routerLink="/games" routerLinkActive="active">games</a>
+    </li>
 
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/players" routerLinkActive="active">players</a>
-      </li>
+    <li class="link-item">
+      <a class="link" routerLink="/players" routerLinkActive="active">players</a>
+    </li>
 
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/servers" routerLinkActive="active">servers</a>
-      </li>
+    <li class="link-item">
+      <a class="link" routerLink="/servers" routerLinkActive="active">servers</a>
+    </li>
 
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/rules" routerLinkActive="active">rules</a>
-      </li>
+    <li class="link-item">
+      <a class="link" routerLink="/rules" routerLinkActive="active">rules</a>
+    </li>
 
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/hall-of-fame" routerLinkActive="active">hall of fame</a>
-      </li>
+    <li class="link-item">
+      <a class="link icon" routerLink="/hall-of-fame" routerLinkActive="active" tooltip="Hall of fame">
+        <img src="/assets/ui_icon_crown.png" width="35" height="35">
+      </a>
+    </li>
 
-      <ng-container *ngFor="let link of links">
-        <a [href]="link.target" target="_blank"
-          [ngClass]="link.icon ? 'navbar-brand' : 'nav-link'">
+    <ng-container *ngFor="let link of links">
+      <li class="link-item">
+        <a [href]="link.target" target="_blank" class="link icon" [tooltip]="link.tooltip">
           <img *ngIf="link.icon; else text"
             [src]="link.icon"
             [attr.alt]="link.name"
-            [tooltip]="link.tooltip"
-            width="30" height="30"
-            class="d-inline-block align-top mx-1">
+            width="35" height="35">
           <ng-template #text>{{ link.name }}</ng-template>
         </a>
-      </ng-container>
-    </ul>
-
-    <ng-container *ngIf="isAuthenticated; else notAuthenticated">
-      <a routerLink="/settings"
-        class="text-dark navbar-light navbar-nav nav-link">
-        <span class="oi oi-cog"></span>
-      </a>
-
-      <span *ngIf="profile | async as _profile" class="profile-link">
-        <a [routerLink]="['/player', _profile.id]" class="text-dark navbar-light navbar-nav nav-link">
-          {{ _profile.name }}
-        </a>
-      </span>
+      </li>
     </ng-container>
+  </ul>
 
-    <ng-template #notAuthenticated>
-      <div class="navbar-text">
-        <app-steam-login-button></app-steam-login-button>
-      </div>
-    </ng-template>
-  </div>
+  <div class="flex-fill"></div>
+
+  <ng-container *ngIf="isAuthenticated; else notAuthenticated">
+    <a routerLink="/settings"
+      class="text-dark navbar-light navbar-nav nav-link">
+      <span class="oi oi-cog"></span>
+    </a>
+
+    <span *ngIf="profile | async as _profile" class="profile-link">
+      <a [routerLink]="['/player', _profile.id]" class="text-dark navbar-light navbar-nav nav-link">
+        {{ _profile.name }}
+      </a>
+    </span>
+  </ng-container>
+
+  <ng-template #notAuthenticated>
+    <app-steam-login-button class="align-self-center mr-5"></app-steam-login-button>
+  </ng-template>
 </nav>
+
+
