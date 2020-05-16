@@ -27,6 +27,7 @@ import { QueueNotificationsControllerComponent } from './queue-notifications-con
 import { QueueSlotContainerComponent } from './queue-slot-container/queue-slot-container.component';
 import { TwitchModule } from '@app/twitch/twitch.module';
 import { NotificationsModule } from '@app/notifications/notifications.module';
+import { SharedModule } from '@app/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { NotificationsModule } from '@app/notifications/notifications.module';
     PlayersModule,
     TwitchModule,
     NotificationsModule,
+    SharedModule,
 
     QueueRoutingModule,
   ],
