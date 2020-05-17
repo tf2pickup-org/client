@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { MapThumbnailService } from '../map-thumbnail.service';
 
 @Component({
@@ -11,6 +11,9 @@ export class MapVoteButtonComponent {
 
   @Input()
   map: string;
+
+  @Input()
+  votePercent: number;
 
   @Input()
   active = false;

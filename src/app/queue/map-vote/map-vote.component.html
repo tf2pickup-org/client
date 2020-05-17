@@ -1,14 +1,9 @@
-<div class="map-vote-container d-flex flex-column align-items-center">
-  <span class="text-secondary font-italic mb-2">vote for the next map</span>
-  <div class="row">
-    <div *ngFor="let result of results | async"
-      class="col-12 col-lg-4 d-flex flex-column align-items-center">
-      <span class="mb-1 font-weight-bold">{{ result.map }}</span>
-      <app-map-vote-button
-        [map]="result.map"
-        [active]="result.map === (mapVote | async)"
-        [disabled]="disabled | async"
-        (voteToggle)="voteForMap(result.map)"></app-map-vote-button>
-      <span class="mt-1 font-weight-bold">{{ result.votePercent | percent }}</span>
-  </div>
+<div class="map-vote-container">
+  <!-- <span class="text-secondary font-italic mb-2">vote for the next map</span> -->
+
+  <app-map-vote-button *ngFor="let result of results | async"
+    [map]="result.map"
+    [votePercent]="result.votePercent"
+    [active]="result.map === (mapVote | async)"
+    [disabled]="disabled | async"></app-map-vote-button>
 </div>

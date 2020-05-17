@@ -1,18 +1,47 @@
-.map-thumbnail-btn {
-  display: block;
-  padding: 0px;
-  width: 300px;
-  height: 160px;
-  border-radius: 0.25rem;
-  border: none;
+@import '~bootstrap';
+@import 'utils/font-size';
 
-  &:not(:disabled) {
-    &.active {
-      box-shadow: 0 0 5px 5px var(--green);
-    }
+$border-radius: 1rem;
 
-    &:not(.active):hover {
-      box-shadow: 0 0 3px 3px var(--yellow);
+.map-vote-btn {
+  margin: 1rem;
+  padding: .5rem;
+
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: $border-radius;
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+  color: #000000;
+
+  .map-thumbnail {
+    display: block;
+    padding: 0px;
+    width: 300px;
+    height: 160px;
+    border-radius: $border-radius * 0.4;
+    border: none;
+
+    .map-thumbnail-content {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: stretch;
+
+      div {
+        background-color: rgba($color: #0A1A33, $alpha: 0.5);
+        color: #ffffff;
+        font-weight: 600;
+        @include font-size(1.2);
+
+        &.top {
+          @include border-top-radius($border-radius * 0.4);
+        }
+
+        &.bottom {
+          @include border-bottom-radius($border-radius * 0.4);
+        }
+      }
     }
   }
 }

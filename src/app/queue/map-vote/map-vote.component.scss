@@ -1,8 +1,6 @@
 .map-vote-container {
-  margin: 2rem 0;
-  background-color: rgba(255, 255, 255, 1.0);
-  border-radius: 1rem;
-  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
-  color: #000000;
-  padding: .5rem;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-around;
 }
