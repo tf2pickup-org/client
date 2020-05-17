@@ -6,8 +6,8 @@
 $navigation-bar-background: #0a1a33;
 $navigation-bar-link-background: #050f1e;
 
-$navigation-bar-link-height: 5.125rem;
-$navigation-bar-height: 5.9rem;
+$navigation-bar-height: 4.75rem;
+$navigation-bar-link-height: $navigation-bar-height * 0.8687;
 
 $navigation-bar-border-radius: 2.8125rem;
 
@@ -41,7 +41,7 @@ $navigation-bar-border-radius: 2.8125rem;
     }
 
     .link-item {
-      @include font-size(1.8);
+      @include font-size(1.6);
       font-weight: bold;
 
       .link {
