@@ -2,7 +2,7 @@
 @import 'theme';
 
 $enable-shadows: true;
-@import '~bootstrap/scss/bootstrap';
+@import '~bootstrap';
 
 body {
   background-image: url(/assets/bg_night_blur.png);

@@ -1,0 +1,11 @@
+$body-bg: #0d1d36;
+$body-color: #ffffff;
+$font-family-sans-serif: "Montserrat", sans-serif;
+
+$theme-colors: (
+  "queue-slot-free": rgba(#ffffff, 0.65),
+  "queue-slot-taken": rgba(#ffffff, 0.95),
+  "queue-slot-taken-by-me": rgba(#ffffff, 1.0),
+  "queue-slot-ready-up-0": rgba(#c0080f, 0.95),
+  "queue-slot-ready-up-1": rgba(#41ca25, 0.75),
+);

@@ -15,7 +15,6 @@
   </div>
 
   <a *ngIf="slot.playerId; else addPrompt"
-    class="text-white"
     [routerLink]="['/player', slot.playerId]">
     <app-player-name [playerId]="slot.playerId"></app-player-name>
   </a>

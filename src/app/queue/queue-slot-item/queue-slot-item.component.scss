@@ -1,24 +1,26 @@
+@import '~bootstrap';
 @import 'utils/font-size';
-@import '~bootstrap/scss/functions';
-@import '~bootstrap/scss/variables';
+@import 'theme';
 
 .queue-slot-item {
-  height: 3rem;
-  margin: .5rem 0;
-  background-color: rgba(255, 255, 255, 0.7);
-  border-radius: 1rem;
-  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
-  @include font-size(1.3);
-  font-weight: bold;
-
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
   align-items: center;
 
+  height: 3rem;
+  margin: .5rem 0;
+
+  border-radius: 1rem;
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+  @include font-size(1.3);
+  font-weight: bold;
+
   position: relative;
 
   &.free {
+    background-color: theme-color("queue-slot-free");
+
     .add-prompt {
       display: none;
     }
@@ -34,14 +36,26 @@
   }
 
   &.taken {
-    background-color: map-get($map: $colors, $key: "gray-dark");
+    background-color: theme-color("queue-slot-taken");
+
+    a {
+      color: color-yiq(theme-color("queue-slot-taken"));
+    }
 
     &.by-me {
-      background-color: theme-color("primary");
+      background-color: theme-color("queue-slot-taken-by-me");
+
+      a {
+        color: color-yiq(theme-color("queue-slot-taken-by-me"));
+      }
     }
 
     &.and-ready {
-      background-color: theme-color("success");
+      background-color: theme-color("queue-slot-ready-up-1");
+
+      a {
+        color: color-yiq(theme-color("queue-slot-ready-up-1"));
+      }
     }
   }
 
