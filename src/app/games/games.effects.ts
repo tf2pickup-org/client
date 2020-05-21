@@ -4,12 +4,13 @@ import { GamesService } from './games.service';
 import { gameAdded, loadGame, gameUpdated, forceEndGame, gameCreated, reinitializeServer, ownGameAdded, requestSubstitute,
   cancelSubstitutionRequest, replacePlayer } from './games.actions';
 import { mergeMap, map, filter, withLatestFrom, tap } from 'rxjs/operators';
-import { GamesEventsService } from './games-events.service';
 import { Store } from '@ngrx/store';
 import { profile } from '@app/profile/profile.selectors';
 import { profileLoaded } from '@app/profile/profile.actions';
 import { Router } from '@angular/router';
 import { routerNavigatedAction } from '@ngrx/router-store';
+import { Socket } from '@app/io/socket';
+import { fromEvent } from 'rxjs';
 
 @Injectable()
 export class GamesEffects {
@@ -101,12 +102,12 @@ export class GamesEffects {
   constructor(
     private actions: Actions,
     private gamesService: GamesService,
-    private gamesEventsService: GamesEventsService,
-    private store: Store<{}>,
+    private store: Store,
     private router: Router,
+    socket: Socket,
   ) {
-    this.gamesEventsService.gameCreated.subscribe(game => this.store.dispatch(gameCreated({ game })));
-    this.gamesEventsService.gameUpdated.subscribe(game => this.store.dispatch(gameUpdated({ game })));
+    fromEvent(socket, 'game created').subscribe(game => this.store.dispatch(gameCreated({ game })));
+    fromEvent(socket, 'game updated').subscribe(game => this.store.dispatch(gameUpdated({ game })));
   }
 
 }

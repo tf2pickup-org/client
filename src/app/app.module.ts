@@ -26,6 +26,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { HallOfFameModule } from './hall-of-fame/hall-of-fame.module';
 import { NotificationsModule } from './notifications/notifications.module';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { IoModule } from './io/io.module';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
     NgxPaginationModule,
 
     AuthModule,
+    IoModule,
     CoreModule,
     PlayersModule,
     QueueModule,

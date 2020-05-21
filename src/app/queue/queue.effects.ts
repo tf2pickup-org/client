@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Actions, createEffect, ofType, OnInitEffects } from '@ngrx/effects';
 import { loadQueue, queueLoaded, joinQueue, leaveQueue, queueStateUpdated, joinQueueError, leaveQueueError, readyUp, readyUpError,
   showReadyUpDialog, hideReadyUpDialog, stopPreReady, voteForMap, mapVoteResultsUpdated, mapVoted,
   mapVoteReset, queueSlotsUpdated, markFriend, startPreReady, substituteRequestsUpdated, friendshipsUpdated } from './queue.actions';
 import { mergeMap, map, catchError, filter, withLatestFrom, mapTo } from 'rxjs/operators';
 import { QueueService } from './queue.service';
-import { QueueEventsService } from './queue-events.service';
 import { Store, select } from '@ngrx/store';
-import { of } from 'rxjs';
+import { of, fromEvent } from 'rxjs';
 import { mySlot, isInQueue, isPreReadied } from './queue.selectors';
 import { ownGameAdded } from '@app/games/games.actions';
+import { Socket } from '@app/io/socket';
 
 @Injectable()
-export class QueueEffects {
+export class QueueEffects implements OnInitEffects {
 
   loadQueue = createEffect(() =>
     this.actions.pipe(
@@ -130,15 +130,19 @@ export class QueueEffects {
   constructor(
     private actions: Actions,
     private queueService: QueueService,
-    private queueEventsService: QueueEventsService,
-    private store: Store<{}>,
+    private store: Store,
+    socket: Socket,
   ) {
-    this.queueEventsService.slotsUpdate.subscribe(slots => this.store.dispatch(queueSlotsUpdated({ slots })));
-    this.queueEventsService.stateUpdate.subscribe(queueState => this.store.dispatch(queueStateUpdated({ queueState })));
-    this.queueEventsService.mapVoteResultsUpdate.subscribe(results => this.store.dispatch(mapVoteResultsUpdated({ results })));
-    this.queueEventsService.substituteRequests.subscribe(substituteRequests =>
+    fromEvent(socket, 'queue slots update').subscribe(slots => this.store.dispatch(queueSlotsUpdated({ slots })));
+    fromEvent(socket, 'queue state update').subscribe(queueState => this.store.dispatch(queueStateUpdated({ queueState })));
+    fromEvent(socket, 'map vote results update').subscribe(results => this.store.dispatch(mapVoteResultsUpdated({ results })));
+    fromEvent(socket, 'substitute requests update').subscribe(substituteRequests =>
         this.store.dispatch(substituteRequestsUpdated({ substituteRequests })));
-    this.queueEventsService.friendshipsUpdate.subscribe(friendships => this.store.dispatch(friendshipsUpdated({ friendships })));
+    fromEvent(socket, 'friendships update').subscribe(friendships => this.store.dispatch(friendshipsUpdated({ friendships })));
+  }
+
+  ngrxOnInitEffects() {
+    return loadQueue();
   }
 
 }

@@ -2,30 +2,30 @@ import { TestBed, inject } from '@angular/core/testing';
 import { QueueService } from './queue.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { API_URL } from '@app/api-url';
-import { IoClientService } from '@app/core/io-client.service';
+import { Socket } from '@app/io/socket';
 
 describe('QueueService', () => {
   let httpController: HttpTestingController;
-  let ioClientServiceStub: jasmine.SpyObj<IoClientService>;
+  let socketStub: jasmine.SpyObj<Socket>;
 
   beforeEach(() => {
-    ioClientServiceStub = jasmine.createSpyObj<IoClientService>('IoClientService', [ 'call' ]);
+    socketStub = jasmine.createSpyObj<Socket>('Socket', [ 'call' ]);
   });
 
   beforeEach(() => TestBed.configureTestingModule({
     imports: [ HttpClientTestingModule ],
     providers: [
       { provide: API_URL, useValue: 'FAKE_URL' },
-      { provide: IoClientService, useValue: ioClientServiceStub },
+      { provide: Socket, useValue: socketStub },
     ],
   }));
 
   beforeEach(() => {
-    httpController = TestBed.get(HttpTestingController);
+    httpController = TestBed.inject(HttpTestingController);
   });
 
   it('should be created', () => {
-    const service: QueueService = TestBed.get(QueueService);
+    const service: QueueService = TestBed.inject(QueueService);
     expect(service).toBeTruthy();
   });
 
@@ -40,35 +40,35 @@ describe('QueueService', () => {
   describe('#joinQueue()', () => {
     it('should call the endpoint', inject([QueueService], (service: QueueService) => {
       service.joinQueue(11);
-      expect(ioClientServiceStub.call).toHaveBeenCalledWith('join queue', { slotId: 11 });
+      expect(socketStub.call).toHaveBeenCalledWith('join queue', { slotId: 11 });
     }));
   });
 
   describe('#leaveQueue()', () => {
     it('should call the endpoint', inject([QueueService], (service: QueueService) => {
       service.leaveQueue();
-      expect(ioClientServiceStub.call).toHaveBeenCalledWith('leave queue');
+      expect(socketStub.call).toHaveBeenCalledWith('leave queue');
     }));
   });
 
   describe('#readyUp()', () => {
     it('should call the endpoint', inject([QueueService], (service: QueueService) => {
       service.readyUp();
-      expect(ioClientServiceStub.call).toHaveBeenCalledWith('player ready');
+      expect(socketStub.call).toHaveBeenCalledWith('player ready');
     }));
   });
 
   describe('#voteForMap()', () => {
     it('should call the endpoint', inject([QueueService], (service: QueueService) => {
       service.voteForMap('cp_fake_rc1');
-      expect(ioClientServiceStub.call).toHaveBeenCalledWith('vote for map', { map: 'cp_fake_rc1' });
+      expect(socketStub.call).toHaveBeenCalledWith('vote for map', { map: 'cp_fake_rc1' });
     }));
   });
 
   describe('#markFriend()', () => {
     it('should call the endpoint', inject([QueueService], (service: QueueService) => {
       service.markFriend('FAKE_ID');
-      expect(ioClientServiceStub.call).toHaveBeenCalledWith('mark friend', { friendPlayerId: 'FAKE_ID' });
+      expect(socketStub.call).toHaveBeenCalledWith('mark friend', { friendPlayerId: 'FAKE_ID' });
     }));
   });
 });

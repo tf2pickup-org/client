@@ -6,6 +6,8 @@ import { provideMockStore } from '@ngrx/store/testing';
 import { AuthService } from '@app/auth/auth.service';
 import { WindowHelperService } from '@app/shared/window-helper.service';
 import { of } from 'rxjs';
+import { Socket } from '@app/io/socket';
+import EventEmitter from 'eventemitter3';
 
 class AuthServiceStub {
   reauth() { return of('FAKE_AUTH_TOKEN'); }
@@ -18,6 +20,7 @@ class WindowHelperServiceStub {
 describe('TwitchService', () => {
   let service: TwitchService;
   let httpContoller: HttpTestingController;
+  let socket: Socket;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -29,11 +32,13 @@ describe('TwitchService', () => {
         provideMockStore(),
         { provide: AuthService, useClass: AuthServiceStub },
         { provide: WindowHelperService, useClass: WindowHelperServiceStub },
+        { provide: Socket, useClass: EventEmitter },
       ],
     });
 
     service = TestBed.inject(TwitchService);
     httpContoller = TestBed.inject(HttpTestingController);
+    socket = TestBed.inject(Socket);
   });
 
   afterEach(() => httpContoller.verify());

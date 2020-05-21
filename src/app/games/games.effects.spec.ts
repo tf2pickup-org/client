@@ -4,12 +4,13 @@ import { TestBed } from '@angular/core/testing';
 import { GamesEffects } from './games.effects';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { GamesService } from './games.service';
-import { GamesEventsService } from './games-events.service';
 import { RouterTestingModule } from '@angular/router/testing';
 import { provideMockStore } from '@ngrx/store/testing';
 import { requestSubstitute, cancelSubstitutionRequest, replacePlayer, gameUpdated, loadGame } from './games.actions';
 import { routerNavigatedAction } from '@ngrx/router-store';
 import { NavigationEnd } from '@angular/router';
+import { Socket } from '@app/io/socket';
+import { EventEmitter } from 'eventemitter3';
 
 const fakeGame = {
   players: [
@@ -52,11 +53,6 @@ class GamesServiceStub {
   replacePlayer(gameId: string, replaceeId: string, replacementId: string) { return of(fakeGame); }
 }
 
-class GamesEventsServiceStub {
-  gameCreated = new Subject<any>();
-  gameUpdated = new Subject<any>();
-}
-
 const initialState = {
   games: {
     ids: [
@@ -71,7 +67,7 @@ const initialState = {
 describe('GamesEffects', () => {
   let actions: ReplaySubject<Action>;
   let effects: GamesEffects;
-  let gamesService: GamesServiceStub;
+  let gamesService: GamesService;
 
   beforeEach(() => actions = new ReplaySubject<Action>(1));
 
@@ -83,14 +79,14 @@ describe('GamesEffects', () => {
       GamesEffects,
       provideMockActions(() => actions.asObservable()),
       { provide: GamesService, useClass: GamesServiceStub },
-      { provide: GamesEventsService, useClass: GamesEventsServiceStub },
       provideMockStore({ initialState }),
+      { provide: Socket, useClass: EventEmitter },
     ],
   }));
 
   beforeEach(() => {
-    effects = TestBed.get(GamesEffects);
-    gamesService = TestBed.get(GamesService);
+    effects = TestBed.inject(GamesEffects);
+    gamesService = TestBed.inject(GamesService);
   });
 
   afterEach(() => actions.complete());

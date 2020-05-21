@@ -4,8 +4,8 @@ import { Queue } from './models/queue';
 import { HttpClient } from '@angular/common/http';
 import { API_URL } from '@app/api-url';
 import { QueueSlot } from './models/queue-slot';
-import { IoClientService } from '@app/core/io-client.service';
 import { Friendship } from './models/friendship';
+import { Socket } from '@app/io/socket';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,7 @@ export class QueueService {
   constructor(
     private http: HttpClient,
     @Inject(API_URL) private apiUrl: string,
-    private ws: IoClientService,
+    private socket: Socket,
   ) { }
 
   fetchQueue(): Observable<Queue> {
@@ -23,23 +23,23 @@ export class QueueService {
   }
 
   joinQueue(slotId: number): Observable<QueueSlot[]> {
-    return this.ws.call<QueueSlot[]>('join queue', { slotId });
+    return this.socket.call<QueueSlot[]>('join queue', { slotId });
   }
 
   leaveQueue(): Observable<QueueSlot> {
-    return this.ws.call<QueueSlot>('leave queue');
+    return this.socket.call<QueueSlot>('leave queue');
   }
 
   readyUp(): Observable<QueueSlot> {
-    return this.ws.call<QueueSlot>('player ready');
+    return this.socket.call<QueueSlot>('player ready');
   }
 
   voteForMap(map: string): Observable<string> {
-    return this.ws.call<string>('vote for map', { map });
+    return this.socket.call<string>('vote for map', { map });
   }
 
   markFriend(friendPlayerId: string): Observable<Friendship[]> {
-    return this.ws.call<Friendship[]>('mark friend', { friendPlayerId });
+    return this.socket.call<Friendship[]>('mark friend', { friendPlayerId });
   }
 
 }
