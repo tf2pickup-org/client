@@ -15,22 +15,14 @@ export class Socket {
     private socketFactoryService: SocketFactoryService,
   ) { }
 
-  addEventListener(event: string, listener: Listener): Socket {
-    this._socket.addEventListener(event, listener);
-    return this;
-  }
-
   on(event: string, listener: Listener): Socket {
-    return this.addEventListener(event, listener);
-  }
-
-  removeEventListener(event: string, listener?: Listener): Socket {
-    this._socket.removeEventListener(event, listener);
+    this._socket.on(event, listener);
     return this;
   }
 
   off(event: string, listener?: Listener): Socket {
-    return this.removeEventListener(event, listener);
+    this._socket.off(event, listener);
+    return this;
   }
 
   call<T>(methodName: string, ...args: any[]): Observable<T> {

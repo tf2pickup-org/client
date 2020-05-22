@@ -22,7 +22,8 @@ export class TwitchService {
     private windowHelperService: WindowHelperService,
     socket: Socket,
   ) {
-    fromEvent(socket, 'twitch streams update').subscribe(twitchStreams => this.store.dispatch(twitchStreamsUpdated({ twitchStreams })));
+    fromEvent<TwitchStream[]>(socket, 'twitch streams update')
+      .subscribe(twitchStreams => this.store.dispatch(twitchStreamsUpdated({ twitchStreams })));
   }
 
   login() {

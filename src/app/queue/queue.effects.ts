@@ -10,6 +10,11 @@ import { of, fromEvent } from 'rxjs';
 import { mySlot, isInQueue, isPreReadied } from './queue.selectors';
 import { ownGameAdded } from '@app/games/games.actions';
 import { Socket } from '@app/io/socket';
+import { QueueSlot } from './models/queue-slot';
+import { QueueState } from './models/queue-state';
+import { MapVoteResult } from './models/map-vote-result';
+import { SubstituteRequest } from './models/substitute-request';
+import { Friendship } from './models/friendship';
 
 @Injectable()
 export class QueueEffects implements OnInitEffects {
@@ -133,12 +138,16 @@ export class QueueEffects implements OnInitEffects {
     private store: Store,
     socket: Socket,
   ) {
-    fromEvent(socket, 'queue slots update').subscribe(slots => this.store.dispatch(queueSlotsUpdated({ slots })));
-    fromEvent(socket, 'queue state update').subscribe(queueState => this.store.dispatch(queueStateUpdated({ queueState })));
-    fromEvent(socket, 'map vote results update').subscribe(results => this.store.dispatch(mapVoteResultsUpdated({ results })));
-    fromEvent(socket, 'substitute requests update').subscribe(substituteRequests =>
+    fromEvent<QueueSlot[]>(socket, 'queue slots update')
+      .subscribe(slots => this.store.dispatch(queueSlotsUpdated({ slots })));
+    fromEvent<QueueState>(socket, 'queue state update')
+      .subscribe(queueState => this.store.dispatch(queueStateUpdated({ queueState })));
+    fromEvent<MapVoteResult[]>(socket, 'map vote results update')
+      .subscribe(results => this.store.dispatch(mapVoteResultsUpdated({ results })));
+    fromEvent<SubstituteRequest[]>(socket, 'substitute requests update').subscribe(substituteRequests =>
         this.store.dispatch(substituteRequestsUpdated({ substituteRequests })));
-    fromEvent(socket, 'friendships update').subscribe(friendships => this.store.dispatch(friendshipsUpdated({ friendships })));
+    fromEvent<Friendship[]>(socket, 'friendships update')
+      .subscribe(friendships => this.store.dispatch(friendshipsUpdated({ friendships })));
   }
 
   ngrxOnInitEffects() {

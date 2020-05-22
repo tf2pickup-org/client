@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 import { routerNavigatedAction } from '@ngrx/router-store';
 import { Socket } from '@app/io/socket';
 import { fromEvent } from 'rxjs';
+import { Game } from './models/game';
 
 @Injectable()
 export class GamesEffects {
@@ -106,8 +107,8 @@ export class GamesEffects {
     private router: Router,
     socket: Socket,
   ) {
-    fromEvent(socket, 'game created').subscribe(game => this.store.dispatch(gameCreated({ game })));
-    fromEvent(socket, 'game updated').subscribe(game => this.store.dispatch(gameUpdated({ game })));
+    fromEvent<Game>(socket, 'game created').subscribe(game => this.store.dispatch(gameCreated({ game })));
+    fromEvent<Game>(socket, 'game updated').subscribe(game => this.store.dispatch(gameUpdated({ game })));
   }
 
 }
