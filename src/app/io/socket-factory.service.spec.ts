@@ -10,7 +10,7 @@ class WsTokenServiceStub {
   getWsToken() { return NEVER; }
 }
 
-fdescribe('SocketFactoryService', () => {
+describe('SocketFactoryService', () => {
   let service: SocketFactoryService;
   let httpController: HttpTestingController;
   let tokenStore: TokenStoreService;
