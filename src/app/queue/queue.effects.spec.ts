@@ -106,6 +106,10 @@ describe('QueueEffects', () => {
     socket.emit('queue slots update', slots);
     expect(spy).toHaveBeenCalledWith(queueSlotsUpdated({ slots }));
 
+    // @ts-ignore
+    socket.emit('queue state update', 'waiting');
+    expect(spy).toHaveBeenCalledWith(queueStateUpdated({ queueState: 'waiting' }));
+
     const results: MapVoteResult[] = [ { map: 'cp_fake_rc1', voteCount: 5 } ];
     // @ts-ignore
     socket.emit('map vote results update', results);

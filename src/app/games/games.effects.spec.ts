@@ -5,8 +5,8 @@ import { GamesEffects } from './games.effects';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { GamesService } from './games.service';
 import { RouterTestingModule } from '@angular/router/testing';
-import { provideMockStore } from '@ngrx/store/testing';
-import { requestSubstitute, cancelSubstitutionRequest, replacePlayer, gameUpdated, loadGame } from './games.actions';
+import { provideMockStore, MockStore } from '@ngrx/store/testing';
+import { requestSubstitute, cancelSubstitutionRequest, replacePlayer, gameUpdated, loadGame, gameCreated } from './games.actions';
 import { routerNavigatedAction } from '@ngrx/router-store';
 import { NavigationEnd } from '@angular/router';
 import { Socket } from '@app/io/socket';
@@ -90,6 +90,21 @@ describe('GamesEffects', () => {
   });
 
   afterEach(() => actions.complete());
+
+  it('should handle game events', () => {
+    const socket = TestBed.inject(Socket);
+    const spy = spyOn(TestBed.inject(MockStore), 'dispatch');
+
+    const game = { id: 'FAKE_GAME_ID' };
+
+    // @ts-ignore
+    socket.emit('game created', game);
+    expect(spy).toHaveBeenCalledWith(gameCreated({ game } as any));
+
+    // @ts-ignore
+    socket.emit('game updated', game);
+    expect(spy).toHaveBeenCalledWith(gameUpdated({ game } as any));
+  });
 
   describe('loadRoutedGame', () => {
     it('should load the given game', () => {
