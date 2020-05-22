@@ -2,10 +2,10 @@ import { TestBed, inject } from '@angular/core/testing';
 import { GamesService } from './games.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { API_URL } from '@app/api-url';
-import { IoClientService } from '@app/core/io-client.service';
 import { NEVER } from 'rxjs';
+import { Socket } from '@app/io/socket';
 
-class IoClientServiceStub {
+class SocketStub {
   call() { return NEVER; }
 }
 
@@ -16,18 +16,18 @@ describe('GamesService', () => {
     imports: [ HttpClientTestingModule ],
     providers: [
       { provide: API_URL, useValue: 'FAKE_URL' },
-      { provide: IoClientService, useClass: IoClientServiceStub },
+      { provide: Socket, useClass: SocketStub },
     ]
   }));
 
   beforeEach(() => {
-    httpController = TestBed.get(HttpTestingController);
+    httpController = TestBed.inject(HttpTestingController);
   });
 
   afterEach(() => httpController.verify());
 
   it('should be created', () => {
-    const service: GamesService = TestBed.get(GamesService);
+    const service: GamesService = TestBed.inject(GamesService);
     expect(service).toBeTruthy();
   });
 
@@ -93,7 +93,7 @@ describe('GamesService', () => {
 
   describe('#replacePlayer()', () => {
     it('should call ws method', inject([GamesService], (service: GamesService) => {
-      const spy = spyOn(TestBed.get(IoClientService), 'call');
+      const spy = spyOn(TestBed.inject(Socket), 'call');
       service.replacePlayer('FAKE_GAME_ID', 'FAKE_PLAYER_ID');
       expect(spy).toHaveBeenCalledWith('replace player', { gameId: 'FAKE_GAME_ID', replaceeId: 'FAKE_PLAYER_ID' });
     }));

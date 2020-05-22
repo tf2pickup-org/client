@@ -1,13 +1,13 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { API_URL } from '@app/api-url';
-import { Observable } from 'rxjs';
+import { Observable, fromEvent } from 'rxjs';
 import { TwitchStream } from './models/twitch-stream';
 import { Store } from '@ngrx/store';
 import { twitchStreamsUpdated } from './twitch.actions';
-import io from 'socket.io-client';
 import { AuthService } from '@app/auth/auth.service';
 import { WindowHelperService } from '@app/shared/window-helper.service';
+import { Socket } from '@app/io/socket';
 
 @Injectable({
   providedIn: 'root'
@@ -20,9 +20,10 @@ export class TwitchService {
     private store: Store,
     private authService: AuthService,
     private windowHelperService: WindowHelperService,
+    socket: Socket,
   ) {
-    const socket = io('/twitch');
-    socket.on('streams update', (twitchStreams: TwitchStream[]) => this.store.dispatch(twitchStreamsUpdated({ twitchStreams })));
+    fromEvent<TwitchStream[]>(socket, 'twitch streams update')
+      .subscribe(twitchStreams => this.store.dispatch(twitchStreamsUpdated({ twitchStreams })));
   }
 
   login() {

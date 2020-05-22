@@ -1,9 +1,8 @@
-import { TestBed, async } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { QueueEffects } from './queue.effects';
 import { provideMockActions } from '@ngrx/effects/testing';
-import { ReplaySubject, Subject, of, noop } from 'rxjs';
-import { Action, Store, select, MemoizedSelector } from '@ngrx/store';
-import { QueueEventsService } from './queue-events.service';
+import { ReplaySubject, of } from 'rxjs';
+import { Action, MemoizedSelector } from '@ngrx/store';
 import { QueueService } from './queue.service';
 import { queueLoaded, loadQueue, joinQueue, joinQueueError, markFriend, mapVoteReset, voteForMap, mapVoted, mapVoteResultsUpdated,
   queueSlotsUpdated, hideReadyUpDialog, showReadyUpDialog, readyUp, queueStateUpdated, substituteRequestsUpdated, friendshipsUpdated } from './queue.actions';
@@ -15,14 +14,8 @@ import { MapVoteResult } from './models/map-vote-result';
 import { AppState } from '@app/app.state';
 import { mySlot, isPreReadied } from './queue.selectors';
 import { PreReadyService } from './pre-ready.service';
-
-class QueueEventsServiceStub {
-  slotsUpdate = new Subject<any>();
-  stateUpdate = new Subject<any>();
-  mapVoteResultsUpdate = new Subject<any>();
-  substituteRequests = new Subject<any>();
-  friendshipsUpdate = new Subject<any>();
-}
+import { Socket } from '@app/io/socket';
+import { EventEmitter } from 'eventemitter3';
 
 class PreReadyServiceStub {
 
@@ -82,15 +75,15 @@ describe('QueueEffects', () => {
       QueueEffects,
       provideMockActions(() => actions.asObservable()),
       { provide: QueueService, useValue: queueServiceStub },
-      { provide: QueueEventsService, useClass: QueueEventsServiceStub },
       provideMockStore({ initialState }),
       { provide: PreReadyService, useClass: PreReadyServiceStub },
+      { provide: Socket, useClass: EventEmitter },
     ],
   }));
 
   beforeEach(() => {
-    effects = TestBed.get(QueueEffects);
-    store = TestBed.get(Store);
+    effects = TestBed.inject(QueueEffects);
+    store = TestBed.inject(MockStore);
   });
 
   it('should load the queue', () => {
@@ -101,18 +94,25 @@ describe('QueueEffects', () => {
   });
 
   it('should handle queue events', () => {
-    const queueEvents = TestBed.get(QueueEventsService) as QueueEventsServiceStub;
+    const socket = TestBed.inject(Socket);
     const spy = spyOn(store, 'dispatch');
 
     const slots: QueueSlot[] = [
       { id: 0, gameClass: 'soldier', playerId: 'FAKE_ID_1', ready: false, },
       { id: 1, gameClass: 'medic', playerId: 'FAKE_ID_2', ready: true, }
     ];
-    queueEvents.slotsUpdate.next(slots);
+
+    // @ts-ignore
+    socket.emit('queue slots update', slots);
     expect(spy).toHaveBeenCalledWith(queueSlotsUpdated({ slots }));
 
+    // @ts-ignore
+    socket.emit('queue state update', 'waiting');
+    expect(spy).toHaveBeenCalledWith(queueStateUpdated({ queueState: 'waiting' }));
+
     const results: MapVoteResult[] = [ { map: 'cp_fake_rc1', voteCount: 5 } ];
-    queueEvents.mapVoteResultsUpdate.next(results);
+    // @ts-ignore
+    socket.emit('map vote results update', results);
     expect(spy).toHaveBeenCalledWith(mapVoteResultsUpdated({ results }));
 
     const substituteRequests = [
@@ -123,11 +123,13 @@ describe('QueueEffects', () => {
         team: 'BLU'
       }
     ];
-    queueEvents.substituteRequests.next(substituteRequests);
+    // @ts-ignore
+    socket.emit('substitute requests update', substituteRequests);
     expect(spy).toHaveBeenCalledWith(substituteRequestsUpdated({ substituteRequests }));
 
     const friendships = [{ sourcePlayerId: 'FAKE_SOURCE', targetPlayerId: 'FAKE_TARGET' }];
-    queueEvents.friendshipsUpdate.next(friendships);
+    // @ts-ignore
+    socket.emit('friendships update', friendships);
     expect(spy).toHaveBeenCalledWith(friendshipsUpdated({ friendships }));
   });
 
