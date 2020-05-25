@@ -1,3 +1,8 @@
+# [2.4.1](https://github.com/tf2pickup-pl/client/compare/2.4.0...2.4.1) (2020-05-25)
+
+### Fixes
+* Twitch streams live refresh ([0c33449](https://github.com/tf2pickup-pl/client/commit/0c334495141304f2140460ef544a15bd47b5d404))
+
 # [2.4.0](https://github.com/tf2pickup-pl/client/compare/2.3.0...2.4.0) (2020-05-16)
 
 ### Features
