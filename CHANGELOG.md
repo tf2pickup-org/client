@@ -1,3 +1,8 @@
+# [2.4.2](https://github.com/tf2pickup-pl/client/compare/2.4.1...2.4.2) (2020-05-25)
+
+### Fixes
+* Optimize bundle size ([ea1ead3](https://github.com/tf2pickup-pl/client/commit/ea1ead3847d9af3a9670beaade2b5bb946e5dc47))
+
 # [2.4.1](https://github.com/tf2pickup-pl/client/compare/2.4.0...2.4.1) (2020-05-25)
 
 ### Fixes
