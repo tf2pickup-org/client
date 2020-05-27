@@ -1,4 +1,6 @@
-@import '~bootstrap';
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins/border-radius';
 @import 'utils/font-size';
 
 $border-radius: 1rem;
