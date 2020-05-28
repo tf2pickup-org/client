@@ -1,0 +1,38 @@
+@use 'sass:color';
+
+.game-list {
+  a {
+
+    color: rgb(0, 0, 0);
+    display: block;
+    margin: 0.3rem 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+  }
+}
+
+.pagination {
+  display: flex;
+
+  justify-content: center;
+  list-style: none;
+
+  li {
+    margin: 0 0.5rem;
+
+    a {
+      color: rgb(255, 255, 255);
+    }
+  }
+
+  .active a {
+    font-weight: bold;
+  }
+
+  .disabled a {
+    color: color.scale(rgb(255, 255, 255), $lightness: -40%);
+    pointer-events: none;
+  }
+}

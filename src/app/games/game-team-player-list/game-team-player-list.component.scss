@@ -1,27 +1,27 @@
-@import "~bootstrap/scss/functions";
-@import "~bootstrap/scss/variables";
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
 
 .player-item {
+  align-items: center;
   display: flex;
   flex-flow: row nowrap;
-  align-items: center;
-  padding: 0;
   height: 3rem;
+  padding: 0;
 
   &.looking-for-substitute {
     justify-content: space-between;
 
     .dummy {
-      width: 30px;
       height: 30px;
-      margin: 0 .75rem;
+      margin: 0 0.75rem;
+      width: 30px;
     }
   }
 
   .class-icon {
-    width: 30px;
+    fill: gray('800');
     height: 30px;
-    margin: 0 .75rem;
-    fill: gray("800");
+    margin: 0 0.75rem;
+    width: 30px;
   }
 }

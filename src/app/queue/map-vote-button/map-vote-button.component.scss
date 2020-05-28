@@ -1,3 +1,4 @@
+@use 'sass:color';
 @import '~bootstrap/scss/functions';
 @import '~bootstrap/scss/variables';
 @import '~bootstrap/scss/mixins/border-radius';
@@ -6,43 +7,43 @@
 $border-radius: 1rem;
 
 .map-vote-btn {
-  margin: 1rem;
-  padding: .5rem;
 
   background-color: rgba(255, 255, 255, 0.7);
   border-radius: $border-radius;
   box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
-  color: #000000;
+  color: #000;
+  margin: 1rem;
+  padding: 0.5rem;
 
   .map-thumbnail {
-    display: block;
-    padding: 0px;
-    width: 300px;
-    height: 160px;
+    border: 0;
     border-radius: $border-radius * 0.4;
-    border: none;
+    display: block;
+    height: 160px;
+    padding: 0;
+    width: 300px;
 
-    .map-thumbnail-content {
-      width: 100%;
-      height: 100%;
+    .content-wraper {
+      align-items: stretch;
       display: flex;
       flex-direction: column;
+      height: 100%;
       justify-content: space-between;
-      align-items: stretch;
+      width: 100%;
 
-      div {
-        background-color: rgba($color: #0A1A33, $alpha: 0.5);
-        color: #ffffff;
-        font-weight: 600;
+      .content {
         @include font-size(1.2);
+        background-color: color.adjust(rgb(0, 0, 0), $lightness: 10%, $alpha: -0.4);
+        color: #fff;
+        font-weight: 600;
+      }
 
-        &.top {
-          @include border-top-radius($border-radius * 0.4);
-        }
+      .top {
+        @include border-top-radius($border-radius * 0.4);
+      }
 
-        &.bottom {
-          @include border-bottom-radius($border-radius * 0.4);
-        }
+      .bottom {
+        @include border-bottom-radius($border-radius * 0.4);
       }
     }
   }

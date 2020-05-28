@@ -1,0 +1,8 @@
+@use 'sass:color';
+
+$player-avatar-border-color: color.scale(rgb(0, 0, 0), $lightness: 40%);
+
+.player-avatar {
+  border: 1px solid $player-avatar-border-color;
+  margin: 1rem;
+}

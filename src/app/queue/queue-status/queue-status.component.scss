@@ -1,13 +1,13 @@
 @import 'utils/font-size';
 
 .queue-status {
-  text-align: center;
-  padding: .5rem;
-  margin: 1.5rem 0;
-  color: #0d1d36;
-  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
   @include font-size(1.8);
   border-radius: 1rem;
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+  color: #0d1d36;
+  margin: 1.5rem 0;
+  padding: 0.5rem;
+  text-align: center;
 
   &.waiting {
     background-color: rgba(255, 255, 255, 0.7);

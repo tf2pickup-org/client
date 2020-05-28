@@ -1,11 +1,11 @@
-$body-bg: #0d1d36;
-$body-color: #ffffff;
-$font-family-sans-serif: "Montserrat", sans-serif;
+$background: #0d1d36;
+$foreground: #fff;
 
-$theme-colors: (
-  "queue-slot-free": rgba(#ffffff, 0.65),
-  "queue-slot-taken": rgba(#ffffff, 0.95),
-  "queue-slot-taken-by-me": rgba(#ffffff, 1.0),
-  "queue-slot-ready-up-0": rgba(#c0080f, 0.95),
-  "queue-slot-ready-up-1": rgba(#41ca25, 0.75),
-);
+$queue-slot-free: rgba(255, 255, 255, 0.65);
+$queue-slot-taken: rgba(255, 255, 255, 0.95);
+$queue-slot-taken-by-me: rgba(255, 255, 255, 1);
+$queue-slot-ready-up-0: rgba(192, 8, 15, 0.95);
+$queue-slot-ready-up-1: rgba(65, 202, 37, 0.75);
+
+$badge-primary-color: rgb(255, 173, 23);
+$badge-twitch-color: rgb(145, 70, 255);

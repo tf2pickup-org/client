@@ -1,0 +1,36 @@
+<div class="h5 text-center">games</div>
+
+<div class="card game-list">
+  <a *ngFor="let game of games | async | paginate: { itemsPerPage: gamesPerPage, currentPage: (page | async), totalItems: (gameCount | async) }"
+    [routerLink]="['/game', game.id]">
+    <app-game-class-icon [gameClass]="game.classPlayed" size="20"></app-game-class-icon>
+    #{{ game.number }} - {{ game.launchedAt | date:'mediumDate'}} - {{ game.map }}
+  </a>
+</div>
+
+<pagination-template #p="paginationApi" (pageChange)="getPage($event)">
+  <nav *ngIf="p.pages.length > 1" class="my-3">
+    <ul class="pagination">
+      <li [class.disabled]="p.isFirstPage()">
+        <a aria-label="Previous" [routerLink]="" (click)="p.previous()">
+          <span aria-hidden="true">&laquo;</span>
+          <span class="sr-only">Previous</span>
+        </a>
+      </li>
+
+      <li *ngFor="let page of p.pages"
+        [class.active]="p.getCurrent() === page.value">
+        <a [routerLink]="" (click)="p.setCurrent(page.value)">
+          {{ page.label }}
+        </a>
+      </li>
+
+      <li [class.disabled]="p.isLastPage()">
+        <a aria-label="Next" [routerLink]="" (click)="p.next()">
+          <span aria-hidden="true">&raquo;</span>
+          <span class="sr-only">Next</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</pagination-template>

@@ -1,50 +1,56 @@
 <div *ngIf="player | async as _player"
   class="container py-5">
 
-  <h4>
-    {{ _player.name }}
-    <span *ngIf="_player.role" class="badge badge-warning">admin</span>
-    <small class="text-muted ml-2">
-      <a [href]="_player.steamId | steamProfileLink" target="_blank">steam</a>
-
-      <ng-container *ngIf="_player.etf2lProfileId">
-        &bull;
-        <a [href]="_player.etf2lProfileId | etf2lProfileLink" target="_blank">etf2l</a>
-      </ng-container>
-
-      &bull;
-      <a [href]="_player.steamId | logsTfProfileLink" target="_blank">logs</a>
-
-      <ng-container *ngIf="_player.twitchTvUser">
-        &bull;
-        <a [href]="_player.twitchTvUser.login | twitchTvProfileLink" target="_blank" class="text-twitch">twitch</a>
-      </ng-container>
-
-      <ng-container *ngIf="isAdmin | async">
-        &bull;
-        <a [routerLink]="['/player', _player.id, 'edit']" class="text-secondary">edit</a>
-
-        &bull;
-        <a [routerLink]="['/player', _player.id, 'bans']" class="text-danger">bans</a>
-      </ng-container>
-
-      <ng-container *ngIf="isSuperUser | async">
-        &bull;
-        <a [routerLink]="" class="text-dark" (click)="openEditPlayerRoleDialog()">roles</a>
-      </ng-container>
-    </small>
-  </h4>
-
-  <div class="row text-muted">
-    <div class="col">joined</div>
-    <div class="col">games played</div>
-  </div>
-
   <div class="row">
-    <div class="col">{{ _player.joinedAt | date:'medium' }}</div>
-    <div class="col"><app-player-stats [playerStats]="stats | async"></app-player-stats></div>
+    <div class="col-auto">
+      <a class="card external-profile-link"
+        [href]="_player.steamId | steamProfileLink"
+        target="_blank"
+        tooltip="Steam profile"
+        placement="left">
+        <img src="/assets/steam.png" width="48" height="48">
+        <span class="sr-only">Steam profile</span>
+      </a>
+
+      <a *ngIf="_player.etf2lProfileId"
+        class="card external-profile-link"
+        [href]="_player.etf2lProfileId | etf2lProfileLink"
+        target="_blank"
+        tooltip="ETF2L profile"
+        placement="left">
+        <span class="sr-only">ETF2L profile</span>
+        etf2l
+      </a>
+
+      <a class="card external-profile-link"
+        [href]="_player.steamId | logsTfProfileLink"
+        target="_blank"
+        tooltip="logs.tf profile"
+        placement="left">
+        <span class="sr-only">logs.tf profile</span>
+        logs
+      </a>
+
+      <a *ngIf="_player.twitchTvUser"
+        class="card external-profile-link"
+        [href]="_player.twitchTvUser.login | twitchTvProfileLink"
+        target="_blank"
+        tooltip="twitch.tv profile"
+        placement="left">
+        <span class="sr-only">twitch.tv profile</span>
+        <img src="/assets/TwitchGlitchPurple.png" height="48">
+      </a>
+    </div>
+
+    <div class="col px-3">
+      <app-player-details-badges [player]="_player"></app-player-details-badges>
+      <app-player-details-header [player]="_player"></app-player-details-header>
+      <app-player-stats [playerStats]="stats | async"></app-player-stats>
+    </div>
+
+    <div class="col">
+      <app-player-details-game-list [playerId]="_player.id"></app-player-details-game-list>
+    </div>
   </div>
 
-  <h6 class="mt-5">Games</h6>
-  <app-game-list [playerId]="_player.id"></app-game-list>
 </div>

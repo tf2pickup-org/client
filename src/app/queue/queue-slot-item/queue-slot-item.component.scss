@@ -1,33 +1,34 @@
+@use 'sass:color';
+@use 'theme';
+
 @import '~bootstrap/scss/functions';
 @import '~bootstrap/scss/variables';
-@import 'utils/font-size';
-@import 'theme';
 
 .queue-slot-item {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: center;
   align-items: center;
-
-  height: 3rem;
-  margin: .5rem 0;
-
   border-radius: 1rem;
   box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
-  @include font-size(1.3);
+  display: flex;
+  flex-flow: row nowrap;
+
+  font-size: 1.3rem;
   font-weight: bold;
+
+  height: 3rem;
+  justify-content: center;
+  margin: 0.5rem 0;
 
   position: relative;
 
   &.free {
-    background-color: theme-color("queue-slot-free");
+    background-color: theme.$queue-slot-free;
 
     .add-prompt {
       display: none;
     }
 
     &:not(.locked):hover {
-      background-color: theme-color("light");
+      background-color: theme-color('light');
       cursor: pointer;
 
       .add-prompt {
@@ -37,36 +38,36 @@
   }
 
   &.taken {
-    background-color: theme-color("queue-slot-taken");
+    background-color: theme.$queue-slot-taken;
 
     a {
-      color: color-yiq(theme-color("queue-slot-taken"));
+      color: color.invert(theme.$queue-slot-taken);
     }
 
     &.by-me {
-      background-color: theme-color("queue-slot-taken-by-me");
+      background-color: theme.$queue-slot-taken-by-me;
 
       a {
-        color: color-yiq(theme-color("queue-slot-taken-by-me"));
+        color: color.invert(theme.$queue-slot-taken-by-me);
       }
     }
 
     &.and-ready {
-      background-color: theme-color("queue-slot-ready-up-1");
+      background-color: theme.$queue-slot-ready-up-1;
 
       a {
-        color: color-yiq(theme-color("queue-slot-ready-up-1"));
+        color: color.invert(theme.$queue-slot-ready-up-1);
       }
     }
   }
 
   .avatar {
+    left: 0.7em;
     position: absolute;
-    left: .7em;
   }
 
   .slot-action-btn {
     position: absolute;
-    right: .7em;
+    right: 0.7em;
   }
 }

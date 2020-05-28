@@ -1,17 +1,10 @@
-@import "~bootstrap/scss/functions";
-@import "~bootstrap/scss/variables";
-
-.col.narrow {
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
-  align-items: center;
+.card.games-player-total {
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-align: center;
 }
 
-.class-icon {
-  display: inline-block;
-  width: 30px;
-  height: 30px;
-  margin: 0 .25em;
-  fill: gray("700");
+.player-stats-games-played-class {
+  font-size: 1.4rem;
+  font-weight: bold;
 }

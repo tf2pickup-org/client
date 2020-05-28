@@ -1,0 +1,29 @@
+@use 'theme';
+
+.badge {
+  border-radius: 0.8rem;
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.9);
+  color: rgb(255, 255, 255);
+  font-weight: 600;
+  margin: 0 0.3rem;
+  padding: 0.3rem 0.9rem;
+
+  &:first-child {
+    margin-left: 0;
+  }
+}
+
+.badge-admin {
+  background-color: theme.$badge-primary-color;
+}
+
+.badge-twitch {
+  background-color: theme.$badge-twitch-color;
+}
+
+.divider {
+  background-color: rgb(255, 255, 255);
+  height: 2px;
+  margin: 0.6rem 1rem 0;
+  width: 100%;
+}

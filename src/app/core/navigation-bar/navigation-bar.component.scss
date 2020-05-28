@@ -12,14 +12,14 @@ $navigation-bar-link-height: $navigation-bar-height * 0.8687;
 $navigation-bar-border-radius: 2.8125rem;
 
 .navigation-bar {
+  @include border-bottom-radius($navigation-bar-border-radius);
+  background-color: $navigation-bar-background;
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
   display: flex;
   flex-flow: row nowrap;
   justify-content: flex-start;
-  background-color: $navigation-bar-background;
   max-height: $navigation-bar-height;
   min-height: $navigation-bar-height;
-  box-shadow: 0 0 .5rem rgba(0, 0, 0, 0.5);
-  @include border-bottom-radius($navigation-bar-border-radius);
 
   .logo:focus {
     outline: none;
@@ -32,10 +32,10 @@ $navigation-bar-border-radius: 2.8125rem;
     padding: 0 1rem;
 
     a {
-      color: #ffffff;
+      color: #fff;
 
       &:hover {
-        color: #ffffff;
+        color: #fff;
         text-decoration: none;
       }
     }
@@ -45,20 +45,20 @@ $navigation-bar-border-radius: 2.8125rem;
       font-weight: bold;
 
       .link {
-        display: block;
-        position: relative;
         background-color: $navigation-bar-link-background;
-        box-shadow: 0 0 .5rem rgba(0, 0, 0, 0.5);
+        border-radius: 0.3125rem 0.3125rem 2.5rem;
+        box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
+        display: block;
         height: $navigation-bar-link-height;
         line-height: $navigation-bar-link-height;
-        border-radius: .3125rem .3125rem 2.5rem .3125rem;
-        transition: 0.1s;
         padding: 0 2rem;
+        position: relative;
+        transition: 0.1s;
         z-index: 1;
 
         &.icon {
-          padding: 0 1.4rem;
           line-height: $navigation-bar-link-height * 0.9;
+          padding: 0 1.4rem;
         }
 
         &:hover {
@@ -72,9 +72,9 @@ $navigation-bar-border-radius: 2.8125rem;
 
         &.active {
           background-color: $navigation-bar-background;
+          box-shadow: 0.5rem 0.5rem 0.5rem -0.5rem rgba(0, 0, 0, 0.5);
           height: $navigation-bar-height;
           padding-top: ($navigation-bar-height - $navigation-bar-link-height);
-          box-shadow: .5rem .5rem .5rem -.5rem rgba(0, 0, 0, 0.5);
           z-index: 0;
         }
       }
