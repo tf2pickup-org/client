@@ -6,16 +6,18 @@ import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
 import { convertToParamMap, ActivatedRoute } from '@angular/router';
-import { Store } from '@ngrx/store';
 import { loadPlayer } from '../actions';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { By } from '@angular/platform-browser';
-import { Etf2lProfileLinkPipe } from '../etf2l-profile-link.pipe';
-import { LogsTfProfileLinkPipe } from '../logs-tf-profile-link.pipe';
-import { SteamProfileLinkPipe } from '../steam-profile-link.pipe';
 import { BsModalService } from 'ngx-bootstrap/modal';
-import { EditPlayerRoleDialogComponent } from '../edit-player-role-dialog/edit-player-role-dialog.component';
-import { TwitchTvProfileLinkPipe } from '../twitch-tv-profile-link.pipe';
+import { MockComponent } from 'ng-mocks';
+import { PlayerDetailsExternalProfileLinksComponent } from
+  '../player-details-external-profile-links/player-details-external-profile-links.component';
+import { PlayerDetailsBadgesComponent } from '../player-details-badges/player-details-badges.component';
+import { PlayerDetailsHeaderComponent } from '../player-details-header/player-details-header.component';
+import { PlayerStatsComponent } from '../player-stats/player-stats.component';
+import { PlayerDetailsGameListComponent } from '../player-details-game-list/player-details-game-list.component';
+import { By } from '@angular/platform-browser';
+import { PlayerRole } from '../models/player-role';
+import { Player } from '../models/player';
 
 class PlayersServiceStub {
   fetchPlayerStats() { return of({}); }
@@ -24,7 +26,7 @@ class PlayersServiceStub {
 const paramMap = of(convertToParamMap({ id: 'FAKE_ID' }));
 
 class BsModalServiceStub {
-  show(component: any, config: any) { }
+  show() { }
 }
 
 describe('PlayerDetailsComponent', () => {
@@ -47,11 +49,12 @@ describe('PlayerDetailsComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [
-        Etf2lProfileLinkPipe,
-        LogsTfProfileLinkPipe,
-        SteamProfileLinkPipe,
         PlayerDetailsComponent,
-        TwitchTvProfileLinkPipe,
+        MockComponent(PlayerDetailsExternalProfileLinksComponent),
+        MockComponent(PlayerDetailsBadgesComponent),
+        MockComponent(PlayerDetailsHeaderComponent),
+        MockComponent(PlayerStatsComponent),
+        MockComponent(PlayerDetailsGameListComponent),
       ],
       imports: [
         RouterTestingModule,
@@ -62,7 +65,6 @@ describe('PlayerDetailsComponent', () => {
         { provide: ActivatedRoute, useValue: { paramMap } },
         { provide: BsModalService, useClass: BsModalServiceStub },
       ],
-      schemas: [ NO_ERRORS_SCHEMA ],
     })
     .compileComponents();
   }));
@@ -92,13 +94,12 @@ describe('PlayerDetailsComponent', () => {
   });
 
   describe('when player loaded', () => {
-    const player = {
-      joinedAt: '2019-08-09T20:45:56.785Z',
+    const player: Player = {
+      joinedAt: new Date(),
       steamId: '76561198977546450',
       name: 'niewielki',
       avatarUrl: 'FAKE_URL',
-      role: 'admin',
-      hasAcceptedRules: true,
+      role: 'admin' as PlayerRole,
       etf2lProfileId: 12345,
       id: 'FAKE_ID',
     };
@@ -123,59 +124,37 @@ describe('PlayerDetailsComponent', () => {
       fixture.detectChanges();
     });
 
-    it('should be aware of the logged-in player role', () => {
-      expect(fixture.debugElement.query(By.css('h4 small a.text-secondary'))).toBeNull();
-      store.setState({ ...stateWithFakePlayer, profile: { role: 'admin' } });
-      fixture.detectChanges();
-      expect(fixture.debugElement.query(By.css('h4 small a.text-secondary'))).toBeTruthy();
+    it('should render external profile links', () => {
+      const externalProfileLinksComponent =
+        fixture.debugElement.query(By.css('app-player-details-external-profile-links'))
+          .componentInstance as PlayerDetailsExternalProfileLinksComponent;
+
+      expect(externalProfileLinksComponent).toBeTruthy();
+      expect(externalProfileLinksComponent.player).toEqual(player);
     });
 
-    it('should render admin badge', () => {
-      const badge = fixture.debugElement.query(By.css('h4 span.badge')).nativeElement as HTMLElement;
-      expect(badge).toBeTruthy();
-      expect(badge.classList.contains('badge-warning')).toBe(true);
-      expect(badge.innerText).toEqual('admin');
+    it('should render player badges', () => {
+      const playerBadgesComponent =
+        fixture.debugElement.query(By.css('app-player-details-badges')).componentInstance as PlayerDetailsBadgesComponent;
+
+      expect(playerBadgesComponent).toBeTruthy();
+      expect(playerBadgesComponent.player).toEqual(player);
     });
 
-    describe('with twitch.tv profile', () => {
-      beforeEach(() => {
-        store.setState({...initialState,
-          players: {
-            players: {
-              ids: [
-                'FAKE_ID',
-              ],
-              entities: {
-                FAKE_ID: { ...player, twitchTvUser: { login: 'FAKE_TWITCH_LOGIN' } },
-              },
-              locked: false
-            },
-          },
-        });
-        fixture.detectChanges();
-      });
+    it('should render details header', () => {
+      const playerDetailsHeaderComponent =
+        fixture.debugElement.query(By.css('app-player-details-header')).componentInstance as PlayerDetailsHeaderComponent;
 
-      it('should render a link to the twitch.tv profile', () => {
-        const anchor = fixture.debugElement.query(By.css('a.text-twitch')).nativeElement as HTMLAnchorElement;
-        expect(anchor).toBeTruthy();
-        expect(anchor.href).toEqual('https://www.twitch.tv/FAKE_TWITCH_LOGIN/');
-      });
+      expect(playerDetailsHeaderComponent).toBeTruthy();
+      expect(playerDetailsHeaderComponent.player).toEqual(player);
     });
 
-    describe('#openEditPlayerRoleDialog()', () => {
-      it('should open the dialog with the player in the initial state', () => {
-        const spy = spyOn(TestBed.inject(BsModalService), 'show').and.callThrough();
-        component.openEditPlayerRoleDialog();
-        expect(spy).toHaveBeenCalledWith(EditPlayerRoleDialogComponent, {
-          initialState: {
-            player: jasmine.objectContaining({
-              id: 'FAKE_ID',
-              role: 'admin',
-              name: 'niewielki',
-            })
-          },
-        });
-      });
+    it('should render the player\'s game list', () => {
+      const gameListComponent =
+        fixture.debugElement.query(By.css('app-player-details-game-list')).componentInstance as PlayerDetailsGameListComponent;
+
+      expect(gameListComponent).toBeTruthy();
+      expect(gameListComponent.playerId).toEqual('FAKE_ID');
     });
   });
 });
