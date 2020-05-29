@@ -1,0 +1,10 @@
+@use 'theme';
+
+.badge {
+  border-radius: 0.8rem;
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.9);
+  color: rgb(255, 255, 255);
+  font-weight: 600;
+  margin: 0 0.3rem;
+  padding: 0.3rem 0.9rem;
+}
