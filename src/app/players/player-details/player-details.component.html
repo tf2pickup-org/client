@@ -3,43 +3,7 @@
 
   <div class="row">
     <div class="col-auto">
-      <a class="card external-profile-link"
-        [href]="_player.steamId | steamProfileLink"
-        target="_blank"
-        tooltip="Steam profile"
-        placement="left">
-        <img src="/assets/steam.png" width="48" height="48">
-        <span class="sr-only">Steam profile</span>
-      </a>
-
-      <a *ngIf="_player.etf2lProfileId"
-        class="card external-profile-link"
-        [href]="_player.etf2lProfileId | etf2lProfileLink"
-        target="_blank"
-        tooltip="ETF2L profile"
-        placement="left">
-        <span class="sr-only">ETF2L profile</span>
-        etf2l
-      </a>
-
-      <a class="card external-profile-link"
-        [href]="_player.steamId | logsTfProfileLink"
-        target="_blank"
-        tooltip="logs.tf profile"
-        placement="left">
-        <span class="sr-only">logs.tf profile</span>
-        logs
-      </a>
-
-      <a *ngIf="_player.twitchTvUser"
-        class="card external-profile-link"
-        [href]="_player.twitchTvUser.login | twitchTvProfileLink"
-        target="_blank"
-        tooltip="twitch.tv profile"
-        placement="left">
-        <span class="sr-only">twitch.tv profile</span>
-        <img src="/assets/TwitchGlitchPurple.png" height="48">
-      </a>
+      <app-player-details-external-profile-links [player]="_player"></app-player-details-external-profile-links>
     </div>
 
     <div class="col px-3">
@@ -52,5 +16,4 @@
       <app-player-details-game-list [playerId]="_player.id"></app-player-details-game-list>
     </div>
   </div>
-
 </div>

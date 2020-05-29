@@ -31,6 +31,7 @@ import { PlayerDetailsHeaderComponent } from './player-details-header/player-det
 import { PlayerDetailsGameListComponent } from './player-details-game-list/player-details-game-list.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { PlayerDetailsBadgesComponent } from './player-details-badges/player-details-badges.component';
+import { PlayerDetailsExternalProfileLinksComponent } from './player-details-external-profile-links/player-details-external-profile-links.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { PlayerDetailsBadgesComponent } from './player-details-badges/player-det
     PlayerDetailsHeaderComponent,
     PlayerDetailsGameListComponent,
     PlayerDetailsBadgesComponent,
+    PlayerDetailsExternalProfileLinksComponent,
   ],
   imports: [
     CommonModule,
