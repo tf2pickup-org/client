@@ -1,8 +1,9 @@
 <div class="container py-3">
-  <div class="list-group list-group-flush">
+  <div class="game-list">
     <a *ngFor="let game of games | async | paginate: { itemsPerPage: gamesPerPage, currentPage: (page | async), totalItems: (gameCount | async) }"
       [routerLink]="['/game', game.id]"
-      class="list-group-item list-group-item-action">
+      class="game-list--item">
+      <img src="/assets/map-thumbnails/badlands.png" class="game-list--item--map-thumbnail">
       #{{ game.number }} - {{ game.launchedAt | date:'medium' }} - {{ game.map }}
       <span *ngIf="game.state === 'launching'" class="badge badge-primary">launching</span>
       <span *ngIf="game.state === 'started'" class="badge badge-warning">in progress</span>
@@ -14,7 +15,7 @@
     <span class="text-muted">no games</span>
   </div>
 </div>
-
+<!--
 <pagination-template #p="paginationApi" (pageChange)="getPage($event)">
   <nav *ngIf="p.pages.length > 1" class="my-3">
     <ul class="pagination justify-content-center">
@@ -42,4 +43,4 @@
       </li>
     </ul>
   </nav>
-</pagination-template>
+</pagination-template> -->
