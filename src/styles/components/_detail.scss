@@ -1,20 +1,31 @@
-@use 'card';
+@use 'sass:color';
 
-.detail {
+$-detail-background-color: rgb(255, 255, 255);
+
+%-detail {
   text-align: center;
+}
 
-  &--label {
-    @extend .card;
-    @extend .detail;
-    border-radius: 0.8rem;
-    font-size: 1.4rem;
-    font-weight: 600;
-    padding: 0 2rem;
-    width: 12rem;
-  }
+.detail--label {
+  @extend %-detail;
 
-  &--value {
-    @extend .detail;
-    font-weight: 500;
-  }
+  display: block;
+  padding: 0 2rem;
+  width: 12rem;
+  padding: 0.1rem 1rem;
+
+  border-radius: 0.8rem;
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
+
+  background-color: $-detail-background-color;
+  color: color.invert($-detail-background-color);
+
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.detail--value {
+  @extend %-detail;
+
+  font-weight: 500;
 }
