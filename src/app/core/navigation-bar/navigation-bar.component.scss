@@ -1,4 +1,3 @@
-@import 'utils/font-size';
 @import '~bootstrap/scss/functions';
 @import '~bootstrap/scss/variables';
 @import '~bootstrap/scss/mixins/border-radius';
@@ -41,7 +40,7 @@ $navigation-bar-border-radius: 2.8125rem;
     }
 
     .link-item {
-      @include font-size(1.6);
+      font-size: 1.6rem;
       font-weight: bold;
 
       .link {

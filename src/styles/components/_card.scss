@@ -2,20 +2,23 @@
 
 $-card-background-color: rgb(255, 255, 255);
 
-.card {
-  background-color: $-card-background-color;
-  border-radius: 1rem;
-  color: color.invert($-card-background-color);
+.card,
+%card {
   display: block;
   padding: 0.5rem 1rem;
+
+  background-color: $-card-background-color;
+  border-radius: 1rem;
+
+  color: color.invert($-card-background-color);
   box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
+}
 
-  @at-root a#{&} {
-    color: color.invert($-card-background-color);
-    text-decoration: none;
+.card-link,
+%card-link {
+  @extend %card;
 
-    &:hover {
-      background-color: color.scale($-card-background-color, $lightness: -7%);
-    }
+  &:hover {
+    background-color: color.scale($-card-background-color, $lightness: -7%);
   }
 }

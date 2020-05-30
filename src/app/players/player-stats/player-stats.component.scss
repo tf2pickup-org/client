@@ -1,8 +1,12 @@
-.card.games-player-total {
+@use 'components/card';
+
+.games-player-total {
+  @extend %card;
+
+  margin: 0.5rem 0;
   font-size: 1.2rem;
   font-weight: 600;
   text-align: center;
-  margin: .5rem 0;
 }
 
 .player-stats-games-played-class {

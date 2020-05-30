@@ -1,14 +1,17 @@
 @use 'sass:color';
+@use 'components/card';
+@use 'utils/outline';
 
 .game-list {
-  a {
-    color: rgb(0, 0, 0);
-    display: block;
-    margin: 0.3rem 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  @extend %card;
+  list-style: none;
 
-    white-space: nowrap;
+  .game-list-item {
+    margin: 0.3rem 0;
+
+    > a {
+      color: rgb(0, 0, 0);
+    }
   }
 }
 
@@ -18,19 +21,20 @@
   justify-content: center;
   list-style: none;
 
-  li {
+  .pagination-item {
     margin: 0 0.5rem;
 
-    a {
+    > a {
+      @include outline.disable;
       color: rgb(255, 255, 255);
     }
   }
 
-  .active a {
+  .active > a {
     font-weight: bold;
   }
 
-  .disabled a {
+  .disabled > a {
     color: color.scale(rgb(255, 255, 255), $lightness: -40%);
     pointer-events: none;
   }

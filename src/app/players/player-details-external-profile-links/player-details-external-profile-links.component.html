@@ -1,4 +1,4 @@
-<a class="card external-profile-link"
+<a class="external-profile-link"
   [href]="player.steamId | steamProfileLink"
   target="_blank"
   tooltip="Steam profile"
@@ -8,7 +8,7 @@
 </a>
 
 <a *ngIf="player.etf2lProfileId"
-  class="card external-profile-link"
+  class="external-profile-link"
   [href]="player.etf2lProfileId | etf2lProfileLink"
   target="_blank"
   tooltip="ETF2L profile"
@@ -17,7 +17,7 @@
   etf2l
 </a>
 
-<a class="card external-profile-link"
+<a class="external-profile-link"
   [href]="player.steamId | logsTfProfileLink"
   target="_blank"
   tooltip="logs.tf profile"
@@ -27,7 +27,7 @@
 </a>
 
 <a *ngIf="player.twitchTvUser"
-  class="card external-profile-link"
+  class="external-profile-link"
   [href]="player.twitchTvUser.login | twitchTvProfileLink"
   target="_blank"
   tooltip="twitch.tv profile"

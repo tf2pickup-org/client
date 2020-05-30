@@ -1,7 +1,5 @@
-@import 'utils/font-size';
-
 .queue-status {
-  @include font-size(1.8);
+  font-size: 1.8rem;
   border-radius: 1rem;
   box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
   color: #0d1d36;

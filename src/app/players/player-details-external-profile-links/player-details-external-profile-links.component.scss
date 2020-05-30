@@ -1,17 +1,23 @@
-$external-profile-link-card-size: 80px;
+@use 'components/card';
+@use 'utils/outline';
 
-.card.external-profile-link {
-  align-items: center;
+$-external-profile-link-card-size: 80px;
+
+.external-profile-link {
+  @extend %card-link;
+  @include outline.disable;
+
   display: flex;
-  font-size: 1.2rem;
   margin: 1rem 0;
-
-  font-weight: 600;
-  height: $external-profile-link-card-size;
-
+  align-items: center;
   justify-content: center;
 
-  width: $external-profile-link-card-size;
+  height: $-external-profile-link-card-size;
+  width: $-external-profile-link-card-size;
+
+  font-weight: 600;
+  font-size: 1.2rem;
+  text-decoration: none;
 
   &:first-child {
     margin-top: 0;

@@ -7,7 +7,7 @@ import { map, switchMap, tap, first } from 'rxjs/operators';
 import { playerById } from '../selectors';
 import { loadPlayer } from '../actions';
 import { PlayersService } from '../players.service';
-import { profile, isAdmin, isSuperUser } from '@app/profile/profile.selectors';
+import { isAdmin, isSuperUser } from '@app/profile/profile.selectors';
 import { PlayerStats } from '../models/player-stats';
 import { Title } from '@angular/platform-browser';
 import { environment } from '@environment';
