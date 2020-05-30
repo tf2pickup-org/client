@@ -1,16 +1,24 @@
-<div class="row text-muted">
-  <div class="col">launched</div>
-  <div class="col">map</div>
-  <div class="col">server</div>
-  <div class="col">state</div>
-</div>
-
 <div class="row">
-  <div class="col">{{ launchedAt | date:'medium' }}</div>
-  <div class="col">{{ map }}</div>
-  <div class="col">{{ gameServerName }} </div>
-  <div class="col">
-    {{ state }}
-    <span *ngIf="error">({{ error }})</span>
+  <div class="col d-flex flex-column align-items-center">
+    <div class="detail--label">launched</div>
+    <div class="detail--value">{{ launchedAt | date:'medium' }}</div>
+  </div>
+
+  <div class="col d-flex flex-column align-items-center">
+    <div class="detail--label">map</div>
+    <div class="detail--value">{{ map }}</div>
+  </div>
+
+  <div class="col d-flex flex-column align-items-center">
+    <div class="detail--label">server</div>
+    <div class="detail--value">{{ gameServerName }}</div>
+  </div>
+
+  <div class="col d-flex flex-column align-items-center">
+    <div class="detail--label">state</div>
+    <div class="detail--value">
+      {{ state }}
+      <span *ngIf="error">({{ error }})</span>
+    </div>
   </div>
 </div>

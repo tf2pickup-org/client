@@ -1,35 +1,21 @@
 <div *ngIf="game | async as _game"
-  class="container py-5">
-  <h4>
+  class="container py-3">
+  <h1>
     Pickup #{{ _game.number }}
-    <small *ngIf="(isAdmin | async) && (isRunning | async)"
-      class="text-secondary ml-2 admin-buttons">
-      &bull;
-      <a [routerLink]="" class="text-secondary reinitialize-server-btn" (click)="reinitializeServer()">reinitialize server</a>
-      &bull;
-      <a [routerLink]="" class="text-secondary force-end-btn" (click)="forceEndGame()">force end</a>
-    </small>
-  </h4>
+  </h1>
 
   <app-game-basic-info
     [launchedAt]="_game.launchedAt"
     [map]="_game.map"
     [gameServerName]="gameServerName | async"
     [state]="_game.state"
-    [error]="_game.error"></app-game-basic-info>
-
-  <ng-container *ngIf="isRunning | async">
-    <app-join-game-info *ngIf="isMyGame | async; else watchGameInfo"
-      [mumbleUrl]="mumbleUrl | async"
-      [connectString]="_game.connectString"></app-join-game-info>
-    <ng-template #watchGameInfo>
-      <app-watch-game-info [stvConnectString]="_game.stvConnectString"></app-watch-game-info>
-    </ng-template>
-  </ng-container>
+    [error]="_game.error"
+    class="d-block mt-4"></app-game-basic-info>
 
   <app-game-summary *ngIf="_game.state === 'ended'"
     [logsUrl]="_game.logsUrl"
-    [demoUrl]="_game.demoUrl"></app-game-summary>
+    [demoUrl]="_game.demoUrl"
+    class="d-block mt-3"></app-game-summary>
 
   <div class="row mt-4">
     <div class="col team-blu">
@@ -42,7 +28,8 @@
         [showAdminActionButtons]="(isAdmin | async) && (isRunning | async)"
         (requestSubstitute)="requestSubstitute($event)"
         (replacePlayer)="replacePlayer($event)"
-        [locked]="isLocked | async"></app-game-team-player-list>
+        [locked]="isLocked | async"
+        class="d-block mt-4"></app-game-team-player-list>
     </div>
 
     <div class="col team-red">
@@ -55,7 +42,8 @@
         [showAdminActionButtons]="(isAdmin | async) && (isRunning | async)"
         (requestSubstitute)="requestSubstitute($event)"
         (replacePlayer)="replacePlayer($event)"
-        [locked]="isLocked | async"></app-game-team-player-list>
+        [locked]="isLocked | async"
+        class="d-block mt-4"></app-game-team-player-list>
     </div>
   </div>
 </div>

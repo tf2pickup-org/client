@@ -1,0 +1,20 @@
+@use 'card';
+
+.detail {
+  text-align: center;
+
+  &--label {
+    @extend .card;
+    @extend .detail;
+    border-radius: 0.8rem;
+    font-size: 1.4rem;
+    font-weight: 600;
+    padding: 0 2rem;
+    width: 12rem;
+  }
+
+  &--value {
+    @extend .detail;
+    font-weight: 500;
+  }
+}

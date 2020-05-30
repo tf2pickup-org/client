@@ -1,27 +1,11 @@
-@import '~bootstrap/scss/functions';
-@import '~bootstrap/scss/variables';
-
-.player-item {
-  align-items: center;
-  display: flex;
-  flex-flow: row nowrap;
-  height: 3rem;
-  padding: 0;
-
-  &.looking-for-substitute {
-    justify-content: space-between;
-
-    .dummy {
-      height: 30px;
-      margin: 0 0.75rem;
-      width: 30px;
-    }
-  }
-
-  .class-icon {
-    fill: gray('800');
-    height: 30px;
-    margin: 0 0.75rem;
-    width: 30px;
+.player-list {
+  a {
+    color: rgb(0, 0, 0);
+    margin: 0.3rem 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 500;
+    line-height: 2.5rem;
+    white-space: nowrap;
   }
 }

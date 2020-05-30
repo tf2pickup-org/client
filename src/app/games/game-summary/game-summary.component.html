@@ -1,24 +1,29 @@
-<div class="row text-muted mt-2">
-  <div class="col">logs</div>
-  <div class="col">demo</div>
-</div>
-
 <div class="row">
-  <div class="col">
-    <span *ngIf="logsUrl; else noLogs">
-      <a [href]="logsUrl" target="_blank">{{ logsUrl }}</a>
-    </span>
-    <ng-template #noLogs>
-      <span class="font-italic text-muted">unavailable</span>
-    </ng-template>
+  <div class="col d-flex flex-column align-items-center">
+    <div class="detail--label">logs</div>
+    <div class="detail--value">
+      <a *ngIf="logsUrl; else noLogs"
+        [href]="logsUrl"
+        target="_blank">
+        {{ logsUrl }}
+      </a>
+      <ng-template #noLogs>
+        <span class="font-italic text-muted">unavailable</span>
+      </ng-template>
+    </div>
   </div>
 
-  <div class="col">
-    <span *ngIf="demoUrl; else noDemo">
-      <a [href]="demoUrl" target="_blank">{{ demoUrl }}</a>
-    </span>
-    <ng-template #noDemo>
-      <span class="font-italic text-muted">unavailable</span>
-    </ng-template>
+  <div class="col d-flex flex-column align-items-center">
+    <div class="detail--label">demo</div>
+    <div class="detail--value">
+      <a *ngIf="demoUrl; else noDemo"
+        [href]="demoUrl"
+        target="_blank">
+        {{ demoUrl }}
+      </a>
+      <ng-template #noDemo>
+        <span class="font-italic text-muted">unavailable</span>
+      </ng-template>
+    </div>
   </div>
 </div>

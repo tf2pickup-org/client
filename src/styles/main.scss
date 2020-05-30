@@ -6,6 +6,11 @@ $body-bg: #0d1d36;
 $body-color: #fff;
 $font-family-sans-serif: 'Montserrat', sans-serif;
 
+$link-color: #fff;
+$link-decoration: none;
+$link-hover-color: darken($link-color, 15%);
+$link-hover-decoration: underline;
+
 @import '~bootstrap/scss/functions';
 @import '~bootstrap/scss/variables';
 @import '~bootstrap/scss/mixins';
@@ -19,6 +24,7 @@ $font-family-sans-serif: 'Montserrat', sans-serif;
 
 @import 'components/card';
 @import 'components/badge';
+@import 'components/detail';
 
 body {
   background-attachment: fixed;

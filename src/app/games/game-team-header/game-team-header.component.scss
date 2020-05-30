@@ -1,3 +1,4 @@
+@use 'theme';
 @import '~bootstrap/scss/functions';
 @import '~bootstrap/scss/variables';
 
@@ -7,18 +8,19 @@
   display: flex;
   justify-content: center;
   text-align: center;
+  padding: .2rem 0;
 
   .team-name {
-    font-size: 200%;
-    font-weight: bold;
+    font-size: 2rem;
+    font-weight: 700;
   }
 
-  &.team-header-red {
-    background-color: #ff6868;
+  &--red {
+    background-color: theme.$team-color-red;
   }
 
-  &.team-header-blu {
-    background-color: #71afff;
+  &--blu {
+    background-color: theme.$team-color-blu;
   }
 
   .team-score {
