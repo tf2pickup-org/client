@@ -6,7 +6,8 @@
   justify-content: space-around;
   align-items: center;
 
-  @include respond.below(medium) {
-    display: none;
+  @include respond.below(large) {
+    flex-flow: column;
+    justify-content: flex-start;
   }
 }

@@ -1,47 +1,93 @@
 @use 'sass:color';
-@import '~bootstrap/scss/functions';
-@import '~bootstrap/scss/variables';
-@import '~bootstrap/scss/mixins/border-radius';
+@use 'utils/border-radius';
+@use 'utils/respond';
 
-$border-radius: 1rem;
+$-button-border-radius-large: 1rem;
+$-button-border-radius-small: 0.5rem;
+$-thumbnail-border-radius: 0.4rem;
+$-overlay-background-color: color.adjust(rgb(0, 0, 0), $lightness: 10%, $alpha: -0.4);
 
 .map-vote-btn {
-  background-color: rgba(255, 255, 255, 0.7);
-  border-radius: $border-radius;
-  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
-  color: #000;
   margin: 1rem;
   padding: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: $-button-border-radius-large;
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
 
-  .map-thumbnail {
-    border: 0;
-    border-radius: $border-radius * 0.4;
-    display: block;
-    height: 160px;
-    padding: 0;
-    width: 300px;
+  @include respond.below(large) {
+    margin: 0.2rem 0;
+    padding: 0.1rem;
+    border-radius: $-button-border-radius-small;
+  }
+}
 
-    .content-wraper {
-      align-items: stretch;
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-      justify-content: space-between;
-      width: 100%;
+.map-thumbnail {
+  display: block;
+  padding: 0;
+  height: 160px;
+  width: 300px;
+  border: 0;
+  border-radius: $-thumbnail-border-radius;
 
-      .content {
-        font-size: 1.2rem;
-        background-color: color.adjust(rgb(0, 0, 0), $lightness: 10%, $alpha: -0.4);
-        color: #fff;
-        font-weight: 700;
+  @include respond.below(large) {
+    height: auto;
+  }
+
+  .content-wraper {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+
+    height: 100%;
+    width: 100%;
+
+    @include respond.above(large) {
+      flex-flow: column nowrap;
+    }
+
+    @include respond.below(large) {
+      flex-flow: row nowrap;
+    }
+
+    .content {
+      background-color: $-overlay-background-color;
+      color: #fff;
+
+      font-size: 1.2rem;
+      font-weight: 700;
+
+      > span {
+        @include respond.below(large) {
+          padding: 0 0.3rem;
+        }
+      }
+    }
+
+    .map-name {
+      @include respond.above(large) {
+        @include border-radius.top($-thumbnail-border-radius);
       }
 
-      .top {
-        @include border-top-radius($border-radius * 0.4);
+      @include respond.below(large) {
+        @include border-radius.left($-thumbnail-border-radius);
+      }
+    }
+
+    .map-vote-result {
+      @include respond.above(large) {
+        @include border-radius.bottom($-thumbnail-border-radius);
       }
 
-      .bottom {
-        @include border-bottom-radius($border-radius * 0.4);
+      @include respond.below(large) {
+        @include border-radius.right($-thumbnail-border-radius);
+      }
+    }
+
+    .fill {
+      flex: 1 1 auto;
+
+      @include respond.above(large) {
+        display: none;
       }
     }
   }

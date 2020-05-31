@@ -9,11 +9,12 @@
     class="map-thumbnail"
     [style.background-image]="'url(' + mapThumbnailImage + ')'">
     <div class="content-wraper">
-      <div class="content top">
-        {{ map }}
+      <div class="content map-name">
+        <span>{{ map }}</span>
       </div>
-      <div class="content bottom">
-        {{ votePercent | percent }}
+      <div class="content fill"></div>
+      <div class="content map-vote-result">
+        <span>{{ votePercent | percent }}</span>
       </div>
     </div>
   </div>

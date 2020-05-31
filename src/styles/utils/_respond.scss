@@ -12,6 +12,18 @@ $breakpoints: (
   huge: 1200px,
 );
 
+@mixin above($breakpoint) {
+  @if map.has-key($breakpoints, $breakpoint) {
+    $value: map.get($breakpoints, $breakpoint);
+
+    @media (min-width: $value) {
+      @content;
+    }
+  } @else {
+    @warn 'Invalid breakpoint: #{$breakpoint}.';
+  }
+}
+
 @mixin below($breakpoint) {
   @if map.has-key($breakpoints, $breakpoint) {
     $value: map.get($breakpoints, $breakpoint);
