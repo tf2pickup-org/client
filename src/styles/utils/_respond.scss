@@ -20,7 +20,7 @@ $breakpoints: (
       @content;
     }
   } @else {
-    @warn 'Invalid breakpoint: #{$breakpoint}.';
+    @error 'Invalid breakpoint: #{$breakpoint}.';
   }
 }
 
@@ -33,5 +33,24 @@ $breakpoints: (
     }
   } @else {
     @error 'Invalid breakpoint: #{$breakpoint}';
+  }
+}
+
+@mixin between($lower, $upper) {
+  @if map.has-key($breakpoints, $lower) and map.has-key($breakpoints, $upper) {
+    $lower-breakpoint: map.get($breakpoints, $lower);
+    $upper-breakpoint: map.get($breakpoints, $upper);
+
+    @media (min-width: $lower-breakpoint) and (max-width: ($upper-breakpoint - 1)) {
+      @content;
+    }
+  } @else {
+    @if (map.has-key($breakpoints, $lower) == false) {
+      @error 'Your lower breakpoint was invalid: #{$lower}.';
+    }
+
+    @if (map.has-key($breakpoints, $upper) == false) {
+      @error 'Your upper breakpoint was invalid: #{$upper}.';
+    }
   }
 }

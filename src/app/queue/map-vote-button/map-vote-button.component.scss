@@ -6,6 +6,7 @@ $-button-border-radius-large: 1rem;
 $-button-border-radius-small: 0.5rem;
 $-thumbnail-border-radius: 0.4rem;
 $-overlay-background-color: color.adjust(rgb(0, 0, 0), $lightness: 10%, $alpha: -0.4);
+$-display-small-buttons-threshold: huge;
 
 .map-vote-btn {
   margin: 1rem;
@@ -14,7 +15,7 @@ $-overlay-background-color: color.adjust(rgb(0, 0, 0), $lightness: 10%, $alpha: 
   border-radius: $-button-border-radius-large;
   box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
 
-  @include respond.below(large) {
+  @include respond.below($-display-small-buttons-threshold) {
     margin: 0.2rem 0;
     padding: 0.1rem;
     border-radius: $-button-border-radius-small;
@@ -29,7 +30,7 @@ $-overlay-background-color: color.adjust(rgb(0, 0, 0), $lightness: 10%, $alpha: 
   border: 0;
   border-radius: $-thumbnail-border-radius;
 
-  @include respond.below(large) {
+  @include respond.below($-display-small-buttons-threshold) {
     height: auto;
   }
 
@@ -41,11 +42,11 @@ $-overlay-background-color: color.adjust(rgb(0, 0, 0), $lightness: 10%, $alpha: 
     height: 100%;
     width: 100%;
 
-    @include respond.above(large) {
+    @include respond.above($-display-small-buttons-threshold) {
       flex-flow: column nowrap;
     }
 
-    @include respond.below(large) {
+    @include respond.below($-display-small-buttons-threshold) {
       flex-flow: row nowrap;
     }
 
@@ -57,28 +58,28 @@ $-overlay-background-color: color.adjust(rgb(0, 0, 0), $lightness: 10%, $alpha: 
       font-weight: 700;
 
       > span {
-        @include respond.below(large) {
+        @include respond.below($-display-small-buttons-threshold) {
           padding: 0 0.3rem;
         }
       }
     }
 
     .map-name {
-      @include respond.above(large) {
+      @include respond.above($-display-small-buttons-threshold) {
         @include border-radius.top($-thumbnail-border-radius);
       }
 
-      @include respond.below(large) {
+      @include respond.below($-display-small-buttons-threshold) {
         @include border-radius.left($-thumbnail-border-radius);
       }
     }
 
     .map-vote-result {
-      @include respond.above(large) {
+      @include respond.above($-display-small-buttons-threshold) {
         @include border-radius.bottom($-thumbnail-border-radius);
       }
 
-      @include respond.below(large) {
+      @include respond.below($-display-small-buttons-threshold) {
         @include border-radius.right($-thumbnail-border-radius);
       }
     }
@@ -86,7 +87,7 @@ $-overlay-background-color: color.adjust(rgb(0, 0, 0), $lightness: 10%, $alpha: 
     .fill {
       flex: 1 1 auto;
 
-      @include respond.above(large) {
+      @include respond.above($-display-small-buttons-threshold) {
         display: none;
       }
     }

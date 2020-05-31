@@ -1,10 +1,25 @@
-:host {
-  display: block;
-  margin-top: 2rem;
+@use 'utils/grid';
+@use 'utils/respond';
+
+.queue {
+  @extend %row;
 }
 
 .game-class-column {
-  min-width: 255px;
+  @extend %column;
+  margin: 1rem 0;
+
+  @include respond.above(huge) {
+    @include grid.column(3);
+  }
+
+  @include respond.between(small, huge) {
+    @include grid.column(6);
+  }
+
+  @include respond.below(small) {
+    @include grid.column(12);
+  }
 
   .game-class-name {
     font-size: 1.7rem;

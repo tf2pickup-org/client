@@ -4,19 +4,30 @@
 @import '~bootstrap/scss/functions';
 @import '~bootstrap/scss/variables';
 
+:host {
+  display: flex;
+  justify-content: center;
+
+  > * {
+    flex: 1 1 auto;
+  }
+}
+
 .queue-slot-item {
-  align-items: center;
-  border-radius: 1rem;
-  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
   display: flex;
   flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
+
+  height: 3rem;
+  margin: 0.5rem 0;
+  max-width: 270px;
+
+  border-radius: 1rem;
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
 
   font-size: 1.3rem;
   font-weight: bold;
-
-  height: 3rem;
-  justify-content: center;
-  margin: 0.5rem 0;
 
   position: relative;
 
