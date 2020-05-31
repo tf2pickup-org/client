@@ -1,0 +1,25 @@
+//
+// Media queries
+// Reference: https://glennmccomb.com/articles/useful-sass-scss-media-query-mixins-for-bootstrap/
+//
+
+@use 'sass:map';
+
+$breakpoints: (
+  small: 576px,
+  medium: 768px,
+  large: 992px,
+  huge: 1200px,
+);
+
+@mixin below($breakpoint) {
+  @if map.has-key($breakpoints, $breakpoint) {
+    $value: map.get($breakpoints, $breakpoint);
+
+    @media (max-width: ($value - 1)) {
+      @content;
+    }
+  } @else {
+    @error 'Invalid breakpoint: #{$breakpoint}';
+  }
+}

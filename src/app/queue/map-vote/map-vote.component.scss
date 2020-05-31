@@ -1,6 +1,12 @@
+@use 'utils/respond';
+
 .map-vote-container {
-  align-items: center;
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-around;
+  align-items: center;
+
+  @include respond.below(medium) {
+    display: none;
+  }
 }

@@ -1,87 +1,122 @@
-@import '~bootstrap/scss/functions';
-@import '~bootstrap/scss/variables';
-@import '~bootstrap/scss/mixins/border-radius';
+@use 'theme';
+@use 'utils/border-radius';
+@use 'utils/outline';
+@use 'utils/respond';
 
-$navigation-bar-background: #0a1a33;
-$navigation-bar-link-background: #050f1e;
+// navigation bar itself
+$-navigation-bar-height: 4.75rem;
+$-navigation-bar-border-radius: 2.8125rem;
+$-navigation-bar-shadow-color: rgba(0, 0, 0, 0.5);
+$-navigation-bar-shadow: 0 0 0.5rem $-navigation-bar-shadow-color;
 
-$navigation-bar-height: 4.75rem;
-$navigation-bar-link-height: $navigation-bar-height * 0.8687;
-
-$navigation-bar-border-radius: 2.8125rem;
+// navigation bar links
+$-link-height: $-navigation-bar-height * 0.8687;
+$-link-border-radius: 0.3125rem;
+$-link-border-radius-bottom-right: 2.5rem;
 
 .navigation-bar {
-  @include border-bottom-radius($navigation-bar-border-radius);
-  background-color: $navigation-bar-background;
-  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
+  @include border-radius.bottom($-navigation-bar-border-radius);
+
   display: flex;
   flex-flow: row nowrap;
   justify-content: flex-start;
-  max-height: $navigation-bar-height;
-  min-height: $navigation-bar-height;
 
-  .logo:focus {
-    outline: none;
+  background-color: theme.$navigation-bar-background-color;
+  box-shadow: $-navigation-bar-shadow;
+
+  max-height: $-navigation-bar-height;
+  min-height: $-navigation-bar-height;
+
+  @include respond.below(huge) {
+    justify-content: center;
+  }
+}
+
+.logo {
+  @include outline.disable;
+
+  align-self: center;
+  margin: 0 0.2rem;
+}
+
+.links {
+  display: flex;
+  flex-flow: row nowrap;
+  padding: 0 1rem;
+  list-style: none;
+
+  @include respond.below(huge) {
+    display: none;
+  }
+}
+
+.link-item {
+  font-size: 1.6rem;
+  font-weight: 700;
+
+  %advanced {
+    height: $-navigation-bar-height;
+    padding-top: ($-navigation-bar-height - $-link-height);
   }
 
-  .links {
-    display: flex;
-    flex-flow: row nowrap;
-    list-style: none;
-    padding: 0 1rem;
+  > a {
+    @include outline.disable;
 
-    a {
-      color: #fff;
+    display: block;
+    height: $-link-height;
+    line-height: $-link-height;
+    padding: 0 2rem;
+
+    background-color: theme.$navigation-bar-link-background-color;
+
+    border-radius: 0 0 $-link-border-radius-bottom-right $-link-border-radius;
+    box-shadow: $-navigation-bar-shadow;
+
+    transition: 0.1s;
+    z-index: 1;
+
+    color: #fff;
+
+    &:hover {
+      @extend %advanced;
+      text-decoration: none;
+    }
+
+    &.active { /* stylelint-disable-line selector-no-qualifying-type */
+      @extend %advanced;
+      background-color: theme.$navigation-bar-background-color;
+      box-shadow: 0.5rem 0.5rem 0.5rem -0.5rem $-navigation-bar-shadow-color;
+      z-index: 0;
+    }
+  }
+
+  &.icon {
+    > a {
+      padding: 0 1.2rem;
+      line-height: $-link-height * 0.9;
 
       &:hover {
-        color: #fff;
-        text-decoration: none;
+        @extend %advanced;
       }
     }
 
-    .link-item {
-      font-size: 1.6rem;
-      font-weight: bold;
-
-      .link {
-        background-color: $navigation-bar-link-background;
-        border-radius: 0.3125rem 0.3125rem 2.5rem;
-        box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
-        display: block;
-        height: $navigation-bar-link-height;
-        line-height: $navigation-bar-link-height;
-        padding: 0 2rem;
-        position: relative;
-        transition: 0.1s;
-        z-index: 1;
-
-        &.icon {
-          line-height: $navigation-bar-link-height * 0.9;
-          padding: 0 1.4rem;
-        }
-
-        &:hover {
-          height: $navigation-bar-height;
-          padding-top: ($navigation-bar-height - $navigation-bar-link-height);
-        }
-
-        &:focus {
-          outline: none;
-        }
-
-        &.active {
-          background-color: $navigation-bar-background;
-          box-shadow: 0.5rem 0.5rem 0.5rem -0.5rem rgba(0, 0, 0, 0.5);
-          height: $navigation-bar-height;
-          padding-top: ($navigation-bar-height - $navigation-bar-link-height);
-          z-index: 0;
-        }
-      }
+    img {
+      width: 30px;
+      height: 30px;
     }
   }
+}
 
-  .profile-link {
-    font-size: 1.8em;
-    font-weight: 700;
+.steam-login-button {
+  align-self: center;
+  margin: 0 2rem;
+
+  @include respond.below(huge) {
+    display: none;
   }
+}
+
+.profile-link {
+  font-size: 1.8em;
+  font-weight: 700;
 }

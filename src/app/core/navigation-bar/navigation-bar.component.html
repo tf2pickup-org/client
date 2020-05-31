@@ -1,45 +1,44 @@
 <nav class="navigation-bar">
-  <a class="align-self-center mx-2 logo" routerLink="/">
+  <a class="logo" routerLink="/">
     <img src="/assets/tf2pickup_logo_white.png" height="60">
   </a>
 
   <ul class="links">
     <li class="link-item">
-      <a class="link" routerLink="/games" routerLinkActive="active">games</a>
+      <a routerLink="/games" routerLinkActive="active">games</a>
     </li>
 
     <li class="link-item">
-      <a class="link" routerLink="/players" routerLinkActive="active">players</a>
+      <a routerLink="/players" routerLinkActive="active">players</a>
     </li>
 
     <li class="link-item">
-      <a class="link" routerLink="/servers" routerLinkActive="active">servers</a>
+      <a routerLink="/servers" routerLinkActive="active">servers</a>
     </li>
 
     <li class="link-item">
-      <a class="link" routerLink="/rules" routerLinkActive="active">rules</a>
+      <a routerLink="/rules" routerLinkActive="active">rules</a>
     </li>
 
-    <li class="link-item">
-      <a class="link icon" routerLink="/hall-of-fame" routerLinkActive="active" tooltip="Hall of fame">
-        <img src="/assets/ui_icon_crown.png" width="35" height="35">
+    <li class="link-item icon">
+      <a routerLink="/hall-of-fame" routerLinkActive="active" tooltip="Hall of fame">
+        <img src="/assets/ui_icon_crown.png">
       </a>
     </li>
 
     <ng-container *ngFor="let link of links">
-      <li class="link-item">
-        <a [href]="link.target" target="_blank" class="link icon" [tooltip]="link.tooltip">
+      <li class="link-item icon">
+        <a [href]="link.target" target="_blank" [tooltip]="link.tooltip">
           <img *ngIf="link.icon; else text"
             [src]="link.icon"
-            [attr.alt]="link.name"
-            width="35" height="35">
+            [attr.alt]="link.name">
           <ng-template #text>{{ link.name }}</ng-template>
         </a>
       </li>
     </ng-container>
   </ul>
 
-  <div class="flex-fill"></div>
+  <div class="flex-xl-fill"></div>
 
   <ng-container *ngIf="isAuthenticated; else notAuthenticated">
     <a routerLink="/settings"
@@ -55,7 +54,7 @@
   </ng-container>
 
   <ng-template #notAuthenticated>
-    <app-steam-login-button class="align-self-center mr-5"></app-steam-login-button>
+    <app-steam-login-button class="steam-login-button"></app-steam-login-button>
   </ng-template>
 </nav>
 
