@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { MapVoteButtonComponent } from './map-vote-button.component';
-import { MapThumbnailService } from '../map-thumbnail.service';
+import { MapThumbnailService } from '../../shared/map-thumbnail.service';
 import { By } from '@angular/platform-browser';
 import { ChangeDetectionStrategy } from '@angular/core';
 

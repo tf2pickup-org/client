@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
-import { MapThumbnailService } from '../map-thumbnail.service';
+import { MapThumbnailService } from '../../shared/map-thumbnail.service';
 
 @Component({
   selector: 'app-map-vote-button',

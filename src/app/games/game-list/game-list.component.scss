@@ -1,24 +1,56 @@
 @use 'sass:color';
+@use 'components/card';
+@use 'utils/border-radius';
+@use 'utils/outline';
+@use 'theme';
 
-$-game-item-background-color: rgb(255, 255, 255);
+$-game-item-background-color: rgba(255, 255, 255, 0.7);
+$-item-height: 80px;
+$-item-margin: 1.5rem;
+$-game-live-indicator-color: theme.$green;
+$-game-live-indicator-size: 20px;
 
-.game-list {
-  &--item {
-    display: block;
+.game-list-item {
+  @extend %card-shadow;
 
-    background-color: $-game-item-background-color;
-    border-radius: 1rem;
-    color: color.invert($-game-item-background-color);
-    display: block;
-    padding: 0;
-    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
-    margin: 1.5rem 0;
+  display: flex;
+  height: $-item-height;
 
-    color: rgb(0, 0, 0);
+  padding: 0;
+  margin: $-item-margin 0;
+  border-radius: 1rem;
 
-    &--map-thumbnail {
-      border-top-left-radius: 1rem;
-      border-bottom-left-radius: 1rem;
-    }
+  background-color: $-game-item-background-color;
+  color: theme.$font-color-dark;
+
+  font-size: 1.5rem;
+  font-weight: 600;
+
+  transition: background-color 0.05s;
+
+  &--content {
+    flex: 1 1 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &--map-thumbnail {
+    @include border-radius.right(1rem);
+    height: $-item-height;
+  }
+
+  &--live-indicator {
+    width: $-game-live-indicator-size;
+    height: $-game-live-indicator-size;
+    margin: 0 0.5rem;
+    border-radius: ($-game-live-indicator-size / 2);
+    background-color: $-game-live-indicator-color;
+    box-shadow: 0 0 0.2rem color.adjust(theme.$green, $lightness: -30%, $alpha: -0.6);
+  }
+
+  &:hover {
+    text-decoration: none;
+    background-color: color.change($-game-item-background-color, $alpha: 0.9);
   }
 }

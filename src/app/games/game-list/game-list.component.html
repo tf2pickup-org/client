@@ -1,46 +1,65 @@
 <div class="container py-3">
-  <div class="game-list">
-    <a *ngFor="let game of games | async | paginate: { itemsPerPage: gamesPerPage, currentPage: (page | async), totalItems: (gameCount | async) }"
-      [routerLink]="['/game', game.id]"
-      class="game-list--item">
-      <img src="/assets/map-thumbnails/badlands.png" class="game-list--item--map-thumbnail">
+  <a *ngFor="let game of games | async | paginate: {
+      itemsPerPage: gamesPerPage,
+      currentPage: (page | async),
+      totalItems: (gameCount | async)
+    }"
+    [routerLink]="['/game', game.id]"
+    class="game-list-item">
+    <div class="game-list-item--content">
       #{{ game.number }} - {{ game.launchedAt | date:'medium' }} - {{ game.map }}
-      <span *ngIf="game.state === 'launching'" class="badge badge-primary">launching</span>
-      <span *ngIf="game.state === 'started'" class="badge badge-warning">in progress</span>
-    </a>
-  </div>
 
-  <div *ngIf="(gameCount | async) === 0"
+      <div *ngIf="game.state === 'launching' || game.state === 'started'"
+        class="game-list-item--live-indicator"
+        [tooltip]="game.state"></div>
+    </div>
+    <img
+      [src]="game.map | mapThumbnail"
+      class="game-list-item--map-thumbnail">
+  </a>
+
+  <!-- <div *ngIf="(gameCount | async) === 0"
     class="d-flex flex-row justify-content-center">
     <span class="text-muted">no games</span>
-  </div>
+  </div> -->
 </div>
-<!--
+
 <pagination-template #p="paginationApi" (pageChange)="getPage($event)">
   <nav *ngIf="p.pages.length > 1" class="my-3">
-    <ul class="pagination justify-content-center">
-      <li class="page-item" [class.disabled]="p.isFirstPage()">
-        <a class="page-link" aria-label="Previous" [routerLink]="" (click)="p.previous()">
+    <ul class="pagination">
+      <li
+        class="pagination-item"
+        [class.disabled]="p.isFirstPage()">
+        <a
+          [routerLink]=""
+          (click)="p.previous()"
+          aria-label="Previous">
           <span aria-hidden="true">&laquo;</span>
           <span class="sr-only">Previous</span>
         </a>
       </li>
 
-      <li
-        *ngFor="let page of p.pages"
-        class="page-item"
+      <li *ngFor="let page of p.pages"
+        class="pagination-item"
         [class.active]="p.getCurrent() === page.value">
-        <a class="page-link" [routerLink]="" (click)="p.setCurrent(page.value)">
+        <a
+          [routerLink]=""
+          (click)="p.setCurrent(page.value)">
           {{ page.label }}
         </a>
       </li>
 
-      <li class="page-item" [class.disabled]="p.isLastPage()">
-        <a class="page-link" aria-label="Next" [routerLink]="" (click)="p.next()">
+      <li
+        class="pagination-item"
+        [class.disabled]="p.isLastPage()">
+        <a
+          [routerLink]=""
+          (click)="p.next()"
+          aria-label="Next">
           <span aria-hidden="true">&raquo;</span>
           <span class="sr-only">Next</span>
         </a>
       </li>
     </ul>
   </nav>
-</pagination-template> -->
+</pagination-template>

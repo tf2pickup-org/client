@@ -1,17 +1,22 @@
 @use 'sass:color';
 
-$-card-background-color: rgb(255, 255, 255);
+$background-color: rgb(255, 255, 255);
+
+%card-shadow {
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
+}
 
 .card,
 %card {
+  @extend %card-shadow;
+
   display: block;
   padding: 0.5rem 1rem;
 
-  background-color: $-card-background-color;
+  background-color: $background-color;
   border-radius: 1rem;
 
-  color: color.invert($-card-background-color);
-  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
+  color: color.invert($background-color);
 }
 
 .card-link,
@@ -19,6 +24,6 @@ $-card-background-color: rgb(255, 255, 255);
   @extend %card;
 
   &:hover {
-    background-color: color.scale($-card-background-color, $lightness: -7%);
+    background-color: color.scale($background-color, $lightness: -7%);
   }
 }
