@@ -1,0 +1,23 @@
+@use 'sass:color';
+@use 'theme';
+
+@mixin make($color, $size: 15px) {
+  display: inline-block;
+  width: $size;
+  height: $size;
+  border-radius: ($size / 2);
+  box-shadow: 0 0 0.2rem color.adjust($color, $lightness: -30%, $alpha: -0.6);
+  background-color: $color;
+}
+
+.indicator--online {
+  @include make(theme.$online);
+}
+
+.indicator--offline {
+  @include make(theme.$offline);
+}
+
+.indicator--warning {
+  @include make(theme.$warning);
+}

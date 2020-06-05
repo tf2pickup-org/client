@@ -1,0 +1,42 @@
+@use 'theme';
+@use 'utils/border-radius';
+
+$-input-border-radius: 0.8rem;
+
+.input-group {
+  display: flex;
+  flex-flow: row nowrap;
+  background-color: #fff;
+  border-radius: $-input-border-radius;
+  padding: 0;
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
+  color: theme.$font-color-dark;
+
+  > input,
+  > button,
+  > a {
+    padding: 0.4rem 1rem;
+    border: 0;
+    font-size: 1.4rem;
+    border-radius: $-input-border-radius;
+    color: theme.$font-color-dark;
+  }
+
+  > input {
+    font-weight: 500;
+  }
+
+  > button,
+  > a {
+    font-weight: 700;
+  }
+
+  .dark {
+    background-color: rgb(0, 0, 0);
+    color: theme.$font-color-light;
+  }
+
+  .right {
+    @include border-radius.left(0);
+  }
+}

@@ -1,25 +1,22 @@
-<span *ngIf="connectString; else noConnectString">
-  <div class="input-group mb-3">
+<ng-container *ngIf="connectString; else noConnectString">
+  <div class="input-group mt-3">
     <input
       type="text"
-      class="form-control"
       [value]="connectString"
       readonly
       #connectInput>
-    <div class="input-group-append">
-      <button
-        class="btn btn-outline-secondary"
-        type="button"
-        tooltip="Copy the connect string to the clipboard"
-        (click)="copyConnectString()">copy</button>
-      <a
-        [href]="connectString | connectStringToLink"
-        class="btn btn-outline-primary"
-        type="button"
-        tooltip="Join the game straight away">join</a>
-    </div>
+    <div class="flex-fill"></div>
+    <button
+      class="dark right"
+      type="button"
+      tooltip="Copy the connect string to the clipboard"
+      (click)="copyConnectString()">copy</button>
+    <a
+      [href]="connectString | connectStringToLink"
+      type="button"
+      tooltip="Join the game straight away">watch</a>
   </div>
-</span>
+</ng-container>
 
 <ng-template #noConnectString>
   <span class="font-italic text-muted">not available yet</span>

@@ -1,5 +1,6 @@
 @use 'sass:color';
 @use 'components/card';
+@use 'components/indicator';
 @use 'utils/border-radius';
 @use 'utils/outline';
 @use 'theme';
@@ -41,12 +42,8 @@ $-game-live-indicator-size: 20px;
   }
 
   &--live-indicator {
-    width: $-game-live-indicator-size;
-    height: $-game-live-indicator-size;
-    margin: 0 0.5rem;
-    border-radius: ($-game-live-indicator-size / 2);
-    background-color: $-game-live-indicator-color;
-    box-shadow: 0 0 0.2rem color.adjust(theme.$green, $lightness: -30%, $alpha: -0.6);
+    @include indicator.make($-game-live-indicator-color, $size: $-game-live-indicator-size);
+    margin: 0 1rem;
   }
 
   &:hover {

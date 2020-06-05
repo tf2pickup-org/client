@@ -1,5 +1,11 @@
-import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, HostBinding } from '@angular/core';
 import { PlayerConnectionStatus } from '../models/player-connection-status';
+
+const connectionStatusToIndicator: Record<PlayerConnectionStatus, string> = {
+  connected: 'indicator--online',
+  offline: 'indicator--offline',
+  joining: 'indicator--warning',
+};
 
 @Component({
   selector: 'app-player-connection-status',
@@ -12,4 +18,8 @@ export class PlayerConnectionStatusComponent {
   @Input()
   connectionStatus: PlayerConnectionStatus;
 
+  @HostBinding('class')
+  get className() {
+    return connectionStatusToIndicator[this.connectionStatus];
+  }
 }

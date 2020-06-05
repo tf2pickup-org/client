@@ -1,9 +1,12 @@
 @use 'sass:color';
+@use 'theme';
+
+$-font-color-lightness-threshold: 60;
 
 @function black-or-white($color) {
-  @if (color.lightness($color) > 50) {
-    @return rgb(0, 0, 0);
+  @if (color.lightness($color) > $-font-color-lightness-threshold) {
+    @return theme.$font-color-dark;
   } @else {
-    @return rgb(255, 255, 255);
+    @return theme.$font-color-light;
   }
 }

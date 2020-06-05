@@ -1,7 +1,8 @@
 <div *ngIf="players"
   class="card player-list">
-  <ng-container *ngFor="let player of players">
-    <ng-container *ngIf="player.status !== 'waiting for substitute'; else waitingForSubSlot">
+  <div *ngFor="let player of players">
+    <div *ngIf="player.status !== 'waiting for substitute'; else waitingForSubSlot"
+      class="d-flex align-items-center">
       <a [routerLink]="['/player', player.id]">
         <app-game-class-icon
           [gameClass]="player.gameClass"
@@ -9,31 +10,33 @@
         {{ player.name }}
       </a>
 
-      <span *ngIf="player.classSkill" class="badge badge-secondary mx-2">{{ player.classSkill }}</span>
-        <div class="flex-fill"></div>
-        <app-player-connection-status *ngIf="showPlayerConnectionStatus"
-          [connectionStatus]="player.connectionStatus"
-          class="mx-1"></app-player-connection-status>
+      <!-- <span *ngIf="player.classSkill" class="badge badge-secondary mx-2">{{ player.classSkill }}</span> -->
+      <div class="flex-fill"></div>
+      <app-player-connection-status
+        *ngIf="showPlayerConnectionStatus"
+        [connectionStatus]="player.connectionStatus"
+        [tooltip]="player.connectionStatus"
+        class="mx-3"></app-player-connection-status>
 
-        <ng-container *ngIf="showAdminActionButtons">
-          <button type="button" class="btn btn-link btn-sm btn-request-substitute"
-            tooltip="Request substitute"
-            (click)="emitRequestSubstitute($event, player)">
-            <span class="oi oi-transfer"></span>
-          </button>
-        </ng-container>
-    </ng-container>
+      <ng-container *ngIf="showAdminActionButtons">
+        <button type="button" class="btn btn-link btn-sm btn-request-substitute"
+          tooltip="Request substitute"
+          (click)="emitRequestSubstitute($event, player)">
+          <span class="oi oi-transfer"></span>
+        </button>
+      </ng-container>
+    </div>
+  </div>
 
-    <ng-template #waitingForSubSlot>
-      <button type="button"
-        class="list-group-item list-group-item-action list-group-item-warning player-item looking-for-substitute"
-        (click)="emitReplacePlayer(player)"
-        tooltip="Replace this player"
-        [disabled]="locked">
-        <div class="class-icon" [inlineSVG]="'/assets/tf2-classfont/' + player.gameClass + '.svg'"></div>
-        <span class="oi oi-plus"></span>
-        <div class="dummy"></div>
-      </button>
-    </ng-template>
-  </ng-container>
+  <ng-template #waitingForSubSlot>
+    <button type="button"
+      class="list-group-item list-group-item-action list-group-item-warning player-item looking-for-substitute"
+      (click)="emitReplacePlayer(player)"
+      tooltip="Replace this player"
+      [disabled]="locked">
+      <div class="class-icon" [inlineSVG]="'/assets/tf2-classfont/' + player.gameClass + '.svg'"></div>
+      <span class="oi oi-plus"></span>
+      <div class="dummy"></div>
+    </button>
+  </ng-template>
 </div>

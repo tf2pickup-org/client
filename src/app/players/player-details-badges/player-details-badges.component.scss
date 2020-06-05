@@ -1,15 +1,16 @@
 @use 'theme';
+@use 'components/badge';
 
 .badge:first-child {
   margin-left: 0;
 }
 
-.badge-admin {
-  background-color: theme.$badge-primary-color;
+.badge--admin {
+  @include badge.make(theme.$yellow);
 }
 
-.badge-twitch {
-  background-color: theme.$badge-twitch-color;
+.badge--twitch {
+  @include badge.make(theme.$twitchtv);
 }
 
 .divider {

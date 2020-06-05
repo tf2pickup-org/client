@@ -1,0 +1,24 @@
+@use 'components/badge';
+@use 'components/card';
+@use 'theme';
+
+$-item-height: 80px;
+$-item-margin: 1.5rem;
+
+.game-server-list-item {
+  @extend %card;
+
+  display: flex;
+  height: $-item-height;
+  margin: $-item-margin 0;
+  padding: 0 2rem;
+  align-items: center;
+  justify-content: space-between;
+
+  color: theme.$font-color-dark;
+}
+
+.server-name {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
