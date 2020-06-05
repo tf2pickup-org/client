@@ -1,13 +1,49 @@
-.queue-status {
-  font-size: 1.8rem;
-  border-radius: 1rem;
-  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
-  color: #0d1d36;
+@use 'sass:color';
+@use 'theme';
+
+$-ghost-line-height: 43px;
+$-ghost-line-width: 200px;
+
+%queue-status {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   margin: 1.5rem 0;
   padding: 0.5rem;
-  text-align: center;
+  border-radius: 1rem;
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
 
-  &.waiting {
+  text-align: center;
+  font-size: 1.8rem;
+  color: theme.$font-color-dark;
+}
+
+@keyframes ghost-line {
+  0% { background-color: color.change(theme.$font-color-dark, $alpha: 0.2); }
+  50% { background-color: color.change(theme.$font-color-dark, $alpha: 0.5); }
+  100% { background-color: color.change(theme.$font-color-dark, $alpha: 0.2); }
+}
+
+.queue-status {
+  &--waiting {
+    @extend %queue-status;
     background-color: rgba(255, 255, 255, 0.7);
+  }
+
+  &--loading {
+    @extend %queue-status;
+    background-color: rgba(255, 255, 255, 0.7);
+
+    .ghost-line {
+      display: block;
+      height: $-ghost-line-height;
+      width: $-ghost-line-width;
+      border-radius: 0.3rem;
+
+      animation-name: ghost-line;
+      animation-duration: 2s;
+      animation-iteration-count: infinite;
+    }
   }
 }

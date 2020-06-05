@@ -152,8 +152,8 @@ export class QueueEffects {
       .subscribe(queueState => this.store.dispatch(queueStateUpdated({ queueState })));
     fromEvent<MapVoteResult[]>(socket, 'map vote results update')
       .subscribe(results => this.store.dispatch(mapVoteResultsUpdated({ results })));
-    fromEvent<SubstituteRequest[]>(socket, 'substitute requests update').subscribe(substituteRequests =>
-        this.store.dispatch(substituteRequestsUpdated({ substituteRequests })));
+    fromEvent<SubstituteRequest[]>(socket, 'substitute requests update')
+      .subscribe(substituteRequests => this.store.dispatch(substituteRequestsUpdated({ substituteRequests })));
     fromEvent<Friendship[]>(socket, 'friendships update')
       .subscribe(friendships => this.store.dispatch(friendshipsUpdated({ friendships })));
   }

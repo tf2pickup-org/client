@@ -1,9 +1,12 @@
-<div *ngIf="state | async as _state"
-  class="queue-status"
-  [ngClass]="{
-    'waiting' :_state === 'waiting',
-    'bg-success': _state === 'ready',
-    'bg-dark': _state === 'launching'
-  }">
-  <strong>players:</strong> {{ playerCount | async }} / {{ requiredPlayerCount | async }}
+<div *ngIf="loading | async; else queueLoaded"
+  class="queue-status--loading">
+  <div class="ghost-line"></div>
 </div>
+
+<ng-template #queueLoaded>
+  <div [ngClass]="{
+      'waiting': 'queue-status--waiting'
+    }[state | async]">
+    <span><strong>players:</strong> {{ playerCount | async }} / {{ requiredPlayerCount | async }}</span>
+  </div>
+</ng-template>

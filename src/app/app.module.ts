@@ -27,6 +27,7 @@ import { HallOfFameModule } from './hall-of-fame/hall-of-fame.module';
 import { NotificationsModule } from './notifications/notifications.module';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { IoModule } from './io/io.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { IoModule } from './io/io.module';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     StoreModule.forRoot({}),
     StoreRouterConnectingModule.forRoot(),

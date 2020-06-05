@@ -10,6 +10,7 @@ export interface State extends Queue {
   readyUpDialogShown: boolean;
   mapVote?: string;
   preReady: boolean;
+  loading: boolean;
 }
 
 export const initialState: State = {
@@ -20,6 +21,7 @@ export const initialState: State = {
   readyUpDialogShown: false,
   preReady: false,
   friendships: [],
+  loading: true,
 };
 
 const updateQueueSlots = (slotsToUpdate: QueueSlot[], state: State): State => {
@@ -30,7 +32,7 @@ const updateQueueSlots = (slotsToUpdate: QueueSlot[], state: State): State => {
 
 const queueReducer = createReducer(
   initialState,
-  on(queueLoaded, (state, { queue }) => ({ ...state, ...queue })),
+  on(queueLoaded, (state, { queue }) => ({ ...state, ...queue, loading: false })),
   on(profileLoaded, (state, { profile }) => ({ ...state, mapVote: profile.mapVote })),
   on(queueSlotsUpdated, (state, { slots }) =>  updateQueueSlots(slots, state)),
   on(queueStateUpdated, (state, { queueState }) => ({ ...state, state: queueState })),
