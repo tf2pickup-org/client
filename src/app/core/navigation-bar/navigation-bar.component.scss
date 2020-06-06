@@ -50,60 +50,60 @@ $-link-border-radius-bottom-right: 2.5rem;
   }
 }
 
-.link-item {
+%advanced {
+  height: $-navigation-bar-height;
+  padding-top: ($-navigation-bar-height - $-link-height);
+}
+
+.link-item,
+%link-item {
+  @include outline.disable;
+
+  display: block;
+  height: $-link-height;
+  line-height: $-link-height;
+  padding: 0 2rem;
+
+  background-color: theme.$navigation-bar-link-background-color;
+
+  border-radius: 0 0 $-link-border-radius-bottom-right $-link-border-radius;
+  box-shadow: $-navigation-bar-shadow;
+
+  transition: 0.1s;
+
+  position: relative;
+  z-index: 1;
+
+  color: #fff;
   font-size: 1.6rem;
   font-weight: 700;
 
-  %advanced {
-    height: $-navigation-bar-height;
-    padding-top: ($-navigation-bar-height - $-link-height);
+  &:hover {
+    @extend %advanced;
+    text-decoration: none;
   }
 
-  > a {
-    @include outline.disable;
-
-    display: block;
-    height: $-link-height;
-    line-height: $-link-height;
-    padding: 0 2rem;
-
-    background-color: theme.$navigation-bar-link-background-color;
-
-    border-radius: 0 0 $-link-border-radius-bottom-right $-link-border-radius;
-    box-shadow: $-navigation-bar-shadow;
-
-    transition: 0.1s;
-    z-index: 1;
-
-    color: #fff;
-
-    &:hover {
-      @extend %advanced;
-      text-decoration: none;
-    }
-
-    &.active { /* stylelint-disable-line selector-no-qualifying-type */
-      @extend %advanced;
-      background-color: theme.$navigation-bar-background-color;
-      box-shadow: 0.5rem 0.5rem 0.5rem -0.5rem $-navigation-bar-shadow-color;
-      z-index: 0;
-    }
+  &.active {
+    @extend %advanced;
+    background-color: theme.$navigation-bar-background-color;
+    box-shadow: 0.5rem 0.5rem 0.5rem -0.5rem $-navigation-bar-shadow-color;
+    z-index: 0;
   }
 
-  &.icon {
-    > a {
-      padding: 0 1.2rem;
-      line-height: $-link-height * 0.9;
+  &--icon {
+    @extend %link-item;
+    padding: 0 1.2rem;
+    line-height: $-link-height * 0.9;
 
-      &:hover {
-        @extend %advanced;
-      }
-    }
-
-    img {
+    > img {
       width: 30px;
       height: 30px;
     }
+  }
+
+  &--profile {
+    @extend %link-item;
+    padding: 0 2rem 0 0.5rem;
   }
 }
 
@@ -116,7 +116,8 @@ $-link-border-radius-bottom-right: 2.5rem;
   }
 }
 
-.profile-link {
-  font-size: 1.8em;
-  font-weight: 700;
+.profile-avatar {
+  width: 50px;
+  height: 50px;
+  margin: 0 0.5rem;
 }
