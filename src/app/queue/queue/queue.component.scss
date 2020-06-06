@@ -20,9 +20,9 @@
   @include respond.below(small) {
     @include grid.column(12);
   }
+}
 
-  .game-class-name {
-    font-size: 1.7rem;
-    font-weight: bold;
-  }
+.game-class-name {
+  font-size: 1.7rem;
+  font-weight: bold;
 }

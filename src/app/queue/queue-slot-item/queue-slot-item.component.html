@@ -1,27 +1,30 @@
 <div
   *ngIf="slot"
-  class="queue-slot-item"
   [ngClass]="{
-    'free': !slot.playerId,
-    'locked': locked,
-    'taken': !!slot.playerId,
+    'queue-slot-item--free': !slot.playerId,
+    'queue-slot-item--taken': !!slot.playerId,
     'by-me': takenByMe,
-    'and-ready': slot.ready
+    'and-ready': slot.ready,
+    'locked': locked
   }"
   (click)="maybeTakeSlot()">
 
-  <div class="avatar" *ngIf="slot.playerId">
-    <app-player-avatar [playerId]="slot.playerId"></app-player-avatar>
+  <div class="avatar">
+    <app-player-avatar *ngIf="slot.playerId"
+      [playerId]="slot.playerId"></app-player-avatar>
   </div>
 
   <a *ngIf="slot.playerId; else addPrompt"
-    [routerLink]="['/player', slot.playerId]">
+    [routerLink]="['/player', slot.playerId]"
+    class="player-name">
     <app-player-name [playerId]="slot.playerId"></app-player-name>
   </a>
 
   <ng-template #addPrompt>
-    <span class="oi oi-plus text-secondary add-prompt"></span>
+    <i-feather name="plus" class="add-prompt"></i-feather>
   </ng-template>
+
+  <div class="slot-action"></div>
 
   <button *ngIf="!locked && takenByMe && !slot.ready"
     type="button"

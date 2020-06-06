@@ -1,9 +1,6 @@
 @use 'sass:color';
 @use 'theme';
 
-@import '~bootstrap/scss/functions';
-@import '~bootstrap/scss/variables';
-
 :host {
   display: flex;
   justify-content: center;
@@ -13,7 +10,7 @@
   }
 }
 
-.queue-slot-item {
+%queue-slot-item {
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
@@ -21,64 +18,65 @@
 
   height: 3rem;
   margin: 0.5rem 0;
+  padding: 0 1rem;
+  width: 270px;
+  min-width: 270px;
   max-width: 270px;
 
   border-radius: 1rem;
   box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
 
-  font-size: 1.3rem;
-  font-weight: bold;
-
   position: relative;
 
-  &.free {
-    background-color: theme.$queue-slot-free;
+  background-color: theme.$queue-slot-free;
+  color: theme.$font-color-dark;
+}
 
-    .add-prompt {
-      display: none;
-    }
+.queue-slot-item--free {
+  @extend %queue-slot-item;
 
-    &:not(.locked):hover {
-      background-color: theme-color('light');
-      cursor: pointer;
-
-      .add-prompt {
-        display: inline;
-      }
-    }
+  > .add-prompt {
+    display: none;
   }
 
-  &.taken {
-    background-color: theme.$queue-slot-taken;
+  &:not(.locked):hover {
+    cursor: pointer;
 
-    a {
-      color: color.invert(theme.$queue-slot-taken);
-    }
-
-    &.by-me {
-      background-color: theme.$queue-slot-taken-by-me;
-
-      a {
-        color: color.invert(theme.$queue-slot-taken-by-me);
-      }
-    }
-
-    &.and-ready {
-      background-color: theme.$queue-slot-ready-up-1;
-
-      a {
-        color: color.invert(theme.$queue-slot-ready-up-1);
-      }
+    > .add-prompt {
+      display: inline;
     }
   }
+}
 
-  .avatar {
-    left: 0.7em;
-    position: absolute;
+.queue-slot-item--taken {
+  @extend %queue-slot-item;
+
+  background-color: theme.$queue-slot-taken;
+
+  > a {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: theme.$font-color-dark;
   }
 
-  .slot-action-btn {
-    position: absolute;
-    right: 0.7em;
+  .player-name {
+    flex: 1 1 auto;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0 0.5rem;
   }
+}
+
+%side-slot {
+  min-width: 2rem;
+}
+
+.avatar {
+  @extend %side-slot;
+}
+
+.slot-action {
+  @extend %side-slot;
 }

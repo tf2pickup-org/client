@@ -1,0 +1,30 @@
+@use 'components/card';
+@use 'utils/color';
+@use 'theme';
+
+$-border-radius: 1rem;
+$-caption-background-color: theme.$dark-blue;
+
+.twitch-stream-list {
+  @extend %card-shadow;
+
+  margin: 2rem 0;
+  border-radius: $-border-radius;
+
+  background-color: rgb(255, 255, 255, 0.7);
+}
+
+.twitch-stream-list-caption {
+  @extend %card-shadow;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: $-border-radius;
+  background-color: $-caption-background-color;
+
+  font-weight: 600;
+  font-size: 1.5rem;
+  color: color.black-or-white($-caption-background-color);
+}

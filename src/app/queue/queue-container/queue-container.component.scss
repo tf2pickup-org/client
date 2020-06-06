@@ -1,32 +1,29 @@
-@import '~bootstrap/scss/functions';
-@import '~bootstrap/scss/variables';
-@import '~bootstrap/scss/mixins/breakpoints';
+@use 'utils/grid';
+@use 'utils/respond';
 
-.column-sidebar {
-  display: none;
-  width: 16rem;
+.queue-container {
+  @extend %row;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+}
 
-  @include media-breakpoint-up(xl) {
-    display: block;
+.column-queue {
+  @extend %column;
+
+  @include respond.above(huge) {
+    @include grid.column(8);
   }
 }
 
-.queue-container {
-  width: 100%;
+.column-sidebar {
+  @extend %column;
 
-  @include media-breakpoint-up(sm) {
-    max-width: 540px;
+  @include respond.above(huge) {
+    @include grid.column(2);
   }
 
-  @include media-breakpoint-up(md) {
-    max-width: 720px;
-  }
-
-  @include media-breakpoint-up(lg) {
-    max-width: 960px;
-  }
-
-  @include media-breakpoint-up(xl) {
-    max-width: 1140px;
+  @include respond.below(huge) {
+    display: none;
   }
 }

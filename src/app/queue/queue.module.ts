@@ -28,6 +28,7 @@ import { QueueSlotContainerComponent } from './queue-slot-container/queue-slot-c
 import { TwitchModule } from '@app/twitch/twitch.module';
 import { NotificationsModule } from '@app/notifications/notifications.module';
 import { SharedModule } from '@app/shared/shared.module';
+import { IconsModule } from '@app/icons/icons.module';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { SharedModule } from '@app/shared/shared.module';
     TwitchModule,
     NotificationsModule,
     SharedModule,
+    IconsModule,
 
     QueueRoutingModule,
   ],

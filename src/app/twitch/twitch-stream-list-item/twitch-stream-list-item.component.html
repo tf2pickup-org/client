@@ -1,20 +1,15 @@
 <a *ngIf="stream"
-  class="text-decoration-none text-primary"
   [href]="'https://www.twitch.tv/' + stream.userName"
-  target="_blank">
-  <div class="card">
-    <img
-      [src]="stream.thumbnailUrl.replace('{width}', 254).replace('{height}', 160)"
-      class="card-img-top"
-      width="254"
-      height="160"
-      crossorigin>
-    <div class="card-body">
-      <h6 class="card-subtitle mb-2 text-muted">
-        <app-player-name [playerId]="stream.playerId"></app-player-name>
-      </h6>
-      <p class="card-text text-truncate">{{ stream.title }}</p>
-      <p class="card-text"><small class="text-muted">{{ stream.viewerCount }} viewers</small></p>
+  target="_blank"
+  class="twitch-stream-list-item">
+  <img
+    [src]="stream.thumbnailUrl.replace('{width}', 100).replace('{height}', 50)"
+    class="stream-thumbnail"
+    width="100"
+    height="50"
+    crossorigin>
+    <div class="content">
+      <app-player-name [playerId]="stream.playerId"></app-player-name>
+      <span><i-feather name="eye" class="mx-2"></i-feather>{{ stream.viewerCount }}</span>
     </div>
-  </div>
 </a>

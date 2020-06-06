@@ -1,0 +1,38 @@
+@use 'theme';
+
+.twitch-stream-list-item {
+  display: flex;
+  flex-flow: row nowrap;
+
+  margin: 0.5rem 0;
+  padding: 1rem;
+  border-radius: 1rem;
+
+  color: theme.$font-color-dark;
+  font-weight: 600;
+
+  .content {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    padding: 0 1rem;
+
+    min-width: 0;
+    flex: 1;
+
+    > * {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+  &:hover {
+    text-decoration: none;
+    background-color: rgba(255, 255, 255, 0.9);
+  }
+}
+
+.stream-thumbnail {
+  box-shadow: 0.2rem 0.2rem 0.2rem rgba(0, 0, 0, 0.5);
+}

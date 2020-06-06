@@ -4,8 +4,6 @@ $-grid-columns: 12;
 %row {
   display: flex;
   flex-flow: row wrap;
-  margin-right: -($-gutter / 2);
-  margin-left: -($-gutter / 2);
 }
 
 %column {
