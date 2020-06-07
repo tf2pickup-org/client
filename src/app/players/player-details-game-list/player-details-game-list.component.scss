@@ -14,3 +14,14 @@
     }
   }
 }
+
+.games-caption,
+%games-caption {
+  text-align: center;
+}
+
+.no-games {
+  @extend %games-caption;
+  font-style: italic;
+  color: color.adjust(rgb(255, 255, 255), $lightness: -20%);
+}

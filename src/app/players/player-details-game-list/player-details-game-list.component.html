@@ -1,6 +1,8 @@
-<div class="h5 text-center">games</div>
+<div *ngIf="gameCount | async; else noGames"
+  class="games-caption">games</div>
 
-<ul class="game-list">
+<ul *ngIf="gameCount | async"
+  class="game-list">
   <li *ngFor="let game of games | async | paginate: { itemsPerPage: gamesPerPage, currentPage: (page | async), totalItems: (gameCount | async) }"
     class="game-list-item">
     <a [routerLink]="['/game', game.id]">
@@ -9,6 +11,10 @@
     </a>
   </li>
 </ul>
+
+<ng-template #noGames>
+  <div class="no-games">no games</div>
+</ng-template>
 
 <pagination-template #p="paginationApi" (pageChange)="getPage($event)">
   <nav *ngIf="p.pages.length > 1" class="my-3">
