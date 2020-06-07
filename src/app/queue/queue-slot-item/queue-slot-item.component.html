@@ -3,8 +3,8 @@
   [ngClass]="{
     'queue-slot-item--free': !slot.playerId,
     'queue-slot-item--taken': !!slot.playerId,
-    'by-me': takenByMe,
-    'and-ready': slot.ready,
+    'taken-by-me': takenByMe,
+    'ready': slot.ready,
     'locked': locked
   }"
   (click)="maybeTakeSlot()">
@@ -24,15 +24,16 @@
     <i-feather name="plus" class="add-prompt"></i-feather>
   </ng-template>
 
-  <div class="slot-action"></div>
-
-  <button *ngIf="!locked && takenByMe && !slot.ready"
-    type="button"
-    class="btn btn-light btn-sm slot-action-btn free-slot-btn"
-    (click)="emitFreeSlot($event)"
-    tooltip="Free this slot">
-    <span class="oi oi-minus"></span>
-  </button>
+  <div class="slot-action">
+    <button *ngIf="!locked && takenByMe && !slot.ready"
+      type="button"
+      class="free-slot-btn"
+      (click)="emitFreeSlot($event)"
+      tooltip="Free this slot"
+      container="body">
+      <i-feather name="minus"></i-feather>
+    </button>
+  </div>
 
   <button *ngIf="friendFlags.canMarkAsFriend && slot.playerId && !takenByMe"
     type="button"

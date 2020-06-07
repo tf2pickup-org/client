@@ -1,6 +1,8 @@
 @use 'sass:color';
 @use 'theme';
 
+$-side-slot-size: 2rem;
+
 :host {
   display: flex;
   justify-content: center;
@@ -67,10 +69,14 @@
     text-overflow: ellipsis;
     padding: 0 0.5rem;
   }
+
+  .taken-by-me {
+    background-color: color.change(theme.$queue-slot-taken, $alpha: 1.0);
+  }
 }
 
 %side-slot {
-  min-width: 2rem;
+  min-width: $-side-slot-size;
 }
 
 .avatar {
@@ -79,4 +85,20 @@
 
 .slot-action {
   @extend %side-slot;
+}
+
+.free-slot-btn {
+  width: $-side-slot-size;
+  height: $-side-slot-size;
+
+  border: 0;
+  margin: 0;
+  padding: 0;
+
+  border-radius: 0.3rem;
+  border: 1px solid color.adjust(rgb(255, 255, 255), $lightness: -15%);
+
+  &:hover {
+    background-color: color.adjust(rgb(255, 255, 255), $lightness: -15%);
+  }
 }
