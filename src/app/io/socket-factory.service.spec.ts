@@ -44,5 +44,19 @@ describe('SocketFactoryService', () => {
       expect(socket.io.uri).toEqual('http://FAKE_URL');
       expect(socket.io.opts.autoConnect).toBe(false);
     });
+
+    describe('created socket', () => {
+      let socket: SocketIOClient.Socket;
+
+      beforeEach(() => {
+        socket = service.createSocket();
+      });
+
+      it('should handle signature verification error', () => {
+        const spy = spyOn(TestBed.inject(WsTokenService), 'getWsToken').and.callThrough();
+        socket.emit('error', new Error('Signature verification failed'));
+        expect(spy).toHaveBeenCalledWith({ force: true });
+      });
+    });
   });
 });

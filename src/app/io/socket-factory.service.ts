@@ -20,7 +20,7 @@ export class SocketFactoryService {
       console.error(error);
       switch (error.message) {
         case 'Signature verification failed': {
-          this.wsTokenService.getWsToken().subscribe(wsToken => {
+          this.wsTokenService.getWsToken({ force: true }).subscribe(wsToken => {
             socket.io.opts.query = `auth_token=${wsToken}`;
             socket.connect();
           });
