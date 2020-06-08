@@ -1,22 +1,24 @@
 <div *ngIf="players"
-  class="card player-list">
+  class="player-list">
   <div *ngFor="let player of players">
     <div *ngIf="player.status !== 'waiting for substitute'; else waitingForSubSlot"
       class="d-flex align-items-center">
-      <a [routerLink]="['/player', player.id]">
+      <a [routerLink]="['/player', player.id]" class="player-link-item">
         <app-game-class-icon
           [gameClass]="player.gameClass"
           class="mr-2"></app-game-class-icon>
         {{ player.name }}
+
+        <div class="flex-fill"></div>
+
+        <app-player-connection-status
+          *ngIf="showPlayerConnectionStatus"
+          [connectionStatus]="player.connectionStatus"
+          [tooltip]="player.connectionStatus"
+          class="mx-2"></app-player-connection-status>
       </a>
 
       <!-- <span *ngIf="player.classSkill" class="badge badge-secondary mx-2">{{ player.classSkill }}</span> -->
-      <div class="flex-fill"></div>
-      <app-player-connection-status
-        *ngIf="showPlayerConnectionStatus"
-        [connectionStatus]="player.connectionStatus"
-        [tooltip]="player.connectionStatus"
-        class="mx-3"></app-player-connection-status>
 
       <ng-container *ngIf="showAdminActionButtons">
         <button type="button" class="btn btn-link btn-sm btn-request-substitute"

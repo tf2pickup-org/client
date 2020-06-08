@@ -1,8 +1,6 @@
 @use 'sass:color';
 @use 'theme';
-
-$-ghost-line-height: 43px;
-$-ghost-line-width: 200px;
+@use 'utils/ghost';
 
 %queue-status {
   display: flex;
@@ -19,31 +17,18 @@ $-ghost-line-width: 200px;
   color: theme.$font-color-dark;
 }
 
-@keyframes ghost-line {
-  0% { background-color: color.change(theme.$font-color-dark, $alpha: 0.2); }
-  50% { background-color: color.change(theme.$font-color-dark, $alpha: 0.5); }
-  100% { background-color: color.change(theme.$font-color-dark, $alpha: 0.2); }
-}
-
 .queue-status {
-  &--waiting {
+  &-waiting {
     @extend %queue-status;
     background-color: rgba(255, 255, 255, 0.7);
   }
 
-  &--loading {
+  &-loading {
     @extend %queue-status;
     background-color: rgba(255, 255, 255, 0.7);
 
     .ghost-line {
-      display: block;
-      height: $-ghost-line-height;
-      width: $-ghost-line-width;
-      border-radius: 0.3rem;
-
-      animation-name: ghost-line;
-      animation-duration: 2s;
-      animation-iteration-count: infinite;
+      @include ghost.make-line(200px, 43px, theme.$font-color-dark);
     }
   }
 }

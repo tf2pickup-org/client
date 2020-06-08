@@ -1,4 +1,4 @@
-<div *ngIf="gameCount | async; else noGames"
+<div *ngIf="(gameCount | async) > 0; else noGames"
   class="games-caption">games</div>
 
 <ul *ngIf="gameCount | async"
@@ -10,6 +10,12 @@
       #{{ game.number }} - {{ game.launchedAt | date:'mediumDate'}} - {{ game.map }}
     </a>
   </li>
+
+  <ng-container *ngIf="isLoading | async">
+    <div class="loading-wrapper">
+      <img src="/assets/loading-medium.gif">
+    </div>
+  </ng-container>
 </ul>
 
 <ng-template #noGames>

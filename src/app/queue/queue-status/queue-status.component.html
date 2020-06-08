@@ -1,11 +1,11 @@
 <div *ngIf="loading | async; else queueLoaded"
-  class="queue-status--loading">
+  class="queue-status-loading">
   <div class="ghost-line"></div>
 </div>
 
 <ng-template #queueLoaded>
   <div [ngClass]="{
-      'waiting': 'queue-status--waiting'
+      'waiting': 'queue-status-waiting'
     }[state | async]">
     <span><strong>players:</strong> {{ playerCount | async }} / {{ requiredPlayerCount | async }}</span>
   </div>

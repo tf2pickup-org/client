@@ -1,4 +1,11 @@
+@use 'sass:color';
+@use 'components/card';
+
 .player-list {
+  @extend %card;
+
+  padding: 0.5rem;
+
   a {
     color: rgb(0, 0, 0);
     overflow: hidden;
@@ -6,5 +13,19 @@
     font-weight: 500;
     line-height: 2.5rem;
     white-space: nowrap;
+  }
+}
+
+.player-link-item {
+  flex: 1 1 auto;
+  border-radius: 0.5rem;
+  padding: 0 0.5rem;
+
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    background-color: color.adjust(rgb(255, 255, 255), $lightness: -5%);
+    text-decoration: none;
   }
 }

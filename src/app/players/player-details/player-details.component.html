@@ -1,19 +1,18 @@
-<div *ngIf="player | async as _player"
-  class="container py-5">
+<div class="container py-5">
 
   <div class="row">
     <div class="col-auto">
-      <app-player-details-external-profile-links [player]="_player"></app-player-details-external-profile-links>
+      <app-player-details-external-profile-links [player]="player | async"></app-player-details-external-profile-links>
     </div>
 
     <div class="col px-3">
-      <app-player-details-badges [player]="_player"></app-player-details-badges>
-      <app-player-details-header [player]="_player"></app-player-details-header>
+      <app-player-details-badges [player]="player | async"></app-player-details-badges>
+      <app-player-details-header [player]="player | async"></app-player-details-header>
       <app-player-stats [playerStats]="stats | async"></app-player-stats>
     </div>
 
     <div class="col">
-      <app-player-details-game-list [playerId]="_player.id"></app-player-details-game-list>
+      <app-player-details-game-list [playerId]="(player | async)?.id"></app-player-details-game-list>
     </div>
   </div>
 </div>

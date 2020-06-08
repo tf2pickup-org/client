@@ -1,6 +1,6 @@
-import { Component, ChangeDetectionStrategy, Input, OnInit, OnDestroy } from '@angular/core';
-import { BehaviorSubject, ReplaySubject, Subject } from 'rxjs';
-import { map, switchMap, takeUntil } from 'rxjs/operators';
+import { Component, ChangeDetectionStrategy, Input, OnDestroy } from '@angular/core';
+import { BehaviorSubject, ReplaySubject, Subject, combineLatest } from 'rxjs';
+import { map, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { PlayersService } from '../players.service';
 import { Game } from '@app/games/models/game';
 
@@ -14,33 +14,43 @@ interface ClassPlayed {
   styleUrls: ['./player-details-game-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PlayerDetailsGameListComponent implements OnInit, OnDestroy {
+export class PlayerDetailsGameListComponent implements OnDestroy {
 
   readonly gamesPerPage = 10;
   private destroyed = new Subject<void>();
+  private _playerId = new ReplaySubject<string>(1);
   page = new BehaviorSubject<number>(1);
   gameCount = new ReplaySubject<number>(1);
   games = new ReplaySubject<(Game & ClassPlayed)[]>(1);
+  isLoading = new BehaviorSubject<boolean>(true);
 
   @Input()
-  playerId: string;
+  set playerId(playerId: string) {
+    this._playerId.next(playerId);
+  }
 
   constructor(
     private playersService: PlayersService,
-  ) { }
+  ) {
+    this.page.pipe(takeUntil(this.destroyed)).subscribe(() => this.isLoading.next(true));
+    this.games.pipe(takeUntil(this.destroyed)).subscribe(() => this.isLoading.next(false));
 
-  ngOnInit() {
-    this.page.pipe(
-      map(page => page - 1),
-      switchMap(page => this.playersService.fetchPlayerGames(this.playerId, page * this.gamesPerPage, this.gamesPerPage)),
+    combineLatest([
+      this.page.pipe(tap(console.log)),
+      this._playerId.pipe(tap(console.log)),
+    ]).pipe(
+      switchMap(([page, playerId]) => this.playersService.fetchPlayerGames(playerId, (page - 1) * this.gamesPerPage, this.gamesPerPage)
+        .pipe(
+          map(response => {
+            this.gameCount.next(response.itemCount);
+            this.games.next(
+              response.results.map(game => ({ ...game, classPlayed: game.slots.find(s => s.playerId === playerId)?.gameClass }))
+            );
+          }),
+        )
+      ),
       takeUntil(this.destroyed),
-    ).subscribe(response => {
-      this.gameCount.next(response.itemCount);
-
-      this.games.next(response.results.map(game => (
-        { ...game, classPlayed: game.slots.find(s => s.playerId === this.playerId)?.gameClass }
-      )));
-    });
+    ).subscribe();
   }
 
   ngOnDestroy() {

@@ -5,6 +5,7 @@
 .game-list {
   @extend %card;
   list-style: none;
+  position: relative;
 
   .game-list-item {
     margin: 0.3rem 0;
@@ -12,6 +13,21 @@
     > a {
       color: rgb(0, 0, 0);
     }
+  }
+
+  .loading-wrapper {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    border-radius: card.$border-radius;
+    background-color: rgba(0, 0, 0, 0.5);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }
 

@@ -1,6 +1,7 @@
 @use 'sass:color';
 
 $background-color: rgb(255, 255, 255);
+$border-radius: 1rem;
 
 %card-shadow {
   box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
@@ -14,7 +15,7 @@ $background-color: rgb(255, 255, 255);
   padding: 0.5rem 1rem;
 
   background-color: $background-color;
-  border-radius: 1rem;
+  border-radius: $border-radius;
 
   color: color.invert($background-color);
 }

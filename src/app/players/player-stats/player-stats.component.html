@@ -1,4 +1,4 @@
-<div *ngIf="playerStats">
+<div *ngIf="playerStats; else ghost">
   <div class="games-player-total">
     games played total: {{ playerStats.gamesPlayed }}
   </div>
@@ -13,3 +13,9 @@
     </div>
   </div>
 </div>
+
+<ng-template #ghost>
+  <div class="games-player-total">
+    <div class="ghost"></div>
+  </div>
+</ng-template>

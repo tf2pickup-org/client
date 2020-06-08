@@ -1,41 +1,49 @@
-<a class="external-profile-link"
-  [href]="player.steamId | steamProfileLink"
-  target="_blank"
-  tooltip="Steam profile"
-  placement="left"
-  container="body">
-  <img src="/assets/steam.png" width="48" height="48">
-  <span class="sr-only">Steam profile</span>
-</a>
+<ng-container *ngIf="player; else ghost">
+  <a class="external-profile-link"
+    [href]="player.steamId | steamProfileLink"
+    target="_blank"
+    tooltip="Steam profile"
+    placement="left"
+    container="body">
+    <img src="/assets/steam.png" width="48" height="48">
+    <span class="sr-only">Steam profile</span>
+  </a>
 
-<a *ngIf="player.etf2lProfileId"
-  class="external-profile-link"
-  [href]="player.etf2lProfileId | etf2lProfileLink"
-  target="_blank"
-  tooltip="ETF2L profile"
-  placement="left"
-  container="body">
-  <span class="sr-only">ETF2L profile</span>
-  etf2l
-</a>
+  <a *ngIf="player.etf2lProfileId"
+    class="external-profile-link"
+    [href]="player.etf2lProfileId | etf2lProfileLink"
+    target="_blank"
+    tooltip="ETF2L profile"
+    placement="left"
+    container="body">
+    <span class="sr-only">ETF2L profile</span>
+    etf2l
+  </a>
 
-<a class="external-profile-link"
-  [href]="player.steamId | logsTfProfileLink"
-  target="_blank"
-  tooltip="logs.tf profile"
-  placement="left"
-  container="body">
-  <span class="sr-only">logs.tf profile</span>
-  logs
-</a>
+  <a class="external-profile-link"
+    [href]="player.steamId | logsTfProfileLink"
+    target="_blank"
+    tooltip="logs.tf profile"
+    placement="left"
+    container="body">
+    <span class="sr-only">logs.tf profile</span>
+    logs
+  </a>
 
-<a *ngIf="player.twitchTvUser"
-  class="external-profile-link"
-  [href]="player.twitchTvUser.login | twitchTvProfileLink"
-  target="_blank"
-  tooltip="twitch.tv profile"
-  placement="left"
-  container="body">
-  <span class="sr-only">twitch.tv profile</span>
-  <img src="/assets/TwitchGlitchPurple.png" height="48">
-</a>
+  <a *ngIf="player.twitchTvUser"
+    class="external-profile-link"
+    [href]="player.twitchTvUser.login | twitchTvProfileLink"
+    target="_blank"
+    tooltip="twitch.tv profile"
+    placement="left"
+    container="body">
+    <span class="sr-only">twitch.tv profile</span>
+    <img src="/assets/TwitchGlitchPurple.png" height="48">
+  </a>
+</ng-container>
+
+<ng-template #ghost>
+  <div class="ghost"></div>
+  <div class="ghost"></div>
+</ng-template>
+
