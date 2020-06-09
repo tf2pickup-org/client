@@ -19,12 +19,16 @@ export class WsTokenService {
     @Inject(API_URL) private apiUrl: string,
   ) { }
 
-  getWsToken(): Observable<string | null> {
+  getWsToken(options?: { force?: boolean }): Observable<string | null> {
     if (!this.authService.authenticated) {
       return of(null);
     }
 
     if (!this.tokenStore.wsToken) {
+      return this.refreshToken();
+    }
+
+    if (options?.force) {
       return this.refreshToken();
     }
 
