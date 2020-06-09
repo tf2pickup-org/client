@@ -1,3 +1,9 @@
+# [2.4.3](https://github.com/tf2pickup-pl/client/compare/2.4.2...2.4.3) (2020-06-10)
+
+### Fixes
+* Force refreshing the ws token ([23ff85b](https://github.com/tf2pickup-pl/client/commit/23ff85bca95db0612cf15d10f1a33bc4e69cc789))
+* Optimize bundle size ([ea1ead3](https://github.com/tf2pickup-pl/client/commit/ea1ead3847d9af3a9670beaade2b5bb946e5dc47))
+
 # [2.4.2](https://github.com/tf2pickup-pl/client/compare/2.4.1...2.4.2) (2020-05-25)
 
 ### Fixes
