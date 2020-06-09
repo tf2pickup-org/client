@@ -10,39 +10,38 @@ describe('MapThumbnailService', () => {
   });
 
   describe('#getMapThumbnail()', () => {
-    it('should return valid thumbnails', inject([MapThumbnailService], (service: MapThumbnailService) => {
-      [
-        'cp_badlands',
-        'cp_prolands_rc2t',
-        'cp_granary',
-        'cp_granary_pro_rc8',
-        'cp_gullywash_final1',
-        'cp_process_final',
-        'cp_reckoner_rc2',
-        'cp_snakewater_final1',
-        'cp_sunshine',
-        'koth_product_rcx',
-        'koth_warmtic_b6',
-        'koth_coalplant_b8',
-        'pl_prowater_b6',
-        'cp_gullywash_final1',
-        'pl_upward',
-        'pl_borneo',
-        'pl_swiftwater_final1',
-        'pl_vigil_rc6',
-        'cp_propaganda_b16',
-        'pl_barnblitz_pro6',
-        'koth_clearcut_b14',
-        'cp_villa_b12',
-        'koth_bagel_fall_b7',
-        'cp_metalworks',
-        'koth_lakeside_final',
-      ].forEach(map => {
-        const thumbnail = service.getMapThumbnail(map);
-        expect(thumbnail).toBeTruthy();
-        expect(thumbnail === 'unknown').toBe(false);
-      });
-    }));
+    [
+      'cp_badlands',
+      'cp_prolands_rc2t',
+      'cp_granary',
+      'cp_granary_pro_rc8',
+      'cp_gullywash_final1',
+      'cp_process_final',
+      'cp_reckoner_rc2',
+      'cp_snakewater_final1',
+      'cp_sunshine',
+      'koth_product_rcx',
+      'koth_warmtic_b6',
+      'koth_coalplant_b8',
+      'pl_prowater_b6',
+      'cp_gullywash_final1',
+      'pl_upward',
+      'pl_borneo',
+      'pl_swiftwater_final1',
+      'pl_vigil_rc6',
+      'cp_propaganda_b16',
+      'pl_barnblitz_pro6',
+      'koth_clearcut_b14',
+      'cp_villa_b12',
+      'koth_bagel_fall_b7',
+      'cp_metalworks',
+      'koth_lakeside_final',
+      'pl_summercoast_rc8d',
+    ].forEach(map => it(`should return valid thumbnail for ${map}`, inject([MapThumbnailService], (service: MapThumbnailService) => {
+      const thumbnail = service.getMapThumbnail(map);
+      expect(thumbnail).toBeTruthy();
+      expect(thumbnail === 'unknown').toBe(false);
+    })));
 
     it('should return unknown.png for unknown map', inject([MapThumbnailService], (service: MapThumbnailService) => {
       expect(service.getMapThumbnail('some fake map')).toEqual('unknown');
