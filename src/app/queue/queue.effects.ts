@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType, OnInitEffects } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { loadQueue, queueLoaded, joinQueue, leaveQueue, queueStateUpdated, joinQueueError, leaveQueueError, readyUp, readyUpError,
   showReadyUpDialog, hideReadyUpDialog, stopPreReady, voteForMap, mapVoteResultsUpdated, mapVoted,
   mapVoteReset, queueSlotsUpdated, markFriend, startPreReady, substituteRequestsUpdated, friendshipsUpdated } from './queue.actions';
@@ -15,9 +15,17 @@ import { QueueState } from './models/queue-state';
 import { MapVoteResult } from './models/map-vote-result';
 import { SubstituteRequest } from './models/substitute-request';
 import { Friendship } from './models/friendship';
+import { ioConnected } from '@app/io/io.actions';
 
 @Injectable()
-export class QueueEffects implements OnInitEffects {
+export class QueueEffects {
+
+  loadQueueWhenOnline = createEffect(() =>
+    this.actions.pipe(
+      ofType(ioConnected),
+      mapTo(loadQueue()),
+    )
+  );
 
   loadQueue = createEffect(() =>
     this.actions.pipe(
@@ -148,10 +156,6 @@ export class QueueEffects implements OnInitEffects {
         this.store.dispatch(substituteRequestsUpdated({ substituteRequests })));
     fromEvent<Friendship[]>(socket, 'friendships update')
       .subscribe(friendships => this.store.dispatch(friendshipsUpdated({ friendships })));
-  }
-
-  ngrxOnInitEffects() {
-    return loadQueue();
   }
 
 }
