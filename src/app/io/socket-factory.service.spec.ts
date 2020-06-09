@@ -5,6 +5,8 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { WS_URL } from '@app/ws-url';
 import { WsTokenService } from './ws-token.service';
 import { NEVER } from 'rxjs';
+import { provideMockStore, MockStore } from '@ngrx/store/testing';
+import { ioConnected, ioDisconnected } from './io.actions';
 
 class WsTokenServiceStub {
   getWsToken() { return NEVER; }
@@ -23,6 +25,7 @@ describe('SocketFactoryService', () => {
       providers: [
         { provide: WsTokenService, useClass: WsTokenServiceStub },
         { provide: WS_URL, useValue: 'FAKE_URL' },
+        provideMockStore(),
       ],
     });
 
@@ -56,6 +59,20 @@ describe('SocketFactoryService', () => {
         const spy = spyOn(TestBed.inject(WsTokenService), 'getWsToken').and.callThrough();
         socket.emit('error', new Error('Signature verification failed'));
         expect(spy).toHaveBeenCalledWith({ force: true });
+      });
+
+      it('should update store when connection state changes', () => {
+        const spy = spyOn(TestBed.inject(MockStore), 'dispatch');
+
+        // todo: figure a way to mock socket properly
+        // socket.emit('connect');
+        // expect(spy).toHaveBeenCalledWith(ioConnected());
+
+        socket.emit('disconnect');
+        expect(spy).toHaveBeenCalledWith(ioDisconnected());
+
+        socket.emit('reconnect');
+        expect(spy).toHaveBeenCalledWith(ioConnected());
       });
     });
   });

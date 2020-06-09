@@ -1,4 +1,4 @@
-import { createReducer, on, Action } from "@ngrx/store";
+import { createReducer, on, Action } from '@ngrx/store';
 import { ioConnected, ioDisconnected } from './io.actions';
 
 export interface State {
