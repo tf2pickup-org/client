@@ -1,21 +1,22 @@
 <footer class="footer">
-  <span class="footer-content">
-    &copy; 2020 tf2pickup.pl
-    &bull; version {{ version }}
+  <span class="footer-entry">© 2020 tf2pickup.pl</span>
+  <span class="footer-entry">version {{ version }}</span>
 
-    <ng-container *ngFor="let link of links">
-      &bull;
+  <ng-container *ngFor="let link of links">
+    <span class="footer-entry">
       <a [href]="link.target" target="_blank">{{ link.name }}</a>
-    </ng-container>
+    </span>
+  </ng-container>
 
-    <ng-container *ngIf="isAuthenticated">
-      &bull;
+  <ng-container *ngIf="isAuthenticated">
+    <span class="footer-entry">
       <a [routerLink]="" (click)="logout()">logout</a>
-    </ng-container>
+    </span>
+  </ng-container>
 
-    <ng-container *ngIf="isAdmin | async">
-      &bull;
+  <ng-container *ngIf="isAdmin | async">
+    <span class="footer-entry">
       <a routerLink="/player-skill-dump" class="text-secondary">player skills</a>
-    </ng-container>
-  </span>
+    </span>
+  </ng-container>
 </footer>

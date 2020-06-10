@@ -3,7 +3,7 @@
     games played total: {{ playerStats.gamesPlayed }}
   </div>
 
-  <div class="row px-5">
+  <div class="row px-3 px-xl-5">
     <div *ngFor="let classPlayed of playerStats.classesPlayed | keyvalue"
       class="col d-flex align-items-center">
       <app-game-class-icon

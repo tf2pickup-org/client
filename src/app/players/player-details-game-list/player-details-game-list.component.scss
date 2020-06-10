@@ -10,6 +10,10 @@
   .game-list-item {
     margin: 0.3rem 0;
 
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
     > a {
       color: rgb(0, 0, 0);
     }
