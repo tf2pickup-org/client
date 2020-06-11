@@ -14,7 +14,8 @@
     "test": "ng test",
     "test:ci": "ng test --browsers=ChromeHeadless --watch=false --code-coverage=true",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "release": "release-it"
   },
   "private": true,
   "dependencies": {
@@ -53,6 +54,7 @@
     "@angular/compiler-cli": "9.1.11",
     "@angular/language-service": "9.1.11",
     "@ngrx/schematics": "9.2.0",
+    "@release-it/conventional-changelog": "^1.1.4",
     "@types/jasmine": "3.5.10",
     "@types/jasminewd2": "2.0.8",
     "@types/jwt-decode": "2.2.1",
@@ -72,6 +74,7 @@
     "karma-spec-reporter": "0.0.32",
     "ng-mocks": "9.5.0",
     "protractor": "7.0.0",
+    "release-it": "^13.6.2",
     "ts-node": "8.10.2",
     "tslint": "6.1.2",
     "typescript": "3.8.3",
