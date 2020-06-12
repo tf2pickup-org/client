@@ -17,7 +17,12 @@ export class SocketFactoryService {
   ) { }
 
   createSocket(): SocketIOClient.Socket {
-    const socket = io(this.wsUrl, { autoConnect: false });
+    const socket = io(this.wsUrl, {
+      autoConnect: false,
+      secure: true,
+      reconnection: true,
+      rejectUnauthorized: false,
+    });
 
     socket.on('error', (error: Error) => {
       switch (error.message) {
