@@ -1,3 +1,17 @@
+# [2.5.0](https://github.com/garrappachc/client/compare/2.4.3...2.5.0) (2020-06-12)
+
+
+### Bug Fixes
+
+* workaround socket.io xhr poll error ([#302](https://github.com/garrappachc/client/issues/302)) ([02803d5](https://github.com/garrappachc/client/commit/02803d5f413fe63b55a231b8d75625c61587ce9a))
+* **deps:** update angular monorepo to v9.1.10 ([#295](https://github.com/garrappachc/client/issues/295)) ([4d31457](https://github.com/garrappachc/client/commit/4d314574299db3af425c75d5c369dfd63dea1d8b))
+* **deps:** update angular monorepo to v9.1.11 ([#298](https://github.com/garrappachc/client/issues/298)) ([cbd4a89](https://github.com/garrappachc/client/commit/cbd4a8989da0190f99a9cd4a696c47f4878982dd))
+
+
+### Features
+
+* **ci:** add release-it support ([fdced1a](https://github.com/garrappachc/client/commit/fdced1ab6f2e73f5102ace67a52221382f7d5843))
+
 # [2.4.3](https://github.com/tf2pickup-pl/client/compare/2.4.2...2.4.3) (2020-06-10)
 
 ### Fixes
