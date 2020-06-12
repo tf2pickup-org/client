@@ -61,6 +61,12 @@ describe('SocketFactoryService', () => {
         expect(spy).toHaveBeenCalledWith({ force: true });
       });
 
+      it('should handle token expired error', () => {
+        const spy = spyOn(TestBed.inject(WsTokenService), 'getWsToken').and.callThrough();
+        socket.emit('error', new Error('Token expired'));
+        expect(spy).toHaveBeenCalledWith({ force: true });
+      });
+
       it('should update store when connection state changes', () => {
         const spy = spyOn(TestBed.inject(MockStore), 'dispatch');
 
