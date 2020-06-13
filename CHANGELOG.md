@@ -1,3 +1,10 @@
+## [2.5.1](https://github.com/garrappachc/client/compare/2.5.0...2.5.1) (2020-06-13)
+
+
+### Bug Fixes
+
+* handle token expiration error ([#303](https://github.com/garrappachc/client/issues/303)) ([5af779b](https://github.com/garrappachc/client/commit/5af779b05d29cada64d4924be445a7502a5eddf0))
+
 # [2.5.0](https://github.com/garrappachc/client/compare/2.4.3...2.5.0) (2020-06-12)
 
 
