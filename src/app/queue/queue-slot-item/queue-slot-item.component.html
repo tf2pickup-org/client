@@ -1,8 +1,9 @@
 <div
   *ngIf="slot"
+  class="queue-slot-item"
   [ngClass]="{
-    'queue-slot-item--free': !slot.playerId,
-    'queue-slot-item--taken': !!slot.playerId,
+    'is-free': !slot.playerId,
+    'is-taken': !!slot.playerId,
     'taken-by-me': takenByMe,
     'ready': slot.ready,
     'locked': locked
@@ -27,21 +28,22 @@
   <div class="slot-action">
     <button *ngIf="!locked && takenByMe && !slot.ready"
       type="button"
-      class="free-slot-btn"
+      class="slot-action-btn free-slot-btn"
       (click)="emitFreeSlot($event)"
       tooltip="Free this slot"
       container="body">
       <i-feather name="minus"></i-feather>
     </button>
-  </div>
 
-  <button *ngIf="friendFlags.canMarkAsFriend && slot.playerId && !takenByMe"
-    type="button"
-    class="btn btn-sm slot-action-btn mark-as-friend-btn"
-    [ngClass]="friendFlags.markedByMe ? 'btn-danger' : 'btn-light'"
-    [tooltip]="friendFlags.markedByMe ? 'Marked as friend' : 'Mark as a friend'"
-    [disabled]="!!friendFlags.markedBy"
-    (click)="emitMarkFriend(slot.playerId, $event)">
-    <span class="oi oi-heart"></span>
-  </button>
+    <button *ngIf="friendFlags.canMarkAsFriend && slot.playerId && !takenByMe"
+      type="button"
+      class="slot-action-btn mark-as-friend-btn"
+      [class.is-marked-by-me]="friendFlags.markedByMe"
+      [tooltip]="friendFlags.markedByMe ? 'Marked as friend' : 'Mark as a friend'"
+      container="body"
+      [disabled]="!!friendFlags.markedBy"
+      (click)="emitMarkFriend(slot.playerId, $event)">
+      <i-feather name="heart"></i-feather>
+    </button>
+  </div>
 </div>

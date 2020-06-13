@@ -12,7 +12,7 @@ $-side-slot-size: 2rem;
   }
 }
 
-%queue-slot-item {
+.queue-slot-item {
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
@@ -30,64 +30,52 @@ $-side-slot-size: 2rem;
 
   position: relative;
 
-  background-color: theme.$queue-slot-free;
-  color: theme.$font-color-dark;
-}
-
-.queue-slot-item--free {
-  @extend %queue-slot-item;
-
-  > .add-prompt {
-    display: none;
+  > a {
+    color: theme.$font-color-dark;
+    font-size: 1.3rem;
+    font-weight: bold;
   }
 
-  &:not(.locked):hover {
-    cursor: pointer;
+  &.is-free {
+    background-color: theme.$queue-slot-free;
 
     > .add-prompt {
-      display: inline;
+      display: none;
+    }
+  
+    &:not(.locked):hover {
+      cursor: pointer;
+  
+      > .add-prompt {
+        display: inline;
+      }
+    }
+  }
+
+  &.is-taken {
+    background-color: theme.$queue-slot-taken;
+  
+    .player-name {
+      flex: 1 1 auto;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding: 0 0.5rem;
+    }
+  
+    .taken-by-me {
+      background-color: color.change(theme.$queue-slot-taken, $alpha: 1.0);
     }
   }
 }
 
-.queue-slot-item--taken {
-  @extend %queue-slot-item;
-
-  background-color: theme.$queue-slot-taken;
-
-  > a {
-    font-size: 1.3rem;
-    font-weight: bold;
-    color: theme.$font-color-dark;
-  }
-
-  .player-name {
-    flex: 1 1 auto;
-    text-align: center;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    padding: 0 0.5rem;
-  }
-
-  .taken-by-me {
-    background-color: color.change(theme.$queue-slot-taken, $alpha: 1.0);
-  }
-}
-
-%side-slot {
+.avatar,
+.slot-action {
   min-width: $-side-slot-size;
 }
 
-.avatar {
-  @extend %side-slot;
-}
-
-.slot-action {
-  @extend %side-slot;
-}
-
-.free-slot-btn {
+.slot-action-btn {
   width: $-side-slot-size;
   height: $-side-slot-size;
 
@@ -101,4 +89,12 @@ $-side-slot-size: 2rem;
   &:hover {
     background-color: color.adjust(rgb(255, 255, 255), $lightness: -15%);
   }
+
+  &.mark-as-friend-btn {
+    &.is-marked-by-me {
+      background-color: theme.$red;
+      color: rgb(255, 255, 255);
+    }
+  }
 }
+
