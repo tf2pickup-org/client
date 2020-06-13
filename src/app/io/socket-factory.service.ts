@@ -26,7 +26,8 @@ export class SocketFactoryService {
 
     socket.on('error', (error: Error) => {
       switch (error.message) {
-        case 'Signature verification failed': {
+        case 'Signature verification failed':
+        case 'Token expired': {
           this.wsTokenService.getWsToken({ force: true }).subscribe(wsToken => {
             socket.io.opts.query = `auth_token=${wsToken}`;
             socket.connect();
