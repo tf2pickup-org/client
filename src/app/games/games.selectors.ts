@@ -4,6 +4,7 @@ import { State } from './games.reducer';
 import { adapter } from './games.adapter';
 import { profile } from '@app/profile/profile.selectors';
 import * as urlParse from 'url-parse';
+import { Tf2Team } from './models/tf2-team';
 
 const gamesFeature = createFeatureSelector<AppState, State>('games');
 
@@ -21,7 +22,7 @@ export const activeGames = createSelector(
 export const activeGame = createSelector(
   profile,
   activeGames,
-  (theProfile, games) => theProfile && games?.find(g => g.players.includes(theProfile.id))
+  (theProfile, games) => theProfile && games?.find(g => g.slots.find(s => s.player === theProfile.id))
 );
 
 export const isPlayingGame = createSelector(
@@ -31,7 +32,7 @@ export const isPlayingGame = createSelector(
 
 export const playerSlot = (gameId: string, playerId: string) => createSelector(
   gameById(gameId),
-  game => game?.slots.find(s => s.playerId === playerId)
+  game => game?.slots.find(s => s.player === playerId)
 );
 
 export const isGameRunning = (gameId: string) => createSelector(
@@ -42,7 +43,7 @@ export const isGameRunning = (gameId: string) => createSelector(
 export const isMyGame = (gameId: string) => createSelector(
   profile,
   gameById(gameId),
-  (theProfile, game) => !!game?.slots.find(s => s.playerId === theProfile?.id)?.status.match(/active|waiting for substitute/)
+  (theProfile, game) => !!game?.slots.find(s => s.player === theProfile?.id)?.status.match(/active|waiting for substitute/)
 );
 
 export const mumbleUrl = (gameId: string) => createSelector(
@@ -53,22 +54,18 @@ export const mumbleUrl = (gameId: string) => createSelector(
       return null;
     }
 
-    const mySlot = game?.slots.find(s => s.playerId === theProfile?.id);
+    const mySlot = game?.slots.find(s => s.player === theProfile?.id);
     if (!mySlot) {
       return null;
     }
 
-    const team = game.teams[mySlot.teamId];
     const url = urlParse(game.mumbleUrl);
     url.set('username', theProfile.name.replace(/\s+/g, '_'));
-    return `${url.toString()}/${team}`;
+    return `${url.toString()}/${mySlot.team.toUpperCase()}`;
   }
 );
 
-export const gameScore = (gameId: string, team: 'blu' | 'red') => createSelector(
+export const gameScore = (gameId: string, team: Tf2Team) => createSelector(
   gameById(gameId),
-  game => {
-    const teamId = Object.keys(game.teams).find(key => game.teams[key].toLowerCase() === team);
-    return game.score?.[teamId];
-  }
+  game => game.score?.[team]
 );

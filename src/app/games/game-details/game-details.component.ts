@@ -1,13 +1,13 @@
 import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { Observable, Subject, ReplaySubject, combineLatest } from 'rxjs';
+import { Observable, Subject, ReplaySubject, combineLatest, of } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { switchMap, map, tap, filter, first, pairwise, shareReplay, takeUntil, startWith } from 'rxjs/operators';
+import { switchMap, map, tap, filter, first, pairwise, shareReplay, takeUntil } from 'rxjs/operators';
 import { gameById, isGameRunning, isMyGame, mumbleUrl, gameScore } from '../games.selectors';
-import { forceEndGame, reinitializeServer, requestSubstitute, replacePlayer, loadGame } from '../games.actions';
+import { forceEndGame, reinitializeServer, requestSubstitute, replacePlayer } from '../games.actions';
 import { playerById } from '@app/players/selectors';
 import { loadPlayer } from '@app/players/actions';
-import { isAdmin, isBanned } from '@app/profile/profile.selectors';
+import { isAdmin } from '@app/profile/profile.selectors';
 import { Title } from '@angular/platform-browser';
 import { environment } from '@environment';
 import { GamePlayer } from '../models/game-player';
@@ -18,6 +18,7 @@ import { ResolvedGamePlayer } from '../models/resolved-game-player';
 import { SoundPlayerService, Sound } from '@app/notifications/sound-player.service';
 import { canSubstituteInGame } from '@app/selectors';
 import { tf2ClassPriority } from '../tf2-class-priority';
+import { Tf2Team } from '../models/tf2-team';
 
 @Component({
   selector: 'app-game-details',
@@ -83,7 +84,7 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
-    private store: Store<{}>,
+    private store: Store,
     private title: Title,
     private gamesService: GamesService,
     private soundPlayerService: SoundPlayerService,
@@ -101,10 +102,10 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
 
     // resolve game slot into a real player
     const resolveGamePlayer = (slot: GamePlayer) => this.store.pipe(
-      select(playerById(slot.playerId)),
+      select(playerById(slot.player)),
       tap(player => {
         if (!player) {
-          this.store.dispatch(loadPlayer({ playerId: slot.playerId }));
+          this.store.dispatch(loadPlayer({ playerId: slot.player }));
         }
       }),
       filter(player => !!player),
@@ -120,40 +121,34 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
     ));
 
     const resolveSkills = this.isAdmin.pipe(
-      filter(_isAdmin => _isAdmin),
-      switchMap(() => this.gameId),
-      switchMap(gameId => this.gamesService.fetchGameSkills(gameId)),
-      filter(skills => !!skills),
+      switchMap(_isAdmin => _isAdmin ? this.gameId.pipe(
+        switchMap(gameId => this.gamesService.fetchGameSkills(gameId)),
+      ) : of(null)),
     );
 
     // load all players
-    // tslint:disable-next-line: deprecation
-    combineLatest([ resolvePlayers, resolveSkills.pipe(startWith(null)) ]).pipe(
+    combineLatest([ resolvePlayers, resolveSkills ]).pipe(
       takeUntil(this.destroyed),
     ).subscribe(([players, skills]) => {
       if (skills) {
-        const playersWithSkills = players.map(player => ({ ...player, classSkill: skills[player.id] || undefined }));
+        const playersWithSkills = players.map(player => ({ ...player, classSkill: skills[player.id] ?? undefined }));
         this.players.next(playersWithSkills);
       } else {
         this.players.next(players);
       }
     });
 
-    // get team id for the given team name
-    const getTeamId = (teamName: string) => this.game.pipe(
-      map(game => Object.keys(game.teams).find(key => game.teams[key] === teamName)),
+    const getPlayersForTeam = (team: Tf2Team) => this.players.pipe(
+      map(players => players.filter(p => p.team === team)),
+      tap(players => {
+        console.log(team + players);
+      }),
+      map(players => this.sortPlayers(players)),
     );
 
     // divide players into red and blu
-    this.playersRed = combineLatest([this.players, getTeamId('RED')]).pipe(
-      map(([allPlayers, redTeamId]) => allPlayers.filter(p => p.teamId === redTeamId)),
-      map(players => this.sortPlayers(players)),
-    );
-
-    this.playersBlu = combineLatest([this.players, getTeamId('BLU')]).pipe(
-      map(([allPlayers, bluTeamId]) => allPlayers.filter(p => p.teamId === bluTeamId)),
-      map(players => this.sortPlayers(players)),
-    );
+    this.playersRed = getPlayersForTeam('red');
+    this.playersBlu = getPlayersForTeam('blu');
 
     // play sound when the connect is available
     this.game.pipe(

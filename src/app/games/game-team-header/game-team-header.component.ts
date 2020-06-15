@@ -1,4 +1,5 @@
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Tf2Team } from '../models/tf2-team';
 
 @Component({
   selector: 'app-game-team-header',
@@ -9,7 +10,7 @@ import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 export class GameTeamHeaderComponent {
 
   @Input()
-  team: 'red' | 'blu';
+  team: Tf2Team;
 
   @Input()
   score: number;

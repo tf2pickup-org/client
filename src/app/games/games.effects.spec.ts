@@ -11,36 +11,29 @@ import { routerNavigatedAction } from '@ngrx/router-store';
 import { NavigationEnd } from '@angular/router';
 import { Socket } from '@app/io/socket';
 import { EventEmitter } from 'eventemitter3';
+import { Game } from './models/game';
 
-const fakeGame = {
-  players: [
-    'PLAYER_ID_1',
-    'PLAYER_ID_2'
-  ],
+const fakeGame: Game = {
   state: 'launching',
   number: 453,
   map: 'cp_sunshine',
-  teams: {
-    0: 'RED',
-    1: 'BLU'
-  },
   slots: [
     {
       status: 'waiting for substitute',
       connectionStatus: 'offline',
-      playerId: 'PLAYER_ID_1',
+      player: 'PLAYER_ID_1',
       gameClass: 'soldier',
-      teamId: '0'
+      team: 'red',
     },
     {
       status: 'active',
       connectionStatus: 'offline',
-      playerId: 'PLAYER_ID_2',
+      player: 'PLAYER_ID_2',
       gameClass: 'soldier',
-      teamId: '1'
+      team: 'blu',
     }
   ],
-  launchedAt: '2020-01-02T21:54:23.036Z',
+  launchedAt: new Date('2020-01-02T21:54:23.036Z'),
   gameServer: '5e0145b90ea72823a3059ced',
   mumbleUrl: 'mumble://melkor.tf/tf2pickup/1',
   connectString: 'connect 192.168.1.11:27015; password 0I9vNJTDpC',

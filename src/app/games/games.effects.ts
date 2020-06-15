@@ -47,7 +47,7 @@ export class GamesEffects {
     this.actions.pipe(
       ofType(gameCreated),
       withLatestFrom(this.store.select(profile)),
-      filter(([{ game }, theProfile]) => theProfile && game.players.includes(theProfile.id)),
+      filter(([{ game }, theProfile]) => theProfile && !!game.slots.find(s => s.player === theProfile.id)),
       map(([{ game }]) => game.id),
       map(gameId => ownGameAdded({ gameId })),
     )

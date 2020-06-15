@@ -39,7 +39,7 @@ describe('games selectors', () => {
       expect(playerSlot('FAKE_GAME_ID', 'FAKE_PLAYER_ID').projector({
         id: 'FAKE_GAME_ID',
         slots: [
-          { playerId: 'FAKE_PLAYER_ID' },
+          { player: 'FAKE_PLAYER_ID' },
         ],
       })).toBeDefined();
     });
@@ -68,15 +68,15 @@ describe('games selectors', () => {
       id: 'FAKE_GAME_ID',
       slots: [
         {
-          playerId: 'ACTIVE_PLAYER_ID',
-          teamId: '1',
+          player: 'ACTIVE_PLAYER_ID',
+          team: 'blu',
           gameClass: 'soldier',
           connectionStatus: 'offline',
           status: 'active',
         },
         {
-          playerId: 'REPLACED_PLAYER_ID',
-          teamId: '2',
+          player: 'REPLACED_PLAYER_ID',
+          team: 'red',
           gameClass: 'soldier',
           connectionStatus: 'offline',
           status: 'replaced',
@@ -105,17 +105,13 @@ describe('games selectors', () => {
     const game: Partial<Game> = {
       slots: [
         {
-          playerId: 'FAKE_PLAYER_ID',
-          teamId: '1',
+          player: 'FAKE_PLAYER_ID',
+          team: 'red',
           gameClass: 'soldier',
           connectionStatus: 'offline',
           status: 'active',
         },
       ],
-      teams: {
-        0: 'BLU',
-        1: 'RED',
-      },
       mumbleUrl: 'mumble://melkor.tf/tf2pickup/5',
     };
 
@@ -145,22 +141,18 @@ describe('games selectors', () => {
   describe('gameScore', () => {
     it('should return score for RED', () => {
       expect(gameScore('FAKE_GAME_ID', 'red').projector({
-        teams: { 0: 'RED', 1: 'BLU' },
-        score: { 0: 5, 1: 3 },
+        score: { red: 5, blu: 3 },
       })).toBe(5);
     });
 
     it('should return score for BLU', () => {
       expect(gameScore('FAKE_GAME_ID', 'blu').projector({
-        teams: { 0: 'RED', 1: 'BLU' },
-        score: { 0: 5, 1: 3 },
+        score: { red: 5, blu: 3 },
       })).toBe(3);
     });
 
     it('should return null if there is no score reported', () => {
-      expect(gameScore('FAKE_GAME_ID', 'red').projector({
-        teams: { 0: 'RED', 1: 'BLU' },
-      })).toBeUndefined();
+      expect(gameScore('FAKE_GAME_ID', 'red').projector({ })).toBeUndefined();
     });
   });
 });

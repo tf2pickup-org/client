@@ -1,13 +1,12 @@
 import { GamePlayer } from './game-player';
 import { GameState } from './game-state';
+import { Tf2Team } from './tf2-team';
 
 export interface Game {
   id: string;
   launchedAt: Date;
   number: number;
-  teams: { [teamId: string]: string };
   slots: GamePlayer[];
-  players: string[];
   map: string;
   logsUrl?: string;
   demoUrl?: string;
@@ -17,5 +16,5 @@ export interface Game {
   error?: string;
   gameServer?: string;
   stvConnectString?: string;
-  score?: { [teamId: string]: number };
+  score?: Record<Tf2Team, number>;
 }
