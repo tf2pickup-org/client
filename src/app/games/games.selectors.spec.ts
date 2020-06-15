@@ -1,4 +1,4 @@
-import { gameById, activeGames, playerSlot, isPlayingGame, isGameRunning, isMyGame, mumbleUrl, gameScore } from './games.selectors';
+import { gameById, activeGames, playerSlot, isPlayingGame, isGameRunning, isMyGame, mumbleUrl, gameScore, activeGame } from './games.selectors';
 import { Game } from './models/game';
 import { Profile } from '@app/profile/models/profile';
 
@@ -24,6 +24,44 @@ describe('games selectors', () => {
     });
   });
 
+  describe('activeGame', () => {
+    describe('when the user is not logged in', () => {
+      it('should return null', () => {
+        expect(activeGame.projector(null, [])).toEqual(null);
+      });
+    });
+
+    describe('when there are no active games', () => {
+      it('should return undefined', () => {
+        expect(activeGame.projector({ id: 'FAKE_PLAYER_ID' }, [])).toBe(undefined);
+      });
+    });
+
+    describe('when there is an active game', () => {
+      const game: Game = {
+        id: '1',
+        launchedAt: new Date(),
+        number: 1,
+        state: 'started',
+        slots: [
+          {
+            player: 'FAKE_PLAYER_ID',
+            team: 'red',
+            gameClass: 'soldier',
+            connectionStatus: 'connected',
+            status: 'active',
+          },
+        ],
+        map: 'cp_badlands',
+        mumbleUrl: 'FAKE_MUMBLE_URL',
+      };
+
+      it('should return the active game', () => {
+        expect(activeGame.projector({ id: 'FAKE_PLAYER_ID' }, [ game ])).toEqual(game);
+      });
+    });
+  });
+
   describe('isPlayingGame', () => {
     it('should return true if there is an active game', () => {
       expect(isPlayingGame.projector({ id: 1, number: 1, state: 'started' })).toBe(true);
@@ -35,6 +73,12 @@ describe('games selectors', () => {
   });
 
   describe('playerSlot', () => {
+    describe('when there is no game with the given id', () => {
+      it('should return undefined', () => {
+        expect(playerSlot('FAKE_GAME_ID', 'FAKE_PLAYER_ID').projector(null)).toEqual(undefined);
+      });
+    });
+
     it('should find the players slot', () => {
       expect(playerSlot('FAKE_GAME_ID', 'FAKE_PLAYER_ID').projector({
         id: 'FAKE_GAME_ID',
@@ -86,6 +130,10 @@ describe('games selectors', () => {
 
     it('should return false if the user is not logged in', () => {
       expect(isMyGame('FAKE_GAME_ID').projector(null, game)).toBe(false);
+    });
+
+    it('should return false if there is no such game', () => {
+      expect(isMyGame('FAKE_GAME_ID').projector(null)).toBe(false);
     });
 
     it('should return false if the user is not part of the game', () => {
