@@ -6,7 +6,7 @@ import { provideMockActions } from '@ngrx/effects/testing';
 import { GamesService } from './games.service';
 import { RouterTestingModule } from '@angular/router/testing';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
-import { requestSubstitute, cancelSubstitutionRequest, replacePlayer, gameUpdated, loadGame, gameCreated } from './games.actions';
+import { requestSubstitute, cancelSubstitutionRequest, replacePlayer, gameUpdated, loadGame, gameCreated, ownGameAdded } from './games.actions';
 import { routerNavigatedAction } from '@ngrx/router-store';
 import { NavigationEnd } from '@angular/router';
 import { Socket } from '@app/io/socket';
@@ -55,6 +55,18 @@ const initialState = {
       FAKE_GAME_ID: fakeGame,
     },
   },
+  profile: {
+    hasAcceptedRules: true,
+    steamId: '76561198074409147',
+    name: 'mały',
+    avatarUrl: 'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/96/962ac5adb6b0cce647227a2c429c035e56197fb2.jpg',
+    role: 'super-user',
+    etf2lProfileId: 112758,
+    joinedAt: '2019-08-02T19:01:09.576Z',
+    id: '5d448875b963ff7e00c6b6b3',
+    activeGameId: null,
+    bans: [],
+  }
 };
 
 describe('GamesEffects', () => {
@@ -119,6 +131,32 @@ describe('GamesEffects', () => {
           event: { } as NavigationEnd,
         },
       }));
+    });
+  });
+
+  describe('ownGameStarted', () => {
+    describe('when the current user is part of the game', () => {
+      const game: Game = {
+        id: 'FAKE_GAME_ID',
+        launchedAt: new Date(),
+        number: 1,
+        slots: [
+          {
+            player: 'FAKE_PLAYER_ID',
+            gameClass: 'soldier',
+            team: 'red',
+            connectionStatus: 'connected',
+            status: 'active',
+          },
+        ],
+        map: 'cp_badlands',
+        state: 'launching',
+      };
+
+      it('should dispatch the ownGameAdded action', () => {
+        effects.ownGameStarted.subscribe(action => expect(action).toEqual(ownGameAdded({ gameId: 'FAKE_GAME_ID' })));
+        actions.next(gameCreated({ game }));
+      });
     });
   });
 

@@ -12,7 +12,7 @@ export interface Game {
   demoUrl?: string;
   state: GameState;
   connectString?: string;
-  mumbleUrl: string;
+  mumbleUrl?: string;
   error?: string;
   gameServer?: string;
   stvConnectString?: string;
