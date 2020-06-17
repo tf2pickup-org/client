@@ -1,12 +1,18 @@
 <div *ngIf="loading | async; else queueLoaded"
   class="queue-status-loading">
+  <div class="fill"></div>
   <div class="ghost-line"></div>
+  <div class="fill"></div>
 </div>
 
 <ng-template #queueLoaded>
   <div [ngClass]="{
       'waiting': 'queue-status-waiting'
     }[state | async]">
+    <div class="fill"></div>
     <span><strong>players:</strong> {{ playerCount | async }} / {{ requiredPlayerCount | async }}</span>
+    <div class="pre-ready-up-container">
+      <app-pre-ready-up-button *ngIf="isInQueue | async"></app-pre-ready-up-button>
+    </div>
   </div>
 </ng-template>

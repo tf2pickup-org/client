@@ -14,7 +14,6 @@ import { PreReadyService } from '../pre-ready.service';
 })
 export class PreReadyUpButtonComponent {
 
-  isInQueue = this.store.select(isInQueue);
   preReadied = this.store.select(isPreReadied);
   timeout = this.preReadyService.timeout;
   text: Observable<string | number> = combineLatest([this.preReadied, this.timeout]).pipe(

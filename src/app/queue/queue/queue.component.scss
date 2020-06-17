@@ -3,6 +3,7 @@
 
 .queue {
   @extend %row;
+  justify-content: center;
 }
 
 .game-class-column {

@@ -1,6 +1,13 @@
 <button
   type="button"
-  class="btn btn-sm pre-ready-up-btn"
-  [ngClass]="(preReadied | async) ? 'btn-dark' : 'btn-primary'"
-  [disabled]="(isInQueue | async) === false"
-  (click)="preReadyToggle()">{{ text | async | seconds }}</button>
+  class="button--outline pre-ready-up-btn"
+  [class.active]="preReadied | async"
+  (click)="preReadyToggle()"
+  tooltip="Pre-ready up">
+  <ng-container *ngIf="preReadied | async; else notPreReadied">
+    {{ timeout | async | seconds }}
+  </ng-container>
+  <ng-template #notPreReadied>
+    <i-feather name="coffee"></i-feather>
+  </ng-template>
+</button>

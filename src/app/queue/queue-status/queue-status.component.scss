@@ -4,7 +4,7 @@
 
 %queue-status {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 
   margin: 1.5rem 0.5rem;
@@ -31,4 +31,14 @@
       @include ghost.make-line(200px, 43px, theme.$font-color-dark);
     }
   }
+}
+
+.fill {
+  flex: 1 1 0;
+}
+
+.pre-ready-up-container {
+  flex: 1 1 0;
+  display: flex;
+  justify-content: flex-end;
 }

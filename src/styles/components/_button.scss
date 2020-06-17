@@ -1,6 +1,38 @@
-.button {
+@use 'sass:color';
+@use 'theme';
+
+$border-radius: 0.5rem;
+
+@mixin border($color) {
+  $border-color: color.change($color, $alpha: 0.12);
+  border: 1px solid $border-color;
+}
+
+@mixin core {
   border: 0;
   margin: 0;
-  border-radius: 0.5rem;
+  border-radius: $border-radius;
   padding: 0 0.7rem;
+}
+
+@mixin outline($color) {
+  @include core;
+  @include border($color);
+  background-color: transparent;
+
+  &:focus {
+    outline: 0;
+  }
+}
+
+.button--outline {
+  @include outline(theme.$primary);
+
+  &:hover {
+    background-color: color.adjust(theme.$primary, $alpha: -0.9);
+  }
+
+  &.active {
+    background-color: color.adjust(theme.$primary, $alpha: -0.8);
+  }
 }
