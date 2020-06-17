@@ -21,6 +21,7 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ConnectStringComponent } from './connect-string/connect-string.component';
 import { WatchGameInfoComponent } from './watch-game-info/watch-game-info.component';
 import { GameTeamHeaderComponent } from './game-team-header/game-team-header.component';
+import { IconsModule } from '@app/icons/icons.module';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,8 @@ import { GameTeamHeaderComponent } from './game-team-header/game-team-header.com
     TooltipModule,
 
     SharedModule,
+    IconsModule,
+    
     GamesRoutingModule,
   ],
   exports: [

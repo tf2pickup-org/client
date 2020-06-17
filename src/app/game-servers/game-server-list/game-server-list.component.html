@@ -11,9 +11,11 @@
 
     <button *ngIf="isSuperUser | async"
       type="button"
-      class="btn btn-danger btn-sm remove-game-server-btn"
+      class="button remove-game-server-btn"
       [disabled]="locked | async"
-      (click)="removeGameServer(server)">remove</button>
+      (click)="removeGameServer(server)">
+      <i-feather name="x"></i-feather>
+    </button>
   </div>
 
   <button *ngIf="isSuperUser | async"

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Eye, Heart, Minus, Plus } from 'angular-feather/icons';
+import { Eye, Heart, Minus, Plus, UserX, X } from 'angular-feather/icons';
 import { FeatherModule } from 'angular-feather';
 
 // https://github.com/michaelbazos/angular-feather#available-icons
@@ -8,6 +8,8 @@ const icons = {
   Heart,
   Minus,
   Plus,
+  UserX,
+  X,
 };
 
 @NgModule({

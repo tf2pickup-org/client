@@ -21,10 +21,10 @@
       <!-- <span *ngIf="player.classSkill" class="badge badge-secondary mx-2">{{ player.classSkill }}</span> -->
 
       <ng-container *ngIf="showAdminActionButtons">
-        <button type="button" class="btn btn-link btn-sm btn-request-substitute"
+        <button type="button" class="btn-request-substitute"
           tooltip="Request substitute"
           (click)="emitRequestSubstitute($event, player)">
-          <span class="oi oi-transfer"></span>
+          <i-feather name="user-x"></i-feather>
         </button>
       </ng-container>
     </div>

@@ -8,6 +8,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { GameServersEffects } from './game-servers.effects';
 import { AddGameServerDialogComponent } from './add-game-server-dialog/add-game-server-dialog.component';
 import { FormsModule } from '@angular/forms';
+import { IconsModule } from '@app/icons/icons.module';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,8 @@ import { FormsModule } from '@angular/forms';
     StoreModule.forFeature('gameServers', reducer),
     EffectsModule.forFeature([GameServersEffects]),
     FormsModule,
+
+    IconsModule,
 
     GameServersRoutingModule,
   ],
