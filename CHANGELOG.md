@@ -1,3 +1,10 @@
+# [2.6.0](https://github.com/garrappachc/client/compare/2.5.1...2.6.0) (2020-06-17)
+
+
+### Features
+
+* handle new Game model ([#307](https://github.com/garrappachc/client/issues/307)) ([8a82de6](https://github.com/garrappachc/client/commit/8a82de6034ce63582c54147ef377bdb53d4fab0f))
+
 ## [2.5.1](https://github.com/garrappachc/client/compare/2.5.0...2.5.1) (2020-06-13)
 
 
