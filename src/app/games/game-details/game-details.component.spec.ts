@@ -28,32 +28,24 @@ const makeStateWithGame = (overrides?: any) => merge({
     entities: {
       FAKE_ID: {
         id: 'FAKE_ID',
-        players: [
-          'FAKE_PLAYER_ID_1',
-          'FAKE_PLAYER_ID_2'
-        ],
         slots: [
           {
-            playerId: 'FAKE_PLAYER_ID_1',
+            player: 'FAKE_PLAYER_ID_1',
             gameClass: 'soldier',
-            teamId: '0',
+            team: 'red',
             connectionStatus: 'offline',
             status: 'active',
           },
           {
-            playerId: 'FAKE_PLAYER_ID_2',
+            player: 'FAKE_PLAYER_ID_2',
             gameClass: 'soldier',
-            teamId: '1',
+            team: 'blu',
             connectionStatus: 'offline',
             status: 'active',
           }
         ],
         map: 'cp_sunshine',
         state: 'launching',
-        teams: {
-          0: 'RED',
-          1: 'BLU'
-        },
         launchedAt: new Date('2019-07-25T11:42:55.121Z'),
         number: 3,
         connectString: null,
@@ -147,7 +139,7 @@ describe('GameDetailsComponent', () => {
   }));
 
   beforeEach(() => {
-    store = TestBed.inject(Store) as MockStore<{}>;
+    store = TestBed.inject(Store) as MockStore;
     storeDispatchSpy = spyOn(store, 'dispatch');
 
     fixture = TestBed.createComponent(GameDetailsComponent);
@@ -209,10 +201,10 @@ describe('GameDetailsComponent', () => {
       expect(teamBlu.players[0]).toEqual(
         {
           id: 'FAKE_PLAYER_ID_2',
-          playerId: 'FAKE_PLAYER_ID_2',
+          player: 'FAKE_PLAYER_ID_2',
           name: 'FAKE_PLAYER_2',
           gameClass: 'soldier',
-          teamId: '1',
+          team: 'blu',
           connectionStatus: 'offline',
           status: 'active',
         } as any
@@ -224,10 +216,10 @@ describe('GameDetailsComponent', () => {
       expect(playersRed.players).toEqual([
         {
           id: 'FAKE_PLAYER_ID_1',
-          playerId: 'FAKE_PLAYER_ID_1',
+          player: 'FAKE_PLAYER_ID_1',
           name: 'FAKE_PLAYER_1',
           gameClass: 'soldier',
-          teamId: '0',
+          team: 'red',
           connectionStatus: 'offline',
           status: 'active',
         } as any
@@ -342,7 +334,7 @@ describe('GameDetailsComponent', () => {
 
     describe('when the score is defined', () => {
       beforeEach(() => {
-        store.setState(makeStateWithGame({ games: { entities: { FAKE_ID: { score: { 0: 3, 1: 5 } } } } }));
+        store.setState(makeStateWithGame({ games: { entities: { FAKE_ID: { score: { blu: 5, red: 3 } } } } }));
         fixture.detectChanges();
       });
 
