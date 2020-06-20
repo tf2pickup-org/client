@@ -104,6 +104,10 @@ $-link-border-radius-bottom-right: 2.5rem;
   &--profile {
     @extend %link-item;
     padding: 0 2rem 0 0.5rem;
+
+    @include respond.below(huge) {
+      display: none;
+    }
   }
 }
 
