@@ -1,3 +1,9 @@
+@use 'utils/respond';
+
 .pre-ready-up-btn {
   min-width: 100px;
+
+  @include respond.below(huge) {
+    display: none;
+  }
 }
