@@ -42,10 +42,10 @@ $-side-slot-size: 2rem;
     > .add-prompt {
       display: none;
     }
-  
+
     &:not(.locked):hover {
       cursor: pointer;
-  
+
       > .add-prompt {
         display: inline;
       }
@@ -54,7 +54,7 @@ $-side-slot-size: 2rem;
 
   &.is-taken {
     background-color: theme.$queue-slot-taken;
-  
+
     .player-name {
       flex: 1 1 auto;
       text-align: center;
@@ -63,9 +63,9 @@ $-side-slot-size: 2rem;
       text-overflow: ellipsis;
       padding: 0 0.5rem;
     }
-  
+
     .taken-by-me {
-      background-color: color.change(theme.$queue-slot-taken, $alpha: 1.0);
+      background-color: color.change(theme.$queue-slot-taken, $alpha: 1);
     }
   }
 }

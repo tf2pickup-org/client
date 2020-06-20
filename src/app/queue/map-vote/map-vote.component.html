@@ -1,9 +1,8 @@
 <div class="map-vote-container">
-  <!-- <span class="text-secondary font-italic mb-2">vote for the next map</span> -->
-
   <app-map-vote-button *ngFor="let result of results | async"
     [map]="result.map"
     [votePercent]="result.votePercent"
     [active]="result.map === (mapVote | async)"
-    [disabled]="disabled | async"></app-map-vote-button>
+    [disabled]="disabled | async"
+    (voteToggle)="voteForMap(result.map)"></app-map-vote-button>
 </div>

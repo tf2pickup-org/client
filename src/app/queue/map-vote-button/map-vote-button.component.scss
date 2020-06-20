@@ -1,24 +1,40 @@
 @use 'sass:color';
 @use 'utils/border-radius';
 @use 'utils/respond';
+@use 'utils/outline';
+@use 'theme';
 
 $-button-border-radius-large: 1rem;
 $-button-border-radius-small: 0.5rem;
+$-button-background-color: rgba(255, 255, 255, 0.7);
+$-button-selected-background-color: color.change(theme.$yellow, $alpha:0.7);
 $-thumbnail-border-radius: 0.4rem;
 $-overlay-background-color: color.adjust(rgb(0, 0, 0), $lightness: 10%, $alpha: -0.4);
 $-display-small-buttons-threshold: huge;
 
 .map-vote-btn {
+  @include outline.disable;
+
   margin: 1rem;
+  border: 0;
   padding: 0.5rem;
   background-color: rgba(255, 255, 255, 0.7);
   border-radius: $-button-border-radius-large;
   box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+  transition: background-color 0.1s;
 
   @include respond.below($-display-small-buttons-threshold) {
     margin: 0.2rem 0;
     padding: 0.1rem;
     border-radius: $-button-border-radius-small;
+  }
+
+  &:hover {
+    background-color: color.change($-button-background-color, $alpha: 0.9);
+  }
+
+  &.is-selected {
+    background-color: $-button-selected-background-color;
   }
 }
 
