@@ -1,10 +1,13 @@
 @use 'theme';
 @use 'utils/color';
 
+$border-radius: 0.8rem;
+$font-weight: 600;
+
 @mixin make($background-color) {
-  border-radius: 0.8rem;
+  border-radius: $border-radius;
   box-shadow: 0 0 0.3rem rgba(0, 0, 0, 0.2);
-  font-weight: 600;
+  font-weight: $font-weight;
   padding: 0.3rem 0.9rem;
   background-color: $background-color;
   color: color.black-or-white($background-color);

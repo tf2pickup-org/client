@@ -12,9 +12,13 @@
 //   $font-family: string.unquote('Arial, Helvetica, sans-serif'),
 // );
 
-@use '@material/button/mdc-button';
-@use '@material/icon-button/mdc-icon-button';
-@use '@material/dialog/mdc-dialog';
+@use '@material/button';
+@use '@material/icon-button';
+@use '@material/dialog';
+
+@include button.core-styles;
+@include icon-button.core-styles;
+@include dialog.core-styles;
 
 $body-bg: #0d1d36;
 $body-color: #fff;

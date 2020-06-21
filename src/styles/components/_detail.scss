@@ -1,13 +1,13 @@
 @use 'sass:color';
 
-$-detail-background-color: rgb(255, 255, 255);
+$label-background-color: rgb(255, 255, 255);
 
-%-detail {
+@mixin common {
   text-align: center;
 }
 
 .detail--label {
-  @extend %-detail;
+  @include common;
 
   display: block;
   padding: 0 2rem;
@@ -17,15 +17,15 @@ $-detail-background-color: rgb(255, 255, 255);
   border-radius: 0.8rem;
   box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
 
-  background-color: $-detail-background-color;
-  color: color.invert($-detail-background-color);
+  background-color: $label-background-color;
+  color: color.invert($label-background-color);
 
   font-size: 1.4rem;
   font-weight: 600;
 }
 
 .detail--value {
-  @extend %-detail;
+  @include common;
 
   font-weight: 500;
 }

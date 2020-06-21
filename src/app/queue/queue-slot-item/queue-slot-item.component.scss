@@ -64,10 +64,23 @@ $-side-slot-size: 2rem;
       text-overflow: ellipsis;
       padding: 0 0.5rem;
     }
-
+  
     .taken-by-me {
       background-color: color.change(theme.$queue-slot-taken, $alpha: 1);
     }
+  }
+
+  &.is-ready {
+    background-color: theme.$queue-slot-ready-up-1;
+  }
+
+  > .player-name {
+    flex: 1 1 auto;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0 0.5rem;
   }
 }
 
