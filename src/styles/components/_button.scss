@@ -1,7 +1,9 @@
 @use 'sass:color';
 @use 'theme';
+@use 'utils/text-color';
 
 $border-radius: 0.5rem;
+$height: 36px;
 
 @mixin border($color) {
   $border-color: color.change($color, $alpha: 0.12);
@@ -9,24 +11,20 @@ $border-radius: 0.5rem;
 }
 
 @mixin core {
-  border: 0;
   margin: 0;
-  border-radius: $border-radius;
   padding: 0 0.7rem;
+
+  border-radius: $border-radius;
+
+  font-weight: 500;
+  font-size: 0.875rem;
 }
 
 @mixin outline($color) {
   @include core;
   @include border($color);
   background-color: transparent;
-
-  &:focus {
-    outline: 0;
-  }
-}
-
-.button--outline {
-  @include outline(theme.$primary);
+  color: $color;
 
   &:hover {
     background-color: color.adjust(theme.$primary, $alpha: -0.9);
@@ -35,4 +33,27 @@ $border-radius: 0.5rem;
   &.active {
     background-color: color.adjust(theme.$primary, $alpha: -0.8);
   }
+
+  &:focus {
+    outline: 0;
+  }
+}
+
+.button--outline {
+  @include outline(theme.$primary);
+}
+
+@mixin contained($color) {
+  @include core;
+
+  height: $height;
+
+  border: 0;
+
+  background-color: $color;
+  color: text-color.on-background($color);
+}
+
+.button--contained {
+  @include contained(theme.$primary);
 }
