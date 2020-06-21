@@ -36,7 +36,7 @@ describe('GameTeamPlayerListComponent', () => {
   describe('with players', () => {
     beforeEach(() => {
       component.players = [
-        { id: 'PLAYER_ID', name: 'FAKE_PLAYER', joinedAt: new Date(), steamId: 'FAKE_STEAM_ID', avatarUrl: 'FAKE_AVATAR_URL', gameCount: 0,
+        { id: 'PLAYER_ID', name: 'FAKE_PLAYER', joinedAt: new Date(), steamId: 'FAKE_STEAM_ID', avatarUrl: 'FAKE_AVATAR_URL',
           player: 'FAKE_PLAYER_ID', team: 'blu', gameClass: 'scout', connectionStatus: 'offline', status: 'active' },
       ];
       fixture.detectChanges();

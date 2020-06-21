@@ -43,7 +43,7 @@ describe('GameListComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
 
-    gamesService = TestBed.get(GamesService);
+    gamesService = TestBed.inject(GamesServiceStub);
   });
 
   it('should create', () => {
@@ -71,25 +71,12 @@ describe('GameListComponent', () => {
   describe('#getPage()', () => {
     describe('without playerId', () => {
       it('should load a given page', () => {
-        const spy = spyOn(TestBed.get(GamesService), 'fetchGames').and.returnValue(of({ itemCount: 50, results: [] }));
+        const spy = spyOn(TestBed.inject(GamesService), 'fetchGames').and.returnValue(of({ itemCount: 50, results: [] }));
         component.getPage(1);
         expect(spy).toHaveBeenCalledWith(0, 10);
 
         component.getPage(5);
         expect(spy).toHaveBeenCalledWith(40, 10);
-      });
-    });
-
-    describe('with playerId', () => {
-      beforeEach(() => component.playerId = 'FAKE_PLAYER_ID');
-
-      it('should load a given page', () => {
-        const spy = spyOn(TestBed.get(PlayersService), 'fetchPlayerGames').and.returnValue(of({ itemCount: 50, results: [] }));
-        component.getPage(1);
-        expect(spy).toHaveBeenCalledWith('FAKE_PLAYER_ID', 0, 10);
-
-        component.getPage(3);
-        expect(spy).toHaveBeenCalledWith('FAKE_PLAYER_ID', 20, 10);
       });
     });
   });

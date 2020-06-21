@@ -42,7 +42,7 @@ describe('PlayerDetailsBadgesComponent', () => {
       });
 
       it('should render admin badge', () => {
-        expect(fixture.debugElement.query(By.css('.badge.badge-admin'))).toBeTruthy();
+        expect(fixture.debugElement.query(By.css('.badge--admin'))).toBeTruthy();
       });
     });
 
@@ -53,7 +53,7 @@ describe('PlayerDetailsBadgesComponent', () => {
       });
 
       it('should not render admin badge', () => {
-        expect(fixture.debugElement.query(By.css('.badge.badge-admin'))).toBeNull();
+        expect(fixture.debugElement.query(By.css('.badge--admin'))).toBeNull();
       });
     });
   });

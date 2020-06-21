@@ -50,8 +50,8 @@ describe('TwitchStreamListItemComponent', () => {
     });
 
     it('should replace thumbnail height and width', () => {
-      const img = fixture.debugElement.query(By.css('img.card-img-top')).nativeElement as HTMLImageElement;
-      expect(img.src).toEqual('https://static-cdn.jtvnw.net/previews-ttv/live_user_weplayesport_ru-254x160.jpg');
+      const img = fixture.debugElement.query(By.css('.stream-thumbnail')).nativeElement as HTMLImageElement;
+      expect(img.src).toEqual('https://static-cdn.jtvnw.net/previews-ttv/live_user_weplayesport_ru-100x50.jpg');
     });
 
     it('should render player name', () => {
