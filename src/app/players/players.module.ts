@@ -32,6 +32,8 @@ import { PlayerDetailsGameListComponent } from './player-details-game-list/playe
 import { NgxPaginationModule } from 'ngx-pagination';
 import { PlayerDetailsBadgesComponent } from './player-details-badges/player-details-badges.component';
 import { PlayerDetailsExternalProfileLinksComponent } from './player-details-external-profile-links/player-details-external-profile-links.component';
+import { PlayerDetailsAdminButtonsComponent } from './player-details-admin-buttons/player-details-admin-buttons.component';
+import { IconsModule } from '@app/icons/icons.module';
 
 @NgModule({
   declarations: [
@@ -55,6 +57,7 @@ import { PlayerDetailsExternalProfileLinksComponent } from './player-details-ext
     PlayerDetailsGameListComponent,
     PlayerDetailsBadgesComponent,
     PlayerDetailsExternalProfileLinksComponent,
+    PlayerDetailsAdminButtonsComponent,
   ],
   imports: [
     CommonModule,
@@ -69,6 +72,7 @@ import { PlayerDetailsExternalProfileLinksComponent } from './player-details-ext
     NgxPaginationModule,
 
     GamesModule,
+    IconsModule,
     SharedModule,
 
     PlayersRoutingModule,

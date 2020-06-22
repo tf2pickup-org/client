@@ -1,6 +1,11 @@
 @use 'theme';
+@use 'font';
 
-@import 'font';
+@use '@material/theme' as mdc-theme with (
+  $primary: rgb(10, 26, 51)
+);
+
+@use '@material/button';
 
 $body-bg: #0d1d36;
 $body-color: #fff;
@@ -22,12 +27,27 @@ $link-hover-decoration: underline;
 
 @import '~bootstrap/scss/tooltip';
 
+@include button.core-styles;
+
+.mdc-button {
+  height: 36px; // dunno why, but the button's height is not enforced
+  line-height: 18px; // vertical align of icons
+
+  &:focus {
+    outline: 0;
+  }
+}
+
 @import 'components/card';
 @import 'components/badge';
 @import 'components/button';
 @import 'components/detail';
 @import 'components/indicator';
 @import 'components/pagination';
+
+html {
+  --mdc-typography-font-family: Montserrat, sans-serif;
+}
 
 body {
   background-attachment: fixed;
