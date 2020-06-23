@@ -72,7 +72,7 @@
     "karma-jasmine": "3.3.1",
     "karma-jasmine-html-reporter": "1.5.4",
     "karma-spec-reporter": "0.0.32",
-    "ng-mocks": "9.6.2",
+    "ng-mocks": "9.6.3",
     "protractor": "7.0.0",
     "release-it": "13.6.3",
     "ts-node": "8.10.2",
