@@ -1,21 +1,18 @@
 $background: #0d1d36;
 $foreground: #fff;
 
+
 // primary colors
-$green: rgb(65, 202, 37);
-$red: rgb(192, 8, 15);
-$yellow: rgb(255, 173, 23);
-$dark-blue: rgb(10, 26, 51);
+$primary: rgb(10, 26, 51);
+$secondary: rgb(255, 173, 23);
 
-// derived colors
-$success: $green;
-$warning: $yellow;
-$error: $red;
+$success: rgb(65, 202, 37);
+$warning: rgb(255, 173, 23);
+$error: rgb(192, 8, 15);
 $twitchtv: rgb(145, 70, 255);
-$primary: $dark-blue;
 
-$online: $green;
-$offline: $red;
+$online: $success;
+$offline: $error;
 
 // font colors
 $font-color-light: rgb(255, 255, 255);
@@ -25,7 +22,7 @@ $font-color-dark: rgb(10, 26, 51);
 $text-background-color: rgba(255, 255, 255, 0.8);
 
 // navigation bar colors
-$navigation-bar-background-color: rgb(10, 26, 51);
+$navigation-bar-background-color: $primary;
 $navigation-bar-link-background-color: rgb(5, 15, 30);
 
 // TF2-specific colors

@@ -6,7 +6,7 @@
 }
 
 .badge--admin {
-  @include badge.make(theme.$yellow);
+  @include badge.make(theme.$secondary);
 }
 
 .badge--twitch {

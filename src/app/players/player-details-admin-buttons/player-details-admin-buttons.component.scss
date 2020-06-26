@@ -14,6 +14,6 @@
 
 .bans-button,
 .roles-button {
-  --mdc-theme-primary: #{theme.$warning};
+  --mdc-theme-primary: #{theme.$secondary};
   --mdc-theme-on-primary: #{theme.$font-color-dark};
 }

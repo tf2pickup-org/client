@@ -3,7 +3,7 @@
 @use 'theme';
 
 $-border-radius: 1rem;
-$-caption-background-color: theme.$dark-blue;
+$-caption-background-color: theme.$primary;
 
 .twitch-stream-list {
   @extend %card-shadow;

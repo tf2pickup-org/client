@@ -2,7 +2,8 @@
 @use 'font';
 
 @use '@material/theme' as mdc-theme with (
-  $primary: rgb(10, 26, 51)
+  $primary: theme.$primary,
+  $secondary: theme.$secondary,
 );
 
 @use '@material/button';

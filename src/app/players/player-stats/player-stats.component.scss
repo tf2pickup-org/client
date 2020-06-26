@@ -16,6 +16,16 @@
   }
 }
 
+.player-stats-classes-container {
+  display: flex;
+  flex-flow: row;
+  justify-items: center;
+
+  > * {
+    margin: 0.5rem;
+  }
+}
+
 .player-stats-games-played-class {
   font-size: 1.4rem;
   font-weight: bold;
