@@ -28,6 +28,7 @@
     "@angular/platform-browser-dynamic": "11.0.4",
     "@angular/router": "11.0.4",
     "@material/button": "^6.0.0",
+    "@material/icon-button": "^7.0.0",
     "@ngrx/effects": "10.1.0",
     "@ngrx/entity": "10.1.0",
     "@ngrx/router-store": "10.1.0",

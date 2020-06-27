@@ -1,7 +1,8 @@
 @use 'sass:color';
+@use 'variables';
 
 $background-color: rgb(255, 255, 255);
-$border-radius: 1rem;
+$border-radius: variables.$default-border-radius;
 
 %card-shadow {
   box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);

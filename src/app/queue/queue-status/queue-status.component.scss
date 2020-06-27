@@ -1,5 +1,6 @@
 @use 'sass:color';
 @use 'theme';
+@use 'variables';
 @use 'utils/ghost';
 
 %queue-status {
@@ -9,7 +10,7 @@
 
   margin: 1.5rem 0.5rem;
   padding: 0.5rem;
-  border-radius: 1rem;
+  border-radius: variables.$default-border-radius;
   box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
 
   text-align: center;

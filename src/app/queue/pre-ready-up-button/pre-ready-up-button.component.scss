@@ -1,7 +1,14 @@
 @use 'utils/respond';
+@use 'theme';
+
+:host {
+  display: flex;
+  align-items: center;
+}
 
 .pre-ready-up-btn {
-  min-width: 100px;
+  min-width: 170px;
+  margin-right: 0.5rem;
 
   @include respond.below(huge) {
     display: none;

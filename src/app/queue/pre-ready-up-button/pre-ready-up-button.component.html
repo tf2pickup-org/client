@@ -1,13 +1,17 @@
 <button
   type="button"
-  class="button--outline pre-ready-up-btn"
+  class="mdc-button pre-ready-up-btn"
   [class.active]="preReadied | async"
   (click)="preReadyToggle()"
   tooltip="Pre-ready up">
+  <div class="mdc-button__ripple"></div>
+  <i-feather name="coffee" class="mdc-button__icon"></i-feather>
   <ng-container *ngIf="preReadied | async; else notPreReadied">
-    {{ timeout | async | seconds }}
+    <span class="mdc-button__label">
+      {{ timeout | async | seconds }}
+    </span>
   </ng-container>
   <ng-template #notPreReadied>
-    <i-feather name="coffee"></i-feather>
+    <span class="mdc-button__label">pre-ready up</span>
   </ng-template>
 </button>
