@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy, Input, OnDestroy } from '@angular/core';
 import { BehaviorSubject, ReplaySubject, Subject, combineLatest } from 'rxjs';
-import { map, switchMap, takeUntil, tap } from 'rxjs/operators';
+import { map, switchMap, takeUntil, tap, filter } from 'rxjs/operators';
 import { PlayersService } from '../players.service';
 import { Game } from '@app/games/models/game';
 
@@ -36,8 +36,8 @@ export class PlayerDetailsGameListComponent implements OnDestroy {
     this.games.pipe(takeUntil(this.destroyed)).subscribe(() => this.isLoading.next(false));
 
     combineLatest([
-      this.page.pipe(tap(console.log)),
-      this._playerId.pipe(tap(console.log)),
+      this.page,
+      this._playerId.pipe(filter(playerId => !!playerId)),
     ]).pipe(
       switchMap(([page, playerId]) => this.playersService.fetchPlayerGames(playerId, (page - 1) * this.gamesPerPage, this.gamesPerPage)
         .pipe(
