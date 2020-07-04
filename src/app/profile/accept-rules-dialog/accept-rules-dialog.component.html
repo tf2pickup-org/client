@@ -1,19 +1,53 @@
-<div class="modal-body" [ngSwitch]="phase | async">
-  <ng-container *ngSwitchCase="'mumble'">
-    <h4>Do you have Mumble?</h4>
-    <div class="row align-items-center">
-      <div class="col-9 px-4"><p><markdown src="/assets/documents/CONFIRM-MUMBLE.md"></markdown></p></div>
-      <div class="col-3"><img src="/assets/mumble-logo-png-transparent.png" width="128"></div>
+<div class="mdc-dialog mdc-dialog--open">
+  <div [ngSwitch]="phase | async"
+    class="mdc-dialog__container">
+    <div *ngSwitchCase="'mumble'"
+      class="mdc-dialog__surface">
+      <div class="mdc-dialog__title">
+        Do you have Mumble?
+      </div>
+
+      <div class="mdc-dialog__content">
+        <div class="d-flex align-items-center">
+          <div class="pr-4">
+            <p><markdown src="/assets/documents/CONFIRM-MUMBLE.md"></markdown></p>
+          </div>
+          <img src="/assets/mumble-logo-png-transparent.png" width="128" height="128">
+        </div>
+      </div>
+
+      <div class="mdc-dialog__actions">
+        <button
+          type="button"
+          class="mdc-button mdc-dialog__button mdc-button--unelevated w-100"
+          (click)="step()">
+          <div class="mdc-button__ripple"></div>
+          <span class="mdc-button__label">Yes, I confirm I have Mumble installed</span>
+        </button>
+      </div>
     </div>
 
-    <button type="button" class="btn btn-primary btn-block mt-4" (click)="step()">Yes, I confirm I have Mumble</button>
-  </ng-container>
+    <div *ngSwitchCase="'rules'"
+      class="mdc-dialog__surface">
+      <div class="mdc-dialog__title">
+        Accept rules
+      </div>
 
-  <ng-container *ngSwitchCase="'rules'">
-    <h4>Accept rules</h4>
-    <p>
-      <markdown src="/assets/documents/RULES.md"></markdown>
-    </p>
-    <button type="button" class="btn btn-primary btn-block" (click)="step()">Okay, I accept these rules</button>
-  </ng-container>
+      <div class="mdc-dialog__content">
+        <p><markdown src="/assets/documents/RULES.md"></markdown></p>
+      </div>
+
+      <div class="mdc-dialog__actions">
+        <button
+          type="button"
+          class="mdc-button mdc-dialog__button mdc-button--unelevated w-100"
+          (click)="step()">
+          <div class="mdc-button__ripple"></div>
+          <span class="mdc-button__label">Okay, I accept these rules</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="mdc-dialog__scrim"></div>
 </div>

@@ -3,12 +3,11 @@ import { Actions, OnInitEffects, createEffect, ofType } from '@ngrx/effects';
 import { ProfileService } from './profile.service';
 import { loadProfile, profileLoaded, acceptRules, rulesAccepted, profileUpdated } from './profile.actions';
 import { AuthService } from '@app/auth/auth.service';
-import { filter, mergeMap, map, switchMap, mapTo, tap } from 'rxjs/operators';
-import { BsModalService } from 'ngx-bootstrap/modal';
-import { AcceptRulesDialogComponent } from './accept-rules-dialog/accept-rules-dialog.component';
-import { Observable, fromEvent } from 'rxjs';
+import { filter, mergeMap, map, switchMap, mapTo } from 'rxjs/operators';
+import { fromEvent } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { Socket } from '@app/io/socket';
+import { AcceptRulesDialogService } from './accept-rules-dialog.service';
 
 @Injectable()
 export class ProfileEffects implements OnInitEffects {
@@ -26,7 +25,7 @@ export class ProfileEffects implements OnInitEffects {
     this.actions.pipe(
       ofType(profileLoaded),
       filter(({ profile }) => !profile.hasAcceptedRules),
-      switchMap(() => this.showAcceptRulesDialog().pipe(
+      switchMap(() => this.acceptRulesDialogService.showAcceptRulesDialog().pipe(
         mapTo(acceptRules()),
       )),
     ),
@@ -45,27 +44,15 @@ export class ProfileEffects implements OnInitEffects {
     private actions: Actions,
     private profileService: ProfileService,
     private authService: AuthService,
-    private modalService: BsModalService,
     private store: Store,
     socket: Socket,
+    private acceptRulesDialogService: AcceptRulesDialogService,
   ) {
     fromEvent(socket, 'profile update').subscribe(profileChanges => this.store.dispatch(profileUpdated({ profileChanges })));
   }
 
   ngrxOnInitEffects() {
     return loadProfile();
-  }
-
-  private showAcceptRulesDialog(): Observable<void> {
-    const modal = this.modalService.show(AcceptRulesDialogComponent, {
-      keyboard: false,
-      ignoreBackdropClick: true,
-      class: 'modal-lg',
-    });
-
-    return (modal.content as AcceptRulesDialogComponent).rulesAccepted.asObservable().pipe(
-      tap(() => modal.hide()),
-    );
   }
 
 }

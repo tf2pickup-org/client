@@ -1,3 +1,5 @@
+@use 'sass:color';
+@use 'sass:string';
 @use 'theme';
 @use 'font';
 
@@ -6,16 +8,21 @@
   $secondary: theme.$secondary,
 );
 
-// @use '@material/button';
-// @use '@material/icon-button';
+// @use '@material/typography/mdc-typography' with (
+//   $font-family: string.unquote('Arial, Helvetica, sans-serif'),
+// );
+
+@use '@material/button/mdc-button';
+@use '@material/icon-button/mdc-icon-button';
+@use '@material/dialog/mdc-dialog';
 
 $body-bg: #0d1d36;
 $body-color: #fff;
 $font-family-sans-serif: 'Montserrat', sans-serif;
 
-$link-color: #fff;
+$link-color: color.adjust(theme.$primary, $lightness: -10%);
 $link-decoration: none;
-$link-hover-color: darken($link-color, 15%);
+$link-hover-color: color.adjust($link-color, $lightness: -15%);
 $link-hover-decoration: underline;
 
 @import 'bootstrap/scss/functions';
@@ -28,12 +35,6 @@ $link-hover-decoration: underline;
 @import 'bootstrap/scss/utilities';
 
 @import 'bootstrap/scss/tooltip';
-
-@import '@material/button/mdc-button';
-@import '@material/icon-button/mdc-icon-button';
-
-// @include button.core-styles;
-// @include icon-button.core-styles;
 
 .mdc-button {
   height: 36px; // dunno why, but the button's height is not enforced
@@ -57,6 +58,7 @@ $link-hover-decoration: underline;
 
 html {
   --mdc-typography-font-family: Montserrat, sans-serif;
+  --mdc-typography-body1-font-weight: 500;
 }
 
 @import 'global/body';

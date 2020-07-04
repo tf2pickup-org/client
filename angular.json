@@ -40,7 +40,8 @@
             ],
             "styles": [
               "src/styles/main.scss",
-              "node_modules/open-iconic/font/css/open-iconic-bootstrap.min.css"
+              "node_modules/open-iconic/font/css/open-iconic-bootstrap.min.css",
+              "node_modules/@angular/cdk/overlay-prebuilt.css"
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
