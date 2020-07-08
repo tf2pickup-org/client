@@ -34,7 +34,7 @@
     "@swimlane/ngx-datatable": "17.0.0",
     "bootstrap": "4.5.0",
     "jwt-decode": "2.2.0",
-    "lodash": "4.17.15",
+    "lodash": "4.17.17",
     "ng-inline-svg": "10.1.0",
     "ngrx-tslint-rules": "2.1.2",
     "ngx-bootstrap": "5.6.1",
