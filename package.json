@@ -44,7 +44,7 @@
     "open-iconic": "1.1.1",
     "rxjs": "6.6.2",
     "socket.io-client": "2.3.0",
-    "tslib": "2.0.0",
+    "tslib": "2.0.1",
     "url-parse": "1.4.7",
     "zone.js": "0.10.3"
   },
