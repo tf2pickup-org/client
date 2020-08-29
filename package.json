@@ -58,7 +58,7 @@
     "@types/jasmine": "3.5.14",
     "@types/jasminewd2": "2.0.8",
     "@types/jwt-decode": "2.2.1",
-    "@types/lodash": "4.14.160",
+    "@types/lodash": "4.14.161",
     "@types/node": "12.12.31",
     "@types/socket.io-client": "1.4.33",
     "@types/url-parse": "1.4.3",
