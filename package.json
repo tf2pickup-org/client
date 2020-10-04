@@ -35,7 +35,7 @@
     "bootstrap": "4.5.2",
     "jwt-decode": "2.2.0",
     "lodash": "4.17.20",
-    "ng-inline-svg": "11.0.0",
+    "ng-inline-svg": "11.0.1",
     "ngrx-tslint-rules": "2.1.4",
     "ngx-bootstrap": "6.1.0",
     "ngx-markdown": "10.1.1",
