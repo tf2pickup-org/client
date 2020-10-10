@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
 import { HttpParams } from '@angular/common/http';
-import * as jwt_decode from 'jwt-decode';
+import jwt_decode from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
