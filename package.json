@@ -45,6 +45,7 @@
     "rxjs": "6.6.3",
     "socket.io-client": "2.3.1",
     "tslib": "2.0.3",
+    "whatwg-url": "^8.4.0",
     "zone.js": "0.11.1"
   },
   "devDependencies": {
@@ -61,6 +62,7 @@
     "@types/node": "12.12.31",
     "@types/socket.io-client": "1.4.34",
     "@types/url-parse": "1.4.3",
+    "@types/whatwg-url": "^8.0.0",
     "codelyzer": "6.0.1",
     "eventemitter3": "4.0.7",
     "jasmine-core": "3.6.0",
