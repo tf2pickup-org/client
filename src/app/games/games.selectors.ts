@@ -59,14 +59,8 @@ export const mumbleUrl = (gameId: string) => createSelector(
     }
 
     const url = new URL(game.mumbleUrl);
-
-    // https://stackoverflow.com/questions/64299675/why-the-url-class-does-not-support-setting-username-for-protocols-other-than-htt
-    const protocol = url.protocol;
-    url.protocol = 'http:';
     url.username = theProfile.name.replace(/\s+/g, '_');
     url.pathname += '/' + mySlot.team.toUpperCase();
-    url.protocol = protocol;
-
     return url.toString();
   }
 );
