@@ -46,5 +46,5 @@ import 'zone.js/dist/zone';  // Included with Angular CLI.
  * APPLICATION IMPORTS
  */
 import { URL } from 'whatwg-url';
-//@ts-expect-error
+// @ts-expect-error
 window.URL = URL;
