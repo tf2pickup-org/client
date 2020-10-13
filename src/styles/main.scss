@@ -8,9 +8,9 @@
   $secondary: theme.$secondary,
 );
 
-// @use '@material/typography/mdc-typography' with (
-//   $font-family: string.unquote('Arial, Helvetica, sans-serif'),
-// );
+@use '@material/typography' with (
+  $font-family: string.unquote('"Montserrat", sans-serif'),
+);
 
 @use '@material/button';
 @use '@material/icon-button';
