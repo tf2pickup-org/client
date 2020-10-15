@@ -1,3 +1,11 @@
+## [2.6.2](https://github.com/tf2pickup-pl/client/compare/2.6.1...2.6.2) (2020-10-15)
+
+
+### Bug Fixes
+
+* **build:** enable crossorigin flags ([#442](https://github.com/tf2pickup-pl/client/issues/442)) ([73b4b65](https://github.com/tf2pickup-pl/client/commit/73b4b657655b8487535d9dcf5427e0dfdc19ee51))
+* **deps:** update angular monorepo to v10.1.6 ([#440](https://github.com/tf2pickup-pl/client/issues/440)) ([858dc29](https://github.com/tf2pickup-pl/client/commit/858dc297665c9bacbc22b96b356defad35a002f9))
+
 ## [2.6.1](https://github.com/tf2pickup-pl/client/compare/2.6.0...2.6.1) (2020-10-14)
 
 
