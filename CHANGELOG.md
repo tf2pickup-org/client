@@ -1,3 +1,10 @@
+## [2.6.3](https://github.com/tf2pickup-pl/client/compare/2.6.2...2.6.3) (2020-10-15)
+
+
+### Reverts
+
+* get rid of the URL polyfill ([b95622b](https://github.com/tf2pickup-pl/client/commit/b95622b82cb034318f4781ee74b36923fa2b112b))
+
 ## [2.6.2](https://github.com/tf2pickup-pl/client/compare/2.6.1...2.6.2) (2020-10-15)
 
 
