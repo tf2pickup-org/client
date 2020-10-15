@@ -4,6 +4,7 @@
 
 $-item-height: 80px;
 $-item-margin: 1.5rem;
+$-item-background-color: rgba(255, 255, 255, 0.7);
 
 .game-server-list-item {
   @extend %card;
@@ -16,6 +17,7 @@ $-item-margin: 1.5rem;
   justify-content: space-between;
 
   color: theme.$font-color-dark;
+  background-color: $-item-background-color;
 }
 
 .server-name {
@@ -23,8 +25,4 @@ $-item-margin: 1.5rem;
   
   font-size: 1.5rem;
   font-weight: 600;
-}
-
-.remove-game-server-btn {
-  margin-left: 0.5rem;
 }

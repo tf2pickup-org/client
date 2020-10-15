@@ -1,0 +1,99 @@
+<div class="container py-3">
+  <form
+    [formGroup]="gameServer"
+    (ngSubmit)="add()">
+    <div class="d-flex align-items-center">
+      <button
+        type="button"
+        class="mdc-icon-button"
+        tooltip="Cancel"
+        placement="top"
+        container="body"
+        (click)="cancel()">
+        <i-feather name="x"></i-feather>
+      </button>
+
+      <div class="flex-grow-1 mdc-typography--headline5">
+        Add game server
+      </div>
+
+      <button type="submit"
+        class="mdc-button mdc-button--raised mdc-button--secondary"
+        [disabled]="(locked | async) || !gameServer.valid">
+        <div class="mdc-button__ripple"></div>
+        <i-feather name="check" class="mdc-button__icon" aria-hidden="true"></i-feather>
+        <span class="mdc-button__label">save</span>
+      </button>
+    </div>
+
+    <div class="text-container">
+      <div>
+        <label class="mdc-text-field mdc-text-field--outlined name-field w-100" #name>
+          <input type="text"
+            class="mdc-text-field__input"
+            aria-labelledby="game-server-name-label"
+            formControlName="name"
+            required>
+            <span class="mdc-notched-outline">
+              <span class="mdc-notched-outline__leading"></span>
+              <span class="mdc-notched-outline__notch">
+                <span class="mdc-floating-label" id="game-server-name-label">Name</span>
+              </span>
+              <span class="mdc-notched-outline__trailing"></span>
+            </span>
+        </label>
+      </div>
+
+      <div class="d-flex">
+        <label class="mdc-text-field mdc-text-field--outlined address-field flex-grow-1 mr-2" #address>
+          <input type="text"
+            class="mdc-text-field__input"
+            aria-labelledby="game-server-address-label"
+            formControlName="address"
+            required>
+            <span class="mdc-notched-outline">
+              <span class="mdc-notched-outline__leading"></span>
+              <span class="mdc-notched-outline__notch">
+                <span class="mdc-floating-label" id="game-server-address-label">Address</span>
+              </span>
+              <span class="mdc-notched-outline__trailing"></span>
+            </span>
+        </label>
+
+        <label class="mdc-text-field mdc-text-field--outlined port-field" #port>
+          <input type="number"
+            class="mdc-text-field__input"
+            aria-labelledby="game-server-port-label"
+            formControlName="port"
+            max="65535"
+            min="1"
+            required>
+            <span class="mdc-notched-outline">
+              <span class="mdc-notched-outline__leading"></span>
+              <span class="mdc-notched-outline__notch">
+                <span class="mdc-floating-label" id="game-server-port-label">Port</span>
+              </span>
+              <span class="mdc-notched-outline__trailing"></span>
+            </span>
+        </label>
+      </div>
+
+      <div>
+        <label class="mdc-text-field mdc-text-field--outlined rcon-password-field w-100" #rconPassword>
+          <input type="text"
+            class="mdc-text-field__input"
+            aria-labelledby="game-server-rcon-password-label"
+            formControlName="rconPassword"
+            required>
+            <span class="mdc-notched-outline">
+              <span class="mdc-notched-outline__leading"></span>
+              <span class="mdc-notched-outline__notch">
+                <span class="mdc-floating-label" id="game-server-rcon-password-label">RCON password</span>
+              </span>
+              <span class="mdc-notched-outline__trailing"></span>
+            </span>
+        </label>
+      </div>
+    </div>
+  </form>
+</div>

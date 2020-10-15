@@ -1,0 +1,9 @@
+@use 'theme';
+@use 'utils/color';
+@use 'components/card';
+
+.text-container {
+  @extend %card;
+  margin-top: 1rem;
+  padding: 2rem;
+}

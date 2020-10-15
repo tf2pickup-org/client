@@ -5,8 +5,6 @@ import { allGameServers, gameServersLoaded, gameServersLocked } from '../game-se
 import { first } from 'rxjs/operators';
 import { loadGameServers, removeGameServer } from '../game-servers.actions';
 import { isSuperUser } from '@app/profile/profile.selectors';
-import { BsModalService } from 'ngx-bootstrap/modal';
-import { AddGameServerDialogComponent } from '../add-game-server-dialog/add-game-server-dialog.component';
 
 @Component({
   selector: 'app-game-server-list',
@@ -22,7 +20,6 @@ export class GameServerListComponent implements OnInit {
 
   constructor(
     private store: Store,
-    private modalService: BsModalService,
   ) { }
 
   ngOnInit() {
@@ -34,10 +31,6 @@ export class GameServerListComponent implements OnInit {
         this.store.dispatch(loadGameServers());
       }
     });
-  }
-
-  addGameServer() {
-    this.modalService.show(AddGameServerDialogComponent);
   }
 
   removeGameServer(server: GameServer) {

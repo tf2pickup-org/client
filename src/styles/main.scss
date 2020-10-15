@@ -9,16 +9,23 @@
 );
 
 @use '@material/typography' with (
-  $font-family: string.unquote('"Montserrat", sans-serif'),
+  $font-family: string.unquote('Montserrat, sans-serif'),
 );
+
+@use '@material/typography/mdc-typography';
 
 @use '@material/button';
 @use '@material/icon-button';
 @use '@material/dialog';
+@use '@material/floating-label/mdc-floating-label';
+@use '@material/line-ripple/mdc-line-ripple';
+@use '@material/notched-outline/mdc-notched-outline';
+@use '@material/textfield';
 
 @include button.core-styles;
 @include icon-button.core-styles;
 @include dialog.core-styles;
+@include textfield.core-styles;
 
 $body-bg: #0d1d36;
 $body-color: #fff;
@@ -41,16 +48,35 @@ $link-hover-decoration: underline;
 @import 'bootstrap/scss/tooltip';
 
 .mdc-button {
-  height: 36px; // dunno why, but the button's height is not enforced
+  @include button.height(36px);
 
   &:focus {
     outline: 0;
+  }
+
+  &:hover {
+    text-decoration: none;
   }
 }
 
 .mdc-button,
 .mdc-icon-button {
-  line-height: 18px; // vertical align of icons
+  line-height: 16px; // vertical align of icons
+}
+
+.mdc-button--secondary {
+  --mdc-theme-primary: #{theme.$secondary};
+  --mdc-theme-on-primary: #{theme.$font-color-dark};
+  @include button.container-fill-color(theme.$secondary);
+  @include button.ink-color(theme.$font-color-dark);
+  @include button.disabled-container-fill-color(color.adjust(theme.$secondary, $lightness: -30%));
+  @include button.disabled-ink-color(color.adjust(white, $lightness: -73%));
+}
+
+.mdc-text-field {
+  @include textfield.outline-color(color.adjust(black, $lightness: +80%));
+  @include textfield.hover-outline-color(color.adjust(black, $lightness: +70%));
+  @include textfield.focused-outline-color(color.adjust(theme.$primary, $lightness: +20%));
 }
 
 @import 'components/card';
@@ -59,11 +85,6 @@ $link-hover-decoration: underline;
 @import 'components/detail';
 @import 'components/indicator';
 @import 'components/pagination';
-
-html {
-  --mdc-typography-font-family: Montserrat, sans-serif;
-  --mdc-typography-body1-font-weight: 500;
-}
 
 @import 'global/body';
 

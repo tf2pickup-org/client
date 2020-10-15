@@ -11,15 +11,22 @@
 
     <button *ngIf="isSuperUser | async"
       type="button"
-      class="button remove-game-server-btn"
+      class="mdc-icon-button ml-2"
       [disabled]="locked | async"
-      (click)="removeGameServer(server)">
+      (click)="removeGameServer(server)"
+      tooltip="Remove this game server"
+      placement="top"
+      container="body">
       <i-feather name="x"></i-feather>
     </button>
   </div>
 
-  <button *ngIf="isSuperUser | async"
-    type="button"
-    class="btn btn-primary mt-5 add-game-server-btn"
-    (click)="addGameServer()">add server</button>
+  <div class="d-flex justify-content-center mt-5">
+    <a class="mdc-button mdc-button--raised mdc-button--secondary add-game-server-button"
+      [routerLink]="['/servers', 'add']">
+      <div class="mdc-button__ripple"></div>
+      <i-feather name="plus" class="mdc-button__icon" aria-hidden="true"></i-feather>
+      <span class="mdc-button__label">add game server</span>
+    </a>
+  </div>
 </div>
