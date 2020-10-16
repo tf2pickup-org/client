@@ -1,24 +1,18 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { GameServerListComponent } from './game-server-list.component';
-import { BsModalService } from 'ngx-bootstrap/modal';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { AppState } from '@app/app.state';
-import { Store, MemoizedSelector } from '@ngrx/store';
-import { allGameServers, gameServersLocked, gameServersLoaded } from '../game-servers.selectors';
+import { MemoizedSelector } from '@ngrx/store';
+import { allGameServers, gameServersLoaded } from '../game-servers.selectors';
 import { removeGameServer, loadGameServers } from '../game-servers.actions';
 import { isSuperUser } from '@app/profile/profile.selectors';
 import { By } from '@angular/platform-browser';
 import { ChangeDetectionStrategy } from '@angular/core';
 
-class BsModalServiceStub {
-  show() { }
-}
-
 describe('GameServerListComponent', () => {
   let component: GameServerListComponent;
   let fixture: ComponentFixture<GameServerListComponent>;
   let store: MockStore<AppState>;
-  let bsModalService: BsModalServiceStub;
   let storeDispatchSpy: jasmine.Spy;
   let allGameServersSelector: MemoizedSelector<AppState, any[]>;
   let isSuperUserSelector: MemoizedSelector<AppState, boolean>;
@@ -27,7 +21,6 @@ describe('GameServerListComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ GameServerListComponent ],
       providers: [
-        { provide: BsModalService, useClass: BsModalServiceStub },
         provideMockStore(),
       ]
     })
@@ -35,11 +28,10 @@ describe('GameServerListComponent', () => {
     .overrideComponent(GameServerListComponent, { set: { changeDetection: ChangeDetectionStrategy.Default } })
     .compileComponents();
 
-    store = TestBed.get(Store);
+    store = TestBed.inject(MockStore);
     storeDispatchSpy = spyOn(store, 'dispatch').and.callThrough();
     allGameServersSelector = store.overrideSelector(allGameServers, []);
     isSuperUserSelector = store.overrideSelector(isSuperUser, false);
-    store.overrideSelector(gameServersLocked, false);
     store.overrideSelector(gameServersLoaded, false);
   }));
 
@@ -47,8 +39,6 @@ describe('GameServerListComponent', () => {
     fixture = TestBed.createComponent(GameServerListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-
-    bsModalService = TestBed.get(BsModalService);
   });
 
   it('should create', () => {
@@ -62,56 +52,62 @@ describe('GameServerListComponent', () => {
     });
   });
 
-  describe('#addGameServer()', () => {
-    it('should open the modal dialog', () => {
-      const spy = spyOn(bsModalService, 'show');
-      component.addGameServer();
-      expect(spy).toHaveBeenCalled();
-    });
-  });
-
-  describe('#removeGameServer()', () => {
-    it('should dispatch an action', () => {
-      component.removeGameServer({ id: 'FAKE_ID' } as any);
-      expect(storeDispatchSpy).toHaveBeenCalledWith(removeGameServer({ gameServerId: 'FAKE_ID' }));
-    });
-  });
-
   describe('remove button', () => {
     beforeEach(() => {
-      allGameServersSelector.setResult([ { id: '1', name: 'some server', isOnline: true } ]);
+      allGameServersSelector.setResult([ { id: 'FAKE_ID', name: 'some server', isOnline: true } ]);
       store.refreshState();
       fixture.detectChanges();
     });
 
-    it('should not be rendered for regular user', () => {
-      expect(fixture.debugElement.query(By.css('.remove-game-server-btn'))).toBeNull();
+    describe('when the current user is a regular one', () => {
+      it('should not be rendered', () => {
+        expect(fixture.debugElement.query(By.css('.remove-game-server-btn'))).toBeNull();
+      });
     });
 
-    it('should be rendered for super-user', () => {
-      isSuperUserSelector.setResult(true);
-      store.refreshState();
-      fixture.detectChanges();
+    describe('when the current user is the super-user', () => {
+      let removeGameServerButton: HTMLButtonElement;
 
-      const btn = fixture.debugElement.query(By.css('.remove-game-server-btn')).nativeElement as HTMLButtonElement;
-      expect(btn).toBeTruthy();
-      expect(btn.disabled).toBeFalse();
+      beforeEach(() => {
+        isSuperUserSelector.setResult(true);
+        store.refreshState();
+        fixture.detectChanges();
+
+        removeGameServerButton = fixture.debugElement.query(By.css('.remove-game-server-button')).nativeElement as HTMLButtonElement;
+      });
+
+      it('should be rendered', () => {
+        expect(removeGameServerButton).toBeTruthy();
+      });
+
+      it('should dispatch an action', () => {
+        removeGameServerButton.click();
+        expect(storeDispatchSpy).toHaveBeenCalledWith(removeGameServer({ gameServerId: 'FAKE_ID' }));
+      });
     });
   });
 
   describe('add button', () => {
-    it('should not be rendered for a regular user', () => {
-      expect(fixture.debugElement.query(By.css('.add-game-server-btn'))).toBeNull();
+    describe('when the current user is a regular one', () => {
+      it('should not be rendered for a regular user', () => {
+        expect(fixture.debugElement.query(By.css('.add-game-server-button'))).toBeNull();
+      });
     });
 
-    it('should be visible for super-user', () => {
-      isSuperUserSelector.setResult(true);
-      store.refreshState();
-      fixture.detectChanges();
+    describe('when the current user is the super-user', () => {
+      let addGameServerButton: HTMLAnchorElement;
 
-      const btn = fixture.debugElement.query(By.css('.add-game-server-btn')).nativeElement as HTMLButtonElement;
-      expect(btn).toBeTruthy();
-      expect(btn.disabled).toBeFalse();
+      beforeEach(() => {
+        isSuperUserSelector.setResult(true);
+        store.refreshState();
+        fixture.detectChanges();
+
+        addGameServerButton = fixture.debugElement.query(By.css('.add-game-server-button')).nativeElement as HTMLAnchorElement;
+      });
+
+      it('should be rendered', () => {
+        expect(addGameServerButton).toBeTruthy();
+      });
     });
   });
 });
