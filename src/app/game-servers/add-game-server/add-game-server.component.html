@@ -5,7 +5,7 @@
     <div class="d-flex align-items-center">
       <button
         type="button"
-        class="mdc-icon-button"
+        class="mdc-icon-button cancel-button"
         tooltip="Cancel"
         placement="top"
         container="body"
@@ -18,7 +18,7 @@
       </div>
 
       <button type="submit"
-        class="mdc-button mdc-button--raised mdc-button--secondary"
+        class="mdc-button mdc-button--raised mdc-button--secondary save-button"
         [disabled]="(locked | async) || !gameServer.valid">
         <div class="mdc-button__ripple"></div>
         <i-feather name="check" class="mdc-button__icon" aria-hidden="true"></i-feather>

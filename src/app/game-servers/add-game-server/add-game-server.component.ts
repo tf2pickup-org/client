@@ -40,7 +40,7 @@ export class AddGameServerComponent implements AfterViewInit, OnDestroy {
   rconPasswordInput: ElementRef;
 
   @HostListener('document:keydown.escape', ['$event'])
-  onKeyDown() {
+  onEscDown() {
     this.cancel();
   }
 
