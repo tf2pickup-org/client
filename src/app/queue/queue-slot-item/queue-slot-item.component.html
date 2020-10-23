@@ -4,9 +4,9 @@
   [ngClass]="{
     'is-free': !slot.playerId,
     'is-taken': !!slot.playerId,
-    'taken-by-me': takenByMe,
+    'is-taken-by-me': takenByMe,
     'is-ready': slot.ready,
-    'locked': locked
+    'is-locked': locked
   }"
   (click)="maybeTakeSlot()">
 

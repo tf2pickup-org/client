@@ -44,7 +44,7 @@ $-side-slot-size: 2rem;
       display: none;
     }
 
-    &:not(.locked):hover {
+    &:not(.is-locked):hover {
       cursor: pointer;
 
       > .add-prompt {
@@ -64,8 +64,8 @@ $-side-slot-size: 2rem;
       text-overflow: ellipsis;
       padding: 0 0.5rem;
     }
-  
-    .taken-by-me {
+
+    .is-taken-by-me {
       background-color: color.change(theme.$queue-slot-taken, $alpha: 1);
     }
   }
