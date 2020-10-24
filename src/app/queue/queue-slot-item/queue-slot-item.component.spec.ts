@@ -3,6 +3,9 @@ import { QueueSlotItemComponent } from './queue-slot-item.component';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { QueueSlot } from '../models/queue-slot';
+import { MockComponent } from 'ng-mocks';
+import { PlayerAvatarComponent } from '@app/players/player-avatar/player-avatar.component';
+import { PlayerNameComponent } from '@app/players/player-name/player-name.component';
 
 describe('QueueSlotItemComponent', () => {
   let component: QueueSlotItemComponent;
@@ -10,7 +13,11 @@ describe('QueueSlotItemComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ QueueSlotItemComponent ],
+      declarations: [
+        QueueSlotItemComponent,
+        MockComponent(PlayerAvatarComponent),
+        MockComponent(PlayerNameComponent),
+      ],
     })
     // https://github.com/angular/angular/issues/12313
     .overrideComponent(QueueSlotItemComponent, { set: { changeDetection: ChangeDetectionStrategy.Default } })
@@ -67,6 +74,10 @@ describe('QueueSlotItemComponent', () => {
         slotDiv.click();
       });
     });
+
+    it('should not render an avatar', () => {
+      expect(fixture.debugElement.query(By.css('app-player-avatar'))).toBeNull();
+    });
   });
 
   describe('with an occupied slot', () => {
@@ -81,6 +92,16 @@ describe('QueueSlotItemComponent', () => {
 
     it('should be marked as taken', () => {
       expect(slotDiv.classList.contains('is-taken')).toBe(true);
+    });
+
+    it('should render player\'s avatar', () => {
+      const avatar = fixture.debugElement.query(By.css('app-player-avatar')).componentInstance as PlayerAvatarComponent;
+      expect(avatar.playerId).toEqual('FAKE_PLAYER_ID');
+    });
+
+    it('should render player name', () => {
+      const name = fixture.debugElement.query(By.css('app-player-name')).componentInstance as PlayerNameComponent;
+      expect(name.playerId).toEqual('FAKE_PLAYER_ID');
     });
 
     it('should not emit takeSlot when clicked', () => {
