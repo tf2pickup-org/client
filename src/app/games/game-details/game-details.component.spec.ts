@@ -144,7 +144,7 @@ describe('GameDetailsComponent', () => {
   }));
 
   beforeEach(() => {
-    store = TestBed.inject(Store) as MockStore;
+    store = TestBed.inject(MockStore);
     storeDispatchSpy = spyOn(store, 'dispatch');
 
     fixture = TestBed.createComponent(GameDetailsComponent);
