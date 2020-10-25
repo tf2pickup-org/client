@@ -2,8 +2,11 @@
 @use 'theme';
 @use 'variables';
 @use 'utils/ghost';
+@use 'utils/transition';
 
-%queue-status {
+.queue-status {
+  @include transition.background-color;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -16,16 +19,20 @@
   text-align: center;
   font-size: 1.8rem;
   color: theme.$font-color-dark;
-}
 
-.queue-status {
-  &-waiting {
-    @extend %queue-status;
-    background-color: rgba(255, 255, 255, 0.7);
+  &.waiting {
+    background-color: theme.$queue-status-waiting;
   }
 
-  &-loading {
-    @extend %queue-status;
+  &.ready {
+    background-color: theme.$queue-status-ready-up;
+  }
+
+  &.launching {
+    background-color: theme.$queue-status-launching;
+  }
+
+  &.loading {
     background-color: rgba(255, 255, 255, 0.7);
 
     .ghost-line {

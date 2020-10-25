@@ -1,9 +1,6 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { queueCurrentPlayerCount, queueRequiredPlayerCount, queueState, isQueueLoading, isInQueue } from '../queue.selectors';
-import { trigger } from '@angular/animations';
-import { fadeIn } from '@app/animations';
 
 @Component({
   selector: 'app-queue-status',
@@ -13,12 +10,8 @@ import { fadeIn } from '@app/animations';
 })
 export class QueueStatusComponent {
 
-  playerCount: Observable<number> = this.store.pipe(
-    select(queueCurrentPlayerCount),
-  );
-  requiredPlayerCount: Observable<number> = this.store.pipe(
-    select(queueRequiredPlayerCount),
-  );
+  playerCount = this.store.select(queueCurrentPlayerCount);
+  requiredPlayerCount = this.store.select(queueRequiredPlayerCount);
   state = this.store.select(queueState);
   loading = this.store.select(isQueueLoading);
   isInQueue = this.store.select(isInQueue);

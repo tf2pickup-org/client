@@ -2,7 +2,7 @@
 @use 'components/card';
 @use 'components/indicator';
 @use 'utils/border-radius';
-@use 'utils/outline';
+@use 'utils/transition';
 @use 'theme';
 
 $-game-item-background-color: rgba(255, 255, 255, 0.7);
@@ -13,6 +13,8 @@ $-game-live-indicator-size: 20px;
 
 .game-list-item {
   @extend %card-shadow;
+
+  @include transition.background-color;
 
   display: flex;
   height: $-item-height;
@@ -26,8 +28,6 @@ $-game-live-indicator-size: 20px;
 
   font-size: 1.5rem;
   font-weight: 600;
-
-  transition: background-color 0.05s;
 
   &--content {
     flex: 1 1 auto;

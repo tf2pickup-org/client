@@ -30,7 +30,9 @@ $team-color-red: rgb(189, 59, 59);
 $team-color-blu: rgb(88, 121, 138);
 
 // queue colors
+$queue-status-waiting: rgba(255, 255, 255, 0.7);
 $queue-status-ready-up: rgba(65, 202, 37, 0.75);
+$queue-status-launching: rgba(118, 154, 240, 0.95);
 $queue-slot-free: rgba(255, 255, 255, 0.65);
 $queue-slot-taken: rgba(255, 255, 255, 0.95);
 $queue-slot-taken-by-me: rgba(255, 255, 255, 1);
