@@ -16,7 +16,7 @@ export class MapVoteButtonComponent {
   votePercent: number;
 
   @Input()
-  active = false;
+  selected = false;
 
   @Input()
   disabled = true;
@@ -33,7 +33,7 @@ export class MapVoteButtonComponent {
   ) { }
 
   toggleVote() {
-    this.voteToggle.emit(!this.active);
+    this.voteToggle.emit(!this.selected);
   }
 
 }

@@ -2,7 +2,7 @@
   <app-map-vote-button *ngFor="let result of results | async"
     [map]="result.map"
     [votePercent]="result.votePercent"
-    [active]="result.map === (mapVote | async)"
+    [selected]="result.map === (mapVote | async)"
     [disabled]="disabled | async"
     (voteToggle)="voteForMap(result.map)"></app-map-vote-button>
 </div>

@@ -5,7 +5,7 @@ import { By } from '@angular/platform-browser';
 import { ChangeDetectionStrategy } from '@angular/core';
 
 class MapThumbnailServiceStub {
-  getMapThumbnailPath(map: string) { return 'fake_thumbnail.png'; }
+  getMapThumbnailPath(map: string) { return map + '.png'; }
 }
 
 describe('MapVoteButtonComponent', () => {
@@ -34,39 +34,60 @@ describe('MapVoteButtonComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should apply correct css classes', () => {
-    const btn = fixture.debugElement.query(By.css('button')).nativeElement as HTMLButtonElement;
-    expect(btn.classList.contains('active')).toBe(false);
+  describe('with a map', () => {
+    beforeEach(() => {
+      component.map = 'cp_fake_rc1';
+      fixture.detectChanges();
+    });
 
-    component.active = true;
-    fixture.detectChanges();
-    expect(btn.classList.contains('active')).toBe(true);
-  });
+    it('should set proper background-image', () => {
+      const div = fixture.debugElement.query(By.css('.map-thumbnail')).nativeElement as HTMLDivElement;
+      expect(div.style.backgroundImage).toMatch(/url\(['"]cp_fake_rc1\.png["']\)/);
+    });
 
-  it('should apply the disabled attribute', () => {
-    const btn = fixture.debugElement.query(By.css('button')).nativeElement as HTMLButtonElement;
-    expect(btn.disabled).toBe(true);
+    it('should render the map name', () => {
+      const span = fixture.debugElement.query(By.css('.map-name > span')).nativeElement as HTMLSpanElement;
+      expect(span.innerText).toEqual('cp_fake_rc1');
+    });
 
-    component.disabled = false;
-    fixture.detectChanges();
-    expect(btn.disabled).toBe(false);
-  });
+    describe('with results', () => {
+      beforeEach(() => {
+        component.votePercent = 0.75;
+        fixture.detectChanges();
+      });
 
-  it('should apply the correct thumbnail path', () => {
-    const spy = spyOn(TestBed.get(MapThumbnailService), 'getMapThumbnailPath').and.callThrough();
-    component.map = 'FAKE_MAP';
-    fixture.detectChanges();
-    expect(spy).toHaveBeenCalledWith('FAKE_MAP');
+      it('should render results', () => {
+        const span = fixture.debugElement.query(By.css('.map-vote-result > span')).nativeElement as HTMLSpanElement;
+        expect(span.innerText).toEqual('75%');
+      });
+    });
 
-    const btn = fixture.debugElement.query(By.css('button')).nativeElement as HTMLButtonElement;
-    expect(btn.style.backgroundImage).toEqual('url("fake_thumbnail.png")');
-  });
+    describe('when not selected', () => {
+      beforeEach(() => {
+        component.selected = false;
+        fixture.detectChanges();
+      });
 
-  describe('#toggleVote()', () => {
-    it('should emit the voteToggle event', () => {
-      component.active = false;
-      component.voteToggle.subscribe(value => expect(value).toBe(true));
-      component.toggleVote();
+      it('should not apply the is-selected css class', () => {
+        const button = fixture.debugElement.query(By.css('button')).nativeElement as HTMLButtonElement;
+        expect(button.classList.contains('is-selected')).toBe(false);
+      });
+    });
+
+    it('should render content-fill', () => {
+      expect(fixture.debugElement.query(By.css('.content.fill'))).toBeTruthy();
+    });
+
+    describe('when selected', () => {
+      beforeEach(() => {
+        component.selected = true;
+        fixture.detectChanges();
+      });
+
+      it('should apply the is-selected css class', () => {
+        const button = fixture.debugElement.query(By.css('button')).nativeElement as HTMLButtonElement;
+        expect(button.classList.contains('is-selected')).toBe(true);
+      });
     });
   });
 });
