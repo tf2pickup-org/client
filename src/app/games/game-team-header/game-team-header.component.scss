@@ -1,25 +1,24 @@
 @use 'theme';
-@import '~bootstrap/scss/functions';
-@import '~bootstrap/scss/variables';
 
 .team-header {
   align-items: center;
-  color: theme-color('light');
   display: flex;
   justify-content: center;
+
   text-align: center;
-  padding: .2rem 0;
+  padding: 0.2rem 0;
+  color: theme.$font-color-light;
 
   .team-name {
     font-size: 2rem;
     font-weight: 700;
   }
 
-  &--red {
+  >.red {
     background-color: theme.$team-color-red;
   }
 
-  &--blu {
+  >.blu {
     background-color: theme.$team-color-blu;
   }
 

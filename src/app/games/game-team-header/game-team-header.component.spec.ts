@@ -32,11 +32,11 @@ describe('GameTeamHeaderComponent', () => {
     beforeEach(() => {
       component.team = 'red';
       fixture.detectChanges();
-      header = fixture.debugElement.query(By.css('div.team-header')).nativeElement as HTMLDivElement;
+      header = fixture.debugElement.query(By.css('.team-header')).nativeElement as HTMLDivElement;
     });
 
-    it('should apply the team-header-red css class', () => {
-      expect(header.classList.contains('team-header-red')).toBe(true);
+    it('should apply the css class', () => {
+      expect(header.classList.contains('red')).toBe(true);
     });
 
     it('should say RED', () => {
@@ -50,28 +50,15 @@ describe('GameTeamHeaderComponent', () => {
     beforeEach(() => {
       component.team = 'blu';
       fixture.detectChanges();
-      header = fixture.debugElement.query(By.css('div.team-header')).nativeElement as HTMLDivElement;
+      header = fixture.debugElement.query(By.css('.team-header')).nativeElement as HTMLDivElement;
     });
 
-    it('should apply the team-header-blu css class', () => {
-      expect(header.classList.contains('team-header-blu')).toBe(true);
+    it('should apply the css class', () => {
+      expect(header.classList.contains('blu')).toBe(true);
     });
 
     it('should say BLU', () => {
       expect(header.innerText).toEqual('BLU');
-    });
-
-    describe('with score', () => {
-      beforeEach(() => {
-        component.score = 5;
-        fixture.detectChanges();
-      });
-
-      it('should render the score', () => {
-        const badge = fixture.debugElement.query(By.css('.team-score')).nativeElement as HTMLElement;
-        expect(badge.innerText).toEqual('5');
-        expect(badge.classList.contains('badge')).toBe(true);
-      });
     });
   });
 });
