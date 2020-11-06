@@ -2,26 +2,17 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { GameListComponent } from './game-list.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { GamesService } from '../games.service';
-import { NEVER, of, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { PlayersService } from '@app/players/players.service';
 import { By } from '@angular/platform-browser';
 import { PaginatedList } from '@app/core/models/paginated-list';
 import { Game } from '../models/game';
 
-class GamesServiceStub {
-  results = new Subject<PaginatedList<Game>>();
-  fetchGames() { return this.results.asObservable(); }
-}
-
-class PlayersServiceStub {
-  fetchPlayerGames() { return NEVER; }
-}
-
 describe('GameListComponent', () => {
   let component: GameListComponent;
   let fixture: ComponentFixture<GameListComponent>;
-  let gamesService: GamesServiceStub;
+  let gamesService: jasmine.SpyObj<GamesService>;
+  let results: Subject<PaginatedList<Game>>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
@@ -31,53 +22,54 @@ describe('GameListComponent', () => {
         NgxPaginationModule,
       ],
       providers: [
-        { provide: GamesService, useClass: GamesServiceStub },
-        { provide: PlayersService, useClass: PlayersServiceStub },
+        {
+          provide: GamesService,
+          useValue: jasmine.createSpyObj<GamesService>(GamesService.name, ['fetchGames']),
+        },
       ],
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
+    results = new Subject();
+    gamesService = TestBed.inject(GamesService) as jasmine.SpyObj<GamesService>;
+    gamesService.fetchGames.and.returnValue(results.asObservable());
+
     fixture = TestBed.createComponent(GameListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-
-    gamesService = TestBed.inject(GamesServiceStub);
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should not render pagination controls unless there is more than 1 page', () => {
-    gamesService.results.next({ itemCount: 10, results: [] });
-    fixture.detectChanges();
-    expect(fixture.debugElement.query(By.css('nav'))).toBeFalsy();
+  describe('when there is not more than 1 page', () => {
+    beforeEach(() => {
+      results.next({ itemCount: 5, results: [ ] });
+      fixture.detectChanges();
+    });
+
+    it('should not render pagination controls', () => {
+      expect(fixture.debugElement.query(By.css('nav'))).toBeFalsy();
+    });
   });
 
-  it('should display \'no games\' text when there are no games', () => {
-    gamesService.results.next({ itemCount: 0, results: [] });
-    fixture.detectChanges();
-    expect(fixture.debugElement.query(By.css('div>span.text-muted'))).toBeTruthy();
-  });
+  describe('when there are more pages', () => {
+    beforeEach(() => {
+      results.next({ itemCount: 7, results: [ ] });
+      fixture.detectChanges();
+    });
 
-  it('should render pagination controls when there are more pages', () => {
-    gamesService.results.next({ itemCount: 11, results: [] });
-    fixture.detectChanges();
-    expect(fixture.debugElement.query(By.css('nav'))).toBeTruthy();
-  });
+    it('should render navigation controls', () => {
+      expect(fixture.debugElement.query(By.css('nav'))).toBeTruthy();
+    });
 
-  describe('#getPage()', () => {
-    describe('without playerId', () => {
-      it('should load a given page', () => {
-        const spy = spyOn(TestBed.inject(GamesService), 'fetchGames').and.returnValue(of({ itemCount: 50, results: [] }));
-        component.getPage(1);
-        expect(spy).toHaveBeenCalledWith(0, 10);
-
-        component.getPage(5);
-        expect(spy).toHaveBeenCalledWith(40, 10);
-      });
+    it('should request given page', () => {
+      const second = fixture.debugElement.query(By.css('nav ul li:nth-child(3) a')).nativeElement as HTMLAnchorElement;
+      second.click();
+      expect(gamesService.fetchGames).toHaveBeenCalledWith(5, 5);
     });
   });
 
