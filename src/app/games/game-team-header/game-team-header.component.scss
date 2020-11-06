@@ -14,11 +14,11 @@
     font-weight: 700;
   }
 
-  >.red {
+  &.red {
     background-color: theme.$team-color-red;
   }
 
-  >.blu {
+  &.blu {
     background-color: theme.$team-color-blu;
   }
 
