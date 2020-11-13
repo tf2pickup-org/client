@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { SteamLoginButtonComponent } from './steam-login-button.component';
 import { API_URL } from '@app/api-url';
 import { By } from '@angular/platform-browser';
@@ -7,7 +7,7 @@ describe('SteamLoginButtonComponent', () => {
   let component: SteamLoginButtonComponent;
   let fixture: ComponentFixture<SteamLoginButtonComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ SteamLoginButtonComponent ],
       providers: [

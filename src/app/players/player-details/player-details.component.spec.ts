@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { PlayerDetailsComponent } from './player-details.component';
 import { PlayersService } from '../players.service';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
@@ -43,7 +43,7 @@ describe('PlayerDetailsComponent', () => {
     profile: { },
   };
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [
         Etf2lProfileLinkPipe,

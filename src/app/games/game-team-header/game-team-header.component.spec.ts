@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { GameTeamHeaderComponent } from './game-team-header.component';
 import { By } from '@angular/platform-browser';
 import { ChangeDetectionStrategy } from '@angular/core';
@@ -7,7 +7,7 @@ describe('GameTeamHeaderComponent', () => {
   let component: GameTeamHeaderComponent;
   let fixture: ComponentFixture<GameTeamHeaderComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ GameTeamHeaderComponent ]
     })

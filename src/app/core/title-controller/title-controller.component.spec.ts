@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { TitleControllerComponent } from './title-controller.component';
 import { ReplaySubject } from 'rxjs';
 import { Router, RoutesRecognized, RouterStateSnapshot } from '@angular/router';
@@ -17,7 +17,7 @@ describe('TitleControllerComponent', () => {
   let component: TitleControllerComponent;
   let fixture: ComponentFixture<TitleControllerComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ TitleControllerComponent ],
       providers: [

@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { QueueStatusComponent } from './queue-status.component';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { Store } from '@ngrx/store';
@@ -13,7 +13,7 @@ describe('QueueStatusComponent', () => {
 
   const initialState = { queue: { state: 'waiting' }};
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ QueueStatusComponent ],
       imports: [ RouterTestingModule ],

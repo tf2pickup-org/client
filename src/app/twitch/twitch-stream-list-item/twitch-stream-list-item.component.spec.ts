@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { TwitchStreamListItemComponent } from './twitch-stream-list-item.component';
 import { By } from '@angular/platform-browser';
 import { ChangeDetectionStrategy } from '@angular/core';
@@ -9,7 +9,7 @@ describe('TwitchStreamListItemComponent', () => {
   let component: TwitchStreamListItemComponent;
   let fixture: ComponentFixture<TwitchStreamListItemComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [
         TwitchStreamListItemComponent,

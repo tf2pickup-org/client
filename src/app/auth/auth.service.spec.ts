@@ -1,4 +1,4 @@
-import { TestBed, inject, async } from '@angular/core/testing';
+import { TestBed, inject, waitForAsync } from '@angular/core/testing';
 import { AuthService } from './auth.service';
 import { API_URL } from '@app/api-url';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
@@ -40,7 +40,7 @@ describe('AuthService', () => {
       expect(req.request.method).toBe('POST');
     }));
 
-    it('should emit the new token', async(inject([AuthService], (service: AuthService) => {
+    it('should emit the new token', waitForAsync(inject([AuthService], (service: AuthService) => {
       const tokenStore = TestBed.get(TokenStoreService);
 
       service.reauth().subscribe(authToken => expect(authToken).toEqual('FAKE_NEW_AUTH_TOKEN'));

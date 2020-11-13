@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { PlayerListComponent } from './player-list.component';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { AppState } from '@app/app.state';
@@ -13,7 +13,7 @@ describe('PlayerListComponent', () => {
   let store: MockStore<AppState>;
   let allPlayersSelector: MemoizedSelector<AppState, any[]>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ PlayerListComponent ],
       imports: [ RouterTestingModule ],

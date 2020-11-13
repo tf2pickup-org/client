@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { WatchGameInfoComponent } from './watch-game-info.component';
 import { MockComponent } from 'ng-mocks';
 import { ConnectStringComponent } from '../connect-string/connect-string.component';
@@ -9,7 +9,7 @@ describe('WatchGameInfoComponent', () => {
   let component: WatchGameInfoComponent;
   let fixture: ComponentFixture<WatchGameInfoComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [
         WatchGameInfoComponent,

@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { QueueSlotContainerComponent } from './queue-slot-container.component';
 import { MockComponent } from 'ng-mocks';
 import { QueueSlotItemComponent } from '../queue-slot-item/queue-slot-item.component';
@@ -76,7 +76,7 @@ describe('QueueSlotContainerComponent', () => {
   let fixture: ComponentFixture<QueueSlotContainerComponent>;
   let store: MockStore<{}>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [
         QueueSlotContainerComponent,

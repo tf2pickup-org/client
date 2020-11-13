@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { SettingsComponent } from './settings.component';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { TwitchService } from '@app/twitch/twitch.service';
@@ -17,7 +17,7 @@ describe('SettingsComponent', () => {
   let store: MockStore;
   let twitchTvUserSelector: MemoizedSelector<AppState, any>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ SettingsComponent ],
       providers: [

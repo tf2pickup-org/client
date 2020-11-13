@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NavigationBarComponent } from './navigation-bar.component';
 import { NO_ERRORS_SCHEMA, ChangeDetectionStrategy } from '@angular/core';
 import { AuthService } from '@app/auth/auth.service';
@@ -16,7 +16,7 @@ describe('NavigationBarComponent', () => {
   let store: MockStore<{ profile: any }>;
   const initialState = { profile: { } };
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ NavigationBarComponent ],
       providers: [

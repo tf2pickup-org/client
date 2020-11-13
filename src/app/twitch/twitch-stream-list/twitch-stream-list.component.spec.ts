@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { TwitchStreamListComponent } from './twitch-stream-list.component';
 import { MockComponent } from 'ng-mocks';
 import { TwitchStreamListItemComponent } from '../twitch-stream-list-item/twitch-stream-list-item.component';
@@ -15,7 +15,7 @@ describe('TwitchStreamListComponent', () => {
   let store: MockStore;
   let twitchStreamsSelector: MemoizedSelector<AppState, TwitchStream[]>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [
         TwitchStreamListComponent,

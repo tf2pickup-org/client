@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { PreReadyUpButtonComponent } from './pre-ready-up-button.component';
 import { SecondsPipe } from '../seconds.pipe';
 import { provideMockStore } from '@ngrx/store/testing';
@@ -11,7 +11,7 @@ describe('PreReadyUpButtonComponent', () => {
   let component: PreReadyUpButtonComponent;
   let fixture: ComponentFixture<PreReadyUpButtonComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [
         PreReadyUpButtonComponent,

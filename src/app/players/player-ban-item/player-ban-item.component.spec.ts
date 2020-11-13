@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { PlayerBanItemComponent } from './player-ban-item.component';
 import { NO_ERRORS_SCHEMA, ChangeDetectionStrategy } from '@angular/core';
 import { By } from '@angular/platform-browser';
@@ -7,7 +7,7 @@ describe('PlayerBanItemComponent', () => {
   let component: PlayerBanItemComponent;
   let fixture: ComponentFixture<PlayerBanItemComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ PlayerBanItemComponent ],
       schemas: [ NO_ERRORS_SCHEMA ],
@@ -74,7 +74,7 @@ describe('PlayerBanItemComponent', () => {
       fixture.detectChanges();
     });
 
-    it('should emit revoke event', async(() => {
+    it('should emit revoke event', waitForAsync(() => {
       component.revoke.subscribe(ban => expect(ban).toEqual(component.playerBan));
       const btn = fixture.debugElement.query(By.css('button[type=button]')).nativeElement as HTMLButtonElement;
       btn.click();
