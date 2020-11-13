@@ -13,7 +13,6 @@ import { QueueClassSlotListComponent } from './queue-class-slot-list/queue-class
 import { QueueSlotItemComponent } from './queue-slot-item/queue-slot-item.component';
 import { PlayersModule } from '@app/players/players.module';
 import { QueueReadyUpDialogComponent } from './queue-ready-up-dialog/queue-ready-up-dialog.component';
-import { QueueReadyUpDialogControllerComponent } from './queue-ready-up-dialog-controller/queue-ready-up-dialog-controller.component';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { FormsModule } from '@angular/forms';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
@@ -38,7 +37,6 @@ import { IconsModule } from '@app/icons/icons.module';
     QueueClassSlotListComponent,
     QueueSlotItemComponent,
     QueueReadyUpDialogComponent,
-    QueueReadyUpDialogControllerComponent,
     QueueAlertsComponent,
     QueueAddonsComponent,
     PreReadyUpButtonComponent,
@@ -66,7 +64,6 @@ import { IconsModule } from '@app/icons/icons.module';
     QueueRoutingModule,
   ],
   exports: [
-    QueueReadyUpDialogControllerComponent,
     QueueNotificationsControllerComponent,
   ],
 })

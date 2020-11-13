@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { loadQueue, queueLoaded, joinQueue, leaveQueue, queueStateUpdated, joinQueueError, leaveQueueError, readyUp, readyUpError,
   showReadyUpDialog, hideReadyUpDialog, stopPreReady, voteForMap, mapVoteResultsUpdated, mapVoted,
   mapVoteReset, queueSlotsUpdated, markFriend, startPreReady, substituteRequestsUpdated, friendshipsUpdated } from './queue.actions';
-import { mergeMap, map, catchError, filter, withLatestFrom, mapTo } from 'rxjs/operators';
+import { mergeMap, map, catchError, filter, withLatestFrom, mapTo, switchMap } from 'rxjs/operators';
 import { QueueService } from './queue.service';
 import { Store, select } from '@ngrx/store';
 import { of, fromEvent } from 'rxjs';
@@ -16,6 +16,7 @@ import { MapVoteResult } from './models/map-vote-result';
 import { SubstituteRequest } from './models/substitute-request';
 import { Friendship } from './models/friendship';
 import { ioConnected } from '@app/io/io.actions';
+import { ReadyUpDialogService } from './ready-up-dialog.service';
 
 @Injectable()
 export class QueueEffects {
@@ -71,7 +72,15 @@ export class QueueEffects {
       filter(([, slot]) => slot && !slot.ready),
       withLatestFrom(this.store.select(isPreReadied)),
       map(([, preReadied]) => preReadied),
-      map(preReadied => preReadied ? readyUp() : showReadyUpDialog()),
+      switchMap(preReadied => {
+        if (preReadied) {
+          return of(readyUp());
+        }
+
+        return this.readyUpDialogService.showReadyUpDialog().pipe(
+          map(result => result ? readyUp() : leaveQueue()),
+        );
+      }),
     )
   );
 
@@ -145,6 +154,7 @@ export class QueueEffects {
     private queueService: QueueService,
     private store: Store,
     socket: Socket,
+    private readyUpDialogService: ReadyUpDialogService,
   ) {
     fromEvent<QueueSlot[]>(socket, 'queue slots update')
       .subscribe(slots => this.store.dispatch(queueSlotsUpdated({ slots })));

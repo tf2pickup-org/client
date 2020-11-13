@@ -37,15 +37,19 @@ const queueReducer = createReducer(
   on(queueSlotsUpdated, (state, { slots }) =>  updateQueueSlots(slots, state)),
   on(queueStateUpdated, (state, { queueState }) => ({ ...state, state: queueState })),
   on(mapVoteResultsUpdated, (state, { results }) => ({ ...state, mapVoteResults: results })),
+
   on(readyUp, state => ({ ...state, readyUpDialogShown: false })),
   on(showReadyUpDialog, state => ({ ...state, readyUpDialogShown: true })),
   on(hideReadyUpDialog, state => ({ ...state, readyUpDialogShown: false })),
   on(leaveQueue, state => ({ ...state, readyUpDialogShown: false })),
+
   on(togglePreReady, state => ({ ...state, preReady: !state.preReady })),
   on(startPreReady, state => ({ ...state, preReady: true })),
   on(stopPreReady, state => ({ ...state, preReady: false })),
+
   on(mapVoted, (state, { map }) => ({ ...state, mapVote: map })),
   on(mapVoteReset, state => ({ ...state, mapVote: undefined })),
+
   on(substituteRequestsUpdated, (state, { substituteRequests }) => ({ ...state, substituteRequests })),
   on(friendshipsUpdated, (state, { friendships }) => ({ ...state, friendships })),
 );

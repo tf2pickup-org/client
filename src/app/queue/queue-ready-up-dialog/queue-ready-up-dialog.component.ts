@@ -1,7 +1,4 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { leaveQueue, readyUp } from '../queue.actions';
-import { BsModalRef } from 'ngx-bootstrap/modal';
+import { Component, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-queue-ready-up-dialog',
@@ -11,19 +8,10 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 })
 export class QueueReadyUpDialogComponent {
 
-  constructor(
-    private store: Store,
-    private bsModalRef: BsModalRef,
-  ) { }
+  @Output()
+  leaveQueue = new EventEmitter<void>();
 
-  leaveQueue() {
-    this.store.dispatch(leaveQueue());
-    this.bsModalRef.hide();
-  }
-
-  confirmReady() {
-    this.store.dispatch(readyUp());
-    this.bsModalRef.hide();
-  }
+  @Output()
+  readyUp = new EventEmitter<void>();
 
 }
