@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { MumbleJoinButtonComponent } from './mumble-join-button.component';
 import { SharedModule } from '@app/shared/shared.module';
 import { ChangeDetectionStrategy } from '@angular/core';
@@ -7,7 +7,7 @@ describe('MumbleJoinButtonComponent', () => {
   let component: MumbleJoinButtonComponent;
   let fixture: ComponentFixture<MumbleJoinButtonComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ MumbleJoinButtonComponent ],
       imports: [

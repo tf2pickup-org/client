@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { AcceptRulesDialogComponent } from './accept-rules-dialog.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
@@ -6,7 +6,7 @@ describe('AcceptRulesDialogComponent', () => {
   let component: AcceptRulesDialogComponent;
   let fixture: ComponentFixture<AcceptRulesDialogComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ AcceptRulesDialogComponent ],
       schemas: [ NO_ERRORS_SCHEMA ],

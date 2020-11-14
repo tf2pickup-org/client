@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { GameDetailsComponent } from './game-details.component';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { SharedModule } from '@app/shared/shared.module';
@@ -109,7 +109,7 @@ describe('GameDetailsComponent', () => {
 
   const initialState = { games: { ids: [], entities: { }, loaded: false } };
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [
         GameDetailsComponent,

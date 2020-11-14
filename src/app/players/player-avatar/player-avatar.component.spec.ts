@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { PlayerAvatarComponent } from './player-avatar.component';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { Store } from '@ngrx/store';
@@ -8,7 +8,7 @@ describe('PlayerAvatarComponent', () => {
   let fixture: ComponentFixture<PlayerAvatarComponent>;
   let store: MockStore<any>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ PlayerAvatarComponent ],
       providers: [

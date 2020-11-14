@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
 import { QueueContainerComponent } from './queue-container.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { queueRequiredPlayerCount, queueCurrentPlayerCount } from '../queue.selectors';
@@ -18,7 +18,7 @@ describe('QueueContainerComponent', () => {
   let store: MockStore<any>;
   let setTitleSpy: jasmine.Spy;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ QueueContainerComponent ],
       imports: [

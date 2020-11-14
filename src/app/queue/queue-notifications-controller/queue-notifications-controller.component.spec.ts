@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
 import { QueueNotificationsControllerComponent } from './queue-notifications-controller.component';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { NotificationsService } from '@app/notifications/notifications.service';
@@ -26,7 +26,7 @@ describe('QueueNotificationsControllerComponent', () => {
   let showNotificationSpy: jasmine.Spy;
   let playSoundSpy: jasmine.Spy;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ QueueNotificationsControllerComponent ],
       providers: [

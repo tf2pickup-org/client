@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { SkillTableComponent } from './skill-table.component';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { AppState } from '@app/app.state';
@@ -55,7 +55,7 @@ describe('SkillTableComponent', () => {
   let allPlayersSelector: MemoizedSelector<AppState, Player[]>;
   let storeDispatchSpy: jasmine.Spy;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ SkillTableComponent ],
       providers: [

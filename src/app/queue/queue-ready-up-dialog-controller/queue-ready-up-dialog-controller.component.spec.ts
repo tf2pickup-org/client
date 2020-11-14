@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { QueueReadyUpDialogControllerComponent } from './queue-ready-up-dialog-controller.component';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { BsModalService } from 'ngx-bootstrap/modal';
@@ -28,7 +28,7 @@ describe('QueueReadyUpDialogControllerComponent', () => {
   let store: MockStore<any>;
   let queueShowReadyUpDialogSelector: MemoizedSelector<AppState, boolean>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ QueueReadyUpDialogControllerComponent ],
       providers: [

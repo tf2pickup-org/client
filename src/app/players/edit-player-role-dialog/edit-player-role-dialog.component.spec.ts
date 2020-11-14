@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { EditPlayerRoleDialogComponent } from './edit-player-role-dialog.component';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
@@ -43,7 +43,7 @@ describe('EditPlayerRoleDialogComponent', () => {
   let playersLockedSelector: MemoizedSelector<AppState, boolean>;
   let storeDispatchSpy: jasmine.Spy;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [
         FormsModule,

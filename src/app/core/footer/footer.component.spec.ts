@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FooterComponent } from './footer.component';
 import { TokenStoreService } from '@app/auth/token-store.service';
 import { AuthService } from '@app/auth/auth.service';
@@ -24,7 +24,7 @@ describe('FooterComponent', () => {
   let store: MockStore<AppState>;
   let isAdminSelector: MemoizedSelector<AppState, boolean>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ FooterComponent ],
       imports: [

@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { PlayerEditSkillComponent } from './player-edit-skill.component';
 import { ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
 import { By } from '@angular/platform-browser';
@@ -9,7 +9,7 @@ describe('PlayerEditSkillComponent', () => {
   let fixture: ComponentFixture<PlayerEditSkillComponent>;
   const formGroup = new FormGroup({ soldier: new FormControl(5) });
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ PlayerEditSkillComponent ],
       imports: [

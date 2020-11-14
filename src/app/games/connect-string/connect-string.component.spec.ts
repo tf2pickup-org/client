@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ConnectStringComponent } from './connect-string.component';
 import { By } from '@angular/platform-browser';
 import { MockPipe } from 'ng-mocks';
@@ -9,7 +9,7 @@ describe('ConnectStringComponent', () => {
   let component: ConnectStringComponent;
   let fixture: ComponentFixture<ConnectStringComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [
         ConnectStringComponent,

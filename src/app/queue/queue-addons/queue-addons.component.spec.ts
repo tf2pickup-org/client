@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { QueueAddonsComponent } from './queue-addons.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
@@ -6,7 +6,7 @@ describe('QueueAddonsComponent', () => {
   let component: QueueAddonsComponent;
   let fixture: ComponentFixture<QueueAddonsComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ QueueAddonsComponent ],
       schemas: [ NO_ERRORS_SCHEMA ],

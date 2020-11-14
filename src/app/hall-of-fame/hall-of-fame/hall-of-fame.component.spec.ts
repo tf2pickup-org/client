@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { HallOfFameComponent } from './hall-of-fame.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
@@ -20,7 +20,7 @@ describe('HallOfFameComponent', () => {
   let component: HallOfFameComponent;
   let fixture: ComponentFixture<HallOfFameComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ HallOfFameComponent ],
       imports: [

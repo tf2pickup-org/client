@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { AddGameServerDialogComponent } from './add-game-server-dialog.component';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { BsModalRef } from 'ngx-bootstrap/modal';
@@ -15,7 +15,7 @@ describe('AddGameServerDialogComponent', () => {
   let store: MockStore<any>;
   const initialState = { gameServers: { ids: [], entities: [], locked: false, }};
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ AddGameServerDialogComponent ],
       providers: [

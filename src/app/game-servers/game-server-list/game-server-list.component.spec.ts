@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { GameServerListComponent } from './game-server-list.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
@@ -23,7 +23,7 @@ describe('GameServerListComponent', () => {
   let allGameServersSelector: MemoizedSelector<AppState, any[]>;
   let isSuperUserSelector: MemoizedSelector<AppState, boolean>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ GameServerListComponent ],
       providers: [
