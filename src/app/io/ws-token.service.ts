@@ -33,7 +33,7 @@ export class WsTokenService {
     }
 
     try {
-      const decoded = jwt_decode<{ exp: number }>(this.tokenStore.wsToken);
+      const decoded = jwt_decode(this.tokenStore.wsToken) as { exp: number };
       if (Date.now() >= decoded.exp * 1000) {
         return this.refreshToken();
       } else {
