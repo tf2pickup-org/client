@@ -32,7 +32,7 @@ export class EditPlayerRoleDialogComponent {
 
   constructor(
     public bsModalRef: BsModalRef,
-    private store: Store<{}>,
+    private store: Store,
   ) { }
 
   saveRole() {

@@ -18,9 +18,9 @@ class SoundPlayerServiceStub {
 describe('QueueNotificationsControllerComponent', () => {
   let component: QueueNotificationsControllerComponent;
   let fixture: ComponentFixture<QueueNotificationsControllerComponent>;
-  let store: MockStore<{ }>;
-  let substituteRequestsSelector: MemoizedSelector<{ }, any[]>;
-  let isPlayingGameSelector: MemoizedSelector<{ }, boolean>;
+  let store: MockStore;
+  let substituteRequestsSelector: MemoizedSelector<unknown, any[]>;
+  let isPlayingGameSelector: MemoizedSelector<unknown, boolean>;
   let notificationsService: NotificationsServiceStub;
   let soundPlayerService: SoundPlayerServiceStub;
   let showNotificationSpy: jasmine.Spy;
@@ -65,7 +65,7 @@ describe('QueueNotificationsControllerComponent', () => {
       tick(1000);
 
       expect(showNotificationSpy).toHaveBeenCalled();
-      expect(playSoundSpy).toHaveBeenCalledWith(Sound.CmonToughGuy);
+      expect(playSoundSpy).toHaveBeenCalledWith(Sound.cmonToughGuy);
     }));
 
     it('should do nothing when the substitution requests disappear', fakeAsync(() => {

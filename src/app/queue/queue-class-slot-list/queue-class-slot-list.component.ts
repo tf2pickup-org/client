@@ -20,7 +20,7 @@ export class QueueClassSlotListComponent {
   }
 
   constructor(
-    private store: Store<{}>,
+    private store: Store,
   ) { }
 
 }

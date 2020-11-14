@@ -24,7 +24,7 @@ export class PlayerAvatarComponent {
   }
 
   constructor(
-    private store: Store<{}>,
+    private store: Store,
   ) { }
 
 }

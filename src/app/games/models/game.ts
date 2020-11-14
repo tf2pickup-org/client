@@ -5,6 +5,7 @@ import { Tf2Team } from './tf2-team';
 export interface Game {
   id: string;
   launchedAt: Date;
+  // eslint-disable-next-line id-blacklist
   number: number;
   slots: GamePlayer[];
   map: string;

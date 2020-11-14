@@ -5,7 +5,8 @@ import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { PlayersService } from './players.service';
 import { playerLoaded, loadPlayer, allPlayerSkillsLoaded, loadAllPlayerSkills, playerSkillLoaded, loadPlayerSkill,
-  failedToLoadPlayerSkill, initializeDefaultPlayerSkill, playerEdited, setPlayerName, setPlayerRole, playerSkillEdited, setPlayerSkill} from './actions';
+  failedToLoadPlayerSkill, initializeDefaultPlayerSkill, playerEdited, setPlayerName, setPlayerRole, playerSkillEdited,
+  setPlayerSkill } from './actions';
 import { Player } from './models/player';
 import { PlayerSkill } from './models/player-skill';
 import { HttpErrorResponse } from '@angular/common/http';

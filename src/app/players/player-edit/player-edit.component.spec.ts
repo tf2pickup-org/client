@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { PlayerEditComponent } from './player-edit.component';
 import { ReactiveFormsModule } from '@angular/forms';

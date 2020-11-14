@@ -14,21 +14,19 @@ const initialState: State = adapter.getInitialState({
   locked: false,
 });
 
-function updatePlayerSkill(playerId: string, skill: { [gameClass: string]: number }, state: State): State {
-  return adapter.updateOne({
+const updatePlayerSkill = (playerId: string, skill: { [gameClass: string]: number }, state: State): State =>
+  adapter.updateOne({
     id: playerId,
     changes: { skill },
   }, state);
-}
 
-function insertAllPlayerSkills(playerSkills: PlayerSkill[], state: State): State {
-  return adapter.updateMany(playerSkills.map(skill => ({
+const insertAllPlayerSkills = (playerSkills: PlayerSkill[], state: State): State =>
+  adapter.updateMany(playerSkills.map(skill => ({
     id: skill.player,
     changes: {
       skill: skill.skill,
     },
   })), state);
-}
 
 const playerReducer = createReducer(
   initialState,
@@ -48,6 +46,4 @@ const playerReducer = createReducer(
   on(playersLoaded, (state, { players }) => adapter.upsertMany(players, state)),
 );
 
-export function reducer(state: State | undefined, action: Action) {
-  return playerReducer(state, action);
-}
+export const reducer = (state: State | undefined, action: Action) => playerReducer(state, action);

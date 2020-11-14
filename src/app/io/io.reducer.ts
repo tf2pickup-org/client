@@ -13,8 +13,6 @@ const ioReducer = createReducer(
   initialState,
   on(ioConnected, state => ({ ...state, connected: true })),
   on(ioDisconnected, state => ({ ...state, connected: false })),
-)
+);
 
-export function reducer(state: State, action: Action) {
-  return ioReducer(state, action);
-}
+export const reducer = (state: State, action: Action) => ioReducer(state, action);

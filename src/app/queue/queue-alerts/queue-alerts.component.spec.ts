@@ -76,6 +76,7 @@ describe('QueueAlertsComponent', () => {
     beforeEach(() => {
       activeGameSelector.setResult({
         id: 'FAKE_GAME_ID',
+        // eslint-disable-next-line id-blacklist
         number: 234,
         launchedAt: new Date(),
         map: 'cp_badlands',

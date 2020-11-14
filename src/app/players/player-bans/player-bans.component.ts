@@ -17,13 +17,13 @@ import { Location } from '@angular/common';
 })
 export class PlayerBansComponent implements OnInit, OnDestroy {
 
-  private destroyed = new Subject<void>();
   player: Observable<Player>;
   bans: Observable<PlayerBan[]>;
+  private destroyed = new Subject<void>();
 
   constructor(
     private route: ActivatedRoute,
-    private store: Store<{}>,
+    private store: Store,
     private location: Location,
   ) { }
 

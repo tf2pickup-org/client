@@ -23,7 +23,7 @@ export class QueueStatusComponent {
   state = this.store.select(queueState);
 
   constructor(
-    private store: Store<{}>,
+    private store: Store,
   ) { }
 
 }

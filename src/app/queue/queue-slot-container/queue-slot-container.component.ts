@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/member-ordering */
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 import { ReplaySubject, combineLatest, of, Observable } from 'rxjs';
 import { QueueSlot } from '../models/queue-slot';
@@ -22,7 +23,8 @@ export class QueueSlotContainerComponent {
 
   slot = this._slotId.pipe(
     switchMap(slotId => this.store.select(slotById(slotId))),
-    shareReplay(),
+    // eslint-disable-next-line rxjs/no-sharereplay
+    shareReplay(1),
   );
 
   takenByMe = combineLatest([this._slotId, this.store.select(mySlot)]).pipe(
@@ -66,7 +68,7 @@ export class QueueSlotContainerComponent {
   }
 
   constructor(
-    private store: Store<{}>,
+    private store: Store,
   ) { }
 
   joinQueue(slot: QueueSlot) {

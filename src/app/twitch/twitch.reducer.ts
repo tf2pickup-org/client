@@ -16,6 +16,4 @@ const twitchReducer = createReducer(
   on(twitchStreamsUpdated, (state, { twitchStreams }) => ({ ...state, streams: twitchStreams })),
 );
 
-export function reducer(state: State | undefined, action: Action) {
-  return twitchReducer(state, action);
-}
+export const reducer = (state: State | undefined, action: Action) => twitchReducer(state, action);

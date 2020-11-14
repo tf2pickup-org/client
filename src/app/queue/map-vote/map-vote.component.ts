@@ -23,7 +23,7 @@ export class MapVoteComponent {
   );
 
   constructor(
-    private store: Store<{}>,
+    private store: Store,
   ) { }
 
   voteForMap(aMap: string) {

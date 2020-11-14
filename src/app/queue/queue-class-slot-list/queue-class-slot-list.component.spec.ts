@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { QueueClassSlotListComponent } from './queue-class-slot-list.component';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
-import { Store, MemoizedSelector } from '@ngrx/store';
+import { MemoizedSelector } from '@ngrx/store';
 import { mySlot } from '../queue.selectors';
 import { MockComponent } from 'ng-mocks';
 import { QueueSlotContainerComponent } from '../queue-slot-container/queue-slot-container.component';
@@ -11,8 +11,8 @@ import { ChangeDetectionStrategy } from '@angular/core';
 describe('QueueClassSlotListComponent', () => {
   let component: QueueClassSlotListComponent;
   let fixture: ComponentFixture<QueueClassSlotListComponent>;
-  let store: MockStore<{}>;
-  let mySlotSelector: MemoizedSelector<{}, any>;
+  let store: MockStore;
+  let mySlotSelector: MemoizedSelector<unknown, any>;
 
   const initialState = {
     queue: {
@@ -49,7 +49,7 @@ describe('QueueClassSlotListComponent', () => {
   }));
 
   beforeEach(() => {
-    store = TestBed.get(Store);
+    store = TestBed.inject(MockStore);
     mySlotSelector = store.overrideSelector(mySlot, null);
     fixture = TestBed.createComponent(QueueClassSlotListComponent);
     component = fixture.componentInstance;

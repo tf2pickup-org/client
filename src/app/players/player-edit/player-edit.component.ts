@@ -20,22 +20,18 @@ import { Location } from '@angular/common';
 })
 export class PlayerEditComponent implements OnInit, OnDestroy {
 
-  private destroyed = new Subject<void>();
-  private originalPlayer: Player;
   player = this.formBuilder.group({
     name: ['', Validators.required],
   });
   locked: Observable<boolean> = this.store.select(playersLocked);
   gameClasses = new BehaviorSubject<string[]>([]);
 
-  @HostListener('document:keydown.escape', ['$event'])
-  onKeyDown() {
-    this.cancel();
-  }
+  private destroyed = new Subject<void>();
+  private originalPlayer: Player;
 
   constructor(
     private route: ActivatedRoute,
-    private store: Store<{}>,
+    private store: Store,
     private formBuilder: FormBuilder,
     private actions: Actions,
     private router: Router,
@@ -43,6 +39,11 @@ export class PlayerEditComponent implements OnInit, OnDestroy {
     private title: Title,
     private location: Location,
   ) { }
+
+  @HostListener('document:keydown.escape', ['$event'])
+  onKeyDown() {
+    this.cancel();
+  }
 
   ngOnInit() {
     const getPlayerId = this.route.paramMap.pipe(
@@ -99,7 +100,7 @@ export class PlayerEditComponent implements OnInit, OnDestroy {
         this.actions.pipe(
           ofType(playerEdited),
           filter(action => action.player.id === this.originalPlayer.id),
-          // tslint:disable-next-line: rxjs-no-unsafe-first
+          // eslint-disable-next-line
           first(),
         )
       );
@@ -111,7 +112,7 @@ export class PlayerEditComponent implements OnInit, OnDestroy {
         this.actions.pipe(
           ofType(playerSkillEdited),
           filter(action => action.playerId === this.originalPlayer.id),
-          // tslint:disable-next-line: rxjs-no-unsafe-first
+          // eslint-disable-next-line
           first(),
         )
       );

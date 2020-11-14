@@ -1,4 +1,7 @@
-import { gameById, activeGames, playerSlot, isPlayingGame, isGameRunning, isMyGame, mumbleUrl, gameScore, activeGame } from './games.selectors';
+/* eslint-disable id-blacklist */
+/* eslint-disable @typescript-eslint/naming-convention */
+import { gameById, activeGames, playerSlot, isPlayingGame, isGameRunning, isMyGame, mumbleUrl, gameScore,
+  activeGame } from './games.selectors';
 import { Game } from './models/game';
 import { Profile } from '@app/profile/models/profile';
 

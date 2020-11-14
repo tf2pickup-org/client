@@ -5,7 +5,8 @@ import { ReplaySubject, of } from 'rxjs';
 import { Action, MemoizedSelector } from '@ngrx/store';
 import { QueueService } from './queue.service';
 import { queueLoaded, loadQueue, joinQueue, joinQueueError, markFriend, mapVoteReset, voteForMap, mapVoted, mapVoteResultsUpdated,
-  queueSlotsUpdated, hideReadyUpDialog, showReadyUpDialog, readyUp, queueStateUpdated, substituteRequestsUpdated, friendshipsUpdated } from './queue.actions';
+  queueSlotsUpdated, hideReadyUpDialog, showReadyUpDialog, readyUp, queueStateUpdated, substituteRequestsUpdated,
+  friendshipsUpdated } from './queue.actions';
 import { Queue } from './models/queue';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { QueueSlot } from './models/queue-slot';

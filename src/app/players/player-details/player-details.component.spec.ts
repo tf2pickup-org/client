@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { PlayerDetailsComponent } from './player-details.component';
 import { PlayersService } from '../players.service';
@@ -67,7 +68,7 @@ describe('PlayerDetailsComponent', () => {
   }));
 
   beforeEach(() => {
-    store = TestBed.inject(Store) as MockStore<{ }>;
+    store = TestBed.inject(MockStore);
     storeDispatchSpy = spyOn(store, 'dispatch').and.callThrough();
     fetchPlayerStatsSpy = spyOn(TestBed.inject(PlayersService), 'fetchPlayerStats').and.callThrough();
 
@@ -100,7 +101,7 @@ describe('PlayerDetailsComponent', () => {
       hasAcceptedRules: true,
       etf2lProfileId: 12345,
       id: 'FAKE_ID',
-    }
+    };
 
     const stateWithFakePlayer = {
       ...initialState,

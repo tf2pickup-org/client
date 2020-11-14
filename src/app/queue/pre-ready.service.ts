@@ -10,8 +10,8 @@ import { isPreReadied } from './queue.selectors';
 })
 export class PreReadyService {
 
-  private readonly defaultTmeout = 300; // 5 minutes
-  private _timeout = new BehaviorSubject<number>(this.defaultTmeout);
+  private readonly defaultTimeout = 300; // 5 minutes
+  private _timeout = new BehaviorSubject<number>(this.defaultTimeout);
   private isCounting = false;
 
   get timeout() {
@@ -19,7 +19,7 @@ export class PreReadyService {
   }
 
   constructor(
-    private store: Store<{}>,
+    private store: Store,
   ) {
     this.store.pipe(
       select(isPreReadied),
@@ -39,13 +39,14 @@ export class PreReadyService {
     }
 
     this.isCounting = true;
-    this._timeout.next(this.defaultTmeout);
+    this._timeout.next(this.defaultTimeout);
 
     timer(0, 1000).pipe(
+      // eslint-disable-next-line rxjs/no-ignored-takewhile-value
       takeWhile(() => this.isCounting),
       finalize(() => {
         this.store.dispatch(stopPreReady());
-        this._timeout.next(this.defaultTmeout);
+        this._timeout.next(this.defaultTimeout);
       }),
     ).subscribe(() => {
       this._timeout.next(this._timeout.value - 1);

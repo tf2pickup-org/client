@@ -34,7 +34,7 @@ export class PlayerNameComponent {
   }
 
   constructor(
-    private store: Store<{}>,
+    private store: Store,
   ) { }
 
 }

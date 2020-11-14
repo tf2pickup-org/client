@@ -21,7 +21,7 @@ export class GameServerListComponent implements OnInit {
   locked = this.store.select(gameServersLocked);
 
   constructor(
-    private store: Store<{}>,
+    private store: Store,
     private modalService: BsModalService,
   ) { }
 

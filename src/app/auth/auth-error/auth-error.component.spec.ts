@@ -4,7 +4,7 @@ import { By } from '@angular/platform-browser';
 import { HttpParams } from '@angular/common/http';
 import { HTTP_PARAMS } from '../http-params';
 
-async function configureTestingModule(httpParams: HttpParams) {
+const configureTestingModule = async (httpParams: HttpParams) => {
   await TestBed.configureTestingModule({
     declarations: [ AuthErrorComponent ],
     providers: [
@@ -17,7 +17,7 @@ async function configureTestingModule(httpParams: HttpParams) {
   fixture.detectChanges();
   const errorMessage = fixture.debugElement.query(By.css('div')).nativeElement;
   return { fixture, errorMessage };
-}
+};
 
 describe('AuthErrorComponent', () => {
   const testErrors = [

@@ -7,9 +7,9 @@ import { queueConfig } from '@app/queue/queue.selectors';
 import { map } from 'rxjs/operators';
 
 interface PlayerRow {
+  [gameclass: string]: any;
   id: string;
   name: string;
-  [gameclass: string]: any;
 }
 
 @Component({
@@ -29,21 +29,22 @@ export class SkillTableComponent implements OnInit {
 
   players: Observable<PlayerRow[]> = this.store.pipe(
     select(allPlayers),
-    map(players => players.map(player => {
-      return {
+    map(players => players.map(player => ({
         id: player.id,
         name: player.name,
         ...player.skill,
-      };
-    })),
+      }),
+    )),
   );
 
   constructor(
-    private store: Store<{}>,
+    private store: Store,
   ) { }
 
   ngOnInit() {
+    // eslint-disable-next-line ngrx/avoid-dispatching-multiple-actions-sequentially
     this.store.dispatch(loadPlayers());
+    // eslint-disable-next-line ngrx/avoid-dispatching-multiple-actions-sequentially
     this.store.dispatch(loadAllPlayerSkills());
   }
 

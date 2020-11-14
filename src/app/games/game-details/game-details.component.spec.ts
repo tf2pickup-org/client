@@ -26,6 +26,7 @@ const makeStateWithGame = (overrides?: any) => merge({
   games: {
     ids: ['FAKE_ID'],
     entities: {
+      // eslint-disable-next-line @typescript-eslint/naming-convention
       FAKE_ID: {
         id: 'FAKE_ID',
         slots: [
@@ -47,6 +48,7 @@ const makeStateWithGame = (overrides?: any) => merge({
         map: 'cp_sunshine',
         state: 'launching',
         launchedAt: new Date('2019-07-25T11:42:55.121Z'),
+        // eslint-disable-next-line id-blacklist
         number: 3,
         connectString: null,
         error: 'ended by admin',
@@ -70,12 +72,14 @@ const makeStateWithGame = (overrides?: any) => merge({
         'FAKE_PLAYER_ID_2',
       ],
       entities: {
+        // eslint-disable-next-line @typescript-eslint/naming-convention
         FAKE_PLAYER_ID_1: {
           id: 'FAKE_PLAYER_ID_1',
           name: 'FAKE_PLAYER_1',
           gameClass: 'soldier',
           status: 'active',
         },
+        // eslint-disable-next-line @typescript-eslint/naming-convention
         FAKE_PLAYER_ID_2: {
           id: 'FAKE_PLAYER_ID_2',
           name: 'FAKE_PLAYER_2',
@@ -88,6 +92,7 @@ const makeStateWithGame = (overrides?: any) => merge({
   gameServers: {
     ids: ['FAKE_GAME_SERVER_ID'],
     entities: {
+      // eslint-disable-next-line @typescript-eslint/naming-convention
       FAKE_GAME_SERVER_ID: { id: 'FAKE_GAME_SERVER_ID', name: 'FAKE_GAME_SERVER_NAME' },
     },
   },
@@ -255,7 +260,16 @@ describe('GameDetailsComponent', () => {
     describe('when the current user is part of the game', () => {
       describe('when the connect string is available', () => {
         beforeEach(() => {
-          store.setState(makeStateWithGame({ games: { entities: { FAKE_ID: { connectString: 'connect 192.168.1.101:27015; password FAKE_PASSWORD' } } } }));
+          store.setState(makeStateWithGame({
+            games: {
+              entities: {
+                // eslint-disable-next-line @typescript-eslint/naming-convention
+                FAKE_ID: {
+                  connectString: 'connect 192.168.1.101:27015; password FAKE_PASSWORD'
+                },
+              },
+            },
+          }));
           fixture.detectChanges();
         });
 
@@ -267,6 +281,7 @@ describe('GameDetailsComponent', () => {
 
       describe('when the mumble url is available', () => {
         beforeEach(() => {
+          // eslint-disable-next-line @typescript-eslint/naming-convention
           store.setState(makeStateWithGame({ games: { entities: { FAKE_ID: { mumbleUrl: 'mumble://melkor.tf/tf2pickup/5' } } } }));
           fixture.detectChanges();
         });
@@ -295,6 +310,7 @@ describe('GameDetailsComponent', () => {
             profile: { id: 'SOME_OTHER_GUY' },
             games: {
               entities: {
+                // eslint-disable-next-line @typescript-eslint/naming-convention
                 FAKE_ID: { stvConnectString: 'connect 192.168.1.101:27020; password tv' },
               },
             },
@@ -311,6 +327,7 @@ describe('GameDetailsComponent', () => {
 
     describe('that has already ended', () => {
       beforeEach(() => {
+        // eslint-disable-next-line @typescript-eslint/naming-convention
         store.setState(makeStateWithGame({ games: { entities: { FAKE_ID: { state: 'ended' } } } }));
         fixture.detectChanges();
       });
@@ -327,13 +344,23 @@ describe('GameDetailsComponent', () => {
 
     it('should play a sound when the connect is available', () => {
       const spy = spyOn(TestBed.inject(SoundPlayerService), 'playSound');
-      store.setState(makeStateWithGame({ games: { entities: { FAKE_ID: { connectString: 'connect 192.168.1.101:27015; password FAKE_PASSWORD' } } } }));
+      store.setState(makeStateWithGame({
+        games: {
+          entities: {
+            // eslint-disable-next-line @typescript-eslint/naming-convention
+            FAKE_ID: {
+              connectString: 'connect 192.168.1.101:27015; password FAKE_PASSWORD',
+            },
+          },
+        },
+      }));
       fixture.detectChanges();
-      expect(spy).toHaveBeenCalledWith(Sound.Fight);
+      expect(spy).toHaveBeenCalledWith(Sound.fight);
     });
 
     describe('when the score is defined', () => {
       beforeEach(() => {
+        // eslint-disable-next-line @typescript-eslint/naming-convention
         store.setState(makeStateWithGame({ games: { entities: { FAKE_ID: { score: { blu: 5, red: 3 } } } } }));
         fixture.detectChanges();
       });

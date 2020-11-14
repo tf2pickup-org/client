@@ -15,7 +15,7 @@ import { isPlayingGame } from '@app/games/games.selectors';
 export class QueueNotificationsControllerComponent implements OnInit {
 
   constructor(
-    private store: Store<{ }>,
+    private store: Store,
     private notificationsService: NotificationsService,
     private soundPlayerService: SoundPlayerService,
   ) { }
@@ -28,7 +28,7 @@ export class QueueNotificationsControllerComponent implements OnInit {
       debounceTime(1000),
     ).subscribe(([, playingGame]) => {
       if (!playingGame) {
-        this.soundPlayerService.playSound(Sound.CmonToughGuy);
+        this.soundPlayerService.playSound(Sound.cmonToughGuy);
         this.notificationsService.showNotification('A subsitute is needed!', { });
       }
     });

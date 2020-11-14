@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/
 import { Store, select } from '@ngrx/store';
 import { Observable, Subject, ReplaySubject, combineLatest, of } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { switchMap, map, tap, filter, first, pairwise, shareReplay, takeUntil } from 'rxjs/operators';
+import { switchMap, map, tap, filter, first, pairwise, takeUntil } from 'rxjs/operators';
 import { gameById, isGameRunning, isMyGame, mumbleUrl, gameScore } from '../games.selectors';
 import { forceEndGame, reinitializeServer, requestSubstitute, replacePlayer } from '../games.actions';
 import { playerById } from '@app/players/selectors';
@@ -28,15 +28,11 @@ import { Tf2Team } from '../models/tf2-team';
 })
 export class GameDetailsComponent implements OnInit, OnDestroy {
 
-  private destroyed = new Subject<void>();
-  private players = new ReplaySubject<ResolvedGamePlayer[]>(1);
-
   gameId = new ReplaySubject<string>(1);
 
   game = this.gameId.pipe(
     switchMap(gameId => this.store.select(gameById(gameId))),
     filter(game => !!game),
-    shareReplay(),
   );
 
   isRunning = this.gameId.pipe(
@@ -81,6 +77,9 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
   isAdmin: Observable<boolean> = this.store.select(isAdmin);
   playersRed: Observable<ResolvedGamePlayer[]>;
   playersBlu: Observable<ResolvedGamePlayer[]>;
+
+  private destroyed = new Subject<void>();
+  private players = new ReplaySubject<ResolvedGamePlayer[]>(1);
 
   constructor(
     private route: ActivatedRoute,
@@ -157,7 +156,7 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
       filter(([a, b])  => !a && !!b),
       takeUntil(this.destroyed),
     ).subscribe(() => {
-      this.soundPlayerService.playSound(Sound.Fight);
+      this.soundPlayerService.playSound(Sound.fight);
     });
   }
 

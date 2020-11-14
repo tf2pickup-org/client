@@ -13,6 +13,4 @@ const profileReducer = createReducer(
   on(profileUpdated, (state, { profileChanges }) => ({ ...state, ...profileChanges })),
 );
 
-export function reducer(state: State | undefined, action: Action) {
-  return profileReducer(state, action);
-}
+export const reducer = (state: State | undefined, action: Action) => profileReducer(state, action);

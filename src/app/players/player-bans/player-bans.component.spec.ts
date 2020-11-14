@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { PlayerBansComponent } from './player-bans.component';
 import { RouterTestingModule } from '@angular/router/testing';

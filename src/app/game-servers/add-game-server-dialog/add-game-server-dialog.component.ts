@@ -23,7 +23,7 @@ export class AddGameServerDialogComponent {
 
   constructor(
     public bsModalRef: BsModalRef,
-    private store: Store<{}>,
+    private store: Store,
   ) { }
 
   add() {
