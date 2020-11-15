@@ -1,0 +1,17 @@
+<ng-container [ngSwitch]="permission | async">
+  <div *ngSwitchCase="'default'"
+    class="alert alert-warning d-flex flex-row justify-content-between align-items-center"
+    role="alert">
+    <span>To be notified when the match is about to start, we need your permission to show browser notifications.</span>
+    <button
+      (click)="requestPermission()"
+      type="button"
+      class="btn btn-primary">Allow notifications</button>
+  </div>
+
+  <div *ngSwitchCase="'denied'"
+    class="alert alert-danger"
+    role="alert">
+    <span>You have disabled browser notifications. You will not be warned when the match is about to start.</span>
+  </div>
+</ng-container>

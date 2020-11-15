@@ -1,5 +1,4 @@
 import { TestBed } from '@angular/core/testing';
-
 import { SoundPlayerService } from './sound-player.service';
 
 describe('SoundPlayerService', () => {
