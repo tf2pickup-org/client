@@ -1,3 +1,15 @@
+## [2.6.4](https://github.com/tf2pickup-pl/client/compare/2.6.3...2.6.4) (2020-11-15)
+
+
+### Bug Fixes
+
+* request notification permissions ([#479](https://github.com/tf2pickup-pl/client/issues/479)) ([760ed58](https://github.com/tf2pickup-pl/client/commit/760ed589f38a685d2908c36794a287670ca1dea6))
+* **deps:** remove @types/url-parse ([#443](https://github.com/tf2pickup-pl/client/issues/443)) ([619e9ea](https://github.com/tf2pickup-pl/client/commit/619e9ea7be589bf6ad75240998939e7f2642fb14))
+* **deps:** update angular monorepo to v11 ([#473](https://github.com/tf2pickup-pl/client/issues/473)) ([4a638d5](https://github.com/tf2pickup-pl/client/commit/4a638d55360baef8ed8ec25a59898a106d7c05c3))
+* **deps:** update dependency jwt-decode to v3.1.1 ([#463](https://github.com/tf2pickup-pl/client/issues/463)) ([dfa29a1](https://github.com/tf2pickup-pl/client/commit/dfa29a1857f20ec4781a805f0f869d1d29068416))
+* **deps:** update dependency ngx-bootstrap to v6.2.0 ([#469](https://github.com/tf2pickup-pl/client/issues/469)) ([6dec6f2](https://github.com/tf2pickup-pl/client/commit/6dec6f2ee8553c033719274251c5aeea9524d15c))
+* **deps:** update dependency zone.js to v0.11.3 ([#459](https://github.com/tf2pickup-pl/client/issues/459)) ([2b4142e](https://github.com/tf2pickup-pl/client/commit/2b4142e11d607acb753b488506f554555bbc3fec))
+
 ## [2.6.3](https://github.com/tf2pickup-pl/client/compare/2.6.2...2.6.3) (2020-10-15)
 
 
