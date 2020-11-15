@@ -7,12 +7,10 @@ import { activeGame, isGameRunning, isPlayingGame, gameById } from './games/game
 export const queueLocked = createSelector(
   profile,
   activeGame,
-  (theProfile, game) => {
-    return !theProfile // user not logged in
-      || !!game // user has active game going on
-      || theProfile.bans && theProfile.bans.length > 0 // user is banned
-      ;
-  }
+  (theProfile, game) =>
+    !theProfile // user not logged in
+    || !!game // user has active game going on
+    || theProfile.bans && theProfile.bans.length > 0 // user is banned
 );
 
 export const canSubstituteInGame = (gameId: string) => createSelector(
@@ -20,9 +18,8 @@ export const canSubstituteInGame = (gameId: string) => createSelector(
   isBanned,
   activeGame,
   gameById(gameId),
-  (gameRunning, banned, theActiveGame, game) => {
-    return gameRunning &&
-      !banned &&
-      (!theActiveGame || theActiveGame.id === game.id);
-  }
+  (gameRunning, banned, theActiveGame, game) =>
+    gameRunning &&
+    !banned &&
+    (!theActiveGame || theActiveGame.id === game.id)
 );

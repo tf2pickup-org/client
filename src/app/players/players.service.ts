@@ -21,7 +21,7 @@ export class PlayersService {
   constructor(
     private http: HttpClient,
     @Inject(API_URL) private apiUrl: string,
-    private store: Store<{}>,
+    private store: Store,
   ) { }
 
   fetchPlayer(playerId: string): Observable<Player> {

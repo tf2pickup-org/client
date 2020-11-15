@@ -18,7 +18,7 @@ export class PlayerListComponent implements OnInit {
   players: Observable<Player[]> = this.store.select(allPlayers);
 
   constructor(
-    private store: Store<{}>,
+    private store: Store,
     private title: Title,
   ) { }
 

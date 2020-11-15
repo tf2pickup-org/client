@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { EditPlayerRoleDialogComponent } from './edit-player-role-dialog.component';
 import { BsModalRef } from 'ngx-bootstrap/modal';

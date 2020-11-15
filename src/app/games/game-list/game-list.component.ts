@@ -14,13 +14,14 @@ import { PaginatedList } from '@app/core/models/paginated-list';
 })
 export class GameListComponent implements OnInit {
 
+  @Input()
+  playerId?: string;
+
   readonly gamesPerPage = 10;
+
   page = new BehaviorSubject<number>(1);
   gameCount = new ReplaySubject<number>(1);
   games = new ReplaySubject<Game[]>(1);
-
-  @Input()
-  playerId?: string;
 
   constructor(
     private gamesService: GamesService,
@@ -37,16 +38,16 @@ export class GameListComponent implements OnInit {
     });
   }
 
+  getPage(page: number) {
+    this.page.next(page);
+  }
+
   private fetchGames(offset: number, limit: number): Observable<PaginatedList<Game>> {
     if (!!this.playerId) {
       return this.playersService.fetchPlayerGames(this.playerId, offset, limit);
     } else {
       return this.gamesService.fetchGames(offset, limit);
     }
-  }
-
-  getPage(page: number) {
-    this.page.next(page);
   }
 
 }

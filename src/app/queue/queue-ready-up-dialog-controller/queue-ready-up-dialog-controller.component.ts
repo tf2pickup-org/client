@@ -20,7 +20,7 @@ export class QueueReadyUpDialogControllerComponent implements OnInit, OnDestroy 
   private queueReadyUpDialogRef: BsModalRef;
 
   constructor(
-    private store: Store<{}>,
+    private store: Store,
     private modalService: BsModalService,
     private notificationsService: NotificationsService,
     private soundPlayerService: SoundPlayerService,
@@ -55,7 +55,7 @@ export class QueueReadyUpDialogControllerComponent implements OnInit, OnDestroy 
     this.notificationsService.showNotification('Ready up!', {
       body: 'A new pickup game is starting',
     });
-    this.soundPlayerService.playSound(Sound.ReadyUp);
+    this.soundPlayerService.playSound(Sound.readyUp);
   }
 
 }

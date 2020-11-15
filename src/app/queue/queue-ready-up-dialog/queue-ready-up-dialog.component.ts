@@ -12,7 +12,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 export class QueueReadyUpDialogComponent {
 
   constructor(
-    private store: Store<{}>,
+    private store: Store,
     private bsModalRef: BsModalRef,
   ) { }
 

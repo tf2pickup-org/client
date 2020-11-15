@@ -21,6 +21,4 @@ const playerBansReducer = createReducer(
   on(playerBanUpdated, (state, { playerBan }) => ({ ...adapter.upsertOne(playerBan, state), locked: false })),
 );
 
-export function reducer(state: State | undefined, action: Action) {
-  return playerBansReducer(state, action);
-}
+export const reducer = (state: State | undefined, action: Action) => playerBansReducer(state, action);

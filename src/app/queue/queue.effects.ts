@@ -40,7 +40,7 @@ export class QueueEffects {
       ofType(joinQueue),
       mergeMap(({ slotId }) => this.queueService.joinQueue(slotId).pipe(
         map(slots => queueSlotsUpdated({ slots })),
-        catchError(error => of(joinQueueError({ error }))),
+        catchError((error: unknown) => of(joinQueueError({ error: error as string }))),
       )),
     )
   );
@@ -50,7 +50,7 @@ export class QueueEffects {
       ofType(leaveQueue),
       mergeMap(() => this.queueService.leaveQueue().pipe(
         map(slot => queueSlotsUpdated({ slots: [ slot ] })),
-        catchError(error => of(leaveQueueError({ error }))),
+        catchError((error: unknown) => of(leaveQueueError({ error: error as string }))),
       )),
     )
   );
@@ -80,7 +80,7 @@ export class QueueEffects {
       ofType(readyUp),
       mergeMap(() => this.queueService.readyUp().pipe(
         map(slot => queueSlotsUpdated({ slots: [ slot ] })),
-        catchError(error => of(readyUpError({ error }))),
+        catchError((error: unknown) => of(readyUpError({ error: error as string }))),
       )),
     )
   );

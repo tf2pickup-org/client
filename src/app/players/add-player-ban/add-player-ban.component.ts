@@ -19,9 +19,6 @@ import { profile } from '@app/profile/profile.selectors';
 })
 export class AddPlayerBanComponent implements OnInit, OnDestroy {
 
-  private destroyed = new Subject<void>();
-  player: Observable<Player>;
-
   readonly lengthValues = [
     '1 hour',
     '6 hours',
@@ -34,6 +31,9 @@ export class AddPlayerBanComponent implements OnInit, OnDestroy {
     '1 year',
     'forever',
   ];
+
+  player: Observable<Player>;
+
   lengthLabel = new BehaviorSubject<string>(this.lengthValues[0]);
   isSubmitLocked = this.store.select(playerBansLocked);
 
@@ -42,9 +42,11 @@ export class AddPlayerBanComponent implements OnInit, OnDestroy {
     reason: [ '', Validators.required ],
   });
 
+  private destroyed = new Subject<void>();
+
   constructor(
     private route: ActivatedRoute,
-    private store: Store<{}>,
+    private store: Store,
     private formBuilder: FormBuilder,
     private router: Router,
     private actions: Actions,
@@ -99,6 +101,10 @@ export class AddPlayerBanComponent implements OnInit, OnDestroy {
     ).subscribe(playerBan => this.store.dispatch(addPlayerBan({ playerBan })));
   }
 
+  cancel() {
+    this.location.back();
+  }
+
   private getBanEnd() {
     const end = new Date();
 
@@ -145,10 +151,6 @@ export class AddPlayerBanComponent implements OnInit, OnDestroy {
     }
 
     return end;
-  }
-
-  cancel() {
-    this.location.back();
   }
 
 }

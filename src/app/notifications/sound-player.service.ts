@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 
+// eslint-disable-next-line no-shadow
 export enum Sound {
-  ReadyUp = 'ready_up.wav',
-  Fight = 'fight.wav',
-  CmonToughGuy = 'cmon_tough_guy.wav',
+  readyUp = 'ready_up.wav',
+  fight = 'fight.wav',
+  cmonToughGuy = 'cmon_tough_guy.wav',
 }
 
 @Injectable({

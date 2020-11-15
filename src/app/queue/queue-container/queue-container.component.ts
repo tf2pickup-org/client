@@ -15,13 +15,13 @@ import { AuthService } from '@app/auth/auth.service';
 })
 export class QueueContainerComponent implements OnInit, OnDestroy {
 
-  private destroyed = new Subject<void>();
   requiredPlayerCount = this.store.select(queueRequiredPlayerCount);
   currentPlayerCount = this.store.select(queueCurrentPlayerCount);
   authenticated = this.authService.authenticated;
+  private destroyed = new Subject<void>();
 
   constructor(
-    private store: Store<{}>,
+    private store: Store,
     private title: Title,
     private authService: AuthService,
   ) { }

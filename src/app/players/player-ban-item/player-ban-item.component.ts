@@ -9,8 +9,6 @@ import { PlayerBan } from '../models/player-ban';
 })
 export class PlayerBanItemComponent {
 
-  private _playerBan: PlayerBan;
-
   @Input()
   set playerBan(playerBan: PlayerBan) {
     this._playerBan = playerBan;
@@ -26,5 +24,7 @@ export class PlayerBanItemComponent {
 
   @Output()
   revoke = new EventEmitter<PlayerBan>();
+
+  private _playerBan: PlayerBan;
 
 }

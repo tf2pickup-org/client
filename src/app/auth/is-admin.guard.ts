@@ -10,7 +10,7 @@ import { isAdmin } from '@app/profile/profile.selectors';
 export class IsAdminGuard implements CanActivate {
 
   constructor(
-    private store: Store<{}>,
+    private store: Store,
   ) { }
 
   canActivate(): Observable<boolean> {

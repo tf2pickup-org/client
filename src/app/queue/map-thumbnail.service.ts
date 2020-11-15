@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class MapThumbnailService {
 
-  private mapMatchers: { regex: RegExp, thumbnailName: string }[] = [
+  private mapMatchers: { regex: RegExp; thumbnailName: string }[] = [
     { regex: /cp_(bad|pro)lands/, thumbnailName: 'badlands' },
     { regex: /cp_granary/,        thumbnailName: 'granary' },
     { regex: /cp_gullywash/,      thumbnailName: 'gullywash' },

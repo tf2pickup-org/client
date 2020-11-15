@@ -21,7 +21,7 @@ export class FooterComponent {
   constructor(
     private tokenStore: TokenStoreService,
     private authService: AuthService,
-    private store: Store<{}>,
+    private store: Store,
   ) { }
 
   logout() {

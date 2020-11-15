@@ -6,7 +6,8 @@ import { provideMockActions } from '@ngrx/effects/testing';
 import { GamesService } from './games.service';
 import { RouterTestingModule } from '@angular/router/testing';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
-import { requestSubstitute, cancelSubstitutionRequest, replacePlayer, gameUpdated, loadGame, gameCreated, ownGameAdded } from './games.actions';
+import { requestSubstitute, cancelSubstitutionRequest, replacePlayer, gameUpdated, loadGame, gameCreated,
+  ownGameAdded } from './games.actions';
 import { routerNavigatedAction } from '@ngrx/router-store';
 import { NavigationEnd } from '@angular/router';
 import { Socket } from '@app/io/socket';
@@ -15,6 +16,7 @@ import { Game } from './models/game';
 
 const fakeGame: Game = {
   state: 'launching',
+  // eslint-disable-next-line id-blacklist
   number: 453,
   map: 'cp_sunshine',
   slots: [
@@ -52,6 +54,7 @@ const initialState = {
       'FAKE_GAME_ID'
     ],
     entities: {
+      // eslint-disable-next-line @typescript-eslint/naming-convention
       FAKE_GAME_ID: fakeGame,
     },
   },
@@ -139,6 +142,7 @@ describe('GamesEffects', () => {
       const game: Game = {
         id: 'FAKE_GAME_ID',
         launchedAt: new Date(),
+        // eslint-disable-next-line id-blacklist
         number: 1,
         slots: [
           {

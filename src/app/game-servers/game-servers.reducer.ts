@@ -26,6 +26,4 @@ const gameServerReducer = createReducer(
   on(gameServerRemoved, (state, { gameServerId }) => ({ ...adapter.removeOne(gameServerId, state), locked: false })),
 );
 
-export function reducer(state: State | undefined, action: Action) {
-  return gameServerReducer(state, action);
-}
+export const reducer = (state: State | undefined, action: Action) => gameServerReducer(state, action);

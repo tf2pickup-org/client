@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { QueueSlotContainerComponent } from './queue-slot-container.component';
 import { MockComponent } from 'ng-mocks';
@@ -74,7 +75,7 @@ const initialState = {
 describe('QueueSlotContainerComponent', () => {
   let component: QueueSlotContainerComponent;
   let fixture: ComponentFixture<QueueSlotContainerComponent>;
-  let store: MockStore<{}>;
+  let store: MockStore;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({

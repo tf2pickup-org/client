@@ -22,7 +22,7 @@ export class PreReadyUpButtonComponent {
   );
 
   constructor(
-    private store: Store<{}>,
+    private store: Store,
     private preReadyService: PreReadyService,
   ) { }
 

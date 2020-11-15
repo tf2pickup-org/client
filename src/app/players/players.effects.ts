@@ -42,7 +42,7 @@ export class PlayerEffects {
       ofType(loadPlayerSkill),
       mergeMap(({ playerId }) => this.playersService.fetchPlayerSkill(playerId).pipe(
         map(playerSkill => playerSkillLoaded({ playerId, skill: playerSkill })),
-        catchError(error => {
+        catchError((error: unknown) => {
           if (error instanceof HttpErrorResponse) {
             if (error.status === 404) {
               return of(initializeDefaultPlayerSkill({ playerId }));

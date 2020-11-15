@@ -5,7 +5,6 @@ import { queueLoaded, queueStateUpdated, readyUp, showReadyUpDialog, hideReadyUp
 import { QueueSlot } from './models/queue-slot';
 import { Queue } from './models/queue';
 import { profileLoaded } from '@app/profile/profile.actions';
-import { ownGameAdded } from '@app/games/games.actions';
 
 export interface State extends Queue {
   readyUpDialogShown: boolean;
@@ -23,13 +22,11 @@ export const initialState: State = {
   friendships: [],
 };
 
-function updateQueueSlots(slotsToUpdate: QueueSlot[], state: State): State {
+const updateQueueSlots = (slotsToUpdate: QueueSlot[], state: State): State => {
   const slots = [ ...state.slots ]
-    .map(slot => {
-      return slotsToUpdate.find(s => s.id === slot.id) || { ...slot };
-    });
+    .map(slot => slotsToUpdate.find(s => s.id === slot.id) || { ...slot });
   return { ...state, slots };
-}
+};
 
 const queueReducer = createReducer(
   initialState,
@@ -51,6 +48,4 @@ const queueReducer = createReducer(
   on(friendshipsUpdated, (state, { friendships }) => ({ ...state, friendships })),
 );
 
-export function reducer(state: State | undefined, action: Action) {
-  return queueReducer(state, action);
-}
+export const reducer = (state: State | undefined, action: Action) => queueReducer(state, action);

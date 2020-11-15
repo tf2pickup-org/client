@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { activeGame } from '@app/games/games.selectors';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { bans } from '@app/profile/profile.selectors';
 import { substituteRequests } from '../queue.selectors';
 
@@ -17,7 +17,7 @@ export class QueueAlertsComponent {
   substituteRequests = this.store.select(substituteRequests);
 
   constructor(
-    private store: Store<{}>,
+    private store: Store,
   ) { }
 
 }

@@ -64,7 +64,7 @@ describe('QueueReadyUpDialogControllerComponent', () => {
 
     expect(showSpy).toHaveBeenCalledWith(QueueReadyUpDialogComponent, jasmine.any(Object));
     expect(showNotificationSpy).toHaveBeenCalled();
-    expect(playSoundSpy).toHaveBeenCalledWith(Sound.ReadyUp);
+    expect(playSoundSpy).toHaveBeenCalledWith(Sound.readyUp);
   });
 
   describe('when the ready up phase is over', () => {

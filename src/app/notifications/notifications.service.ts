@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { environment } from '@environment';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +18,7 @@ export class NotificationsService {
   }
 
   showNotification(title: string, options: NotificationOptions) {
-    const _options = { ...options, ...this.defaultNotificationOptions };
-    const notification = new Notification(title, _options);
+    const destOptions = { ...options, ...this.defaultNotificationOptions };
+    const notification = new Notification(title, destOptions);
   }
 }
