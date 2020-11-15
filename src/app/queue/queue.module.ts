@@ -26,6 +26,7 @@ import { MapVoteButtonComponent } from './map-vote-button/map-vote-button.compon
 import { QueueNotificationsControllerComponent } from './queue-notifications-controller/queue-notifications-controller.component';
 import { QueueSlotContainerComponent } from './queue-slot-container/queue-slot-container.component';
 import { TwitchModule } from '@app/twitch/twitch.module';
+import { NotificationsModule } from '@app/notifications/notifications.module';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { TwitchModule } from '@app/twitch/twitch.module';
 
     PlayersModule,
     TwitchModule,
+    NotificationsModule,
 
     QueueRoutingModule,
   ],
