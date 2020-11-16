@@ -51,12 +51,13 @@ describe('RequestNotificationPermissionsComponent', () => {
       fixture.detectChanges();
     });
 
-    it('should render the warning dialog', () => {
-      expect(fixture.debugElement.query(By.css('.alert-warning'))).toBeTruthy();
+    it('should render the banner', () => {
+      const div = fixture.debugElement.query(By.css('.request-notification-permissions')).nativeElement as HTMLElement;
+      expect(div.classList.contains('default')).toBe(true);
     });
 
     it('should render the allow notifications button', () => {
-      const button = fixture.debugElement.query(By.css('.btn-primary')).nativeElement as HTMLButtonElement;
+      const button = fixture.debugElement.query(By.css('.allow-notifications-button')).nativeElement as HTMLButtonElement;
       button.click();
       expect(notificationsService.requestPermission).toHaveBeenCalled();
     });
@@ -68,8 +69,9 @@ describe('RequestNotificationPermissionsComponent', () => {
       fixture.detectChanges();
     });
 
-    it('should render the danger dialog', () => {
-      expect(fixture.debugElement.query(By.css('.alert-danger'))).toBeTruthy();
+    it('should render the banner', () => {
+      const div = fixture.debugElement.query(By.css('.request-notification-permissions')).nativeElement as HTMLElement;
+      expect(div.classList.contains('denied')).toBe(true);
     });
   });
 

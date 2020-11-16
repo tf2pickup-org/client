@@ -1,0 +1,50 @@
+@use 'variables';
+@use 'theme';
+@use 'utils/respond';
+
+.request-notification-permissions {
+  display: flex;
+
+  margin: 1.5rem 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: variables.$default-border-radius;
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+
+  color: theme.$font-color-dark;
+  font-weight: 400;
+
+  @include respond.above(huge) {
+    flex-flow: row wrap;
+    align-items: center;
+  }
+
+  @include respond.below(huge) {
+    flex-flow: column wrap;
+  }
+
+  &.default {
+    background-color: theme.$secondary;
+  }
+
+  &.denied {
+    background-color: theme.$error;
+  }
+
+  .message-icon {
+    @include respond.below(huge) {
+      display: none;
+    }
+  }
+
+  .message {
+    flex: 1 1 auto;
+  }
+
+  .allow-notifications-button {
+    flex: 0 0 auto;
+
+    @include respond.below(huge) {
+      align-self: flex-end;
+    }
+  }
+}

@@ -4,7 +4,7 @@ import { NotificationsService } from '../notifications.service';
 @Component({
   selector: 'app-request-notification-permissions',
   templateUrl: './request-notification-permissions.component.html',
-  styleUrls: ['./request-notification-permissions.component.css'],
+  styleUrls: ['./request-notification-permissions.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RequestNotificationPermissionsComponent {
