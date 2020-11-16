@@ -46,7 +46,6 @@ export const mapVoteTotalCount = createSelector(
 );
 
 export const mapVote = createSelector(queueFeature, feature => feature.mapVote);
-export const queueShowReadyUpDialog = createSelector(queueFeature, feature => feature.readyUpDialogShown);
 export const isPreReadied = createSelector(queueFeature, feature => feature.preReady);
 
 export const substituteRequests = createSelector(queueFeature, feature => feature.substituteRequests);

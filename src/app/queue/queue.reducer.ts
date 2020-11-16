@@ -1,13 +1,11 @@
 import { createReducer, on, Action } from '@ngrx/store';
-import { queueLoaded, queueStateUpdated, readyUp, showReadyUpDialog, hideReadyUpDialog, leaveQueue, togglePreReady,
-  stopPreReady, mapVoteResultsUpdated, mapVoted, mapVoteReset, queueSlotsUpdated, startPreReady, substituteRequestsUpdated,
-  friendshipsUpdated } from './queue.actions';
+import { queueLoaded, queueStateUpdated, togglePreReady, stopPreReady, mapVoteResultsUpdated, mapVoted, mapVoteReset,
+  queueSlotsUpdated, startPreReady, substituteRequestsUpdated, friendshipsUpdated } from './queue.actions';
 import { QueueSlot } from './models/queue-slot';
 import { Queue } from './models/queue';
 import { profileLoaded } from '@app/profile/profile.actions';
 
 export interface State extends Queue {
-  readyUpDialogShown: boolean;
   mapVote?: string;
   preReady: boolean;
   loading: boolean;
@@ -18,7 +16,6 @@ export const initialState: State = {
   slots: [],
   state: 'waiting',
   mapVoteResults: [],
-  readyUpDialogShown: false,
   preReady: false,
   friendships: [],
   loading: true,
@@ -37,11 +34,6 @@ const queueReducer = createReducer(
   on(queueSlotsUpdated, (state, { slots }) =>  updateQueueSlots(slots, state)),
   on(queueStateUpdated, (state, { queueState }) => ({ ...state, state: queueState })),
   on(mapVoteResultsUpdated, (state, { results }) => ({ ...state, mapVoteResults: results })),
-
-  on(readyUp, state => ({ ...state, readyUpDialogShown: false })),
-  on(showReadyUpDialog, state => ({ ...state, readyUpDialogShown: true })),
-  on(hideReadyUpDialog, state => ({ ...state, readyUpDialogShown: false })),
-  on(leaveQueue, state => ({ ...state, readyUpDialogShown: false })),
 
   on(togglePreReady, state => ({ ...state, preReady: !state.preReady })),
   on(startPreReady, state => ({ ...state, preReady: true })),

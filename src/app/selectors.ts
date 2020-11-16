@@ -1,6 +1,7 @@
 import { createSelector } from '@ngrx/store';
 import { profile, isBanned } from './profile/profile.selectors';
-import { activeGame, isGameRunning, isPlayingGame, gameById } from './games/games.selectors';
+import { activeGame, isGameRunning, gameById } from './games/games.selectors';
+import { isPreReadied, mySlot, queueState } from './queue/queue.selectors';
 
 // some root-state selectors
 
@@ -22,4 +23,14 @@ export const canSubstituteInGame = (gameId: string) => createSelector(
     gameRunning &&
     !banned &&
     (!theActiveGame || theActiveGame.id === game.id)
+);
+
+export const isReadyUpDialogShown = createSelector(
+  queueState,
+  mySlot,
+  isPreReadied,
+  (state, slot, preReadied) =>
+    state === 'ready'
+    && (!!slot && !slot.ready)
+    && !preReadied
 );

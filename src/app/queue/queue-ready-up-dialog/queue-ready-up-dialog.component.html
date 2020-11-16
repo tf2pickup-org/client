@@ -1,23 +1,23 @@
-<div class="mdc-dialog mdc-dialog--open">
+<div class="mdc-dialog mdc-dialog--open mdc-dialog--stacked">
   <div class="mdc-dialog__container">
-    <div class="mdc-dialog__surface">
+    <div class="mdc-dialog__surface p-3">
       <div class="mdc-dialog__title">
         Are you ready to play the game now?
       </div>
 
-      <div class="mdc-dialog__actions">
+      <div class="mdc-dialog__actions align-items-center">
         <button
           type="button"
-          class="mdc-button mdc-dialog__button mdc-button--unelevated"
-          (click)="readyUp.next()">
+          class="mdc-button mdc-dialog__button mdc-button--unelevated ready-up-button"
+          (click)="readyUp()">
           <div class="mdc-button__ripple"></div>
           <span class="mdc-button__label">Ready!</span>
         </button>
 
         <button
           type="button"
-          class="mdc-button mdc-dialog__button mdc-button--unelevated"
-          (click)="leaveQueue.next()">
+          class="mdc-button mdc-dialog__button leave-queue-button"
+          (click)="leaveQueue()">
           <div class="mdc-button__ripple"></div>
           <span class="mdc-button__label">No, I can't play now</span>
         </button>

@@ -1,26 +1,22 @@
 import { TestBed } from '@angular/core/testing';
 import { QueueEffects } from './queue.effects';
 import { provideMockActions } from '@ngrx/effects/testing';
-import { ReplaySubject, of } from 'rxjs';
+import { ReplaySubject, of, throwError, NEVER } from 'rxjs';
 import { Action, MemoizedSelector } from '@ngrx/store';
 import { QueueService } from './queue.service';
 import { queueLoaded, loadQueue, joinQueue, joinQueueError, markFriend, mapVoteReset, voteForMap, mapVoted, mapVoteResultsUpdated,
-  queueSlotsUpdated, hideReadyUpDialog, showReadyUpDialog, readyUp, queueStateUpdated, substituteRequestsUpdated,
-  friendshipsUpdated } from './queue.actions';
+  queueSlotsUpdated, queueStateUpdated, substituteRequestsUpdated, friendshipsUpdated, readyUp, leaveQueue } from './queue.actions';
 import { Queue } from './models/queue';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { QueueSlot } from './models/queue-slot';
-import { ownGameAdded } from '@app/games/games.actions';
 import { MapVoteResult } from './models/map-vote-result';
 import { AppState } from '@app/app.state';
-import { mySlot, isPreReadied } from './queue.selectors';
-import { PreReadyService } from './pre-ready.service';
 import { Socket } from '@app/io/socket';
 import { EventEmitter } from 'eventemitter3';
-
-class PreReadyServiceStub {
-
-}
+import { ReadyUpDialogService } from './ready-up-dialog.service';
+import { isInQueue } from './queue.selectors';
+import { isReadyUpDialogShown } from '@app/selectors';
+import { QueueReadyUpAction } from './queue-ready-up-dialog/queue-ready-up-dialog.component';
 
 const queue: Queue = {
   config: {
@@ -51,41 +47,48 @@ const queue: Queue = {
   friendships: [],
 };
 
-const initialState = {
-  profile: { id: 'FAKE_ID' },
-  queue
-};
-
 describe('QueueEffects', () => {
-  const actions = new ReplaySubject<Action>(1);
+  let actions: ReplaySubject<Action>;
   let queueServiceStub: jasmine.SpyObj<QueueService>;
+  let readyUpDialogService: jasmine.SpyObj<ReadyUpDialogService>;
   let effects: QueueEffects;
   let store: MockStore<AppState>;
+  let isInQueueSelector: MemoizedSelector<unknown, boolean>;
+  let isReadyUpDialogShownSelector: MemoizedSelector<unknown, boolean>;
 
   beforeEach(() => {
-    queueServiceStub = jasmine.createSpyObj<QueueService>('QueueService', [
+    queueServiceStub = jasmine.createSpyObj<QueueService>(QueueService.name, [
       'fetchQueue',
       'joinQueue',
       'markFriend',
       'voteForMap',
     ]);
+
+    readyUpDialogService = jasmine.createSpyObj<ReadyUpDialogService>(ReadyUpDialogService.name, ['showReadyUpDialog']);
   });
+
+  beforeEach(() => actions = new ReplaySubject<Action>(1));
 
   beforeEach(() => TestBed.configureTestingModule({
     providers: [
       QueueEffects,
       provideMockActions(() => actions.asObservable()),
       { provide: QueueService, useValue: queueServiceStub },
-      provideMockStore({ initialState }),
-      { provide: PreReadyService, useClass: PreReadyServiceStub },
+      provideMockStore(),
       { provide: Socket, useClass: EventEmitter },
+      { provide: ReadyUpDialogService, useValue: readyUpDialogService },
     ],
   }));
 
   beforeEach(() => {
-    effects = TestBed.inject(QueueEffects);
     store = TestBed.inject(MockStore);
+    isInQueueSelector = store.overrideSelector(isInQueue, false);
+    isReadyUpDialogShownSelector = store.overrideSelector(isReadyUpDialogShown, false);
+
+    effects = TestBed.inject(QueueEffects);
   });
+
+  afterEach(() => actions.complete());
 
   it('should load the queue', () => {
     queueServiceStub.fetchQueue.and.returnValue(of(queue));
@@ -135,16 +138,19 @@ describe('QueueEffects', () => {
   });
 
   describe('#joinQueue', () => {
-    it('should attempt to join the queue', () => {
+    it('should attempt to join the queue', done => {
       const slot: QueueSlot = { id: 1, gameClass: 'soldier', playerId: 'FAKE_ID_2', ready: false, };
       queueServiceStub.joinQueue.and.returnValue(of([ slot ]));
-      effects.joinQueue.subscribe(action => expect(action).toEqual(queueSlotsUpdated({ slots: [ slot ] })));
+      effects.joinQueue.subscribe(action => {
+        expect(queueServiceStub.joinQueue).toHaveBeenCalledWith(1);
+        expect(action).toEqual(queueSlotsUpdated({ slots: [ slot ] }));
+        done();
+      });
       actions.next(joinQueue({ slotId: 1 }));
-      expect(queueServiceStub.joinQueue).toHaveBeenCalledWith(1);
     });
 
-    xit('should handle errors', done => {
-      queueServiceStub.joinQueue.and.throwError('FAKE_ERROR');
+    it('should handle errors', done => {
+      queueServiceStub.joinQueue.and.returnValue(throwError('FAKE_ERROR'));
       effects.joinQueue.subscribe(action => {
         expect(action).toEqual(joinQueueError({ error: 'FAKE_ERROR' }));
         done();
@@ -153,78 +159,81 @@ describe('QueueEffects', () => {
     });
   });
 
-  describe('#showReadyUpDialog', () => {
-    const slot: QueueSlot = { id: 1, gameClass: 'soldier', playerId: 'FAKE_ID_2', ready: false, };
-    let mySlotSelector: MemoizedSelector<AppState, QueueSlot>;
-    let preReadiedSelector: MemoizedSelector<AppState, boolean>;
-
-    beforeEach(() => {
-      mySlotSelector = store.overrideSelector(mySlot, slot);
-      preReadiedSelector = store.overrideSelector(isPreReadied, false);
-    });
-
-    it('should show ready up dialog if the user is in the queue but not readied up', () => {
-      effects.showReadyUpDialog.subscribe(action => expect(action).toEqual(showReadyUpDialog()));
-      actions.next(queueLoaded({ queue: { ...queue, state: 'ready' }}));
-    });
-
-    it('should not show ready up dialog if the user is already readied up', () => {
-      mySlotSelector.setResult({ ...slot, ready: true });
-      effects.showReadyUpDialog.subscribe(() => fail());
-      actions.next(queueLoaded({ queue: { ...queue, state: 'ready' }}));
-      expect().nothing();
-    });
-
-    it('should ready up without showing the dialog if the user is pre-readied', () => {
-      preReadiedSelector.setResult(true);
-      effects.showReadyUpDialog.subscribe(action => expect(action).toEqual(readyUp()));
-      actions.next(queueStateUpdated({ queueState: 'ready' }));
-    });
-  });
-
-  describe('#closeReadyUpDialog', () => {
-    it('should emit whenever user loses the slot', () => {
-      const slot: QueueSlot = { id: 1, gameClass: 'soldier', playerId: 'FAKE_ID_2', ready: false, };
-      const selector = store.overrideSelector(mySlot, slot);
-
-      let n = 0;
-      effects.closeReadyUpDialog.subscribe(action => {
-        expect(action).toEqual(hideReadyUpDialog());
-        n += 1;
-        if (n > 1) {
-          fail();
-        }
-      });
-
-      selector.setResult(null);
-      store.refreshState();
-      expect().nothing();
-    });
-  });
-
   describe('#markFriend', () => {
-    it('should call the service', () => {
+    it('should call the service', done => {
       const friendships = [ { sourcePlayerId: 'FAKE_PLAYER_ID', targetPlayerId: 'FAKE_FRIEND_ID' } ];
       queueServiceStub.markFriend.and.returnValue(of(friendships));
-      effects.markFriend.subscribe(action => expect(action).toEqual(friendshipsUpdated({ friendships })));
+      effects.markFriend.subscribe(action => {
+        expect(queueServiceStub.markFriend).toHaveBeenCalledWith('FAKE_FRIEND_ID');
+        expect(action).toEqual(friendshipsUpdated({ friendships }));
+        done();
+      });
       actions.next(markFriend({ friendId: 'FAKE_FRIEND_ID' }));
-      expect(queueServiceStub.markFriend).toHaveBeenCalledWith('FAKE_FRIEND_ID');
     });
   });
 
   describe('#voteForMap', () => {
-    it('should attempt to vote for the given map', () => {
+    it('should attempt to vote for the given map', done => {
       queueServiceStub.voteForMap.and.returnValue(of('FAKE_MAP'));
-      effects.voteForMap.subscribe(action => expect(action).toEqual(mapVoted({ map: 'FAKE_MAP' })));
+      effects.voteForMap.subscribe(action => {
+        expect(queueServiceStub.voteForMap).toHaveBeenCalledWith('FAKE_MAP');
+        expect(action).toEqual(mapVoted({ map: 'FAKE_MAP' }));
+        done();
+      });
       actions.next(voteForMap({ map: 'FAKE_MAP' }));
-      expect(queueServiceStub.voteForMap).toHaveBeenCalledWith('FAKE_MAP');
     });
   });
 
   describe('#resetMapVote', () => {
-    it('should reset map vote', () => {
-      effects.resetMapVote.subscribe(action => expect(action).toEqual(mapVoteReset()));
-      actions.next(ownGameAdded({ gameId: 'FAKE_GAME_ID' }));
+    it('should reset map vote', done => {
+      effects.resetMapVote.subscribe(action => {
+        expect(action).toEqual(mapVoteReset());
+        done();
+      });
+      isInQueueSelector.setResult(false);
+      store.refreshState();
+    });
+  });
+
+  describe('when ready-up dialog needs to be shown', () => {
+    beforeEach(() => {
+      readyUpDialogService.showReadyUpDialog.and.returnValue(NEVER);
+    });
+
+    it('shows the ready-up dialog', () => {
+      isReadyUpDialogShownSelector.setResult(true);
+      store.refreshState();
+      expect(readyUpDialogService.showReadyUpDialog).toHaveBeenCalledTimes(1);
+    });
+
+    describe('when user readies up', () => {
+      beforeEach(() => {
+        readyUpDialogService.showReadyUpDialog.and.returnValue(of(QueueReadyUpAction.readyUp));
+      });
+
+      it('should ready up', () => {
+        const spy = spyOn(store, 'dispatch');
+
+        isReadyUpDialogShownSelector.setResult(true);
+        store.refreshState();
+
+        expect(spy).toHaveBeenCalledWith(readyUp());
+      });
+    });
+
+    describe('when user does not ready up', () => {
+      beforeEach(() => {
+        readyUpDialogService.showReadyUpDialog.and.returnValue(of(QueueReadyUpAction.leaveQueue));
+      });
+
+      it('should leave the queue', () => {
+        const spy = spyOn(store, 'dispatch');
+
+        isReadyUpDialogShownSelector.setResult(true);
+        store.refreshState();
+
+        expect(spy).toHaveBeenCalledWith(leaveQueue());
+      });
     });
   });
 });

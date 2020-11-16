@@ -1,34 +1,25 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { QueueReadyUpDialogComponent } from './queue-ready-up-dialog.component';
+import { QueueReadyUpAction, QueueReadyUpDialogComponent } from './queue-ready-up-dialog.component';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
-import { BsModalRef } from 'ngx-bootstrap/modal';
-import { Store } from '@ngrx/store';
-import { leaveQueue, readyUp } from '../queue.actions';
-
-class BsModalRefStub {
-  hide() { }
-}
+import { By } from '@angular/platform-browser';
 
 describe('QueueReadyUpDialogComponent', () => {
   let component: QueueReadyUpDialogComponent;
   let fixture: ComponentFixture<QueueReadyUpDialogComponent>;
   let store: MockStore<any>;
-  let bsModalRef: BsModalRef;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ QueueReadyUpDialogComponent ],
       providers: [
         provideMockStore(),
-        { provide: BsModalRef, useClass: BsModalRefStub },
       ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    store = TestBed.get(Store);
-    bsModalRef = TestBed.get(BsModalRef);
+    store = TestBed.inject(MockStore);
 
     fixture = TestBed.createComponent(QueueReadyUpDialogComponent);
     component = fixture.componentInstance;
@@ -39,31 +30,29 @@ describe('QueueReadyUpDialogComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('#leaveQueue()', () => {
-    it('should dispatch leaveQueue action', () => {
-      const spy = spyOn(store, 'dispatch');
-      component.leaveQueue();
-      expect(spy).toHaveBeenCalledWith(leaveQueue());
+  describe('when user readies up', () => {
+    let readyUpButton: HTMLButtonElement;
+
+    beforeEach(() => {
+      readyUpButton = fixture.debugElement.query(By.css('.ready-up-button')).nativeElement as HTMLButtonElement;
     });
 
-    it('should hide the dialog', () => {
-      const spy = spyOn(bsModalRef, 'hide');
-      component.leaveQueue();
-      expect(spy).toHaveBeenCalled();
+    it('should emit ready up', () => {
+      component.action.subscribe(action => expect(action).toEqual(QueueReadyUpAction.readyUp));
+      readyUpButton.click();
     });
   });
 
-  describe('#confirmReady()', () => {
-    it('should dispatch readyUp action', () => {
-      const spy = spyOn(store, 'dispatch');
-      component.confirmReady();
-      expect(spy).toHaveBeenCalledWith(readyUp());
+  describe('when user leaves the queue', () => {
+    let leaveQueueButton: HTMLButtonElement;
+
+    beforeEach(() => {
+      leaveQueueButton = fixture.debugElement.query(By.css('.leave-queue-button')).nativeElement as HTMLButtonElement;
     });
 
-    it('should hide the dialog', () => {
-      const spy = spyOn(bsModalRef, 'hide');
-      component.confirmReady();
-      expect(spy).toHaveBeenCalled();
+    it('should emit leave queue', () => {
+      component.action.subscribe(action => expect(action).toEqual(QueueReadyUpAction.leaveQueue));
+      leaveQueueButton.click();
     });
   });
 });
