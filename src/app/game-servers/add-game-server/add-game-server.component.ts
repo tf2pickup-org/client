@@ -18,15 +18,6 @@ import { Location } from '@angular/common';
 })
 export class AddGameServerComponent implements AfterViewInit, OnDestroy {
 
-  gameServer = this.formBuilder.group({
-    name: ['', Validators.required],
-    address: ['', Validators.required],
-    port: ['27015', [Validators.min(0), Validators.max(65535)]],
-    rconPassword: ['', Validators.required],
-  });
-
-  locked = new BehaviorSubject<boolean>(false);
-
   @ViewChild('name')
   nameInput: ElementRef;
 
@@ -39,10 +30,14 @@ export class AddGameServerComponent implements AfterViewInit, OnDestroy {
   @ViewChild('rconPassword')
   rconPasswordInput: ElementRef;
 
-  @HostListener('document:keydown.escape', ['$event'])
-  onEscDown() {
-    this.cancel();
-  }
+  gameServer = this.formBuilder.group({
+    name: ['', Validators.required],
+    address: ['', Validators.required],
+    port: ['27015', [Validators.min(0), Validators.max(65535)]],
+    rconPassword: ['', Validators.required],
+  });
+
+  locked = new BehaviorSubject<boolean>(false);
 
   private fields: MDCTextField[];
 
@@ -53,6 +48,11 @@ export class AddGameServerComponent implements AfterViewInit, OnDestroy {
     private actions: Actions,
     private location: Location,
   ) { }
+
+  @HostListener('document:keydown.escape', ['$event'])
+  onEscDown() {
+    this.cancel();
+  }
 
   ngAfterViewInit() {
     this.fields = [

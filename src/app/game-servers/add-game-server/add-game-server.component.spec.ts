@@ -58,7 +58,7 @@ describe('AddGameServerComponent', () => {
 
   describe('when the form is valid', () => {
     let saveButton: HTMLButtonElement;
-    
+
     beforeEach(() => {
       const nameInput = fixture.debugElement.query(By.css('.name-field input[type=text]')).nativeElement as HTMLInputElement;
       nameInput.value = 'FAKE_GAME_SERVER_NAME';
@@ -72,7 +72,8 @@ describe('AddGameServerComponent', () => {
       portInput.value = '27015';
       portInput.dispatchEvent(new Event('input'));
 
-      const rconPasswordInput = fixture.debugElement.query(By.css('.rcon-password-field input[type=text]')).nativeElement as HTMLInputElement;
+      const rconPasswordInput = fixture.debugElement.query(By.css('.rcon-password-field input[type=text]'))
+        .nativeElement as HTMLInputElement;
       rconPasswordInput.value = 'FAKE_GAME_SERVER_RCON_PASSWORD';
       rconPasswordInput.dispatchEvent(new Event('input'));
 
