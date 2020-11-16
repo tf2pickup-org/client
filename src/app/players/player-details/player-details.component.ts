@@ -1,9 +1,9 @@
 import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Player } from '../models/player';
-import { map, switchMap, tap, first } from 'rxjs/operators';
+import { map, switchMap, tap } from 'rxjs/operators';
 import { playerById } from '../selectors';
 import { loadPlayer } from '../actions';
 import { PlayersService } from '../players.service';
@@ -11,8 +11,6 @@ import { isAdmin, isSuperUser } from '@app/profile/profile.selectors';
 import { PlayerStats } from '../models/player-stats';
 import { Title } from '@angular/platform-browser';
 import { environment } from '@environment';
-import { BsModalService } from 'ngx-bootstrap/modal';
-import { EditPlayerRoleDialogComponent } from '../edit-player-role-dialog/edit-player-role-dialog.component';
 
 @Component({
   selector: 'app-player-details',
@@ -32,7 +30,6 @@ export class PlayerDetailsComponent implements OnInit {
     private store: Store,
     private playersService: PlayersService,
     private title: Title,
-    private modalService: BsModalService,
   ) { }
 
   ngOnInit() {
@@ -52,12 +49,6 @@ export class PlayerDetailsComponent implements OnInit {
         }),
       )),
     );
-  }
-
-  openEditPlayerRoleDialog() {
-    this.player.pipe(
-      first(p => !!p),
-    ).subscribe(player => this.modalService.show(EditPlayerRoleDialogComponent, { initialState: { player } }));
   }
 
 }

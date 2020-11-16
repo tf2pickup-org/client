@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 
 @Component({
   selector: 'app-player-details-admin-buttons',
@@ -6,4 +6,9 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   styleUrls: ['./player-details-admin-buttons.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PlayerDetailsAdminButtonsComponent { }
+export class PlayerDetailsAdminButtonsComponent {
+
+  @Input()
+  playerId: string;
+
+}

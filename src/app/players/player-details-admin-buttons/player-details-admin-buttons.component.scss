@@ -11,9 +11,3 @@
     margin: 0 0.5rem;
   }
 }
-
-.bans-button,
-.roles-button {
-  --mdc-theme-primary: #{theme.$secondary};
-  --mdc-theme-on-primary: #{theme.$font-color-dark};
-}

@@ -7,7 +7,6 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
 import { convertToParamMap, ActivatedRoute } from '@angular/router';
 import { loadPlayer } from '../actions';
-import { BsModalService } from 'ngx-bootstrap/modal';
 import { MockComponent } from 'ng-mocks';
 import { PlayerDetailsExternalProfileLinksComponent } from
   '../player-details-external-profile-links/player-details-external-profile-links.component';
@@ -18,23 +17,19 @@ import { PlayerDetailsGameListComponent } from '../player-details-game-list/play
 import { By } from '@angular/platform-browser';
 import { PlayerRole } from '../models/player-role';
 import { Player } from '../models/player';
-
-class PlayersServiceStub {
-  fetchPlayerStats() { return of({}); }
-}
+import { MemoizedSelector } from '@ngrx/store';
+import { PlayerDetailsAdminButtonsComponent } from '../player-details-admin-buttons/player-details-admin-buttons.component';
+import { isAdmin } from '@app/profile/profile.selectors';
 
 const paramMap = of(convertToParamMap({ id: 'FAKE_ID' }));
-
-class BsModalServiceStub {
-  show() { }
-}
 
 describe('PlayerDetailsComponent', () => {
   let component: PlayerDetailsComponent;
   let fixture: ComponentFixture<PlayerDetailsComponent>;
   let store: MockStore<any>;
   let storeDispatchSpy: jasmine.Spy;
-  let fetchPlayerStatsSpy: jasmine.Spy;
+  let playersService: jasmine.SpyObj<PlayersService>;
+  let isAdminSelector: MemoizedSelector<unknown, boolean>;
 
   const initialState = {
     players: {
@@ -46,6 +41,10 @@ describe('PlayerDetailsComponent', () => {
     profile: { },
   };
 
+  beforeEach(() => {
+    playersService = jasmine.createSpyObj<PlayersService>(PlayersService.name, ['fetchPlayerStats']);
+  });
+
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [
@@ -55,15 +54,15 @@ describe('PlayerDetailsComponent', () => {
         MockComponent(PlayerDetailsHeaderComponent),
         MockComponent(PlayerStatsComponent),
         MockComponent(PlayerDetailsGameListComponent),
+        MockComponent(PlayerDetailsAdminButtonsComponent),
       ],
       imports: [
         RouterTestingModule,
       ],
       providers: [
-        { provide: PlayersService, useClass: PlayersServiceStub  },
+        { provide: PlayersService, useValue: playersService  },
         provideMockStore({ initialState }),
         { provide: ActivatedRoute, useValue: { paramMap } },
-        { provide: BsModalService, useClass: BsModalServiceStub },
       ],
     })
     .compileComponents();
@@ -71,8 +70,8 @@ describe('PlayerDetailsComponent', () => {
 
   beforeEach(() => {
     store = TestBed.inject(MockStore);
+    isAdminSelector = store.overrideSelector(isAdmin, false);
     storeDispatchSpy = spyOn(store, 'dispatch').and.callThrough();
-    fetchPlayerStatsSpy = spyOn(TestBed.inject(PlayersService), 'fetchPlayerStats').and.callThrough();
 
     fixture = TestBed.createComponent(PlayerDetailsComponent);
     component = fixture.componentInstance;
@@ -89,7 +88,7 @@ describe('PlayerDetailsComponent', () => {
     });
 
     it('should load player\'s stats', () => {
-      expect(fetchPlayerStatsSpy).toHaveBeenCalledWith('FAKE_ID');
+      expect(playersService.fetchPlayerStats).toHaveBeenCalledWith('FAKE_ID');
     });
   });
 
@@ -155,6 +154,22 @@ describe('PlayerDetailsComponent', () => {
 
       expect(gameListComponent).toBeTruthy();
       expect(gameListComponent.playerId).toEqual('FAKE_ID');
+    });
+
+    describe('when logged-in as an admin', () => {
+      beforeEach(() => {
+        isAdminSelector.setResult(true);
+        store.refreshState();
+        fixture.detectChanges();
+      });
+
+      it('should render admin buttons', () => {
+        const playerDetailsAdminButtonsComponent =
+          fixture.debugElement.query(By.css('app-player-details-admin-buttons')).componentInstance as PlayerDetailsAdminButtonsComponent;
+
+        expect(playerDetailsAdminButtonsComponent).toBeTruthy();
+        expect(playerDetailsAdminButtonsComponent.playerId).toEqual('FAKE_ID');
+      });
     });
   });
 });
