@@ -12,7 +12,7 @@ import { switchMap, map, takeUntil } from 'rxjs/operators';
 })
 export class GameListComponent implements OnInit, OnDestroy {
 
-  readonly gamesPerPage = 10;
+  readonly gamesPerPage = 5;
 
   page = new BehaviorSubject<number>(1);
   gameCount = new ReplaySubject<number>(1);
