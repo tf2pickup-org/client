@@ -1,4 +1,5 @@
 @use 'sass:color';
+@use 'theme';
 
 $label-background-color: rgb(255, 255, 255);
 
@@ -28,4 +29,9 @@ $label-background-color: rgb(255, 255, 255);
   @include common;
 
   font-weight: 500;
+  color: theme.$font-color-light;
+
+  a {
+    color: theme.$font-color-light;
+  }
 }

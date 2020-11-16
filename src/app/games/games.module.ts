@@ -48,7 +48,7 @@ import { IconsModule } from '@app/icons/icons.module';
 
     SharedModule,
     IconsModule,
-    
+
     GamesRoutingModule,
   ],
   exports: [
