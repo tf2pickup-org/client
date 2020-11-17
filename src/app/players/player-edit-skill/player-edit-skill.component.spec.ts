@@ -24,6 +24,7 @@ describe('PlayerEditSkillComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(PlayerEditSkillComponent);
     component = fixture.componentInstance;
+    component.form = formGroup;
     fixture.detectChanges();
   });
 
@@ -32,7 +33,6 @@ describe('PlayerEditSkillComponent', () => {
   });
 
   it('should set min & max on the input', () => {
-    component.form = formGroup;
     component.gameClass = 'soldier';
     fixture.detectChanges();
 

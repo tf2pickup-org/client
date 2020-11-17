@@ -2,7 +2,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { PlayerEditComponent } from './player-edit.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { of, Subject } from 'rxjs';
 import { convertToParamMap, ActivatedRoute, Router } from '@angular/router';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
@@ -11,7 +10,7 @@ import { Action, Store } from '@ngrx/store';
 import { RouterTestingModule } from '@angular/router/testing';
 import { loadPlayerSkill, playerEdited, loadPlayer, setPlayerName, setPlayerSkill } from '../actions';
 import { Location } from '@angular/common';
-import { Title } from '@angular/platform-browser';
+import { By, Title } from '@angular/platform-browser';
 
 const paramMap = of(convertToParamMap({ id: 'FAKE_ID' }));
 const actions = new Subject<Action>();
@@ -44,7 +43,6 @@ describe('PlayerEditComponent', () => {
         provideMockStore({ initialState }),
         { provide: Actions, useValue: actions },
       ],
-      schemas: [ NO_ERRORS_SCHEMA ],
     })
     .compileComponents();
   }));
@@ -90,6 +88,8 @@ describe('PlayerEditComponent', () => {
   });
 
   describe('with player', () => {
+    let saveButton: HTMLButtonElement;
+
     beforeEach(() => {
       store.setState({
         players: {
@@ -107,6 +107,8 @@ describe('PlayerEditComponent', () => {
           },
         },
       });
+
+      saveButton = fixture.debugElement.query(By.css('.save-button')).nativeElement as HTMLButtonElement;
     });
 
     it('should set the title', () => {
@@ -117,33 +119,47 @@ describe('PlayerEditComponent', () => {
       expect(component.player.value.name).toEqual('maly');
     });
 
-    describe('#save()', () => {
+    it('should have the save button disabled initially', () => {
+      expect(saveButton.disabled).toBe(true);
+    });
+
+    describe('when edited', () => {
+      let playerNameInput: HTMLInputElement;
+
+      beforeEach(() => {
+        playerNameInput = fixture.debugElement.query(By.css('.name-field input[type=text]')).nativeElement as HTMLInputElement;
+
+        playerNameInput.value = 'maly2';
+        playerNameInput.dispatchEvent(new Event('input'));
+        fixture.detectChanges();
+      });
+
+      it('should enable the save button', () => {
+        expect(saveButton.disabled).toBe(false);
+      });
+
       it('should dispatch the setPlayerName action', () => {
-        component.player.value.name = 'maly2';
-        component.save();
+        saveButton.click();
         expect(storeDispatchSpy).toHaveBeenCalledWith(setPlayerName({ playerId: 'FAKE_ID', name: 'maly2' }));
       });
 
       it('should redirect to the player details after saving is done', () => {
-        const spy = spyOn(TestBed.get(Router), 'navigate');
-        component.player.value.name = 'maly2';
-        component.save();
+        const spy = spyOn(TestBed.inject(Router), 'navigate');
+
+        saveButton.click();
+
         actions.next(playerEdited({ player: { id: 'FAKE_ID' } } as any));
         expect(spy).toHaveBeenCalledWith(['/player', 'FAKE_ID']);
-      });
-
-      it('should do nothing if the name has not changed', () => {
-        component.save();
-        expect(storeDispatchSpy).not.toHaveBeenCalledWith(setPlayerName({ playerId: 'FAKE_ID', name: 'maly' }));
       });
     });
 
     describe('and with skill', () => {
-      describe('#save()', () => {
+      describe('when saved', () => {
         it('should dispatch the setPlayerSkill action', () => {
-          component.player.value.skill = { demoman: 5 };
-          component.save();
-          expect(storeDispatchSpy).toHaveBeenCalledWith(setPlayerSkill({ playerId: 'FAKE_ID', skill: { demoman: 5 }}));
+          component.player.value.skill = { demoman: -1 };
+          saveButton.disabled = false; // I'm feeling bad about this, but it needs to be called explicitly
+          saveButton.click();
+          expect(storeDispatchSpy).toHaveBeenCalledWith(setPlayerSkill({ playerId: 'FAKE_ID', skill: { demoman: -1 }}));
         });
       });
     });

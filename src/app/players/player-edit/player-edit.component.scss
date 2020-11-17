@@ -1,6 +1,7 @@
-.close-anchor {
-  left: -2.5rem;
-  position: absolute;
+@use 'components/card';
 
-  top: 3.65rem;
+.player-edit-container {
+  @extend %card;
+  margin-top: 1rem;
+  padding: 2rem;
 }

@@ -79,6 +79,10 @@ $link-hover-decoration: underline;
   @include textfield.focused-outline-color(color.adjust(theme.$primary, $lightness: +20%));
 }
 
+.mdc-text-field--dense {
+  @include textfield.outlined-density(-4);
+}
+
 @import 'components/card';
 @import 'components/badge';
 @import 'components/button';
