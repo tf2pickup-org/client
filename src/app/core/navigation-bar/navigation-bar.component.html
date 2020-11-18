@@ -58,10 +58,12 @@
   <div class="flex-xl-fill"></div>
 
   <ng-container *ngIf="isAuthenticated; else notAuthenticated">
-    <!-- <a routerLink="/settings"
-      class="text-dark navbar-light navbar-nav nav-link">
-      <span class="oi oi-cog"></span>
-    </a> -->
+    <a routerLink="/settings"
+      routerLinkActive="active"
+      tooltip="Settings"
+      class="link-item--settings">
+      <img src="/assets/ui_settings.png">
+    </a>
 
     <a *ngIf="profile | async as _profile"
       [routerLink]="['/player', _profile.id]"

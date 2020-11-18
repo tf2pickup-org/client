@@ -113,6 +113,26 @@ $-link-border-radius-bottom-right: 2.5rem;
       display: none;
     }
   }
+
+  &--settings {
+    @extend %link-item;
+    padding: 0 1.2rem;
+    line-height: $-link-height * 0.9;
+    border-radius: 0 0 $-link-border-radius $-link-border-radius-bottom-right;
+
+    @include respond.below(huge) {
+      display: none;
+    }
+
+    &.active {
+      box-shadow: -0.5rem 0.5rem 0.5rem -0.5rem $-navigation-bar-shadow-color;
+    }
+
+    > img {
+      width: 30px;
+      height: 30px;
+    }
+  }
 }
 
 .steam-login-button {
