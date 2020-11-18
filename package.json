@@ -69,7 +69,7 @@
     "eslint": "7.13.0",
     "eslint-plugin-import": "2.22.1",
     "eslint-plugin-jsdoc": "30.7.8",
-    "eslint-plugin-ngrx": "1.10.2",
+    "eslint-plugin-ngrx": "1.11.1",
     "eslint-plugin-prefer-arrow": "1.2.2",
     "eslint-plugin-rxjs": "2.1.3",
     "eventemitter3": "4.0.7",
