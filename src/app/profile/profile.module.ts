@@ -10,11 +10,14 @@ import { SettingsComponent } from './settings/settings.component';
 import { ProfileRoutingModule } from './profile-routing.module';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { PortalModule } from '@angular/cdk/portal';
+import { IconsModule } from '@app/icons/icons.module';
+import { TwitchTvIntegrationComponent } from './twitch-tv-integration/twitch-tv-integration.component';
 
 @NgModule({
   declarations: [
     AcceptRulesDialogComponent,
     SettingsComponent,
+    TwitchTvIntegrationComponent,
   ],
   imports: [
     CommonModule,
@@ -23,6 +26,7 @@ import { PortalModule } from '@angular/cdk/portal';
     MarkdownModule.forChild(),
     OverlayModule,
     PortalModule,
+    IconsModule,
 
     ProfileRoutingModule,
   ],

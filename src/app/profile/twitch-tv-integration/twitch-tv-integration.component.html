@@ -1,0 +1,39 @@
+<div class="mdc-card twitch-integration-card">
+
+  <ng-container *ngIf="twitchTvProfile | async as _twitchTvProfile; else noTwitchTvProfile">
+    <div class="twitch-integration-card-content">
+      <h6 class="mdc-typography--headline6">twitch.tv integration</h6>
+      <span class="mdc-typography--body2">
+        Logged in as
+        <a [href]="twitchTvProfileLink | async" target="_blank">
+          {{ _twitchTvProfile.displayName }}
+        </a>.
+      </span>
+    </div>
+    <div class="mdc-card__actions">
+      <button class="mdc-button mdc-card__action mdc-card__action--button" disabled>
+        <div class="mdc-button__ripple"></div>
+        <span class="mdc-button__label">Disconnect</span>
+      </button>
+    </div>
+  </ng-container>
+
+  <ng-template #noTwitchTvProfile>
+    <div class="twitch-integration-card-content">
+      <h6 class="mdc-typography--headline6">twitch.tv integration</h6>
+      <span class="mdc-typography--body2">
+        Your streams will be displayed on the main page.
+      </span>
+    </div>
+    <div class="mdc-card__actions">
+      <button
+        class="mdc-button mdc-card__action mdc-card__action--button login-via-twitch-tv-button"
+        (click)="loginViaTwitchTv()">
+        <div class="mdc-button__ripple"></div>
+        <span class="mdc-button__label">Login via twitch.tv</span>
+      </button>
+    </div>
+  </ng-template>
+
+</div>
+

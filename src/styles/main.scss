@@ -15,16 +15,18 @@
 @use '@material/typography/mdc-typography';
 
 @use '@material/button';
-@use '@material/icon-button';
+@use '@material/card';
 @use '@material/dialog';
 @use '@material/floating-label/mdc-floating-label';
+@use '@material/icon-button';
 @use '@material/line-ripple/mdc-line-ripple';
 @use '@material/notched-outline/mdc-notched-outline';
 @use '@material/textfield';
 
 @include button.core-styles;
-@include icon-button.core-styles;
+@include card.core-styles;
 @include dialog.core-styles;
+@include icon-button.core-styles;
 @include textfield.core-styles;
 
 $body-bg: #0d1d36;
@@ -81,6 +83,10 @@ $link-hover-decoration: underline;
 
 .mdc-text-field--dense {
   @include textfield.outlined-density(-4);
+}
+
+.mdc-card {
+  color: theme.$font-color-dark;
 }
 
 @import 'components/card';
