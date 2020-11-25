@@ -1,6 +1,7 @@
 @use 'sass:color';
 @use 'theme';
 @use 'variables';
+@use 'utils/outline';
 
 $-side-slot-size: 2rem;
 
@@ -90,6 +91,8 @@ $-side-slot-size: 2rem;
 }
 
 .slot-action-btn {
+  @include outline.disable;
+
   width: $-side-slot-size;
   height: $-side-slot-size;
 
