@@ -17,12 +17,14 @@ interface ClassPlayed {
 export class PlayerDetailsGameListComponent implements OnDestroy {
 
   readonly gamesPerPage = 10;
-  private destroyed = new Subject<void>();
-  private _playerId = new ReplaySubject<string>(1);
+
   page = new BehaviorSubject<number>(1);
   gameCount = new ReplaySubject<number>(1);
   games = new ReplaySubject<(Game & ClassPlayed)[]>(1);
   isLoading = new BehaviorSubject<boolean>(true);
+
+  private destroyed = new Subject<void>();
+  private _playerId = new ReplaySubject<string>(1);
 
   @Input()
   set playerId(playerId: string) {
