@@ -66,13 +66,43 @@ $link-hover-decoration: underline;
   line-height: 16px; // vertical align of icons
 }
 
+.mdc-button--inverted {
+  @include button.ink-color(theme.$font-color-light);
+}
+
 .mdc-button--secondary {
-  --mdc-theme-primary: #{theme.$secondary};
-  --mdc-theme-on-primary: #{theme.$font-color-dark};
-  @include button.container-fill-color(theme.$secondary);
+  @include button.filled-accessible(theme.$secondary);
   @include button.ink-color(theme.$font-color-dark);
   @include button.disabled-container-fill-color(color.adjust(theme.$secondary, $lightness: -30%));
   @include button.disabled-ink-color(color.adjust(white, $lightness: -73%));
+}
+
+.mdc-button--contained {
+  @include button.filled-accessible(theme.$primary);
+}
+
+.mdc-button--white {
+  @include button.filled-accessible(rgb(255, 255, 255));
+  @include button.ink-color(theme.$font-color-dark);
+}
+
+.mdc-button--large {
+  @include button.height(46px);
+  @include button.shape-radius(0.8rem);
+  @include button.horizontal-padding(1rem);
+  font-size: 1.2rem;
+  font-weight: 700;
+
+  /* stylelint-disable-next-line selector-class-pattern */
+  .mdc-button__icon {
+    width: 26px;
+    height: 26px;
+  }
+
+  /* stylelint-disable-next-line selector-class-pattern */
+  .mdc-button__label {
+    letter-spacing: normal;
+  }
 }
 
 .mdc-text-field {

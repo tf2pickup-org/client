@@ -139,9 +139,6 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
 
     const getPlayersForTeam = (team: Tf2Team) => this.players.pipe(
       map(players => players.filter(p => p.team === team)),
-      tap(players => {
-        console.log(team + players);
-      }),
       map(players => this.sortPlayers(players)),
     );
 

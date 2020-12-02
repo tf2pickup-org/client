@@ -2,7 +2,6 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { GameDetailsComponent } from './game-details.component';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { SharedModule } from '@app/shared/shared.module';
-import { Store } from '@ngrx/store';
 import { ActivatedRoute, convertToParamMap } from '@angular/router';
 import { of, NEVER } from 'rxjs';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -12,13 +11,14 @@ import { GamesService } from '../games.service';
 import { MockComponent } from 'ng-mocks';
 import { GameBasicInfoComponent } from '../game-basic-info/game-basic-info.component';
 import { By } from '@angular/platform-browser';
-import { JoinGameInfoComponent } from '../join-game-info/join-game-info.component';
 import { SoundPlayerService, Sound } from '@app/notifications/sound-player.service';
 import { GameSummaryComponent } from '../game-summary/game-summary.component';
 import { merge } from 'lodash';
-import { WatchGameInfoComponent } from '../watch-game-info/watch-game-info.component';
 import { GameTeamHeaderComponent } from '../game-team-header/game-team-header.component';
 import { GameTeamPlayerListComponent } from '../game-team-player-list/game-team-player-list.component';
+import { ConnectStringComponent } from '../connect-string/connect-string.component';
+import { GameAdminButtonsComponent } from '../game-admin-buttons/game-admin-buttons.component';
+import { MumbleJoinButtonComponent } from '../mumble-join-button/mumble-join-button.component';
 
 const paramMap = of(convertToParamMap({ id: 'FAKE_ID' }));
 
@@ -119,11 +119,12 @@ describe('GameDetailsComponent', () => {
       declarations: [
         GameDetailsComponent,
         MockComponent(GameBasicInfoComponent),
-        MockComponent(JoinGameInfoComponent),
         MockComponent(GameSummaryComponent),
-        MockComponent(WatchGameInfoComponent),
         MockComponent(GameTeamHeaderComponent),
         MockComponent(GameTeamPlayerListComponent),
+        MockComponent(ConnectStringComponent),
+        MockComponent(GameAdminButtonsComponent),
+        MockComponent(MumbleJoinButtonComponent),
       ],
       imports: [
         RouterTestingModule,
@@ -162,35 +163,34 @@ describe('GameDetailsComponent', () => {
       fixture.detectChanges();
     });
 
-    it('should retrieve the game from the store', () => {
-      const h4 = fixture.debugElement.query(By.css('h4')).nativeElement as HTMLElement;
-      expect(h4.innerText).toMatch(/Pickup #3/);
+    it('should render the pickup header', () => {
+      const header = fixture.debugElement.query(By.css('.mdc-typography--headline4')).nativeElement as HTMLElement;
+      expect(header.innerText).toMatch(/Pickup #3/);
     });
 
     describe('when logged in as an admin', () => {
       let fetchGameSkillsSpy: jasmine.Spy;
+      let gameAdminButtons: GameAdminButtonsComponent;
 
       beforeEach(() => {
         fetchGameSkillsSpy = spyOn(TestBed.inject(GamesService), 'fetchGameSkills').and.returnValue(NEVER);
         store.setState(makeStateWithGame({ profile: { role: 'admin' } }));
         fixture.detectChanges();
+
+        gameAdminButtons = fixture.debugElement.query(By.css('app-game-admin-buttons')).componentInstance;
       });
 
       it('should render admin buttons', () => {
-        expect(fixture.debugElement.query(By.css('.admin-buttons'))).toBeTruthy();
+        expect(gameAdminButtons).toBeTruthy();
       });
 
       it('should be able to reinitialize the server', () => {
-        const btn = fixture.debugElement.query(By.css('.reinitialize-server-btn')).nativeElement as HTMLAnchorElement;
-        expect(btn).toBeTruthy();
-        btn.click();
+        gameAdminButtons.reinitializeServer.emit();
         expect(storeDispatchSpy).toHaveBeenCalledWith(reinitializeServer({ gameId: 'FAKE_ID' }));
       });
 
       it('should be able to force end the game', () => {
-        const btn = fixture.debugElement.query(By.css('.force-end-btn')).nativeElement as HTMLAnchorElement;
-        expect(btn).toBeTruthy();
-        btn.click();
+        gameAdminButtons.forceEnd.emit();
         expect(storeDispatchSpy).toHaveBeenCalledWith(forceEndGame({ gameId: 'FAKE_ID' }));
       });
 
@@ -243,7 +243,7 @@ describe('GameDetailsComponent', () => {
         expect(storeDispatchSpy).toHaveBeenCalledWith(requestSubstitute({ gameId: 'FAKE_ID', playerId: 'FAKE_PLAYER_ID' }));
       });
 
-      it('should repalce player', () => {
+      it('should replace player', () => {
         gameTeamPlayerList.replacePlayer.emit('FAKE_REPLACEE_ID');
         expect(storeDispatchSpy).toHaveBeenCalledWith(replacePlayer({ gameId: 'FAKE_ID', replaceeId: 'FAKE_REPLACEE_ID' }));
       });
@@ -273,9 +273,9 @@ describe('GameDetailsComponent', () => {
           fixture.detectChanges();
         });
 
-        it('should pass the connect string to the JoinGameInfoComponent', () => {
-          const joinGameInfo = fixture.debugElement.query(By.css('app-join-game-info')).componentInstance as JoinGameInfoComponent;
-          expect(joinGameInfo.connectString).toEqual('connect 192.168.1.101:27015; password FAKE_PASSWORD');
+        it('should render the ConnectStringComponent', () => {
+          const connectString = fixture.debugElement.query(By.css('app-connect-string')).componentInstance as ConnectStringComponent;
+          expect(connectString.connectString).toEqual('connect 192.168.1.101:27015; password FAKE_PASSWORD');
         });
       });
 
@@ -287,8 +287,8 @@ describe('GameDetailsComponent', () => {
         });
 
         it('should pass the mumble url to the MumbleJoinButtonComponent', () => {
-          const mumbleJoinButton = fixture.debugElement.query(By.css('app-join-game-info'))
-            .componentInstance as JoinGameInfoComponent;
+          const mumbleJoinButton = fixture.debugElement.query(By.css('app-mumble-join-button'))
+            .componentInstance as MumbleJoinButtonComponent;
           expect(mumbleJoinButton.mumbleUrl).toEqual('mumble://FAKE_PLAYER_NAME_1@melkor.tf/tf2pickup/5/RED');
         });
       });
@@ -318,9 +318,9 @@ describe('GameDetailsComponent', () => {
           fixture.detectChanges();
         });
 
-        it('should render WatchGameInfoComponent', () => {
-          const watchGameInfo = fixture.debugElement.query(By.css('app-watch-game-info')).componentInstance as WatchGameInfoComponent;
-          expect(watchGameInfo.stvConnectString).toEqual('connect 192.168.1.101:27020; password tv');
+        it('should render ConnectString with the stv connect', () => {
+          const connectString = fixture.debugElement.query(By.css('app-connect-string')).componentInstance as ConnectStringComponent;
+          expect(connectString.stvConnectString).toEqual('connect 192.168.1.101:27020; password tv');
         });
       });
     });
@@ -332,8 +332,8 @@ describe('GameDetailsComponent', () => {
         fixture.detectChanges();
       });
 
-      it('should not render join game anymore', () => {
-        expect(fixture.debugElement.query(By.css('app-join-game-info'))).toBeFalsy();
+      it('should not render the connect string anymore', () => {
+        expect(fixture.debugElement.query(By.css('app-connect-string'))).toBeFalsy();
       });
 
       it('should render game summary', () => {

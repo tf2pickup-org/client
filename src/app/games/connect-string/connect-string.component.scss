@@ -1,42 +1,38 @@
+@use 'sass:color';
+@use '@material/button';
 @use 'theme';
-@use 'utils/border-radius';
 
-$-input-border-radius: 0.8rem;
+$-border-radius: 0.8rem;
 
-.input-group {
+.connect-string-wrapper {
   display: flex;
   flex-flow: row nowrap;
-  background-color: #fff;
-  border-radius: $-input-border-radius;
+  background-color: rgb(255, 255, 255);
+  border-radius: $-border-radius;
   padding: 0;
   box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
   color: theme.$font-color-dark;
 
-  > input,
-  > button,
-  > a {
+  .connect-string {
+    flex: 1 1 auto;
     padding: 0.4rem 1rem;
     border: 0;
     font-size: 1.4rem;
-    border-radius: $-input-border-radius;
+    border-radius: $-border-radius;
     color: theme.$font-color-dark;
-  }
-
-  > input {
     font-weight: 500;
+
+    &.connect-unavailable {
+      color: color.adjust(rgb(0, 0, 0), $lightness: 50%);
+      font-size: 1.3rem;
+    }
   }
 
-  > button,
-  > a {
-    font-weight: 700;
+  .radius-right {
+    @include button.shape-radius(0 0.8rem 0.8rem 0);
   }
 
-  .dark {
-    background-color: rgb(0, 0, 0);
-    color: theme.$font-color-light;
-  }
-
-  .right {
-    @include border-radius.left(0);
+  .radius-none {
+    @include button.shape-radius(0);
   }
 }

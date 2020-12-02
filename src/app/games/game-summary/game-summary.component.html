@@ -1,31 +1,19 @@
-<div class="row">
-  <div class="col d-flex flex-column align-items-center">
-    <div class="detail--label">logs</div>
-    <div class="detail--value">
-      <a *ngIf="logsUrl; else noLogs"
-        [href]="logsUrl"
-        target="_blank">
-        {{ logsUrl }}
-        <i-feather name="external-link" class="external-link-icon"></i-feather>
-      </a>
-      <ng-template #noLogs>
-        <span class="font-italic text-muted">unavailable</span>
-      </ng-template>
-    </div>
+<div class="d-flex flex-nowrap">
+  <div *ngIf="logsUrl" class="detail--value mx-3">
+    <a [href]="logsUrl"
+      target="_blank">
+      <i-feather name="file-text" class="icon"></i-feather>
+      logs
+      <i-feather name="external-link" class="external-link-icon"></i-feather>
+    </a>
   </div>
 
-  <div class="col d-flex flex-column align-items-center">
-    <div class="detail--label">demo</div>
-    <div class="detail--value">
-      <a *ngIf="demoUrl; else noDemo"
-        [href]="demoUrl"
-        target="_blank">
-        {{ demoUrl }}
-        <i-feather name="external-link" class="external-link-icon"></i-feather>
-      </a>
-      <ng-template #noDemo>
-        <span class="font-italic text-muted">unavailable</span>
-      </ng-template>
-    </div>
+  <div *ngIf="demoUrl" class="detail--value mx-3">
+    <a [href]="demoUrl"
+      target="_blank">
+      <i-feather name="film" class="icon"></i-feather>
+      demo
+      <i-feather name="external-link" class="external-link-icon"></i-feather>
+    </a>
   </div>
 </div>
