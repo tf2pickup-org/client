@@ -9,6 +9,11 @@
           class="mr-2"></app-game-class-icon>
         {{ player.name }}
 
+        <span *ngIf="player.classSkill"
+          class="mdc-typography--caption mx-2">
+          {{ player.classSkill }}
+        </span>
+
         <div class="flex-fill"></div>
 
         <app-player-connection-status
@@ -18,27 +23,30 @@
           class="mx-2"></app-player-connection-status>
       </a>
 
-      <!-- <span *ngIf="player.classSkill" class="badge badge-secondary mx-2">{{ player.classSkill }}</span> -->
-
       <ng-container *ngIf="showAdminActionButtons">
-        <button type="button" class="btn-request-substitute"
+        <button type="button"
+          class="request-substitute-button"
           tooltip="Request substitute"
           (click)="emitRequestSubstitute($event, player)">
           <i-feather name="user-x"></i-feather>
         </button>
       </ng-container>
     </div>
-  </div>
 
-  <ng-template #waitingForSubSlot>
-    <button type="button"
-      class="list-group-item list-group-item-action list-group-item-warning player-item looking-for-substitute"
-      (click)="emitReplacePlayer(player)"
-      tooltip="Replace this player"
-      [disabled]="locked">
-      <div class="class-icon" [inlineSVG]="'/assets/tf2-classfont/' + player.gameClass + '.svg'"></div>
-      <span class="oi oi-plus"></span>
-      <div class="dummy"></div>
-    </button>
-  </ng-template>
+    <ng-template #waitingForSubSlot>
+      <div class="d-flex">
+        <button type="button"
+          class="replace-player"
+          (click)="emitReplacePlayer(player)"
+          tooltip="Take this spot"
+          [disabled]="locked">
+          <app-game-class-icon [gameClass]="player.gameClass"></app-game-class-icon>
+          <div class="flex-grow-1">
+            <i-feather name="plus"></i-feather>
+          </div>
+          <div class="dummy"></div>
+        </button>
+      </div>
+    </ng-template>
+  </div>
 </div>

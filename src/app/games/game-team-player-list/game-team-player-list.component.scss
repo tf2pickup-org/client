@@ -1,5 +1,7 @@
 @use 'sass:color';
+@use 'theme';
 @use 'components/card';
+@use 'utils/transition';
 
 .player-list {
   @extend %card;
@@ -30,7 +32,9 @@
   }
 }
 
-.btn-request-substitute {
+.request-substitute-button {
+  @include transition.background-color;
+
   border: 0;
   margin: 0;
   border-radius: 0.5rem;
@@ -43,4 +47,35 @@
   &:hover {
     background-color: color.adjust(rgb(255, 255, 255), $lightness: -5%);
   }
+
+  &:focus {
+    outline: 0;
+  }
+}
+
+.replace-player {
+  flex: 1 1 auto;
+
+  border: 0;
+  margin: 0;
+  border-radius: 0.5rem;
+  padding: 0 0.5rem;
+
+  background-color: color.adjust(theme.$secondary, $lightness: 20%);
+  line-height: 2.5rem;
+
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    background-color: color.adjust(theme.$secondary, $lightness: 15%);
+  }
+
+  &:focus {
+    outline: 0;
+  }
+}
+
+.dummy {
+  width: 30px;
 }
