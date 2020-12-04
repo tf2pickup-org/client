@@ -1,6 +1,7 @@
 @use 'sass:color';
 @use 'sass:string';
 @use 'theme';
+@use 'variables';
 @use 'font';
 
 @use '@material/theme' as mdc-theme with (
@@ -89,7 +90,7 @@ $link-hover-decoration: underline;
 
 .mdc-button--large {
   @include button.height(46px);
-  @include button.shape-radius(0.8rem);
+  @include button.shape-radius(variables.$default-border-radius);
   @include button.horizontal-padding(1rem);
   font-size: 1.2rem;
   font-weight: 700;

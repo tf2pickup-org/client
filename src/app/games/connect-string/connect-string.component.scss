@@ -1,14 +1,13 @@
 @use 'sass:color';
 @use '@material/button';
 @use 'theme';
-
-$-border-radius: 0.8rem;
+@use 'variables';
 
 .connect-string-wrapper {
   display: flex;
   flex-flow: row nowrap;
   background-color: rgb(255, 255, 255);
-  border-radius: $-border-radius;
+  border-radius: variables.$default-border-radius;
   padding: 0;
   box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
   color: theme.$font-color-dark;
@@ -18,7 +17,7 @@ $-border-radius: 0.8rem;
     padding: 0.4rem 1rem;
     border: 0;
     font-size: 1.4rem;
-    border-radius: $-border-radius;
+    border-radius: variables.$default-border-radius;
     color: theme.$font-color-dark;
     font-weight: 500;
 
@@ -29,7 +28,7 @@ $-border-radius: 0.8rem;
   }
 
   .radius-right {
-    @include button.shape-radius(0 0.8rem 0.8rem 0);
+    @include button.shape-radius(0 1rem 1rem 0);
   }
 
   .radius-none {
