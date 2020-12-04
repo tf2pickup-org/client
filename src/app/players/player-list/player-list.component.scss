@@ -1,0 +1,19 @@
+@use 'sass:color';
+@use 'theme';
+
+.player-list {
+  padding: 2rem;
+  margin: 1rem 0;
+  border-radius: 1rem;
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+  background-color: theme.$text-background-color;
+  color: theme.$primary;
+}
+
+.admin-badge {
+  width: 16px;
+  height: 16px;
+  margin: 0 0.1rem;
+
+  fill: color.adjust(theme.$secondary, $lightness: -10%);
+}

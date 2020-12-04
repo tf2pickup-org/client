@@ -1,10 +1,22 @@
 <div class="container py-3">
-  <div class="list-group list-group-flush">
-    <a *ngFor="let player of players | async"
-      [routerLink]="['/player', player.id]"
-      class="list-group-item list-group-item-action">
-      {{ player.name }}
-      <span *ngIf="!!player.role" class="ml-1 badge badge-warning">admin</span>
-    </a>
+  <div class="player-list">
+    <div *ngFor="let playerGroup of players | async"
+      class="mdc-list-group">
+      <h3 class="mdc-list-group__subheader">{{ playerGroup.key | uppercase }}</h3>
+
+      <div class="mdc-list mdc-list--dense">
+        <a *ngFor="let player of playerGroup.players"
+          [routerLink]="['/player', player.id]"
+          class="mdc-list-item">
+          <span class="mdc-list-item__ripple"></span>
+          <span  class="mdc-list-item__text">
+            {{ player.name }}
+            <i-feather *ngIf="!!player.role" name="star" class="admin-badge"></i-feather>
+          </span>
+        </a>
+      </div>
+
+      <hr class="mdc-list-divider">
+    </div>
   </div>
 </div>

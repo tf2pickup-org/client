@@ -9,7 +9,7 @@ import { SkillTableComponent } from './skill-table/skill-table.component';
 import { IsAdminGuard } from '@app/auth/is-admin.guard';
 
 const routes: Routes = [
-  { path: 'players', component: PlayerListComponent },
+  { path: 'players', component: PlayerListComponent, data: { title: 'players' } },
   { path: 'player/:id', component: PlayerDetailsComponent },
   { path: 'player/:id/edit', component: PlayerEditComponent },
   { path: 'player/:id/bans', component: PlayerBansComponent },
