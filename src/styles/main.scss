@@ -12,8 +12,6 @@
   $font-family: string.unquote('Montserrat, sans-serif'),
 );
 
-@use '@material/typography/mdc-typography';
-
 @use '@material/button';
 @use '@material/card';
 @use '@material/dialog';
@@ -21,13 +19,16 @@
 @use '@material/icon-button';
 @use '@material/line-ripple/mdc-line-ripple';
 @use '@material/notched-outline/mdc-notched-outline';
+@use '@material/snackbar';
 @use '@material/textfield';
 
 @include button.core-styles;
 @include card.core-styles;
 @include dialog.core-styles;
 @include icon-button.core-styles;
+@include snackbar.core-styles;
 @include textfield.core-styles;
+@include typography.core-styles;
 
 $body-bg: #0d1d36;
 $body-color: #fff;

@@ -28,6 +28,7 @@ import { TwitchModule } from '@app/twitch/twitch.module';
 import { NotificationsModule } from '@app/notifications/notifications.module';
 import { SharedModule } from '@app/shared/shared.module';
 import { IconsModule } from '@app/icons/icons.module';
+import { ActiveGameSnackbarComponent } from './active-game-snackbar/active-game-snackbar.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { IconsModule } from '@app/icons/icons.module';
     MapVoteButtonComponent,
     QueueNotificationsControllerComponent,
     QueueSlotContainerComponent,
+    ActiveGameSnackbarComponent,
   ],
   imports: [
     CommonModule,

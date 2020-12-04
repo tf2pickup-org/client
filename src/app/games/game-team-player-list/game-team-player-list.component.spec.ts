@@ -5,10 +5,9 @@ import { ChangeDetectionStrategy } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { MockComponent } from 'ng-mocks';
 import { PlayerConnectionStatusComponent } from '../player-connection-status/player-connection-status.component';
-import { Player } from '@app/players/models/player';
 import { ResolvedGamePlayer } from '../models/resolved-game-player';
 
-fdescribe('GameTeamPlayerListComponent', () => {
+describe('GameTeamPlayerListComponent', () => {
   let component: GameTeamPlayerListComponent;
   let fixture: ComponentFixture<GameTeamPlayerListComponent>;
 

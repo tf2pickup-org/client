@@ -6,12 +6,7 @@
   <div>Reason: <strong>{{ ban.reason }}</strong></div>
 </div>
 
-<div
-  *ngIf="activeGame | async as _activeGame"
-  class="alert alert-primary"
-  role="alert">
-  Click <a [routerLink]="['/game', _activeGame.id]">here</a> to go back to your game.
-</div>
+<app-active-game-snackbar [game]="activeGame | async"></app-active-game-snackbar>
 
 <div *ngFor="let sr of substituteRequests | async"
   class="alert alert-warning"

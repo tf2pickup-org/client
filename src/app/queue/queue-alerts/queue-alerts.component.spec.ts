@@ -2,7 +2,6 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { QueueAlertsComponent } from './queue-alerts.component';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { Store, MemoizedSelector } from '@ngrx/store';
 import { By } from '@angular/platform-browser';
 import { AppState } from '@app/app.state';
@@ -12,6 +11,8 @@ import { PlayerBan } from '@app/players/models/player-ban';
 import { bans } from '@app/profile/profile.selectors';
 import { SubstituteRequest } from '../models/substitute-request';
 import { substituteRequests } from '../queue.selectors';
+import { MockComponent } from 'ng-mocks';
+import { ActiveGameSnackbarComponent } from '../active-game-snackbar/active-game-snackbar.component';
 
 describe('QueueAlertsComponent', () => {
   let component: QueueAlertsComponent;
@@ -23,20 +24,22 @@ describe('QueueAlertsComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ QueueAlertsComponent ],
+      declarations: [
+        QueueAlertsComponent,
+        MockComponent(ActiveGameSnackbarComponent),
+      ],
       imports: [
         RouterTestingModule,
       ],
       providers: [
         provideMockStore(),
       ],
-      schemas: [ NO_ERRORS_SCHEMA ],
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    store = TestBed.get(Store);
+    store = TestBed.inject(MockStore);
     activeGameSelector = store.overrideSelector(activeGame, null);
     bansSelector = store.overrideSelector(bans, []);
     substituteRequestsSelector = store.overrideSelector(substituteRequests, []);
@@ -73,21 +76,25 @@ describe('QueueAlertsComponent', () => {
   });
 
   describe('with active game', () => {
+    const mockGame: Game = {
+      id: 'FAKE_GAME_ID',
+      // eslint-disable-next-line id-blacklist
+      number: 234,
+      launchedAt: new Date(),
+      map: 'cp_badlands',
+    } as any;
+
     beforeEach(() => {
-      activeGameSelector.setResult({
-        id: 'FAKE_GAME_ID',
-        // eslint-disable-next-line id-blacklist
-        number: 234,
-        launchedAt: new Date(),
-        map: 'cp_badlands',
-      } as any);
+      activeGameSelector.setResult(mockGame);
       store.refreshState();
       fixture.detectChanges();
     });
 
-    it('should show alert', () => {
-      const el = fixture.debugElement.query(By.css('div.alert.alert-primary')).nativeElement as HTMLDivElement;
-      expect(el).toBeTruthy();
+    it('should show the snackbar', () => {
+      const activeGameSnackbar = fixture.debugElement.query(By.css('app-active-game-snackbar'))
+        .componentInstance as ActiveGameSnackbarComponent;
+      expect(activeGameSnackbar).toBeTruthy();
+      expect(activeGameSnackbar.game).toEqual(mockGame);
     });
   });
 
