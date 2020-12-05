@@ -1,7 +1,8 @@
 @use 'utils/respond';
 @use 'theme';
+@use 'variables';
 
-$-footer-height: 3rem;
+$-footer-height: variables.$footer-height;
 
 .footer {
   display: flex;
@@ -32,7 +33,7 @@ $-footer-height: 3rem;
     color: theme.$font-color-dark;
   }
 
-  > .footer-entry {
+  .footer-entry {
     @include respond.above(huge) {
       &:not(:first-child)::before {
         content: '•';
