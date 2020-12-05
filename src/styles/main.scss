@@ -21,6 +21,7 @@
 @use '@material/line-ripple/mdc-line-ripple';
 @use '@material/list';
 @use '@material/notched-outline/mdc-notched-outline';
+@use '@material/ripple';
 @use '@material/snackbar';
 @use '@material/textfield';
 
@@ -29,6 +30,7 @@
 @include dialog.core-styles;
 @include icon-button.core-styles;
 @include list.core-styles;
+@include ripple.core-styles;
 @include snackbar.core-styles;
 @include textfield.core-styles;
 @include typography.core-styles;
