@@ -1,5 +1,6 @@
 <ng-container [ngSwitch]="permission | async">
   <div *ngSwitchCase="'default'"
+    @fadeOut
     class="request-notification-permissions default"
     role="alert">
     <i-feather name="message-square" class="mr-2 message-icon"></i-feather>
