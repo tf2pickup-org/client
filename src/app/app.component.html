@@ -1,5 +1,7 @@
 <app-title-controller></app-title-controller>
 <app-queue-notifications-controller></app-queue-notifications-controller>
 <app-navigation-bar></app-navigation-bar>
-<router-outlet></router-outlet>
+<div [@routeAnimations]="prepareRoute(outlet)" class="router-wrapper">
+  <router-outlet #outlet="outlet"></router-outlet>
+</div>
 <app-footer></app-footer>
