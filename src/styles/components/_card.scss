@@ -1,4 +1,5 @@
 @use 'sass:color';
+@use '@material/ripple';
 @use 'variables';
 
 $background-color: rgb(255, 255, 255);
@@ -24,8 +25,8 @@ $border-radius: variables.$default-border-radius;
 .card-link,
 %card-link {
   @extend %card;
-
-  &:hover {
-    background-color: color.scale($background-color, $lightness: -7%);
-  }
+  @include ripple.surface;
+  @include ripple.radius-bounded;
+  @include ripple.states;
+  overflow: hidden;
 }

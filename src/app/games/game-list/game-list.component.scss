@@ -1,27 +1,32 @@
 @use 'sass:color';
+@use '@material/ripple';
 @use 'components/card';
 @use 'components/indicator';
 @use 'utils/border-radius';
 @use 'utils/transition';
 @use 'theme';
+@use 'variables';
 
 $-game-item-background-color: rgba(255, 255, 255, 0.7);
 $-item-height: 80px;
-$-item-margin: 1.5rem;
+$-item-margin: 24px;
 $-game-live-indicator-color: theme.$success;
 $-game-live-indicator-size: 20px;
 
 .game-list-item {
   @extend %card-shadow;
 
-  @include transition.background-color;
+  @include ripple.surface;
+  @include ripple.radius-bounded;
+  @include ripple.states(color.change($-game-item-background-color, $alpha: 0.9));
+  overflow: hidden;
 
   display: flex;
   height: $-item-height;
 
   padding: 0;
   margin: $-item-margin 0;
-  border-radius: 1rem;
+  border-radius: variables.$default-border-radius;
 
   background-color: $-game-item-background-color;
   color: theme.$font-color-dark;
@@ -37,7 +42,7 @@ $-game-live-indicator-size: 20px;
   }
 
   &--map-thumbnail {
-    @include border-radius.right(1rem);
+    @include border-radius.right(variables.$default-border-radius);
     height: $-item-height;
   }
 
@@ -48,6 +53,5 @@ $-game-live-indicator-size: 20px;
 
   &:hover {
     text-decoration: none;
-    background-color: color.change($-game-item-background-color, $alpha: 0.9);
   }
 }
