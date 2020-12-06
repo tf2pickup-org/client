@@ -1,81 +1,95 @@
 @use 'sass:color';
+@use '@material/ripple';
+@use '@material/typography';
 @use 'theme';
 @use 'components/card';
+@use 'utils/outline';
 @use 'utils/transition';
 
 .player-list {
   @extend %card;
 
-  padding: 0.5rem;
+  padding: 10px 5px;
 
-  a {
-    color: rgb(0, 0, 0);
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-weight: 500;
-    line-height: 2.5rem;
-    white-space: nowrap;
+  .player-list-item {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    min-width: 0;
+
+    padding: 0 8px;
+
+    &__icon,
+    &__connection-status {
+      margin: 0 2px;
+    }
+
+    &__link {
+      @include ripple.surface;
+      @include ripple.radius-bounded;
+      @include ripple.states;
+
+      overflow: hidden;
+
+      flex: 1 1 auto;
+      margin: 0 5px;
+      padding: 0 8px;
+
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      min-width: 0;
+
+      font-weight: 500;
+      line-height: 38px;
+
+      border-radius: 0.3rem;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+
+    &__player-name {
+      @include typography.overflow-ellipsis;
+    }
+
+    &__skill {
+      @include typography.base;
+      @include typography.typography(caption);
+
+      color: color.adjust(theme.$secondary, $lightness: -15%);
+      margin: 0 4px;
+    }
   }
 }
 
-.player-link-item {
-  flex: 1 1 auto;
-  border-radius: 0.5rem;
-  padding: 0 0.5rem;
+%long-button {
+  @include ripple.surface;
+  @include ripple.radius-bounded;
+  @include ripple.states;
+  @include outline.disable;
 
-  display: flex;
-  align-items: center;
+  overflow: hidden;
 
-  &:hover {
-    background-color: color.adjust(rgb(255, 255, 255), $lightness: -5%);
-    text-decoration: none;
-  }
+  border: 0;
+  margin: 0 4px;
+  border-radius: 8px;
+  padding: 0 10px;
 }
 
 .request-substitute-button {
-  @include transition.background-color;
-
-  border: 0;
-  margin: 0;
-  border-radius: 0.5rem;
-  padding: 0 0.7rem;
+  @extend %long-button;
 
   background-color: rgb(255, 255, 255);
-
-  line-height: 2.5rem;
-
-  &:hover {
-    background-color: color.adjust(rgb(255, 255, 255), $lightness: -5%);
-  }
-
-  &:focus {
-    outline: 0;
-  }
+  line-height: 40px;
+  min-width: 44px;
 }
 
-.replace-player {
+.replace-player-button {
+  @extend %long-button;
+
+  line-height: 36px;
+  border: 2px solid color.adjust(theme.$primary, $lightness: 70%);
   flex: 1 1 auto;
-
-  border: 0;
-  margin: 0;
-  border-radius: 0.5rem;
-  padding: 0 0.5rem;
-
-  background-color: color.adjust(theme.$secondary, $lightness: 20%);
-  line-height: 2.5rem;
-
-  display: flex;
-  align-items: center;
-
-  &:hover {
-    background-color: color.adjust(theme.$secondary, $lightness: 15%);
-  }
-
-  &:focus {
-    outline: 0;
-  }
-}
-
-.dummy {
-  width: 30px;
 }

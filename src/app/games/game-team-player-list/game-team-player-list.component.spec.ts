@@ -127,12 +127,12 @@ describe('GameTeamPlayerListComponent', () => {
       });
 
       it('should apply css class for players that are looking for substitutes', () => {
-        const item = fixture.debugElement.query(By.css('.replace-player')).nativeElement as HTMLElement;
+        const item = fixture.debugElement.query(By.css('.replace-player-button')).nativeElement as HTMLElement;
         expect(item).toBeDefined();
       });
 
       it('should trigger the replacePlayer event', done => {
-        const button = fixture.debugElement.query(By.css('.replace-player')).nativeElement as HTMLButtonElement;
+        const button = fixture.debugElement.query(By.css('.replace-player-button')).nativeElement as HTMLButtonElement;
         component.replacePlayer.subscribe((playerId: string) => {
           expect(playerId).toEqual('PLAYER_ID');
           done();
@@ -141,7 +141,7 @@ describe('GameTeamPlayerListComponent', () => {
       });
 
       it('should be disabled if locked=true', () => {
-        const button = fixture.debugElement.query(By.css('.replace-player')).nativeElement as HTMLButtonElement;
+        const button = fixture.debugElement.query(By.css('.replace-player-button')).nativeElement as HTMLButtonElement;
         expect(button.disabled).toBe(false);
 
         component.locked = true;

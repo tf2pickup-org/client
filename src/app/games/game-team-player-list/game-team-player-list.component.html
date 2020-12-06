@@ -1,52 +1,50 @@
-<div *ngIf="players"
-  class="player-list">
-  <div *ngFor="let player of players">
-    <div *ngIf="player.status !== 'waiting for substitute'; else waitingForSubSlot"
-      class="d-flex align-items-center">
-      <a [routerLink]="['/player', player.id]" class="player-link-item">
-        <app-game-class-icon
-          [gameClass]="player.gameClass"
-          class="mr-2"></app-game-class-icon>
-        {{ player.name }}
+<div *ngIf="players" class="player-list">
+  <div *ngFor="let player of players" class="player-list-item">
+    <app-game-class-icon
+      [gameClass]="player.gameClass"
+      class="player-list-item__icon"></app-game-class-icon>
 
-        <span *ngIf="player.classSkill"
-          class="mdc-typography--caption mx-2">
-          {{ player.classSkill }}
-        </span>
+    <ng-container [ngSwitch]="player.status">
+      <ng-container *ngSwitchCase="'active'">
+        <a [routerLink]="['/player', player.id]"
+          class="player-list-item__link">
 
-        <div class="flex-fill"></div>
+          <span class="player-list-item__player-name">
+            {{ player.name }}
+          </span>
 
-        <app-player-connection-status
-          *ngIf="showPlayerConnectionStatus"
-          [connectionStatus]="player.connectionStatus"
-          [tooltip]="player.connectionStatus"
-          class="mx-2"></app-player-connection-status>
-      </a>
+          <span *ngIf="player.classSkill"
+            class="player-list-item__skill">
+            {{ player.classSkill }}
+          </span>
+        </a>
 
-      <ng-container *ngIf="showAdminActionButtons">
-        <button type="button"
+        <button *ngIf="showAdminActionButtons"
+          type="button"
           class="request-substitute-button"
           tooltip="Request substitute"
           (click)="emitRequestSubstitute($event, player)">
           <i-feather name="user-x"></i-feather>
         </button>
-      </ng-container>
-    </div>
 
-    <ng-template #waitingForSubSlot>
-      <div class="d-flex">
+        <app-player-connection-status
+          *ngIf="showPlayerConnectionStatus"
+          [connectionStatus]="player.connectionStatus"
+          [tooltip]="player.connectionStatus"
+          class="player-list-item__connection-status"></app-player-connection-status>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="'waiting for substitute'">
         <button type="button"
-          class="replace-player"
+          class="replace-player-button"
           (click)="emitReplacePlayer(player)"
           tooltip="Take this spot"
           [disabled]="locked">
-          <app-game-class-icon [gameClass]="player.gameClass"></app-game-class-icon>
           <div class="flex-grow-1">
             <i-feather name="plus"></i-feather>
           </div>
-          <div class="dummy"></div>
         </button>
-      </div>
-    </ng-template>
+      </ng-container>
+    </ng-container>
   </div>
 </div>
