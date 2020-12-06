@@ -57,22 +57,5 @@ describe('QueueComponent', () => {
       const queueClassSlotListComponent = fixture.debugElement.query(By.css('app-queue-class-slot-list')).componentInstance;
       expect(queueClassSlotListComponent).toBeTruthy();
     });
-
-    it('should wrap the game class in a column if 4 per row max', () => {
-      const wrapper = fixture.debugElement.query(By.css('.game-class-column')).nativeElement as HTMLElement;
-      expect(wrapper.classList.contains('col-3')).toBe(true);
-    });
-  });
-
-  describe('with 2 game classes', () => {
-    beforeEach(() => {
-      queueClassesSelector.setResult([{ name: 'soldier', count: 2 }, { name: 'medic', count: 1 }]);
-      store.refreshState();
-      fixture.detectChanges();
-    });
-
-    it('should render two QueueClassSlotListComponent instances', () => {
-      expect(fixture.debugElement.queryAll(By.css('app-queue-class-slot-list')).length).toBe(2);
-    });
   });
 });
