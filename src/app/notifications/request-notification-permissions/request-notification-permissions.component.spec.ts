@@ -3,6 +3,7 @@ import { By } from '@angular/platform-browser';
 import { ReplaySubject } from 'rxjs';
 import { NotificationsService } from '../notifications.service';
 import { RequestNotificationPermissionsComponent } from './request-notification-permissions.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('RequestNotificationPermissionsComponent', () => {
   let component: RequestNotificationPermissionsComponent;
@@ -17,6 +18,9 @@ describe('RequestNotificationPermissionsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ RequestNotificationPermissionsComponent ],
+      imports: [
+        NoopAnimationsModule,
+      ],
       providers: [
         {
           provide: NotificationsService,
