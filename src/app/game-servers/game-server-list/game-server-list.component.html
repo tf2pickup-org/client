@@ -12,7 +12,6 @@
     <button *ngIf="isSuperUser | async"
       type="button"
       class="mdc-icon-button ml-2 remove-game-server-button"
-      [disabled]="locked | async"
       (click)="removeGameServer(server)"
       tooltip="Remove this game server"
       placement="top"
