@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { isInQueue, isPreReadied } from '../queue.selectors';
+import { isPreReadied } from '../queue.selectors';
 import { map } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { togglePreReady } from '../queue.actions';

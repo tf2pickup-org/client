@@ -1,15 +1,18 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { PreReadyUpButtonComponent } from './pre-ready-up-button.component';
 import { SecondsPipe } from '../seconds.pipe';
-import { provideMockStore } from '@ngrx/store/testing';
-import { isInQueue, isPreReadied } from '../queue.selectors';
-import { Store } from '@ngrx/store';
+import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import { isPreReadied } from '../queue.selectors';
+import { MemoizedSelector } from '@ngrx/store';
 import { togglePreReady } from '../queue.actions';
 import { By } from '@angular/platform-browser';
+import { ChangeDetectionStrategy } from '@angular/core';
 
 describe('PreReadyUpButtonComponent', () => {
   let component: PreReadyUpButtonComponent;
   let fixture: ComponentFixture<PreReadyUpButtonComponent>;
+  let store: MockStore;
+  let isPreReadiedSelector: MemoizedSelector<any, boolean>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
@@ -18,18 +21,19 @@ describe('PreReadyUpButtonComponent', () => {
         SecondsPipe,
       ],
       providers: [
-        provideMockStore({
-          selectors: [
-            { selector: isInQueue, value: false },
-            { selector: isPreReadied, value: false },
-          ]
-        }),
+        provideMockStore(),
       ],
     })
+    // https://github.com/angular/angular/issues/12313
+    .overrideComponent(PreReadyUpButtonComponent, { set: { changeDetection: ChangeDetectionStrategy.Default } })
     .compileComponents();
   }));
 
   beforeEach(() => {
+    store = TestBed.inject(MockStore);
+    isPreReadiedSelector = store.overrideSelector(isPreReadied, false);
+    spyOn(store, 'dispatch');
+
     fixture = TestBed.createComponent(PreReadyUpButtonComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -39,23 +43,22 @@ describe('PreReadyUpButtonComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('#preReadyToggle()', () => {
-    it('should dispatch togglePreReady action', () => {
-      const store = TestBed.get(Store);
-      const spy = spyOn(store, 'dispatch');
+  it('should dispatch togglePreReady action', () => {
+    const button = fixture.debugElement.query(By.css('button.pre-ready-up-btn')).nativeElement as HTMLButtonElement;
+    button.click();
+    expect(store.dispatch).toHaveBeenCalledWith(togglePreReady());
+  });
 
-      component.preReadyToggle();
-      expect(spy).toHaveBeenCalledWith(togglePreReady());
+  describe('when pre-readied', () => {
+    beforeEach(() => {
+      isPreReadiedSelector.setResult(true);
+      store.refreshState();
+      fixture.detectChanges();
     });
-  });
 
-  it('should be disabled unless in queue', () => {
-    const btn = fixture.debugElement.query(By.css('button.pre-ready-up-btn')).nativeElement as HTMLButtonElement;
-    expect(btn.disabled).toBe(true);
-  });
-
-  it('should apply the btn-primary class unless pre-ready is on', () => {
-    const btn = fixture.debugElement.query(By.css('button.pre-ready-up-btn')).nativeElement as HTMLButtonElement;
-    expect(btn.classList.contains('btn-primary')).toBe(true);
+    it('should apply the active class', () => {
+      const button = fixture.debugElement.query(By.css('button.pre-ready-up-btn')).nativeElement as HTMLButtonElement;
+      expect(button.classList.contains('active')).toBe(true);
+    });
   });
 });
