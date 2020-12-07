@@ -10,17 +10,17 @@ export const fadeThrough = trigger('routeAnimations', [
         width: '100%',
         height: '100%',
       }),
-    ]),
+    ], { optional: true }),
     query(':enter', [
       style({ opacity: 0, }),
-    ]),
+    ], { optional: true }),
     group([
       query(':leave', [
         animate('50ms', style({ opacity: 0, })),
-      ]),
+      ], { optional: true }),
       query(':enter', [
         animate('100ms 50ms', style({ opacity: 1 })),
-      ]),
+      ], { optional: true }),
     ]),
   ]),
 ]);
