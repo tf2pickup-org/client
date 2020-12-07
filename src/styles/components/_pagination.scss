@@ -7,7 +7,7 @@
   justify-content: center;
   list-style: none;
 
-  .pagination-item {
+  &__item {
     margin: 0 0.5rem;
 
     > a {
@@ -16,11 +16,11 @@
     }
   }
 
-  .active > a {
+  &__item--active a {
     font-weight: bold;
   }
 
-  .disabled > a {
+  &__item--disabled a {
     color: color.scale(rgb(255, 255, 255), $lightness: -40%);
     pointer-events: none;
   }

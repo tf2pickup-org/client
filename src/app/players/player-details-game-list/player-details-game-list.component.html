@@ -26,8 +26,8 @@
   <nav *ngIf="p.pages.length > 1" class="my-3">
     <ul class="pagination">
       <li
-        [class.disabled]="p.isFirstPage()"
-        class="pagination-item">
+        [class.pagination__item--disabled]="p.isFirstPage()"
+        class="pagination__item">
         <a aria-label="Previous" [routerLink]="" (click)="p.previous()">
           <span aria-hidden="true">&laquo;</span>
           <span class="sr-only">Previous</span>
@@ -35,16 +35,16 @@
       </li>
 
       <li *ngFor="let page of p.pages"
-        [class.active]="p.getCurrent() === page.value"
-        class="pagination-item">
+        [class.pagination__item--active]="p.getCurrent() === page.value"
+        class="pagination__item">
         <a [routerLink]="" (click)="p.setCurrent(page.value)">
           {{ page.label }}
         </a>
       </li>
 
       <li
-        [class.disabled]="p.isLastPage()"
-        class="pagination-item">
+        [class.pagination__item--disabled]="p.isLastPage()"
+        class="pagination__item">
         <a aria-label="Next" [routerLink]="" (click)="p.next()">
           <span aria-hidden="true">&raquo;</span>
           <span class="sr-only">Next</span>

@@ -1,8 +1,8 @@
-<div class="container py-3">
-  <a *ngFor="let game of games | async | paginate: {
-      itemsPerPage: gamesPerPage,
-      currentPage: (page | async),
-      totalItems: (gameCount | async)
+<div class="container py-3 game-list">
+  <a *ngFor="let game of store.games | async | paginate: {
+      itemsPerPage: store.gamesPerPage,
+      currentPage: (store.page | async),
+      totalItems: (store.gameCount | async)
     }"
     [routerLink]="['/game', game.id]"
     class="game-list-item">
@@ -22,16 +22,19 @@
     class="d-flex flex-row justify-content-center">
     <span class="text-muted">no games</span>
   </div> -->
+
+  <div *ngIf="store.loading | async"
+    class="loading">
+    <img src="/assets/loading-medium.gif">
+  </div>
 </div>
 
-<pagination-template #p="paginationApi" (pageChange)="getPage($event)">
+<pagination-template #p="paginationApi" (pageChange)="loadPage($event)">
   <nav *ngIf="p.pages.length > 1" class="my-3">
     <ul class="pagination">
-      <li
-        class="pagination-item"
-        [class.disabled]="p.isFirstPage()">
-        <a
-          [routerLink]=""
+      <li class="pagination__item"
+        [class.pagination__item--disabled]="p.isFirstPage()">
+        <a [routerLink]=""
           (click)="p.previous()"
           aria-label="Previous">
           <span aria-hidden="true">&laquo;</span>
@@ -40,8 +43,8 @@
       </li>
 
       <li *ngFor="let page of p.pages"
-        class="pagination-item"
-        [class.active]="p.getCurrent() === page.value">
+        class="pagination__item"
+        [class.pagination__item--active]="p.getCurrent() === page.value">
         <a
           [routerLink]=""
           (click)="p.setCurrent(page.value)">
@@ -50,8 +53,8 @@
       </li>
 
       <li
-        class="pagination-item"
-        [class.disabled]="p.isLastPage()">
+        class="pagination__item"
+        [class.pagination__item--disabled]="p.isLastPage()">
         <a
           [routerLink]=""
           (click)="p.next()"
