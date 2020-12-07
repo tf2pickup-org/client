@@ -1,4 +1,6 @@
 import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { map } from 'rxjs/operators';
 import { GameListStore } from './game-list.store';
 
 @Component({
@@ -12,14 +14,19 @@ export class GameListComponent implements OnInit {
 
   constructor(
     public readonly store: GameListStore,
+    private route: ActivatedRoute,
+    private router: Router,
   ) { }
 
   ngOnInit() {
-    this.loadPage(1);
+    this.route.queryParamMap.pipe(
+      map(params => params.get('page')),
+      map(page => page ?? '1'),
+    ).subscribe(page => this.store.loadPage(parseInt(page, 10)));
   }
 
   loadPage(page: number) {
-    this.store.loadPage(page);
+    this.router.navigate(['/games'], { queryParams: { page }});
   }
 
 }
