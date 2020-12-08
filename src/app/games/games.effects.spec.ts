@@ -157,8 +157,11 @@ describe('GamesEffects', () => {
         state: 'launching',
       };
 
-      it('should dispatch the ownGameAdded action', () => {
-        effects.ownGameStarted.subscribe(action => expect(action).toEqual(ownGameAdded({ gameId: 'FAKE_GAME_ID' })));
+      it('should dispatch the ownGameAdded action', done => {
+        effects.ownGameStarted.subscribe(action => {
+          expect(action).toEqual(ownGameAdded({ gameId: 'FAKE_GAME_ID' }));
+          done();
+        });
         actions.next(gameCreated({ game }));
       });
     });
