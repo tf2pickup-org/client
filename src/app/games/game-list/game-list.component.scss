@@ -12,10 +12,11 @@ $-item-height: 80px;
 $-item-margin: 24px;
 $-game-live-indicator-color: theme.$success;
 $-game-live-indicator-size: 20px;
+$-games-per-page: 5;
 
 .game-list {
-  position: relative;
-  min-height: 200px;
+  min-height: ($-item-height + $-item-margin) * $-games-per-page;
+  margin: 48px auto;
 }
 
 .game-list-item {
@@ -24,6 +25,7 @@ $-game-live-indicator-size: 20px;
   @include ripple.surface;
   @include ripple.radius-bounded;
   @include ripple.states(color.change($-game-item-background-color, $alpha: 0.9));
+
   overflow: hidden;
 
   display: flex;
@@ -59,17 +61,4 @@ $-game-live-indicator-size: 20px;
   &:hover {
     text-decoration: none;
   }
-}
-
-.loading {
-  position: absolute;
-  top: 0;
-  left: 0;
-
-  width: 100%;
-  height: 100%;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }

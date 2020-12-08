@@ -1,5 +1,8 @@
-<div class="container py-3 game-list">
-  <a *ngFor="let game of store.games | async | paginate: {
+<div [@gameList]="(games | async)?.length"
+  (@gameList.start)="onAnimationStart()"
+  (@gameList.done)="onAnimationDone()"
+  class="container game-list">
+  <a *ngFor="let game of games | async | paginate: {
       itemsPerPage: store.gamesPerPage,
       currentPage: (store.page | async),
       totalItems: (store.gameCount | async)
@@ -17,16 +20,6 @@
       [src]="game.map | mapThumbnail"
       class="game-list-item--map-thumbnail">
   </a>
-
-  <!-- <div *ngIf="(gameCount | async) === 0"
-    class="d-flex flex-row justify-content-center">
-    <span class="text-muted">no games</span>
-  </div> -->
-
-  <div *ngIf="store.loading | async"
-    class="loading">
-    <img src="/assets/loading-medium.gif">
-  </div>
 </div>
 
 <pagination-template #p="paginationApi" (pageChange)="loadPage($event)">

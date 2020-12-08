@@ -25,7 +25,7 @@ export class GameListStore extends ComponentStore<GameListState> {
 
   readonly gamesPerPage = 5;
 
-  loading = this.select(state => state.loading);
+  isLoading = this.select(state => state.loading);
   games = this.select(state => state.games);
   gameCount = this.select(state => state.gameCount);
   page = this.select(state => state.page);
