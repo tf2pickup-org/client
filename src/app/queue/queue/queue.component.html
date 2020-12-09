@@ -1,7 +1,7 @@
 <div *ngIf="queueClasses | async as _queueClasses" class="queue">
   <div *ngFor="let class of _queueClasses"
     class="game-class-column">
-    <h4 class="text-center mx-2 game-class-name">
+    <h4 class="game-class-name">
       <app-game-class-icon [gameClass]="class.name" size="30"></app-game-class-icon>
       {{ class.name }}
     </h4>

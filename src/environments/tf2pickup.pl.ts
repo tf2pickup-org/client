@@ -1,4 +1,5 @@
 import { version } from 'package.json';
+import { entryQueue6v6 } from './entry-queue-6v6';
 
 const discordInvitation = 'https://discord.gg/UVFVfc4';
 
@@ -16,4 +17,7 @@ export const environment = {
     { name: 'changelog', target: 'https://github.com/tf2pickup-pl/client/blob/master/CHANGELOG.md' },
   ],
   titleSuffix: 'tf2pickup.pl • Polskie Pickupy',
+
+  // Initial queue config for ghost loading
+  entryQueue: entryQueue6v6,
 };

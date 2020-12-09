@@ -27,7 +27,6 @@ const queue: Queue = {
         count: 1
       },
     ],
-    nextMapSuccessfulVoteThreshold: 2,
   },
   slots: [
     {

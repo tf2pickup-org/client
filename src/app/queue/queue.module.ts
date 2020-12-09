@@ -29,6 +29,7 @@ import { NotificationsModule } from '@app/notifications/notifications.module';
 import { SharedModule } from '@app/shared/shared.module';
 import { IconsModule } from '@app/icons/icons.module';
 import { ActiveGameSnackbarComponent } from './active-game-snackbar/active-game-snackbar.component';
+import { LayoutModule } from '@angular/cdk/layout';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { ActiveGameSnackbarComponent } from './active-game-snackbar/active-game-
     EffectsModule.forFeature([QueueEffects]),
     TooltipModule,
     ButtonsModule,
+    LayoutModule,
 
     PlayersModule,
     TwitchModule,

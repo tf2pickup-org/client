@@ -5,17 +5,27 @@
   [disabled]="disabled"
   (click)="toggleVote()">
 
-  <div
-    class="map-thumbnail"
-    [style.background-image]="'url(' + mapThumbnailImage + ')'">
-    <div class="content-wraper">
-      <div class="content map-name">
+  <div class="thumbnail"
+    [ngStyle]="{
+      'background-image': map && 'url(' + mapThumbnailImage + ')'
+    }">
+    <div class="thumbnail__overlay"
+      [@.disabled]="isSmallScreen">
+
+      <div *ngIf="map"
+        @unroll
+        class="thumbnail__overlay__name">
         <span>{{ map }}</span>
       </div>
-      <div class="content fill"></div>
-      <div class="content map-vote-result">
-        <span>{{ votePercent | percent }}</span>
+
+      <div class="thumbnail__overlay__fill"></div>
+
+      <div *ngIf="map"
+        @unroll
+        class="thumbnail__overlay__vote-result">
+        <div [@pulsate]="votePercent">{{ votePercent | percent }}</div>
       </div>
+
     </div>
   </div>
 </button>

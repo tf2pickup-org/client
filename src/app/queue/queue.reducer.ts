@@ -4,21 +4,24 @@ import { queueLoaded, queueStateUpdated, togglePreReady, stopPreReady, mapVoteRe
 import { QueueSlot } from './models/queue-slot';
 import { Queue } from './models/queue';
 import { profileLoaded } from '@app/profile/profile.actions';
+import { environment } from '@environment';
 
 export interface State extends Queue {
   mapVote?: string;
   preReady: boolean;
-  loading: boolean;
 }
 
 export const initialState: State = {
-  config: null,
-  slots: [],
-  state: 'waiting',
-  mapVoteResults: [],
+  config: environment.entryQueue.config,
+  slots: environment.entryQueue.slots,
+  state: 'loading',
+  mapVoteResults: [
+    { map: null, voteCount: 0 },
+    { map: null, voteCount: 0 },
+    { map: null, voteCount: 0 },
+  ],
   preReady: false,
   friendships: [],
-  loading: true,
 };
 
 const updateQueueSlots = (slotsToUpdate: QueueSlot[], state: State): State => {

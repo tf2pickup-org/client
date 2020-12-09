@@ -1,5 +1,5 @@
 <div class="map-vote-container">
-  <app-map-vote-button *ngFor="let result of results | async"
+  <app-map-vote-button *ngFor="let result of results | async; trackBy: trackByFn"
     [map]="result.map"
     [votePercent]="result.votePercent"
     [selected]="result.map === (mapVote | async)"

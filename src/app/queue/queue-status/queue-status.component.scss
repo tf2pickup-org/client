@@ -32,17 +32,13 @@
     background-color: theme.$queue-status-launching;
   }
 
-  &.loading {
-    background-color: rgba(255, 255, 255, 0.7);
-
-    .ghost-line {
-      @include ghost.make-line(200px, 43px, theme.$font-color-dark);
-    }
+  &__ghost {
+    @include ghost.make-line(220px, 43px, theme.$font-color-dark);
   }
 }
 
 .fill {
-  flex: 1 1 0;
+  flex: 1 1 auto;
 }
 
 .pre-ready-up-container {
