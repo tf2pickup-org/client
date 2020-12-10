@@ -4,17 +4,17 @@
 @use 'utils/respond';
 
 // navigation bar itself
-$-navigation-bar-height: 4.75rem;
-$-navigation-bar-border-radius: 2.8125rem;
+$-navigation-bar-height: 76px;
+$-navigation-bar-border-radius: 45px;
 $-navigation-bar-shadow-color: rgba(0, 0, 0, 0.5);
-$-navigation-bar-shadow: 0 0 0.5rem $-navigation-bar-shadow-color;
+$-navigation-bar-shadow: 0 0 8px $-navigation-bar-shadow-color;
 
 // navigation bar links
 $-link-height: $-navigation-bar-height * 0.8687;
-$-link-border-radius: 0.3125rem;
-$-link-border-radius-bottom-right: 2.5rem;
+$-link-border-radius: 5px;
+$-link-border-radius-bottom-right: 40px;
 
-.navigation-bar {
+.navbar {
   @include border-radius.bottom($-navigation-bar-border-radius);
 
   display: flex;
@@ -30,107 +30,104 @@ $-link-border-radius-bottom-right: 2.5rem;
   @include respond.below(huge) {
     justify-content: center;
   }
-}
 
-.logo {
-  @include outline.disable;
+  &__logo {
+    @include outline.disable;
 
-  align-self: center;
-  margin: 0 0.2rem;
-}
-
-.links {
-  display: flex;
-  flex-flow: row nowrap;
-  padding: 0 1rem;
-  list-style: none;
-
-  @include respond.below(huge) {
-    display: none;
+    align-self: center;
+    margin: 0 0.2rem;
   }
-}
 
-%advanced {
-  height: $-navigation-bar-height;
-  padding-top: ($-navigation-bar-height - $-link-height);
-}
+  &__links {
+    display: flex;
+    flex-flow: row nowrap;
+    padding: 0 16px;
+    list-style: none;
 
-.link-item,
-%link-item {
-  @include outline.disable;
+    @include respond.below(huge) {
+      display: none;
+    }
+  }
 
-  display: block;
-  height: $-link-height;
-  line-height: $-link-height;
-  padding: 0 2rem;
+  &__link {
+    @include outline.disable;
 
-  background-color: theme.$navigation-bar-link-background-color;
+    display: block;
+    height: $-link-height;
+    line-height: $-link-height;
+    padding: 0 2rem;
 
-  border-radius: 0 0 $-link-border-radius-bottom-right $-link-border-radius;
-  box-shadow: $-navigation-bar-shadow;
+    background-color: theme.$navigation-bar-link-background-color;
 
-  transition: 0.1s;
+    border-radius: 0 0 $-link-border-radius-bottom-right $-link-border-radius;
+    box-shadow: $-navigation-bar-shadow;
 
-  position: relative;
-  z-index: 1;
+    transition: 0.1s;
 
-  color: #fff;
-  font-size: 1.6rem;
-  font-weight: 700;
+    position: relative;
+    z-index: 1;
 
-  &:hover {
-    @extend %advanced;
+    color: #fff;
+    font-size: 1.6rem;
+    font-weight: 700;
     text-decoration: none;
-  }
 
-  &.active {
-    @extend %advanced;
-    background-color: theme.$navigation-bar-background-color;
-    box-shadow: 0.5rem 0.5rem 0.5rem -0.5rem $-navigation-bar-shadow-color;
-    z-index: 0;
-  }
-
-  &--icon {
-    @extend %link-item;
-    padding: 0 1.2rem;
-    line-height: $-link-height * 0.9;
-
-    > img {
-      width: 30px;
-      height: 30px;
+    @mixin make-advanced {
+      height: $-navigation-bar-height;
+      padding-top: ($-navigation-bar-height - $-link-height);
     }
-  }
 
-  &--profile {
-    @extend %link-item;
-    padding: 0 2rem 0 0.5rem;
-
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-
-    @include respond.below(huge) {
-      display: none;
-    }
-  }
-
-  &--settings {
-    @extend %link-item;
-    padding: 0 1.2rem;
-    line-height: $-link-height * 0.9;
-    border-radius: 0 0 $-link-border-radius $-link-border-radius-bottom-right;
-
-    @include respond.below(huge) {
-      display: none;
+    &:hover {
+      @include make-advanced;
     }
 
     &.active {
-      box-shadow: -0.5rem 0.5rem 0.5rem -0.5rem $-navigation-bar-shadow-color;
+      @include make-advanced;
+
+      background-color: theme.$navigation-bar-background-color;
+      box-shadow: 0.5rem 0.5rem 0.5rem -0.5rem $-navigation-bar-shadow-color;
+      z-index: 0;
     }
 
-    > img {
-      width: 30px;
-      height: 30px;
+    &--icon {
+      padding: 0 1.2rem;
+      line-height: $-link-height * 0.9;
+
+      > img {
+        width: 30px;
+        height: 30px;
+      }
+    }
+
+    &--profile {
+      padding: 0 2rem 0 0.5rem;
+
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      @include respond.below(huge) {
+        display: none;
+      }
+    }
+
+    &--settings {
+      padding: 0 1.2rem;
+      line-height: $-link-height * 0.9;
+      border-radius: 0 0 $-link-border-radius $-link-border-radius-bottom-right;
+
+      @include respond.below(huge) {
+        display: none;
+      }
+
+      &.active {
+        box-shadow: -0.5rem 0.5rem 0.5rem -0.5rem $-navigation-bar-shadow-color;
+      }
+
+      > img {
+        width: 30px;
+        height: 30px;
+      }
     }
   }
 }

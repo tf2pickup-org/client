@@ -45,7 +45,7 @@ describe('NavigationBarComponent', () => {
   });
 
   it('should render the logo', () => {
-    const el = fixture.debugElement.query(By.css('a.logo>img'));
+    const el = fixture.debugElement.query(By.css('.navbar__logo>img'));
     expect(el).toBeTruthy();
   });
 
@@ -57,14 +57,14 @@ describe('NavigationBarComponent', () => {
     });
 
     it('should render profile link', () => {
-      const el = fixture.debugElement.query(By.css('a.link-item--profile')).nativeElement as HTMLAnchorElement;
+      const el = fixture.debugElement.query(By.css('a.navbar__link--profile')).nativeElement as HTMLAnchorElement;
       expect(el).toBeTruthy();
       expect(el.innerText.trim()).toBe('FAKE_NAME');
       expect(el.href).toMatch(/\/player\/FAKE_ID$/);
     });
 
     it('should render link to the settings page', () => {
-      const el = fixture.debugElement.query(By.css('a.link-item--settings')).nativeElement as HTMLAnchorElement;
+      const el = fixture.debugElement.query(By.css('a.navbar__link--settings')).nativeElement as HTMLAnchorElement;
       expect(el).toBeTruthy();
       expect(el.href).toMatch(/\/settings/);
     });

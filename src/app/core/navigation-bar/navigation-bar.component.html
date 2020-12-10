@@ -1,33 +1,33 @@
-<nav class="navigation-bar">
-  <a class="logo" routerLink="/">
+<nav class="navbar" role="navigation">
+  <a class="navbar__logo" routerLink="/">
     <img src="/assets/tf2pickup_logo_white.png" height="60">
   </a>
 
-  <ul class="links">
+  <ul class="navbar__links">
     <li>
       <a routerLink="/games" routerLinkActive="active"
-        class="link-item">
+        class="navbar__link">
         games
       </a>
     </li>
 
     <li>
       <a routerLink="/players" routerLinkActive="active"
-        class="link-item">
+        class="navbar__link">
         players
       </a>
     </li>
 
     <li>
       <a routerLink="/servers" routerLinkActive="active"
-        class="link-item">
+        class="navbar__link">
         servers
       </a>
     </li>
 
     <li>
       <a routerLink="/rules" routerLinkActive="active"
-        class="link-item">
+        class="navbar__link">
         rules
       </a>
     </li>
@@ -35,7 +35,7 @@
     <li>
       <a routerLink="/hall-of-fame" routerLinkActive="active"
         tooltip="Hall of fame"
-        class="link-item--icon">
+        class="navbar__link navbar__link--icon">
         <img src="/assets/ui_icon_crown.png">
       </a>
     </li>
@@ -45,7 +45,8 @@
         <a [href]="link.target"
           target="_blank"
           [tooltip]="link.tooltip"
-          class="link-item--icon">
+          class="navbar__link"
+          [class.navbar__link--icon]="!!link.icon">
           <img *ngIf="link.icon; else text"
             [src]="link.icon"
             [attr.alt]="link.name">
@@ -61,13 +62,13 @@
     <a routerLink="/settings"
       routerLinkActive="active"
       tooltip="Settings"
-      class="link-item--settings">
+      class="navbar__link navbar__link--settings">
       <img src="/assets/ui_settings.png">
     </a>
 
     <a *ngIf="profile | async as _profile"
       [routerLink]="['/player', _profile.id]"
-      class="link-item--profile">
+      class="navbar__link navbar__link--profile">
       <img [src]="_profile.avatarUrl"
         class="profile-avatar">
       {{ _profile.name }}
