@@ -86,9 +86,19 @@ describe('AddGameServerComponent', () => {
     });
 
     describe('when the form is submited', () => {
+      const action = gameServerAdded({
+        gameServer: {
+          name: 'FAKE_GAME_SERVER_NAME',
+          address: 'FAKE_GAME_SERVER_ADDRESS',
+          port: '27015',
+          rconPassword: 'FAKE_GAME_SERVER_RCON_PASSWORD',
+        },
+      });
+
       it('should dispatch an event', () => {
         const spy = spyOn(TestBed.inject(MockStore), 'dispatch');
         saveButton.click();
+        actions.next(action);
         expect(spy).toHaveBeenCalledWith(addGameServer({
           gameServer: {
             name: 'FAKE_GAME_SERVER_NAME',
@@ -108,14 +118,7 @@ describe('AddGameServerComponent', () => {
       it('should eventually go back to the game server list', () => {
         const spy = spyOn(TestBed.inject(Router), 'navigate');
         saveButton.click();
-        actions.next(gameServerAdded({
-          gameServer: {
-            name: 'FAKE_GAME_SERVER_NAME',
-            address: 'FAKE_GAME_SERVER_ADDRESS',
-            port: '27015',
-            rconPassword: 'FAKE_GAME_SERVER_RCON_PASSWORD',
-          },
-        }));
+        actions.next(action);
         expect(spy).toHaveBeenCalledWith(['/servers']);
       });
     });
