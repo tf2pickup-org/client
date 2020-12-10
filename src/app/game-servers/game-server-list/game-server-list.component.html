@@ -6,8 +6,10 @@
       {{ server.name }}
     </span>
 
-    <span *ngIf="server.isOnline; else serverOffline" class="badge--online">online</span>
-    <ng-template #serverOffline><span class="badge--offline">offline</span></ng-template>
+    <ng-container [ngSwitch]="server.isOnline">
+      <div *ngSwitchCase="true" class="indicator indicator--online" tooltip="online"></div>
+      <div *ngSwitchCase="false" class="indicator indicator--offline" tooltip="offline"></div>
+    </ng-container>
 
     <button *ngIf="isSuperUser | async"
       type="button"

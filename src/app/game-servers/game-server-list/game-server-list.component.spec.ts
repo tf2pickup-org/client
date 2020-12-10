@@ -13,11 +13,10 @@ describe('GameServerListComponent', () => {
   let component: GameServerListComponent;
   let fixture: ComponentFixture<GameServerListComponent>;
   let store: MockStore<AppState>;
-  let storeDispatchSpy: jasmine.Spy;
   let allGameServersSelector: MemoizedSelector<AppState, any[]>;
   let isSuperUserSelector: MemoizedSelector<AppState, boolean>;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(waitForAsync(() =>
     TestBed.configureTestingModule({
       declarations: [ GameServerListComponent ],
       providers: [
@@ -26,14 +25,17 @@ describe('GameServerListComponent', () => {
     })
     // https://github.com/angular/angular/issues/12313
     .overrideComponent(GameServerListComponent, { set: { changeDetection: ChangeDetectionStrategy.Default } })
-    .compileComponents();
+    .compileComponents()
+  ));
 
+  beforeEach(() => {
     store = TestBed.inject(MockStore);
-    storeDispatchSpy = spyOn(store, 'dispatch').and.callThrough();
+    spyOn(store, 'dispatch').and.callThrough();
+
     allGameServersSelector = store.overrideSelector(allGameServers, []);
     isSuperUserSelector = store.overrideSelector(isSuperUser, false);
     store.overrideSelector(gameServersLoaded, false);
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(GameServerListComponent);
@@ -48,7 +50,7 @@ describe('GameServerListComponent', () => {
   describe('#ngOnInit()', () => {
     it('should load all the game servers', () => {
       component.ngOnInit();
-      expect(storeDispatchSpy).toHaveBeenCalledWith(loadGameServers());
+      expect(store.dispatch).toHaveBeenCalledWith(loadGameServers());
     });
   });
 
@@ -61,7 +63,7 @@ describe('GameServerListComponent', () => {
 
     describe('when the current user is a regular one', () => {
       it('should not be rendered', () => {
-        expect(fixture.debugElement.query(By.css('.remove-game-server-btn'))).toBeNull();
+        expect(fixture.debugElement.query(By.css('.remove-game-server-button'))).toBeNull();
       });
     });
 
@@ -82,7 +84,7 @@ describe('GameServerListComponent', () => {
 
       it('should dispatch an action', () => {
         removeGameServerButton.click();
-        expect(storeDispatchSpy).toHaveBeenCalledWith(removeGameServer({ gameServerId: 'FAKE_ID' }));
+        expect(store.dispatch).toHaveBeenCalledWith(removeGameServer({ gameServerId: 'FAKE_ID' }));
       });
     });
   });

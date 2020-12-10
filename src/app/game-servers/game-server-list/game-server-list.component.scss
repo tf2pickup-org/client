@@ -3,7 +3,7 @@
 @use 'theme';
 
 $-item-height: 80px;
-$-item-margin: 1.5rem;
+$-item-margin: 24px;
 $-item-background-color: rgba(255, 255, 255, 0.7);
 
 .game-server-list-item {
@@ -12,17 +12,16 @@ $-item-background-color: rgba(255, 255, 255, 0.7);
   display: flex;
   height: $-item-height;
   margin: $-item-margin 0;
-  padding: 0 2rem;
+  padding: 0 32px;
   align-items: center;
   justify-content: space-between;
 
-  color: theme.$font-color-dark;
   background-color: $-item-background-color;
 }
 
 .server-name {
   flex: 1 1 auto;
-  
+
   font-size: 1.5rem;
   font-weight: 600;
 }

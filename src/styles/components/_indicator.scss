@@ -1,23 +1,34 @@
 @use 'sass:color';
 @use 'theme';
 
-@mixin make($color, $size: 15px) {
+@mixin make {
   display: inline-block;
+}
+
+@mixin color($color) {
+  background-color: $color;
+  box-shadow: 0 0 3px color.adjust($color, $lightness: -30%, $alpha: -0.6);
+}
+
+@mixin size($size) {
   width: $size;
   height: $size;
   border-radius: ($size / 2);
-  box-shadow: 0 0 0.2rem color.adjust($color, $lightness: -30%, $alpha: -0.6);
-  background-color: $color;
+}
+
+.indicator {
+  @include make;
+  @include size(15px);
 }
 
 .indicator--online {
-  @include make(theme.$online);
+  @include color(theme.$online);
 }
 
 .indicator--offline {
-  @include make(theme.$offline);
+  @include color(theme.$offline);
 }
 
 .indicator--warning {
-  @include make(theme.$warning);
+  @include color(theme.$warning);
 }

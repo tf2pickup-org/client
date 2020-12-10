@@ -54,7 +54,10 @@ $-games-per-page: 5;
   }
 
   &--live-indicator {
-    @include indicator.make($-game-live-indicator-color, $size: $-game-live-indicator-size);
+    @include indicator.make;
+    @include indicator.size($-game-live-indicator-size);
+    @include indicator.color($-game-live-indicator-color);
+
     margin: 0 1rem;
   }
 
