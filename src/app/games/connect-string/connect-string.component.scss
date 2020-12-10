@@ -14,7 +14,7 @@
 
   .connect-string {
     flex: 1 1 auto;
-    padding: 0.4rem 1rem;
+    padding: 6px 16px;
     border: 0;
     font-size: 1.4rem;
     border-radius: variables.$default-border-radius;
@@ -28,7 +28,7 @@
   }
 
   .radius-right {
-    @include button.shape-radius(0 1rem 1rem 0);
+    @include button.shape-radius(0 16px 16px 0);
   }
 
   .radius-none {

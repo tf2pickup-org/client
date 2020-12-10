@@ -20,6 +20,6 @@ export class PlayerConnectionStatusComponent {
 
   @HostBinding('class')
   get className() {
-    return connectionStatusToIndicator[this.connectionStatus];
+    return `indicator ${connectionStatusToIndicator[this.connectionStatus]}` ;
   }
 }

@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-
 import { PlayerConnectionStatusComponent } from './player-connection-status.component';
 
 describe('PlayerConnectionStatusComponent', () => {
@@ -21,5 +20,9 @@ describe('PlayerConnectionStatusComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should apply host-bound css class', () => {
+    expect(component.className).toMatch(/indicator/);
   });
 });
