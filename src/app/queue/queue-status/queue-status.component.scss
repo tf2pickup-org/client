@@ -35,6 +35,10 @@
   &__ghost {
     @include ghost.make-line(220px, 43px, theme.$font-color-dark);
   }
+
+  .player-count {
+    display: inline-block;
+  }
 }
 
 .fill {

@@ -1,5 +1,8 @@
 <ng-template #readyOrWaiting>
-  <span @fadeIn><strong>players:</strong> {{ playerCount | async }} / {{ requiredPlayerCount | async }}</span>
+  <div @fadeIn>
+    <strong>players: </strong>
+    <div [@pulsate]="playerCount | async" class="player-count">{{ playerCount | async }}</div> / {{ requiredPlayerCount | async }}
+  </div>
   <div class="pre-ready-up-container">
     <app-pre-ready-up-button *ngIf="isInQueue | async"></app-pre-ready-up-button>
   </div>

@@ -1,5 +1,6 @@
-import { animate, style, transition, trigger } from '@angular/animations';
+import { animate, style, transition, trigger, useAnimation } from '@angular/animations';
 import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { pulsate } from '@app/animations';
 import { Store } from '@ngrx/store';
 import { queueCurrentPlayerCount, queueRequiredPlayerCount, queueState, isInQueue } from '../queue.selectors';
 
@@ -15,7 +16,10 @@ import { queueCurrentPlayerCount, queueRequiredPlayerCount, queueState, isInQueu
         animate('250ms ease-out', style({ opacity: 1 })),
       ]),
     ]),
-  ]
+    trigger('pulsate', [
+      transition(':increment', useAnimation(pulsate)),
+    ]),
+  ],
 })
 export class QueueStatusComponent {
 
