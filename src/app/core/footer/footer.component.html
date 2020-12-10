@@ -1,22 +1,22 @@
 <footer class="footer">
-  <span class="footer-entry">© 2020 tf2pickup.pl</span>
-  <span class="footer-entry">version {{ version }}</span>
+  <span class="footer__entry">© 2020 tf2pickup.pl</span>
+  <span class="footer__entry">version {{ version }}</span>
 
   <ng-container *ngFor="let link of links">
-    <span class="footer-entry">
+    <span class="footer__entry">
       <a [href]="link.target" target="_blank">{{ link.name }}</a>
     </span>
   </ng-container>
 
   <ng-container *ngIf="isAuthenticated">
-    <span class="footer-entry">
+    <span class="footer__entry">
       <a [routerLink]="" (click)="logout()">logout</a>
     </span>
   </ng-container>
 
   <ng-container *ngIf="isAdmin | async">
-    <span class="footer-entry">
-      <a routerLink="/player-skill-dump" class="text-secondary">player skills</a>
+    <span class="footer__entry">
+      <a routerLink="/player-skill-dump">player skills</a>
     </span>
   </ng-container>
 </footer>

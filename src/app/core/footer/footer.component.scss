@@ -8,7 +8,7 @@ $-footer-height: variables.$footer-height;
   display: flex;
   width: 100%;
 
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: theme.$footer-background-color;
   bottom: 0;
 
   color: theme.$font-color-dark;
@@ -33,7 +33,7 @@ $-footer-height: variables.$footer-height;
     color: theme.$font-color-dark;
   }
 
-  .footer-entry {
+  &__entry {
     @include respond.above(huge) {
       &:not(:first-child)::before {
         content: '•';
