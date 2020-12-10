@@ -2,6 +2,7 @@
 
 .text-container {
   @extend %card;
-  margin-top: 1rem;
-  padding: 2rem;
+
+  margin-top: 16px;
+  padding: 32px;
 }
