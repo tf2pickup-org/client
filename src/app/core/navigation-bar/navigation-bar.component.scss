@@ -35,7 +35,7 @@ $-link-border-radius-bottom-right: 40px;
     @include outline.disable;
 
     align-self: center;
-    margin: 0 0.2rem;
+    margin: 0 4px;
   }
 
   &__links {
@@ -55,7 +55,7 @@ $-link-border-radius-bottom-right: 40px;
     display: block;
     height: $-link-height;
     line-height: $-link-height;
-    padding: 0 2rem;
+    padding: 0 32px;
 
     background-color: theme.$navigation-bar-link-background-color;
 
@@ -90,7 +90,7 @@ $-link-border-radius-bottom-right: 40px;
     }
 
     &--icon {
-      padding: 0 1.2rem;
+      padding: 0 20px;
       line-height: $-link-height * 0.9;
 
       > img {
@@ -100,7 +100,7 @@ $-link-border-radius-bottom-right: 40px;
     }
 
     &--profile {
-      padding: 0 2rem 0 0.5rem;
+      padding: 0 32px 0 8px;
 
       white-space: nowrap;
       overflow: hidden;
@@ -112,7 +112,7 @@ $-link-border-radius-bottom-right: 40px;
     }
 
     &--settings {
-      padding: 0 1.2rem;
+      padding: 0 19px;
       line-height: $-link-height * 0.9;
       border-radius: 0 0 $-link-border-radius $-link-border-radius-bottom-right;
 
@@ -121,7 +121,7 @@ $-link-border-radius-bottom-right: 40px;
       }
 
       &.active {
-        box-shadow: -0.5rem 0.5rem 0.5rem -0.5rem $-navigation-bar-shadow-color;
+        box-shadow: -8px 8px 8px -8px $-navigation-bar-shadow-color;
       }
 
       > img {
@@ -134,7 +134,7 @@ $-link-border-radius-bottom-right: 40px;
 
 .steam-login-button {
   align-self: center;
-  margin: 0 2rem;
+  margin: 0 32px;
 
   @include respond.below(huge) {
     display: none;
@@ -144,5 +144,5 @@ $-link-border-radius-bottom-right: 40px;
 .profile-avatar {
   width: 50px;
   height: 50px;
-  margin: 0 0.5rem;
+  margin: 0 8px;
 }
