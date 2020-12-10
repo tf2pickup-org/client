@@ -1,4 +1,5 @@
 import { version } from 'package.json';
+import { entryQueue6v6 } from './entry-queue-6v6';
 
 const discordInvitation = 'https://discord.gg/9YKcMgg';
 
@@ -16,4 +17,5 @@ export const environment = {
     { name: 'changelog', target: 'https://github.com/tf2pickup-pl/client/blob/master/CHANGELOG.md' },
   ],
   titleSuffix: 'tf2pickup.es • Spanish Team Fortress 2 Pickup-up games',
+  entryQueue: entryQueue6v6,
 };

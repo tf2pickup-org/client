@@ -17,7 +17,5 @@ export const environment = {
     { name: 'changelog', target: 'https://github.com/tf2pickup-pl/client/blob/master/CHANGELOG.md' },
   ],
   titleSuffix: 'tf2pickup.pl • Polskie Pickupy',
-
-  // Initial queue config for ghost loading
   entryQueue: entryQueue6v6,
 };
