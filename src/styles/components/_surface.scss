@@ -1,0 +1,38 @@
+@use 'variables';
+@use 'theme';
+
+// A customizable surface for pretty much every textual
+// content.
+
+@mixin make {
+  margin: 24px 8px;
+  padding: 8px 16px;
+  border-radius: variables.$default-border-radius;
+
+  font-weight: 400;
+}
+
+@mixin ink-color($color) {
+  color: $color;
+}
+
+@mixin fill-color($color) {
+  background-color: $color;
+}
+
+@mixin shadow {
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+}
+
+@mixin core-styles {
+  .surface {
+    @include make;
+    @include shadow;
+    @include fill-color(theme.$text-background-color);
+    @include ink-color(theme.$font-color-dark);
+
+    &__content {
+      padding: 32px;
+    }
+  }
+}

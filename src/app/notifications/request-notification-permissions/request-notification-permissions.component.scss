@@ -1,17 +1,15 @@
 @use 'variables';
 @use 'theme';
+@use 'components/surface';
 @use 'utils/respond';
 
 .request-notification-permissions {
+  @include surface.make;
+  @include surface.shadow;
+  @include surface.fill-color(theme.$text-background-color);
+  @include surface.ink-color(theme.$font-color-dark);
+
   display: flex;
-
-  margin: 1.5rem 0.5rem;
-  padding: 0.5rem 1rem;
-  border-radius: variables.$default-border-radius;
-  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
-
-  color: theme.$font-color-dark;
-  font-weight: 400;
 
   @include respond.above(huge) {
     flex-flow: row wrap;
@@ -23,11 +21,11 @@
   }
 
   &.default {
-    background-color: theme.$secondary;
+    @include surface.fill-color(theme.$secondary);
   }
 
   &.denied {
-    background-color: theme.$error;
+    @include surface.fill-color(theme.$error);
   }
 
   .message-icon {

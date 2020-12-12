@@ -1,35 +1,33 @@
 @use 'sass:color';
 @use 'theme';
 @use 'variables';
+@use 'components/surface';
 @use 'utils/ghost';
 @use 'utils/transition';
 
 .queue-status {
+  @include surface.make;
+  @include surface.shadow;
+  @include surface.ink-color(theme.$font-color-dark);
   @include transition.background-color;
 
   display: flex;
   justify-content: space-between;
   align-items: center;
 
-  margin: 1.5rem 0.5rem;
-  padding: 0.5rem;
-  border-radius: variables.$default-border-radius;
-  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
-
   text-align: center;
   font-size: 1.8rem;
-  color: theme.$font-color-dark;
 
   &.waiting {
-    background-color: theme.$queue-status-waiting;
+    @include surface.fill-color(theme.$queue-status-waiting);
   }
 
   &.ready {
-    background-color: theme.$queue-status-ready-up;
+    @include surface.fill-color(theme.$queue-status-ready-up);
   }
 
   &.launching {
-    background-color: theme.$queue-status-launching;
+    @include surface.fill-color(theme.$queue-status-launching);
   }
 
   &__ghost {

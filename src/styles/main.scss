@@ -25,6 +25,8 @@
 @use '@material/snackbar';
 @use '@material/textfield';
 
+@use 'components/surface';
+
 @include button.core-styles;
 @include card.core-styles;
 @include dialog.core-styles;
@@ -34,6 +36,8 @@
 @include snackbar.core-styles;
 @include textfield.core-styles;
 @include typography.core-styles;
+
+@include surface.core-styles;
 
 $body-bg: #0d1d36;
 $body-color: #fff;
