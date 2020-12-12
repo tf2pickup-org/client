@@ -7,7 +7,7 @@
     readonly>
 
   <button *ngIf="connectString || stvConnectString"
-    class="mdc-button mdc-button--large radius-none"
+    class="mdc-button mdc-button--large mdc-button--radius-none"
     type="button"
     tooltip="Copy the connect string to the clipboard"
     [cdkCopyToClipboard]="connectString || stvConnectString">
@@ -20,7 +20,7 @@
 
   <a *ngIf="connectString"
     [href]="connectString | connectStringToLink"
-    class="mdc-button mdc-button--secondary mdc-button--large radius-right"
+    class="mdc-button mdc-button--secondary mdc-button--large mdc-button--radius-right"
     type="button"
     tooltip="Join the game right away">
     <div class="mdc-button__ripple"></div>
@@ -32,7 +32,7 @@
 
   <a *ngIf="stvConnectString"
     [href]="stvConnectString | connectStringToLink"
-    class="mdc-button mdc-button--secondary mdc-button--large radius-right"
+    class="mdc-button mdc-button--secondary mdc-button--large mdc-button--radius-right"
     type="button"
     tooltip="Watch the game">
     <div class="mdc-button__ripple"></div>

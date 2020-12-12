@@ -26,12 +26,12 @@
       font-size: 1.3rem;
     }
   }
+}
 
-  .radius-right {
-    @include button.shape-radius(0 16px 16px 0);
-  }
+.mdc-button--radius-right {
+  @include button.shape-radius(0 16px 16px 0);
+}
 
-  .radius-none {
-    @include button.shape-radius(0);
-  }
+.mdc-button--radius-none {
+  @include button.shape-radius(0);
 }
