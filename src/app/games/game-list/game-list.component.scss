@@ -41,19 +41,19 @@ $-games-per-page: 5;
   font-size: 1.5rem;
   font-weight: 600;
 
-  &--content {
+  &__content {
     flex: 1 1 auto;
     display: flex;
     justify-content: center;
     align-items: center;
   }
 
-  &--map-thumbnail {
+  &__map-thumbnail {
     @include border-radius.right(variables.$default-border-radius);
     height: $-item-height;
   }
 
-  &--live-indicator {
+  &__live-indicator {
     @include indicator.make;
     @include indicator.size($-game-live-indicator-size);
     @include indicator.color($-game-live-indicator-color);

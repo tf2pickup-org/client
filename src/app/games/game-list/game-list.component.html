@@ -9,16 +9,15 @@
     }"
     [routerLink]="['/game', game.id]"
     class="game-list-item">
-    <div class="game-list-item--content">
+    <div class="game-list-item__content">
       #{{ game.number }} - {{ game.launchedAt | date:'medium' }} - {{ game.map }}
 
       <div *ngIf="game.state === 'launching' || game.state === 'started'"
-        class="game-list-item--live-indicator"
+        class="game-list-item__live-indicator"
         [tooltip]="game.state"></div>
     </div>
-    <img
-      [src]="game.map | mapThumbnail"
-      class="game-list-item--map-thumbnail">
+    <img [src]="game.map | mapThumbnail"
+      class="game-list-item__map-thumbnail">
   </a>
 </div>
 
