@@ -2,29 +2,29 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { PlayerBansComponent } from './player-bans.component';
 import { RouterTestingModule } from '@angular/router/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { of } from 'rxjs';
 import { convertToParamMap, ActivatedRoute } from '@angular/router';
-import { Store } from '@ngrx/store';
 import { loadPlayerBans, revokePlayerBan } from '../actions';
+import { MockComponent } from 'ng-mocks';
+import { PlayerBanItemComponent } from '../player-ban-item/player-ban-item.component';
+import { By } from '@angular/platform-browser';
 import { Location } from '@angular/common';
 
-const paramMap = of(convertToParamMap({ id: 'FAKE_ID' }));
+const paramMap = of(convertToParamMap({ id: 'FAKE_PLAYER_ID' }));
 
 describe('PlayerBansComponent', () => {
   let component: PlayerBansComponent;
   let fixture: ComponentFixture<PlayerBansComponent>;
-  let store: MockStore<any>;
-  let storeDispatchSpy: jasmine.Spy;
+  let store: MockStore;
 
   const initialState = {
     players: {
       players: {
-        ids: [ 'FAKE_ID' ],
+        ids: [ 'FAKE_PLAYER_ID' ],
         entities: {
-          FAKE_ID: {
-            id: 'FAKE_ID',
+          FAKE_PLAYER_ID: {
+            id: 'FAKE_PLAYER_ID',
             name: 'FAKE_NAME',
           },
         },
@@ -38,9 +38,11 @@ describe('PlayerBansComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ PlayerBansComponent ],
+      declarations: [
+        PlayerBansComponent,
+        MockComponent(PlayerBanItemComponent),
+      ],
       imports: [ RouterTestingModule ],
-      schemas: [ NO_ERRORS_SCHEMA ],
       providers: [
         provideMockStore({ initialState }),
         { provide: ActivatedRoute, useValue: { paramMap } },
@@ -50,8 +52,8 @@ describe('PlayerBansComponent', () => {
   }));
 
   beforeEach(() => {
-    store = TestBed.get(Store);
-    storeDispatchSpy = spyOn(store, 'dispatch');
+    store = TestBed.inject(MockStore);
+    spyOn(store, 'dispatch');
   });
 
   beforeEach(() => {
@@ -65,11 +67,11 @@ describe('PlayerBansComponent', () => {
   });
 
   it('should load player bans', () => {
-    expect(storeDispatchSpy).toHaveBeenCalledWith(loadPlayerBans({ playerId: 'FAKE_ID' }));
+    expect(store.dispatch).toHaveBeenCalledWith(loadPlayerBans({ playerId: 'FAKE_PLAYER_ID' }));
   });
 
-  describe('#revoke', () => {
-    const ban = {
+  describe('with bans', () => {
+    const mockBan = {
       player: 'FAKE_PLAYER_ID',
       start: new Date(),
       end: new Date(),
@@ -78,17 +80,51 @@ describe('PlayerBansComponent', () => {
       id: 'FAKE_PLAYER_BAN_ID'
     };
 
-    it('should dispatch revoke action', () => {
-      component.revoke(ban);
-      expect(storeDispatchSpy).toHaveBeenCalledWith(revokePlayerBan({ playerBan: ban }));
+    let playerBanItem: PlayerBanItemComponent;
+
+    beforeEach(() => {
+      store.setState({
+        players: {
+          players: {
+            ids: [ 'FAKE_PLAYER_ID' ],
+            entities: {
+              FAKE_ID: {
+                id: 'FAKE_PLAYER_ID',
+                name: 'FAKE_NAME',
+              },
+            },
+          },
+          bans: {
+            ids: ['FAKE_PLAYER_BAN_ID'],
+            entities: { FAKE_PLAYER_BAN_ID: mockBan },
+          },
+        },
+      });
+
+      fixture.detectChanges();
+      playerBanItem = fixture.debugElement.query(By.css('app-player-ban-item')).componentInstance;
+    });
+
+    it('should render PlayerBanItem', () => {
+      expect(playerBanItem).toBeTruthy();
+    });
+
+    it('should be able to revoke a ban', () => {
+      playerBanItem.revoke.emit();
+      expect(store.dispatch).toHaveBeenCalledWith(revokePlayerBan({ playerBan: mockBan }));
     });
   });
 
-  describe('#back()', () => {
-    it('should call location.back()', () => {
-      const location = TestBed.get(Location);
-      const spy = spyOn(location, 'back');
-      component.back();
+  describe('when user presses the cancel button', () => {
+    let cancelButton: HTMLButtonElement;
+
+    beforeEach(() => {
+      cancelButton = fixture.debugElement.query(By.css('.cancel-button')).nativeElement as HTMLButtonElement;
+    });
+
+    it('should go back in history', () => {
+      const spy = spyOn(TestBed.inject(Location), 'back');
+      cancelButton.click();
       expect(spy).toHaveBeenCalled();
     });
   });

@@ -1,6 +1,5 @@
-.close-anchor {
-  left: -2.5rem;
-  position: absolute;
+@use 'utils/outline';
 
-  top: 3.35rem;
+.cancel-button {
+  @include outline.disable;
 }

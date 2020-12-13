@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { AlertOctagon, Check, Clipboard, Coffee, Edit2, ExternalLink, Eye, FileText, Film, Headphones, Heart, MessageSquare, Minus,
-  Play, Plus, RefreshCcw, Star, User, UserX, X } from 'angular-feather/icons';
+  Play, Plus, RefreshCcw, Star, Trash2, User, UserX, X } from 'angular-feather/icons';
 import { FeatherModule } from 'angular-feather';
 
 // https://github.com/michaelbazos/angular-feather#available-icons
@@ -23,6 +23,7 @@ const icons = {
   Plus,
   RefreshCcw,
   Star,
+  Trash2,
   User,
   UserX,
   X,

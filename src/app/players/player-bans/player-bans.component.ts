@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { map, tap, switchMap, takeUntil } from 'rxjs/operators';
+import { map, tap, switchMap, takeUntil, filter } from 'rxjs/operators';
 import { PlayerBan } from '../models/player-ban';
 import { Observable, Subject } from 'rxjs';
 import { Player } from '../models/player';
@@ -8,6 +8,8 @@ import { Store } from '@ngrx/store';
 import { playerById, playerBans } from '../selectors';
 import { loadPlayer, revokePlayerBan, loadPlayerBans } from '../actions';
 import { Location } from '@angular/common';
+import { Title } from '@angular/platform-browser';
+import { environment } from '@environment';
 
 @Component({
   selector: 'app-player-bans',
@@ -25,6 +27,7 @@ export class PlayerBansComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private store: Store,
     private location: Location,
+    private title: Title,
   ) { }
 
   ngOnInit() {
@@ -39,7 +42,9 @@ export class PlayerBansComponent implements OnInit, OnDestroy {
             this.store.dispatch(loadPlayer({ playerId }));
           }
         })
-      ))
+      )),
+      filter(player => !!player),
+      tap(player => this.title.setTitle(`${player.name} bans • ${environment.titleSuffix}`)),
     );
 
     getPlayerId.pipe(
@@ -54,12 +59,12 @@ export class PlayerBansComponent implements OnInit, OnDestroy {
     this.destroyed.unsubscribe();
   }
 
-  revoke(playerBan: PlayerBan) {
-    this.store.dispatch(revokePlayerBan({ playerBan }));
+  cancel() {
+    this.location.back();
   }
 
-  back() {
-    this.location.back();
+  revoke(playerBan: PlayerBan) {
+    this.store.dispatch(revokePlayerBan({ playerBan }));
   }
 
 }
