@@ -14,6 +14,7 @@ import { AddGameServerComponent } from './add-game-server.component';
 describe('AddGameServerComponent', () => {
   let component: AddGameServerComponent;
   let fixture: ComponentFixture<AddGameServerComponent>;
+  let store: MockStore;
   let actions: ReplaySubject<Action>;
 
   beforeEach(() => actions = new ReplaySubject<Action>(1));
@@ -34,6 +35,9 @@ describe('AddGameServerComponent', () => {
   });
 
   beforeEach(() => {
+    store = TestBed.inject(MockStore);
+    spyOn(store, 'dispatch');
+
     fixture = TestBed.createComponent(AddGameServerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -96,10 +100,9 @@ describe('AddGameServerComponent', () => {
       });
 
       it('should dispatch an event', () => {
-        const spy = spyOn(TestBed.inject(MockStore), 'dispatch');
         saveButton.click();
         actions.next(action);
-        expect(spy).toHaveBeenCalledWith(addGameServer({
+        expect(store.dispatch).toHaveBeenCalledWith(addGameServer({
           gameServer: {
             name: 'FAKE_GAME_SERVER_NAME',
             address: 'FAKE_GAME_SERVER_ADDRESS',
@@ -113,6 +116,7 @@ describe('AddGameServerComponent', () => {
         saveButton.click();
         fixture.detectChanges();
         expect(saveButton.disabled).toBe(true);
+        actions.next(action);
       });
 
       it('should eventually go back to the game server list', () => {
