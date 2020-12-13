@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map, switchMap, tap, first, filter, takeUntil, withLatestFrom } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
@@ -10,6 +10,12 @@ import { Player } from '../models/player';
 import { Actions, ofType } from '@ngrx/effects';
 import { Location } from '@angular/common';
 import { profile } from '@app/profile/profile.selectors';
+import { MDCTextField } from '@material/textfield';
+
+interface BanLengthValue {
+  label: string;
+  toDate: () => Date;
+}
 
 @Component({
   selector: 'app-add-player-ban',
@@ -19,23 +25,104 @@ import { profile } from '@app/profile/profile.selectors';
 })
 export class AddPlayerBanComponent implements OnInit, OnDestroy {
 
-  readonly lengthValues = [
-    '1 hour',
-    '6 hours',
-    '24 hours',
-    '3 days',
-    '7 days',
-    '2 weeks',
-    '4 weeks',
-    '6 months',
-    '1 year',
-    'forever',
+  @ViewChild('reason')
+  set reasonInput(reasonElement: ElementRef) {
+    if (this._reason) {
+      this._reason.destroy();
+    }
+
+    if (reasonElement) {
+      this._reason = new MDCTextField(reasonElement.nativeElement);
+    }
+  }
+
+  readonly lengthValues: BanLengthValue[] = [
+    {
+      label: '1 hour',
+      toDate: () => {
+        const date = new Date();
+        date.setHours(date.getHours() + 1);
+        return date;
+      },
+    },
+    {
+      label: '6 hours',
+      toDate: () => {
+        const date = new Date();
+        date.setHours(date.getHours() + 6);
+        return date;
+      },
+    },
+    {
+      label: '24 hours',
+      toDate: () => {
+        const date = new Date();
+        date.setHours(date.getHours() + 24);
+        return date;
+      },
+    },
+    {
+      label: '3 days',
+      toDate: () => {
+        const date = new Date();
+        date.setDate(date.getDate() + 3);
+        return date;
+      },
+    },
+    {
+      label: '7 days',
+      toDate: () => {
+        const date = new Date();
+        date.setDate(date.getDate() + 7);
+        return date;
+      },
+    },
+    {
+      label: '2 weeks',
+      toDate: () => {
+        const date = new Date();
+        date.setDate(date.getDate() + 14);
+        return date;
+      },
+    },
+    {
+      label: '4 weeks',
+      toDate: () => {
+        const date = new Date();
+        date.setDate(date.getDate() + 28);
+        return date;
+      },
+    },
+    {
+      label: '6 months',
+      toDate: () => {
+        const date = new Date();
+        date.setMonth(date.getMonth() + 6);
+        return date;
+      },
+    },
+    {
+      label: '1 year',
+      toDate: () => {
+        const date = new Date();
+        date.setFullYear(date.getFullYear() + 1);
+        return date;
+      },
+    },
+    {
+      label: 'forever',
+      toDate: () => {
+        const date = new Date();
+        date.setFullYear(date.getFullYear() + 100);
+        return date;
+      },
+    },
   ];
 
   player: Observable<Player>;
-
-  lengthLabel = new BehaviorSubject<string>(this.lengthValues[0]);
+  lengthLabel = new BehaviorSubject<string>(this.lengthValues[0].label);
   isSubmitLocked = this.store.select(playerBansLocked);
+  locked = this.store.select(playerBansLocked);
 
   banForm = this.formBuilder.group({
     length: [ 0 ],
@@ -43,6 +130,7 @@ export class AddPlayerBanComponent implements OnInit, OnDestroy {
   });
 
   private destroyed = new Subject<void>();
+  private _reason: MDCTextField;
 
   constructor(
     private route: ActivatedRoute,
@@ -53,7 +141,7 @@ export class AddPlayerBanComponent implements OnInit, OnDestroy {
     private location: Location,
   ) {
     this.banForm.get('length').valueChanges.subscribe(value => {
-      this.lengthLabel.next(this.lengthValues[value]);
+      this.lengthLabel.next(this.lengthValues[value].label);
     });
   }
 
@@ -84,6 +172,10 @@ export class AddPlayerBanComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.destroyed.next();
     this.destroyed.unsubscribe();
+
+    if (this._reason) {
+      this._reason.destroy();
+    }
   }
 
   submit() {
@@ -93,7 +185,7 @@ export class AddPlayerBanComponent implements OnInit, OnDestroy {
       map(player => ({
         player,
         start: new Date(),
-        end: this.getBanEnd(),
+        end: this.lengthValues[this.banForm.get('length').value].toDate(),
         reason: this.banForm.get('reason').value,
       })),
       withLatestFrom(this.store.select(profile)),
@@ -103,54 +195,6 @@ export class AddPlayerBanComponent implements OnInit, OnDestroy {
 
   cancel() {
     this.location.back();
-  }
-
-  private getBanEnd() {
-    const end = new Date();
-
-    switch (this.banForm.get('length').value) {
-      case 0: // 1 hour
-        end.setHours(end.getHours() + 1);
-        break;
-
-      case 1: // 6 hours
-        end.setHours(end.getHours() + 6);
-        break;
-
-      case 2: // 24 hours
-        end.setHours(end.getHours() + 24);
-        break;
-
-      case 3: // 3 days
-        end.setDate(end.getDate() + 3);
-        break;
-
-      case 4: // 7 days
-        end.setDate(end.getDate() + 7);
-        break;
-
-      case 5: // 2 weeks
-        end.setDate(end.getDate() + 14);
-        break;
-
-      case 6: // 4 weeks
-        end.setDate(end.getDate() + 28);
-        break;
-
-      case 7: // 6 months
-        end.setMonth(end.getMonth() + 6);
-        break;
-
-      case 8: // 1 year
-        end.setFullYear(end.getFullYear() + 1);
-        break;
-
-      case 9: // forever
-        end.setFullYear(end.getFullYear() + 100);
-        break;
-    }
-
-    return end;
   }
 
 }

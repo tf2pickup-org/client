@@ -1,6 +1,17 @@
-.close-anchor {
-  left: -2.5rem;
-  position: absolute;
+@use 'components/surface';
+@use 'utils/outline';
+@use 'theme';
 
-  top: 3.25rem;
+.cancel-button {
+  @include outline.disable;
+}
+
+.add-ban-container {
+  @include surface.make;
+  @include surface.shadow;
+  @include surface.fill-color(rgb(255, 255, 255));
+  @include surface.ink-color(theme.$font-color-dark);
+
+  margin-top: 16px;
+  padding: 32px;
 }

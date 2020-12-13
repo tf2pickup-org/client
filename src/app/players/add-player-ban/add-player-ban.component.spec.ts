@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { AddPlayerBanComponent } from './add-player-ban.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
-import { provideMockStore } from '@ngrx/store/testing';
+import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { Subject, of } from 'rxjs';
 import { Action, Store } from '@ngrx/store';
 import { Actions } from '@ngrx/effects';
@@ -14,11 +14,13 @@ import { PlayerBan } from '../models/player-ban';
 import { By } from '@angular/platform-browser';
 
 const paramMap = of(convertToParamMap({ id: 'FAKE_ID' }));
-const actions = new Subject<Action>();
 
 describe('AddPlayerBanComponent', () => {
   let component: AddPlayerBanComponent;
   let fixture: ComponentFixture<AddPlayerBanComponent>;
+  let store: MockStore;
+  let submit: HTMLButtonElement;
+  let actions: Subject<Action>;
 
   const initialState = {
     profile: {
@@ -40,6 +42,10 @@ describe('AddPlayerBanComponent', () => {
     },
   };
 
+  beforeEach(() => {
+    actions = new Subject<Action>();
+  });
+
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ AddPlayerBanComponent ],
@@ -57,31 +63,49 @@ describe('AddPlayerBanComponent', () => {
   }));
 
   beforeEach(() => {
+    store = TestBed.inject(MockStore);
+    spyOn(store, 'dispatch');
+
     fixture = TestBed.createComponent(AddPlayerBanComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+
+    submit = fixture.debugElement.query(By.css('button[type=submit]')).nativeElement;
   });
+
+  afterEach(() => actions.complete());
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
+  it('should disable submit button', () => {
+    expect(submit.disabled).toBe(true);
+  });
+
   it('should redirect to player ban list when adding a ban is done', () => {
-    const spy = spyOn(TestBed.get(Router), 'navigate');
+    const spy = spyOn(TestBed.inject(Router), 'navigate');
     actions.next(playerBanAdded({ playerBan: { player: 'FAKE_ID' } } as { playerBan: PlayerBan }));
     expect(spy).toHaveBeenCalledWith(['/player', 'FAKE_ID', 'bans']);
   });
 
-  describe('#submit()', () => {
-    it('should dispatch action', () => {
-      const reasonDiv = fixture.debugElement.query(By.css('input#reason')).nativeElement as HTMLInputElement;
+  describe('when valid', () => {
+
+    beforeEach(() => {
+      const reasonDiv = fixture.debugElement.query(By.css('input.reason-input')).nativeElement as HTMLInputElement;
       reasonDiv.value = 'FAKE_REASON';
       reasonDiv.dispatchEvent(new Event('input'));
       fixture.detectChanges();
+    });
 
-      const spy = spyOn(TestBed.inject(Store), 'dispatch').and.callThrough();
-      component.submit();
-      expect(spy).toHaveBeenCalledWith(addPlayerBan({ playerBan: {
+    it('should enable the submit button', () => {
+      expect(submit.disabled).toBe(false);
+    });
+
+    it('should submit', () => {
+      submit.click();
+
+      expect(store.dispatch).toHaveBeenCalledWith(addPlayerBan({ playerBan: {
         player: 'FAKE_ID',
         start: jasmine.any(Date) as any,
         end: jasmine.any(Date) as any,
