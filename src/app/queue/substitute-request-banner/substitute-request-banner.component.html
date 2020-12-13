@@ -1,0 +1,14 @@
+<div *ngIf="substituteRequest"
+  class="substitute-request-banner">
+  <h5 class="mdc-typography--headline5">Substitute needed</h5>
+  <p>Team <strong>{{ substituteRequest.team }}</strong> needs a substitute for <strong>{{ substituteRequest.gameClass }}</strong>
+    in game #{{ substituteRequest.gameNumber }}.</p>
+
+  <div class="substitute-request-banner__actions">
+    <a [routerLink]="['/game', substituteRequest.gameId]"
+      class="mdc-button">
+      <div class="mdc-button__ripple"></div>
+      <span class="mdc-button__label">View game details</span>
+    </a>
+  </div>
+</div>

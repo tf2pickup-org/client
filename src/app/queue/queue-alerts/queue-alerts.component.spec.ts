@@ -13,6 +13,7 @@ import { SubstituteRequest } from '../models/substitute-request';
 import { substituteRequests } from '../queue.selectors';
 import { MockComponent } from 'ng-mocks';
 import { ActiveGameSnackbarComponent } from '../active-game-snackbar/active-game-snackbar.component';
+import { SubstituteRequestBannerComponent } from '../substitute-request-banner/substitute-request-banner.component';
 
 describe('QueueAlertsComponent', () => {
   let component: QueueAlertsComponent;
@@ -27,6 +28,7 @@ describe('QueueAlertsComponent', () => {
       declarations: [
         QueueAlertsComponent,
         MockComponent(ActiveGameSnackbarComponent),
+        MockComponent(SubstituteRequestBannerComponent),
       ],
       imports: [
         RouterTestingModule,
@@ -99,22 +101,24 @@ describe('QueueAlertsComponent', () => {
   });
 
   describe('with player substitute announcement', () => {
+    const mockSubstituteRequest: SubstituteRequest = {
+      gameId: '5e1fb93d9cacb6d6e08bc6bf',
+      gameNumber: 514,
+      gameClass: 'soldier',
+      team: 'BLU',
+    };
+
     beforeEach(() => {
-      substituteRequestsSelector.setResult([
-        {
-          gameId: '5e1fb93d9cacb6d6e08bc6bf',
-          gameNumber: 514,
-          gameClass: 'soldier',
-          team: 'BLU',
-        },
-      ]);
+      substituteRequestsSelector.setResult([ mockSubstituteRequest ]);
       store.refreshState();
       fixture.detectChanges();
     });
 
-    it('should render the subsitute alert', () => {
-      const el = fixture.debugElement.query(By.css('div.alert.alert-warning')).nativeElement as HTMLDivElement;
-      expect(el).toBeTruthy();
+    it('should render the subsitute alert banner', () => {
+      const substituteRequestBanner = fixture.debugElement.query(By.css('app-substitute-request-banner'))
+        .componentInstance as SubstituteRequestBannerComponent;
+      expect(substituteRequestBanner).toBeTruthy();
+      expect(substituteRequestBanner.substituteRequest).toEqual(mockSubstituteRequest);
     });
   });
 });

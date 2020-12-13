@@ -30,6 +30,7 @@ import { SharedModule } from '@app/shared/shared.module';
 import { IconsModule } from '@app/icons/icons.module';
 import { ActiveGameSnackbarComponent } from './active-game-snackbar/active-game-snackbar.component';
 import { LayoutModule } from '@angular/cdk/layout';
+import { SubstituteRequestBannerComponent } from './substitute-request-banner/substitute-request-banner.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { LayoutModule } from '@angular/cdk/layout';
     QueueNotificationsControllerComponent,
     QueueSlotContainerComponent,
     ActiveGameSnackbarComponent,
+    SubstituteRequestBannerComponent,
   ],
   imports: [
     CommonModule,
