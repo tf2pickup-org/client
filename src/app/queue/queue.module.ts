@@ -31,6 +31,7 @@ import { IconsModule } from '@app/icons/icons.module';
 import { ActiveGameSnackbarComponent } from './active-game-snackbar/active-game-snackbar.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { SubstituteRequestBannerComponent } from './substitute-request-banner/substitute-request-banner.component';
+import { BanBannerComponent } from './ban-banner/ban-banner.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { SubstituteRequestBannerComponent } from './substitute-request-banner/su
     QueueSlotContainerComponent,
     ActiveGameSnackbarComponent,
     SubstituteRequestBannerComponent,
+    BanBannerComponent,
   ],
   imports: [
     CommonModule,

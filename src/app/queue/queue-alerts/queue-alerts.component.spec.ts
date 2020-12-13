@@ -14,6 +14,7 @@ import { substituteRequests } from '../queue.selectors';
 import { MockComponent } from 'ng-mocks';
 import { ActiveGameSnackbarComponent } from '../active-game-snackbar/active-game-snackbar.component';
 import { SubstituteRequestBannerComponent } from '../substitute-request-banner/substitute-request-banner.component';
+import { BanBannerComponent } from '../ban-banner/ban-banner.component';
 
 describe('QueueAlertsComponent', () => {
   let component: QueueAlertsComponent;
@@ -29,6 +30,7 @@ describe('QueueAlertsComponent', () => {
         QueueAlertsComponent,
         MockComponent(ActiveGameSnackbarComponent),
         MockComponent(SubstituteRequestBannerComponent),
+        MockComponent(BanBannerComponent),
       ],
       imports: [
         RouterTestingModule,
@@ -56,24 +58,25 @@ describe('QueueAlertsComponent', () => {
   });
 
   describe('with ban issued', () => {
+    const mockBan: PlayerBan = {
+      id: 'FAKE_BAN_ID',
+      player: 'FAKE_PLAYER_ID',
+      reason: 'FAKE_REASON',
+      start: new Date(),
+      end: new Date(),
+      admin: 'FAKE_ADMIN_ID',
+    };
+
     beforeEach(() => {
-      bansSelector.setResult([
-        {
-          id: 'FAKE_BAN_ID',
-          player: 'FAKE_PLAYER_ID',
-          reason: 'FAKE_REASON',
-          start: new Date(),
-          end: new Date(),
-          admin: 'FAKE_ADMIN_ID',
-        },
-      ]);
+      bansSelector.setResult([ mockBan ]);
       store.refreshState();
       fixture.detectChanges();
     });
 
     it('should show alert', () => {
-      const el = fixture.debugElement.query(By.css('div.alert.alert-danger')).nativeElement as HTMLDivElement;
-      expect(el).toBeTruthy();
+      const banBanner = fixture.debugElement.query(By.css('app-ban-banner')).componentInstance as BanBannerComponent;
+      expect(banBanner).toBeTruthy();
+      expect(banBanner.ban).toEqual(mockBan);
     });
   });
 
