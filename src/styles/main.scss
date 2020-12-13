@@ -25,6 +25,9 @@
 @use '@material/snackbar';
 @use '@material/textfield';
 
+@use 'components/detail';
+@use 'components/indicator';
+@use 'components/pagination';
 @use 'components/surface';
 
 @include button.core-styles;
@@ -37,6 +40,9 @@
 @include textfield.core-styles;
 @include typography.core-styles;
 
+@include detail.core-styles;
+@include indicator.core-styles;
+@include pagination.core-styles;
 @include surface.core-styles;
 
 $body-bg: #0d1d36;
@@ -131,13 +137,6 @@ $link-hover-decoration: underline;
 .mdc-card {
   color: theme.$font-color-dark;
 }
-
-@import 'components/card';
-@import 'components/badge';
-@import 'components/button';
-@import 'components/detail';
-@import 'components/indicator';
-@import 'components/pagination';
 
 @import 'global/body';
 

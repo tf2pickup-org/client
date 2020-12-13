@@ -1,9 +1,13 @@
 @use 'sass:color';
-@use 'components/card';
+@use 'components/surface';
 @use 'utils/ghost';
+@use 'theme';
 
 .games-player-total {
-  @extend %card;
+  @include surface.make;
+  @include surface.shadow;
+  @include surface.fill-color(rgb(255, 255, 255));
+  @include surface.ink-color(theme.$font-color-dark);
 
   margin: 0.5rem 0;
   font-size: 1.2rem;

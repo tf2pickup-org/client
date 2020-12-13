@@ -1,9 +1,15 @@
 @use 'sass:color';
-@use 'components/card';
+@use 'components/surface';
 @use 'utils/outline';
+@use 'theme';
+@use 'variables';
 
 .game-list {
-  @extend %card;
+  @include surface.make;
+  @include surface.shadow;
+  @include surface.fill-color(rgb(255, 255, 255));
+  @include surface.ink-color(theme.$font-color-dark);
+
   list-style: none;
   position: relative;
 
@@ -26,7 +32,7 @@
     left: 0;
     right: 0;
 
-    border-radius: card.$border-radius;
+    border-radius: variables.$default-border-radius;
     background-color: rgba(0, 0, 0, 0.5);
 
     display: flex;

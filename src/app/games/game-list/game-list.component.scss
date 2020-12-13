@@ -1,13 +1,10 @@
 @use 'sass:color';
-@use '@material/ripple';
-@use 'components/card';
+@use 'components/surface';
 @use 'components/indicator';
 @use 'utils/border-radius';
-@use 'utils/transition';
 @use 'theme';
 @use 'variables';
 
-$-game-item-background-color: rgba(255, 255, 255, 0.7);
 $-item-height: 80px;
 $-item-margin: 24px;
 $-game-live-indicator-color: theme.$success;
@@ -20,23 +17,17 @@ $-games-per-page: 5;
 }
 
 .game-list-item {
-  @extend %card-shadow;
-
-  @include ripple.surface;
-  @include ripple.radius-bounded;
-  @include ripple.states(color.change($-game-item-background-color, $alpha: 0.9));
-
-  overflow: hidden;
+  @include surface.make;
+  @include surface.shadow;
+  @include surface.ripple;
+  @include surface.fill-color(theme.$text-background-color);
+  @include surface.ink-color(theme.$font-color-dark);
 
   display: flex;
   height: $-item-height;
 
   padding: 0;
   margin: $-item-margin 0;
-  border-radius: variables.$default-border-radius;
-
-  background-color: $-game-item-background-color;
-  color: theme.$font-color-dark;
 
   font-size: 1.5rem;
   font-weight: 600;

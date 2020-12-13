@@ -1,31 +1,30 @@
-@use 'components/card';
-@use 'utils/color';
+@use 'components/surface';
 @use 'theme';
 
 $-border-radius: 1rem;
 $-caption-background-color: theme.$primary;
 
 .twitch-stream-list {
-  @extend %card-shadow;
+  @include surface.make;
+  @include surface.shadow;
+  @include surface.fill-color(theme.$text-background-color);
+  @include surface.ink-color(theme.$font-color-dark);
 
   margin: 2rem 0;
+  padding: 0;
   border-radius: $-border-radius;
   max-width: 300px;
 
-  background-color: rgb(255, 255, 255, 0.7);
-}
+  &__caption {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-.twitch-stream-list-caption {
-  @extend %card-shadow;
+    border-radius: $-border-radius;
+    background-color: $-caption-background-color;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  border-radius: $-border-radius;
-  background-color: $-caption-background-color;
-
-  font-weight: 600;
-  font-size: 1.5rem;
-  color: color.black-or-white($-caption-background-color);
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: theme.$font-color-light;
+  }
 }

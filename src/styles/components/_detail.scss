@@ -5,20 +5,22 @@
   text-align: center;
 }
 
-.detail--label {
-  @include common;
+@mixin core-styles {
+  .detail--label {
+    @include common;
 
-  color: color.adjust(theme.$font-color-light, $lightness: -10%);
-  font-weight: 300;
-}
+    color: color.adjust(theme.$font-color-light, $lightness: -10%);
+    font-weight: 300;
+  }
 
-.detail--value {
-  @include common;
+  .detail--value {
+    @include common;
 
-  font-weight: 600;
-  color: theme.$font-color-light;
-
-  a {
+    font-weight: 600;
     color: theme.$font-color-light;
+
+    // a {
+    //   color: theme.$font-color-light;
+    // }
   }
 }

@@ -1,13 +1,16 @@
 @use 'sass:color';
 @use '@material/ripple';
 @use '@material/typography';
-@use 'theme';
-@use 'components/card';
+@use 'components/surface';
 @use 'utils/outline';
 @use 'utils/transition';
+@use 'theme';
 
 .player-list {
-  @extend %card;
+  @include surface.make;
+  @include surface.shadow;
+  @include surface.fill-color(rgb(255, 255, 255));
+  @include surface.ink-color(theme.$font-color-dark);
 
   padding: 10px 5px;
 
@@ -64,7 +67,7 @@
   }
 }
 
-%long-button {
+%button {
   @include ripple.surface;
   @include ripple.radius-bounded;
   @include ripple.states;
@@ -79,7 +82,7 @@
 }
 
 .request-substitute-button {
-  @extend %long-button;
+  @extend %button;
 
   background-color: rgb(255, 255, 255);
   line-height: 40px;
@@ -87,7 +90,7 @@
 }
 
 .replace-player-button {
-  @extend %long-button;
+  @extend %button;
 
   line-height: 36px;
   border: 2px solid color.adjust(theme.$primary, $lightness: 70%);

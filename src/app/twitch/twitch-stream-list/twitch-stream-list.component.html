@@ -1,8 +1,9 @@
 <div *ngIf="streamCount | async"
   class="twitch-stream-list">
-  <div class="twitch-stream-list-caption">
+  <div class="twitch-stream-list__caption">
     streams
   </div>
-  <app-twitch-stream-list-item *ngFor="let stream of streams | async"
+  <app-twitch-stream-list-item
+    *ngFor="let stream of streams | async"
     [stream]="stream"></app-twitch-stream-list-item>
 </div>

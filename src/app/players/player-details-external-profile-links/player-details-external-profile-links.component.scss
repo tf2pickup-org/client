@@ -1,6 +1,7 @@
-@use 'components/card';
+@use 'components/surface';
 @use 'utils/outline';
 @use 'utils/respond';
+@use 'theme';
 
 $-external-profile-link-card-size: 80px;
 
@@ -18,7 +19,11 @@ $-external-profile-link-card-size: 80px;
 }
 
 %external-profile-link {
-  @extend %card-link;
+  @include surface.make;
+  @include surface.shadow;
+  @include surface.ripple;
+  @include surface.fill-color(rgb(255, 255, 255));
+  @include surface.ink-color(theme.$font-color-dark);
 
   height: $-external-profile-link-card-size;
   width: $-external-profile-link-card-size;

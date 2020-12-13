@@ -16,19 +16,21 @@
   border-radius: ($size / 2);
 }
 
-.indicator {
-  @include make;
-  @include size(15px);
-}
+@mixin core-styles {
+  .indicator {
+    @include make;
+    @include size(15px);
+  }
 
-.indicator--online {
-  @include color(theme.$online);
-}
+  .indicator--online {
+    @include color(theme.$online);
+  }
 
-.indicator--offline {
-  @include color(theme.$offline);
-}
+  .indicator--offline {
+    @include color(theme.$offline);
+  }
 
-.indicator--warning {
-  @include color(theme.$warning);
+  .indicator--warning {
+    @include color(theme.$warning);
+  }
 }

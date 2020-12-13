@@ -1,25 +1,30 @@
+@use 'components/surface';
 @use 'theme';
 
 .team-header {
+  @include surface.make;
+  @include surface.shadow;
+  @include surface.ink-color(theme.$font-color-light);
+
   align-items: center;
   display: flex;
   justify-content: center;
 
   text-align: center;
   padding: 4px 0;
-  color: theme.$font-color-light;
+  margin: 4px 0;
 
   .team-name {
     font-size: 2rem;
     font-weight: 700;
   }
 
-  &.red {
-    background-color: theme.$team-color-red;
+  &--red {
+    @include surface.fill-color(theme.$team-color-red);
   }
 
-  &.blu {
-    background-color: theme.$team-color-blu;
+  &--blu {
+    @include surface.fill-color(theme.$team-color-blu);
   }
 
   .team-score {

@@ -36,7 +36,7 @@ describe('GameTeamHeaderComponent', () => {
     });
 
     it('should apply the css class', () => {
-      expect(header.classList.contains('red')).toBe(true);
+      expect(header.classList.contains('team-header--red')).toBe(true);
     });
 
     it('should say RED', () => {
@@ -54,7 +54,7 @@ describe('GameTeamHeaderComponent', () => {
     });
 
     it('should apply the css class', () => {
-      expect(header.classList.contains('blu')).toBe(true);
+      expect(header.classList.contains('team-header--blu')).toBe(true);
     });
 
     it('should say BLU', () => {

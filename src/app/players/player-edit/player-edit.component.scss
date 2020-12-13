@@ -1,7 +1,17 @@
-@use 'components/card';
+@use 'components/surface';
+@use 'utils/outline';
+@use 'theme';
+
+.cancel-button {
+  @include outline.disable;
+}
 
 .player-edit-container {
-  @extend %card;
-  margin-top: 1rem;
-  padding: 2rem;
+  @include surface.make;
+  @include surface.shadow;
+  @include surface.fill-color(rgb(255, 255, 255));
+  @include surface.ink-color(theme.$font-color-dark);
+
+  margin-top: 16px;
+  padding: 32px;
 }

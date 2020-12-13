@@ -1,8 +1,8 @@
 <div *ngIf="team"
-  class="card team-header"
+  class="team-header"
   [ngClass]="{
-    'blu': 'blu',
-    'red': 'red'
+    'blu': 'team-header--blu',
+    'red': 'team-header--red'
   }[team]">
   <span class="team-name">
     {{ team === 'blu' && 'BLU' || 'RED' }}

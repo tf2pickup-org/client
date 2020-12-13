@@ -1,7 +1,8 @@
 <a *ngIf="stream"
   [href]="'https://www.twitch.tv/' + stream.userName"
   target="_blank"
-  class="twitch-stream-list-item">
+  class="twitch-stream-list-item"
+  [tooltip]="stream.title">
   <img
     [src]="stream.thumbnailUrl.replace('{width}', 100).replace('{height}', 50)"
     class="stream-thumbnail"
