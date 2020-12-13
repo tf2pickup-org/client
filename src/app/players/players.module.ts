@@ -31,7 +31,8 @@ import { PlayerDetailsHeaderComponent } from './player-details-header/player-det
 import { PlayerDetailsGameListComponent } from './player-details-game-list/player-details-game-list.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { PlayerDetailsBadgesComponent } from './player-details-badges/player-details-badges.component';
-import { PlayerDetailsExternalProfileLinksComponent } from './player-details-external-profile-links/player-details-external-profile-links.component';
+import { PlayerDetailsExternalProfileLinksComponent } from
+  './player-details-external-profile-links/player-details-external-profile-links.component';
 import { PlayerDetailsAdminButtonsComponent } from './player-details-admin-buttons/player-details-admin-buttons.component';
 import { IconsModule } from '@app/icons/icons.module';
 
