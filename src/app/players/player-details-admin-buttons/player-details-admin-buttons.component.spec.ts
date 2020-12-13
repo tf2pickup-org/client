@@ -1,3 +1,4 @@
+import { ChangeDetectionStrategy } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -14,6 +15,8 @@ describe('PlayerDetailsAdminButtonsComponent', () => {
         RouterTestingModule,
       ],
     })
+    // https://github.com/angular/angular/issues/12313
+    .overrideComponent(PlayerDetailsAdminButtonsComponent, { set: { changeDetection: ChangeDetectionStrategy.Default } })
     .compileComponents();
   }));
 
@@ -36,5 +39,18 @@ describe('PlayerDetailsAdminButtonsComponent', () => {
     const playerBansAnchor = fixture.debugElement.query(By.css('.player-bans-button')).nativeElement as HTMLAnchorElement;
     expect(playerBansAnchor).toBeTruthy();
     expect(playerBansAnchor.href).toMatch(/\/player\/FAKE_PLAYER_ID\/bans$/);
+  });
+
+  describe('when super-user', () => {
+    beforeEach(() => {
+      component.isSuperUser = true;
+      fixture.detectChanges();
+    });
+
+    it('should render roles link', () => {
+      const playerRolesAnchor = fixture.debugElement.query(By.css('.edit-player-roles-button')).nativeElement as HTMLAnchorElement;
+      expect(playerRolesAnchor).toBeTruthy();
+      expect(playerRolesAnchor.href).toMatch(/\/player\/FAKE_PLAYER_ID\/roles$/);
+    });
   });
 });

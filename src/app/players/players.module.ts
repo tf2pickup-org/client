@@ -35,6 +35,7 @@ import { PlayerDetailsExternalProfileLinksComponent } from
   './player-details-external-profile-links/player-details-external-profile-links.component';
 import { PlayerDetailsAdminButtonsComponent } from './player-details-admin-buttons/player-details-admin-buttons.component';
 import { IconsModule } from '@app/icons/icons.module';
+import { EditPlayerRolesComponent } from './edit-player-roles/edit-player-roles.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { IconsModule } from '@app/icons/icons.module';
     PlayerDetailsBadgesComponent,
     PlayerDetailsExternalProfileLinksComponent,
     PlayerDetailsAdminButtonsComponent,
+    EditPlayerRolesComponent,
   ],
   imports: [
     CommonModule,

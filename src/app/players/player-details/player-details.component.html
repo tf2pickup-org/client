@@ -10,7 +10,8 @@
       <app-player-stats [playerStats]="stats | async"></app-player-stats>
       <app-player-details-admin-buttons
         *ngIf="isAdmin | async"
-        [playerId]="(player | async)?.id"></app-player-details-admin-buttons>
+        [playerId]="(player | async)?.id"
+        [isSuperUser]="isSuperUser | async"></app-player-details-admin-buttons>
     </div>
 
     <div class="player-games">

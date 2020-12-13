@@ -7,6 +7,7 @@ import { PlayerBansComponent } from './player-bans/player-bans.component';
 import { AddPlayerBanComponent } from './add-player-ban/add-player-ban.component';
 import { SkillTableComponent } from './skill-table/skill-table.component';
 import { IsAdminGuard } from '@app/auth/is-admin.guard';
+import { EditPlayerRolesComponent } from './edit-player-roles/edit-player-roles.component';
 
 const routes: Routes = [
   { path: 'players', component: PlayerListComponent, data: { title: 'players', animation: 'PlayerListPage' } },
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'player/:id/edit', component: PlayerEditComponent, data: { animation: 'PlayerEditPage' } },
   { path: 'player/:id/bans', component: PlayerBansComponent, data: { animation: 'PlayerBansPage' } },
   { path: 'player/:id/bans/add', component: AddPlayerBanComponent, data: { animation: 'AddPlayerBanPage' } },
+  { path: 'player/:id/roles', component: EditPlayerRolesComponent, data: { animation: 'EditPlayerRolesPage' } },
   { path: 'player-skill-dump', component: SkillTableComponent, canActivate: [ IsAdminGuard ], data: { title: 'player skills' } },
 ];
 

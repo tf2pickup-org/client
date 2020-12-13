@@ -14,10 +14,12 @@
     <i-feather name="alert-octagon" class="mdc-button__icon" aria-hidden="true"></i-feather>
     <span class="mdc-button__label">bans</span>
   </a>
-<!--
-  <button class="mdc-button mdc-button--raised roles-button">
+
+  <a *ngIf="isSuperUser"
+    [routerLink]="['/player', playerId, 'roles']"
+    class="mdc-button mdc-button--inverted edit-player-roles-button">
     <div class="mdc-button__ripple"></div>
-    <i-feather name="user" class="mdc-button__icon" aria-hidden="true"></i-feather>
+    <i-feather name="trending-up" class="mdc-button__icon" aria-hidden="true"></i-feather>
     <span class="mdc-button__label">roles</span>
-  </button> -->
+  </a>
 </div>

@@ -11,4 +11,7 @@ export class PlayerDetailsAdminButtonsComponent {
   @Input()
   playerId: string;
 
+  @Input()
+  isSuperUser = false;
+
 }
