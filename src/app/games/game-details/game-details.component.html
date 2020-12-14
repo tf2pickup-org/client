@@ -1,35 +1,36 @@
 <div *ngIf="game | async as _game"
-  class="container py-5">
-  <h4>
-    Pickup #{{ _game.number }}
-    <small *ngIf="(isAdmin | async) && (isRunning | async)"
-      class="text-secondary ml-2 admin-buttons">
-      &bull;
-      <a [routerLink]="" class="text-secondary reinitialize-server-btn" (click)="reinitializeServer()">reinitialize server</a>
-      &bull;
-      <a [routerLink]="" class="text-secondary force-end-btn" (click)="forceEndGame()">force end</a>
-    </small>
-  </h4>
+  class="container py-3">
+  <div class="d-flex flex-row align-items-center">
+    <div class="mdc-typography--headline4 mr-3">Pickup #{{ _game.number }}</div>
+
+    <app-game-admin-buttons *ngIf="(isAdmin | async) && (isRunning | async)"
+      (reinitializeServer)="reinitializeServer()"
+      (forceEnd)="forceEndGame()"></app-game-admin-buttons>
+
+    <app-game-summary *ngIf="_game.state === 'ended'"
+      [logsUrl]="_game.logsUrl"
+      [demoUrl]="_game.demoUrl"></app-game-summary>
+  </div>
 
   <app-game-basic-info
     [launchedAt]="_game.launchedAt"
     [map]="_game.map"
     [gameServerName]="gameServerName | async"
     [state]="_game.state"
-    [error]="_game.error"></app-game-basic-info>
+    [error]="_game.error"
+    class="game-basic-info"></app-game-basic-info>
 
-  <ng-container *ngIf="isRunning | async">
-    <app-join-game-info *ngIf="isMyGame | async; else watchGameInfo"
-      [mumbleUrl]="mumbleUrl | async"
-      [connectString]="_game.connectString"></app-join-game-info>
+  <div *ngIf="isRunning | async" class="game-runtime-info">
+    <div *ngIf="isMyGame | async; else watchGameInfo" class="d-flex align-items-center">
+      <app-connect-string [connectString]="_game.connectString" class="flex-grow-1 mr-3"></app-connect-string>
+      <app-mumble-join-button [mumbleUrl]="mumbleUrl | async"></app-mumble-join-button>
+    </div>
+
     <ng-template #watchGameInfo>
-      <app-watch-game-info [stvConnectString]="_game.stvConnectString"></app-watch-game-info>
+      <app-connect-string
+        [stvConnectString]="_game.stvConnectString"></app-connect-string>
     </ng-template>
-  </ng-container>
-
-  <app-game-summary *ngIf="_game.state === 'ended'"
-    [logsUrl]="_game.logsUrl"
-    [demoUrl]="_game.demoUrl"></app-game-summary>
+  </div>
 
   <div class="row mt-4">
     <div class="col team-blu">
@@ -42,7 +43,8 @@
         [showAdminActionButtons]="(isAdmin | async) && (isRunning | async)"
         (requestSubstitute)="requestSubstitute($event)"
         (replacePlayer)="replacePlayer($event)"
-        [locked]="isLocked | async"></app-game-team-player-list>
+        [locked]="isLocked | async"
+        class="d-block mt-4"></app-game-team-player-list>
     </div>
 
     <div class="col team-red">
@@ -55,7 +57,8 @@
         [showAdminActionButtons]="(isAdmin | async) && (isRunning | async)"
         (requestSubstitute)="requestSubstitute($event)"
         (replacePlayer)="replacePlayer($event)"
-        [locked]="isLocked | async"></app-game-team-player-list>
+        [locked]="isLocked | async"
+        class="d-block mt-4"></app-game-team-player-list>
     </div>
   </div>
 </div>

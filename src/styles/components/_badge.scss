@@ -1,0 +1,17 @@
+@use 'theme';
+
+$border-radius: 12px;
+$font-weight: 600;
+
+@mixin make($background-color) {
+  border-radius: $border-radius;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+  font-weight: $font-weight;
+  padding: 4px 14px;
+  background-color: $background-color;
+  font-size: 0.8rem;
+}
+
+@mixin ink-color($ink-color) {
+  color: $ink-color;
+}

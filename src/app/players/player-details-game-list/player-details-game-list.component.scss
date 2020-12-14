@@ -1,0 +1,53 @@
+@use 'sass:color';
+@use 'components/surface';
+@use 'utils/outline';
+@use 'theme';
+@use 'variables';
+
+.game-list {
+  @include surface.make;
+  @include surface.shadow;
+  @include surface.fill-color(rgb(255, 255, 255));
+  @include surface.ink-color(theme.$font-color-dark);
+
+  list-style: none;
+  position: relative;
+
+  .game-list-item {
+    margin: 0.3rem 0;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    > a {
+      color: rgb(0, 0, 0);
+    }
+  }
+
+  .loading-wrapper {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    border-radius: variables.$default-border-radius;
+    background-color: rgba(0, 0, 0, 0.5);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.games-caption,
+%games-caption {
+  text-align: center;
+}
+
+.no-games {
+  @extend %games-caption;
+  font-style: italic;
+  color: color.adjust(rgb(255, 255, 255), $lightness: -20%);
+}

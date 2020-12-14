@@ -1,4 +1,5 @@
 import { version } from 'package.json';
+import { entryQueue9v9 } from './entry-queue-9v9';
 
 const discordInvitation = 'https://discord.gg/UVFVfc4';
 
@@ -8,7 +9,7 @@ export const environment = {
   wsUrl: 'https://api.hl.tf2pickup.pl',
   version,
   headerLinks: [
-    { name: 'discord', icon: '/assets/discord.svg', target: discordInvitation, tooltip: 'Join us on discord!' },
+    { name: 'discord', icon: '/assets/ui_icon_discord.png', target: discordInvitation, tooltip: 'Join us on discord!' },
   ],
   footerLinks: [
     { name: 'github', target: 'https://github.com/tf2pickup-pl' },
@@ -16,4 +17,5 @@ export const environment = {
     { name: 'changelog', target: 'https://github.com/tf2pickup-pl/client/blob/master/CHANGELOG.md' },
   ],
   titleSuffix: 'hl.tf2pickup.pl • Polskie Pickupy 9v9',
+  entryQueue: entryQueue9v9,
 };

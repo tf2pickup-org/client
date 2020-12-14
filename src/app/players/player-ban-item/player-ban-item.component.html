@@ -1,14 +1,22 @@
 <div *ngIf="playerBan"
-  class="d-flex flex-column">
+  class="player-ban-item"
+  [class.player-ban-item--expired]="isExpired()">
   <div class="d-flex flex-row justify-content-between">
     <div>
-      <h6>{{ playerBan.reason }} <small class="text-muted">by <app-player-name [playerId]="playerBan.admin"></app-player-name></small></h6>
+      <h6 class="mdc-typography--headline5">
+        {{ playerBan.reason }}
+        <span class="mdc-typography--body2">by <app-player-name [playerId]="playerBan.admin"></app-player-name></span>
+      </h6>
     </div>
-    <button *ngIf="!expired"
+    <button *ngIf="!isExpired()"
       type="button"
-      class="btn btn-danger btn-sm"
-      (click)="revoke.emit(playerBan)">revoke</button>
+      class="mdc-button"
+      (click)="revoke.emit()">
+      <div class="mdc-button__ripple"></div>
+      <i-feather name="trash2" class="mdc-button__icon" aria-hidden="true"></i-feather>
+      <span class="mdc-button__label">revoke</span>
+    </button>
   </div>
-  <div><span class="text-muted">starts</span> {{ playerBan.start | date: 'medium' }}</div>
-  <div><span class="text-muted">ends</span> {{ playerBan.end | date: 'medium' }}</div>
+  <div><span class="mdc-typography--body2">starts</span> {{ playerBan.start | date: 'medium' }}</div>
+  <div><span class="mdc-typography--body2">ends</span> {{ playerBan.end | date: 'medium' }}</div>
 </div>

@@ -23,4 +23,8 @@ export class QueueClassSlotListComponent {
     private store: Store,
   ) { }
 
+  slotId(index: number, slot: QueueSlot) {
+    return slot.id;
+  }
+
 }

@@ -1,4 +1,4 @@
 <div class="d-flex flex-column">
-  <app-queue-slot-container *ngFor="let slot of slots | async"
+  <app-queue-slot-container *ngFor="let slot of slots | async; trackBy: slotId"
     [slotId]="slot.id"></app-queue-slot-container>
 </div>

@@ -17,7 +17,6 @@ const player: Player = {
   joinedAt: new Date(),
   steamId: 'FAKE_STEAM_ID',
   avatarUrl: 'whatever',
-  gameCount: 144,
 };
 
 const allPlayerSkills: PlayerSkill[] = [

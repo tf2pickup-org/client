@@ -1,32 +1,28 @@
-@import "~bootstrap/scss/functions";
-@import "~bootstrap/scss/variables";
-@import "~bootstrap/scss/mixins/breakpoints";
+@use 'utils/respond';
 
-.column-sidebar {
-  display: none;
-  width: 16rem;
+.queue-container {
+  display: flex;
 
-  @include media-breakpoint-up(xl) {
-    display: block;
+  width: 100%;
+  height: 100%;
+
+  flex-flow: row nowrap;
+  justify-content: center;
+}
+
+.column-queue {
+  @include respond.above(huge) {
+    max-width: 1255px;
   }
 }
 
-.queue-container {
-  width: 100%;
+.column-sidebar {
+  flex: 1 1 0;
 
-  @include media-breakpoint-up(sm) {
-    max-width: 540px;
-  }
+  display: flex;
+  justify-content: center;
 
-  @include media-breakpoint-up(md) {
-    max-width: 720px;
-  }
-
-  @include media-breakpoint-up(lg) {
-    max-width: 960px;
-  }
-
-  @include media-breakpoint-up(xl) {
-    max-width: 1140px;
+  @include respond.below(huge) {
+    display: none;
   }
 }

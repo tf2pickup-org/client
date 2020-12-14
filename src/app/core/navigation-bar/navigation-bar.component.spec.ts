@@ -1,10 +1,10 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NavigationBarComponent } from './navigation-bar.component';
-import { NO_ERRORS_SCHEMA, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy } from '@angular/core';
 import { AuthService } from '@app/auth/auth.service';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { By } from '@angular/platform-browser';
-import { Store } from '@ngrx/store';
+import { RouterTestingModule } from '@angular/router/testing';
 
 const authServiceStub = {
   authenticated: false,
@@ -13,7 +13,7 @@ const authServiceStub = {
 describe('NavigationBarComponent', () => {
   let component: NavigationBarComponent;
   let fixture: ComponentFixture<NavigationBarComponent>;
-  let store: MockStore<{ profile: any }>;
+  let store: MockStore;
   const initialState = { profile: { } };
 
   beforeEach(waitForAsync(() => {
@@ -23,7 +23,9 @@ describe('NavigationBarComponent', () => {
         { provide: AuthService, useValue: authServiceStub },
         provideMockStore({ initialState }),
       ],
-      schemas: [ NO_ERRORS_SCHEMA ],
+      imports: [
+        RouterTestingModule,
+      ],
     })
     // https://github.com/angular/angular/issues/12313
     .overrideComponent(NavigationBarComponent, { set: { changeDetection: ChangeDetectionStrategy.Default } })
@@ -35,7 +37,7 @@ describe('NavigationBarComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
 
-    store = TestBed.inject(Store) as MockStore<any>;
+    store = TestBed.inject(MockStore);
   });
 
   it('should create', () => {
@@ -43,7 +45,7 @@ describe('NavigationBarComponent', () => {
   });
 
   it('should render the logo', () => {
-    const el = fixture.debugElement.query(By.css('a.navbar-brand>img'));
+    const el = fixture.debugElement.query(By.css('.navbar__logo>img'));
     expect(el).toBeTruthy();
   });
 
@@ -55,13 +57,16 @@ describe('NavigationBarComponent', () => {
     });
 
     it('should render profile link', () => {
-      const el = fixture.debugElement.query(By.css('.profile-link a')).nativeElement as HTMLAnchorElement;
+      const el = fixture.debugElement.query(By.css('a.navbar__link--profile')).nativeElement as HTMLAnchorElement;
       expect(el).toBeTruthy();
       expect(el.innerText.trim()).toBe('FAKE_NAME');
+      expect(el.href).toMatch(/\/player\/FAKE_ID$/);
     });
 
     it('should render link to the settings page', () => {
-      expect(fixture.debugElement.query(By.css('a[routerLink="/settings"]'))).toBeTruthy();
+      const el = fixture.debugElement.query(By.css('a.navbar__link--settings')).nativeElement as HTMLAnchorElement;
+      expect(el).toBeTruthy();
+      expect(el.href).toMatch(/\/settings/);
     });
   });
 

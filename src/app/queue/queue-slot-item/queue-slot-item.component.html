@@ -2,43 +2,48 @@
   *ngIf="slot"
   class="queue-slot-item"
   [ngClass]="{
-    'free': !slot.playerId,
-    'locked': locked,
-    'taken': !!slot.playerId,
-    'by-me': takenByMe,
-    'and-ready': slot.ready
+    'is-free': !slot.playerId,
+    'is-taken': !!slot.playerId,
+    'is-taken-by-me': takenByMe,
+    'is-ready': slot.ready,
+    'is-locked': locked
   }"
   (click)="maybeTakeSlot()">
 
-  <div class="avatar" *ngIf="slot.playerId">
-    <app-player-avatar [playerId]="slot.playerId"></app-player-avatar>
+  <div class="avatar">
+    <app-player-avatar *ngIf="slot.playerId"
+      [playerId]="slot.playerId"></app-player-avatar>
   </div>
 
   <a *ngIf="slot.playerId; else addPrompt"
-    class="text-white"
-    [routerLink]="['/player', slot.playerId]">
+    [routerLink]="['/player', slot.playerId]"
+    class="player-name">
     <app-player-name [playerId]="slot.playerId"></app-player-name>
   </a>
 
   <ng-template #addPrompt>
-    <span class="oi oi-plus text-secondary add-prompt"></span>
+    <i-feather name="plus" class="add-prompt"></i-feather>
   </ng-template>
 
-  <button *ngIf="!locked && takenByMe && !slot.ready"
-    type="button"
-    class="btn btn-light btn-sm slot-action-btn free-slot-btn"
-    (click)="emitFreeSlot($event)"
-    tooltip="Free this slot">
-    <span class="oi oi-minus"></span>
-  </button>
+  <div class="slot-action">
+    <button *ngIf="!locked && takenByMe && !slot.ready"
+      type="button"
+      class="slot-action-btn free-slot-btn"
+      (click)="emitFreeSlot($event)"
+      tooltip="Free this slot"
+      container="body">
+      <i-feather name="minus"></i-feather>
+    </button>
 
-  <button *ngIf="friendFlags.canMarkAsFriend && slot.playerId && !takenByMe"
-    type="button"
-    class="btn btn-sm slot-action-btn mark-as-friend-btn"
-    [ngClass]="friendFlags.markedByMe ? 'btn-danger' : 'btn-light'"
-    [tooltip]="friendFlags.markedByMe ? 'Marked as friend' : 'Mark as a friend'"
-    [disabled]="!!friendFlags.markedBy"
-    (click)="emitMarkFriend(slot.playerId, $event)">
-    <span class="oi oi-heart"></span>
-  </button>
+    <button *ngIf="friendFlags.canMarkAsFriend && slot.playerId && !takenByMe"
+      type="button"
+      class="slot-action-btn mark-as-friend-btn"
+      [class.is-marked-by-me]="friendFlags.markedByMe"
+      [tooltip]="friendFlags.markedByMe ? 'Marked as friend' : 'Mark as a friend'"
+      container="body"
+      [disabled]="!!friendFlags.markedBy"
+      (click)="emitMarkFriend(slot.playerId, $event)">
+      <i-feather name="heart"></i-feather>
+    </button>
+  </div>
 </div>

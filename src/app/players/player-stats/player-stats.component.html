@@ -1,19 +1,21 @@
-<div *ngIf="playerStats" class="row align-items-center">
-  <div class="col" [class.narrow]="isNarrow">
-    <span class="text-muted">total</span>
-    <span
-      class="font-weight-bold"
-      [class.ml-2]="!isNarrow">
-      {{ playerStats.gamesPlayed }}
-    </span>
+<div *ngIf="playerStats; else ghost">
+  <div class="games-player-total">
+    games played total: {{ playerStats.gamesPlayed }}
   </div>
 
-  <div *ngFor="let classPlayed of playerStats.classesPlayed | keyvalue"
-    class="col"
-    [class.narrow]="isNarrow">
-    <div class="class-icon"
-      [inlineSVG]="'/assets/tf2-classfont/' + classPlayed.key + '.svg'"
-      [tooltip]="classPlayed.key"></div>
-    <span class="font-weight-bold">{{ classPlayed.value }}</span>
+  <div class="player-stats-classes-container px-3 px-xl-5">
+    <div *ngFor="let classPlayed of playerStats.classesPlayed | keyvalue"
+      class="d-flex align-items-center">
+      <app-game-class-icon
+        [gameClass]="classPlayed.key"
+        [tooltip]="classPlayed.key"></app-game-class-icon>
+      <span class="player-stats-games-played-class ml-2">{{ classPlayed.value }}</span>
+    </div>
   </div>
 </div>
+
+<ng-template #ghost>
+  <div class="games-player-total">
+    <div class="ghost"></div>
+  </div>
+</ng-template>

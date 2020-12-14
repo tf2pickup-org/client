@@ -1,0 +1,9 @@
+@use 'components/surface';
+@use 'theme';
+
+.ban-banner {
+  @include surface.make;
+  @include surface.shadow;
+  @include surface.fill-color(theme.$error);
+  @include surface.ink-color(theme.$font-color-dark);
+}

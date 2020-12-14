@@ -10,7 +10,6 @@ describe('PlayerBanItemComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ PlayerBanItemComponent ],
-      schemas: [ NO_ERRORS_SCHEMA ],
     })
     // https://github.com/angular/angular/issues/12313
     .overrideComponent(PlayerBanItemComponent, { set: { changeDetection: ChangeDetectionStrategy.Default } })
@@ -25,34 +24,6 @@ describe('PlayerBanItemComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('should determine whether the ban has expired', () => {
-    const start = new Date();
-    let end = new Date();
-    end.setHours(end.getHours() + 1);
-
-    component.playerBan = {
-      player: 'FAKE_PLAYER_ID',
-      start,
-      end,
-      reason: 'FAKE_PLAYER_BAN_REASON',
-      admin: 'FAKE_ADMIN_ID',
-      id: 'FAKE_PLAYER_BAN_ID'
-    };
-    expect(component.expired).toBe(false);
-
-    end = new Date();
-    end.setSeconds(end.getSeconds() - 1);
-    component.playerBan = {
-      player: 'FAKE_PLAYER_ID',
-      start,
-      end,
-      reason: 'FAKE_PLAYER_BAN_REASON',
-      admin: 'FAKE_ADMIN_ID',
-      id: 'FAKE_PLAYER_BAN_ID'
-    };
-    expect(component.expired).toBe(true);
   });
 
   describe('with player ban', () => {
@@ -74,11 +45,12 @@ describe('PlayerBanItemComponent', () => {
       fixture.detectChanges();
     });
 
-    it('should emit revoke event', waitForAsync(() => {
-      component.revoke.subscribe(ban => expect(ban).toEqual(component.playerBan));
+    it('should emit revoke event', done => {
+      component.revoke.subscribe(done);
       const btn = fixture.debugElement.query(By.css('button[type=button]')).nativeElement as HTMLButtonElement;
       btn.click();
-    }));
+      expect().nothing();
+    });
   });
 
 });

@@ -1,0 +1,55 @@
+<div *ngIf="(gameCount | async) > 0; else noGames"
+  class="games-caption">games</div>
+
+<ul *ngIf="gameCount | async"
+  class="game-list">
+  <li *ngFor="let game of games | async | paginate: { itemsPerPage: gamesPerPage, currentPage: (page | async), totalItems: (gameCount | async) }"
+    class="game-list-item">
+    <a [routerLink]="['/game', game.id]">
+      <app-game-class-icon [gameClass]="game.classPlayed" size="20"></app-game-class-icon>
+      #{{ game.number }} - {{ game.launchedAt | date:'mediumDate'}} - {{ game.map }}
+    </a>
+  </li>
+
+  <ng-container *ngIf="isLoading | async">
+    <div class="loading-wrapper">
+      <img src="/assets/loading-medium.gif">
+    </div>
+  </ng-container>
+</ul>
+
+<ng-template #noGames>
+  <div class="no-games">no games</div>
+</ng-template>
+
+<pagination-template #p="paginationApi" (pageChange)="getPage($event)">
+  <nav *ngIf="p.pages.length > 1" class="my-3">
+    <ul class="pagination">
+      <li
+        [class.pagination__item--disabled]="p.isFirstPage()"
+        class="pagination__item">
+        <a aria-label="Previous" [routerLink]="" (click)="p.previous()">
+          <span aria-hidden="true">&laquo;</span>
+          <span class="sr-only">Previous</span>
+        </a>
+      </li>
+
+      <li *ngFor="let page of p.pages"
+        [class.pagination__item--active]="p.getCurrent() === page.value"
+        class="pagination__item">
+        <a [routerLink]="" (click)="p.setCurrent(page.value)">
+          {{ page.label }}
+        </a>
+      </li>
+
+      <li
+        [class.pagination__item--disabled]="p.isLastPage()"
+        class="pagination__item">
+        <a aria-label="Next" [routerLink]="" (click)="p.next()">
+          <span aria-hidden="true">&raquo;</span>
+          <span class="sr-only">Next</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</pagination-template>

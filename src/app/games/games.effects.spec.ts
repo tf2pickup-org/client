@@ -1,4 +1,6 @@
-import { ReplaySubject, Subject, of } from 'rxjs';
+/* eslint-disable @typescript-eslint/naming-convention */
+/* eslint-disable id-blacklist */
+import { ReplaySubject, of } from 'rxjs';
 import { Action } from '@ngrx/store';
 import { TestBed } from '@angular/core/testing';
 import { GamesEffects } from './games.effects';
@@ -16,7 +18,6 @@ import { Game } from './models/game';
 
 const fakeGame: Game = {
   state: 'launching',
-  // eslint-disable-next-line id-blacklist
   number: 453,
   map: 'cp_sunshine',
   slots: [
@@ -42,19 +43,12 @@ const fakeGame: Game = {
   id: 'FAKE_GAME_ID'
 };
 
-class GamesServiceStub {
-  requestSubstitute(gameId: string, playerId: string) { return of(null); }
-  cancelSubstitutionRequest(gameId: string, playerId: string) { return of(null); }
-  replacePlayer(gameId: string, replaceeId: string, replacementId: string) { return of(fakeGame); }
-}
-
 const initialState = {
   games: {
     ids: [
       'FAKE_GAME_ID'
     ],
     entities: {
-      // eslint-disable-next-line @typescript-eslint/naming-convention
       FAKE_GAME_ID: fakeGame,
     },
   },
@@ -66,7 +60,7 @@ const initialState = {
     role: 'super-user',
     etf2lProfileId: 112758,
     joinedAt: '2019-08-02T19:01:09.576Z',
-    id: '5d448875b963ff7e00c6b6b3',
+    id: 'FAKE_PLAYER_ID',
     activeGameId: null,
     bans: [],
   }
@@ -75,9 +69,17 @@ const initialState = {
 describe('GamesEffects', () => {
   let actions: ReplaySubject<Action>;
   let effects: GamesEffects;
-  let gamesService: GamesService;
+  let gamesService: jasmine.SpyObj<GamesService>;
 
-  beforeEach(() => actions = new ReplaySubject<Action>(1));
+  beforeEach(() => {
+    actions = new ReplaySubject<Action>(1);
+
+    gamesService = jasmine.createSpyObj<GamesService>(GamesService.name,
+      ['requestSubstitute', 'cancelSubstitutionRequest', 'replacePlayer']);
+    gamesService.requestSubstitute.and.returnValue(of(null));
+    gamesService.cancelSubstitutionRequest.and.returnValue(of(null));
+    gamesService.replacePlayer.and.returnValue(of(fakeGame));
+  });
 
   beforeEach(() => TestBed.configureTestingModule({
     imports: [
@@ -86,7 +88,7 @@ describe('GamesEffects', () => {
     providers: [
       GamesEffects,
       provideMockActions(() => actions.asObservable()),
-      { provide: GamesService, useClass: GamesServiceStub },
+      { provide: GamesService, useValue: gamesService },
       provideMockStore({ initialState }),
       { provide: Socket, useClass: EventEmitter },
     ],
@@ -94,7 +96,6 @@ describe('GamesEffects', () => {
 
   beforeEach(() => {
     effects = TestBed.inject(GamesEffects);
-    gamesService = TestBed.inject(GamesService);
   });
 
   afterEach(() => actions.complete());
@@ -142,7 +143,6 @@ describe('GamesEffects', () => {
       const game: Game = {
         id: 'FAKE_GAME_ID',
         launchedAt: new Date(),
-        // eslint-disable-next-line id-blacklist
         number: 1,
         slots: [
           {
@@ -157,8 +157,11 @@ describe('GamesEffects', () => {
         state: 'launching',
       };
 
-      it('should dispatch the ownGameAdded action', () => {
-        effects.ownGameStarted.subscribe(action => expect(action).toEqual(ownGameAdded({ gameId: 'FAKE_GAME_ID' })));
+      it('should dispatch the ownGameAdded action', done => {
+        effects.ownGameStarted.subscribe(action => {
+          expect(action).toEqual(ownGameAdded({ gameId: 'FAKE_GAME_ID' }));
+          done();
+        });
         actions.next(gameCreated({ game }));
       });
     });
@@ -167,27 +170,24 @@ describe('GamesEffects', () => {
   describe('requestSubstitute', () => {
     it('should call service', () => {
       effects.requestSubstitute.subscribe();
-      const spy = spyOn(gamesService, 'requestSubstitute').and.callThrough();
       actions.next(requestSubstitute({ gameId: 'FAKE_GAME_ID', playerId: 'FAKE_PLAYER_ID' }));
-      expect(spy).toHaveBeenCalledWith('FAKE_GAME_ID', 'FAKE_PLAYER_ID');
+      expect(gamesService.requestSubstitute).toHaveBeenCalledWith('FAKE_GAME_ID', 'FAKE_PLAYER_ID');
     });
   });
 
   describe('cancelSubstitutionRequest', () => {
     it('should call service', () => {
       effects.cancelSubstitutionRequest.subscribe();
-      const spy = spyOn(gamesService, 'cancelSubstitutionRequest').and.callThrough();
       actions.next(cancelSubstitutionRequest({ gameId: 'FAKE_GAME_ID', playerId: 'FAKE_PLAYER_ID' }));
-      expect(spy).toHaveBeenCalledWith('FAKE_GAME_ID', 'FAKE_PLAYER_ID');
+      expect(gamesService.cancelSubstitutionRequest).toHaveBeenCalledWith('FAKE_GAME_ID', 'FAKE_PLAYER_ID');
     });
   });
 
   describe('replacePlayer', () => {
     it('should replace the player', () => {
       effects.replacePlayer.subscribe(game => expect(game).toEqual(gameUpdated({ game: fakeGame as any })));
-      const spy = spyOn(gamesService, 'replacePlayer').and.callThrough();
       actions.next(replacePlayer({ gameId: 'FAKE_GAME_ID', replaceeId: 'FAKE_REPLACEE_PLAYER_ID' }));
-      expect(spy).toHaveBeenCalled();
+      expect(gamesService.replacePlayer).toHaveBeenCalled();
     });
   });
 });

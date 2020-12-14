@@ -94,7 +94,6 @@ describe('SkillTableComponent', () => {
         joinedAt: new Date(),
         steamId: 'FAKE_STEAM_ID',
         avatarUrl: 'whatever',
-        gameCount: 144,
         skill: {
           scout: 1,
           soldier: 2,

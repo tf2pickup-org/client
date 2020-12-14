@@ -1,37 +1,50 @@
-<div class="list-group list-group-flush" *ngIf="players">
-  <ng-container *ngFor="let player of players">
-    <ng-container *ngIf="player.status !== 'waiting for substitute'; else waitingForSubSlot">
-      <a class="list-group-item list-group-item-action player-item pr-2"
-        [routerLink]="['/player', player.id]">
+<div *ngIf="players" class="player-list">
+  <div *ngFor="let player of players" class="player-list-item">
+    <app-game-class-icon
+      [gameClass]="player.gameClass"
+      class="player-list-item__icon"></app-game-class-icon>
 
-        <div class="class-icon" [inlineSVG]="'/assets/tf2-classfont/' + player.gameClass + '.svg'"></div>
-        {{ player.name }}
-        <span *ngIf="player.classSkill" class="badge badge-secondary mx-2">{{ player.classSkill }}</span>
-        <div class="flex-fill"></div>
-        <app-player-connection-status *ngIf="showPlayerConnectionStatus"
+    <ng-container [ngSwitch]="player.status">
+      <ng-container *ngSwitchCase="'active'">
+        <a [routerLink]="['/player', player.id]"
+          class="player-list-item__link">
+
+          <span class="player-list-item__player-name">
+            {{ player.name }}
+          </span>
+
+          <span *ngIf="player.classSkill"
+            class="player-list-item__skill">
+            {{ player.classSkill }}
+          </span>
+        </a>
+
+        <button *ngIf="showAdminActionButtons"
+          type="button"
+          class="request-substitute-button"
+          tooltip="Request substitute"
+          (click)="emitRequestSubstitute($event, player)">
+          <i-feather name="user-x"></i-feather>
+        </button>
+
+        <app-player-connection-status
+          *ngIf="showPlayerConnectionStatus"
           [connectionStatus]="player.connectionStatus"
-          class="mx-1"></app-player-connection-status>
+          [tooltip]="player.connectionStatus"
+          class="player-list-item__connection-status"></app-player-connection-status>
+      </ng-container>
 
-        <ng-container *ngIf="showAdminActionButtons">
-          <button type="button" class="btn btn-link btn-sm btn-request-substitute"
-            tooltip="Request substitute"
-            (click)="emitRequestSubstitute($event, player)">
-            <span class="oi oi-transfer"></span>
-          </button>
-        </ng-container>
-      </a>
+      <ng-container *ngSwitchCase="'waiting for substitute'">
+        <button type="button"
+          class="replace-player-button"
+          (click)="emitReplacePlayer(player)"
+          tooltip="Take this spot"
+          [disabled]="locked">
+          <div class="flex-grow-1">
+            <i-feather name="plus"></i-feather>
+          </div>
+        </button>
+      </ng-container>
     </ng-container>
-
-    <ng-template #waitingForSubSlot>
-      <button type="button"
-        class="list-group-item list-group-item-action list-group-item-warning player-item looking-for-substitute"
-        (click)="emitReplacePlayer(player)"
-        tooltip="Replace this player"
-        [disabled]="locked">
-        <div class="class-icon" [inlineSVG]="'/assets/tf2-classfont/' + player.gameClass + '.svg'"></div>
-        <span class="oi oi-plus"></span>
-        <div class="dummy"></div>
-      </button>
-    </ng-template>
-  </ng-container>
+  </div>
 </div>

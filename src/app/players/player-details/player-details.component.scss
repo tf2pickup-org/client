@@ -1,3 +1,36 @@
-.text-twitch {
-  color: #9146ff;
+@use 'utils/grid';
+@use 'utils/respond';
+
+.player-details {
+  display: flex;
+  padding: 2rem 0;
+
+  @include respond.above(huge) {
+    flex-flow: row nowrap;
+  }
+
+  @include respond.below(huge) {
+    flex-flow: column nowrap;
+  }
+}
+
+.external-profile-links {
+  margin-bottom: 2rem;
+}
+
+.profile-details {
+  @include respond.above(huge) {
+    flex: 1 1 auto;
+    padding: 0 2rem;
+  }
+
+  @include respond.below(huge) {
+    margin-bottom: 2rem;
+  }
+}
+
+.player-games {
+  @include respond.above(huge) {
+    flex: 1 1 auto;
+  }
 }

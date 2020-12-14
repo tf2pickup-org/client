@@ -1,0 +1,13 @@
+@use 'utils/respond';
+
+.map-vote-container {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  align-items: center;
+
+  @include respond.below(large) {
+    flex-flow: column;
+    justify-content: flex-start;
+  }
+}

@@ -1,0 +1,27 @@
+@use 'components/badge';
+@use 'components/surface';
+@use 'theme';
+
+$-item-height: 80px;
+$-item-margin: 24px;
+
+.game-server-list-item {
+  @include surface.make;
+  @include surface.shadow;
+  @include surface.fill-color(theme.$text-background-color);
+  @include surface.ink-color(theme.$font-color-dark);
+
+  display: flex;
+  height: $-item-height;
+  margin: $-item-margin 0;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+}
+
+.server-name {
+  flex: 1 1 auto;
+
+  font-size: 1.5rem;
+  font-weight: 600;
+}

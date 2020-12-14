@@ -1,18 +1,133 @@
-.map-thumbnail-btn {
-  display: block;
-  padding: 0px;
-  width: 300px;
-  height: 160px;
-  border-radius: 0.25rem;
-  border: none;
+@use 'sass:color';
+@use '@material/ripple';
+@use 'utils/border-radius';
+@use 'utils/ghost';
+@use 'utils/respond';
+@use 'utils/outline';
+@use 'theme';
 
-  &:not(:disabled) {
-    &.active {
-      box-shadow: 0 0 5px 5px var(--green);
+$-button-border-radius-large: 16px;
+$-thumbnail-height-large: 160px;
+$-button-border-radius-small: 8px;
+$-thumbnail-height-small: 29px;
+
+$-button-background-color: rgba(255, 255, 255, 0.7);
+$-button-selected-background-color: color.change(theme.$secondary, $alpha:0.7);
+$-overlay-background-color: color.adjust(rgb(0, 0, 0), $lightness: 10%, $alpha: -0.4);
+
+$-thumbnail-border-radius: 6px;
+
+$-display-small-buttons-threshold: huge;
+
+.map-vote-btn {
+  @include outline.disable;
+
+  margin: 1rem;
+  border: 0;
+  padding: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: $-button-border-radius-large;
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+  transition: background-color 0.1s;
+
+  @include respond.below($-display-small-buttons-threshold) {
+    margin: 0.2rem 0;
+    padding: 0.1rem;
+    border-radius: $-button-border-radius-small;
+  }
+
+  &:not([disabled]) {
+    @include ripple.surface;
+    @include ripple.radius-bounded;
+    @include ripple.states;
+
+    overflow: hidden;
+  }
+
+  &.is-selected {
+    background-color: $-button-selected-background-color;
+  }
+}
+
+.thumbnail {
+  display: block;
+  padding: 0;
+  height: $-thumbnail-height-large;
+  width: 300px;
+  border: 0;
+  border-radius: $-thumbnail-border-radius;
+  background-image: linear-gradient(65deg, rgba(255, 255, 255, 0) 0, rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0) 100%);
+
+  @include respond.below($-display-small-buttons-threshold) {
+    height: $-thumbnail-height-small;
+  }
+
+  &__overlay {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+
+    height: 100%;
+    width: 100%;
+
+    @include respond.above($-display-small-buttons-threshold) {
+      flex-flow: column nowrap;
     }
 
-    &:not(.active):hover {
-      box-shadow: 0 0 3px 3px var(--yellow);
+    @include respond.below($-display-small-buttons-threshold) {
+      flex-flow: row nowrap;
+    }
+
+    %line {
+      background-color: $-overlay-background-color;
+      color: #fff;
+
+      font-size: 1.2rem;
+      font-weight: 700;
+
+      height: 29px;
+      overflow: hidden;
+
+      > span,
+      > div {
+        @include respond.below($-display-small-buttons-threshold) {
+          padding: 0 0.3rem;
+        }
+      }
+    }
+
+    &__name {
+      @extend %line;
+
+      @include respond.above($-display-small-buttons-threshold) {
+        @include border-radius.top($-thumbnail-border-radius);
+      }
+
+      @include respond.below($-display-small-buttons-threshold) {
+        @include border-radius.left($-thumbnail-border-radius);
+      }
+    }
+
+    &__vote-result {
+      @extend %line;
+
+      @include respond.above($-display-small-buttons-threshold) {
+        @include border-radius.bottom($-thumbnail-border-radius);
+      }
+
+      @include respond.below($-display-small-buttons-threshold) {
+        @include border-radius.right($-thumbnail-border-radius);
+      }
+    }
+
+    &__fill {
+      @extend %line;
+
+      flex: 1 1 auto;
+
+      @include respond.above($-display-small-buttons-threshold) {
+        display: none;
+      }
     }
   }
 }

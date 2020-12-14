@@ -7,14 +7,18 @@ import { reducer } from './twitch.reducer';
 import { PlayersModule } from '@app/players/players.module';
 import { EffectsModule } from '@ngrx/effects';
 import { TwitchEffects } from './twitch.effects';
+import { IconsModule } from '@app/icons/icons.module';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
 @NgModule({
   imports: [
     CommonModule,
     StoreModule.forFeature('twitch', reducer),
     EffectsModule.forFeature([TwitchEffects]),
+    TooltipModule,
 
     PlayersModule,
+    IconsModule,
   ],
   declarations: [
     TwitchStreamListComponent,

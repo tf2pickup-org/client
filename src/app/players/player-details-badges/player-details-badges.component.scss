@@ -1,0 +1,23 @@
+@use 'theme';
+@use 'components/badge';
+
+.badge:first-child {
+  margin-left: 0;
+}
+
+.badge--admin {
+  @include badge.make(theme.$secondary);
+  @include badge.ink-color(theme.$font-color-dark);
+}
+
+.badge--twitch {
+  @include badge.make(theme.$twitchtv);
+  @include badge.ink-color(theme.$font-color-light);
+}
+
+.divider {
+  background-color: rgb(255, 255, 255);
+  height: 2px;
+  margin: 0.8rem 0 1rem;
+  width: 100%;
+}

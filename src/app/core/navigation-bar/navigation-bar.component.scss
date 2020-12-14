@@ -1,4 +1,148 @@
-.profile-link {
-  font-size: 130%;
-  font-weight: bold;
+@use 'theme';
+@use 'utils/border-radius';
+@use 'utils/outline';
+@use 'utils/respond';
+
+// navigation bar itself
+$-navigation-bar-height: 76px;
+$-navigation-bar-border-radius: 45px;
+$-navigation-bar-shadow-color: rgba(0, 0, 0, 0.5);
+$-navigation-bar-shadow: 0 0 8px $-navigation-bar-shadow-color;
+
+// navigation bar links
+$-link-height: $-navigation-bar-height * 0.8687;
+$-link-border-radius: 5px;
+$-link-border-radius-bottom-right: 40px;
+
+.navbar {
+  @include border-radius.bottom($-navigation-bar-border-radius);
+
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+
+  background-color: theme.$navigation-bar-background-color;
+  box-shadow: $-navigation-bar-shadow;
+
+  max-height: $-navigation-bar-height;
+  min-height: $-navigation-bar-height;
+
+  @include respond.below(huge) {
+    justify-content: center;
+  }
+
+  &__logo {
+    @include outline.disable;
+
+    align-self: center;
+    margin: 0 4px;
+  }
+
+  &__links {
+    display: flex;
+    flex-flow: row nowrap;
+    padding: 0 16px;
+    list-style: none;
+
+    @include respond.below(huge) {
+      display: none;
+    }
+  }
+
+  &__link {
+    @include outline.disable;
+
+    display: block;
+    height: $-link-height;
+    line-height: $-link-height;
+    padding: 0 32px;
+
+    background-color: theme.$navigation-bar-link-background-color;
+
+    border-radius: 0 0 $-link-border-radius-bottom-right $-link-border-radius;
+    box-shadow: $-navigation-bar-shadow;
+
+    transition: 0.1s;
+
+    position: relative;
+    z-index: 1;
+
+    color: #fff;
+    font-size: 1.6rem;
+    font-weight: 700;
+    text-decoration: none;
+
+    @mixin make-advanced {
+      height: $-navigation-bar-height;
+      padding-top: ($-navigation-bar-height - $-link-height);
+    }
+
+    &:hover {
+      @include make-advanced;
+    }
+
+    &.active {
+      @include make-advanced;
+
+      background-color: theme.$navigation-bar-background-color;
+      box-shadow: 0.5rem 0.5rem 0.5rem -0.5rem $-navigation-bar-shadow-color;
+      z-index: 0;
+    }
+
+    &--icon {
+      padding: 0 20px;
+      line-height: $-link-height * 0.9;
+
+      > img {
+        width: 30px;
+        height: 30px;
+      }
+    }
+
+    &--profile {
+      padding: 0 32px 0 8px;
+
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      @include respond.below(huge) {
+        display: none;
+      }
+    }
+
+    &--settings {
+      padding: 0 19px;
+      line-height: $-link-height * 0.9;
+      border-radius: 0 0 $-link-border-radius $-link-border-radius-bottom-right;
+
+      @include respond.below(huge) {
+        display: none;
+      }
+
+      &.active {
+        box-shadow: -8px 8px 8px -8px $-navigation-bar-shadow-color;
+      }
+
+      > img {
+        width: 30px;
+        height: 30px;
+      }
+    }
+  }
+}
+
+.steam-login-button {
+  align-self: center;
+  margin: 0 32px;
+
+  @include respond.below(huge) {
+    display: none;
+  }
+}
+
+.profile-avatar {
+  width: 50px;
+  height: 50px;
+  margin: 0 8px;
 }

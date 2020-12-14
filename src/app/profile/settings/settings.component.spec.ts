@@ -1,37 +1,20 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { SettingsComponent } from './settings.component';
-import { provideMockStore, MockStore } from '@ngrx/store/testing';
-import { TwitchService } from '@app/twitch/twitch.service';
-import { twitchTvUser } from '../profile.selectors';
-import { MemoizedSelector } from '@ngrx/store';
-import { AppState } from '@app/app.state';
 import { By } from '@angular/platform-browser';
-
-class TwitchServiceStub {
-  login() { }
-}
+import { SettingsComponent } from './settings.component';
+import { Location } from '@angular/common';
 
 describe('SettingsComponent', () => {
   let component: SettingsComponent;
   let fixture: ComponentFixture<SettingsComponent>;
-  let store: MockStore;
-  let twitchTvUserSelector: MemoizedSelector<AppState, any>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ SettingsComponent ],
-      providers: [
-        provideMockStore(),
-        { provide: TwitchService, useClass: TwitchServiceStub },
-      ],
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    store = TestBed.inject(MockStore);
-    twitchTvUserSelector = store.overrideSelector(twitchTvUser, null);
-
     fixture = TestBed.createComponent(SettingsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -41,28 +24,17 @@ describe('SettingsComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('when the twitch profile is not linked', () => {
-    it('should render the button to login via twitch', () => {
-      const btn = fixture.debugElement.query(By.css('button.login-via-twitch')).nativeElement as HTMLButtonElement;
-      expect(btn).toBeTruthy();
+  describe('when user presses the cancel button', () => {
+    let cancelButton: HTMLButtonElement;
 
-      const spy = spyOn(TestBed.inject(TwitchService), 'login');
-      btn.click();
-      expect(spy).toHaveBeenCalled();
-    });
-  });
-
-  describe('when the user has linked twitch account', () => {
     beforeEach(() => {
-      twitchTvUserSelector.setResult({ displayName: 'FAKE_DISPLAY_NAME', login: 'FAKE_LOGIN' });
-      store.refreshState();
-      fixture.detectChanges();
+      cancelButton = fixture.debugElement.query(By.css('.cancel-button')).nativeElement as HTMLButtonElement;
     });
 
-    it('should render profile info', () => {
-      expect(fixture.debugElement.query(By.css('.twitch-profile-info'))).toBeTruthy();
-      const anchor = fixture.debugElement.query(By.css('.twitch-profile-info a')).nativeElement as HTMLAnchorElement;
-      expect(anchor.href).toEqual('https://www.twitch.tv/FAKE_LOGIN/');
+    it('should go back in history', () => {
+      const spy = spyOn(TestBed.inject(Location), 'back');
+      cancelButton.click();
+      expect(spy).toHaveBeenCalled();
     });
   });
 });

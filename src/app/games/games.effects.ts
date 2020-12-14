@@ -3,7 +3,7 @@ import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { GamesService } from './games.service';
 import { gameAdded, loadGame, gameUpdated, forceEndGame, gameCreated, reinitializeServer, ownGameAdded, requestSubstitute,
   cancelSubstitutionRequest, replacePlayer } from './games.actions';
-import { mergeMap, map, filter, withLatestFrom, tap } from 'rxjs/operators';
+import { mergeMap, map, filter, withLatestFrom } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { profile } from '@app/profile/profile.selectors';
 import { profileLoaded } from '@app/profile/profile.actions';

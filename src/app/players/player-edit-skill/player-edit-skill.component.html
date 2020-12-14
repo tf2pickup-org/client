@@ -1,11 +1,24 @@
-<div *ngIf="form" [formGroup]="form" class="form-group row">
-  <label [attr.for]="'rating_' + gameClass" class="col-4 col-form-label">{{ gameClass }}</label>
-  <div class="col-8">
-    <input
-      type="number"
-      [attr.id]="'rating_' + gameClass"
+<div *ngIf="form && gameClass" [formGroup]="form" class="player-edit-skill-container">
+  <app-game-class-icon
+    [gameClass]="gameClass"
+    size="24"
+    class="mr-3"></app-game-class-icon>
+  <label
+    class="mdc-text-field mdc-text-field--outlined mdc-text-field--dense mdc-text-field--label-floating skill-field" #skill>
+    <input type="number"
+      class="mdc-text-field__input"
+      [attr.aria-labelledby]="'player-skill-' + gameClass"
       [formControlName]="gameClass"
-      class="form-control"
+      required
       min="1" max="7">
-  </div>
+    <span class="mdc-notched-outline  mdc-notched-outline--upgraded mdc-notched-outline--notched">
+      <span class="mdc-notched-outline__leading"></span>
+      <span class="mdc-notched-outline__notch">
+        <span
+          class="mdc-floating-label mdc-floating-label--float-above"
+          [attr.id]="'player-skill-' + gameClass">{{ gameClass }}</span>
+      </span>
+      <span class="mdc-notched-outline__trailing"></span>
+    </span>
+  </label>
 </div>

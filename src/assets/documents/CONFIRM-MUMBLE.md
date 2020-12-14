@@ -1,2 +1,1 @@
-Yes, I have installed and configured a [Mumble](https://www.mumble.com/) application on my computer.
-My microphone is working, my voice is clear and audible.
+Using [Mumble](https://www.mumble.com/) is obligatory when playing pickups. Please verify you have Mumble installed, your microphone is working and your voice is clear and audible.

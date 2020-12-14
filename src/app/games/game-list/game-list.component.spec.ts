@@ -1,96 +1,127 @@
+/* eslint-disable id-blacklist */
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { GameListComponent } from './game-list.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { GamesService } from '../games.service';
-import { NEVER, of, Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { PlayersService } from '@app/players/players.service';
 import { By } from '@angular/platform-browser';
 import { PaginatedList } from '@app/core/models/paginated-list';
 import { Game } from '../models/game';
+import { ActivatedRoute, convertToParamMap, Router } from '@angular/router';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { first } from 'rxjs/operators';
+import { ChangeDetectionStrategy } from '@angular/core';
+import { MockPipe } from 'ng-mocks';
+import { MapThumbnailPipe } from '@app/shared/map-thumbnail.pipe';
 
-class GamesServiceStub {
-  results = new Subject<PaginatedList<Game>>();
-  fetchGames() { return this.results.asObservable(); }
-}
-
-class PlayersServiceStub {
-  fetchPlayerGames() { return NEVER; }
-}
+const mockGameListResponse = {
+  results: [{
+    id: 'FAKE_GAME_ID',
+    state: 'ended',
+    number: 1905,
+    map: 'cp_reckoner_rc5',
+    slots: [],
+    launchedAt: new Date('2020-12-08T17:24:21.003Z'),
+  }],
+  itemCount: 1905
+};
 
 describe('GameListComponent', () => {
   let component: GameListComponent;
   let fixture: ComponentFixture<GameListComponent>;
-  let gamesService: GamesServiceStub;
+  let gamesService: jasmine.SpyObj<GamesService>;
+  let results: Subject<PaginatedList<Game>>;
+  let queryParams: Subject<any>;
+  let activatedRoute: { queryParamMap: Observable<any> };
+  let router: Router;
+
+  beforeEach(() => {
+    queryParams = new Subject();
+    activatedRoute = { queryParamMap: queryParams.asObservable() };
+  });
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ GameListComponent ],
+      declarations: [
+        GameListComponent,
+        MockPipe(MapThumbnailPipe, value => ''),
+      ],
       imports: [
         RouterTestingModule,
         NgxPaginationModule,
+        NoopAnimationsModule,
       ],
       providers: [
-        { provide: GamesService, useClass: GamesServiceStub },
-        { provide: PlayersService, useClass: PlayersServiceStub },
+        {
+          provide: GamesService,
+          useValue: jasmine.createSpyObj<GamesService>(GamesService.name, ['fetchGames']),
+        },
+        {
+          provide: ActivatedRoute,
+          useValue: activatedRoute,
+        },
       ],
     })
+    // https://github.com/angular/angular/issues/12313
+    .overrideComponent(GameListComponent, { set: { changeDetection: ChangeDetectionStrategy.Default } })
     .compileComponents();
   }));
 
   beforeEach(() => {
+    results = new Subject();
+    gamesService = TestBed.inject(GamesService) as jasmine.SpyObj<GamesService>;
+    gamesService.fetchGames.and.returnValue(results.asObservable().pipe(first()));
+
     fixture = TestBed.createComponent(GameListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
 
-    gamesService = TestBed.get(GamesService);
+    router = TestBed.inject(Router);
+    spyOn(router, 'navigate').and.callFake((commands, extras) => {
+      queryParams.next(convertToParamMap(extras.queryParams || { }));
+      return Promise.resolve(true);
+    });
+  });
+
+  beforeEach(() => {
+    component.ngOnInit();
+    queryParams.next(convertToParamMap({ page: null }));
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should not render pagination controls unless there is more than 1 page', () => {
-    gamesService.results.next({ itemCount: 10, results: [] });
-    fixture.detectChanges();
-    expect(fixture.debugElement.query(By.css('nav'))).toBeFalsy();
-  });
-
-  it('should display \'no games\' text when there are no games', () => {
-    gamesService.results.next({ itemCount: 0, results: [] });
-    fixture.detectChanges();
-    expect(fixture.debugElement.query(By.css('div>span.text-muted'))).toBeTruthy();
-  });
-
-  it('should render pagination controls when there are more pages', () => {
-    gamesService.results.next({ itemCount: 11, results: [] });
-    fixture.detectChanges();
-    expect(fixture.debugElement.query(By.css('nav'))).toBeTruthy();
-  });
-
-  describe('#getPage()', () => {
-    describe('without playerId', () => {
-      it('should load a given page', () => {
-        const spy = spyOn(TestBed.get(GamesService), 'fetchGames').and.returnValue(of({ itemCount: 50, results: [] }));
-        component.getPage(1);
-        expect(spy).toHaveBeenCalledWith(0, 10);
-
-        component.getPage(5);
-        expect(spy).toHaveBeenCalledWith(40, 10);
-      });
+  describe('when there is not more than 1 page', () => {
+    beforeEach(() => {
+      results.next({ results: mockGameListResponse.results, itemCount: 5 } as any);
+      fixture.detectChanges();
     });
 
-    describe('with playerId', () => {
-      beforeEach(() => component.playerId = 'FAKE_PLAYER_ID');
+    it('should not render pagination controls', () => {
+      expect(fixture.debugElement.query(By.css('.pagination'))).toBeFalsy();
+    });
+  });
 
-      it('should load a given page', () => {
-        const spy = spyOn(TestBed.get(PlayersService), 'fetchPlayerGames').and.returnValue(of({ itemCount: 50, results: [] }));
-        component.getPage(1);
-        expect(spy).toHaveBeenCalledWith('FAKE_PLAYER_ID', 0, 10);
+  describe('when there are more pages', () => {
+    beforeEach(() => {
+      results.next(mockGameListResponse as any);
 
-        component.getPage(3);
-        expect(spy).toHaveBeenCalledWith('FAKE_PLAYER_ID', 20, 10);
-      });
+      // This is a workaround, I have no idea how to make Angular call the animation.done callback...
+      component.onAnimationDone();
+
+      fixture.detectChanges();
+    });
+
+    it('should render navigation controls', () => {
+      expect(fixture.debugElement.query(By.css('.pagination'))).toBeTruthy();
+    });
+
+    it('should request given page', () => {
+      const second = fixture.debugElement.query(By.css('.pagination__item:nth-child(3) a')).nativeElement as HTMLAnchorElement;
+      second.click();
+      expect(gamesService.fetchGames).toHaveBeenCalledWith(5, 5);
     });
   });
 

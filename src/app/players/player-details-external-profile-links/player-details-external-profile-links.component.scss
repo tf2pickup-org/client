@@ -1,0 +1,59 @@
+@use 'components/surface';
+@use 'utils/outline';
+@use 'utils/respond';
+@use 'theme';
+
+$-external-profile-link-card-size: 80px;
+
+.external-profile-links {
+  display: flex;
+
+  @include respond.above(huge) {
+    flex-flow: column nowrap;
+  }
+
+  @include respond.below(huge) {
+    flex-flow: row nowrap;
+    justify-content: center;
+  }
+}
+
+%external-profile-link {
+  @include surface.make;
+  @include surface.shadow;
+  @include surface.ripple;
+  @include surface.fill-color(rgb(255, 255, 255));
+  @include surface.ink-color(theme.$font-color-dark);
+
+  height: $-external-profile-link-card-size;
+  width: $-external-profile-link-card-size;
+
+  @include respond.above(huge) {
+    margin: 0.5rem 0;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  @include respond.below(huge) {
+    margin: 0 0.5rem;
+  }
+}
+
+.external-profile-link {
+  @extend %external-profile-link;
+  @include outline.disable;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-weight: 600;
+  font-size: 1.2rem;
+  text-decoration: none;
+}
+
+.ghost {
+  @extend %external-profile-link;
+}

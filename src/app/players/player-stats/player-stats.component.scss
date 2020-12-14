@@ -1,17 +1,36 @@
-@import "~bootstrap/scss/functions";
-@import "~bootstrap/scss/variables";
+@use 'sass:color';
+@use 'components/surface';
+@use 'utils/ghost';
+@use 'theme';
 
-.col.narrow {
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
-  align-items: center;
+.games-player-total {
+  @include surface.make;
+  @include surface.shadow;
+  @include surface.fill-color(rgb(255, 255, 255));
+  @include surface.ink-color(theme.$font-color-dark);
+
+  margin: 0.5rem 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-align: center;
+
+  .ghost {
+    @include ghost.make-line(300px, 29px, rgb(0, 0, 0));
+    margin: 0 auto;
+  }
 }
 
-.class-icon {
-  display: inline-block;
-  width: 30px;
-  height: 30px;
-  margin: 0 .25em;
-  fill: gray("700");
+.player-stats-classes-container {
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+
+  > * {
+    margin: 0.5rem;
+  }
+}
+
+.player-stats-games-played-class {
+  font-size: 1.4rem;
+  font-weight: bold;
 }

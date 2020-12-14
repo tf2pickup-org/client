@@ -3,7 +3,7 @@ import { PlayerListComponent } from './player-list.component';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { AppState } from '@app/app.state';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Store, MemoizedSelector } from '@ngrx/store';
+import { MemoizedSelector } from '@ngrx/store';
 import { allPlayers } from '../selectors';
 import { By } from '@angular/platform-browser';
 
@@ -25,7 +25,7 @@ describe('PlayerListComponent', () => {
   }));
 
   beforeEach(() => {
-    store = TestBed.get(Store);
+    store = TestBed.inject(MockStore);
     allPlayersSelector = store.overrideSelector(allPlayers, []);
 
     fixture = TestBed.createComponent(PlayerListComponent);
@@ -37,15 +37,19 @@ describe('PlayerListComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should render correct link', () => {
-    allPlayersSelector.setResult([{ id: 'FAKE_ID', name: 'FAKE_NAME' }]);
-    store.refreshState();
-    fixture.detectChanges();
+  describe('with players', () => {
+    beforeEach(() => {
+      allPlayersSelector.setResult([{ id: 'FAKE_ID', name: 'FAKE_NAME' }]);
+      store.refreshState();
+      fixture.detectChanges();
+    });
 
-    const anchor = fixture.debugElement.query(By.css('a.list-group-item.list-group-item-action')).nativeElement as HTMLAnchorElement;
-    expect(anchor).toBeTruthy();
-    expect(anchor.href).toMatch(/\/player\/FAKE_ID$/);
-    expect(anchor.innerText).toEqual('FAKE_NAME');
+    it('should render correct link', () => {
+      const anchor = fixture.debugElement.query(By.css('a')).nativeElement as HTMLAnchorElement;
+      expect(anchor).toBeTruthy();
+      expect(anchor.href).toMatch(/\/player\/FAKE_ID$/);
+      expect(anchor.innerText).toEqual('FAKE_NAME');
+    });
   });
 
   it('should render an admin badge', () => {
@@ -53,8 +57,7 @@ describe('PlayerListComponent', () => {
     store.refreshState();
     fixture.detectChanges();
 
-    const badge = fixture.debugElement.query(By.css('span.badge')).nativeElement as HTMLElement;
-    expect(badge.classList.contains('badge-warning')).toBe(true);
-    expect(badge.innerText).toEqual('admin');
+    const badge = fixture.debugElement.query(By.css('i-feather[name=star]')).nativeElement as HTMLElement;
+    expect(badge).toBeTruthy();
   });
 });

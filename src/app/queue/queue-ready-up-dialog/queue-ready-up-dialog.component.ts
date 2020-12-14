@@ -1,7 +1,10 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { leaveQueue, readyUp } from '../queue.actions';
-import { BsModalRef } from 'ngx-bootstrap/modal';
+import { Component, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
+
+// eslint-disable-next-line no-shadow
+export enum QueueReadyUpAction {
+  readyUp,
+  leaveQueue,
+};
 
 @Component({
   selector: 'app-queue-ready-up-dialog',
@@ -11,19 +14,15 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 })
 export class QueueReadyUpDialogComponent {
 
-  constructor(
-    private store: Store,
-    private bsModalRef: BsModalRef,
-  ) { }
+  @Output()
+  action = new EventEmitter<QueueReadyUpAction>();
 
-  leaveQueue() {
-    this.store.dispatch(leaveQueue());
-    this.bsModalRef.hide();
+  readyUp() {
+    this.action.emit(QueueReadyUpAction.readyUp);
   }
 
-  confirmReady() {
-    this.store.dispatch(readyUp());
-    this.bsModalRef.hide();
+  leaveQueue() {
+    this.action.emit(QueueReadyUpAction.leaveQueue);
   }
 
 }

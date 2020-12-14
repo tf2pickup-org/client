@@ -1,10 +1,39 @@
-<div
-  *ngIf="state | async as _state"
-  class="p-3 my-2 text-white rounded text-center"
+<ng-template #readyOrWaiting>
+  <div @fadeIn>
+    <strong>players: </strong>
+    <div [@pulsate]="playerCount | async" class="player-count">{{ playerCount | async }}</div> / {{ requiredPlayerCount | async }}
+  </div>
+  <div class="pre-ready-up-container">
+    <app-pre-ready-up-button *ngIf="isInQueue | async"></app-pre-ready-up-button>
+  </div>
+</ng-template>
+
+<div class="queue-status"
   [ngClass]="{
-    'bg-info' :_state === 'waiting',
-    'bg-success': _state === 'ready',
-    'bg-dark': _state === 'launching'
-  }">
-  Players: {{ playerCount | async }} / {{ requiredPlayerCount | async }}
+    'loading': 'waiting',
+    'waiting': 'waiting',
+    'ready': 'ready',
+    'launching': 'launching'
+  }[state | async]">
+  <div class="fill"></div>
+
+  <ng-container [ngSwitch]="state | async">
+    <ng-container *ngSwitchCase="'loading'">
+      <div class="queue-status__ghost"></div>
+      <div class="fill"></div>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'ready'">
+      <ng-container *ngTemplateOutlet="readyOrWaiting"></ng-container>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'waiting'">
+      <ng-container *ngTemplateOutlet="readyOrWaiting"></ng-container>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'launching'">
+      <span>launching...</span>
+      <div class="fill"></div>
+    </ng-container>
+  </ng-container>
 </div>

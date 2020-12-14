@@ -1,11 +1,29 @@
-<div class="modal-body text-center">
-  <p>Are you ready to play the game now?</p>
-  <div class="row">
-    <div class="col">
-      <button type="button" class="btn btn-primary btn-block" (click)="confirmReady()">Ready!</button>
-    </div>
-    <div class="col">
-      <button type="button" class="btn btn-secondary btn-block" (click)="leaveQueue()">No, I can't play now</button>
+<div class="mdc-dialog mdc-dialog--open mdc-dialog--stacked">
+  <div class="mdc-dialog__container">
+    <div class="mdc-dialog__surface p-3">
+      <div class="mdc-dialog__title">
+        Are you ready to play the game now?
+      </div>
+
+      <div class="mdc-dialog__actions align-items-center">
+        <button
+          type="button"
+          class="mdc-button mdc-dialog__button mdc-button--unelevated ready-up-button"
+          (click)="readyUp()">
+          <div class="mdc-button__ripple"></div>
+          <span class="mdc-button__label">Ready!</span>
+        </button>
+
+        <button
+          type="button"
+          class="mdc-button mdc-dialog__button leave-queue-button"
+          (click)="leaveQueue()">
+          <div class="mdc-button__ripple"></div>
+          <span class="mdc-button__label">No, I can't play now</span>
+        </button>
+      </div>
     </div>
   </div>
+
+  <div class="mdc-dialog__scrim"></div>
 </div>

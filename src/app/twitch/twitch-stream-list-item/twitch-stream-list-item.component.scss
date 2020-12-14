@@ -1,0 +1,40 @@
+@use 'components/surface';
+@use 'theme';
+@use 'variables';
+
+.twitch-stream-list-item {
+  @include surface.ripple;
+
+  display: flex;
+  flex-flow: row nowrap;
+
+  margin: 8px 0;
+  padding: 16px;
+  border-radius: variables.$default-border-radius;
+
+  font-weight: 600;
+
+  .content {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    padding: 0 16px;
+
+    min-width: 0;
+    flex: 1;
+
+    > * {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.stream-thumbnail {
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+}

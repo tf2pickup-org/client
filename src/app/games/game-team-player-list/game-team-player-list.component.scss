@@ -1,27 +1,98 @@
-@import "~bootstrap/scss/functions";
-@import "~bootstrap/scss/variables";
+@use 'sass:color';
+@use '@material/ripple';
+@use '@material/typography';
+@use 'components/surface';
+@use 'utils/outline';
+@use 'utils/transition';
+@use 'theme';
 
-.player-item {
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-  padding: 0;
-  height: 3rem;
+.player-list {
+  @include surface.make;
+  @include surface.shadow;
+  @include surface.fill-color(rgb(255, 255, 255));
+  @include surface.ink-color(theme.$font-color-dark);
 
-  &.looking-for-substitute {
-    justify-content: space-between;
+  padding: 10px 5px;
 
-    .dummy {
-      width: 30px;
-      height: 30px;
-      margin: 0 .75rem;
+  .player-list-item {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    min-width: 0;
+
+    padding: 0 8px;
+
+    &__icon,
+    &__connection-status {
+      margin: 0 2px;
+    }
+
+    &__link {
+      @include ripple.surface;
+      @include ripple.radius-bounded;
+      @include ripple.states;
+
+      overflow: hidden;
+
+      flex: 1 1 auto;
+      margin: 0 5px;
+      padding: 0 8px;
+
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      min-width: 0;
+
+      font-weight: 500;
+      line-height: 38px;
+
+      border-radius: 4px;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+
+    &__player-name {
+      @include typography.overflow-ellipsis;
+    }
+
+    &__skill {
+      @include typography.base;
+      @include typography.typography(caption);
+
+      color: color.adjust(theme.$secondary, $lightness: -15%);
+      margin: 0 4px;
     }
   }
+}
 
-  .class-icon {
-    width: 30px;
-    height: 30px;
-    margin: 0 .75rem;
-    fill: gray("800");
-  }
+%button {
+  @include ripple.surface;
+  @include ripple.radius-bounded;
+  @include ripple.states;
+  @include outline.disable;
+
+  overflow: hidden;
+
+  border: 0;
+  margin: 0 4px;
+  border-radius: 8px;
+  padding: 0 10px;
+}
+
+.request-substitute-button {
+  @extend %button;
+
+  background-color: rgb(255, 255, 255);
+  line-height: 40px;
+  min-width: 44px;
+}
+
+.replace-player-button {
+  @extend %button;
+
+  line-height: 36px;
+  border: 2px solid color.adjust(theme.$primary, $lightness: 70%);
+  flex: 1 1 auto;
 }

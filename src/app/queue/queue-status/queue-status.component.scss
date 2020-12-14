@@ -1,0 +1,50 @@
+@use 'sass:color';
+@use 'theme';
+@use 'variables';
+@use 'components/surface';
+@use 'utils/ghost';
+@use 'utils/transition';
+
+.queue-status {
+  @include surface.make;
+  @include surface.shadow;
+  @include surface.ink-color(theme.$font-color-dark);
+  @include transition.background-color;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  text-align: center;
+  font-size: 1.8rem;
+
+  &.waiting {
+    @include surface.fill-color(theme.$queue-status-waiting);
+  }
+
+  &.ready {
+    @include surface.fill-color(theme.$queue-status-ready-up);
+  }
+
+  &.launching {
+    @include surface.fill-color(theme.$queue-status-launching);
+  }
+
+  &__ghost {
+    @include ghost.make-line(220px, 43px, theme.$font-color-dark);
+  }
+
+  .player-count {
+    display: inline-block;
+  }
+}
+
+.fill {
+  flex: 1 1 auto;
+}
+
+.pre-ready-up-container {
+  flex: 1 1 0;
+  display: flex;
+  justify-content: flex-end;
+}

@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { RulesComponent } from './shared/rules/rules.component';
 
 const routes: Routes = [
-  { path: 'rules', component: RulesComponent },
+  { path: 'rules', component: RulesComponent, data: { animation: 'RulesPage' } },
 ];
 
 @NgModule({

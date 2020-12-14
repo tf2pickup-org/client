@@ -2,7 +2,6 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { QueueAlertsComponent } from './queue-alerts.component';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { Store, MemoizedSelector } from '@ngrx/store';
 import { By } from '@angular/platform-browser';
 import { AppState } from '@app/app.state';
@@ -12,6 +11,10 @@ import { PlayerBan } from '@app/players/models/player-ban';
 import { bans } from '@app/profile/profile.selectors';
 import { SubstituteRequest } from '../models/substitute-request';
 import { substituteRequests } from '../queue.selectors';
+import { MockComponent } from 'ng-mocks';
+import { ActiveGameSnackbarComponent } from '../active-game-snackbar/active-game-snackbar.component';
+import { SubstituteRequestBannerComponent } from '../substitute-request-banner/substitute-request-banner.component';
+import { BanBannerComponent } from '../ban-banner/ban-banner.component';
 
 describe('QueueAlertsComponent', () => {
   let component: QueueAlertsComponent;
@@ -23,20 +26,24 @@ describe('QueueAlertsComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ QueueAlertsComponent ],
+      declarations: [
+        QueueAlertsComponent,
+        MockComponent(ActiveGameSnackbarComponent),
+        MockComponent(SubstituteRequestBannerComponent),
+        MockComponent(BanBannerComponent),
+      ],
       imports: [
         RouterTestingModule,
       ],
       providers: [
         provideMockStore(),
       ],
-      schemas: [ NO_ERRORS_SCHEMA ],
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    store = TestBed.get(Store);
+    store = TestBed.inject(MockStore);
     activeGameSelector = store.overrideSelector(activeGame, null);
     bansSelector = store.overrideSelector(bans, []);
     substituteRequestsSelector = store.overrideSelector(substituteRequests, []);
@@ -51,63 +58,70 @@ describe('QueueAlertsComponent', () => {
   });
 
   describe('with ban issued', () => {
+    const mockBan: PlayerBan = {
+      id: 'FAKE_BAN_ID',
+      player: 'FAKE_PLAYER_ID',
+      reason: 'FAKE_REASON',
+      start: new Date(),
+      end: new Date(),
+      admin: 'FAKE_ADMIN_ID',
+    };
+
     beforeEach(() => {
-      bansSelector.setResult([
-        {
-          id: 'FAKE_BAN_ID',
-          player: 'FAKE_PLAYER_ID',
-          reason: 'FAKE_REASON',
-          start: new Date(),
-          end: new Date(),
-          admin: 'FAKE_ADMIN_ID',
-        },
-      ]);
+      bansSelector.setResult([ mockBan ]);
       store.refreshState();
       fixture.detectChanges();
     });
 
     it('should show alert', () => {
-      const el = fixture.debugElement.query(By.css('div.alert.alert-danger')).nativeElement as HTMLDivElement;
-      expect(el).toBeTruthy();
+      const banBanner = fixture.debugElement.query(By.css('app-ban-banner')).componentInstance as BanBannerComponent;
+      expect(banBanner).toBeTruthy();
+      expect(banBanner.ban).toEqual(mockBan);
     });
   });
 
   describe('with active game', () => {
+    const mockGame: Game = {
+      id: 'FAKE_GAME_ID',
+      // eslint-disable-next-line id-blacklist
+      number: 234,
+      launchedAt: new Date(),
+      map: 'cp_badlands',
+    } as any;
+
     beforeEach(() => {
-      activeGameSelector.setResult({
-        id: 'FAKE_GAME_ID',
-        // eslint-disable-next-line id-blacklist
-        number: 234,
-        launchedAt: new Date(),
-        map: 'cp_badlands',
-      } as any);
+      activeGameSelector.setResult(mockGame);
       store.refreshState();
       fixture.detectChanges();
     });
 
-    it('should show alert', () => {
-      const el = fixture.debugElement.query(By.css('div.alert.alert-primary')).nativeElement as HTMLDivElement;
-      expect(el).toBeTruthy();
+    it('should show the snackbar', () => {
+      const activeGameSnackbar = fixture.debugElement.query(By.css('app-active-game-snackbar'))
+        .componentInstance as ActiveGameSnackbarComponent;
+      expect(activeGameSnackbar).toBeTruthy();
+      expect(activeGameSnackbar.game).toEqual(mockGame);
     });
   });
 
   describe('with player substitute announcement', () => {
+    const mockSubstituteRequest: SubstituteRequest = {
+      gameId: '5e1fb93d9cacb6d6e08bc6bf',
+      gameNumber: 514,
+      gameClass: 'soldier',
+      team: 'BLU',
+    };
+
     beforeEach(() => {
-      substituteRequestsSelector.setResult([
-        {
-          gameId: '5e1fb93d9cacb6d6e08bc6bf',
-          gameNumber: 514,
-          gameClass: 'soldier',
-          team: 'BLU',
-        },
-      ]);
+      substituteRequestsSelector.setResult([ mockSubstituteRequest ]);
       store.refreshState();
       fixture.detectChanges();
     });
 
-    it('should render the subsitute alert', () => {
-      const el = fixture.debugElement.query(By.css('div.alert.alert-warning')).nativeElement as HTMLDivElement;
-      expect(el).toBeTruthy();
+    it('should render the subsitute alert banner', () => {
+      const substituteRequestBanner = fixture.debugElement.query(By.css('app-substitute-request-banner'))
+        .componentInstance as SubstituteRequestBannerComponent;
+      expect(substituteRequestBanner).toBeTruthy();
+      expect(substituteRequestBanner.substituteRequest).toEqual(mockSubstituteRequest);
     });
   });
 });

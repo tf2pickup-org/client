@@ -1,0 +1,16 @@
+@use 'sass:color';
+
+@mixin make-line($width, $height, $color: rgb(255, 255, 255)) {
+  display: block;
+
+  width: $width;
+  height: $height;
+
+  border-radius: 0.3rem;
+
+  @if (color.lightness($color) > 60) {
+    background-color: color.adjust($color, $lightness: -10%, $alpha: -0.3);
+  } @else {
+    background-color: color.adjust($color, $lightness: 80%, $alpha: -0.3);
+  }
+}

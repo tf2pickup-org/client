@@ -1,0 +1,56 @@
+//
+// Media queries
+// Reference: https://glennmccomb.com/articles/useful-sass-scss-media-query-mixins-for-bootstrap/
+//
+
+@use 'sass:map';
+
+$breakpoints: (
+  small: 576px,
+  medium: 768px,
+  large: 992px,
+  huge: 1200px,
+);
+
+@mixin above($breakpoint) {
+  @if map.has-key($breakpoints, $breakpoint) {
+    $value: map.get($breakpoints, $breakpoint);
+
+    @media (min-width: $value) {
+      @content;
+    }
+  } @else {
+    @error 'Invalid breakpoint: #{$breakpoint}.';
+  }
+}
+
+@mixin below($breakpoint) {
+  @if map.has-key($breakpoints, $breakpoint) {
+    $value: map.get($breakpoints, $breakpoint);
+
+    @media (max-width: ($value - 1)) {
+      @content;
+    }
+  } @else {
+    @error 'Invalid breakpoint: #{$breakpoint}';
+  }
+}
+
+@mixin between($lower, $upper) {
+  @if map.has-key($breakpoints, $lower) and map.has-key($breakpoints, $upper) {
+    $lower-breakpoint: map.get($breakpoints, $lower);
+    $upper-breakpoint: map.get($breakpoints, $upper);
+
+    @media (min-width: $lower-breakpoint) and (max-width: ($upper-breakpoint - 1)) {
+      @content;
+    }
+  } @else {
+    @if (map.has-key($breakpoints, $lower) == false) {
+      @error 'Your lower breakpoint was invalid: #{$lower}.';
+    }
+
+    @if (map.has-key($breakpoints, $upper) == false) {
+      @error 'Your upper breakpoint was invalid: #{$upper}.';
+    }
+  }
+}

@@ -13,12 +13,10 @@ import { QueueClassSlotListComponent } from './queue-class-slot-list/queue-class
 import { QueueSlotItemComponent } from './queue-slot-item/queue-slot-item.component';
 import { PlayersModule } from '@app/players/players.module';
 import { QueueReadyUpDialogComponent } from './queue-ready-up-dialog/queue-ready-up-dialog.component';
-import { QueueReadyUpDialogControllerComponent } from './queue-ready-up-dialog-controller/queue-ready-up-dialog-controller.component';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { FormsModule } from '@angular/forms';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { QueueAlertsComponent } from './queue-alerts/queue-alerts.component';
-import { QueueAddonsComponent } from './queue-addons/queue-addons.component';
 import { PreReadyUpButtonComponent } from './pre-ready-up-button/pre-ready-up-button.component';
 import { SecondsPipe } from './seconds.pipe';
 import { MapVoteComponent } from './map-vote/map-vote.component';
@@ -27,6 +25,12 @@ import { QueueNotificationsControllerComponent } from './queue-notifications-con
 import { QueueSlotContainerComponent } from './queue-slot-container/queue-slot-container.component';
 import { TwitchModule } from '@app/twitch/twitch.module';
 import { NotificationsModule } from '@app/notifications/notifications.module';
+import { SharedModule } from '@app/shared/shared.module';
+import { IconsModule } from '@app/icons/icons.module';
+import { ActiveGameSnackbarComponent } from './active-game-snackbar/active-game-snackbar.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { SubstituteRequestBannerComponent } from './substitute-request-banner/substitute-request-banner.component';
+import { BanBannerComponent } from './ban-banner/ban-banner.component';
 
 @NgModule({
   declarations: [
@@ -36,15 +40,16 @@ import { NotificationsModule } from '@app/notifications/notifications.module';
     QueueClassSlotListComponent,
     QueueSlotItemComponent,
     QueueReadyUpDialogComponent,
-    QueueReadyUpDialogControllerComponent,
     QueueAlertsComponent,
-    QueueAddonsComponent,
     PreReadyUpButtonComponent,
     SecondsPipe,
     MapVoteComponent,
     MapVoteButtonComponent,
     QueueNotificationsControllerComponent,
     QueueSlotContainerComponent,
+    ActiveGameSnackbarComponent,
+    SubstituteRequestBannerComponent,
+    BanBannerComponent,
   ],
   imports: [
     CommonModule,
@@ -54,15 +59,17 @@ import { NotificationsModule } from '@app/notifications/notifications.module';
     EffectsModule.forFeature([QueueEffects]),
     TooltipModule,
     ButtonsModule,
+    LayoutModule,
 
     PlayersModule,
     TwitchModule,
     NotificationsModule,
+    SharedModule,
+    IconsModule,
 
     QueueRoutingModule,
   ],
   exports: [
-    QueueReadyUpDialogControllerComponent,
     QueueNotificationsControllerComponent,
   ],
 })

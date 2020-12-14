@@ -1,0 +1,42 @@
+$background: #0d1d36;
+$foreground: #fff;
+
+// primary colors
+$primary: rgb(10, 26, 51);
+$secondary: rgb(255, 173, 23);
+
+$success: rgb(65, 202, 37);
+$warning: rgb(255, 173, 23);
+$error: rgb(192, 8, 15);
+$twitchtv: rgb(145, 70, 255);
+
+$online: $success;
+$offline: $error;
+
+// font colors
+$font-color-light: rgb(255, 255, 255);
+$font-color-dark: rgb(10, 26, 51);
+
+// background color for text blocks (rules, about, etc.)
+$text-background-color: rgba(255, 255, 255, 0.9);
+
+// navigation bar colors
+$navigation-bar-background-color: $primary;
+$navigation-bar-link-background-color: rgb(5, 15, 30);
+
+// footer
+$footer-background-color: rgba(255, 255, 255, 0.8);
+
+// TF2-specific colors
+$team-color-red: rgb(189, 59, 59);
+$team-color-blu: rgb(88, 121, 138);
+
+// queue colors
+$queue-status-waiting: rgba(255, 255, 255, 0.7);
+$queue-status-ready-up: rgba(65, 202, 37, 0.75);
+$queue-status-launching: rgba(118, 154, 240, 0.95);
+$queue-slot-free: rgba(255, 255, 255, 0.65);
+$queue-slot-taken: rgba(255, 255, 255, 0.95);
+$queue-slot-taken-by-me: rgba(255, 255, 255, 1);
+$queue-slot-ready-up-0: rgba(192, 8, 15, 0.95);
+$queue-slot-ready-up-1: rgba(65, 202, 37, 0.75);

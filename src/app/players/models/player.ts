@@ -7,7 +7,6 @@ export interface Player {
   joinedAt: Date;
   steamId: string;
   avatarUrl: string;
-  gameCount: number;
   role?: PlayerRole;
   etf2lProfileId?: number;
   skill?: { [gameClass: string]: number };

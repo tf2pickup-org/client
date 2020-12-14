@@ -1,11 +1,11 @@
 import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { allPlayers } from '../selectors';
-import { Player } from '../models/player';
 import { loadPlayers } from '../actions';
-import { Title } from '@angular/platform-browser';
-import { environment } from '@environment';
+import { map } from 'rxjs/operators';
+import { PlayerGroup } from './player-group';
+import { groupPlayers } from './group-players';
 
 @Component({
   selector: 'app-player-list',
@@ -15,16 +15,17 @@ import { environment } from '@environment';
 })
 export class PlayerListComponent implements OnInit {
 
-  players: Observable<Player[]> = this.store.select(allPlayers);
+  players: Observable<PlayerGroup[]> = this.store.pipe(
+    select(allPlayers),
+    map(players => groupPlayers(players)),
+  );
 
   constructor(
     private store: Store,
-    private title: Title,
   ) { }
 
   ngOnInit() {
     this.store.dispatch(loadPlayers());
-    this.title.setTitle(`players • ${environment.titleSuffix}`);
   }
 
 }

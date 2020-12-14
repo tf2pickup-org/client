@@ -1,0 +1,16 @@
+@use '@material/card';
+@use 'variables';
+
+.twitch-integration-card {
+  @include card.shape-radius(variables.$default-border-radius);
+
+  background-image: url('/assets/TwitchGlitchPurple.svg');
+  background-size: 100px 100px;
+  background-position: 98% 50%;
+  background-repeat: no-repeat;
+
+  &__content {
+    padding: 12px 20px;
+  }
+
+}

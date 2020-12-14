@@ -6,19 +6,25 @@ import { StoreModule } from '@ngrx/store';
 import { reducer } from './game-servers.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { GameServersEffects } from './game-servers.effects';
-import { AddGameServerDialogComponent } from './add-game-server-dialog/add-game-server-dialog.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { IconsModule } from '@app/icons/icons.module';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { AddGameServerComponent } from './add-game-server/add-game-server.component';
 
 @NgModule({
   declarations: [
     GameServerListComponent,
-    AddGameServerDialogComponent,
+    AddGameServerComponent,
   ],
   imports: [
     CommonModule,
     StoreModule.forFeature('gameServers', reducer),
     EffectsModule.forFeature([GameServersEffects]),
     FormsModule,
+    ReactiveFormsModule,
+    TooltipModule,
+
+    IconsModule,
 
     GameServersRoutingModule,
   ],

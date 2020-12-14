@@ -1,0 +1,15 @@
+<div class="admin-buttons-container">
+  <button class="mdc-button mdc-button--inverted mx-2 reinitialize-server-button"
+    (click)="reinitializeServer.emit()">
+    <div class="mdc-button__ripple"></div>
+    <i-feather name="refresh-ccw" class="mdc-button__icon" aria-hidden="true"></i-feather>
+    <span class="mdc-button__label">reinitialize server</span>
+  </button>
+
+  <button class="mdc-button mdc-button--inverted mx-2 force-end-button"
+    (click)="forceEnd.emit()">
+    <div class="mdc-button__ripple"></div>
+    <i-feather name="x" class="mdc-button__icon" aria-hidden="true"></i-feather>
+    <span class="mdc-button__label">force end</span>
+  </button>
+</div>

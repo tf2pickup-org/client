@@ -3,6 +3,8 @@ import { PlayerEditSkillComponent } from './player-edit-skill.component';
 import { ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { ChangeDetectionStrategy } from '@angular/core';
+import { MockComponent } from 'ng-mocks';
+import { GameClassIconComponent } from '@app/shared/game-class-icon/game-class-icon.component';
 
 describe('PlayerEditSkillComponent', () => {
   let component: PlayerEditSkillComponent;
@@ -11,7 +13,10 @@ describe('PlayerEditSkillComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ PlayerEditSkillComponent ],
+      declarations: [
+        PlayerEditSkillComponent,
+        MockComponent(GameClassIconComponent),
+      ],
       imports: [
         ReactiveFormsModule,
       ],
@@ -24,6 +29,7 @@ describe('PlayerEditSkillComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(PlayerEditSkillComponent);
     component = fixture.componentInstance;
+    component.form = formGroup;
     fixture.detectChanges();
   });
 
@@ -31,14 +37,22 @@ describe('PlayerEditSkillComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should set min & max on the input', () => {
-    component.form = formGroup;
-    component.gameClass = 'soldier';
-    fixture.detectChanges();
+  describe('with game class defined', () => {
+    beforeEach(() => {
+      component.gameClass = 'soldier';
+      fixture.detectChanges();
+    });
 
-    const el = fixture.debugElement.query(By.css('input[type=number]')).nativeElement as HTMLInputElement;
-    expect(el).toBeTruthy();
-    expect(el.min).toBe('1');
-    expect(el.max).toBe('7');
+    it('should render the proper game class', () => {
+      const gameClassIcon = fixture.debugElement.query(By.css('app-game-class-icon')).componentInstance as GameClassIconComponent;
+      expect(gameClassIcon.gameClass).toEqual('soldier');
+    });
+
+    it('should set min & max on the input', () => {
+      const el = fixture.debugElement.query(By.css('input[type=number]')).nativeElement as HTMLInputElement;
+      expect(el).toBeTruthy();
+      expect(el.min).not.toBeNull();
+      expect(el.max).not.toBeNull();
+    });
   });
 });

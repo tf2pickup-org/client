@@ -8,7 +8,7 @@ import { Friendship } from './friendship';
 export interface Queue {
   config: QueueConfig;
   slots: QueueSlot[];
-  state: QueueState;
+  state: QueueState | 'loading';
   mapVoteResults: MapVoteResult[];
   substituteRequests?: SubstituteRequest[];
   friendships: Friendship[];

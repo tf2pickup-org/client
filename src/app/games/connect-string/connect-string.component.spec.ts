@@ -38,11 +38,8 @@ describe('ConnectStringComponent', () => {
     });
 
     it('should render the input', () => {
-      expect(fixture.debugElement.query(By.css('input[type=text]'))).toBeDefined();
-    });
-
-    it('should render the input read-only', () => {
-      const input = fixture.debugElement.query(By.css('input[type=text]')).nativeElement as HTMLInputElement;
+      const input = fixture.debugElement.query(By.css('input.connect-string')).nativeElement as HTMLInputElement;
+      expect(input).toBeDefined();
       expect(input.readOnly).toBe(true);
     });
 
@@ -53,11 +50,29 @@ describe('ConnectStringComponent', () => {
     });
   });
 
+  describe('with stv connect string', () => {
+    beforeEach(() => {
+      component.stvConnectString = 'FAKE_STV_CONNECT_STRING';
+      fixture.detectChanges();
+    });
+
+    it('should render the input', () => {
+      const input = fixture.debugElement.query(By.css('input.connect-string')).nativeElement as HTMLInputElement;
+      expect(input).toBeDefined();
+      expect(input.readOnly).toBe(true);
+    });
+
+    it('should render the direct connect link', () => {
+      const anchor = fixture.debugElement.query(By.css('a')).nativeElement as HTMLAnchorElement;
+      expect(anchor).toBeDefined();
+      expect(anchor.href).toMatch(/FAKE_STV_CONNECT_STRING/);
+    });
+  });
+
   describe('without the connect string', () => {
-    it('should not render input nor button nor anchor', () => {
-      expect(fixture.debugElement.query(By.css('input'))).toBeNull();
-      expect(fixture.debugElement.query(By.css('button'))).toBeNull();
-      expect(fixture.debugElement.query(By.css('a'))).toBeNull();
+    it('should not render input.connect-unavailable', () => {
+      const input = fixture.debugElement.query(By.css('input.connect-string')).nativeElement as HTMLInputElement;
+      expect(input.classList.contains('connect-unavailable')).toBe(true);
     });
   });
 });

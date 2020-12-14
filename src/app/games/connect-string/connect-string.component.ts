@@ -1,5 +1,4 @@
-import { Component, ChangeDetectionStrategy, Input, ViewChild, ElementRef } from '@angular/core';
-
+import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 @Component({
   selector: 'app-connect-string',
   templateUrl: './connect-string.component.html',
@@ -8,17 +7,10 @@ import { Component, ChangeDetectionStrategy, Input, ViewChild, ElementRef } from
 })
 export class ConnectStringComponent {
 
-  @ViewChild('connectInput')
-  connectInput: ElementRef;
-
   @Input()
   connectString: string;
 
-  copyConnectString() {
-    const input = this.connectInput.nativeElement as HTMLInputElement;
-    input.focus();
-    input.select();
-    document.execCommand('copy');
-  }
+  @Input()
+  stvConnectString: string;
 
 }

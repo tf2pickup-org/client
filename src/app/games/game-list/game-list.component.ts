@@ -1,53 +1,81 @@
-import { Component, ChangeDetectionStrategy, Input, OnInit } from '@angular/core';
-import { ReplaySubject, BehaviorSubject, Observable } from 'rxjs';
+import { Component, ChangeDetectionStrategy, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { filter, map, takeUntil } from 'rxjs/operators';
 import { Game } from '../models/game';
-import { GamesService } from '../games.service';
-import { switchMap, map } from 'rxjs/operators';
-import { PlayersService } from '@app/players/players.service';
-import { PaginatedList } from '@app/core/models/paginated-list';
+import { GameListStore } from './game-list.store';
+import { gameListAnimation } from './game-list.animation';
+
+// Helper object for handling animation.
+// Animations in this component are quite complex...
+interface AnimationState {
+  games: Game[];
+  isAnimating: boolean;
+}
+
+const initialAnimationState: AnimationState = {
+  games: [],
+  isAnimating: true,
+};
 
 @Component({
   selector: 'app-game-list',
   templateUrl: './game-list.component.html',
   styleUrls: ['./game-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [ GameListStore ],
+  animations: [ gameListAnimation ],
 })
-export class GameListComponent implements OnInit {
+export class GameListComponent implements OnInit, OnDestroy {
 
-  @Input()
-  playerId?: string;
+  animationStore = new BehaviorSubject<AnimationState>(initialAnimationState);
 
-  readonly gamesPerPage = 10;
+  games = this.animationStore.pipe(
+    filter(state => !state.isAnimating),
+    map(state => state.games),
+  );
 
-  page = new BehaviorSubject<number>(1);
-  gameCount = new ReplaySubject<number>(1);
-  games = new ReplaySubject<Game[]>(1);
+  private destroyed = new Subject<void>();
 
   constructor(
-    private gamesService: GamesService,
-    private playersService: PlayersService,
-  ) { }
+    public readonly store: GameListStore,
+    private route: ActivatedRoute,
+    private router: Router,
+  ) {
+    this.store.games.pipe(
+      takeUntil(this.destroyed),
+    ).subscribe(games => this.animationStore.next({ ...this.animationStore.value, games }));
+
+    this.store.isLoading.pipe(
+      filter(isLoading => isLoading),
+      takeUntil(this.destroyed),
+    ).subscribe(() => this.animationStore.next({ ...this.animationStore.value, games: [] }));
+  }
 
   ngOnInit() {
-    this.page.pipe(
-      map(page => page - 1),
-      switchMap(page => this.fetchGames(page * this.gamesPerPage, this.gamesPerPage)),
-    ).subscribe(response => {
-      this.gameCount.next(response.itemCount);
-      this.games.next(response.results);
-    });
+    this.route.queryParamMap.pipe(
+      map(params => params.get('page')),
+      map(page => page ?? '1'),
+      takeUntil(this.destroyed),
+    ).subscribe(page => this.store.loadPage(parseInt(page, 10)));
   }
 
-  getPage(page: number) {
-    this.page.next(page);
+  ngOnDestroy() {
+    this.destroyed.next();
+    this.destroyed.complete();
+    this.animationStore.complete();
   }
 
-  private fetchGames(offset: number, limit: number): Observable<PaginatedList<Game>> {
-    if (!!this.playerId) {
-      return this.playersService.fetchPlayerGames(this.playerId, offset, limit);
-    } else {
-      return this.gamesService.fetchGames(offset, limit);
-    }
+  loadPage(page: number) {
+    this.router.navigate(['/games'], { queryParams: { page }});
+  }
+
+  onAnimationStart() {
+    this.animationStore.next({ ...this.animationStore.value, isAnimating: true });
+  }
+
+  onAnimationDone() {
+    this.animationStore.next({ ...this.animationStore.value, isAnimating: false });
   }
 
 }

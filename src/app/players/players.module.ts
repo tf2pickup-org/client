@@ -26,6 +26,16 @@ import { SkillTableComponent } from './skill-table/skill-table.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { EditPlayerRoleDialogComponent } from './edit-player-role-dialog/edit-player-role-dialog.component';
 import { TwitchTvProfileLinkPipe } from './twitch-tv-profile-link.pipe';
+import { SharedModule } from '@app/shared/shared.module';
+import { PlayerDetailsHeaderComponent } from './player-details-header/player-details-header.component';
+import { PlayerDetailsGameListComponent } from './player-details-game-list/player-details-game-list.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { PlayerDetailsBadgesComponent } from './player-details-badges/player-details-badges.component';
+import { PlayerDetailsExternalProfileLinksComponent } from
+  './player-details-external-profile-links/player-details-external-profile-links.component';
+import { PlayerDetailsAdminButtonsComponent } from './player-details-admin-buttons/player-details-admin-buttons.component';
+import { IconsModule } from '@app/icons/icons.module';
+import { EditPlayerRolesComponent } from './edit-player-roles/edit-player-roles.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +55,12 @@ import { TwitchTvProfileLinkPipe } from './twitch-tv-profile-link.pipe';
     SkillTableComponent,
     EditPlayerRoleDialogComponent,
     TwitchTvProfileLinkPipe,
+    PlayerDetailsHeaderComponent,
+    PlayerDetailsGameListComponent,
+    PlayerDetailsBadgesComponent,
+    PlayerDetailsExternalProfileLinksComponent,
+    PlayerDetailsAdminButtonsComponent,
+    EditPlayerRolesComponent,
   ],
   imports: [
     CommonModule,
@@ -56,8 +72,11 @@ import { TwitchTvProfileLinkPipe } from './twitch-tv-profile-link.pipe';
     TooltipModule,
     InlineSVGModule,
     NgxDatatableModule,
+    NgxPaginationModule,
 
     GamesModule,
+    IconsModule,
+    SharedModule,
 
     PlayersRoutingModule,
   ],

@@ -14,13 +14,14 @@ import { MumbleJoinButtonComponent } from './mumble-join-button/mumble-join-butt
 import { NgxPaginationModule } from 'ngx-pagination';
 import { PlayerConnectionStatusComponent } from './player-connection-status/player-connection-status.component';
 import { GameBasicInfoComponent } from './game-basic-info/game-basic-info.component';
-import { JoinGameInfoComponent } from './join-game-info/join-game-info.component';
 import { GameSummaryComponent } from './game-summary/game-summary.component';
 import { GameTeamPlayerListComponent } from './game-team-player-list/game-team-player-list.component';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ConnectStringComponent } from './connect-string/connect-string.component';
-import { WatchGameInfoComponent } from './watch-game-info/watch-game-info.component';
 import { GameTeamHeaderComponent } from './game-team-header/game-team-header.component';
+import { IconsModule } from '@app/icons/icons.module';
+import { GameAdminButtonsComponent } from './game-admin-buttons/game-admin-buttons.component';
+import { ClipboardModule } from '@angular/cdk/clipboard';
 
 @NgModule({
   declarations: [
@@ -30,12 +31,11 @@ import { GameTeamHeaderComponent } from './game-team-header/game-team-header.com
     MumbleJoinButtonComponent,
     PlayerConnectionStatusComponent,
     GameBasicInfoComponent,
-    JoinGameInfoComponent,
     GameSummaryComponent,
     GameTeamPlayerListComponent,
     ConnectStringComponent,
-    WatchGameInfoComponent,
     GameTeamHeaderComponent,
+    GameAdminButtonsComponent,
   ],
   imports: [
     CommonModule,
@@ -44,8 +44,11 @@ import { GameTeamHeaderComponent } from './game-team-header/game-team-header.com
     InlineSVGModule,
     NgxPaginationModule,
     TooltipModule,
+    ClipboardModule,
 
     SharedModule,
+    IconsModule,
+
     GamesRoutingModule,
   ],
   exports: [

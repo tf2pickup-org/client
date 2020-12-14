@@ -1,22 +1,28 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { MapVoteButtonComponent } from './map-vote-button.component';
-import { MapThumbnailService } from '../map-thumbnail.service';
+import { MapThumbnailService } from '../../shared/map-thumbnail.service';
 import { By } from '@angular/platform-browser';
 import { ChangeDetectionStrategy } from '@angular/core';
-
-class MapThumbnailServiceStub {
-  getMapThumbnailPath(map: string) { return 'fake_thumbnail.png'; }
-}
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('MapVoteButtonComponent', () => {
   let component: MapVoteButtonComponent;
   let fixture: ComponentFixture<MapVoteButtonComponent>;
+  let mapThumbnailService: jasmine.SpyObj<MapThumbnailService>;
+
+  beforeEach(() => {
+    mapThumbnailService = jasmine.createSpyObj<MapThumbnailService>(MapThumbnailService.name, ['getMapThumbnailPath']);
+    mapThumbnailService.getMapThumbnailPath.and.callFake(map => `${map}.png`);
+  });
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ MapVoteButtonComponent ],
       providers: [
-        { provide: MapThumbnailService, useClass: MapThumbnailServiceStub },
+        { provide: MapThumbnailService, useValue: mapThumbnailService },
+      ],
+      imports: [
+        NoopAnimationsModule,
       ],
     })
     // https://github.com/angular/angular/issues/12313
@@ -34,39 +40,84 @@ describe('MapVoteButtonComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should apply correct css classes', () => {
-    const btn = fixture.debugElement.query(By.css('button')).nativeElement as HTMLButtonElement;
-    expect(btn.classList.contains('active')).toBe(false);
+  describe('with a map', () => {
+    let button: HTMLButtonElement;
 
-    component.active = true;
-    fixture.detectChanges();
-    expect(btn.classList.contains('active')).toBe(true);
-  });
+    beforeEach(() => {
+      component.map = 'cp_fake_rc1';
+      fixture.detectChanges();
 
-  it('should apply the disabled attribute', () => {
-    const btn = fixture.debugElement.query(By.css('button')).nativeElement as HTMLButtonElement;
-    expect(btn.disabled).toBe(true);
+      button = fixture.debugElement.query(By.css('button')).nativeElement as HTMLButtonElement;
+    });
 
-    component.disabled = false;
-    fixture.detectChanges();
-    expect(btn.disabled).toBe(false);
-  });
+    it('should render the button', () => {
+      expect(button).toBeTruthy();
+    });
 
-  it('should apply the correct thumbnail path', () => {
-    const spy = spyOn(TestBed.get(MapThumbnailService), 'getMapThumbnailPath').and.callThrough();
-    component.map = 'FAKE_MAP';
-    fixture.detectChanges();
-    expect(spy).toHaveBeenCalledWith('FAKE_MAP');
+    it('should set proper background-image', () => {
+      const div = fixture.debugElement.query(By.css('.thumbnail')).nativeElement as HTMLDivElement;
+      expect(div.style.backgroundImage).toMatch(/url\(['"]cp_fake_rc1\.png["']\)/);
+    });
 
-    const btn = fixture.debugElement.query(By.css('button')).nativeElement as HTMLButtonElement;
-    expect(btn.style.backgroundImage).toEqual('url("fake_thumbnail.png")');
-  });
+    it('should render the map name', () => {
+      const span = fixture.debugElement.query(By.css('.thumbnail__overlay__name > span')).nativeElement as HTMLSpanElement;
+      expect(span.innerText).toEqual('cp_fake_rc1');
+    });
 
-  describe('#toggleVote()', () => {
-    it('should emit the voteToggle event', () => {
-      component.active = false;
-      component.voteToggle.subscribe(value => expect(value).toBe(true));
-      component.toggleVote();
+    describe('with results', () => {
+      beforeEach(() => {
+        component.votePercent = 0.75;
+        fixture.detectChanges();
+      });
+
+      it('should render results', () => {
+        const span = fixture.debugElement.query(By.css('.thumbnail__overlay__vote-result > div')).nativeElement as HTMLSpanElement;
+        expect(span.innerText).toEqual('75%');
+      });
+    });
+
+    describe('when not selected', () => {
+      beforeEach(() => {
+        component.selected = false;
+        fixture.detectChanges();
+      });
+
+      it('should not apply the is-selected css class', () => {
+        expect(button.classList.contains('is-selected')).toBe(false);
+      });
+    });
+
+    it('should render content-fill', () => {
+      expect(fixture.debugElement.query(By.css('.thumbnail__overlay__fill'))).toBeTruthy();
+    });
+
+    describe('when selected', () => {
+      beforeEach(() => {
+        component.selected = true;
+        fixture.detectChanges();
+      });
+
+      it('should apply the is-selected css class', () => {
+        expect(button.classList.contains('is-selected')).toBe(true);
+      });
+    });
+
+    describe('when enabled', () => {
+      beforeEach(() => {
+        component.disabled = false;
+        fixture.detectChanges();
+      });
+
+      describe('when clicked', () => {
+        it('should emit voteToggle', done => {
+          component.voteToggle.subscribe(isSelected => {
+            expect(isSelected).toBe(true);
+            done();
+          });
+
+          button.click();
+        });
+      });
     });
   });
 });

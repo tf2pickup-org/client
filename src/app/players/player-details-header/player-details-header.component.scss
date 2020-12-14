@@ -1,0 +1,31 @@
+@use 'sass:color';
+@use 'utils/ghost';
+
+$-player-avatar-border-color: color.scale(rgb(0, 0, 0), $lightness: 40%);
+$-avatar-size: 128px;
+
+.avatar {
+  display: block;
+
+  border: 1px solid $-player-avatar-border-color;
+  margin: 0 16px 16px 0;
+
+  width: $-avatar-size;
+  height: $-avatar-size;
+
+  &--ghost {
+    background-color: rgb(255, 255, 255);
+  }
+}
+
+.ghost {
+  &__player-name {
+    @include ghost.make-line(170px, 48px);
+    margin-bottom: 0.5rem;
+  }
+
+  &__joined {
+    @include ghost.make-line(230px, 24px);
+  }
+
+}

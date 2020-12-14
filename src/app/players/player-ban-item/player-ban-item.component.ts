@@ -10,21 +10,13 @@ import { PlayerBan } from '../models/player-ban';
 export class PlayerBanItemComponent {
 
   @Input()
-  set playerBan(playerBan: PlayerBan) {
-    this._playerBan = playerBan;
-    this.expired = new Date(playerBan.end) < new Date();
-  }
-
-  get playerBan() {
-    return this._playerBan;
-  }
-
-  @HostBinding('class.bg-light')
-  expired: boolean;
+  playerBan: PlayerBan;
 
   @Output()
-  revoke = new EventEmitter<PlayerBan>();
+  revoke = new EventEmitter<void>();
 
-  private _playerBan: PlayerBan;
+  isExpired() {
+    return new Date(this.playerBan.end) < new Date();
+  }
 
 }

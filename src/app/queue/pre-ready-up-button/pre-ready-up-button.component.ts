@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { isInQueue, isPreReadied } from '../queue.selectors';
+import { isPreReadied } from '../queue.selectors';
 import { map } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { togglePreReady } from '../queue.actions';
@@ -14,7 +14,6 @@ import { PreReadyService } from '../pre-ready.service';
 })
 export class PreReadyUpButtonComponent {
 
-  isInQueue = this.store.select(isInQueue);
   preReadied = this.store.select(isPreReadied);
   timeout = this.preReadyService.timeout;
   text: Observable<string | number> = combineLatest([this.preReadied, this.timeout]).pipe(

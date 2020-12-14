@@ -26,7 +26,7 @@ export const joinQueueError = createAction(
 export const leaveQueue = createAction('[Queue] Leave queue');
 
 export const leaveQueueError = createAction(
-  '[API] Failed to leave queue',
+  '[API] Failed to leave the queue',
   props<{ error: string }>(),
 );
 
@@ -63,9 +63,6 @@ export const mapVoted = createAction(
 );
 
 export const mapVoteReset = createAction('[Queue] Map vote reset');
-
-export const showReadyUpDialog = createAction('[Queue] Show ready up dialog');
-export const hideReadyUpDialog = createAction('[Queue] Hide ready up dialog');
 
 export const togglePreReady = createAction('[Queue] Toggle pre-ready up');
 export const startPreReady = createAction('[Queue] Start pre-ready');

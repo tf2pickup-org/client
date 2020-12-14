@@ -1,8 +1,5 @@
-// This file can be replaced during build by using the `fileReplacements` array.
-// `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
-// The list of file replacements can be found in `angular.json`.
-
 import { version } from 'package.json';
+import { entryQueue6v6 } from './entry-queue-6v6';
 
 const discordInvitation = 'https://discord.gg/UVFVfc4';
 
@@ -12,7 +9,7 @@ export const environment = {
   wsUrl: '/',
   version,
   headerLinks: [
-    { name: 'discord', icon: '/assets/discord.svg', target: discordInvitation, tooltip: 'Join us on discord!' },
+    { name: 'discord', icon: '/assets/ui_icon_discord.png', target: discordInvitation, tooltip: 'Join us on discord!' },
   ],
   footerLinks: [
     { name: 'github', target: 'https://github.com/tf2pickup-pl' },
@@ -20,6 +17,9 @@ export const environment = {
     { name: 'changelog', target: 'https://github.com/tf2pickup-pl/client/blob/master/CHANGELOG.md' },
   ],
   titleSuffix: 'tf2pickup.pl • dev',
+
+  // Initial queue config for ghost loading
+  entryQueue: entryQueue6v6,
 };
 
 /*
