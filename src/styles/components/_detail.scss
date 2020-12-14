@@ -19,8 +19,12 @@
     font-weight: 600;
     color: theme.$font-color-light;
 
-    // a {
-    //   color: theme.$font-color-light;
-    // }
+    a {
+      color: theme.$font-color-light;
+
+      &:hover {
+        color: theme.$font-color-light;
+      }
+    }
   }
 }
