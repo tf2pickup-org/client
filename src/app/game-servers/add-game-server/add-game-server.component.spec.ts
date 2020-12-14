@@ -16,6 +16,7 @@ describe('AddGameServerComponent', () => {
   let fixture: ComponentFixture<AddGameServerComponent>;
   let store: MockStore;
   let actions: ReplaySubject<Action>;
+  let router: Router;
 
   beforeEach(() => actions = new ReplaySubject<Action>(1));
 
@@ -37,6 +38,9 @@ describe('AddGameServerComponent', () => {
   beforeEach(() => {
     store = TestBed.inject(MockStore);
     spyOn(store, 'dispatch');
+
+    router = TestBed.inject(Router);
+    spyOn(router, 'navigate');
 
     fixture = TestBed.createComponent(AddGameServerComponent);
     component = fixture.componentInstance;
@@ -120,10 +124,9 @@ describe('AddGameServerComponent', () => {
       });
 
       it('should eventually go back to the game server list', () => {
-        const spy = spyOn(TestBed.inject(Router), 'navigate');
         saveButton.click();
         actions.next(action);
-        expect(spy).toHaveBeenCalledWith(['/servers']);
+        expect(router.navigate).toHaveBeenCalledWith(['/servers']);
       });
     });
   });
