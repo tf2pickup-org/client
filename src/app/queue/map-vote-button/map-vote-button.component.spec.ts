@@ -41,9 +41,17 @@ describe('MapVoteButtonComponent', () => {
   });
 
   describe('with a map', () => {
+    let button: HTMLButtonElement;
+
     beforeEach(() => {
       component.map = 'cp_fake_rc1';
       fixture.detectChanges();
+
+      button = fixture.debugElement.query(By.css('button')).nativeElement as HTMLButtonElement;
+    });
+
+    it('should render the button', () => {
+      expect(button).toBeTruthy();
     });
 
     it('should set proper background-image', () => {
@@ -75,7 +83,6 @@ describe('MapVoteButtonComponent', () => {
       });
 
       it('should not apply the is-selected css class', () => {
-        const button = fixture.debugElement.query(By.css('button')).nativeElement as HTMLButtonElement;
         expect(button.classList.contains('is-selected')).toBe(false);
       });
     });
@@ -91,8 +98,25 @@ describe('MapVoteButtonComponent', () => {
       });
 
       it('should apply the is-selected css class', () => {
-        const button = fixture.debugElement.query(By.css('button')).nativeElement as HTMLButtonElement;
         expect(button.classList.contains('is-selected')).toBe(true);
+      });
+    });
+
+    describe('when enabled', () => {
+      beforeEach(() => {
+        component.disabled = false;
+        fixture.detectChanges();
+      });
+
+      describe('when clicked', () => {
+        it('should emit voteToggle', done => {
+          component.voteToggle.subscribe(isSelected => {
+            expect(isSelected).toBe(true);
+            done();
+          });
+
+          button.click();
+        });
       });
     });
   });
