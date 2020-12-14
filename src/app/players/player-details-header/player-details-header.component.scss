@@ -4,16 +4,16 @@
 $-player-avatar-border-color: color.scale(rgb(0, 0, 0), $lightness: 40%);
 $-avatar-size: 128px;
 
-.player-avatar {
+.avatar {
   display: block;
 
   border: 1px solid $-player-avatar-border-color;
-  margin: 0 1rem 1rem 0;
+  margin: 0 16px 16px 0;
 
   width: $-avatar-size;
   height: $-avatar-size;
 
-  &.ghost {
+  &--ghost {
     background-color: rgb(255, 255, 255);
   }
 }
