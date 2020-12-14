@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { GameSummaryComponent } from './game-summary.component';
 
 describe('GameSummaryComponent', () => {
@@ -9,7 +10,10 @@ describe('GameSummaryComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ GameSummaryComponent ]
+      declarations: [ GameSummaryComponent ],
+      imports: [
+        NoopAnimationsModule,
+      ],
     })
     // https://github.com/angular/angular/issues/12313
     .overrideComponent(GameSummaryComponent, { set: { changeDetection: ChangeDetectionStrategy.Default } })
