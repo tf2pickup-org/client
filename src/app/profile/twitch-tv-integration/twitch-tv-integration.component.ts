@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { TwitchService } from '@app/twitch/twitch.service';
 import { Store } from '@ngrx/store';
 import { filter, map } from 'rxjs/operators';
@@ -8,6 +8,7 @@ import { twitchTvUser } from '../profile.selectors';
   selector: 'app-twitch-tv-integration',
   templateUrl: './twitch-tv-integration.component.html',
   styleUrls: ['./twitch-tv-integration.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TwitchTvIntegrationComponent {
 
