@@ -8,26 +8,35 @@
 
   align-items: center;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
 
   text-align: center;
   padding: 4px 0;
   margin: 4px 0;
 
-  .team-name {
-    font-size: 2rem;
-    font-weight: 700;
-  }
-
   &--red {
     @include surface.fill-color(theme.$team-color-red);
+    flex-flow: row-reverse nowrap;
   }
 
   &--blu {
     @include surface.fill-color(theme.$team-color-blu);
+    flex-flow: row nowrap;
   }
 
-  .team-score {
-    font-size: 110%;
+  &__name,
+  &__score {
+    font-size: 2rem;
+    font-weight: 700;
+  }
+
+  &__name {
+    flex: 1 1 auto;
+  }
+
+  &__score,
+  &__score-equalizer {
+    margin: 0 16px;
+    width: 15px;
   }
 }

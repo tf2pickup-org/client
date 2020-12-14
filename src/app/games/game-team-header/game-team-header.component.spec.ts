@@ -42,6 +42,19 @@ describe('GameTeamHeaderComponent', () => {
     it('should say RED', () => {
       expect(header.innerText).toEqual('RED');
     });
+
+    describe('with score', () => {
+      beforeEach(() => {
+        component.score = 5;
+        fixture.detectChanges();
+      });
+
+      it('should render the score', () => {
+        const score = fixture.debugElement.query(By.css('.team-header__score')).nativeElement as HTMLDivElement;
+        expect(score).toBeTruthy();
+        expect(score.innerHTML).toEqual('5');
+      });
+    });
   });
 
   describe('when BLU', () => {
