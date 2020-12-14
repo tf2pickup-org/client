@@ -19,12 +19,12 @@ $-avatar-size: 128px;
 }
 
 .ghost {
-  &--player-name {
+  &__player-name {
     @include ghost.make-line(170px, 48px);
     margin-bottom: 0.5rem;
   }
 
-  &--joined {
+  &__joined {
     @include ghost.make-line(230px, 24px);
   }
 
