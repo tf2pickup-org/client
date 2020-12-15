@@ -1,4 +1,4 @@
 export interface PlayerSkill {
   player: string;
-  skill: { [gameClass: string]: number };
+  skill: Record<string, number>;
 }
