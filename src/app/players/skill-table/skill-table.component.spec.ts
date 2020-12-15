@@ -11,8 +11,9 @@ import { ChangeDetectionStrategy } from '@angular/core';
 import { first } from 'rxjs/operators';
 import { Player } from '../models/player';
 import { PlayerSkill } from '../models/player-skill';
+import { QueueConfig } from '@app/queue/models/queue-config';
 
-const config = {
+const config: QueueConfig = {
   teamCount: 2,
   classes: [
     {
@@ -32,20 +33,6 @@ const config = {
       count: 1
     }
   ],
-  readyUptimeout: 40000,
-  queueReadyTimeout: 60000,
-  maps: [
-    'cp_process_final',
-    'cp_snakewater_final1',
-    'cp_sunshine',
-    'cp_granary_pro_rc8',
-    'cp_gullywash_final1',
-    'cp_reckoner_rc2',
-    'cp_prolands_rc2t'
-  ],
-  execConfigs: [
-    'etf2l_6v6_5cp'
-  ]
 };
 
 const allPlayers = [

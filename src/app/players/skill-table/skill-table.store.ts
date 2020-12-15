@@ -27,7 +27,7 @@ export class SkillTableStore extends ComponentStore<SkillTableState> {
     ...s.skill,
     id: s.player,
     name: state.players[s.player].name,
-  }))).pipe(tap(console.log));
+  })));
 
   columns: Observable<{ prop: string }[]> = this.store.pipe(
     select(queueConfig),
