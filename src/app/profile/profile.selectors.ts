@@ -4,6 +4,11 @@ import { State } from './profile.reducer';
 
 export const profile = createFeatureSelector<AppState, State>('profile');
 
+export const isLoggedIn = createSelector(
+  profile,
+  theProfile => !!theProfile
+);
+
 export const isAdmin = createSelector(
   profile,
   theProfile =>  /^(admin|super-user)$/.test(theProfile?.role)

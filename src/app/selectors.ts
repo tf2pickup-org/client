@@ -1,5 +1,5 @@
 import { createSelector } from '@ngrx/store';
-import { profile, isBanned } from './profile/profile.selectors';
+import { profile, isBanned, isLoggedIn } from './profile/profile.selectors';
 import { activeGame, isGameRunning, gameById } from './games/games.selectors';
 import { isPreReadied, mySlot, queueState } from './queue/queue.selectors';
 
@@ -15,11 +15,13 @@ export const queueLocked = createSelector(
 );
 
 export const canSubstituteInGame = (gameId: string) => createSelector(
+  isLoggedIn,
   isGameRunning(gameId),
   isBanned,
   activeGame,
   gameById(gameId),
-  (gameRunning, banned, theActiveGame, game) =>
+  (loggedIn, gameRunning, banned, theActiveGame, game) =>
+    loggedIn &&
     gameRunning &&
     !banned &&
     (!theActiveGame || theActiveGame.id === game.id)
