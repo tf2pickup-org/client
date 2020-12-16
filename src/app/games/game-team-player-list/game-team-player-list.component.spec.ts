@@ -42,7 +42,11 @@ describe('GameTeamPlayerListComponent', () => {
       name: 'FAKE_PLAYER',
       joinedAt: new Date(),
       steamId: 'FAKE_STEAM_ID',
-      avatarUrl: 'FAKE_AVATAR_URL',
+      avatar: {
+        small: 'FAKE_SMALL_AVATAR_URL',
+        medium: 'FAKE_MEDIUM_AVATAR_URL',
+        large: 'FAKE_LARGE_AVATAR_URL',
+      },
       player: 'FAKE_PLAYER_ID',
       team: 'blu',
       gameClass: 'scout',
