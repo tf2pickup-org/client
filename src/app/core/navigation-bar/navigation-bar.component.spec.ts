@@ -51,7 +51,17 @@ describe('NavigationBarComponent', () => {
 
   describe('when logged in', () => {
     beforeEach(() => {
-      store.setState({ profile: { name: 'FAKE_NAME', id: 'FAKE_ID' } });
+      store.setState({
+        profile: {
+          name: 'FAKE_NAME',
+          id: 'FAKE_ID',
+          avatar: {
+            small: 'FAKE_SMALL_AVATAR_URL',
+            medium: 'FAKE_MEDIUM_AVATAR_URL',
+            large: 'FAKE_LARGE_AVATAR_URL',
+          },
+        },
+      });
       component.isAuthenticated = true;
       fixture.detectChanges();
     });

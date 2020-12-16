@@ -97,7 +97,11 @@ describe('PlayerDetailsComponent', () => {
       joinedAt: new Date(),
       steamId: '76561198977546450',
       name: 'niewielki',
-      avatarUrl: 'FAKE_URL',
+      avatar: {
+        small: 'FAKE_SMALL_AVATAR_URL',
+        medium: 'FAKE_MEDIUM_AVATAR_URL',
+        large: 'FAKE_LARGE_AVATAR_URL',
+      },
       role: 'admin' as PlayerRole,
       etf2lProfileId: 12345,
       id: 'FAKE_ID',

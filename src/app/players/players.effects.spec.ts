@@ -16,7 +16,11 @@ const player: Player = {
   name: 'FAKE_PLAYER_NAME',
   joinedAt: new Date(),
   steamId: 'FAKE_STEAM_ID',
-  avatarUrl: 'whatever',
+  avatar: {
+    small: 'FAKE_SMALL_AVATAR_URL',
+    medium: 'FAKE_MEDIUM_AVATAR_URL',
+    large: 'FAKE_LARGE_AVATAR_URL',
+  },
 };
 
 const allPlayerSkills: PlayerSkill[] = [

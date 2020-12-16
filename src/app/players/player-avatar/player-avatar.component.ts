@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { select, Store } from '@ngrx/store';
 import { playerById } from '../selectors';
 import { filter, map } from 'rxjs/operators';
+import { PlayerAvatar } from '../models/player-avatar';
 
 @Component({
   selector: 'app-player-avatar',
@@ -12,6 +13,9 @@ import { filter, map } from 'rxjs/operators';
 })
 export class PlayerAvatarComponent {
 
+  @Input()
+  size: keyof PlayerAvatar = 'small';
+
   url: Observable<string>;
 
   @Input()
@@ -19,7 +23,7 @@ export class PlayerAvatarComponent {
     this.url = this.store.pipe(
       select(playerById(playerId)),
       filter(player => !!player),
-      map(player => player.avatarUrl),
+      map(player => player.avatar[this.size]),
     );
   }
 

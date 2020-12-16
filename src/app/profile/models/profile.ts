@@ -1,16 +1,18 @@
 import { PlayerRole } from '@app/players/models/player-role';
 import { PlayerBan } from '@app/players/models/player-ban';
+import { PlayerAvatar } from '@app/players/models/player-avatar';
 
 export interface Profile {
   id: string;
-  steamId: string;
-  avatarUrl: string;
   name: string;
   joinedAt: Date;
+  steamId: string;
+  avatar: PlayerAvatar;
+  role?: PlayerRole;
+  etf2lProfileId?: number;
+
   activeGameId: string;
-  role: PlayerRole;
   hasAcceptedRules: boolean;
-  etf2lProfileId: number;
   bans: PlayerBan[];
   mapVote?: string;
 

@@ -69,7 +69,7 @@
     <a *ngIf="profile | async as _profile"
       [routerLink]="['/player', _profile.id]"
       class="navbar__link navbar__link--profile">
-      <img [src]="_profile.avatarUrl"
+      <img [src]="_profile.avatar.medium"
         class="profile-avatar">
       {{ _profile.name }}
     </a>
