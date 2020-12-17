@@ -1,9 +1,9 @@
 import { Overlay } from '@angular/cdk/overlay';
 import { TestBed } from '@angular/core/testing';
-import { ReadyUpDialogService } from './ready-up-dialog.service';
+import { ReadyUpService } from './ready-up.service';
 
-describe('ReadyUpDialogService', () => {
-  let service: ReadyUpDialogService;
+describe('ReadyUpService', () => {
+  let service: ReadyUpService;
   let overlayService: jasmine.SpyObj<Overlay>;
 
   beforeEach(() => {
@@ -16,7 +16,7 @@ describe('ReadyUpDialogService', () => {
         { provide: Overlay, useValue: overlayService },
       ],
     });
-    service = TestBed.inject(ReadyUpDialogService);
+    service = TestBed.inject(ReadyUpService);
   });
 
   it('should be created', () => {

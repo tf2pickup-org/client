@@ -6,7 +6,7 @@ import { QueueSlotItemComponent } from '../queue-slot-item/queue-slot-item.compo
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { Store } from '@ngrx/store';
 import { joinQueue, markFriend } from '../queue.actions';
-import { queueLocked } from '@app/selectors';
+import { canJoinQueue } from '@app/selectors';
 import { By } from '@angular/platform-browser';
 import { merge, cloneDeep } from 'lodash';
 import { ChangeDetectionStrategy } from '@angular/core';
@@ -87,7 +87,7 @@ describe('QueueSlotContainerComponent', () => {
         provideMockStore({
           initialState,
           selectors: [
-            { selector: queueLocked, value: false },
+            { selector: canJoinQueue, value: false },
           ],
         }),
       ],

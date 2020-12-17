@@ -1,22 +1,22 @@
 import { QueueSlot } from './queue/models/queue-slot';
-import { queueLocked, canSubstituteInGame, isReadyUpDialogShown } from './selectors';
+import { canJoinQueue, canSubstituteInGame, awaitsReadyUp } from './selectors';
 
-describe('queueLocked', () => {
+fdescribe('canJoinQueue', () => {
   describe('when the user is not logged in', () => {
-    it('should return true', () => {
-      expect(queueLocked.projector(null, null)).toBe(true);
+    it('should return false', () => {
+      expect(canJoinQueue.projector(null, null)).toBe(false);
     });
   });
 
   describe('when the user has an active game', () => {
-    it('should return true', () => {
-      expect(queueLocked.projector({ }, { })).toBe(true);
+    it('should return false', () => {
+      expect(canJoinQueue.projector({ }, { })).toBe(false);
     });
   });
 
   describe('when the user has active bans', () => {
-    it('should return true', () => {
-      expect(queueLocked.projector({ bans: [{ }] }, null)).toBe(true);
+    it('should return false', () => {
+      expect(canJoinQueue.projector({ bans: [{ }] }, null)).toBe(false);
     });
   });
 });
@@ -63,7 +63,7 @@ describe('canSubstituteInGame', () => {
   });
 });
 
-describe('isReadyUpDialogShown', () => {
+describe('awaitsReadyUp', () => {
   let mySlot: QueueSlot;
 
   describe('when the user is in the queue', () => {
@@ -77,13 +77,13 @@ describe('isReadyUpDialogShown', () => {
 
         describe('when is not pre-readied', () => {
           it('should return true', () => {
-            expect(isReadyUpDialogShown.projector('ready', mySlot, false)).toBe(true);
+            expect(awaitsReadyUp.projector('ready', mySlot, false)).toBe(true);
           });
         });
 
         describe('when is pre-readied', () => {
           it('should return false', () => {
-            expect(isReadyUpDialogShown.projector('ready', mySlot, true)).toBe(false);
+            expect(awaitsReadyUp.projector('ready', mySlot, true)).toBe(false);
           });
         });
       });
@@ -92,23 +92,23 @@ describe('isReadyUpDialogShown', () => {
         beforeEach(() => mySlot.ready = true);
 
         it('should return false', () => {
-          expect(isReadyUpDialogShown.projector('ready', mySlot, false)).toBe(false);
-          expect(isReadyUpDialogShown.projector('ready', mySlot, true)).toBe(false);
+          expect(awaitsReadyUp.projector('ready', mySlot, false)).toBe(false);
+          expect(awaitsReadyUp.projector('ready', mySlot, true)).toBe(false);
         });
       });
     });
 
     describe('when the queue is in waiting state', () => {
       it('should return false', () => {
-        expect(isReadyUpDialogShown.projector('waiting', mySlot, false)).toBe(false);
-        expect(isReadyUpDialogShown.projector('waiting', mySlot, true)).toBe(false);
+        expect(awaitsReadyUp.projector('waiting', mySlot, false)).toBe(false);
+        expect(awaitsReadyUp.projector('waiting', mySlot, true)).toBe(false);
       });
     });
 
     describe('when the queue is in launching state', () => {
       it('should return false', () => {
-        expect(isReadyUpDialogShown.projector('launching', mySlot, false)).toBe(false);
-        expect(isReadyUpDialogShown.projector('launching', mySlot, true)).toBe(false);
+        expect(awaitsReadyUp.projector('launching', mySlot, false)).toBe(false);
+        expect(awaitsReadyUp.projector('launching', mySlot, true)).toBe(false);
       });
     });
   });
@@ -119,12 +119,12 @@ describe('isReadyUpDialogShown', () => {
     });
 
     it('should return false', () => {
-      expect(isReadyUpDialogShown.projector('waiting', mySlot, true)).toBe(false);
-      expect(isReadyUpDialogShown.projector('waiting', mySlot, false)).toBe(false);
-      expect(isReadyUpDialogShown.projector('ready', mySlot, true)).toBe(false);
-      expect(isReadyUpDialogShown.projector('ready', mySlot, false)).toBe(false);
-      expect(isReadyUpDialogShown.projector('launching', mySlot, true)).toBe(false);
-      expect(isReadyUpDialogShown.projector('launching', mySlot, false)).toBe(false);
+      expect(awaitsReadyUp.projector('waiting', mySlot, true)).toBe(false);
+      expect(awaitsReadyUp.projector('waiting', mySlot, false)).toBe(false);
+      expect(awaitsReadyUp.projector('ready', mySlot, true)).toBe(false);
+      expect(awaitsReadyUp.projector('ready', mySlot, false)).toBe(false);
+      expect(awaitsReadyUp.projector('launching', mySlot, true)).toBe(false);
+      expect(awaitsReadyUp.projector('launching', mySlot, false)).toBe(false);
     });
   });
 });

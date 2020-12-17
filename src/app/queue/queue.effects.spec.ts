@@ -13,9 +13,8 @@ import { MapVoteResult } from './models/map-vote-result';
 import { AppState } from '@app/app.state';
 import { Socket } from '@app/io/socket';
 import { EventEmitter } from 'eventemitter3';
-import { ReadyUpDialogService } from './ready-up-dialog.service';
 import { isInQueue } from './queue.selectors';
-import { isReadyUpDialogShown } from '@app/selectors';
+import { awaitsReadyUp } from '@app/selectors';
 import { QueueReadyUpAction } from './queue-ready-up-dialog/queue-ready-up-dialog.component';
 
 const queue: Queue = {
@@ -82,7 +81,7 @@ describe('QueueEffects', () => {
   beforeEach(() => {
     store = TestBed.inject(MockStore);
     isInQueueSelector = store.overrideSelector(isInQueue, false);
-    isReadyUpDialogShownSelector = store.overrideSelector(isReadyUpDialogShown, false);
+    isReadyUpDialogShownSelector = store.overrideSelector(awaitsReadyUp, false);
 
     effects = TestBed.inject(QueueEffects);
   });
