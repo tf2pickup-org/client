@@ -22,7 +22,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - name: Setup Chrome
-      uses: nanasess/setup-chromedriver@v1.0.1
+      uses: nanasess/setup-chromedriver@v1.0.3
     - name: Install dependencies
       run: npm install
     - name: Test
