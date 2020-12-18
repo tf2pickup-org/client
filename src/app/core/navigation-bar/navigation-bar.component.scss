@@ -13,6 +13,7 @@ $-navigation-bar-shadow: 0 0 8px $-navigation-bar-shadow-color;
 $-link-height: $-navigation-bar-height * 0.8687;
 $-link-border-radius: 5px;
 $-link-border-radius-bottom-right: 40px;
+$-link-icon-size: 30px;
 
 .navbar {
   @include border-radius.bottom($-navigation-bar-border-radius);
@@ -94,8 +95,8 @@ $-link-border-radius-bottom-right: 40px;
       line-height: $-link-height * 0.9;
 
       > img {
-        width: 30px;
-        height: 30px;
+        width: $-link-icon-size;
+        height: $-link-icon-size;
       }
     }
 
