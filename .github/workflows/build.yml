@@ -1,0 +1,37 @@
+name: build
+
+on:
+  release:
+    types: [ created, edited, published ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        branding: [ tf2pickup.pl, hl.tf2pickup.pl, tf2pickup.es ]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build ${{ matrix.branding }}
+        run: npm run build:${{ matrix.branding }}
+
+      - name: Create ${{ matrix.branding }} tarball
+        run: tar -C dist/${{ matrix.branding }} -zcvf ${{ matrix.branding }}_client-${{ github.event.release.tag_name }}.tar.gz .
+
+      - name: Upload all tarballs
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ${{ matrix.branding }}_client-${{ github.event.release.tag_name }}.tar.gz
+          tag: ${{ github.ref }}
+          overwrite: true
