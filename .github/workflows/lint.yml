@@ -23,11 +23,4 @@ jobs:
       run: npm install
 
     - name: Lint
-      uses: wearerequired/lint-action@v1
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        eslint: true
-        eslint_args: -c .eslintrc.json
-        eslint_extensions: ts,html
-        stylelint: true
-        stylelint_extensions: scss
+      run: npm run lint

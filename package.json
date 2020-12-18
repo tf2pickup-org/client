@@ -13,7 +13,7 @@
     "build:all": "npm run build:tf2pickup.pl && npm run build:hl.tf2pickup.pl && npm run build:tf2pickup.es",
     "test": "ng test",
     "test:ci": "ng test --browsers=ChromeHeadless --watch=false --code-coverage=true",
-    "lint": "ng lint",
+    "lint": "ng lint && stylelint **/*.scss",
     "e2e": "ng e2e",
     "release": "release-it"
   },
