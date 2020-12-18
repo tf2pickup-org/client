@@ -7,8 +7,8 @@
 <h4 align="center">A Team Fortress 2 pickup system</h4>
 
 <p align="center">
-  <a href="https://travis-ci.org/tf2pickup-pl/client">
-    <img src="https://travis-ci.org/tf2pickup-pl/client.svg?branch=master" alt="Travis">
+  <a href="https://github.com/tf2pickup-pl/client/actions?query=workflow%3Atest">
+    <img src="https://github.com/tf2pickup-pl/client/workflows/test/badge.svg" alt="Test status">
   </a>
 
   <a href="https://codecov.io/gh/tf2pickup-pl/client">
