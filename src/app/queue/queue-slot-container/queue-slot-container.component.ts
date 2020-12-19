@@ -4,7 +4,7 @@ import { ReplaySubject, combineLatest, of, Observable } from 'rxjs';
 import { QueueSlot } from '../models/queue-slot';
 import { Store, select } from '@ngrx/store';
 import { slotById, mySlot, queueFriendships } from '../queue.selectors';
-import { queueLocked } from '@app/selectors';
+import { canJoinQueue } from '@app/selectors';
 import { joinQueue, leaveQueue, markFriend } from '../queue.actions';
 import { switchMap, map, shareReplay } from 'rxjs/operators';
 import { profile } from '@app/profile/profile.selectors';
@@ -60,7 +60,10 @@ export class QueueSlotContainerComponent {
     })
   );
 
-  locked = this.store.select(queueLocked);
+  locked = this.store.pipe(
+    select(canJoinQueue),
+    map(r => !r),
+  );
 
   @Input()
   set slotId(slotId: number) {
