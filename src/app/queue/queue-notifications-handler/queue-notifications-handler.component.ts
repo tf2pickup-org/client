@@ -1,10 +1,10 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { isPlayingGame } from '@app/games/games.selectors';
 import { awaitsReadyUp } from '@app/selectors';
 import { select, Store } from '@ngrx/store';
 import { Howl } from 'howler';
-import { NEVER } from 'rxjs';
-import { debounceTime, switchMap, map, filter, withLatestFrom } from 'rxjs/operators';
+import { NEVER, Subject } from 'rxjs';
+import { debounceTime, switchMap, map, filter, withLatestFrom, takeUntil } from 'rxjs/operators';
 import { QueueReadyUpAction } from '../queue-ready-up-dialog/queue-ready-up-dialog.component';
 import { readyUp, leaveQueue } from '../queue.actions';
 import { substituteRequests } from '../queue.selectors';
@@ -16,7 +16,9 @@ import { ReadyUpService } from '../ready-up.service';
   styleUrls: ['./queue-notifications-handler.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class QueueNotificationsHandlerComponent implements OnInit {
+export class QueueNotificationsHandlerComponent implements OnInit, OnDestroy {
+
+  private destroyed = new Subject<void>();
 
   constructor(
     private store: Store,
@@ -25,6 +27,7 @@ export class QueueNotificationsHandlerComponent implements OnInit {
 
   ngOnInit() {
     this.store.pipe(
+      takeUntil(this.destroyed),
       select(awaitsReadyUp),
       debounceTime(100),
       switchMap(shown => shown ? this.readyUpService.askUserToReadyUp() : NEVER),
@@ -39,6 +42,7 @@ export class QueueNotificationsHandlerComponent implements OnInit {
     ).subscribe(action => this.store.dispatch(action));
 
     this.store.pipe(
+      takeUntil(this.destroyed),
       select(substituteRequests),
       filter(requests => requests?.length > 0),
       withLatestFrom(this.store.select(isPlayingGame)),
@@ -58,6 +62,11 @@ export class QueueNotificationsHandlerComponent implements OnInit {
         });
       }
     });
+  }
+
+  ngOnDestroy() {
+    this.destroyed.next();
+    this.destroyed.unsubscribe();
   }
 
 }

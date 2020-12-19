@@ -11,7 +11,6 @@ import { GamesService } from '../games.service';
 import { MockComponent } from 'ng-mocks';
 import { GameBasicInfoComponent } from '../game-basic-info/game-basic-info.component';
 import { By } from '@angular/platform-browser';
-import { SoundPlayerService, Sound } from '@app/notifications/sound-player.service';
 import { GameSummaryComponent } from '../game-summary/game-summary.component';
 import { merge } from 'lodash';
 import { GameTeamHeaderComponent } from '../game-team-header/game-team-header.component';
@@ -19,6 +18,7 @@ import { GameTeamPlayerListComponent } from '../game-team-player-list/game-team-
 import { ConnectStringComponent } from '../connect-string/connect-string.component';
 import { GameAdminButtonsComponent } from '../game-admin-buttons/game-admin-buttons.component';
 import { MumbleJoinButtonComponent } from '../mumble-join-button/mumble-join-button.component';
+import { Howl } from 'howler';
 
 const paramMap = of(convertToParamMap({ id: 'FAKE_ID' }));
 
@@ -102,10 +102,6 @@ class GamesServiceStub {
   fetchGameSkills(gameId: string) { }
 }
 
-class SoundPlayerServiceStub {
-  playSound(sound: any) { }
-}
-
 describe('GameDetailsComponent', () => {
   let component: GameDetailsComponent;
   let fixture: ComponentFixture<GameDetailsComponent>;
@@ -113,6 +109,11 @@ describe('GameDetailsComponent', () => {
   let storeDispatchSpy: jasmine.Spy;
 
   const initialState = { games: { ids: [], entities: { }, loaded: false } };
+
+  beforeEach(() => {
+    // @ts-ignore
+    spyOn(Howl.prototype, 'init');
+  });
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
@@ -136,7 +137,6 @@ describe('GameDetailsComponent', () => {
         }),
         { provide: ActivatedRoute, useValue: { paramMap } },
         { provide: GamesService, useClass: GamesServiceStub  },
-        { provide: SoundPlayerService, useClass: SoundPlayerServiceStub },
       ],
     })
     // https://github.com/angular/angular/issues/12313
@@ -343,7 +343,6 @@ describe('GameDetailsComponent', () => {
     });
 
     it('should play a sound when the connect is available', () => {
-      const spy = spyOn(TestBed.inject(SoundPlayerService), 'playSound');
       store.setState(makeStateWithGame({
         games: {
           entities: {
@@ -355,7 +354,11 @@ describe('GameDetailsComponent', () => {
         },
       }));
       fixture.detectChanges();
-      expect(spy).toHaveBeenCalledWith(Sound.fight);
+      // @ts-ignore
+      expect(Howl.prototype.init).toHaveBeenCalledOnceWith({
+        src: [ '/assets/sounds/fight.wav' ],
+        autoplay: true,
+      });
     });
 
     describe('when the score is defined', () => {

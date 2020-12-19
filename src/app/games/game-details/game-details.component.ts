@@ -15,10 +15,10 @@ import { GamesService } from '../games.service';
 import { gameServerById } from '@app/game-servers/game-servers.selectors';
 import { loadGameServer } from '@app/game-servers/game-servers.actions';
 import { ResolvedGamePlayer } from '../models/resolved-game-player';
-import { SoundPlayerService, Sound } from '@app/notifications/sound-player.service';
 import { canSubstituteInGame } from '@app/selectors';
 import { tf2ClassPriority } from '../tf2-class-priority';
 import { Tf2Team } from '../models/tf2-team';
+import { Howl } from 'howler';
 
 @Component({
   selector: 'app-game-details',
@@ -86,7 +86,6 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
     private store: Store,
     private title: Title,
     private gamesService: GamesService,
-    private soundPlayerService: SoundPlayerService,
   ) { }
 
   ngOnInit() {
@@ -153,7 +152,10 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
       filter(([a, b])  => !a && !!b),
       takeUntil(this.destroyed),
     ).subscribe(() => {
-      this.soundPlayerService.playSound(Sound.fight);
+      new Howl({
+        src: [ '/assets/sounds/fight.wav' ],
+        autoplay: true,
+      });
     });
   }
 

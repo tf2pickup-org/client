@@ -8,10 +8,6 @@ export class NotificationsService {
 
   private _permission = new ReplaySubject<NotificationPermission>(1);
 
-  private readonly defaultNotificationOptions: NotificationOptions = {
-    icon: `/assets/android-icon-48x48.png`,
-  };
-
   get permission() {
     return this._permission.asObservable();
   }
@@ -26,8 +22,4 @@ export class NotificationsService {
     Notification.requestPermission().then(permission => this._permission.next(permission));
   }
 
-  showNotification(title: string, options: NotificationOptions) {
-    const destOptions = { ...options, ...this.defaultNotificationOptions };
-    const notification = new Notification(title, destOptions);
-  }
 }

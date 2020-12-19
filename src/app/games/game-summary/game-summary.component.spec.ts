@@ -2,7 +2,9 @@ import { ChangeDetectionStrategy } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MockComponent } from 'ng-mocks';
 import { GameSummaryComponent } from './game-summary.component';
+import { FeatherComponent } from 'angular-feather';
 
 describe('GameSummaryComponent', () => {
   let component: GameSummaryComponent;
@@ -10,7 +12,10 @@ describe('GameSummaryComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ GameSummaryComponent ],
+      declarations: [
+        GameSummaryComponent,
+        MockComponent(FeatherComponent),
+      ],
       imports: [
         NoopAnimationsModule,
       ],

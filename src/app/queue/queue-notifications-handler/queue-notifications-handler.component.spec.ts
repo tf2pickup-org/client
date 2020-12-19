@@ -2,6 +2,7 @@ import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testin
 import { isPlayingGame } from '@app/games/games.selectors';
 import { awaitsReadyUp } from '@app/selectors';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import { Howl } from 'howler';
 import { Subject } from 'rxjs';
 import { QueueReadyUpAction } from '../queue-ready-up-dialog/queue-ready-up-dialog.component';
 import { leaveQueue, readyUp } from '../queue.actions';
@@ -20,6 +21,11 @@ describe('QueueNotificationsHandlerComponent', () => {
     readyUpResult = new Subject();
     readyUpService = jasmine.createSpyObj<ReadyUpService>(ReadyUpService.name, ['askUserToReadyUp']);
     readyUpService.askUserToReadyUp.and.returnValue(readyUpResult.asObservable());
+  });
+
+  beforeEach(() => {
+    // @ts-ignore
+    spyOn(Howl.prototype, 'init');
   });
 
   beforeEach(async () => {
@@ -45,8 +51,6 @@ describe('QueueNotificationsHandlerComponent', () => {
     fixture.detectChanges();
   });
 
-  beforeEach(() => component.ngOnInit());
-
   it('should create', () => {
     expect(component).toBeTruthy();
   });
@@ -55,7 +59,7 @@ describe('QueueNotificationsHandlerComponent', () => {
     beforeEach(fakeAsync(() => {
       awaitsReadyUp.setResult(true);
       store.refreshState();
-      tick(200);
+      tick(100);
     }));
 
     it('should ask the user to ready up', () => {
@@ -80,6 +84,40 @@ describe('QueueNotificationsHandlerComponent', () => {
       it('should dispatch the leaveQueue action', () => {
         expect(store.dispatch).toHaveBeenCalledWith(leaveQueue());
       });
+    });
+  });
+
+  describe('when a substitute is needed', () => {
+    beforeEach(fakeAsync(() => {
+      substituteRequests.setResult([
+        { team: 'RED', gameClass: 'soldier', gameNumber: 1, gameId: 'FAKE_GAME_ID' },
+      ]);
+      store.refreshState();
+      tick(1000);
+    }));
+
+    it('should play the sound', () => {
+      // @ts-ignore
+      expect(Howl.prototype.init).toHaveBeenCalledOnceWith({
+        src: [ '/assets/sounds/cmon_tough_guy.wav' ],
+        autoplay: true,
+      });
+    });
+  });
+
+  describe('when a substitute is needed, but the user is playing a game', () => {
+    beforeEach(fakeAsync(() => {
+      isPlayingGame.setResult(true);
+      substituteRequests.setResult([
+        { team: 'RED', gameClass: 'soldier', gameNumber: 1, gameId: 'FAKE_GAME_ID' },
+      ]);
+      store.refreshState();
+      tick(1000);
+    }));
+
+    it('should not play the sound', () => {
+      // @ts-ignore
+      expect(Howl.prototype.init).not.toHaveBeenCalled();
     });
   });
 });
