@@ -16,6 +16,7 @@ import { EventEmitter } from 'eventemitter3';
 import { isInQueue } from './queue.selectors';
 import { awaitsReadyUp } from '@app/selectors';
 import { QueueReadyUpAction } from './queue-ready-up-dialog/queue-ready-up-dialog.component';
+import { ReadyUpService } from './ready-up.service';
 
 const queue: Queue = {
   config: {
@@ -48,7 +49,7 @@ const queue: Queue = {
 describe('QueueEffects', () => {
   let actions: ReplaySubject<Action>;
   let queueServiceStub: jasmine.SpyObj<QueueService>;
-  let readyUpDialogService: jasmine.SpyObj<ReadyUpDialogService>;
+  let readyUpService: jasmine.SpyObj<ReadyUpService>;
   let effects: QueueEffects;
   let store: MockStore<AppState>;
   let isInQueueSelector: MemoizedSelector<unknown, boolean>;
@@ -62,7 +63,7 @@ describe('QueueEffects', () => {
       'voteForMap',
     ]);
 
-    readyUpDialogService = jasmine.createSpyObj<ReadyUpDialogService>(ReadyUpDialogService.name, ['showReadyUpDialog']);
+    readyUpService = jasmine.createSpyObj<ReadyUpService>(ReadyUpService.name, ['askUserToReadyUp']);
   });
 
   beforeEach(() => actions = new ReplaySubject<Action>(1));
@@ -74,7 +75,7 @@ describe('QueueEffects', () => {
       { provide: QueueService, useValue: queueServiceStub },
       provideMockStore(),
       { provide: Socket, useClass: EventEmitter },
-      { provide: ReadyUpDialogService, useValue: readyUpDialogService },
+      { provide: ReadyUpService, useValue: readyUpService },
     ],
   }));
 
@@ -190,48 +191,6 @@ describe('QueueEffects', () => {
       });
       isInQueueSelector.setResult(false);
       store.refreshState();
-    });
-  });
-
-  describe('when ready-up dialog needs to be shown', () => {
-    beforeEach(() => {
-      readyUpDialogService.showReadyUpDialog.and.returnValue(NEVER);
-    });
-
-    it('shows the ready-up dialog', () => {
-      isReadyUpDialogShownSelector.setResult(true);
-      store.refreshState();
-      expect(readyUpDialogService.showReadyUpDialog).toHaveBeenCalledTimes(1);
-    });
-
-    describe('when user readies up', () => {
-      beforeEach(() => {
-        readyUpDialogService.showReadyUpDialog.and.returnValue(of(QueueReadyUpAction.readyUp));
-      });
-
-      it('should ready up', () => {
-        const spy = spyOn(store, 'dispatch');
-
-        isReadyUpDialogShownSelector.setResult(true);
-        store.refreshState();
-
-        expect(spy).toHaveBeenCalledWith(readyUp());
-      });
-    });
-
-    describe('when user does not ready up', () => {
-      beforeEach(() => {
-        readyUpDialogService.showReadyUpDialog.and.returnValue(of(QueueReadyUpAction.leaveQueue));
-      });
-
-      it('should leave the queue', () => {
-        const spy = spyOn(store, 'dispatch');
-
-        isReadyUpDialogShownSelector.setResult(true);
-        store.refreshState();
-
-        expect(spy).toHaveBeenCalledWith(leaveQueue());
-      });
     });
   });
 });

@@ -52,7 +52,7 @@ export class QueueNotificationsHandlerComponent implements OnInit {
 
         requests.forEach(request => {
           new Notification('A subsitute is needed!', {
-            body: `Team ${request.team} needs a substitute for ${request.gameClass} in game #${request.gameNumber}.`,
+            body: `Team ${request.team} needs a substitute for ${request.gameClass} in game #${request.gameNumber}`,
             icon: '/assets/android-icon-48x48.png',
           });
         });

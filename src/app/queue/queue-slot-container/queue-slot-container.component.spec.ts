@@ -87,7 +87,7 @@ describe('QueueSlotContainerComponent', () => {
         provideMockStore({
           initialState,
           selectors: [
-            { selector: canJoinQueue, value: false },
+            { selector: canJoinQueue, value: true },
           ],
         }),
       ],

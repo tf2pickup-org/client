@@ -75,14 +75,14 @@ export class QueueEffects {
   cancelPreReadyOnQueueLeave = createEffect(() =>
     this.store.select(isInQueue).pipe(
       filter(inQueue => !inQueue),
-      map(() => stopPreReady()),
+      mapTo(stopPreReady()),
     )
   );
 
   cancelPreReadyOnGameLaunch = createEffect(() =>
     this.actions.pipe(
       ofType(ownGameAdded),
-      map(() => stopPreReady()),
+      mapTo(stopPreReady()),
     )
   );
 
