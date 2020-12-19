@@ -153,7 +153,7 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
       takeUntil(this.destroyed),
     ).subscribe(() => {
       new Howl({
-        src: [ '/assets/sounds/fight.wav' ],
+        src: ['webm', 'wav'].map(format => `/assets/sounds/fight.${format}`),
         autoplay: true,
       });
     });

@@ -99,7 +99,7 @@ describe('QueueNotificationsHandlerComponent', () => {
     it('should play the sound', () => {
       // @ts-ignore
       expect(Howl.prototype.init).toHaveBeenCalledOnceWith({
-        src: [ '/assets/sounds/cmon_tough_guy.wav' ],
+        src: jasmine.any(Array),
         autoplay: true,
       });
     });

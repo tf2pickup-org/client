@@ -50,7 +50,7 @@ export class QueueNotificationsHandlerComponent implements OnInit, OnDestroy {
     ).subscribe(([requests, playingGame]) => {
       if (!playingGame) {
         new Howl({
-          src: [ '/assets/sounds/cmon_tough_guy.wav' ],
+          src: ['webm', 'wav'].map(format => `/assets/sounds/cmon_tough_guy.${format}`),
           autoplay: true,
         });
 

@@ -24,7 +24,7 @@ export class ReadyUpService {
       const component = overlay.attach(portal);
 
       const sound = new Howl({
-        src: [ '/assets/sounds/ready_up.wav' ],
+        src: ['webm', 'wav'].map(format => `/assets/sounds/ready_up.${format}`),
         autoplay: true,
       });
 

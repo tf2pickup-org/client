@@ -356,7 +356,7 @@ describe('GameDetailsComponent', () => {
       fixture.detectChanges();
       // @ts-ignore
       expect(Howl.prototype.init).toHaveBeenCalledOnceWith({
-        src: [ '/assets/sounds/fight.wav' ],
+        src: jasmine.any(Array),
         autoplay: true,
       });
     });
