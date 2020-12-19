@@ -81,7 +81,7 @@
     "@typescript-eslint/parser": "4.10.0",
     "eslint": "7.16.0",
     "eslint-plugin-import": "2.22.1",
-    "eslint-plugin-jsdoc": "30.7.8",
+    "eslint-plugin-jsdoc": "30.7.9",
     "eslint-plugin-ngrx": "1.13.0",
     "eslint-plugin-prefer-arrow": "1.2.2",
     "eslint-plugin-rxjs": "2.1.5",
