@@ -2,6 +2,8 @@ import { ChangeDetectionStrategy } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
+import { FeatherComponent } from 'angular-feather';
+import { MockComponent } from 'ng-mocks';
 import { PlayerDetailsAdminButtonsComponent } from './player-details-admin-buttons.component';
 
 describe('PlayerDetailsAdminButtonsComponent', () => {
@@ -10,7 +12,10 @@ describe('PlayerDetailsAdminButtonsComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ PlayerDetailsAdminButtonsComponent ],
+      declarations: [
+        PlayerDetailsAdminButtonsComponent,
+        MockComponent(FeatherComponent),
+      ],
       imports: [
         RouterTestingModule,
       ],
