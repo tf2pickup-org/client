@@ -7,6 +7,7 @@ import { MockComponent } from 'ng-mocks';
 import { QueueClassSlotListComponent } from '../queue-class-slot-list/queue-class-slot-list.component';
 import { By } from '@angular/platform-browser';
 import { GameClass } from '../models/game-class';
+import { GameClassIconComponent } from '@app/shared/game-class-icon/game-class-icon.component';
 
 describe('QueueComponent', () => {
   let component: QueueComponent;
@@ -19,6 +20,7 @@ describe('QueueComponent', () => {
       declarations: [
         QueueComponent,
         MockComponent(QueueClassSlotListComponent),
+        MockComponent(GameClassIconComponent),
       ],
       providers: [
         provideMockStore(),

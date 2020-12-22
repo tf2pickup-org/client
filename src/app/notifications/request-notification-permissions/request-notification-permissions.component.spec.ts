@@ -4,6 +4,8 @@ import { ReplaySubject } from 'rxjs';
 import { NotificationsService } from '../notifications.service';
 import { RequestNotificationPermissionsComponent } from './request-notification-permissions.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MockComponent } from 'ng-mocks';
+import { FeatherComponent } from 'angular-feather';
 
 describe('RequestNotificationPermissionsComponent', () => {
   let component: RequestNotificationPermissionsComponent;
@@ -17,7 +19,10 @@ describe('RequestNotificationPermissionsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RequestNotificationPermissionsComponent ],
+      declarations: [
+        RequestNotificationPermissionsComponent,
+        MockComponent(FeatherComponent),
+      ],
       imports: [
         NoopAnimationsModule,
       ],
