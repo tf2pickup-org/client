@@ -1,41 +1,45 @@
 <div *ngIf="hallOfFame | async as _hallOfFame" class="container py-3">
-  <div class="row">
-    <div class="col">
-      <p>
-        <span class="font-weight-bold">Hall of Fame</span> is a selection of the most active players.
-      </p>
-    </div>
-  </div>
+  <p class="mdc-typography--subtitle2">
+    <span class="font-weight-bold">Hall of Fame</span> is a selection of the most active players.
+  </p>
 
-  <div class="row mt-4">
-    <div class="col-6">
-      <h4>All classes</h4>
+  <div class="d-flex flex-row">
+    <div class="flex-grow-1 surface">
+      <h4 class="mdc-typography--subtitle4">All classes</h4>
 
-      <ul class="list-group list-group-flush mt-2">
+      <ul class="mdc-list">
         <a [routerLink]="['/player', player.player]"
-          class="list-group-item list-group-item-action d-flex flex-row justify-content-between"
+          class="mdc-list-item d-flex justify-content-between"
+          [class.top1]="i === 0"
+          [class.top2]="i === 1"
+          [class.top3]="i === 2"
           *ngFor="let player of _hallOfFame.mostActivePlayers; index as i">
-          <span>
+          <span class="mdc-list-item__ripple"></span>
+          <span class="mdc-list-item__text">
             {{ i + 1 }}.
             <app-player-name [playerId]="player.player"></app-player-name>
           </span>
-          <span>{{ player.count }}</span>
+          <span class="mdc-list-item__text">{{ player.count }}</span>
         </a>
       </ul>
     </div>
 
-    <div class="col-6">
-      <h4>Medics</h4>
+    <div class="flex-grow-1 surface">
+      <h4 class="mdc-typography--subtitle4">Medics</h4>
 
-      <ul class="list-group list-group-flush mt-2">
+      <ul class="mdc-list">
         <a [routerLink]="['/player', player.player]"
-          class="list-group-item list-group-item-action d-flex flex-row justify-content-between"
+          class="mdc-list-item d-flex justify-content-between"
+          [class.top1]="i === 0"
+          [class.top2]="i === 1"
+          [class.top3]="i === 2"
           *ngFor="let player of _hallOfFame.mostActiveMedics; index as i">
-          <span>
+          <span class="mdc-list-item__ripple"></span>
+          <span class="mdc-list-item__text">
             {{ i + 1 }}.
             <app-player-name [playerId]="player.player"></app-player-name>
           </span>
-          <span>{{ player.count }}</span>
+          <span class="mdc-list-item__text">{{ player.count }}</span>
         </a>
       </ul>
     </div>

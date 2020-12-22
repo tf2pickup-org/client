@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { HallOfFameComponent } from './hall-of-fame/hall-of-fame.component';
 
 const routes: Routes = [
-  { path: 'hall-of-fame', component: HallOfFameComponent },
+  { path: 'hall-of-fame', component: HallOfFameComponent, data: { title: 'hall of fame', animation: 'HallOfFamePage' } },
 ];
 
 @NgModule({
