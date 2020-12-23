@@ -1,3 +1,40 @@
+# [3.0.0](https://github.com/tf2pickup-pl/client/compare/2.6.4...3.0.0) (2020-12-23)
+
+
+**Requires server version v3.3.0.**
+
+### Bug Fixes
+
+* **ci:** cleanup github workflows ([0b3219e](https://github.com/tf2pickup-pl/client/commit/0b3219eb0cabd9eaf19e489522ec292beb4ee4d7))
+* **ci:** fix coverage script ([d8fa89a](https://github.com/tf2pickup-pl/client/commit/d8fa89aa72e30dce3e4c34652d313187ce1bb7d1))
+* **ci:** fix github actions ([48fcadf](https://github.com/tf2pickup-pl/client/commit/48fcadf16890d251304e41e8747007aad3b4cecc))
+* **ci:** fix lint action ([3868aab](https://github.com/tf2pickup-pl/client/commit/3868aab89d93228218170ce15651270a56082eca))
+* **ci:** split github workflows ([d2c0793](https://github.com/tf2pickup-pl/client/commit/d2c0793873066c0f06276674abffa85bd494810b))
+* **ci:** use karma-coverage ([#537](https://github.com/tf2pickup-pl/client/issues/537)) ([84b2824](https://github.com/tf2pickup-pl/client/commit/84b2824ce69e215ffeed07431a0b132495128f2c))
+* **deps:** update angular monorepo to v11.0.5 ([#531](https://github.com/tf2pickup-pl/client/issues/531)) ([3ff026a](https://github.com/tf2pickup-pl/client/commit/3ff026aeaa77e103fe5ac5fdc6b56e14e942392b))
+* **deps:** update dependency jwt-decode to v3.1.2 ([#481](https://github.com/tf2pickup-pl/client/issues/481)) ([557e303](https://github.com/tf2pickup-pl/client/commit/557e303820ad6ddbf2be36e112ac8203edbef113))
+* **deps:** update dependency ngx-markdown to v11.0.1 ([#509](https://github.com/tf2pickup-pl/client/issues/509)) ([989c2dd](https://github.com/tf2pickup-pl/client/commit/989c2dd19e011ca0bb68fad78c973dd988c4a576))
+* **deps:** update ngrx monorepo to v10.1.2 ([#549](https://github.com/tf2pickup-pl/client/issues/549)) ([9b67993](https://github.com/tf2pickup-pl/client/commit/9b67993a10f0888b019413ecf6c3231cb5f36f56))
+* **style:** body padding only on large screens ([#551](https://github.com/tf2pickup-pl/client/issues/551)) ([c63e66e](https://github.com/tf2pickup-pl/client/commit/c63e66e7b5337f98e199f94addf81f82bfed24c1))
+* add missing crossorigin tags ([#532](https://github.com/tf2pickup-pl/client/issues/532)) ([888477f](https://github.com/tf2pickup-pl/client/commit/888477f14ab329a3bf7977446b90a2931e0dcf47))
+* canSubstituteInGame selector returns true when the user is not logged in ([#525](https://github.com/tf2pickup-pl/client/issues/525)) ([5a8f830](https://github.com/tf2pickup-pl/client/commit/5a8f8306e53875536b0a9c350e60b23d097f865f))
+* get rid of unused assets ([#540](https://github.com/tf2pickup-pl/client/issues/540)) ([d0b02a1](https://github.com/tf2pickup-pl/client/commit/d0b02a1c112800c168735c18f8afd6b8210f6c57))
+
+
+### Features
+
+* new ui (#445) ([ac3fd37](https://github.com/tf2pickup-pl/client/commit/ac3fd3794a12ac84baf0d47b48a8e6894d38ef00)), closes [#445](https://github.com/tf2pickup-pl/client/issues/445)
+* **ci:** build releases ([#539](https://github.com/tf2pickup-pl/client/issues/539)) ([0839855](https://github.com/tf2pickup-pl/client/commit/0839855dbd66a35bb32a43ce0b68d83a232ca985))
+* **ci:** make use of github actions ([#534](https://github.com/tf2pickup-pl/client/issues/534)) ([d440780](https://github.com/tf2pickup-pl/client/commit/d4407804a470922fccb3c6dc036efb696ac28f9b))
+* **ci:** upload test coverage info ([af7231a](https://github.com/tf2pickup-pl/client/commit/af7231a0ccaecd54b98961379d9ad89743274090))
+* handle all avatar sizes ([#530](https://github.com/tf2pickup-pl/client/issues/530)) ([5871d8e](https://github.com/tf2pickup-pl/client/commit/5871d8e8ae417f2f802ef83e047b0079243f4fc7))
+* use component store in SkillTableComponent ([#524](https://github.com/tf2pickup-pl/client/issues/524)) ([e410b3a](https://github.com/tf2pickup-pl/client/commit/e410b3a7caf328a0762802744497ff0435914959))
+
+
+### BREAKING CHANGES
+
+* This is a complete UI overhaul.
+
 ## [2.6.4](https://github.com/tf2pickup-pl/client/compare/2.6.3...2.6.4) (2020-11-15)
 
 
