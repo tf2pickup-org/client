@@ -70,7 +70,8 @@
       [routerLink]="['/player', _profile.id]"
       class="navbar__link navbar__link--profile">
       <img [src]="_profile.avatar.medium"
-        class="profile-avatar">
+        class="profile-avatar"
+        crossorigin="anonymous">
       {{ _profile.name }}
     </a>
   </ng-container>

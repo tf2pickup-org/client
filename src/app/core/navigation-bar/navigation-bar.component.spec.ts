@@ -73,6 +73,12 @@ describe('NavigationBarComponent', () => {
       expect(el.href).toMatch(/\/player\/FAKE_ID$/);
     });
 
+    it('should render profile avatar', () => {
+      const img = fixture.debugElement.query(By.css('.navbar__link--profile img')).nativeElement as HTMLImageElement;
+      expect(img).toBeTruthy();
+      expect(img.crossOrigin).toEqual('anonymous');
+    });
+
     it('should render link to the settings page', () => {
       const el = fixture.debugElement.query(By.css('a.navbar__link--settings')).nativeElement as HTMLAnchorElement;
       expect(el).toBeTruthy();
