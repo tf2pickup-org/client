@@ -1,3 +1,11 @@
+## [3.0.1](https://github.com/tf2pickup-pl/client/compare/3.0.0...3.0.1) (2020-12-24)
+
+
+### Bug Fixes
+
+* **css:** fix pagination anchor color ([#554](https://github.com/tf2pickup-pl/client/issues/554)) ([ff974f5](https://github.com/tf2pickup-pl/client/commit/ff974f5e0b7923bb65544dea9b35a242a375327e))
+* add missing crossorigin tag ([#553](https://github.com/tf2pickup-pl/client/issues/553)) ([44bc74c](https://github.com/tf2pickup-pl/client/commit/44bc74c44592d62d8edc32558eb87cad7f4c36da))
+
 # [3.0.0](https://github.com/tf2pickup-pl/client/compare/2.6.4...3.0.0) (2020-12-23)
 
 
