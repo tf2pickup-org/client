@@ -16,7 +16,6 @@ import { GamePlayer } from '../models/game-player';
 import { ResolvedGamePlayer } from '../models/resolved-game-player';
 import { Tf2Team } from '../models/tf2-team';
 import { createMumbleUrl } from './create-mumble-url';
-import { sortPlayers } from './sort-players';
 
 interface GameDetailsState {
   game: Game;
@@ -140,9 +139,7 @@ export class GameDetailsStore extends ComponentStore<GameDetailsState> {
   }
 
   playersOf(team: Tf2Team) {
-    return this.select(this.players, players => players.filter(p => p.team === team)).pipe(
-      map(players => sortPlayers(players)),
-    );
+    return this.select(this.players, players => players.filter(p => p.team === team));
   }
 
   scoreOf(team: Tf2Team) {

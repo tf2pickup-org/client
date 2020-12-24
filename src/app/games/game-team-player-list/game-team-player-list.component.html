@@ -1,5 +1,5 @@
 <div *ngIf="players" class="player-list">
-  <div *ngFor="let player of players" class="player-list-item">
+  <div *ngFor="let player of players | orderTf2Classes" class="player-list-item">
     <app-game-class-icon
       [gameClass]="player.gameClass"
       class="player-list-item__icon"></app-game-class-icon>
