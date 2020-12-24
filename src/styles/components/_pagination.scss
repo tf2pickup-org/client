@@ -14,6 +14,10 @@
       > a {
         @include outline.disable;
         color: rgb(255, 255, 255);
+
+        &:hover {
+          color: rgb(255, 255, 255);
+        }
       }
     }
 
