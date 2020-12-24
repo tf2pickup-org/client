@@ -12,17 +12,16 @@ import { GameSummaryComponent } from '../game-summary/game-summary.component';
 import { GameTeamHeaderComponent } from '../game-team-header/game-team-header.component';
 import { GameTeamPlayerListComponent } from '../game-team-player-list/game-team-player-list.component';
 import { Game } from '../models/game';
-import { PlayersService } from '@app/players/players.service';
 import { map } from 'rxjs/operators';
 import { isAdmin, isBanned, isLoggedIn, profile } from '@app/profile/profile.selectors';
 import { activeGame } from '../games.selectors';
 import { GameServer } from '@app/game-servers/models/game-server';
-import { Player } from '@app/players/models/player';
 import { ConnectStringComponent } from '../connect-string/connect-string.component';
 import { GameAdminButtonsComponent } from '../game-admin-buttons/game-admin-buttons.component';
 import { MumbleJoinButtonComponent } from '../mumble-join-button/mumble-join-button.component';
 import { forceEndGame, loadGame, reinitializeServer, requestSubstitute } from '../games.actions';
 import { Profile } from '@app/profile/models/profile';
+import { keyBy } from 'lodash';
 
 const gameInProgress: Game = {
   id: 'FAKE_GAME_ID',
@@ -86,8 +85,8 @@ const mockGameServer: GameServer = {
   port: '12345',
 };
 
-const mockPlayers: Record<string, Player> = {
-  FAKE_PLAYER_1_ID: {
+const mockPlayers = [
+  {
     id: 'FAKE_PLAYER_1_ID',
     name: 'FAKE_PLAYER_1',
     joinedAt: new Date('2019-08-01T13:42:55.121Z'),
@@ -98,7 +97,7 @@ const mockPlayers: Record<string, Player> = {
       large: 'FAKE_PLAYER_1_LARGE_AVATAR_URL',
     },
   },
-  FAKE_PLAYER_2_ID: {
+  {
     id: 'FAKE_PLAYER_2_ID',
     name: 'FAKE_PLAYER_2',
     joinedAt: new Date('2019-08-01T13:42:55.121Z'),
@@ -109,20 +108,26 @@ const mockPlayers: Record<string, Player> = {
       large: 'FAKE_PLAYER_2_LARGE_AVATAR_URL',
     },
   },
-};
+];
+
+const makeState = (games: Game[]) => ({
+  games: {
+    ids: games.map(g => g.id),
+    entities: keyBy(games, 'id'),
+  },
+  gameServers: {
+    ids: ['FAKE_GAME_SERVER_ID'],
+    entities: { FAKE_GAME_SERVER_ID: mockGameServer },
+  },
+  players: {
+    players: {
+      ids: mockPlayers.map(p => p.id),
+      entities: keyBy(mockPlayers, 'id'),
+    }
+  },
+});
 
 describe('GameDetailsComponent', () => {
-  const initialState = {
-    games: {
-      ids: [],
-      entities: { },
-    },
-    gameServers: {
-      ids: [],
-      entities: { },
-    },
-  };
-
   let fixture: MockedComponentFixture;
   let component: GameDetailsComponent;
   let store: MockStore<any>;
@@ -133,12 +138,9 @@ describe('GameDetailsComponent', () => {
   });
 
   beforeEach(() => MockBuilder(GameDetailsComponent)
-    .provide(provideMockStore({ initialState }))
+    .provide(provideMockStore({ initialState: makeState([]) }))
     .mock(ActivatedRoute, {
       paramMap: routeParams.pipe(map(convertToParamMap)),
-    })
-    .mock(PlayersService, {
-      fetchPlayer: playerId => of(mockPlayers[playerId]),
     })
     .mock(Title)
     .mock(GameAdminButtonsComponent)
@@ -184,16 +186,7 @@ describe('GameDetailsComponent', () => {
 
     describe('and with the game loaded', () => {
       beforeEach(() => {
-        store.setState({
-          games: {
-            ids: ['FAKE_GAME_ID'],
-            entities: { FAKE_GAME_ID: gameInProgress },
-          },
-          gameServers: {
-            ids: ['FAKE_GAME_SERVER_ID'],
-            entities: { FAKE_GAME_SERVER_ID: mockGameServer },
-          },
-        });
+        store.setState(makeState([gameInProgress]));
         fixture.detectChanges();
       });
 
@@ -302,8 +295,8 @@ describe('GameDetailsComponent', () => {
             store.refreshState();
             fixture.detectChanges();
 
-            gameAdminButtons = ngMocks.find(GameAdminButtonsComponent)?.componentInstance;
-            gameTeamPlayerLists = ngMocks.findAll(GameTeamPlayerListComponent)?.map(m => m.componentInstance);
+            gameAdminButtons = ngMocks.find(GameAdminButtonsComponent).componentInstance;
+            gameTeamPlayerLists = ngMocks.findAll(GameTeamPlayerListComponent).map(m => m.componentInstance);
           });
 
           it('should render admin buttons', () => {
@@ -331,16 +324,7 @@ describe('GameDetailsComponent', () => {
 
       describe('when the game has ended', () => {
         beforeEach(() => {
-          store.setState({
-            games: {
-              ids: ['FAKE_GAME_ID'],
-              entities: { FAKE_GAME_ID: endedGame },
-            },
-            gameServers: {
-              ids: ['FAKE_GAME_SERVER_ID'],
-              entities: { FAKE_GAME_SERVER_ID: mockGameServer },
-            },
-          });
+          store.setState(makeState([endedGame]));
           fixture.detectChanges();
         });
 

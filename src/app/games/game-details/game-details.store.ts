@@ -2,8 +2,10 @@ import { Injectable } from '@angular/core';
 import { loadGameServer } from '@app/game-servers/game-servers.actions';
 import { gameServerById } from '@app/game-servers/game-servers.selectors';
 import { GameServer } from '@app/game-servers/models/game-server';
+import { loadPlayer } from '@app/players/actions';
 import { Player } from '@app/players/models/player';
 import { PlayersService } from '@app/players/players.service';
+import { playerById } from '@app/players/selectors';
 import { isAdmin, isBanned, isLoggedIn, profile } from '@app/profile/profile.selectors';
 import { ComponentStore } from '@ngrx/component-store';
 import { Store } from '@ngrx/store';
@@ -101,12 +103,14 @@ export class GameDetailsStore extends ComponentStore<GameDetailsState> {
   private readonly resolvePlayers = this.effect((slots: Observable<GamePlayer[]>) => slots.pipe(
     switchMap(_slots => from(_slots)),
     filter(slot => /active|waiting for substitute/.test(slot.status)),
-    mergeMap(slot => this.playersService.fetchPlayer(slot.player).pipe(
-      tap(player => this.addPlayer(player)),
-      catchError((error: unknown) => {
-        console.error(error);
-        return NEVER;
+    mergeMap(slot => this.store.select(playerById(slot.player)).pipe(
+      tap(player => {
+        if (!player) {
+          this.store.dispatch(loadPlayer({ playerId: slot.player }));
+        }
       }),
+      filter(player => !!player),
+      tap(player => this.addPlayer(player)),
     )),
   ));
 
@@ -128,7 +132,6 @@ export class GameDetailsStore extends ComponentStore<GameDetailsState> {
 
   constructor(
     private store: Store,
-    private playersService: PlayersService,
   ) {
     super({
       game: null,
