@@ -45,7 +45,7 @@
         [showAdminActionButtons]="(store.showAdminTools | async)"
         (requestSubstitute)="requestSubstitute($event)"
         (replacePlayer)="replacePlayer($event)"
-        [locked]="!(store.canSubstitute | async)"
+        [locked]="(store.canSubstitute | async) !== true"
         class="d-block mt-4"></app-game-team-player-list>
     </div>
   </div>
