@@ -19,10 +19,13 @@ import { GameServer } from '@app/game-servers/models/game-server';
 import { ConnectStringComponent } from '../connect-string/connect-string.component';
 import { GameAdminButtonsComponent } from '../game-admin-buttons/game-admin-buttons.component';
 import { MumbleJoinButtonComponent } from '../mumble-join-button/mumble-join-button.component';
-import { forceEndGame, loadGame, reinitializeServer, requestSubstitute } from '../games.actions';
+import { forceEndGame, loadGame, reinitializeServer, replacePlayer, requestSubstitute } from '../games.actions';
 import { Profile } from '@app/profile/models/profile';
 import { keyBy } from 'lodash';
 import { Howl } from 'howler';
+import { loadGameServer } from '@app/game-servers/game-servers.actions';
+import { Player } from '@app/players/models/player';
+import { loadPlayer } from '@app/players/actions';
 
 const gameInProgress: Game = {
   id: 'FAKE_GAME_ID',
@@ -77,6 +80,10 @@ const endedGame: Game = {
   ],
   logsUrl: 'FAKE_LOGS_URL',
   demoUrl: 'FAKE_DEMO_URL',
+  score: {
+    red: 2,
+    blu: 1,
+  },
 };
 
 const mockGameServer: GameServer = {
@@ -111,19 +118,19 @@ const mockPlayers = [
   },
 ];
 
-const makeState = (games: Game[]) => ({
+const makeState = (games: Game[], gameServers: GameServer[] = [mockGameServer], players: Player[] = mockPlayers) => ({
   games: {
     ids: games.map(g => g.id),
     entities: keyBy(games, 'id'),
   },
   gameServers: {
-    ids: ['FAKE_GAME_SERVER_ID'],
-    entities: { FAKE_GAME_SERVER_ID: mockGameServer },
+    ids: gameServers.map(gs => gs.id),
+    entities: keyBy(gameServers, 'id'),
   },
   players: {
     players: {
-      ids: mockPlayers.map(p => p.id),
-      entities: keyBy(mockPlayers, 'id'),
+      ids: players.map(p => p.id),
+      entities: keyBy(players, 'id'),
     }
   },
 });
@@ -190,6 +197,30 @@ describe('GameDetailsComponent', () => {
       expect(store.dispatch).toHaveBeenCalledWith(loadGame({ gameId: 'FAKE_GAME_ID' }));
     });
 
+    describe('without game server', () => {
+      beforeEach(() => {
+        store.setState(makeState([gameInProgress], []));
+        fixture.detectChanges();
+      });
+
+      it('should attempt to load the game server', () => {
+        expect(store.dispatch).toHaveBeenCalledWith(loadGameServer({ gameServerId: 'FAKE_GAME_SERVER_ID' }));
+      });
+    });
+
+    describe('without players', () => {
+      beforeEach(() => {
+        // @ts-ignore
+        store.dispatch.calls.reset();
+        store.setState(makeState([gameInProgress], [mockGameServer], []));
+        fixture.detectChanges();
+      });
+
+      it('should attempt to load players', () => {
+        expect(store.dispatch).toHaveBeenCalledTimes(2);
+      });
+    });
+
     describe('and with the game loaded', () => {
       beforeEach(() => {
         store.setState(makeState([gameInProgress]));
@@ -244,6 +275,9 @@ describe('GameDetailsComponent', () => {
           it('should be able to take the substitute spot', () => {
             const gameTeamPlayerList = ngMocks.find(GameTeamPlayerListComponent).componentInstance;
             expect(gameTeamPlayerList.locked).toBe(false);
+
+            gameTeamPlayerList.replacePlayer.emit('FAKE_PLAYER_1_ID');
+            expect(store.dispatch).toHaveBeenCalledWith(replacePlayer({ gameId: 'FAKE_GAME_ID', replaceeId: 'FAKE_PLAYER_1_ID' }));
           });
 
           describe('and banned', () => {
@@ -365,6 +399,16 @@ describe('GameDetailsComponent', () => {
         it('should not render player connection statuses', () => {
           const playerList = ngMocks.find(GameTeamPlayerListComponent).componentInstance;
           expect(playerList.showPlayerConnectionStatus).toBe(false);
+        });
+
+        it('should render score', () => {
+          const gameTeamHeaders = ngMocks.findAll(GameTeamHeaderComponent).map(m => m.componentInstance);
+
+          const bluHeader = gameTeamHeaders.find(h => h.team === 'blu');
+          expect(bluHeader.score).toEqual(1);
+
+          const redHeader = gameTeamHeaders.find(h => h.team === 'red');
+          expect(redHeader.score).toEqual(2);
         });
       });
     });
