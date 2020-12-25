@@ -4,7 +4,7 @@ import { TestBed } from '@angular/core/testing';
 import { GameDetailsComponent } from './game-details.component';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { ActivatedRoute, convertToParamMap } from '@angular/router';
-import { of, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { MockBuilder, MockedComponentFixture, MockRender, ngMocks } from 'ng-mocks';
 import { GameBasicInfoComponent } from '../game-basic-info/game-basic-info.component';
 import { Title } from '@angular/platform-browser';
@@ -22,6 +22,7 @@ import { MumbleJoinButtonComponent } from '../mumble-join-button/mumble-join-but
 import { forceEndGame, loadGame, reinitializeServer, requestSubstitute } from '../games.actions';
 import { Profile } from '@app/profile/models/profile';
 import { keyBy } from 'lodash';
+import { Howl } from 'howler';
 
 const gameInProgress: Game = {
   id: 'FAKE_GAME_ID',
@@ -132,6 +133,11 @@ describe('GameDetailsComponent', () => {
   let component: GameDetailsComponent;
   let store: MockStore<any>;
   let routeParams: Subject<any>;
+
+  beforeEach(() => {
+    // @ts-ignore
+    spyOn(Howl.prototype, 'init');
+  });
 
   beforeEach(() => {
     routeParams = new Subject();
@@ -318,6 +324,24 @@ describe('GameDetailsComponent', () => {
             const gameTeamPlayerList = ngMocks.find(GameTeamPlayerListComponent).componentInstance;
             gameTeamPlayerList.requestSubstitute.emit('FAKE_PLAYER_1_ID');
             expect(store.dispatch).toHaveBeenCalledWith(requestSubstitute({ gameId: 'FAKE_GAME_ID', playerId: 'FAKE_PLAYER_1_ID' }));
+          });
+        });
+
+        describe('and the connect string becomes available', () => {
+          beforeEach(() => {
+            store.setState(makeState([{
+              ...gameInProgress,
+              connectString: undefined,
+            }]));
+            store.setState(makeState([ gameInProgress ]));
+          });
+
+          it('should play the ready-up sound', () => {
+            // @ts-ignore
+            expect(Howl.prototype.init).toHaveBeenCalledOnceWith({
+              src: jasmine.any(Array),
+              autoplay: true,
+            });
           });
         });
       });
