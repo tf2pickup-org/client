@@ -1,5 +1,5 @@
 import { QueueSlot } from './queue/models/queue-slot';
-import { canJoinQueue, canSubstituteInGame, awaitsReadyUp } from './selectors';
+import { canJoinQueue, awaitsReadyUp } from './selectors';
 
 describe('canJoinQueue', () => {
   describe('when the user is not logged in', () => {
@@ -17,48 +17,6 @@ describe('canJoinQueue', () => {
   describe('when the user has active bans', () => {
     it('should return false', () => {
       expect(canJoinQueue.projector(true, null, true)).toBe(false);
-    });
-  });
-});
-
-describe('canSubstituteInGame', () => {
-  describe('when not logged in', () => {
-    it('should return false', () => {
-      expect(canSubstituteInGame('FAKE_GAME_ID').projector(false, true, false, null, { id: 'FAKE_GAME_ID' })).toBe(false);
-    });
-  });
-
-  describe('when logged in', () => {
-    describe('when the given game is not runnong', () => {
-      it('should return false', () => {
-        expect(canSubstituteInGame('FAKE_GAME_ID').projector(true, false, false, null, null)).toBe(false);
-      });
-    });
-
-    describe('when the user is banned', () => {
-      it('should return false', () => {
-        expect(canSubstituteInGame('FAKE_GAME_ID').projector(true, true, true, null, null)).toBe(false);
-      });
-    });
-
-    describe('when the user is not playing any game', () => {
-      it('should return true', () => {
-        expect(canSubstituteInGame('FAKE_GAME_ID').projector(true, true, false, null, { id: 'FAKE_GAME_ID' })).toBe(true);
-      });
-    });
-
-    describe('when the user is playing a game', () => {
-      it('should return false', () => {
-        expect(canSubstituteInGame('FAKE_GAME_ID').projector(true, true, false, { id: 'SOME_OTHER_GAME' }, { id: 'FAKE_GAME_ID' }))
-          .toBe(false);
-      });
-    });
-
-    describe('when the user is trying to sub in the same game', () => {
-      it('should return true', () => {
-        expect(canSubstituteInGame('FAKE_GAME_ID').projector(true, true, false, { id: 'FAKE_GAME_ID' }, { id: 'FAKE_GAME_ID' }))
-          .toBe(true);
-      });
     });
   });
 });

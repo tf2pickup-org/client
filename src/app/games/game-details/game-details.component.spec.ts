@@ -1,383 +1,415 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+/* eslint-disable id-blacklist */
+/* eslint-disable @typescript-eslint/naming-convention */
+import { TestBed } from '@angular/core/testing';
 import { GameDetailsComponent } from './game-details.component';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
-import { SharedModule } from '@app/shared/shared.module';
 import { ActivatedRoute, convertToParamMap } from '@angular/router';
-import { of, NEVER } from 'rxjs';
-import { RouterTestingModule } from '@angular/router/testing';
-import { forceEndGame, reinitializeServer, replacePlayer, requestSubstitute } from '../games.actions';
-import { ChangeDetectionStrategy } from '@angular/core';
-import { GamesService } from '../games.service';
-import { MockComponent } from 'ng-mocks';
+import { Subject } from 'rxjs';
+import { MockBuilder, MockedComponentFixture, MockRender, ngMocks } from 'ng-mocks';
 import { GameBasicInfoComponent } from '../game-basic-info/game-basic-info.component';
-import { By } from '@angular/platform-browser';
+import { Title } from '@angular/platform-browser';
 import { GameSummaryComponent } from '../game-summary/game-summary.component';
-import { merge } from 'lodash';
 import { GameTeamHeaderComponent } from '../game-team-header/game-team-header.component';
 import { GameTeamPlayerListComponent } from '../game-team-player-list/game-team-player-list.component';
+import { Game } from '../models/game';
+import { map } from 'rxjs/operators';
+import { isAdmin, isBanned, isLoggedIn, profile } from '@app/profile/profile.selectors';
+import { activeGame } from '../games.selectors';
+import { GameServer } from '@app/game-servers/models/game-server';
 import { ConnectStringComponent } from '../connect-string/connect-string.component';
 import { GameAdminButtonsComponent } from '../game-admin-buttons/game-admin-buttons.component';
 import { MumbleJoinButtonComponent } from '../mumble-join-button/mumble-join-button.component';
+import { forceEndGame, loadGame, reinitializeServer, replacePlayer, requestSubstitute } from '../games.actions';
+import { Profile } from '@app/profile/models/profile';
+import { keyBy } from 'lodash';
 import { Howl } from 'howler';
+import { loadGameServer } from '@app/game-servers/game-servers.actions';
+import { Player } from '@app/players/models/player';
+import { loadPlayer } from '@app/players/actions';
 
-const paramMap = of(convertToParamMap({ id: 'FAKE_ID' }));
-
-const makeStateWithGame = (overrides?: any) => merge({
-  games: {
-    ids: ['FAKE_ID'],
-    entities: {
-      // eslint-disable-next-line @typescript-eslint/naming-convention
-      FAKE_ID: {
-        id: 'FAKE_ID',
-        slots: [
-          {
-            player: 'FAKE_PLAYER_ID_1',
-            gameClass: 'soldier',
-            team: 'red',
-            connectionStatus: 'offline',
-            status: 'active',
-          },
-          {
-            player: 'FAKE_PLAYER_ID_2',
-            gameClass: 'soldier',
-            team: 'blu',
-            connectionStatus: 'offline',
-            status: 'active',
-          }
-        ],
-        map: 'cp_sunshine',
-        state: 'launching',
-        launchedAt: new Date('2019-07-25T11:42:55.121Z'),
-        // eslint-disable-next-line id-blacklist
-        number: 3,
-        connectString: null,
-        error: 'ended by admin',
-        mumbleUrl: null,
-        gameServer: 'FAKE_GAME_SERVER_ID',
-        stvConnectString: null,
-      },
+const gameInProgress: Game = {
+  id: 'FAKE_GAME_ID',
+  map: 'cp_sunshine',
+  state: 'launching',
+  launchedAt: new Date('2019-07-25T11:42:55.121Z'),
+  number: 3,
+  gameServer: 'FAKE_GAME_SERVER_ID',
+  connectString: 'FAKE_CONNECT_STRING',
+  stvConnectString: 'FAKE_STV_CONNECT_STRING',
+  mumbleUrl: 'mumble://melkor.tf/tf2pickup/5',
+  slots: [
+    {
+      player: 'FAKE_PLAYER_1_ID',
+      gameClass: 'soldier',
+      team: 'red',
+      connectionStatus: 'offline',
+      status: 'active',
     },
-    loaded: true,
+    {
+      player: 'FAKE_PLAYER_2_ID',
+      gameClass: 'soldier',
+      team: 'blu',
+      connectionStatus: 'offline',
+      status: 'active',
+    }
+  ],
+};
+
+const endedGame: Game = {
+  id: 'FAKE_GAME_ID',
+  map: 'cp_sunshine',
+  state: 'ended',
+  launchedAt: new Date('2019-07-25T11:42:55.121Z'),
+  number: 3,
+  gameServer: 'FAKE_GAME_SERVER_ID',
+  slots: [
+    {
+      player: 'FAKE_PLAYER_1_ID',
+      gameClass: 'soldier',
+      team: 'red',
+      connectionStatus: 'offline',
+      status: 'active',
+    },
+    {
+      player: 'FAKE_PLAYER_2_ID',
+      gameClass: 'soldier',
+      team: 'blu',
+      connectionStatus: 'offline',
+      status: 'active',
+    },
+  ],
+  logsUrl: 'FAKE_LOGS_URL',
+  demoUrl: 'FAKE_DEMO_URL',
+  score: {
+    red: 2,
+    blu: 1,
   },
-  profile: {
-    id: 'FAKE_PLAYER_ID_1',
-    name: 'FAKE_PLAYER_NAME_1',
-    bans: [],
-    role: null,
+};
+
+const mockGameServer: GameServer = {
+  id: 'FAKE_GAME_SERVER_ID',
+  name: 'FAKE_GAME_SERVER',
+  address: 'FAKE_ADDRESS',
+  port: '12345',
+};
+
+const mockPlayers = [
+  {
+    id: 'FAKE_PLAYER_1_ID',
+    name: 'FAKE_PLAYER_1',
+    joinedAt: new Date('2019-08-01T13:42:55.121Z'),
+    steamId: 'FAKE_PLAYER_1_STEAM_ID',
+    avatar: {
+      small: 'FAKE_PLAYER_1_SMALL_AVATAR_URL',
+      medium: 'FAKE_PLAYER_1_MEDIUM_AVATAR_URL',
+      large: 'FAKE_PLAYER_1_LARGE_AVATAR_URL',
+    },
+  },
+  {
+    id: 'FAKE_PLAYER_2_ID',
+    name: 'FAKE_PLAYER_2',
+    joinedAt: new Date('2019-08-01T13:42:55.121Z'),
+    steamId: 'FAKE_PLAYER_2_STEAM_ID',
+    avatar: {
+      small: 'FAKE_PLAYER_2_SMALL_AVATAR_URL',
+      medium: 'FAKE_PLAYER_2_MEDIUM_AVATAR_URL',
+      large: 'FAKE_PLAYER_2_LARGE_AVATAR_URL',
+    },
+  },
+];
+
+const makeState = (games: Game[], gameServers: GameServer[] = [mockGameServer], players: Player[] = mockPlayers) => ({
+  games: {
+    ids: games.map(g => g.id),
+    entities: keyBy(games, 'id'),
+  },
+  gameServers: {
+    ids: gameServers.map(gs => gs.id),
+    entities: keyBy(gameServers, 'id'),
   },
   players: {
     players: {
-      ids: [
-        'FAKE_PLAYER_ID_1',
-        'FAKE_PLAYER_ID_2',
-      ],
-      entities: {
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        FAKE_PLAYER_ID_1: {
-          id: 'FAKE_PLAYER_ID_1',
-          name: 'FAKE_PLAYER_1',
-          gameClass: 'soldier',
-          status: 'active',
-        },
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        FAKE_PLAYER_ID_2: {
-          id: 'FAKE_PLAYER_ID_2',
-          name: 'FAKE_PLAYER_2',
-          gameClass: 'soldier',
-          status: 'active',
-        },
-      },
-    },
+      ids: players.map(p => p.id),
+      entities: keyBy(players, 'id'),
+    }
   },
-  gameServers: {
-    ids: ['FAKE_GAME_SERVER_ID'],
-    entities: {
-      // eslint-disable-next-line @typescript-eslint/naming-convention
-      FAKE_GAME_SERVER_ID: { id: 'FAKE_GAME_SERVER_ID', name: 'FAKE_GAME_SERVER_NAME' },
-    },
-  },
-}, overrides);
-
-class GamesServiceStub {
-  fetchGameSkills(gameId: string) { }
-}
+});
 
 describe('GameDetailsComponent', () => {
+  let fixture: MockedComponentFixture;
   let component: GameDetailsComponent;
-  let fixture: ComponentFixture<GameDetailsComponent>;
   let store: MockStore<any>;
-  let storeDispatchSpy: jasmine.Spy;
-
-  const initialState = { games: { ids: [], entities: { }, loaded: false } };
+  let routeParams: Subject<any>;
 
   beforeEach(() => {
     // @ts-ignore
     spyOn(Howl.prototype, 'init');
   });
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [
-        GameDetailsComponent,
-        MockComponent(GameBasicInfoComponent),
-        MockComponent(GameSummaryComponent),
-        MockComponent(GameTeamHeaderComponent),
-        MockComponent(GameTeamPlayerListComponent),
-        MockComponent(ConnectStringComponent),
-        MockComponent(GameAdminButtonsComponent),
-        MockComponent(MumbleJoinButtonComponent),
-      ],
-      imports: [
-        RouterTestingModule,
-        SharedModule,
-      ],
-      providers: [
-        provideMockStore({
-          initialState,
-        }),
-        { provide: ActivatedRoute, useValue: { paramMap } },
-        { provide: GamesService, useClass: GamesServiceStub  },
-      ],
+  beforeEach(() => {
+    routeParams = new Subject();
+  });
+
+  beforeEach(() => MockBuilder(GameDetailsComponent)
+    .provide(provideMockStore({ initialState: makeState([]) }))
+    .mock(ActivatedRoute, {
+      paramMap: routeParams.pipe(map(convertToParamMap)),
     })
-    // https://github.com/angular/angular/issues/12313
-    .overrideComponent(GameDetailsComponent, { set: { changeDetection: ChangeDetectionStrategy.Default } })
-    .compileComponents();
-  }));
+    .mock(Title)
+    .mock(GameAdminButtonsComponent)
+    .mock(GameSummaryComponent)
+    .mock(GameBasicInfoComponent)
+    .mock(ConnectStringComponent)
+    .mock(MumbleJoinButtonComponent)
+    .mock(GameTeamHeaderComponent)
+    .mock(GameTeamPlayerListComponent)
+  );
 
   beforeEach(() => {
-    store = TestBed.inject(MockStore);
-    storeDispatchSpy = spyOn(store, 'dispatch');
+    fixture = MockRender(GameDetailsComponent);
+    component = fixture.point.componentInstance;
 
-    fixture = TestBed.createComponent(GameDetailsComponent);
-    component = fixture.componentInstance;
+    store = TestBed.inject(MockStore);
+    store.overrideSelector(profile, null);
+    store.overrideSelector(isLoggedIn, false);
+    store.overrideSelector(isBanned, false);
+    store.overrideSelector(activeGame, null);
+    store.overrideSelector(isAdmin, false);
+    spyOn(store, 'dispatch');
+
     fixture.detectChanges();
+  });
+
+  afterEach(() => {
+    routeParams.unsubscribe();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('with game', () => {
+  describe('with game id', () => {
     beforeEach(() => {
-      store.setState(makeStateWithGame());
-      fixture.detectChanges();
+      routeParams.next({ id: 'FAKE_GAME_ID' });
     });
 
-    it('should render the pickup header', () => {
-      const header = fixture.debugElement.query(By.css('.mdc-typography--headline4')).nativeElement as HTMLElement;
-      expect(header.innerText).toMatch(/Pickup #3/);
+    it('should attempt to load the game', () => {
+      expect(store.dispatch).toHaveBeenCalledWith(loadGame({ gameId: 'FAKE_GAME_ID' }));
     });
 
-    describe('when logged in as an admin', () => {
-      let fetchGameSkillsSpy: jasmine.Spy;
-      let gameAdminButtons: GameAdminButtonsComponent;
-
+    describe('without game server', () => {
       beforeEach(() => {
-        fetchGameSkillsSpy = spyOn(TestBed.inject(GamesService), 'fetchGameSkills').and.returnValue(NEVER);
-        store.setState(makeStateWithGame({ profile: { role: 'admin' } }));
-        fixture.detectChanges();
-
-        gameAdminButtons = fixture.debugElement.query(By.css('app-game-admin-buttons')).componentInstance;
-      });
-
-      it('should render admin buttons', () => {
-        expect(gameAdminButtons).toBeTruthy();
-      });
-
-      it('should be able to reinitialize the server', () => {
-        gameAdminButtons.reinitializeServer.emit();
-        expect(storeDispatchSpy).toHaveBeenCalledWith(reinitializeServer({ gameId: 'FAKE_ID' }));
-      });
-
-      it('should be able to force end the game', () => {
-        gameAdminButtons.forceEnd.emit();
-        expect(storeDispatchSpy).toHaveBeenCalledWith(forceEndGame({ gameId: 'FAKE_ID' }));
-      });
-
-      it('should fetch skill of each player if the current user is an admin', () => {
-        expect(fetchGameSkillsSpy).toHaveBeenCalledWith('FAKE_ID');
-      });
-    });
-
-    it('should retrieve players of each team', () => {
-      const teamBlu = fixture.debugElement.query(By.css('.team-blu app-game-team-player-list'))
-        .componentInstance as GameTeamPlayerListComponent;
-
-      expect(teamBlu.players[0]).toEqual(
-        {
-          id: 'FAKE_PLAYER_ID_2',
-          player: 'FAKE_PLAYER_ID_2',
-          name: 'FAKE_PLAYER_2',
-          gameClass: 'soldier',
-          team: 'blu',
-          connectionStatus: 'offline',
-          status: 'active',
-        } as any
-      );
-
-      const playersRed = fixture.debugElement.query(By.css('.team-red app-game-team-player-list'))
-        .componentInstance as GameTeamPlayerListComponent;
-
-      expect(playersRed.players).toEqual([
-        {
-          id: 'FAKE_PLAYER_ID_1',
-          player: 'FAKE_PLAYER_ID_1',
-          name: 'FAKE_PLAYER_1',
-          gameClass: 'soldier',
-          team: 'red',
-          connectionStatus: 'offline',
-          status: 'active',
-        } as any
-      ]);
-    });
-
-    describe('app-game-team-player-list', () => {
-      let gameTeamPlayerList: GameTeamPlayerListComponent;
-
-      beforeEach(() => {
-        gameTeamPlayerList = fixture.debugElement.query(By.css('app-game-team-player-list')).componentInstance;
-      });
-
-      it('should request substitute', () => {
-        gameTeamPlayerList.requestSubstitute.emit('FAKE_PLAYER_ID');
-        expect(storeDispatchSpy).toHaveBeenCalledWith(requestSubstitute({ gameId: 'FAKE_ID', playerId: 'FAKE_PLAYER_ID' }));
-      });
-
-      it('should replace player', () => {
-        gameTeamPlayerList.replacePlayer.emit('FAKE_REPLACEE_ID');
-        expect(storeDispatchSpy).toHaveBeenCalledWith(replacePlayer({ gameId: 'FAKE_ID', replaceeId: 'FAKE_REPLACEE_ID' }));
-      });
-    });
-
-    it('should render game basic info', () => {
-      const gameBasicInfo = fixture.debugElement.query(By.css('app-game-basic-info')).componentInstance as GameBasicInfoComponent;
-      expect(gameBasicInfo.launchedAt).toEqual(jasmine.any(Date));
-      expect(gameBasicInfo.map).toEqual('cp_sunshine');
-      expect(gameBasicInfo.gameServerName).toEqual('FAKE_GAME_SERVER_NAME');
-      expect(gameBasicInfo.state).toEqual('launching');
-    });
-
-    describe('when the current user is part of the game', () => {
-      describe('when the connect string is available', () => {
-        beforeEach(() => {
-          store.setState(makeStateWithGame({
-            games: {
-              entities: {
-                // eslint-disable-next-line @typescript-eslint/naming-convention
-                FAKE_ID: {
-                  connectString: 'connect 192.168.1.101:27015; password FAKE_PASSWORD'
-                },
-              },
-            },
-          }));
-          fixture.detectChanges();
-        });
-
-        it('should render the ConnectStringComponent', () => {
-          const connectString = fixture.debugElement.query(By.css('app-connect-string')).componentInstance as ConnectStringComponent;
-          expect(connectString.connectString).toEqual('connect 192.168.1.101:27015; password FAKE_PASSWORD');
-        });
-      });
-
-      describe('when the mumble url is available', () => {
-        beforeEach(() => {
-          // eslint-disable-next-line @typescript-eslint/naming-convention
-          store.setState(makeStateWithGame({ games: { entities: { FAKE_ID: { mumbleUrl: 'mumble://melkor.tf/tf2pickup/5' } } } }));
-          fixture.detectChanges();
-        });
-
-        it('should pass the mumble url to the MumbleJoinButtonComponent', () => {
-          const mumbleJoinButton = fixture.debugElement.query(By.css('app-mumble-join-button'))
-            .componentInstance as MumbleJoinButtonComponent;
-          expect(mumbleJoinButton.mumbleUrl).toEqual('mumble://FAKE_PLAYER_NAME_1@melkor.tf/tf2pickup/5/RED');
-        });
-      });
-    });
-
-    describe('when the current user is not a part of the game', () => {
-      beforeEach(() => {
-        store.setState(makeStateWithGame({ profile: { id: 'SOME_OTHER_GUY' } }));
+        store.setState(makeState([gameInProgress], []));
         fixture.detectChanges();
       });
 
-      it('should not render game join info', () => {
-        expect(fixture.debugElement.query(By.css('app-join-game-info'))).toBeNull();
-      });
-
-      describe('when the stv connect string is available', () => {
-        beforeEach(() => {
-          store.setState(makeStateWithGame({
-            profile: { id: 'SOME_OTHER_GUY' },
-            games: {
-              entities: {
-                // eslint-disable-next-line @typescript-eslint/naming-convention
-                FAKE_ID: { stvConnectString: 'connect 192.168.1.101:27020; password tv' },
-              },
-            },
-          }));
-          fixture.detectChanges();
-        });
-
-        it('should render ConnectString with the stv connect', () => {
-          const connectString = fixture.debugElement.query(By.css('app-connect-string')).componentInstance as ConnectStringComponent;
-          expect(connectString.stvConnectString).toEqual('connect 192.168.1.101:27020; password tv');
-        });
+      it('should attempt to load the game server', () => {
+        expect(store.dispatch).toHaveBeenCalledWith(loadGameServer({ gameServerId: 'FAKE_GAME_SERVER_ID' }));
       });
     });
 
-    describe('that has already ended', () => {
+    describe('without players', () => {
       beforeEach(() => {
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        store.setState(makeStateWithGame({ games: { entities: { FAKE_ID: { state: 'ended' } } } }));
+        // @ts-ignore
+        store.dispatch.calls.reset();
+        store.setState(makeState([gameInProgress], [mockGameServer], []));
         fixture.detectChanges();
       });
 
-      it('should not render the connect string anymore', () => {
-        expect(fixture.debugElement.query(By.css('app-connect-string'))).toBeFalsy();
-      });
-
-      it('should render game summary', () => {
-        const gameSummary = fixture.debugElement.query(By.css('app-game-summary')).componentInstance as GameSummaryComponent;
-        expect(gameSummary).toBeTruthy();
+      it('should attempt to load players', () => {
+        expect(store.dispatch).toHaveBeenCalledTimes(2);
       });
     });
 
-    it('should play a sound when the connect is available', () => {
-      store.setState(makeStateWithGame({
-        games: {
-          entities: {
-            // eslint-disable-next-line @typescript-eslint/naming-convention
-            FAKE_ID: {
-              connectString: 'connect 192.168.1.101:27015; password FAKE_PASSWORD',
-            },
-          },
-        },
+    describe('and with the game loaded', () => {
+      beforeEach(() => {
+        store.setState(makeState([gameInProgress]));
+        fixture.detectChanges();
+      });
+
+      it('should set the title', () => {
+        const title = TestBed.inject(Title);
+        expect(title.setTitle).toHaveBeenCalledWith(jasmine.stringMatching(/Pickup #3/));
+      });
+
+      it('should render game basic info', () => {
+        const gameBasicInfo = ngMocks.find(GameBasicInfoComponent).componentInstance;
+        expect(gameBasicInfo.map).toEqual('cp_sunshine');
+        expect(gameBasicInfo.state).toEqual('launching');
+        expect(gameBasicInfo.gameServerName).toEqual('FAKE_GAME_SERVER');
+      });
+
+      ['blu', 'red'].forEach(team => it(`should render ${team} header`, () => {
+        const gameTeamHeader = ngMocks.find(`.team-${team} app-game-team-header`)?.componentInstance as GameTeamHeaderComponent;
+        expect(gameTeamHeader).toBeTruthy();
+        expect(gameTeamHeader.team).toEqual(team);
       }));
-      fixture.detectChanges();
-      // @ts-ignore
-      expect(Howl.prototype.init).toHaveBeenCalledOnceWith({
-        src: jasmine.any(Array),
-        autoplay: true,
-      });
-    });
 
-    describe('when the score is defined', () => {
-      beforeEach(() => {
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        store.setState(makeStateWithGame({ games: { entities: { FAKE_ID: { score: { blu: 5, red: 3 } } } } }));
-        fixture.detectChanges();
+      ['blu', 'red'].forEach(team => it(`should render ${team} players`, () => {
+        const gameTeamPlayerList = ngMocks.find(`.team-${team} app-game-team-player-list`)
+          ?.componentInstance as GameTeamPlayerListComponent;
+        expect(gameTeamPlayerList).toBeTruthy();
+        expect(gameTeamPlayerList.showAdminActionButtons).toBe(false);
+        expect(gameTeamPlayerList.locked).toBe(true);
+      }));
+
+      describe('when the game is running', () => {
+        it('should render the connect string', () => {
+          const connectString = ngMocks.find(ConnectStringComponent).componentInstance;
+          expect(connectString.stvConnectString).toEqual('FAKE_STV_CONNECT_STRING');
+          expect(connectString.connectString).toBeUndefined();
+        });
+
+        it('should not render the voice server button', () => {
+          expect(() => ngMocks.find(MumbleJoinButtonComponent)).toThrow();
+        });
+
+        describe('when logged in', () => {
+          beforeEach(() => {
+            profile.setResult({ id: 'FAKE_PLAYER_ID' } as Profile);
+            isLoggedIn.setResult(true);
+            store.refreshState();
+            fixture.detectChanges();
+          });
+
+          it('should be able to take the substitute spot', () => {
+            const gameTeamPlayerList = ngMocks.find(GameTeamPlayerListComponent).componentInstance;
+            expect(gameTeamPlayerList.locked).toBe(false);
+
+            gameTeamPlayerList.replacePlayer.emit('FAKE_PLAYER_1_ID');
+            expect(store.dispatch).toHaveBeenCalledWith(replacePlayer({ gameId: 'FAKE_GAME_ID', replaceeId: 'FAKE_PLAYER_1_ID' }));
+          });
+
+          describe('and banned', () => {
+            beforeEach(() => {
+              isBanned.setResult(true);
+              store.refreshState();
+              fixture.detectChanges();
+            });
+
+            it('should not be able to take the substitute spot', () => {
+              const gameTeamPlayerList = ngMocks.find(GameTeamPlayerListComponent).componentInstance;
+              expect(gameTeamPlayerList.locked).toBe(true);
+            });
+          });
+
+          describe('and has active game', () => {
+            beforeEach(() => {
+              activeGame.setResult({ id: 'OTHER_GAME_ID' } as Game);
+              store.refreshState();
+              fixture.detectChanges();
+            });
+
+            it('should not be able to take the substitute spot', () => {
+              const gameTeamPlayerList = ngMocks.find(GameTeamPlayerListComponent).componentInstance;
+              expect(gameTeamPlayerList.locked).toBe(true);
+            });
+          });
+
+          describe('and takes part in this game', () => {
+            beforeEach(() => {
+              profile.setResult({ id: 'FAKE_PLAYER_1_ID', name: 'FAKE PLAYER' } as Profile);
+              store.refreshState();
+              fixture.detectChanges();
+            });
+
+            it('should have access to the connect string', () => {
+              const connectString = ngMocks.find(ConnectStringComponent).componentInstance;
+              expect(connectString.connectString).toEqual('FAKE_CONNECT_STRING');
+              expect(connectString.stvConnectString).toBeUndefined();
+            });
+
+            it('should have the join mumble button', () => {
+              const mumbleJoinButton = ngMocks.find(MumbleJoinButtonComponent).componentInstance;
+              expect(mumbleJoinButton.mumbleUrl).toEqual('mumble://FAKE_PLAYER@melkor.tf/tf2pickup/5/RED');
+            });
+          });
+        });
+
+        describe('and the current user is admin', () => {
+          let gameAdminButtons: GameAdminButtonsComponent;
+          let gameTeamPlayerLists: GameTeamPlayerListComponent[];
+
+          beforeEach(() => {
+            isAdmin.setResult(true);
+            store.refreshState();
+            fixture.detectChanges();
+
+            gameAdminButtons = ngMocks.find(GameAdminButtonsComponent).componentInstance;
+            gameTeamPlayerLists = ngMocks.findAll(GameTeamPlayerListComponent).map(m => m.componentInstance);
+          });
+
+          it('should render admin buttons', () => {
+            expect(gameAdminButtons).toBeTruthy();
+            expect(gameTeamPlayerLists.every(playerList => playerList.showAdminActionButtons)).toBe(true);
+          });
+
+          it('should be able to reinitialize the game server', () => {
+            gameAdminButtons.reinitializeServer.emit();
+            expect(store.dispatch).toHaveBeenCalledWith(reinitializeServer({ gameId: 'FAKE_GAME_ID' }));
+          });
+
+          it('should be able to force-end the game', () => {
+            gameAdminButtons.forceEnd.emit();
+            expect(store.dispatch).toHaveBeenCalledWith(forceEndGame({ gameId: 'FAKE_GAME_ID' }));
+          });
+
+          it('should be able to request substitute', () => {
+            const gameTeamPlayerList = ngMocks.find(GameTeamPlayerListComponent).componentInstance;
+            gameTeamPlayerList.requestSubstitute.emit('FAKE_PLAYER_1_ID');
+            expect(store.dispatch).toHaveBeenCalledWith(requestSubstitute({ gameId: 'FAKE_GAME_ID', playerId: 'FAKE_PLAYER_1_ID' }));
+          });
+        });
+
+        describe('and the connect string becomes available', () => {
+          beforeEach(() => {
+            store.setState(makeState([{
+              ...gameInProgress,
+              connectString: undefined,
+            }]));
+            store.setState(makeState([ gameInProgress ]));
+          });
+
+          it('should play the ready-up sound', () => {
+            // @ts-ignore
+            expect(Howl.prototype.init).toHaveBeenCalledOnceWith({
+              src: jasmine.any(Array),
+              autoplay: true,
+            });
+          });
+        });
       });
 
-      it('should render BLU score', () => {
-        const gameTeamHeader = fixture.debugElement.query(By.css('app-game-team-header[team=blu]'))
-          .componentInstance as GameTeamHeaderComponent;
-        expect(gameTeamHeader.score).toBe(5);
-      });
+      describe('when the game has ended', () => {
+        beforeEach(() => {
+          store.setState(makeState([endedGame]));
+          fixture.detectChanges();
+        });
 
-      it('should render RED score', () => {
-        const gameTeamHeader = fixture.debugElement.query(By.css('app-game-team-header[team=red]'))
-          .componentInstance as GameTeamHeaderComponent;
-        expect(gameTeamHeader.score).toBe(3);
+        it('should render game summary', () => {
+          const gameSummary = ngMocks.find(GameSummaryComponent).componentInstance;
+          expect(gameSummary.demoUrl).toEqual('FAKE_DEMO_URL');
+          expect(gameSummary.logsUrl).toEqual('FAKE_LOGS_URL');
+        });
+
+        it('should not render any connect strings', () => {
+          expect(() => ngMocks.find(ConnectStringComponent)).toThrow();
+        });
+
+        it('should not render player connection statuses', () => {
+          const playerList = ngMocks.find(GameTeamPlayerListComponent).componentInstance;
+          expect(playerList.showPlayerConnectionStatus).toBe(false);
+        });
+
+        it('should render score', () => {
+          const gameTeamHeaders = ngMocks.findAll(GameTeamHeaderComponent).map(m => m.componentInstance);
+
+          const bluHeader = gameTeamHeaders.find(h => h.team === 'blu');
+          expect(bluHeader.score).toEqual(1);
+
+          const redHeader = gameTeamHeaders.find(h => h.team === 'red');
+          expect(redHeader.score).toEqual(2);
+        });
       });
     });
   });

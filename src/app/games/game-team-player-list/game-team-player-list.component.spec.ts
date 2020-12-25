@@ -3,9 +3,10 @@ import { GameTeamPlayerListComponent } from './game-team-player-list.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { By } from '@angular/platform-browser';
-import { MockComponent } from 'ng-mocks';
+import { MockComponent, MockPipe } from 'ng-mocks';
 import { PlayerConnectionStatusComponent } from '../player-connection-status/player-connection-status.component';
 import { ResolvedGamePlayer } from '../models/resolved-game-player';
+import { OrderTf2ClassesPipe } from '../order-tf2-classes.pipe';
 
 describe('GameTeamPlayerListComponent', () => {
   let component: GameTeamPlayerListComponent;
@@ -19,6 +20,7 @@ describe('GameTeamPlayerListComponent', () => {
       declarations: [
         GameTeamPlayerListComponent,
         MockComponent(PlayerConnectionStatusComponent),
+        MockPipe(OrderTf2ClassesPipe, value => value),
       ],
     })
     // https://github.com/angular/angular/issues/12313
