@@ -3,11 +3,11 @@ import { isPlayingGame } from '@app/games/games.selectors';
 import { awaitsReadyUp } from '@app/selectors';
 import { select, Store } from '@ngrx/store';
 import { Howl } from 'howler';
-import { NEVER, Subject } from 'rxjs';
+import { NEVER, of, Subject } from 'rxjs';
 import { debounceTime, switchMap, map, filter, withLatestFrom, takeUntil } from 'rxjs/operators';
 import { QueueReadyUpAction } from '../queue-ready-up-dialog/queue-ready-up-dialog.component';
 import { readyUp, leaveQueue } from '../queue.actions';
-import { substituteRequests } from '../queue.selectors';
+import { isPreReadied, substituteRequests } from '../queue.selectors';
 import { ReadyUpService } from '../ready-up.service';
 
 @Component({
@@ -30,14 +30,26 @@ export class QueueNotificationsHandlerComponent implements OnInit, OnDestroy {
       takeUntil(this.destroyed),
       select(awaitsReadyUp),
       debounceTime(100),
-      switchMap(shown => shown ? this.readyUpService.askUserToReadyUp() : NEVER),
-      map(action => {
-        switch (action) {
-          case QueueReadyUpAction.readyUp:
-            return readyUp();
-          case QueueReadyUpAction.leaveQueue:
-            return leaveQueue();
+      withLatestFrom(this.store.select(isPreReadied)),
+      // eslint-disable-next-line no-shadow
+      switchMap(([awaitsReadyUp, isPreReadied]) => {
+        if (awaitsReadyUp) {
+          if (isPreReadied) {
+            return of(readyUp());
+          } else {
+            return this.readyUpService.askUserToReadyUp().pipe(
+              map(action => {
+                switch (action) {
+                  case QueueReadyUpAction.readyUp:
+                    return readyUp();
+                  case QueueReadyUpAction.leaveQueue:
+                    return leaveQueue();
+                }
+              }),
+            );
+          }
         }
+        return NEVER;
       }),
     ).subscribe(action => this.store.dispatch(action));
 
