@@ -6,7 +6,7 @@ import { Howl } from 'howler';
 import { Subject } from 'rxjs';
 import { QueueReadyUpAction } from '../queue-ready-up-dialog/queue-ready-up-dialog.component';
 import { leaveQueue, readyUp } from '../queue.actions';
-import { substituteRequests } from '../queue.selectors';
+import { isPreReadied, substituteRequests } from '../queue.selectors';
 import { ReadyUpService } from '../ready-up.service';
 import { QueueNotificationsHandlerComponent } from './queue-notifications-handler.component';
 
@@ -42,6 +42,7 @@ describe('QueueNotificationsHandlerComponent', () => {
   beforeEach(() => {
     store = TestBed.inject(MockStore);
     store.overrideSelector(awaitsReadyUp, false);
+    store.overrideSelector(isPreReadied, false);
     store.overrideSelector(substituteRequests, []);
     store.overrideSelector(isPlayingGame, false);
     spyOn(store, 'dispatch');
@@ -56,33 +57,52 @@ describe('QueueNotificationsHandlerComponent', () => {
   });
 
   describe('when ready up is awaited', () => {
-    beforeEach(fakeAsync(() => {
-      awaitsReadyUp.setResult(true);
-      store.refreshState();
-      tick(100);
-    }));
+    describe('and the user is not pre-readied', () => {
+      beforeEach(fakeAsync(() => {
+        awaitsReadyUp.setResult(true);
+        store.refreshState();
+        tick(100);
+      }));
 
-    it('should ask the user to ready up', () => {
-      expect(readyUpService.askUserToReadyUp).toHaveBeenCalled();
-    });
-
-    describe('when the user readies up', () => {
-      beforeEach(() => {
-        readyUpResult.next(QueueReadyUpAction.readyUp);
+      it('should ask the user to ready up', () => {
+        expect(readyUpService.askUserToReadyUp).toHaveBeenCalled();
       });
 
-      it('should dispatch the readyUp action', () => {
+      describe('when the user readies up', () => {
+        beforeEach(() => {
+          readyUpResult.next(QueueReadyUpAction.readyUp);
+        });
+
+        it('should dispatch the readyUp action', () => {
+          expect(store.dispatch).toHaveBeenCalledWith(readyUp());
+        });
+      });
+
+      describe('when the user does not ready up', () => {
+        beforeEach(() => {
+          readyUpResult.next(QueueReadyUpAction.leaveQueue);
+        });
+
+        it('should dispatch the leaveQueue action', () => {
+          expect(store.dispatch).toHaveBeenCalledWith(leaveQueue());
+        });
+      });
+    });
+
+    describe('and the user is pre-readied', () => {
+      beforeEach(fakeAsync(() => {
+        isPreReadied.setResult(true);
+        awaitsReadyUp.setResult(true);
+        store.refreshState();
+        tick(100);
+      }));
+
+      it('should not ask the user to ready up', () => {
+        expect(readyUpService.askUserToReadyUp).not.toHaveBeenCalled();
+      });
+
+      it('should ready up immediately', () => {
         expect(store.dispatch).toHaveBeenCalledWith(readyUp());
-      });
-    });
-
-    describe('when the user does not ready up', () => {
-      beforeEach(() => {
-        readyUpResult.next(QueueReadyUpAction.leaveQueue);
-      });
-
-      it('should dispatch the leaveQueue action', () => {
-        expect(store.dispatch).toHaveBeenCalledWith(leaveQueue());
       });
     });
   });
