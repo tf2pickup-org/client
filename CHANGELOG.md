@@ -1,3 +1,15 @@
+# [3.1.0](https://github.com/tf2pickup-pl/client/compare/3.0.2...3.1.0) (2020-12-25)
+
+
+### Features
+
+* add etf2l.org & logs.tf logos ([#558](https://github.com/tf2pickup-pl/client/issues/558)) ([bb0aa67](https://github.com/tf2pickup-pl/client/commit/bb0aa676af37017d3abe0b2d33995677522b1d57))
+
+
+### Performance Improvements
+
+* optimize images ([#559](https://github.com/tf2pickup-pl/client/issues/559)) ([bc07100](https://github.com/tf2pickup-pl/client/commit/bc071005d4b3b191e56ecab3a3e3e8ec7fd46136))
+
 ## [3.0.2](https://github.com/tf2pickup-pl/client/compare/3.0.1...3.0.2) (2020-12-25)
 
 
