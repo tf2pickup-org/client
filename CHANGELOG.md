@@ -1,3 +1,12 @@
+## [3.0.2](https://github.com/tf2pickup-pl/client/compare/3.0.1...3.0.2) (2020-12-25)
+
+
+### Bug Fixes
+
+* honor pre-ready up ([#556](https://github.com/tf2pickup-pl/client/issues/556)) ([082c582](https://github.com/tf2pickup-pl/client/commit/082c5826974ca0207a42f827202eb9328683fbd3))
+* **ci:** get rid of travis.yml ([6fca5c3](https://github.com/tf2pickup-pl/client/commit/6fca5c3b0582f59394adcfe8f6693e4ffd6832e5))
+* **ci:** update build script ([139c531](https://github.com/tf2pickup-pl/client/commit/139c531137209b6be256863639a261d5fdb59980))
+
 ## [3.0.1](https://github.com/tf2pickup-pl/client/compare/3.0.0...3.0.1) (2020-12-24)
 
 
