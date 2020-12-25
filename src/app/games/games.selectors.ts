@@ -14,7 +14,7 @@ export const gameById = (gameId: string) => createSelector(gameEntities, entitie
 
 export const activeGames = createSelector(
   allGames,
-  games => games?.filter(g => /launching|started/.test(g.state))
+  games => games.filter(g => /launching|started/.test(g.state))
 );
 
 export const activeGame = createSelector(
