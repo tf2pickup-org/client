@@ -9,9 +9,10 @@ import { isAdmin, isBanned, isLoggedIn, profile } from '@app/profile/profile.sel
 import { ComponentStore } from '@ngrx/component-store';
 import { Store } from '@ngrx/store';
 import { from, Observable } from 'rxjs';
-import { filter, first, map, mergeMap, switchMap, tap } from 'rxjs/operators';
+import { filter, first, map, mergeMap, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import { forceEndGame, loadGame, reinitializeServer, replacePlayer, requestSubstitute } from '../games.actions';
 import { activeGame, gameById } from '../games.selectors';
+import { GamesService } from '../games.service';
 import { Game } from '../models/game';
 import { GamePlayer } from '../models/game-player';
 import { ResolvedGamePlayer } from '../models/resolved-game-player';
@@ -64,6 +65,7 @@ export class GameDetailsStore extends ComponentStore<GameDetailsState> {
   readonly players: Observable<ResolvedGamePlayer[]> = this.select(state => state.game?.slots.map(slot => ({
     ...slot,
     ...state.players?.[slot.player],
+    classSkill: state.skills?.[slot.player],
   })));
 
   readonly showAdminTools = this.select(
@@ -83,9 +85,19 @@ export class GameDetailsStore extends ComponentStore<GameDetailsState> {
       }),
     )),
     filter(game => !!game),
+    tap(game => this.fetchGameSkills(game.id)),
     tap(game => this.setGame(game)),
     tap(game => this.setGameServerId(game.gameServer)),
     tap((game: Game) => this.resolvePlayers(game.slots)),
+  ));
+
+  private readonly fetchGameSkills = this.effect((gameId: Observable<string>) => gameId.pipe(
+    withLatestFrom(this.store.select(isAdmin)),
+    // eslint-disable-next-line no-shadow
+    filter(([, isAdmin]) => isAdmin),
+    // eslint-disable-next-line no-shadow
+    map(([gameId]) => this.gamesService.fetchGameSkills(gameId)),
+    map(result => this.setSkills(result)),
   ));
 
   private readonly setGameServerId = this.effect((gameServerId: Observable<string>) => gameServerId.pipe(
@@ -129,8 +141,14 @@ export class GameDetailsStore extends ComponentStore<GameDetailsState> {
     players: { ...state.players, [player.id]: { ...player } },
   }));
 
+  private readonly setSkills = this.updater((state, skills: Record<string, number>) => ({
+    ...state,
+    skills,
+  }));
+
   constructor(
     private store: Store,
+    private gamesService: GamesService,
   ) {
     super({
       game: null,
