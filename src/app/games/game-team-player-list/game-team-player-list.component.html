@@ -13,7 +13,7 @@
             {{ player.name }}
           </span>
 
-          <span *ngIf="player.classSkill"
+          <span *ngIf="player.classSkill !== undefined"
             class="player-list-item__skill">
             {{ player.classSkill }}
           </span>

@@ -1,36 +1,49 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { GameTeamPlayerListComponent } from './game-team-player-list.component';
-import { RouterTestingModule } from '@angular/router/testing';
-import { ChangeDetectionStrategy } from '@angular/core';
-import { By } from '@angular/platform-browser';
-import { MockComponent, MockPipe } from 'ng-mocks';
+import { MockBuilder, MockedComponentFixture, MockRender, ngMocks } from 'ng-mocks';
 import { PlayerConnectionStatusComponent } from '../player-connection-status/player-connection-status.component';
 import { ResolvedGamePlayer } from '../models/resolved-game-player';
 import { OrderTf2ClassesPipe } from '../order-tf2-classes.pipe';
+import { Subject } from 'rxjs';
 
 describe('GameTeamPlayerListComponent', () => {
   let component: GameTeamPlayerListComponent;
-  let fixture: ComponentFixture<GameTeamPlayerListComponent>;
-
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule,
-      ],
-      declarations: [
-        GameTeamPlayerListComponent,
-        MockComponent(PlayerConnectionStatusComponent),
-        MockPipe(OrderTf2ClassesPipe, value => value),
-      ],
-    })
-    // https://github.com/angular/angular/issues/12313
-    .overrideComponent(GameTeamPlayerListComponent, { set: { changeDetection: ChangeDetectionStrategy.Default } })
-    .compileComponents();
-  }));
+  let fixture: MockedComponentFixture;
+  let inputs: {
+    players: Subject<ResolvedGamePlayer[]>;
+    showPlayerConnectionStatus: Subject<boolean>;
+    showAdminActionButtons: Subject<boolean>;
+    locked: Subject<boolean>;
+  };
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GameTeamPlayerListComponent);
-    component = fixture.componentInstance;
+    inputs = {
+      players: new Subject(),
+      showPlayerConnectionStatus: new Subject(),
+      showAdminActionButtons: new Subject(),
+      locked: new Subject(),
+    };
+  });
+
+  beforeEach(() => MockBuilder(GameTeamPlayerListComponent)
+    .mock(PlayerConnectionStatusComponent)
+    .mock(OrderTf2ClassesPipe, value => value)
+  );
+
+  beforeEach(() => {
+    fixture = MockRender(`
+      <app-game-team-player-list
+        [players]="players | async"
+        [showPlayerConnectionStatus]="showPlayerConnectionStatus | async"
+        [showAdminActionButtons]="showAdminActionButtons | async"
+        [locked]="locked | async"
+      ></app-game-team-player-list>
+    `, {
+      players: inputs.players.asObservable(),
+      showPlayerConnectionStatus: inputs.showPlayerConnectionStatus.asObservable(),
+      showAdminActionButtons: inputs.showAdminActionButtons.asObservable(),
+      locked: inputs.locked.asObservable(),
+    });
+    component = fixture.point.componentInstance;
     fixture.detectChanges();
   });
 
@@ -57,50 +70,47 @@ describe('GameTeamPlayerListComponent', () => {
     };
 
     beforeEach(() => {
-      component.players = [ { ...mockPlayer } ];
+      inputs.players.next([mockPlayer]);
       fixture.detectChanges();
     });
 
     it('should not render admin buttons', () => {
-      expect(fixture.debugElement.query(By.css('.request-substitute-button'))).toBeNull();
+      expect(() => ngMocks.find('.request-substitute-buton')).toThrow();
     });
 
     describe('when rendering connection status', () => {
       beforeEach(() => {
-        component.showPlayerConnectionStatus = true;
+        inputs.showPlayerConnectionStatus.next(true);
         fixture.detectChanges();
       });
 
       describe('when the player is offline', () => {
         it('should render connection status', () => {
-          const connectionStatus = fixture.debugElement.query(By.css('app-player-connection-status'))
-            .componentInstance as PlayerConnectionStatusComponent;
+          const connectionStatus = ngMocks.findInstance(PlayerConnectionStatusComponent);
           expect(connectionStatus.connectionStatus).toEqual('offline');
         });
       });
 
       describe('when the player is joining', () => {
         beforeEach(() => {
-          component.players = [ { ...mockPlayer, connectionStatus: 'joining' } ];
+          inputs.players.next([{ ...mockPlayer, connectionStatus: 'joining' }]);
           fixture.detectChanges();
         });
 
         it('should render connection status', () => {
-          const connectionStatus = fixture.debugElement.query(By.css('app-player-connection-status'))
-            .componentInstance as PlayerConnectionStatusComponent;
+          const connectionStatus = ngMocks.findInstance(PlayerConnectionStatusComponent);
           expect(connectionStatus.connectionStatus).toEqual('joining');
         });
       });
 
       describe('when the player is connected', () => {
         beforeEach(() => {
-          component.players = [ { ...mockPlayer, connectionStatus: 'connected' } ];
+          inputs.players.next([{ ...mockPlayer, connectionStatus: 'connected' }]);
           fixture.detectChanges();
         });
 
         it('should render connection status', () => {
-          const connectionStatus = fixture.debugElement.query(By.css('app-player-connection-status'))
-            .componentInstance as PlayerConnectionStatusComponent;
+          const connectionStatus = ngMocks.findInstance(PlayerConnectionStatusComponent);
           expect(connectionStatus.connectionStatus).toEqual('connected');
         });
       });
@@ -108,16 +118,16 @@ describe('GameTeamPlayerListComponent', () => {
 
     describe('when admin', () => {
       beforeEach(() => {
-        component.showAdminActionButtons = true;
+        inputs.showAdminActionButtons.next(true);
         fixture.detectChanges();
       });
 
       it('should render admin buttons', () => {
-        expect(fixture.debugElement.query(By.css('.request-substitute-button'))).toBeDefined();
+        expect(ngMocks.find('.request-substitute-button')).toBeDefined();
       });
 
       it('should trigger the requestSubstitute event', done => {
-        const button = fixture.debugElement.query(By.css('.request-substitute-button')).nativeElement as HTMLButtonElement;
+        const button = ngMocks.find('.request-substitute-button').nativeElement as HTMLButtonElement;
         component.requestSubstitute.subscribe((playerId: string) => {
           expect(playerId).toEqual('PLAYER_ID');
           done();
@@ -128,17 +138,16 @@ describe('GameTeamPlayerListComponent', () => {
 
     describe('when looking for substitute', () => {
       beforeEach(() => {
-        component.players[0].status = 'waiting for substitute';
+        inputs.players.next([{...mockPlayer, status: 'waiting for substitute'}]);
         fixture.detectChanges();
       });
 
       it('should apply css class for players that are looking for substitutes', () => {
-        const item = fixture.debugElement.query(By.css('.replace-player-button')).nativeElement as HTMLElement;
-        expect(item).toBeDefined();
+        expect(ngMocks.find('.replace-player-button').nativeElement).toBeDefined();
       });
 
       it('should trigger the replacePlayer event', done => {
-        const button = fixture.debugElement.query(By.css('.replace-player-button')).nativeElement as HTMLButtonElement;
+        const button = ngMocks.find('.replace-player-button').nativeElement as HTMLButtonElement;
         component.replacePlayer.subscribe((playerId: string) => {
           expect(playerId).toEqual('PLAYER_ID');
           done();
@@ -147,12 +156,24 @@ describe('GameTeamPlayerListComponent', () => {
       });
 
       it('should be disabled if locked=true', () => {
-        const button = fixture.debugElement.query(By.css('.replace-player-button')).nativeElement as HTMLButtonElement;
+        const button = ngMocks.find('.replace-player-button').nativeElement as HTMLButtonElement;
         expect(button.disabled).toBe(false);
 
-        component.locked = true;
+        inputs.locked.next(true);
         fixture.detectChanges();
         expect(button.disabled).toBe(true);
+      });
+    });
+
+    describe('when skill is defined', () => {
+      beforeEach(() => {
+        inputs.players.next([{ ...mockPlayer, classSkill: 0 }]);
+        fixture.detectChanges();
+      });
+
+      it('should render skill', () => {
+        const span = ngMocks.find('.player-list-item__skill').nativeElement as HTMLElement;
+        expect(span.innerText).toEqual('0');
       });
     });
   });
