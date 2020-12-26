@@ -1,3 +1,11 @@
+## [3.1.1](https://github.com/tf2pickup-pl/client/compare/3.1.0...3.1.1) (2020-12-26)
+
+
+### Bug Fixes
+
+* game assigned skills reporting ([#560](https://github.com/tf2pickup-pl/client/issues/560)) ([c68a804](https://github.com/tf2pickup-pl/client/commit/c68a8043c1f56e4b47aaddc847a3bac9a26c69be))
+* ready up when the user is pre-readied ([#561](https://github.com/tf2pickup-pl/client/issues/561)) ([b4923f5](https://github.com/tf2pickup-pl/client/commit/b4923f517824664460187e9c87e53099f0eedd07))
+
 # [3.1.0](https://github.com/tf2pickup-pl/client/compare/3.0.2...3.1.0) (2020-12-25)
 
 
