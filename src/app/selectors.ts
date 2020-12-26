@@ -1,7 +1,7 @@
 import { createSelector } from '@ngrx/store';
 import { isBanned, isLoggedIn } from './profile/profile.selectors';
 import { activeGame } from './games/games.selectors';
-import { isPreReadied, mySlot, queueState } from './queue/queue.selectors';
+import { mySlot, queueState } from './queue/queue.selectors';
 
 // some root-state selectors
 
@@ -16,10 +16,8 @@ export const canJoinQueue = createSelector(
 export const awaitsReadyUp = createSelector(
   queueState,
   mySlot,
-  isPreReadied,
   // eslint-disable-next-line no-shadow
-  (queueState, mySlot, isPreReadied) =>
+  (queueState, mySlot) =>
     queueState === 'ready'
     && (!!mySlot && !mySlot.ready)
-    && !isPreReadied
 );
