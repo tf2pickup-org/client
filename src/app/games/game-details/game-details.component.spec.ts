@@ -4,7 +4,7 @@ import { TestBed } from '@angular/core/testing';
 import { GameDetailsComponent } from './game-details.component';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { ActivatedRoute, convertToParamMap } from '@angular/router';
-import { Subject } from 'rxjs';
+import { of, Subject } from 'rxjs';
 import { MockBuilder, MockedComponentFixture, MockRender, ngMocks } from 'ng-mocks';
 import { GameBasicInfoComponent } from '../game-basic-info/game-basic-info.component';
 import { Title } from '@angular/platform-browser';
@@ -26,6 +26,7 @@ import { Howl } from 'howler';
 import { loadGameServer } from '@app/game-servers/game-servers.actions';
 import { Player } from '@app/players/models/player';
 import { loadPlayer } from '@app/players/actions';
+import { GamesService } from '../games.service';
 
 const gameInProgress: Game = {
   id: 'FAKE_GAME_ID',
@@ -118,6 +119,11 @@ const mockPlayers = [
   },
 ];
 
+const playersSkills = {
+  FAKE_PLAYER_1_ID: 2,
+  FAKE_PLAYER_2_ID: 4,
+};
+
 const makeState = (games: Game[], gameServers: GameServer[] = [mockGameServer], players: Player[] = mockPlayers) => ({
   games: {
     ids: games.map(g => g.id),
@@ -155,6 +161,7 @@ describe('GameDetailsComponent', () => {
     .mock(ActivatedRoute, {
       paramMap: routeParams.pipe(map(convertToParamMap)),
     })
+    .mock(GamesService)
     .mock(Title)
     .mock(GameAdminButtonsComponent)
     .mock(GameSummaryComponent)
@@ -326,41 +333,6 @@ describe('GameDetailsComponent', () => {
           });
         });
 
-        describe('and the current user is admin', () => {
-          let gameAdminButtons: GameAdminButtonsComponent;
-          let gameTeamPlayerLists: GameTeamPlayerListComponent[];
-
-          beforeEach(() => {
-            isAdmin.setResult(true);
-            store.refreshState();
-            fixture.detectChanges();
-
-            gameAdminButtons = ngMocks.find(GameAdminButtonsComponent).componentInstance;
-            gameTeamPlayerLists = ngMocks.findAll(GameTeamPlayerListComponent).map(m => m.componentInstance);
-          });
-
-          it('should render admin buttons', () => {
-            expect(gameAdminButtons).toBeTruthy();
-            expect(gameTeamPlayerLists.every(playerList => playerList.showAdminActionButtons)).toBe(true);
-          });
-
-          it('should be able to reinitialize the game server', () => {
-            gameAdminButtons.reinitializeServer.emit();
-            expect(store.dispatch).toHaveBeenCalledWith(reinitializeServer({ gameId: 'FAKE_GAME_ID' }));
-          });
-
-          it('should be able to force-end the game', () => {
-            gameAdminButtons.forceEnd.emit();
-            expect(store.dispatch).toHaveBeenCalledWith(forceEndGame({ gameId: 'FAKE_GAME_ID' }));
-          });
-
-          it('should be able to request substitute', () => {
-            const gameTeamPlayerList = ngMocks.find(GameTeamPlayerListComponent).componentInstance;
-            gameTeamPlayerList.requestSubstitute.emit('FAKE_PLAYER_1_ID');
-            expect(store.dispatch).toHaveBeenCalledWith(requestSubstitute({ gameId: 'FAKE_GAME_ID', playerId: 'FAKE_PLAYER_1_ID' }));
-          });
-        });
-
         describe('and the connect string becomes available', () => {
           beforeEach(() => {
             store.setState(makeState([{
@@ -410,6 +382,47 @@ describe('GameDetailsComponent', () => {
           const redHeader = gameTeamHeaders.find(h => h.team === 'red');
           expect(redHeader.score).toEqual(2);
         });
+      });
+    });
+
+    describe('when the current user is admin', () => {
+      let gameAdminButtons: GameAdminButtonsComponent;
+      let gameTeamPlayerLists: GameTeamPlayerListComponent[];
+
+      beforeEach(() => {
+        isAdmin.setResult(true);
+        store.setState(makeState([gameInProgress]));
+        store.refreshState();
+        fixture.detectChanges();
+
+        gameAdminButtons = ngMocks.find(GameAdminButtonsComponent).componentInstance;
+        gameTeamPlayerLists = ngMocks.findAll(GameTeamPlayerListComponent).map(m => m.componentInstance);
+      });
+
+      it('should render admin buttons', () => {
+        expect(gameAdminButtons).toBeTruthy();
+        expect(gameTeamPlayerLists.every(playerList => playerList.showAdminActionButtons)).toBe(true);
+      });
+
+      it('should be able to reinitialize the game server', () => {
+        gameAdminButtons.reinitializeServer.emit();
+        expect(store.dispatch).toHaveBeenCalledWith(reinitializeServer({ gameId: 'FAKE_GAME_ID' }));
+      });
+
+      it('should be able to force-end the game', () => {
+        gameAdminButtons.forceEnd.emit();
+        expect(store.dispatch).toHaveBeenCalledWith(forceEndGame({ gameId: 'FAKE_GAME_ID' }));
+      });
+
+      it('should be able to request substitute', () => {
+        const gameTeamPlayerList = ngMocks.find(GameTeamPlayerListComponent).componentInstance;
+        gameTeamPlayerList.requestSubstitute.emit('FAKE_PLAYER_1_ID');
+        expect(store.dispatch).toHaveBeenCalledWith(requestSubstitute({ gameId: 'FAKE_GAME_ID', playerId: 'FAKE_PLAYER_1_ID' }));
+      });
+
+      it('should attempt to load assigned skills', () => {
+        const gamesService = TestBed.inject(GamesService);
+        expect(gamesService.fetchGameSkills).toHaveBeenCalledWith('FAKE_GAME_ID');
       });
     });
   });

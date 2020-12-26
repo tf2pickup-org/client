@@ -33,8 +33,8 @@ export class GamesService {
     return this.http.post<void>(`${this.apiUrl}/games/${gameId}?reinitialize_server`, { });
   }
 
-  fetchGameSkills(gameId: string): Observable<{ [playerId: string]: number }> {
-    return this.http.get<{ [playerId: string]: number }>(`${this.apiUrl}/games/${gameId}/skills`);
+  fetchGameSkills(gameId: string): Observable<Record<string, number>> {
+    return this.http.get<Record<string, number>>(`${this.apiUrl}/games/${gameId}/skills`);
   }
 
   requestSubstitute(gameId: string, playerId: string): Observable<void> {
