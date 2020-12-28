@@ -376,9 +376,43 @@ describe('GameDetailsComponent', () => {
           });
 
           it('should not list this player', () => {
-            const players = ngMocks.findAll(GameTeamPlayerListComponent).reduce((acc, m) => acc.concat(m.componentInstance.players), []);
+            const players = ngMocks
+              .findAll(GameTeamPlayerListComponent)
+              .reduce((acc, m) => acc.concat(m.componentInstance.players), []);
             expect(players.length).toEqual(1);
             expect(players[0].id).toEqual('FAKE_PLAYER_1_ID');
+          });
+        });
+
+        describe('when a player is waiting for substitute', () => {
+          beforeEach(() => {
+            store.setState(makeState([{
+              ...gameInProgress,
+              slots: [
+                {
+                  player: 'FAKE_PLAYER_1_ID',
+                  gameClass: 'soldier',
+                  team: 'red',
+                  connectionStatus: 'offline',
+                  status: 'active',
+                },
+                {
+                  player: 'FAKE_PLAYER_2_ID',
+                  gameClass: 'soldier',
+                  team: 'blu',
+                  connectionStatus: 'offline',
+                  status: 'waiting for substitute',
+                },
+              ],
+            }]));
+            fixture.detectChanges();
+          });
+
+          it('should list this player', () => {
+            const players = ngMocks
+              .findAll(GameTeamPlayerListComponent)
+              .reduce((acc, m) => acc.concat(m.componentInstance.players), []);
+            expect(players.length).toEqual(2);
           });
         });
       });
