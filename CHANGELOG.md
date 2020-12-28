@@ -1,3 +1,10 @@
+## [3.1.2](https://github.com/tf2pickup-pl/client/compare/3.1.1...3.1.2) (2020-12-28)
+
+
+### Bug Fixes
+
+* don't render replaced players ([#563](https://github.com/tf2pickup-pl/client/issues/563)) ([dc5e900](https://github.com/tf2pickup-pl/client/commit/dc5e900bb26a1bbc8950c39de18fe5a77c4e25b8))
+
 ## [3.1.1](https://github.com/tf2pickup-pl/client/compare/3.1.0...3.1.1) (2020-12-26)
 
 
