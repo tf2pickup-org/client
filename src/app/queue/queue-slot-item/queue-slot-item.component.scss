@@ -6,7 +6,6 @@
 @use 'utils/transition';
 
 $-slot-height: 48px;
-$-slot-width: 270px;
 $-slot-action-size: 32px;
 
 :host {
@@ -29,9 +28,7 @@ $-slot-action-size: 32px;
   height: $-slot-height;
   margin: 0.5rem 0;
   padding: 0 1rem;
-  width: $-slot-width;
-  min-width: $-slot-width;
-  max-width: $-slot-width;
+  max-width: 310px;
 
   border-radius: variables.$default-border-radius;
   box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);

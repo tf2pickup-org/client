@@ -11,6 +11,8 @@
 }
 
 .column-queue {
+  flex: 1 0 auto;
+
   @include respond.above(huge) {
     max-width: 1255px;
   }
