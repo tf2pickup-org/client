@@ -5,13 +5,13 @@
 .player-ban-item {
   @include surface.make;
   @include surface.shadow;
-  @include surface.fill-color(theme.$text-background-color);
-  @include surface.ink-color(theme.$font-color-dark);
+  @include surface.fill-color(theme.$surface);
+  @include surface.ink-color(theme.$on-surface);
 
   padding: 12px 24px;
 
   &--expired {
-    @include surface.fill-color(color.change(theme.$text-background-color, $alpha: 0.7));
-    @include surface.ink-color(color.adjust(theme.$font-color-dark, $lightness: 20%, $saturation: -100));
+    @include surface.fill-color(color.change(theme.$surface, $alpha: 0.7));
+    @include surface.ink-color(color.adjust(theme.$on-surface, $lightness: 20%, $saturation: -100));
   }
 }

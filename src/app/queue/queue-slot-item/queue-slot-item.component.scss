@@ -39,7 +39,7 @@ $-slot-action-size: 32px;
   position: relative;
 
   a {
-    color: theme.$font-color-dark;
+    color: theme.$on-surface;
     font-size: 1.3rem;
     font-weight: bold;
   }
@@ -85,7 +85,7 @@ $-slot-action-size: 32px;
   }
 
   &.is-ready {
-    background-color: theme.$queue-slot-ready-up-1;
+    background-color: theme.$queue-slot-ready-up;
   }
 
   > .player-name {
@@ -121,7 +121,7 @@ $-slot-action-size: 32px;
 
   &.mark-as-friend-btn {
     &.is-marked-by-me {
-      background-color: theme.$queue-slot-ready-up-0;
+      background-color: theme.$queue-slot-ready-up;
       color: rgb(255, 255, 255);
     }
   }

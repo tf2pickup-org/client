@@ -5,7 +5,7 @@
   @include surface.make;
   @include surface.shadow;
   @include surface.fill-color(theme.$secondary);
-  @include surface.ink-color(theme.$font-color-dark);
+  @include surface.ink-color(theme.$on-secondary);
 
   &__actions {
     display: flex;

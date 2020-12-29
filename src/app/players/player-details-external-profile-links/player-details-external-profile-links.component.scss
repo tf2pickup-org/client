@@ -23,7 +23,7 @@ $-external-profile-link-card-size: 80px;
   @include surface.shadow;
   @include surface.ripple;
   @include surface.fill-color(rgb(255, 255, 255));
-  @include surface.ink-color(theme.$font-color-dark);
+  @include surface.ink-color(theme.$on-surface);
 
   height: $-external-profile-link-card-size;
   width: $-external-profile-link-card-size;

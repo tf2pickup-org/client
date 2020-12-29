@@ -10,7 +10,7 @@
   border-radius: variables.$default-border-radius;
   padding: 0;
   box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
-  color: theme.$font-color-dark;
+  color: theme.$on-surface;
 
   .connect-string {
     flex: 1 1 auto;
@@ -18,7 +18,7 @@
     border: 0;
     font-size: 1.4rem;
     border-radius: variables.$default-border-radius;
-    color: theme.$font-color-dark;
+    color: theme.$on-surface;
     font-weight: 500;
 
     &.connect-unavailable {

@@ -9,7 +9,7 @@
   .detail--label {
     @include common;
 
-    color: color.adjust(theme.$font-color-light, $lightness: -10%);
+    color: color.adjust(theme.$on-primary, $lightness: -10%);
     font-weight: 300;
   }
 
@@ -17,13 +17,13 @@
     @include common;
 
     font-weight: 600;
-    color: theme.$font-color-light;
+    color: theme.$on-primary;
 
     a {
-      color: theme.$font-color-light;
+      color: theme.$on-primary;
 
       &:hover {
-        color: theme.$font-color-light;
+        color: theme.$on-primary;
       }
     }
   }
