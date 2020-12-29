@@ -6,8 +6,8 @@
   margin: 16px 0;
   border-radius: 16px;
   box-shadow: 0 0 16px rgba(0, 0, 0, 0.5);
-  background-color: theme.$text-background-color;
-  color: theme.$primary;
+  background-color: theme.$surface;
+  color: theme.$on-surface;
 }
 
 .admin-badge {

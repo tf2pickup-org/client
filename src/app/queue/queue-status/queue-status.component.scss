@@ -8,7 +8,7 @@
 .queue-status {
   @include surface.make;
   @include surface.shadow;
-  @include surface.ink-color(theme.$font-color-dark);
+  @include surface.ink-color(theme.$on-surface);
   @include transition.background-color;
 
   display: flex;
@@ -31,7 +31,7 @@
   }
 
   &__ghost {
-    @include ghost.make-line(220px, 43px, theme.$font-color-dark);
+    @include ghost.make-line(220px, 43px, theme.$on-surface);
   }
 
   .player-count {

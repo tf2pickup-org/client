@@ -1,15 +1,18 @@
+@use 'sass:color';
 @use 'theme';
 @use 'utils/border-radius';
 @use 'utils/outline';
 @use 'utils/respond';
 
 // navigation bar itself
+$-navigation-bar-background-color: color.change(theme.$primary, $alpha: 0.8);
 $-navigation-bar-height: 76px;
 $-navigation-bar-border-radius: 45px;
 $-navigation-bar-shadow-color: rgba(0, 0, 0, 0.5);
 $-navigation-bar-shadow: 0 0 8px $-navigation-bar-shadow-color;
 
 // navigation bar links
+$-link-background-color: color.adjust(theme.$primary, $lightness: -5%);
 $-link-height: $-navigation-bar-height * 0.8687;
 $-link-border-radius: 5px;
 $-link-border-radius-bottom-right: 40px;
@@ -22,7 +25,7 @@ $-link-icon-size: 30px;
   flex-flow: row nowrap;
   justify-content: flex-start;
 
-  background-color: theme.$navigation-bar-background-color;
+  background-color: $-navigation-bar-background-color;
   box-shadow: $-navigation-bar-shadow;
 
   max-height: $-navigation-bar-height;
@@ -58,7 +61,7 @@ $-link-icon-size: 30px;
     line-height: $-link-height;
     padding: 0 32px;
 
-    background-color: theme.$navigation-bar-link-background-color;
+    background-color: $-link-background-color;
 
     border-radius: 0 0 $-link-border-radius-bottom-right $-link-border-radius;
     box-shadow: $-navigation-bar-shadow;
@@ -85,7 +88,7 @@ $-link-icon-size: 30px;
     &.active {
       @include make-advanced;
 
-      background-color: theme.$navigation-bar-background-color;
+      background-color: transparent;
       box-shadow: 0.5rem 0.5rem 0.5rem -0.5rem $-navigation-bar-shadow-color;
       z-index: 0;
     }

@@ -49,7 +49,7 @@ $body-bg: #0d1d36;
 $body-color: #fff;
 $font-family-sans-serif: 'Montserrat', sans-serif;
 
-$link-color: color.adjust(theme.$primary, $lightness: -10%);
+$link-color: theme.$on-surface;
 $link-decoration: none;
 $link-hover-color: color.adjust($link-color, $lightness: -15%);
 $link-hover-decoration: underline;
@@ -86,14 +86,14 @@ $link-hover-decoration: underline;
 }
 
 .mdc-button--inverted {
-  @include button.ink-color(theme.$font-color-light);
+  @include button.ink-color(theme.$on-primary);
 }
 
 .mdc-button--secondary {
   @include button.filled-accessible(theme.$secondary);
-  @include button.ink-color(theme.$font-color-dark);
+  @include button.ink-color(theme.$on-secondary);
   @include button.disabled-container-fill-color(color.adjust(theme.$secondary, $lightness: -30%));
-  @include button.disabled-ink-color(color.adjust(white, $lightness: -73%));
+  @include button.disabled-ink-color(color.adjust(theme.$on-secondary, $lightness: -73%));
 }
 
 .mdc-button--contained {
@@ -102,7 +102,7 @@ $link-hover-decoration: underline;
 
 .mdc-button--white {
   @include button.filled-accessible(rgb(255, 255, 255));
-  @include button.ink-color(theme.$font-color-dark);
+  @include button.ink-color(theme.$primary);
 }
 
 .mdc-button--large {
@@ -135,7 +135,7 @@ $link-hover-decoration: underline;
 }
 
 .mdc-card {
-  color: theme.$font-color-dark;
+  color: theme.$on-surface;
 }
 
 @import 'global/body';

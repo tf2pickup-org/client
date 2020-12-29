@@ -1,18 +1,18 @@
 @use 'components/surface';
 @use 'theme';
+@use 'variables';
 
-$-border-radius: 1rem;
 $-caption-background-color: theme.$primary;
 
 .twitch-stream-list {
   @include surface.make;
   @include surface.shadow;
-  @include surface.fill-color(theme.$text-background-color);
-  @include surface.ink-color(theme.$font-color-dark);
+  @include surface.fill-color(theme.$surface);
+  @include surface.ink-color(theme.$on-surface);
 
   margin: 2rem 0;
   padding: 0;
-  border-radius: $-border-radius;
+  border-radius: variables.$default-border-radius;
   max-width: 300px;
 
   &__caption {
@@ -20,11 +20,11 @@ $-caption-background-color: theme.$primary;
     justify-content: center;
     align-items: center;
 
-    border-radius: $-border-radius;
+    border-radius: variables.$default-border-radius;
     background-color: $-caption-background-color;
 
     font-weight: 600;
     font-size: 1.5rem;
-    color: theme.$font-color-light;
+    color: theme.$on-primary;
   }
 }

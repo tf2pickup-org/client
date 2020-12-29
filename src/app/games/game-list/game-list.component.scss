@@ -20,8 +20,8 @@ $-games-per-page: 5;
   @include surface.make;
   @include surface.shadow;
   @include surface.ripple;
-  @include surface.fill-color(theme.$text-background-color);
-  @include surface.ink-color(theme.$font-color-dark);
+  @include surface.fill-color(theme.$surface);
+  @include surface.ink-color(theme.$on-surface);
 
   display: flex;
   height: $-item-height;

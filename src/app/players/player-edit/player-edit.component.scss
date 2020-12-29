@@ -9,8 +9,8 @@
 .player-edit-container {
   @include surface.make;
   @include surface.shadow;
-  @include surface.fill-color(rgb(255, 255, 255));
-  @include surface.ink-color(theme.$font-color-dark);
+  @include surface.fill-color(white);
+  @include surface.ink-color(theme.$on-surface);
 
   margin-top: 16px;
   padding: 32px;

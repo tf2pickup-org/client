@@ -4,7 +4,7 @@
 .team-header {
   @include surface.make;
   @include surface.shadow;
-  @include surface.ink-color(theme.$font-color-light);
+  @include surface.ink-color(theme.$on-primary);
 
   align-items: center;
   display: flex;
@@ -15,12 +15,12 @@
   margin: 4px 0;
 
   &--red {
-    @include surface.fill-color(theme.$team-color-red);
+    @include surface.fill-color(theme.$team-red);
     flex-flow: row-reverse nowrap;
   }
 
   &--blu {
-    @include surface.fill-color(theme.$team-color-blu);
+    @include surface.fill-color(theme.$tem-blu);
     flex-flow: row nowrap;
   }
 

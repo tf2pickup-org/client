@@ -37,8 +37,8 @@
   .surface {
     @include make;
     @include shadow;
-    @include fill-color(theme.$text-background-color);
-    @include ink-color(theme.$font-color-dark);
+    @include fill-color(theme.$surface);
+    @include ink-color(theme.$on-surface);
 
     &__content {
       padding: 32px;

@@ -46,7 +46,8 @@
             "stylePreprocessorOptions": {
               "includePaths": [
                 "node_modules",
-                "src/styles"
+                "src/styles",
+                "src/styles/themes/tf2pickup.pl"
               ]
             },
             "scripts": [
@@ -81,7 +82,14 @@
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/tf2pickup.pl.ts"
                 }
-              ]
+              ],
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "node_modules",
+                  "src/styles",
+                  "src/styles/themes/tf2pickup.pl"
+                ]
+              }
             },
             "hl.tf2pickup.pl": {
               "fileReplacements": [
@@ -109,7 +117,14 @@
                   "input": "src/assets/custom/hl.tf2pickup.pl",
                   "output": "/assets/"
                 }
-              ]
+              ],
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "node_modules",
+                  "src/styles",
+                  "src/styles/themes/hl.tf2pickup.pl"
+                ]
+              }
             },
             "tf2pickup.es": {
               "fileReplacements": [
@@ -177,7 +192,8 @@
             "stylePreprocessorOptions": {
               "includePaths": [
                 "node_modules",
-                "src/styles"
+                "src/styles",
+                "src/styles/themes/tf2pickup.pl"
               ]
             }
           }
