@@ -192,7 +192,8 @@
             "stylePreprocessorOptions": {
               "includePaths": [
                 "node_modules",
-                "src/styles"
+                "src/styles",
+                "src/styles/themes/tf2pickup.pl"
               ]
             }
           }
