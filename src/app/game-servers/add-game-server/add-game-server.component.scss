@@ -9,7 +9,7 @@
 .text-container {
   @include surface.make;
   @include surface.shadow;
-  @include surface.fill-color(theme.$surface);
+  @include surface.fill-color(white);
   @include surface.ink-color(theme.$on-surface);
 
   margin-top: 16px;
