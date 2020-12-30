@@ -4,6 +4,7 @@ import { WsTokenService } from './ws-token.service';
 import { WS_URL } from '@app/ws-url';
 import { Store } from '@ngrx/store';
 import { ioConnected, ioDisconnected } from './io.actions';
+import { noop } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -28,10 +29,10 @@ export class SocketFactoryService {
       switch (error.message) {
         case 'Signature verification failed':
         case 'Token expired': {
+          socket.disconnect();
           this.wsTokenService.getWsToken({ force: true }).subscribe(wsToken => {
             socket.io.opts.query = `auth_token=${wsToken}`;
-            socket.connect();
-          });
+          }, noop, () => socket.connect());
           break;
         }
 
@@ -52,8 +53,7 @@ export class SocketFactoryService {
       if (wsToken) {
         socket.io.opts.query = `auth_token=${wsToken}`;
       }
-      socket.connect();
-    });
+    }, noop, () => socket.connect());
 
     return socket;
   }
