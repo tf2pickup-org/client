@@ -1,3 +1,23 @@
+# [3.2.0](https://github.com/tf2pickup-pl/client/compare/3.1.2...3.2.0) (2020-12-30)
+
+
+### Bug Fixes
+
+* **io:** reconnect with the socket on error ([#571](https://github.com/tf2pickup-pl/client/issues/571)) ([d99eb64](https://github.com/tf2pickup-pl/client/commit/d99eb640597e41f27cee67b9ea1a686c901c084f))
+* AddGameServerComponent surface color ([#570](https://github.com/tf2pickup-pl/client/issues/570)) ([b8eadef](https://github.com/tf2pickup-pl/client/commit/b8eadef577104e7dde823f27550b4d27db4fe44c))
+* **build:** remove crossOrigin tags ([9327581](https://github.com/tf2pickup-pl/client/commit/9327581e796e22279d3ad5899d80147775af6956))
+* 9v9 gamemode adaptation ([#567](https://github.com/tf2pickup-pl/client/issues/567)) ([3ad77d1](https://github.com/tf2pickup-pl/client/commit/3ad77d1c56ea3ffc0db14c7e3636c300b7b63c69))
+
+
+### Features
+
+* theming support ([#565](https://github.com/tf2pickup-pl/client/issues/565)) ([04835ee](https://github.com/tf2pickup-pl/client/commit/04835eeec996f890786084a23ed77e173d2ad549))
+
+
+### Performance Improvements
+
+* optimize images ([#568](https://github.com/tf2pickup-pl/client/issues/568)) ([83cdd26](https://github.com/tf2pickup-pl/client/commit/83cdd268084a86af58bacbbe6b8687de159c43a4))
+
 ## [3.1.2](https://github.com/tf2pickup-pl/client/compare/3.1.1...3.1.2) (2020-12-28)
 
 
