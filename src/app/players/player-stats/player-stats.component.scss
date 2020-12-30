@@ -7,7 +7,7 @@
   @include surface.make;
   @include surface.shadow;
   @include surface.fill-color(rgb(255, 255, 255));
-  @include surface.ink-color(theme.$on-secondary);
+  @include surface.ink-color(theme.$on-surface);
 
   margin: 0.5rem 0;
   font-size: 1.2rem;
@@ -17,16 +17,6 @@
   .ghost {
     @include ghost.make-line(300px, 29px, rgb(0, 0, 0));
     margin: 0 auto;
-  }
-}
-
-.player-stats-classes-container {
-  display: flex;
-  flex-flow: row;
-  justify-content: center;
-
-  > * {
-    margin: 0.5rem;
   }
 }
 

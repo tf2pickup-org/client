@@ -1,19 +1,42 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { QueueComponent } from './queue.component';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
-import { MemoizedSelector } from '@ngrx/store';
-import { queueClasses } from '../queue.selectors';
+import { queueConfig } from '../queue.selectors';
 import { MockComponent } from 'ng-mocks';
 import { QueueClassSlotListComponent } from '../queue-class-slot-list/queue-class-slot-list.component';
 import { By } from '@angular/platform-browser';
-import { GameClass } from '../models/game-class';
 import { GameClassIconComponent } from '@app/shared/game-class-icon/game-class-icon.component';
+import { QueueConfig } from '../models/queue-config';
+
+const config6v6: QueueConfig = {
+  teamCount: 2,
+  classes: [
+    { name: 'scout', count: 2 },
+    { name: 'soldier', count: 2 },
+    { name: 'demoman', count: 1 },
+    { name: 'medic', count: 1 },
+  ],
+};
+
+const config9v9: QueueConfig = {
+  teamCount: 2,
+  classes: [
+    { name: 'scout', count: 1 },
+    { name: 'soldier', count: 1 },
+    { name: 'pyro', count: 1 },
+    { name: 'demoman', count: 1 },
+    { name: 'heavy', count: 1 },
+    { name: 'engineer', count: 1 },
+    { name: 'medic', count: 1 },
+    { name: 'sniper', count: 1 },
+    { name: 'spy', count: 1 },
+  ],
+};
 
 describe('QueueComponent', () => {
   let component: QueueComponent;
   let fixture: ComponentFixture<QueueComponent>;
-  let store: MockStore<any>;
-  let queueClassesSelector: MemoizedSelector<any, GameClass[]>;
+  let store: MockStore;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
@@ -31,7 +54,7 @@ describe('QueueComponent', () => {
 
   beforeEach(() => {
     store = TestBed.inject(MockStore);
-    queueClassesSelector = store.overrideSelector(queueClasses, []);
+    store.overrideSelector(queueConfig, config6v6);
 
     fixture = TestBed.createComponent(QueueComponent);
     component = fixture.componentInstance;
@@ -42,22 +65,28 @@ describe('QueueComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('without any classes', () => {
-    it('should not render any QueueClassSlotListComponent instances', () => {
-      expect(fixture.debugElement.query(By.css('app-queue-class-slot-list'))).toBeNull();
+  it('should render the QueueClassSlotListComponent instance', () => {
+    const queueClassSlotListComponent = fixture.debugElement.query(By.css('app-queue-class-slot-list')).componentInstance;
+    expect(queueClassSlotListComponent).toBeTruthy();
+  });
+
+  describe('for 6v6', () => {
+    it('should apply 4x1 grid', () => {
+      const div = fixture.debugElement.query(By.css('.queue')).nativeElement as HTMLElement;
+      expect(div.classList.contains('queue--4x1')).toBe(true);
     });
   });
 
-  describe('with one game class', () => {
+  describe('for 9v9', () => {
     beforeEach(() => {
-      queueClassesSelector.setResult([{ name: 'soldier', count: 2 }]);
+      queueConfig.setResult(config9v9);
       store.refreshState();
       fixture.detectChanges();
     });
 
-    it('should render the QueueClassSlotListComponent instance', () => {
-      const queueClassSlotListComponent = fixture.debugElement.query(By.css('app-queue-class-slot-list')).componentInstance;
-      expect(queueClassSlotListComponent).toBeTruthy();
+    it('should apply 3x3 grid', () => {
+      const div = fixture.debugElement.query(By.css('.queue')).nativeElement as HTMLElement;
+      expect(div.classList.contains('queue--3x3')).toBe(true);
     });
   });
 });

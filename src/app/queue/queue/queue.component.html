@@ -1,4 +1,10 @@
-<div *ngIf="queueClasses | async as _queueClasses" class="queue">
+<div *ngIf="queueClasses | async as _queueClasses"
+  class="queue"
+  [ngClass]="{
+    '1': 'queue--1x1',
+    '4': 'queue--4x1',
+    '9': 'queue--3x3'
+  }[(queueConfig | async)?.classes.length]">
   <div *ngFor="let class of _queueClasses"
     class="game-class-column">
     <h4 class="game-class-name">
