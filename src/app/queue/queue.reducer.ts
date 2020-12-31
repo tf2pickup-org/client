@@ -5,6 +5,7 @@ import { QueueSlot } from './models/queue-slot';
 import { Queue } from './models/queue';
 import { profileLoaded } from '@app/profile/profile.actions';
 import { environment } from '@environment';
+import { QueueConfig } from './models/queue-config';
 
 export interface State extends Queue {
   mapVote?: string;
@@ -12,7 +13,7 @@ export interface State extends Queue {
 }
 
 export const initialState: State = {
-  config: environment.entryQueue.config,
+  config: environment.entryQueue.config as QueueConfig,
   slots: environment.entryQueue.slots,
   state: 'loading',
   mapVoteResults: [

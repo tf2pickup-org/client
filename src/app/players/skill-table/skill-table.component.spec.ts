@@ -12,24 +12,25 @@ import { first } from 'rxjs/operators';
 import { Player } from '../models/player';
 import { PlayerSkill } from '../models/player-skill';
 import { QueueConfig } from '@app/queue/models/queue-config';
+import { Tf2ClassName } from '@app/shared/models/tf2-class-name';
 
 const config: QueueConfig = {
   teamCount: 2,
   classes: [
     {
-      name: 'scout',
+      name: Tf2ClassName.scout,
       count: 2
     },
     {
-      name: 'soldier',
+      name: Tf2ClassName.soldier,
       count: 2
     },
     {
-      name: 'demoman',
+      name: Tf2ClassName.demoman,
       count: 1
     },
     {
-      name: 'medic',
+      name: Tf2ClassName.medic,
       count: 1
     }
   ],

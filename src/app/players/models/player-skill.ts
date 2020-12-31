@@ -1,4 +1,8 @@
+import { Tf2ClassName } from '@app/shared/models/tf2-class-name';
+
 export interface PlayerSkill {
   player: string;
-  skill: Record<string, number>;
+  skill: {
+    [className in Tf2ClassName]?: number;
+  };
 }

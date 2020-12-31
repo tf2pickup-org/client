@@ -2,9 +2,7 @@ import { EntityState } from '@ngrx/entity';
 import { Player } from '../models/player';
 import { playersAdapter as adapter } from '../adapters';
 import { createReducer, Action, on } from '@ngrx/store';
-import { playerLoaded, playerUpdated, playerEdited, playerSkillLoaded, playersLoaded, allPlayerSkillsLoaded, setPlayerName,
-  setPlayerRole, setPlayerSkill, playerSkillEdited } from '../actions';
-import { PlayerSkill } from '../models/player-skill';
+import { playerLoaded, playerUpdated, playerEdited, playersLoaded, setPlayerName, setPlayerRole } from '../actions';
 
 export interface State extends EntityState<Player> {
   locked: boolean; // is player editing enabled or not
@@ -14,20 +12,6 @@ const initialState: State = adapter.getInitialState({
   locked: false,
 });
 
-const updatePlayerSkill = (playerId: string, skill: { [gameClass: string]: number }, state: State): State =>
-  adapter.updateOne({
-    id: playerId,
-    changes: { skill },
-  }, state);
-
-const insertAllPlayerSkills = (playerSkills: PlayerSkill[], state: State): State =>
-  adapter.updateMany(playerSkills.map(skill => ({
-    id: skill.player,
-    changes: {
-      skill: skill.skill,
-    },
-  })), state);
-
 const playerReducer = createReducer(
   initialState,
   on(playerLoaded, (state, { player }) => adapter.upsertOne(player, state)),
@@ -36,12 +20,6 @@ const playerReducer = createReducer(
   on(setPlayerName, state => ({ ...state, locked: true })),
   on(setPlayerRole, state => ({ ...state, locked: true })),
   on(playerEdited, (state, { player }) => ({ ...adapter.upsertOne(player, state), locked: false })),
-
-  on(playerSkillLoaded, (state, { playerId, skill }) => updatePlayerSkill(playerId, skill, state)),
-  on(setPlayerSkill, state => ({ ...state, locked: true })),
-  on(playerSkillEdited, (state, { playerId, skill }) => ({ ...updatePlayerSkill(playerId, skill, state), locked: false })),
-
-  on(allPlayerSkillsLoaded, (state, { playerSkills }) => insertAllPlayerSkills(playerSkills, state)),
 
   on(playersLoaded, (state, { players }) => adapter.upsertMany(players, state)),
 );

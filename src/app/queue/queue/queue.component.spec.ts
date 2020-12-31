@@ -7,29 +7,30 @@ import { QueueClassSlotListComponent } from '../queue-class-slot-list/queue-clas
 import { By } from '@angular/platform-browser';
 import { GameClassIconComponent } from '@app/shared/game-class-icon/game-class-icon.component';
 import { QueueConfig } from '../models/queue-config';
+import { Tf2ClassName } from '@app/shared/models/tf2-class-name';
 
 const config6v6: QueueConfig = {
   teamCount: 2,
   classes: [
-    { name: 'scout', count: 2 },
-    { name: 'soldier', count: 2 },
-    { name: 'demoman', count: 1 },
-    { name: 'medic', count: 1 },
+    { name: Tf2ClassName.scout, count: 2 },
+    { name: Tf2ClassName.soldier, count: 2 },
+    { name: Tf2ClassName.demoman, count: 1 },
+    { name: Tf2ClassName.medic, count: 1 },
   ],
 };
 
 const config9v9: QueueConfig = {
   teamCount: 2,
   classes: [
-    { name: 'scout', count: 1 },
-    { name: 'soldier', count: 1 },
-    { name: 'pyro', count: 1 },
-    { name: 'demoman', count: 1 },
-    { name: 'heavy', count: 1 },
-    { name: 'engineer', count: 1 },
-    { name: 'medic', count: 1 },
-    { name: 'sniper', count: 1 },
-    { name: 'spy', count: 1 },
+    { name: Tf2ClassName.scout, count: 1 },
+    { name: Tf2ClassName.soldier, count: 1 },
+    { name: Tf2ClassName.pyro, count: 1 },
+    { name: Tf2ClassName.demoman, count: 1 },
+    { name: Tf2ClassName.heavy, count: 1 },
+    { name: Tf2ClassName.engineer, count: 1 },
+    { name: Tf2ClassName.medic, count: 1 },
+    { name: Tf2ClassName.sniper, count: 1 },
+    { name: Tf2ClassName.spy, count: 1 },
   ],
 };
 

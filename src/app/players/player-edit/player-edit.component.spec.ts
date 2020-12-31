@@ -11,6 +11,8 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { loadPlayerSkill, playerEdited, loadPlayer, setPlayerName, setPlayerSkill } from '../actions';
 import { Location } from '@angular/common';
 import { By, Title } from '@angular/platform-browser';
+import { MockComponent } from 'ng-mocks';
+import { FeatherComponent } from 'angular-feather';
 
 const paramMap = of(convertToParamMap({ id: 'FAKE_ID' }));
 const actions = new Subject<Action>();
@@ -19,7 +21,6 @@ describe('PlayerEditComponent', () => {
   let component: PlayerEditComponent;
   let fixture: ComponentFixture<PlayerEditComponent>;
   let store: MockStore<any>;
-  let storeDispatchSpy: jasmine.Spy;
   let setTitleSpy: jasmine.Spy;
 
   const initialState = {
@@ -28,12 +29,20 @@ describe('PlayerEditComponent', () => {
         ids: [],
         entities: { },
       },
+      skills: {
+        ids: [],
+        entities: { },
+        locked: false,
+      },
     },
   };
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ PlayerEditComponent ],
+      declarations: [
+        PlayerEditComponent,
+        MockComponent(FeatherComponent),
+      ],
       imports: [
         ReactiveFormsModule,
         RouterTestingModule,
@@ -48,9 +57,9 @@ describe('PlayerEditComponent', () => {
   }));
 
   beforeEach(() => {
-    store = TestBed.get(Store);
-    storeDispatchSpy = spyOn(store, 'dispatch');
-    setTitleSpy = spyOn(TestBed.get(Title), 'setTitle').and.callThrough();
+    store = TestBed.inject(MockStore);
+    spyOn(store, 'dispatch');
+    setTitleSpy = spyOn(TestBed.inject(Title), 'setTitle').and.callThrough();
   });
 
   beforeEach(() => {
@@ -64,16 +73,16 @@ describe('PlayerEditComponent', () => {
   });
 
   it('should load player skill', () => {
-    expect(storeDispatchSpy).toHaveBeenCalledWith(loadPlayerSkill({ playerId: 'FAKE_ID' }));
+    expect(store.dispatch).toHaveBeenCalledWith(loadPlayerSkill({ playerId: 'FAKE_ID' }));
   });
 
   it('should load player data', () => {
-    expect(storeDispatchSpy).toHaveBeenCalledWith(loadPlayer({ playerId: 'FAKE_ID' }));
+    expect(store.dispatch).toHaveBeenCalledWith(loadPlayer({ playerId: 'FAKE_ID' }));
   });
 
   describe('#cancel()', () => {
     it('should navigate back to the player details page', () => {
-      const spy = spyOn(TestBed.get(Location), 'back');
+      const spy = spyOn(TestBed.inject(Location), 'back');
       component.cancel();
       expect(spy).toHaveBeenCalled();
     });
@@ -81,7 +90,7 @@ describe('PlayerEditComponent', () => {
 
   describe('#onKeyDown()', () => {
     it('should navigate back to the player details page', () => {
-      const spy = spyOn(TestBed.get(Location), 'back');
+      const spy = spyOn(TestBed.inject(Location), 'back');
       component.onKeyDown();
       expect(spy).toHaveBeenCalled();
     });
@@ -103,7 +112,11 @@ describe('PlayerEditComponent', () => {
                 id: 'FAKE_ID',
               }
             },
-            locked: false
+          },
+          skills: {
+            ids: [],
+            entities: { },
+            locked: false,
           },
         },
       });
@@ -140,7 +153,7 @@ describe('PlayerEditComponent', () => {
 
       it('should dispatch the setPlayerName action', () => {
         saveButton.click();
-        expect(storeDispatchSpy).toHaveBeenCalledWith(setPlayerName({ playerId: 'FAKE_ID', name: 'maly2' }));
+        expect(store.dispatch).toHaveBeenCalledWith(setPlayerName({ playerId: 'FAKE_ID', name: 'maly2' }));
       });
 
       it('should redirect to the player details after saving is done', () => {
@@ -159,7 +172,7 @@ describe('PlayerEditComponent', () => {
           component.player.value.skill = { demoman: -1 };
           saveButton.disabled = false; // I'm feeling bad about this, but it needs to be called explicitly
           saveButton.click();
-          expect(storeDispatchSpy).toHaveBeenCalledWith(setPlayerSkill({ playerId: 'FAKE_ID', skill: { demoman: -1 }}));
+          expect(store.dispatch).toHaveBeenCalledWith(setPlayerSkill({ skill: { player: 'FAKE_ID', skill: { demoman: -1 } } }));
         });
       });
     });

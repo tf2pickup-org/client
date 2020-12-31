@@ -104,7 +104,7 @@ describe('PlayerEffects', () => {
     it('should attempt to fetch player skill', () => {
       const spy = spyOn(playersService, 'fetchPlayerSkill').and.callThrough();
       effects.loadPlayerSkill.subscribe(action => {
-        expect(action).toEqual(playerSkillLoaded({ playerId: 'FAKE_PLAYER_ID', skill: { demoman: 5 } }));
+        expect(action).toEqual(playerSkillLoaded({ skill: { player: 'FAKE_PLAYER_ID', skill: { demoman: 5 } } }));
       });
       actions.next(loadPlayerSkill({ playerId: 'FAKE_PLAYER_ID' }));
       expect(spy).toHaveBeenCalledWith('FAKE_PLAYER_ID');
@@ -133,9 +133,9 @@ describe('PlayerEffects', () => {
     it('should attempt to set player skills', () => {
       const spy = spyOn(playersService, 'setPlayerSkill').and.callThrough();
       effects.setPlayerSkill.subscribe(action => expect(action).toEqual(
-        playerSkillEdited({ playerId: 'FAKE_PLAYER_ID', skill: { demoman: 5 } })
+        playerSkillEdited({ skill: { player: 'FAKE_PLAYER_ID', skill: { demoman: 5 } } })
       ));
-      actions.next(setPlayerSkill({ playerId: 'FAKE_PLAYER_ID', skill: { demoman: 5 } }));
+      actions.next(setPlayerSkill({ skill: { player: 'FAKE_PLAYER_ID', skill: { demoman: 5 } } }));
       expect(spy).toHaveBeenCalledWith('FAKE_PLAYER_ID', { demoman: 5 });
     });
   });
@@ -145,8 +145,10 @@ describe('PlayerEffects', () => {
       const spy = spyOn(playersService, 'defaultSkill').and.callThrough();
       effects.initializeDefaultPlayerSkill.subscribe(action => {
         expect(action).toEqual(playerSkillLoaded({
-          playerId: 'FAKE_PLAYER_ID',
-          skill: { medic: 2 },
+          skill: {
+            player: 'FAKE_PLAYER_ID',
+            skill: { medic: 2 },
+          },
         }));
       });
       actions.next(initializeDefaultPlayerSkill({ playerId: 'FAKE_PLAYER_ID' }));

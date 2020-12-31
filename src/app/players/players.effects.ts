@@ -41,7 +41,7 @@ export class PlayerEffects {
     this.actions.pipe(
       ofType(loadPlayerSkill),
       mergeMap(({ playerId }) => this.playersService.fetchPlayerSkill(playerId).pipe(
-        map(playerSkill => playerSkillLoaded({ playerId, skill: playerSkill })),
+        map(skill => playerSkillLoaded({ skill: { player: playerId, skill } })),
         catchError((error: unknown) => {
           if (error instanceof HttpErrorResponse) {
             if (error.status === 404) {
@@ -60,8 +60,8 @@ export class PlayerEffects {
   setPlayerSkill = createEffect(() =>
     this.actions.pipe(
       ofType(setPlayerSkill),
-      mergeMap(({ playerId, skill }) => this.playersService.setPlayerSkill(playerId, skill).pipe(
-        map(editedSkill => playerSkillEdited({ playerId, skill: editedSkill })),
+      mergeMap(({ skill }) => this.playersService.setPlayerSkill(skill.player, skill.skill).pipe(
+        map(editedSkill => playerSkillEdited({ skill: { player: skill.player, skill: editedSkill } })),
       )),
     )
   );
@@ -70,7 +70,7 @@ export class PlayerEffects {
     this.actions.pipe(
       ofType(initializeDefaultPlayerSkill),
       switchMap(({ playerId }) => this.playersService.defaultSkill(playerId).pipe(
-        map(skill => playerSkillLoaded({ playerId, skill }))
+        map(skill => playerSkillLoaded({ skill: { player: playerId, skill } }))
       )),
     )
   );

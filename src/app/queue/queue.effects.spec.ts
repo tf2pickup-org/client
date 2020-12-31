@@ -17,13 +17,14 @@ import { isInQueue } from './queue.selectors';
 import { awaitsReadyUp } from '@app/selectors';
 import { QueueReadyUpAction } from './queue-ready-up-dialog/queue-ready-up-dialog.component';
 import { ReadyUpService } from './ready-up.service';
+import { Tf2ClassName } from '@app/shared/models/tf2-class-name';
 
 const queue: Queue = {
   config: {
     teamCount: 2,
     classes: [
       {
-        name: 'soldier',
+        name: Tf2ClassName.soldier,
         count: 1
       },
     ],

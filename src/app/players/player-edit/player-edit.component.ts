@@ -1,10 +1,9 @@
 import { Component, OnInit, ChangeDetectionStrategy, OnDestroy, ChangeDetectorRef, HostListener, ViewChild,
-  ElementRef,
-  AfterViewInit} from '@angular/core';
+  ElementRef, AfterViewInit} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map, switchMap, tap, filter, takeUntil, first } from 'rxjs/operators';
 import { Store, Action } from '@ngrx/store';
-import { playerById, playersLocked, playerSkillByPlayerId } from '../selectors';
+import { playerById, playerSkill, playerSkillsLocked } from '../selectors';
 import { loadPlayer, playerEdited, loadPlayerSkill, setPlayerName, setPlayerSkill, playerSkillEdited } from '../actions';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 import { Player } from '../models/player';
@@ -14,6 +13,15 @@ import { Title } from '@angular/platform-browser';
 import { environment } from '@environment';
 import { Location } from '@angular/common';
 import { MDCTextField } from '@material/textfield/component';
+import { PlayerSkill } from '../models/player-skill';
+
+const toFormGroup = (skill: PlayerSkill['skill']): FormGroup => {
+  const group = { };
+  Object.keys(skill).forEach(gameClass => {
+    group[gameClass] = new FormControl(skill[gameClass]);
+  });
+  return new FormGroup(group);
+};
 
 @Component({
   selector: 'app-player-edit',
@@ -29,7 +37,7 @@ export class PlayerEditComponent implements OnInit, AfterViewInit, OnDestroy {
   player = this.formBuilder.group({
     name: ['', Validators.required],
   });
-  locked: Observable<boolean> = this.store.select(playersLocked);
+  locked = this.store.select(playerSkillsLocked);
   gameClasses = new BehaviorSubject<string[]>([]);
 
   private destroyed = new Subject<void>();
@@ -77,12 +85,11 @@ export class PlayerEditComponent implements OnInit, AfterViewInit, OnDestroy {
     });
 
     getPlayerId.pipe(
-      switchMap(playerId => this.store.select(playerSkillByPlayerId(playerId))),
-      filter(skill => !!skill),
-      first(),
+      switchMap(playerId => this.store.select(playerSkill(playerId))),
+      first(skill => !!skill),
       takeUntil(this.destroyed),
     ).subscribe(skill => {
-      this.player.addControl('skill', this.toFormGroup(skill));
+      this.player.addControl('skill', toFormGroup(skill));
       this.gameClasses.next(Object.keys(skill));
       this.changeDetector.markForCheck();
     });
@@ -113,21 +120,17 @@ export class PlayerEditComponent implements OnInit, AfterViewInit, OnDestroy {
       observables.push(
         this.actions.pipe(
           ofType(playerEdited),
-          filter(action => action.player.id === this.originalPlayer.id),
-          // eslint-disable-next-line
-          first(),
+          first(action => action.player.id === this.originalPlayer.id),
         )
       );
     }
 
     if (JSON.stringify(this.player.value.skill) !== JSON.stringify(this.originalPlayer.skill)) {
-      actions.push(setPlayerSkill({ playerId: this.originalPlayer.id, skill: this.player.value.skill }));
+      actions.push(setPlayerSkill({ skill: { player: this.originalPlayer.id, skill: this.player.value.skill } }));
       observables.push(
         this.actions.pipe(
           ofType(playerSkillEdited),
-          filter(action => action.playerId === this.originalPlayer.id),
-          // eslint-disable-next-line
-          first(),
+          first(action => action.skill.player === this.originalPlayer.id),
         )
       );
     }
@@ -145,14 +148,6 @@ export class PlayerEditComponent implements OnInit, AfterViewInit, OnDestroy {
 
   get skill() {
     return this.player.get('skill') as FormGroup;
-  }
-
-  private toFormGroup(skill: { [gameClass: string]: number }): FormGroup {
-    const group = { };
-    Object.keys(skill).forEach(gameClass => {
-      group[gameClass] = new FormControl(skill[gameClass]);
-    });
-    return new FormGroup(group);
   }
 
 }
