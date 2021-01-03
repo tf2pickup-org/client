@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GamesRoutingModule } from './games-routing.module';
-import { GamesContainerComponent } from './games-container/games-container.component';
 import { GameListComponent } from './game-list/game-list.component';
 import { StoreModule } from '@ngrx/store';
 import { reducer } from './games.reducer';
@@ -26,7 +25,6 @@ import { OrderTf2ClassesPipe } from './order-tf2-classes.pipe';
 
 @NgModule({
   declarations: [
-    GamesContainerComponent,
     GameListComponent,
     GameDetailsComponent,
     MumbleJoinButtonComponent,
