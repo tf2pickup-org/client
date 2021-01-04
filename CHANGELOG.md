@@ -1,3 +1,11 @@
+## [3.2.2](https://github.com/tf2pickup-pl/client/compare/3.2.1...3.2.2) (2021-01-04)
+
+
+### Bug Fixes
+
+* reduce 9v9 background image size ([#586](https://github.com/tf2pickup-pl/client/issues/586)) ([12b53bb](https://github.com/tf2pickup-pl/client/commit/12b53bbda7cb0e7b227ac68c219c949c64ba1972))
+* spy icon ([#585](https://github.com/tf2pickup-pl/client/issues/585)) ([f5050e8](https://github.com/tf2pickup-pl/client/commit/f5050e8f8e5ef37d00f2fc31a913bb0a4e2cb631))
+
 ## [3.2.1](https://github.com/tf2pickup-pl/client/compare/3.2.0...3.2.1) (2021-01-04)
 
 
