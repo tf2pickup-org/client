@@ -1,12 +1,9 @@
 import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { PlayersService } from './players.service';
-import { map, mergeMap, catchError, switchMap } from 'rxjs/operators';
-import { loadPlayer, playerLoaded, playerEdited, playerSkillLoaded, loadPlayerSkill, loadPlayers, playersLoaded, loadPlayerBans,
-  playerBansLoaded, revokePlayerBan, playerBanUpdated, addPlayerBan, playerBanAdded, loadAllPlayerSkills, allPlayerSkillsLoaded,
-  failedToLoadPlayerSkill, initializeDefaultPlayerSkill, setPlayerName, setPlayerRole, setPlayerSkill, playerSkillEdited } from './actions';
-import { of, throwError } from 'rxjs';
-import { HttpErrorResponse } from '@angular/common/http';
+import { map, mergeMap } from 'rxjs/operators';
+import { loadPlayer, playerLoaded, loadPlayers, playersLoaded, loadPlayerBans, playerBansLoaded, revokePlayerBan, playerBanUpdated,
+  addPlayerBan, playerBanAdded } from './actions';
 
 @Injectable()
 export class PlayerEffects {
@@ -19,76 +16,11 @@ export class PlayerEffects {
     )
   );
 
-  setPlayerName = createEffect(() =>
-    this.actions.pipe(
-      ofType(setPlayerName),
-      mergeMap(({ playerId, name }) => this.playersService.setPlayerName(playerId, name).pipe(
-        map(player => playerEdited({ player })),
-      )),
-    )
-  );
-
-  setPlayerRole = createEffect(() =>
-    this.actions.pipe(
-      ofType(setPlayerRole),
-      mergeMap(({ playerId, role }) => this.playersService.setPlayerRole(playerId, role).pipe(
-        map(player => playerEdited({ player })),
-      )),
-    )
-  );
-
-  loadPlayerSkill = createEffect(() =>
-    this.actions.pipe(
-      ofType(loadPlayerSkill),
-      mergeMap(({ playerId }) => this.playersService.fetchPlayerSkill(playerId).pipe(
-        map(skill => playerSkillLoaded({ skill: { player: playerId, skill } })),
-        catchError((error: unknown) => {
-          if (error instanceof HttpErrorResponse) {
-            if (error.status === 404) {
-              return of(initializeDefaultPlayerSkill({ playerId }));
-            } else {
-              return of(failedToLoadPlayerSkill({ error }));
-            }
-          } else {
-            return throwError(error);
-          }
-        }),
-      )),
-    )
-  );
-
-  setPlayerSkill = createEffect(() =>
-    this.actions.pipe(
-      ofType(setPlayerSkill),
-      mergeMap(({ skill }) => this.playersService.setPlayerSkill(skill.player, skill.skill).pipe(
-        map(editedSkill => playerSkillEdited({ skill: { player: skill.player, skill: editedSkill } })),
-      )),
-    )
-  );
-
-  initializeDefaultPlayerSkill = createEffect(() =>
-    this.actions.pipe(
-      ofType(initializeDefaultPlayerSkill),
-      switchMap(({ playerId }) => this.playersService.defaultSkill(playerId).pipe(
-        map(skill => playerSkillLoaded({ skill: { player: playerId, skill } }))
-      )),
-    )
-  );
-
   loadAllPlayers = createEffect(() =>
     this.actions.pipe(
       ofType(loadPlayers),
       mergeMap(() => this.playersService.fetchAllPlayers().pipe(
         map(players => playersLoaded({ players })),
-      )),
-    )
-  );
-
-  loadAllPlayerSkills = createEffect(() =>
-    this.actions.pipe(
-      ofType(loadAllPlayerSkills),
-      mergeMap(() => this.playersService.fetchAllPlayerSkills().pipe(
-        map(playerSkills => allPlayerSkillsLoaded({ playerSkills })),
       )),
     )
   );
