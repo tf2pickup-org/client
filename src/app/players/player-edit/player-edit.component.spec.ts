@@ -1,167 +1,190 @@
-/* eslint-disable @typescript-eslint/naming-convention */
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { PlayerEditComponent } from './player-edit.component';
-import { ReactiveFormsModule } from '@angular/forms';
 import { of, Subject } from 'rxjs';
-import { convertToParamMap, ActivatedRoute, Router } from '@angular/router';
-import { provideMockStore, MockStore } from '@ngrx/store/testing';
-import { Actions } from '@ngrx/effects';
-import { Action, Store } from '@ngrx/store';
-import { RouterTestingModule } from '@angular/router/testing';
-import { loadPlayerSkill, playerEdited, loadPlayer, setPlayerName, setPlayerSkill } from '../actions';
+import { ActivatedRoute, convertToParamMap } from '@angular/router';
+import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import { MockBuilder, MockedComponentFixture, MockRender, ngMocks } from 'ng-mocks';
+import { PlayersService } from '../players.service';
+import { map } from 'rxjs/operators';
+import { ReactiveFormsModule } from '@angular/forms';
+import { loadPlayer, playerEdited } from '../actions';
+import { Title } from '@angular/platform-browser';
+import { Tf2ClassName } from '@app/shared/models/tf2-class-name';
+import { PlayerEditSkillComponent } from '../player-edit-skill/player-edit-skill.component';
+import { FeatherComponent } from 'angular-feather';
 import { Location } from '@angular/common';
-import { By, Title } from '@angular/platform-browser';
+import { Player } from '../models/player';
 
-const paramMap = of(convertToParamMap({ id: 'FAKE_ID' }));
-const actions = new Subject<Action>();
-
-describe('PlayerEditComponent', () => {
+describe(PlayerEditComponent.name, () => {
+  let fixture: MockedComponentFixture;
   let component: PlayerEditComponent;
-  let fixture: ComponentFixture<PlayerEditComponent>;
-  let store: MockStore<any>;
-  let storeDispatchSpy: jasmine.Spy;
-  let setTitleSpy: jasmine.Spy;
-
-  const initialState = {
-    players: {
-      players: {
-        ids: [],
-        entities: { },
-      },
-    },
-  };
-
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ PlayerEditComponent ],
-      imports: [
-        ReactiveFormsModule,
-        RouterTestingModule,
-      ],
-      providers: [
-        { provide: ActivatedRoute, useValue: { paramMap } },
-        provideMockStore({ initialState }),
-        { provide: Actions, useValue: actions },
-      ],
-    })
-    .compileComponents();
-  }));
+  let routeParams: Subject<any>;
+  let store: MockStore;
+  let playersService: jasmine.SpyObj<PlayersService>;
+  let saveButton: HTMLButtonElement;
+  let nameInput: HTMLInputElement;
+  let fetchPlayerSkill: Subject<{ [gameClass in Tf2ClassName]?: number }>;
+  let setPlayerName: Subject<Player>;
+  let setPlayerSkill: Subject<any>;
 
   beforeEach(() => {
-    store = TestBed.get(Store);
-    storeDispatchSpy = spyOn(store, 'dispatch');
-    setTitleSpy = spyOn(TestBed.get(Title), 'setTitle').and.callThrough();
+    routeParams = new Subject();
+    fetchPlayerSkill = new Subject();
+    setPlayerName = new Subject();
+    setPlayerSkill = new Subject();
   });
 
+  beforeEach(() => MockBuilder(PlayerEditComponent)
+    .provide(provideMockStore({
+      initialState: {
+        players: {
+          players: {
+            ids: [],
+            entities: { },
+          },
+        },
+      },
+    }))
+    .keep(ReactiveFormsModule)
+    .mock(ActivatedRoute, {
+      paramMap: routeParams.pipe(map(convertToParamMap)),
+    })
+    .mock(PlayersService)
+    .mock(Title)
+    .mock(Location)
+    .mock(PlayerEditSkillComponent)
+    .mock(FeatherComponent)
+  );
+
   beforeEach(() => {
-    fixture = TestBed.createComponent(PlayerEditComponent);
-    component = fixture.componentInstance;
+    fixture = MockRender(PlayerEditComponent);
+    component = fixture.point.componentInstance;
+
+    store = TestBed.inject(MockStore);
+    spyOn(store, 'dispatch');
+
+    playersService = TestBed.inject(PlayersService) as jasmine.SpyObj<PlayersService>;
+    playersService.fetchPlayerSkill.and.returnValue(fetchPlayerSkill.asObservable());
+    playersService.setPlayerName.and.returnValue(setPlayerName.asObservable());
+    playersService.setPlayerSkill.and.returnValue(setPlayerSkill.asObservable());
+
     fixture.detectChanges();
+    saveButton = ngMocks.find('button[type=submit]').nativeElement;
+    nameInput = ngMocks.find('input[type=text]').nativeElement;
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should load player skill', () => {
-    expect(storeDispatchSpy).toHaveBeenCalledWith(loadPlayerSkill({ playerId: 'FAKE_ID' }));
-  });
-
-  it('should load player data', () => {
-    expect(storeDispatchSpy).toHaveBeenCalledWith(loadPlayer({ playerId: 'FAKE_ID' }));
-  });
-
-  describe('#cancel()', () => {
-    it('should navigate back to the player details page', () => {
-      const spy = spyOn(TestBed.get(Location), 'back');
-      component.cancel();
-      expect(spy).toHaveBeenCalled();
-    });
-  });
-
-  describe('#onKeyDown()', () => {
-    it('should navigate back to the player details page', () => {
-      const spy = spyOn(TestBed.get(Location), 'back');
-      component.onKeyDown();
-      expect(spy).toHaveBeenCalled();
-    });
-  });
-
-  describe('with player', () => {
-    let saveButton: HTMLButtonElement;
-
+  describe('when a player id is given', () => {
     beforeEach(() => {
-      store.setState({
-        players: {
-          players: {
-            ids: [
-              'FAKE_ID'
-            ],
-            entities: {
-              FAKE_ID: {
-                name: 'maly',
-                id: 'FAKE_ID',
-              }
-            },
-            locked: false
-          },
-        },
-      });
-
-      saveButton = fixture.debugElement.query(By.css('.save-button')).nativeElement as HTMLButtonElement;
+      routeParams.next({ id: 'FAKE_PLAYER_ID' });
     });
 
-    it('should set the title', () => {
-      expect(setTitleSpy).toHaveBeenCalledWith(jasmine.stringMatching('maly'));
+    it('should load the player from the store', () => {
+      expect(store.dispatch).toHaveBeenCalledWith(loadPlayer({ playerId: 'FAKE_PLAYER_ID' }));
     });
 
-    it('should set the player name', () => {
-      expect(component.player.value.name).toEqual('maly');
+    it('should load player\'s skill', () => {
+      expect(playersService.fetchPlayerSkill).toHaveBeenCalledWith('FAKE_PLAYER_ID');
     });
 
-    it('should have the save button disabled initially', () => {
+    it('should disable the save button initially', () => {
       expect(saveButton.disabled).toBe(true);
     });
 
-    describe('when edited', () => {
-      let playerNameInput: HTMLInputElement;
-
+    describe('with player loaded', () => {
       beforeEach(() => {
-        playerNameInput = fixture.debugElement.query(By.css('.name-field input[type=text]')).nativeElement as HTMLInputElement;
-
-        playerNameInput.value = 'maly2';
-        playerNameInput.dispatchEvent(new Event('input'));
-        fixture.detectChanges();
+        store.setState({
+          players: {
+            players: {
+              ids: [ 'FAKE_PLAYER_ID' ],
+              entities: {
+                FAKE_PLAYER_ID: {
+                  name: 'maly',
+                  id: 'FAKE_PLAYER_ID',
+                }
+              },
+            },
+          },
+        });
       });
 
-      it('should enable the save button', () => {
-        expect(saveButton.disabled).toBe(false);
+      it('should set the title', () => {
+        const title = TestBed.inject(Title);
+        expect(title.setTitle).toHaveBeenCalledWith(jasmine.stringMatching(/maly.+edit/));
       });
 
-      it('should dispatch the setPlayerName action', () => {
-        saveButton.click();
-        expect(storeDispatchSpy).toHaveBeenCalledWith(setPlayerName({ playerId: 'FAKE_ID', name: 'maly2' }));
+      it('should set the player\'s name', () => {
+        expect(nameInput.value).toEqual('maly');
       });
 
-      it('should redirect to the player details after saving is done', () => {
-        const spy = spyOn(TestBed.inject(Router), 'navigate');
+      describe('when the skill is fetched', () => {
+        beforeEach(() => {
+          fetchPlayerSkill.next({ scout: 1, soldier: 2 });
+          fetchPlayerSkill.complete();
+          fixture.detectChanges();
+        });
 
-        saveButton.click();
+        it('should render skill forms', () => {
+          const playerEditSkillComponents = ngMocks.findInstances(PlayerEditSkillComponent);
+          expect(playerEditSkillComponents.length).toBe(2); // scout and soldier
+        });
 
-        actions.next(playerEdited({ player: { id: 'FAKE_ID' } } as any));
-        expect(spy).toHaveBeenCalledWith(['/player', 'FAKE_ID']);
-      });
-    });
+        describe('when the name is edited', () => {
+          beforeEach(() => {
+            nameInput.value = 'maly2';
+            nameInput.dispatchEvent(new Event('input'));
+            fixture.detectChanges();
+          });
 
-    describe('and with skill', () => {
-      describe('when saved', () => {
-        it('should dispatch the setPlayerSkill action', () => {
-          component.player.value.skill = { demoman: -1 };
-          saveButton.disabled = false; // I'm feeling bad about this, but it needs to be called explicitly
-          saveButton.click();
-          expect(storeDispatchSpy).toHaveBeenCalledWith(setPlayerSkill({ playerId: 'FAKE_ID', skill: { demoman: -1 }}));
+          it('should enable the submit button', () => {
+            expect(saveButton.disabled).toBe(false);
+          });
+
+          describe('when the form is saved', () => {
+            beforeEach(() => {
+              saveButton.click();
+              fixture.detectChanges();
+            });
+
+            it('should set the new values', () => {
+              expect(playersService.setPlayerName).toHaveBeenCalledWith('FAKE_PLAYER_ID', 'maly2');
+              expect(playersService.setPlayerSkill).toHaveBeenCalledWith('FAKE_PLAYER_ID', { scout: 1, soldier: 2 });
+            });
+
+            it('should disable the submit button', () => {
+              expect(saveButton.disabled).toBe(true);
+            });
+
+            describe('when the values are updated', () => {
+              beforeEach(() => {
+                setPlayerName.next({ name: 'maly2', id: 'FAKE_PLAYER_ID' } as Player);
+                setPlayerName.complete();
+                setPlayerSkill.next({ scout: 7, soldier: 8 });
+                setPlayerSkill.complete();
+              });
+
+              it('should store the edited player in the store', () => {
+                expect(store.dispatch).toHaveBeenCalledWith(playerEdited({ player: { name: 'maly2', id: 'FAKE_PLAYER_ID' } as Player }));
+              });
+
+              it('should redirect back', () => {
+                const location = TestBed.inject(Location);
+                expect(location.back).toHaveBeenCalled();
+              });
+            });
+          });
         });
       });
     });
+  });
+
+  it('should render cancel button', () => {
+    const location = TestBed.inject(Location);
+    const cancelButton = ngMocks.find('.cancel-button').nativeElement as HTMLButtonElement;
+    cancelButton.click();
+    expect(location.back).toHaveBeenCalled();
   });
 });

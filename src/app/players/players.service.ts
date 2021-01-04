@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { Observable, of, zip } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Player } from './models/player';
 import { API_URL } from '@app/api-url';
 import { HttpClient } from '@angular/common/http';
@@ -12,6 +12,12 @@ import { PaginatedList } from '@app/core/models/paginated-list';
 import { Store, select } from '@ngrx/store';
 import { queueConfig } from '@app/queue/queue.selectors';
 import { PlayerRole } from './models/player-role';
+import { Tf2ClassName } from '@app/shared/models/tf2-class-name';
+
+type AllPlayerSkillsResponse = {
+  player: string;
+  skill: { [gameClass in Tf2ClassName]?: number };
+}[];
 
 @Injectable({
   providedIn: 'root'
@@ -40,16 +46,16 @@ export class PlayersService {
     return this.http.patch<Player>(`${this.apiUrl}/players/${playerId}`, { role });
   }
 
-  setPlayerSkill(playerId: string, skill: { [gameClass: string]: number }) {
-    return this.http.put<{ [gameClass: string]: number }>(`${this.apiUrl}/players/${playerId}/skill`, skill);
+  setPlayerSkill(playerId: string, skill: { [gameClass in Tf2ClassName]?: number }) {
+    return this.http.put<{ [gameClass in Tf2ClassName]?: number }>(`${this.apiUrl}/players/${playerId}/skill`, skill);
   }
 
-  fetchAllPlayerSkills(): Observable<PlayerSkill[]> {
-    return this.http.get<PlayerSkill[]>(`${this.apiUrl}/players/all/skill`);
+  fetchAllPlayerSkills(): Observable<AllPlayerSkillsResponse> {
+    return this.http.get<AllPlayerSkillsResponse>(`${this.apiUrl}/players/all/skill`);
   }
 
-  fetchPlayerSkill(playerId: string): Observable<{ [gameClass: string]: number }> {
-    return this.http.get<{ [gameClass: string]: number }>(`${this.apiUrl}/players/${playerId}/skill`);
+  fetchPlayerSkill(playerId: string): Observable<{ [gameClass in Tf2ClassName]?: number }> {
+    return this.http.get<Record<Tf2ClassName, number>>(`${this.apiUrl}/players/${playerId}/skill`);
   }
 
   fetchAllPlayers(): Observable<Player[]> {
@@ -72,11 +78,12 @@ export class PlayersService {
     return this.http.post<PlayerBan>(`${this.apiUrl}/players/${playerBan.player}/bans/${playerBan.id}?revoke`, { });
   }
 
-  defaultSkill(playerId: string): Observable<{ [gameClass: string]: number }> {
+  defaultSkill(playerId: string): Observable<{ [gameClass in Tf2ClassName]?: number }> {
     return this.store.pipe(
       select(queueConfig),
       first(config => !!config),
-      map(config => config.classes.reduce((_skill, curr) => { _skill[curr.name] = 1; return _skill; }, { })),
+      map(config => config.classes.reduce((_skill, curr) => { _skill[curr.name] = 1; return _skill; },
+        { } as Record<Tf2ClassName, number>)),
     );
   }
 
