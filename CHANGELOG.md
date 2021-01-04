@@ -1,3 +1,10 @@
+## [3.2.3](https://github.com/tf2pickup-pl/client/compare/3.2.2...3.2.3) (2021-01-04)
+
+
+### Bug Fixes
+
+* 9v9 background image fix ([#588](https://github.com/tf2pickup-pl/client/issues/588)) ([6954820](https://github.com/tf2pickup-pl/client/commit/6954820a193381067a02df39284b137a2041acd4))
+
 ## [3.2.2](https://github.com/tf2pickup-pl/client/compare/3.2.1...3.2.2) (2021-01-04)
 
 
