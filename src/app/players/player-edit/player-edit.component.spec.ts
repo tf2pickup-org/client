@@ -73,28 +73,6 @@ describe(PlayerEditComponent.name, () => {
     nameInput = ngMocks.find('input[type=text]').nativeElement;
   });
 
-  afterEach(() => {
-    routeParams.complete();
-
-    // complete all streams so that first() operators are happy
-
-    if (!fetchPlayerSkill.closed) {
-      fetchPlayerSkill.next({ });
-      fetchPlayerSkill.complete();
-    }
-
-    store.setState({
-      players: {
-        players: {
-          ids: [ 'FAKE_PLAYER_ID' ],
-          entities: {
-            FAKE_PLAYER_ID: { name: 'maly', id: 'FAKE_PLAYER_ID' },
-          },
-        },
-      },
-    });
-  });
-
   it('should create', () => {
     expect(component).toBeTruthy();
   });

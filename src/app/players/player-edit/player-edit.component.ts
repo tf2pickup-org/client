@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy, OnDestroy, ChangeDetectorRef, HostListener, ViewChild,
   ElementRef, AfterViewInit} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { map, takeUntil, first, pairwise, filter } from 'rxjs/operators';
+import { map, takeUntil, pairwise, filter, take } from 'rxjs/operators';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 import { Subject, BehaviorSubject } from 'rxjs';
 import { Title } from '@angular/platform-browser';
@@ -55,7 +55,8 @@ export class PlayerEditComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit() {
     this.store.player.pipe(
-      first(player => !!player),
+      filter(player => !!player),
+      take(1),
       takeUntil(this.destroyed),
     ).subscribe(player => {
       this.title.setTitle(`${player.name} • edit • ${environment.titleSuffix}`);
@@ -64,7 +65,8 @@ export class PlayerEditComponent implements OnInit, AfterViewInit, OnDestroy {
     });
 
     this.store.skill.pipe(
-      first(skill => !!skill),
+      filter(skill => !!skill),
+      take(1),
       takeUntil(this.destroyed),
     ).subscribe(skill => {
       this.player.addControl('skill', toFormGroup(skill));
