@@ -47,7 +47,7 @@ export class PlayersService {
   }
 
   setPlayerSkill(playerId: string, skill: { [gameClass in Tf2ClassName]?: number }) {
-    return this.http.put<Record<Tf2ClassName, number>>(`${this.apiUrl}/players/${playerId}/skill`, skill);
+    return this.http.put<{ [gameClass in Tf2ClassName]?: number }>(`${this.apiUrl}/players/${playerId}/skill`, skill);
   }
 
   fetchAllPlayerSkills(): Observable<AllPlayerSkillsResponse> {

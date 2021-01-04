@@ -1,19 +1,15 @@
 import { Component, OnInit, ChangeDetectionStrategy, OnDestroy, ChangeDetectorRef, HostListener, ViewChild,
   ElementRef, AfterViewInit} from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { map, switchMap, tap, filter, takeUntil, first } from 'rxjs/operators';
-import { Store, Action } from '@ngrx/store';
-import { playerById, playerSkill, playerSkillsLocked } from '../selectors';
-import { loadPlayer, playerEdited, loadPlayerSkill, setPlayerName, setPlayerSkill, playerSkillEdited } from '../actions';
+import { ActivatedRoute } from '@angular/router';
+import { map, takeUntil, first, pairwise, filter } from 'rxjs/operators';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
-import { Player } from '../models/player';
-import { Actions, ofType } from '@ngrx/effects';
-import { Subject, Observable, BehaviorSubject, zip } from 'rxjs';
+import { Subject, BehaviorSubject } from 'rxjs';
 import { Title } from '@angular/platform-browser';
 import { environment } from '@environment';
 import { Location } from '@angular/common';
 import { MDCTextField } from '@material/textfield/component';
 import { PlayerSkill } from '../models/player-skill';
+import { PlayerEditStore } from './player-edit.store';
 
 const toFormGroup = (skill: PlayerSkill['skill']): FormGroup => {
   const group = { };
@@ -28,6 +24,7 @@ const toFormGroup = (skill: PlayerSkill['skill']): FormGroup => {
   templateUrl: './player-edit.component.html',
   styleUrls: ['./player-edit.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [ PlayerEditStore ],
 })
 export class PlayerEditComponent implements OnInit, AfterViewInit, OnDestroy {
 
@@ -37,22 +34,18 @@ export class PlayerEditComponent implements OnInit, AfterViewInit, OnDestroy {
   player = this.formBuilder.group({
     name: ['', Validators.required],
   });
-  locked = this.store.select(playerSkillsLocked);
   gameClasses = new BehaviorSubject<string[]>([]);
 
   private destroyed = new Subject<void>();
-  private originalPlayer: Player;
   private fields: MDCTextField[];
 
   constructor(
     private route: ActivatedRoute,
-    private store: Store,
     private formBuilder: FormBuilder,
-    private actions: Actions,
-    private router: Router,
     private changeDetector: ChangeDetectorRef,
     private title: Title,
     private location: Location,
+    public readonly store: PlayerEditStore,
   ) { }
 
   @HostListener('document:keydown.escape', ['$event'])
@@ -61,31 +54,16 @@ export class PlayerEditComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit() {
-    const getPlayerId = this.route.paramMap.pipe(
-      map(params => params.get('id')),
-    );
-
-    getPlayerId.pipe(
-      switchMap(playerId => this.store.select(playerById(playerId)).pipe(
-        tap(player => {
-          if (!player) {
-            this.store.dispatch(loadPlayer({ playerId }));
-          } else {
-            this.title.setTitle(`${player.name} • edit • ${environment.titleSuffix}`);
-          }
-        }),
-      )),
-      filter(player => !!player),
-      first(),
+    this.store.player.pipe(
+      first(player => !!player),
       takeUntil(this.destroyed),
     ).subscribe(player => {
-      this.originalPlayer = player;
-      this.player.setValue({ name: player.name });
+      this.title.setTitle(`${player.name} • edit • ${environment.titleSuffix}`);
+      this.player.patchValue({ name: player.name });
       this.changeDetector.markForCheck();
     });
 
-    getPlayerId.pipe(
-      switchMap(playerId => this.store.select(playerSkill(playerId))),
+    this.store.skill.pipe(
       first(skill => !!skill),
       takeUntil(this.destroyed),
     ).subscribe(skill => {
@@ -94,9 +72,11 @@ export class PlayerEditComponent implements OnInit, AfterViewInit, OnDestroy {
       this.changeDetector.markForCheck();
     });
 
-    getPlayerId.pipe(
+    // load the given player
+    this.route.paramMap.pipe(
+      map(params => params.get('id')),
       takeUntil(this.destroyed),
-    ).subscribe(playerId => this.store.dispatch(loadPlayerSkill({ playerId })));
+    ).subscribe(playerId => this.store.setPlayerId(playerId));
   }
 
   ngAfterViewInit() {
@@ -112,34 +92,13 @@ export class PlayerEditComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   save() {
-    const observables: Observable<any>[] = [];
-    const actions: Action[] = [];
-
-    if (this.player.value.name !== this.originalPlayer.name) {
-      actions.push(setPlayerName({ playerId: this.originalPlayer.id, name: this.player.value.name }));
-      observables.push(
-        this.actions.pipe(
-          ofType(playerEdited),
-          first(action => action.player.id === this.originalPlayer.id),
-        )
-      );
-    }
-
-    if (JSON.stringify(this.player.value.skill) !== JSON.stringify(this.originalPlayer.skill)) {
-      actions.push(setPlayerSkill({ skill: { player: this.originalPlayer.id, skill: this.player.value.skill } }));
-      observables.push(
-        this.actions.pipe(
-          ofType(playerSkillEdited),
-          first(action => action.skill.player === this.originalPlayer.id),
-        )
-      );
-    }
-
-    zip(...observables).pipe(
+    this.store.saving.pipe(
+      pairwise(),
+      filter(([ former, latter ]) => former && !latter),
       takeUntil(this.destroyed),
-    ).subscribe(() => this.router.navigate(['/player', this.originalPlayer.id]));
+    ).subscribe(() => this.location.back());
 
-    actions.forEach(action => this.store.dispatch(action));
+    this.store.save({ name: this.player.value.name, skill: this.player.value.skill });
   }
 
   cancel() {
