@@ -1,3 +1,10 @@
+## [3.2.1](https://github.com/tf2pickup-pl/client/compare/3.2.0...3.2.1) (2021-01-04)
+
+
+### Bug Fixes
+
+* **deps:** update material monorepo to v9 ([#566](https://github.com/tf2pickup-pl/client/issues/566)) ([056ca4f](https://github.com/tf2pickup-pl/client/commit/056ca4fda731a3d5c95a1cac9af8d518385f05fa))
+
 # [3.2.0](https://github.com/tf2pickup-pl/client/compare/3.1.2...3.2.0) (2020-12-30)
 
 
