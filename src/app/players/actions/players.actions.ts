@@ -1,6 +1,5 @@
 import { createAction, props } from '@ngrx/store';
 import { Player } from '../models/player';
-import { PlayerRole } from '../models/player-role';
 
 export const loadPlayer = createAction(
   '[Queue] Load player',
@@ -10,16 +9,6 @@ export const loadPlayer = createAction(
 export const playerLoaded = createAction(
   '[API] Player loaded',
   props<{ player: Player }>(),
-);
-
-export const setPlayerName = createAction(
-  '[Player] Set player name',
-  props<{ playerId: string; name: string }>(),
-);
-
-export const setPlayerRole = createAction(
-  '[Player] Set player role',
-  props<{ playerId: string; role: PlayerRole }>(),
 );
 
 export const playerEdited = createAction(
