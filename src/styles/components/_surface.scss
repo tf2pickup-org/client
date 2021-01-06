@@ -43,5 +43,9 @@
     &__content {
       padding: 32px;
     }
+
+    &--white {
+      @include fill-color(white);
+    }
   }
 }
