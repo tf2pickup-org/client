@@ -7,6 +7,7 @@ import { MarkdownModule } from 'ngx-markdown';
 import { SafeMumbleUrlPipe } from './safe-mumble-url.pipe';
 import { GameClassIconComponent } from './game-class-icon/game-class-icon.component';
 import { MapThumbnailPipe } from './map-thumbnail.pipe';
+import { NavigateBackDirective } from './navigate-back.directive';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { MapThumbnailPipe } from './map-thumbnail.pipe';
     SafeMumbleUrlPipe,
     GameClassIconComponent,
     MapThumbnailPipe,
+    NavigateBackDirective,
   ],
   imports: [
     CommonModule,
@@ -28,6 +30,7 @@ import { MapThumbnailPipe } from './map-thumbnail.pipe';
     SafeMumbleUrlPipe,
     GameClassIconComponent,
     MapThumbnailPipe,
+    NavigateBackDirective,
   ]
 })
 export class SharedModule { }

@@ -90,7 +90,7 @@ export class PlayerEditComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnDestroy() {
     this.fields.forEach(field => field.destroy());
     this.destroyed.next();
-    this.destroyed.unsubscribe();
+    this.destroyed.complete();
   }
 
   save() {

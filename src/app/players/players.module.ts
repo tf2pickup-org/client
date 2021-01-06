@@ -24,7 +24,6 @@ import { Etf2lProfileLinkPipe } from './etf2l-profile-link.pipe';
 import { LogsTfProfileLinkPipe } from './logs-tf-profile-link.pipe';
 import { SkillTableComponent } from './skill-table/skill-table.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
-import { EditPlayerRoleDialogComponent } from './edit-player-role-dialog/edit-player-role-dialog.component';
 import { TwitchTvProfileLinkPipe } from './twitch-tv-profile-link.pipe';
 import { SharedModule } from '@app/shared/shared.module';
 import { PlayerDetailsHeaderComponent } from './player-details-header/player-details-header.component';
@@ -53,7 +52,6 @@ import { EditPlayerRolesComponent } from './edit-player-roles/edit-player-roles.
     Etf2lProfileLinkPipe,
     LogsTfProfileLinkPipe,
     SkillTableComponent,
-    EditPlayerRoleDialogComponent,
     TwitchTvProfileLinkPipe,
     PlayerDetailsHeaderComponent,
     PlayerDetailsGameListComponent,
