@@ -141,6 +141,12 @@ $link-hover-decoration: underline;
   color: theme.$on-surface;
 }
 
+.focus-none {
+  &:focus {
+    outline: 0;
+  }
+}
+
 @import 'global/body';
 
 @import '@swimlane/ngx-datatable/index';

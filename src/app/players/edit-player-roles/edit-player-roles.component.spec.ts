@@ -3,6 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, convertToParamMap } from '@angular/router';
+import { NavigateBackDirective } from '@app/shared/navigate-back.directive';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { FeatherComponent } from 'angular-feather';
 import { MockBuilder, MockedComponentFixture, MockRender, ngMocks } from 'ng-mocks';
@@ -46,6 +47,7 @@ describe(EditPlayerRolesComponent.name, () => {
     .mock(Title)
     .mock(Location)
     .mock(FeatherComponent)
+    .keep(NavigateBackDirective)
   );
 
   beforeEach(() => {
@@ -147,5 +149,12 @@ describe(EditPlayerRolesComponent.name, () => {
         });
       });
     });
+  });
+
+  it('should be able to cancel and go back', () => {
+    const location = TestBed.inject(Location);
+    const cancelButton = ngMocks.find('button.cancel-button').nativeElement as HTMLButtonElement;
+    cancelButton.click();
+    expect(location.back).toHaveBeenCalled();
   });
 });
