@@ -1,3 +1,16 @@
+## [3.2.4](https://github.com/tf2pickup-pl/client/compare/3.2.3...3.2.4) (2021-01-06)
+
+
+### Bug Fixes
+
+* **deps:** pin dependencies ([#595](https://github.com/tf2pickup-pl/client/issues/595)) ([980a093](https://github.com/tf2pickup-pl/client/commit/980a09317f060d629128f9140673d875a36a8ba2))
+* **deps:** update angular monorepo to v11.0.6 ([#596](https://github.com/tf2pickup-pl/client/issues/596)) ([4cbdf3d](https://github.com/tf2pickup-pl/client/commit/4cbdf3d74499cc995ff73a8195e4077187f4c5df))
+* implement edit player role ([#594](https://github.com/tf2pickup-pl/client/issues/594)) ([8daa0df](https://github.com/tf2pickup-pl/client/commit/8daa0dfa8c0d886ff2d6dfba16e849b80dd017fe))
+* **deps:** update dependency @swimlane/ngx-datatable to v19 ([#590](https://github.com/tf2pickup-pl/client/issues/590)) ([5980079](https://github.com/tf2pickup-pl/client/commit/5980079af1a5dbfa2ac8333d63deea454891a0ff))
+* **deps:** update dependency ng-inline-svg to v11.0.2 ([#592](https://github.com/tf2pickup-pl/client/issues/592)) ([8d981d9](https://github.com/tf2pickup-pl/client/commit/8d981d9ce0f15af5b58014a9e84bb0ff3fed80f2))
+* **deps:** update dependency socket.io-client to v2.4.0 ([#591](https://github.com/tf2pickup-pl/client/issues/591)) ([4b6c2b2](https://github.com/tf2pickup-pl/client/commit/4b6c2b2f9536d124cb7a53396ceffaad90a75ada))
+* **deps:** update dependency tslib to v2.1.0 ([#593](https://github.com/tf2pickup-pl/client/issues/593)) ([ba3b6b1](https://github.com/tf2pickup-pl/client/commit/ba3b6b161509bfda27f311d515c170a26842a9b5))
+
 ## [3.2.3](https://github.com/tf2pickup-pl/client/compare/3.2.2...3.2.3) (2021-01-04)
 
 
