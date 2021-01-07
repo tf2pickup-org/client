@@ -1,4 +1,4 @@
-import { GamePlayer } from './game-player';
+import { GameSlot } from './game-slot';
 import { GameState } from './game-state';
 import { Tf2Team } from './tf2-team';
 
@@ -7,7 +7,7 @@ export interface Game {
   launchedAt: Date;
   // eslint-disable-next-line id-blacklist
   number: number;
-  slots: GamePlayer[];
+  slots: GameSlot[];
   map: string;
   logsUrl?: string;
   demoUrl?: string;

@@ -1,7 +1,7 @@
 import { GameTeamPlayerListComponent } from './game-team-player-list.component';
 import { MockBuilder, MockedComponentFixture, MockRender, ngMocks } from 'ng-mocks';
 import { PlayerConnectionStatusComponent } from '../player-connection-status/player-connection-status.component';
-import { ResolvedGamePlayer } from '../models/resolved-game-player';
+import { ResolvedGameSlot } from '../models/resolved-game-slot';
 import { OrderTf2ClassesPipe } from '../order-tf2-classes.pipe';
 import { Subject } from 'rxjs';
 
@@ -9,7 +9,7 @@ describe('GameTeamPlayerListComponent', () => {
   let component: GameTeamPlayerListComponent;
   let fixture: MockedComponentFixture;
   let inputs: {
-    players: Subject<ResolvedGamePlayer[]>;
+    players: Subject<ResolvedGameSlot[]>;
     showPlayerConnectionStatus: Subject<boolean>;
     showAdminActionButtons: Subject<boolean>;
     locked: Subject<boolean>;
@@ -52,7 +52,7 @@ describe('GameTeamPlayerListComponent', () => {
   });
 
   describe('with players', () => {
-    const mockPlayer: ResolvedGamePlayer = {
+    const mockPlayer: ResolvedGameSlot = {
       id: 'PLAYER_ID',
       name: 'FAKE_PLAYER',
       joinedAt: new Date(),
