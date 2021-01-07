@@ -1,3 +1,12 @@
+## [3.2.5](https://github.com/tf2pickup-pl/client/compare/3.2.4...3.2.5) (2021-01-07)
+
+
+### Bug Fixes
+
+* **css:** bring back mark as friend button color ([#600](https://github.com/tf2pickup-pl/client/issues/600)) ([0741ff3](https://github.com/tf2pickup-pl/client/commit/0741ff32cf32ff00519e60c8406ca3a82737bb4a))
+* **deps:** update angular monorepo to v11.0.7 ([#601](https://github.com/tf2pickup-pl/client/issues/601)) ([884df2f](https://github.com/tf2pickup-pl/client/commit/884df2fd182f960fc3107c7b5595366a5339e106))
+* let the user take his own sub spot ([#598](https://github.com/tf2pickup-pl/client/issues/598)) ([70034e0](https://github.com/tf2pickup-pl/client/commit/70034e0323963aa6004435cdda5041017868c826))
+
 ## [3.2.4](https://github.com/tf2pickup-pl/client/compare/3.2.3...3.2.4) (2021-01-06)
 
 
