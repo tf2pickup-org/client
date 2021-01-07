@@ -316,6 +316,7 @@ describe('GameDetailsComponent', () => {
           describe('and takes part in this game', () => {
             beforeEach(() => {
               profile.setResult({ id: 'FAKE_PLAYER_1_ID', name: 'FAKE PLAYER' } as Profile);
+              activeGame.setResult({ id: 'FAKE_GAME_ID' } as Game);
               store.refreshState();
               fixture.detectChanges();
             });
@@ -329,6 +330,35 @@ describe('GameDetailsComponent', () => {
             it('should have the join mumble button', () => {
               const mumbleJoinButton = ngMocks.find(MumbleJoinButtonComponent).componentInstance;
               expect(mumbleJoinButton.mumbleUrl).toEqual('mumble://FAKE_PLAYER@melkor.tf/tf2pickup/5/RED');
+            });
+
+            describe('when subbed out', () => {
+              beforeEach(() => {
+                store.setState(makeState([{
+                  ...gameInProgress,
+                  slots: [
+                    {
+                      player: 'FAKE_PLAYER_1_ID',
+                      gameClass: 'soldier',
+                      team: 'red',
+                      connectionStatus: 'offline',
+                      status: 'waiting for substitute',
+                    },
+                    {
+                      player: 'FAKE_PLAYER_2_ID',
+                      gameClass: 'soldier',
+                      team: 'blu',
+                      connectionStatus: 'offline',
+                      status: 'active',
+                    },
+                  ],
+                }]));
+              });
+
+              it('should be able to sub himself', () => {
+                const gameTeamPlayerList = ngMocks.find(GameTeamPlayerListComponent).componentInstance;
+                expect(gameTeamPlayerList.locked).toBe(false);
+              });
             });
           });
         });
