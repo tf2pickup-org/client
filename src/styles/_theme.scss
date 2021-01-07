@@ -29,6 +29,7 @@ $-default-colors: (
   'queue-slot-taken': rgba(255, 255, 255, 0.95),
   'queue-slot-taken-by-me': rgba(255, 255, 255, 1),
   'queue-slot-ready-up': rgba(65, 202, 37, 0.75),
+  'queue-slot-mark-as-friend-button': rgb(192, 50, 50),
 );
 
 $-colors: map.merge($-default-colors, theme-overrides.$colors);
@@ -67,3 +68,4 @@ $queue-slot-free: map.get($-colors, 'queue-slot-free');
 $queue-slot-taken: map.get($-colors, 'queue-slot-taken');
 $queue-slot-taken-by-me: map.get($-colors, 'queue-slot-taken-by-me');
 $queue-slot-ready-up: map.get($-colors, 'queue-slot-ready-up');
+$queue-slot-mark-as-friend-button: map.get($-colors, 'queue-slot-mark-as-friend-button');
