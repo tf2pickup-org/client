@@ -53,13 +53,13 @@ export class GameDetailsStore extends ComponentStore<GameDetailsState> {
     this.store.select(isLoggedIn),
     this.store.select(isBanned),
     this.store.select(activeGame),
-    this.isRunning,
+    this.game,
     // eslint-disable-next-line no-shadow
-    (isLoggedIn, isBanned, activeGame, isRunning) =>
+    (isLoggedIn, isBanned, activeGame, game) =>
       isLoggedIn &&
       !isBanned &&
-      !activeGame &&
-      isRunning
+      (!activeGame || activeGame.id === game.id) &&
+      /launching|started/.test(game?.state)
   );
 
   readonly players: Observable<ResolvedGamePlayer[]> = this.select(state => state.game?.slots
