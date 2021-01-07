@@ -1,4 +1,4 @@
-import { ResolvedGamePlayer } from './models/resolved-game-player';
+import { ResolvedGameSlot } from './models/resolved-game-slot';
 import { OrderTf2ClassesPipe } from './order-tf2-classes.pipe';
 
 describe('OrderTf2ClassesPipe', () => {
@@ -17,7 +17,7 @@ describe('OrderTf2ClassesPipe', () => {
       { id: 'soldier', gameClass: 'soldier' },
       { id: 'demoman', gameClass: 'demoman' },
       { id: 'scout', gameClass: 'scout' },
-    ] as ResolvedGamePlayer[];
+    ] as ResolvedGameSlot[];
 
     expect(pipe.transform(slots)).toEqual([
       { id: 'scout', gameClass: 'scout' },

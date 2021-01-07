@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
-import { ResolvedGamePlayer } from '../models/resolved-game-player';
+import { ResolvedGameSlot } from '../models/resolved-game-slot';
 
 @Component({
   selector: 'app-game-team-player-list',
@@ -10,7 +10,7 @@ import { ResolvedGamePlayer } from '../models/resolved-game-player';
 export class GameTeamPlayerListComponent {
 
   @Input()
-  players: ResolvedGamePlayer[];
+  players: ResolvedGameSlot[];
 
   @Input()
   showPlayerConnectionStatus = false;
@@ -27,13 +27,13 @@ export class GameTeamPlayerListComponent {
   @Output()
   replacePlayer = new EventEmitter<string>();
 
-  emitRequestSubstitute(event: Event, player: ResolvedGamePlayer) {
+  emitRequestSubstitute(event: Event, player: ResolvedGameSlot) {
     event.preventDefault();
     event.stopPropagation();
     this.requestSubstitute.emit(player.id);
   }
 
-  emitReplacePlayer(player: ResolvedGamePlayer) {
+  emitReplacePlayer(player: ResolvedGameSlot) {
     this.replacePlayer.emit(player.id);
   }
 

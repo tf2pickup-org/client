@@ -14,8 +14,8 @@ import { forceEndGame, loadGame, reinitializeServer, replacePlayer, requestSubst
 import { activeGame, gameById } from '../games.selectors';
 import { GamesService } from '../games.service';
 import { Game } from '../models/game';
-import { GamePlayer } from '../models/game-player';
-import { ResolvedGamePlayer } from '../models/resolved-game-player';
+import { GameSlot } from '../models/game-slot';
+import { ResolvedGameSlot } from '../models/resolved-game-slot';
 import { Tf2Team } from '../models/tf2-team';
 import { createMumbleUrl } from './create-mumble-url';
 
@@ -62,7 +62,7 @@ export class GameDetailsStore extends ComponentStore<GameDetailsState> {
       /launching|started/.test(game?.state)
   );
 
-  readonly players: Observable<ResolvedGamePlayer[]> = this.select(state => state.game?.slots
+  readonly players: Observable<ResolvedGameSlot[]> = this.select(state => state.game?.slots
     .filter(slot => slot.status.match(/active|waiting for substitute/))
     .map(slot => ({
       ...slot,
@@ -113,7 +113,7 @@ export class GameDetailsStore extends ComponentStore<GameDetailsState> {
     tap((server: GameServer) => this.setServer(server)),
   ));
 
-  private readonly resolvePlayers = this.effect((slots: Observable<GamePlayer[]>) => slots.pipe(
+  private readonly resolvePlayers = this.effect((slots: Observable<GameSlot[]>) => slots.pipe(
     switchMap(_slots => from(_slots)),
     filter(slot => /active|waiting for substitute/.test(slot.status)),
     mergeMap(slot => this.store.select(playerById(slot.player)).pipe(

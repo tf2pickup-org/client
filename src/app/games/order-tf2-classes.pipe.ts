@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { ResolvedGamePlayer } from './models/resolved-game-player';
+import { ResolvedGameSlot } from './models/resolved-game-slot';
 
 /**
  * Orders classes in the game slot list.
@@ -21,7 +21,7 @@ const tf2ClassPriority = {
 })
 export class OrderTf2ClassesPipe implements PipeTransform {
 
-  transform(value: ResolvedGamePlayer[]): ResolvedGamePlayer[] {
+  transform(value: ResolvedGameSlot[]): ResolvedGameSlot[] {
     return value.sort((a, b) => tf2ClassPriority[b.gameClass] - tf2ClassPriority[a.gameClass]);
   }
 
