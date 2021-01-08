@@ -1,3 +1,10 @@
+## [3.2.6](https://github.com/tf2pickup-pl/client/compare/3.2.5...3.2.6) (2021-01-08)
+
+
+### Bug Fixes
+
+* fix 2x game class icon path ([#602](https://github.com/tf2pickup-pl/client/issues/602)) ([c281f8b](https://github.com/tf2pickup-pl/client/commit/c281f8bf12e3708a9959b2889ed5f1395cb8fd94))
+
 ## [3.2.5](https://github.com/tf2pickup-pl/client/compare/3.2.4...3.2.5) (2021-01-07)
 
 
