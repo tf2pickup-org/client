@@ -47,12 +47,5 @@ describe('PlayerEditSkillComponent', () => {
       const gameClassIcon = fixture.debugElement.query(By.css('app-game-class-icon')).componentInstance as GameClassIconComponent;
       expect(gameClassIcon.gameClass).toEqual('soldier');
     });
-
-    it('should set min & max on the input', () => {
-      const el = fixture.debugElement.query(By.css('input[type=number]')).nativeElement as HTMLInputElement;
-      expect(el).toBeTruthy();
-      expect(el.min).not.toBeNull();
-      expect(el.max).not.toBeNull();
-    });
   });
 });
