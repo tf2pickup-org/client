@@ -2,21 +2,27 @@ import { QueueSlot } from './queue/models/queue-slot';
 import { canJoinQueue, awaitsReadyUp } from './selectors';
 
 describe('canJoinQueue', () => {
+  describe('when the user is offline', () => {
+    it('should return false', () => {
+      expect(canJoinQueue.projector(false, true, null, false)).toBe(false);
+    });
+  });
+
   describe('when the user is not logged in', () => {
     it('should return false', () => {
-      expect(canJoinQueue.projector(false, null, false)).toBe(false);
+      expect(canJoinQueue.projector(true, false, null, false)).toBe(false);
     });
   });
 
   describe('when the user has an active game', () => {
     it('should return false', () => {
-      expect(canJoinQueue.projector(true, { }, false)).toBe(false);
+      expect(canJoinQueue.projector(true, true, { }, false)).toBe(false);
     });
   });
 
   describe('when the user has active bans', () => {
     it('should return false', () => {
-      expect(canJoinQueue.projector(true, null, true)).toBe(false);
+      expect(canJoinQueue.projector(true, true, null, true)).toBe(false);
     });
   });
 });
