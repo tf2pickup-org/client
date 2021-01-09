@@ -2,12 +2,10 @@ import { createReducer, on, Action } from '@ngrx/store';
 import { ioConnected, ioDisconnected } from './io.actions';
 
 export interface State {
-  connected: boolean;
+  connected?: boolean;
 }
 
-export const initialState: State = {
-  connected: false,
-};
+export const initialState: State = { };
 
 const ioReducer = createReducer(
   initialState,
