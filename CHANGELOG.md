@@ -1,3 +1,11 @@
+## [3.2.7](https://github.com/tf2pickup-pl/client/compare/3.2.6...3.2.7) (2021-01-09)
+
+
+### Bug Fixes
+
+* add high resolution logo ([#604](https://github.com/tf2pickup-pl/client/issues/604)) ([ebed8a9](https://github.com/tf2pickup-pl/client/commit/ebed8a9dc52bdb810c97adb302048eb2b624f621))
+* remove skill range restrictions ([#603](https://github.com/tf2pickup-pl/client/issues/603)) ([d76bd78](https://github.com/tf2pickup-pl/client/commit/d76bd7898ca4f078d831837db67d3c60a50bc1cb))
+
 ## [3.2.6](https://github.com/tf2pickup-pl/client/compare/3.2.5...3.2.6) (2021-01-08)
 
 
