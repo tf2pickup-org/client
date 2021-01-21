@@ -63,13 +63,13 @@
     "zone.js": "0.11.3"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "0.1100.7",
+    "@angular-devkit/build-angular": "0.1101.0",
     "@angular-eslint/builder": "1.1.0",
     "@angular-eslint/eslint-plugin": "1.1.0",
     "@angular-eslint/eslint-plugin-template": "1.1.0",
     "@angular-eslint/schematics": "1.1.0",
     "@angular-eslint/template-parser": "1.1.0",
-    "@angular/cli": "11.0.7",
+    "@angular/cli": "11.1.0",
     "@angular/compiler-cli": "11.1.0",
     "@angular/language-service": "11.1.0",
     "@ngrx/schematics": "10.1.2",
@@ -100,6 +100,7 @@
     "karma-spec-reporter": "0.0.32",
     "ng-mocks": "11.4.0",
     "protractor": "7.0.0",
+    "postcss": "8.2.4",
     "release-it": "14.2.2",
     "stylelint": "13.9.0",
     "stylelint-config-sass-guidelines": "7.1.0",
