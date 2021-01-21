@@ -100,6 +100,7 @@
     "karma-spec-reporter": "0.0.32",
     "ng-mocks": "11.4.0",
     "protractor": "7.0.0",
+    "postcss": "8.2.4",
     "release-it": "14.2.2",
     "stylelint": "13.9.0",
     "stylelint-config-sass-guidelines": "7.1.0",
