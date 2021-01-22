@@ -152,7 +152,14 @@
                   "input": "src/assets/custom/tf2pickup.es",
                   "output": "/assets/"
                 }
-              ]
+              ],
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "node_modules",
+                  "src/styles",
+                  "src/styles/themes/tf2pickup.es"
+                ]
+              }
             }
           }
         },
