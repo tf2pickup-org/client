@@ -160,18 +160,40 @@
                   "src/styles/themes/tf2pickup.es"
                 ]
               }
+            },
+            "tf2pickup.fr": {
+              "assets": [
+                {
+                  "glob": "**/*",
+                  "input": "src/assets/",
+                  "output": "/assets/",
+                  "ignore": [
+                    "custom/**/*"
+                  ]
+                },
+                {
+                  "glob": "favicon.ico",
+                  "input": "src/assets/custom/tf2pickup.fr",
+                  "output": "/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/assets/custom/tf2pickup.fr",
+                  "output": "/assets/"
+                }
+              ]
             }
           }
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "tf2pickuppl:build",
+            "browserTarget": "tf2pickuppl:build:tf2pickup.fr",
             "proxyConfig": "proxy.conf.json"
           },
           "configurations": {
             "production": {
-              "browserTarget": "tf2pickuppl:build:production"
+              "browserTarget": "tf2pickuppl:build:production:tf2pickup.fr"
             }
           }
         },
