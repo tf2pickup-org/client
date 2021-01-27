@@ -1,0 +1,7 @@
+<div class="surface surface--white">
+  <div class="mdc-typography--headline6 mb-3">Map pool</div>
+
+  <div *ngFor="let map of store.maps | async">
+    <app-map-edit [map]="map"></app-map-edit>
+  </div>
+</div>

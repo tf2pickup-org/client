@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-configuration',
@@ -6,11 +6,8 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   styleUrls: ['./configuration.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ConfigurationComponent implements OnInit {
+export class ConfigurationComponent {
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }

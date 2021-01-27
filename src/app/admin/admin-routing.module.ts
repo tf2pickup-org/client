@@ -8,7 +8,7 @@ const routes: Routes = [
     path: 'configuration',
     component: ConfigurationComponent,
     data: { title: 'configuration' },
-    canActivate: [ IsAdminGuard ],
+    // canActivate: [ IsAdminGuard ],
   },
 ];
 
