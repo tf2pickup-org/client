@@ -1,7 +1,19 @@
 <div class="surface surface--white">
   <div class="mdc-typography--headline6 mb-3">Map pool</div>
 
-  <div *ngFor="let map of store.maps | async">
-    <app-map-edit [map]="map"></app-map-edit>
-  </div>
+  <form [formGroup]="form">
+    <ng-container formArrayName="maps">
+      <div *ngFor="let map of maps.controls; index as i">
+        <app-map-edit
+          [mapControl]="map"
+          (remove)="remove(i)"></app-map-edit>
+      </div>
+    </ng-container>
+
+    <button class="mdc-button mdc-button--raised mx-2 my-2" (click)="add()">
+      <span class="mdc-button__ripple"></span>
+      <i-feather name="plus" class="mdc-button__icon" aria-hidden="true"></i-feather>
+      <span class="mdc-button__label">Add map</span>
+    </button>
+  </form>
 </div>

@@ -6,6 +6,7 @@ import { MapPoolEditComponent } from './map-pool-edit/map-pool-edit.component';
 import { MapEditComponent } from './map-edit/map-edit.component';
 import { IconsModule } from '@app/icons/icons.module';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
   imports: [
     CommonModule,
     TooltipModule,
+    ReactiveFormsModule,
 
     IconsModule,
 

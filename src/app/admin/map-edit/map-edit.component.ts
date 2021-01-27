@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, Input, ViewChild, ElementRef, OnDestroy, Output, EventEmitter } from '@angular/core';
-import { Map } from '@app/queue/models/map';
+import { FormGroup } from '@angular/forms';
 import { MDCTextField } from '@material/textfield';
 
 @Component({
@@ -11,29 +11,32 @@ import { MDCTextField } from '@material/textfield';
 export class MapEditComponent implements OnDestroy {
 
   @ViewChild('mapName')
-  set mapNameInput(mapNameInput: ElementRef) {
-    if (mapNameInput) {
+  set mapNameControl(mapNameControl: ElementRef) {
+    if (mapNameControl) {
       if (this.mapNameField) {
         this.mapNameField.destroy();
       }
 
-      this.mapNameField = new MDCTextField(mapNameInput.nativeElement)
+      this.mapNameField = new MDCTextField(mapNameControl.nativeElement)
     }
   }
 
   @ViewChild('execConfig')
-  set execConfigInput(execConfigInput: ElementRef) {
-    if (execConfigInput) {
+  set execConfigControl(execConfigControl: ElementRef) {
+    if (execConfigControl) {
       if (this.execConfigField) {
         this.execConfigField.destroy();
       }
 
-      this.execConfigField = new MDCTextField(execConfigInput.nativeElement)
+      this.execConfigField = new MDCTextField(execConfigControl.nativeElement)
     }
   }
 
+  @ViewChild('mapNameInput')
+  mapNameInput: ElementRef;
+
   @Input()
-  map: Map;
+  mapControl: FormGroup;
 
   @Output()
   remove = new EventEmitter<void>();
@@ -49,6 +52,10 @@ export class MapEditComponent implements OnDestroy {
     if (this.execConfigField) {
       this.execConfigField.destroy();
     }
+  }
+
+  focus() {
+    this.mapNameInput?.nativeElement.focus();
   }
 
 }
