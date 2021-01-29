@@ -1,14 +1,21 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { IsAdminGuard } from '@app/auth/is-admin.guard';
-import { ConfigurationComponent } from './configuration/configuration.component';
+import { AdminItemListComponent } from './admin-item-list/admin-item-list.component';
+import { MapPoolEditComponent } from './map-pool-edit/map-pool-edit.component';
 
 const routes: Routes = [
   {
-    path: 'configuration',
-    component: ConfigurationComponent,
-    data: { title: 'configuration' },
+    path: '',
+    pathMatch: 'full',
+    component: AdminItemListComponent,
+    data: { title: 'admin panel' },
     // canActivate: [ IsAdminGuard ],
+  },
+  {
+    path: 'map-pool',
+    component: MapPoolEditComponent,
+    data: { title: 'map pool configuration' },
   },
 ];
 

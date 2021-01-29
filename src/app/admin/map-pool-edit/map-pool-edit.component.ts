@@ -1,6 +1,6 @@
-import { Component, ChangeDetectionStrategy, OnInit, ChangeDetectorRef, ViewChildren, QueryList } from '@angular/core';
-import { FormArray, FormBuilder } from '@angular/forms';
-import { filter, take } from 'rxjs/operators';
+import { Component, ChangeDetectionStrategy, OnInit, ChangeDetectorRef, ViewChildren, QueryList, OnDestroy } from '@angular/core';
+import { FormArray, FormBuilder, Validators } from '@angular/forms';
+import { filter, skip, take } from 'rxjs/operators';
 import { MapEditComponent } from '../map-edit/map-edit.component';
 import { MapPoolStore } from './map-pool.store';
 
@@ -32,11 +32,9 @@ export class MapPoolEditComponent implements OnInit {
       take(1),
     ).subscribe(maps => {
       // ayayay map maps
-      this.form.setControl('maps', this.formBuilder.array(maps.map(map => this.formBuilder.group({ name: map.name, execConfig: map.execConfig }))));
+      this.form.setControl('maps', this.formBuilder.array(maps.map(map => this.createMapFromGroup(map))));
       this.changeDetector.markForCheck();
     });
-
-    this.form.valueChanges.subscribe(value => console.log(value));
 
     this.store.loadMaps();
   }
@@ -47,6 +45,7 @@ export class MapPoolEditComponent implements OnInit {
 
   remove(i: number) {
     this.maps.removeAt(i);
+    this.form.markAsDirty();
   }
 
   add() {
@@ -55,7 +54,26 @@ export class MapPoolEditComponent implements OnInit {
     ).subscribe((compoents: QueryList<MapEditComponent>) => {
       compoents.last.focus();
     });
-    this.maps.push(this.formBuilder.group({ name: null, execConfig: null }));
+    this.maps.push(this.createMapFromGroup());
+    this.form.markAsDirty();
+  }
+
+  save() {
+    this.store.maps.pipe(
+      skip(1),
+      take(1),
+    ).subscribe(maps => {
+      this.maps.reset(maps);
+    });
+
+    this.store.save(this.maps.value);
+  }
+
+  private createMapFromGroup({ name, execConfig }: { name: string, execConfig?: string } = { name: null, execConfig: null }) {
+    return this.formBuilder.group({
+      name: [ name, Validators.required ],
+      execConfig: [ execConfig, Validators.pattern(/^\w*$/) ],
+    });
   }
 
 }

@@ -1,0 +1,38 @@
+@use 'sass:color';
+@use 'components/surface';
+@use 'theme';
+
+.list-item {
+  @include surface.make;
+  @include surface.shadow;
+  @include surface.ripple;
+  @include surface.fill-color(theme.$surface);
+  @include surface.ink-color(theme.$on-surface);
+
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+
+  padding: 1rem 1.5rem;
+  margin: 1.5rem 0;
+
+  &__content {
+    flex: 1 1 auto;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+
+    &__link {
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+  }
+
+  &__chevron {
+    color: color.adjust(#fff, $lightness: -40%);
+  }
+
+  &:hover {
+    text-decoration: none;
+  }
+}

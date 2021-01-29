@@ -47,4 +47,8 @@ export class QueueService {
     return this.http.get<Map[]>(`${this.apiUrl}/queue/maps`);
   }
 
+  setMaps(maps: Map[]): Observable<Map[]> {
+    return this.http.put<Map[]>(`${this.apiUrl}/queue/maps`, maps);
+  }
+
 }
