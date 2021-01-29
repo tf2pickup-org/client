@@ -71,4 +71,21 @@ describe('QueueService', () => {
       expect(socketStub.call).toHaveBeenCalledWith('mark friend', { friendPlayerId: 'FAKE_ID' });
     }));
   });
+
+  describe('#fetchMaps()', () => {
+    it('should call the endpoint', inject([QueueService], (service: QueueService) => {
+      service.fetchMaps().subscribe();
+      httpController.expectOne('FAKE_URL/queue/maps');
+      expect().nothing();
+    }));
+  });
+
+  describe('#setMaps()', () => {
+    it('should call the endpoint', inject([QueueService], (service: QueueService) => {
+      service.setMaps([{ name: 'cp_process_final', execConfig: 'etf2l_6v6_5cp' }]).subscribe();
+      const request = httpController.expectOne('FAKE_URL/queue/maps');
+      expect(request.request.method).toEqual('PUT');
+      expect(request.request.body).toEqual([{ name: 'cp_process_final', execConfig: 'etf2l_6v6_5cp' }]);
+    }));
+  });
 });
