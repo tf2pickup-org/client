@@ -6,12 +6,14 @@ import { SharedModule } from '@app/shared/shared.module';
 import { FooterComponent } from './footer/footer.component';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { TitleControllerComponent } from './title-controller/title-controller.component';
+import { OfflineStateBannerComponent } from './offline-state-banner/offline-state-banner.component';
 
 @NgModule({
   declarations: [
     NavigationBarComponent,
     FooterComponent,
     TitleControllerComponent,
+    OfflineStateBannerComponent,
   ],
   imports: [
     CommonModule,
@@ -24,6 +26,7 @@ import { TitleControllerComponent } from './title-controller/title-controller.co
     NavigationBarComponent,
     FooterComponent,
     TitleControllerComponent,
+    OfflineStateBannerComponent,
   ],
 })
 export class CoreModule { }

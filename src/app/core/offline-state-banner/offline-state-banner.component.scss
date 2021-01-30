@@ -1,0 +1,21 @@
+@use 'components/surface';
+@use 'theme';
+
+.offline-state-banner {
+  @include surface.make;
+  @include surface.shadow;
+  @include surface.fill-color(theme.$error);
+  @include surface.ink-color(theme.$on-secondary);
+
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  align-items: center;
+
+  max-width: 1400px;
+  margin: 1rem auto;
+
+  &__content {
+    padding: 0.5rem;
+  }
+}

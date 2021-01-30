@@ -1,0 +1,6 @@
+<div *ngIf="(ioConnected | async) === false"
+  class="offline-state-banner">
+  <div class="offline-state-banner__content">
+    You have disconnected from the server.
+  </div>
+</div>
