@@ -6,6 +6,7 @@ import { API_URL } from '@app/api-url';
 import { QueueSlot } from './models/queue-slot';
 import { Friendship } from './models/friendship';
 import { Socket } from '@app/io/socket';
+import { Map } from './models/map';
 
 @Injectable({
   providedIn: 'root'
@@ -40,6 +41,14 @@ export class QueueService {
 
   markFriend(friendPlayerId: string): Observable<Friendship[]> {
     return this.socket.call<Friendship[]>('mark friend', { friendPlayerId });
+  }
+
+  fetchMaps(): Observable<Map[]> {
+    return this.http.get<Map[]>(`${this.apiUrl}/queue/maps`);
+  }
+
+  setMaps(maps: Map[]): Observable<Map[]> {
+    return this.http.put<Map[]>(`${this.apiUrl}/queue/maps`, maps);
   }
 
 }
