@@ -9,13 +9,20 @@ const routes: Routes = [
     path: '',
     pathMatch: 'full',
     component: AdminItemListComponent,
-    data: { title: 'admin panel' },
-    // canActivate: [ IsAdminGuard ],
+    data: {
+      title: 'admin panel',
+      animation: 'AdminItemListPage',
+    },
+    canActivate: [ IsAdminGuard ],
   },
   {
     path: 'map-pool',
     component: MapPoolEditComponent,
-    data: { title: 'map pool configuration' },
+    data: {
+      title: 'map pool configuration',
+      animation: 'MapPoolEditPage',
+    },
+    canActivate: [ IsAdminGuard ],
   },
 ];
 
