@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, OnInit, ChangeDetectorRef, ViewChildren, QueryList, OnDestroy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit, ChangeDetectorRef, ViewChildren, QueryList } from '@angular/core';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { filter, skip, take } from 'rxjs/operators';
 import { MapEditComponent } from '../map-edit/map-edit.component';

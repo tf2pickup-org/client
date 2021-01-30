@@ -1,21 +1,18 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { FeatherComponent } from 'angular-feather';
+import { MockBuilder, MockedComponentFixture, MockRender } from 'ng-mocks';
 import { MapEditComponent } from './map-edit.component';
 
-describe('MapEditComponent', () => {
+describe(MapEditComponent.name, () => {
   let component: MapEditComponent;
-  let fixture: ComponentFixture<MapEditComponent>;
+  let fixture: MockedComponentFixture<MapEditComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ MapEditComponent ]
-    })
-    .compileComponents();
-  });
+  beforeEach(() => MockBuilder(MapEditComponent)
+    .mock(FeatherComponent)
+  );
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MapEditComponent);
-    component = fixture.componentInstance;
+    fixture = MockRender(MapEditComponent);
+    component = fixture.point.componentInstance;
     fixture.detectChanges();
   });
 
