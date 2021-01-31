@@ -22,8 +22,6 @@ import { GamesModule } from '@app/games/games.module';
 import { SteamProfileLinkPipe } from './steam-profile-link.pipe';
 import { Etf2lProfileLinkPipe } from './etf2l-profile-link.pipe';
 import { LogsTfProfileLinkPipe } from './logs-tf-profile-link.pipe';
-import { SkillTableComponent } from './skill-table/skill-table.component';
-import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { TwitchTvProfileLinkPipe } from './twitch-tv-profile-link.pipe';
 import { SharedModule } from '@app/shared/shared.module';
 import { PlayerDetailsHeaderComponent } from './player-details-header/player-details-header.component';
@@ -51,7 +49,6 @@ import { EditPlayerRolesComponent } from './edit-player-roles/edit-player-roles.
     SteamProfileLinkPipe,
     Etf2lProfileLinkPipe,
     LogsTfProfileLinkPipe,
-    SkillTableComponent,
     TwitchTvProfileLinkPipe,
     PlayerDetailsHeaderComponent,
     PlayerDetailsGameListComponent,
@@ -69,7 +66,6 @@ import { EditPlayerRolesComponent } from './edit-player-roles/edit-player-roles.
     EffectsModule.forFeature([PlayerEffects]),
     TooltipModule,
     InlineSVGModule,
-    NgxDatatableModule,
     NgxPaginationModule,
 
     GamesModule,
