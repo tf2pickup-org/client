@@ -24,7 +24,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
 
     - name: Install Chrome
-      uses: nanasess/setup-chromedriver@v1.0.4
+      uses: nanasess/setup-chromedriver@v1.0.5
 
     - name: Install dependencies
       run: npm install
