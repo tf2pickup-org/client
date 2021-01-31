@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { IsAdminGuard } from '@app/auth/is-admin.guard';
 import { AdminItemListComponent } from './admin-item-list/admin-item-list.component';
 import { MapPoolEditComponent } from './map-pool-edit/map-pool-edit.component';
+import { PlayerSkillTableComponent } from './player-skill-table/player-skill-table.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,14 @@ const routes: Routes = [
       animation: 'MapPoolEditPage',
     },
     canActivate: [ IsAdminGuard ],
+  },
+  {
+    path: 'player-skill-table',
+    component: PlayerSkillTableComponent,
+    data: {
+      title: 'player skill table',
+      animation: 'PlayerSkillTable',
+    },
   },
 ];
 
