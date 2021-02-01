@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
-import { PlayersService } from '../players.service';
-import { Player } from '../models/player';
-import { PlayerSkill } from '../models/player-skill';
+import { PlayersService } from '@app/players/players.service';
+import { Player } from '@app/players/models/player';
+import { PlayerSkill } from '@app/players/models/player-skill';
 import { map, tap } from 'rxjs/operators';
 import { forkJoin, Observable } from 'rxjs';
 import { keyBy } from 'lodash';
@@ -21,7 +21,7 @@ const initialState: SkillTableState = {
 };
 
 @Injectable()
-export class SkillTableStore extends ComponentStore<SkillTableState> {
+export class PlayerSkillTableStore extends ComponentStore<SkillTableState> {
 
   players: Observable<PlayerRow[]> = this.select(state => state.skills.map(s => ({
     ...s.skill,

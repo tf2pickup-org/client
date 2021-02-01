@@ -77,7 +77,7 @@ describe('FooterComponent', () => {
 
   describe('admin-only links', () => {
     it('should not be rendered', () => {
-      expect(fixture.debugElement.query(By.css('a[href="/player-skill-dump"]'))).toBeNull();
+      expect(fixture.debugElement.query(By.css('a[href="/admin"]'))).toBeNull();
     });
 
     it('should be rendered if the current user is admin', () => {
@@ -85,7 +85,7 @@ describe('FooterComponent', () => {
       store.refreshState();
       fixture.detectChanges();
 
-      expect(fixture.debugElement.query(By.css('a[href="/player-skill-dump"]'))).toBeTruthy();
+      expect(fixture.debugElement.query(By.css('a[href="/admin"]'))).toBeTruthy();
     });
   });
 });

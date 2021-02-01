@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { SkillTableComponent } from './skill-table.component';
+import { PlayerSkillTableComponent } from './player-skill-table.component';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
-import { PlayersService } from '../players.service';
+import { PlayersService } from '@app/players/players.service';
 import { MockComponent } from 'ng-mocks';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { queueConfig } from '@app/queue/queue.selectors';
@@ -9,8 +9,8 @@ import { By } from '@angular/platform-browser';
 import { Subject } from 'rxjs';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { first } from 'rxjs/operators';
-import { Player } from '../models/player';
-import { PlayerSkill } from '../models/player-skill';
+import { Player } from '@app/players/models/player';
+import { PlayerSkill } from '@app/players/models/player-skill';
 import { QueueConfig } from '@app/queue/models/queue-config';
 import { Tf2ClassName } from '@app/shared/models/tf2-class-name';
 
@@ -62,9 +62,9 @@ const allPlayerSkills = [
   },
 ];
 
-describe('SkillTableComponent', () => {
-  let component: SkillTableComponent;
-  let fixture: ComponentFixture<SkillTableComponent>;
+describe(PlayerSkillTableComponent.name, () => {
+  let component: PlayerSkillTableComponent;
+  let fixture: ComponentFixture<PlayerSkillTableComponent>;
   let store: MockStore;
   let playersService: jasmine.SpyObj<PlayersService>;
   let datatable: DatatableComponent;
@@ -83,7 +83,7 @@ describe('SkillTableComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [
-        SkillTableComponent,
+        PlayerSkillTableComponent,
         MockComponent(DatatableComponent),
       ],
       providers: [
@@ -92,7 +92,7 @@ describe('SkillTableComponent', () => {
       ],
     })
     // https://github.com/angular/angular/issues/12313
-    .overrideComponent(SkillTableComponent, { set: { changeDetection: ChangeDetectionStrategy.Default } })
+    .overrideComponent(PlayerSkillTableComponent, { set: { changeDetection: ChangeDetectionStrategy.Default } })
     .compileComponents();
   }));
 
@@ -101,7 +101,7 @@ describe('SkillTableComponent', () => {
     store.overrideSelector(queueConfig, config);
     store.refreshState();
 
-    fixture = TestBed.createComponent(SkillTableComponent);
+    fixture = TestBed.createComponent(PlayerSkillTableComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
 

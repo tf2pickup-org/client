@@ -8,17 +8,21 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '@app/shared/shared.module';
 import { AdminItemListComponent } from './admin-item-list/admin-item-list.component';
+import { PlayerSkillTableComponent } from './player-skill-table/player-skill-table.component';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 @NgModule({
   declarations: [
     MapPoolEditComponent,
     MapEditComponent,
     AdminItemListComponent,
+    PlayerSkillTableComponent,
   ],
   imports: [
     CommonModule,
     TooltipModule,
     ReactiveFormsModule,
+    NgxDatatableModule,
 
     IconsModule,
     SharedModule,
