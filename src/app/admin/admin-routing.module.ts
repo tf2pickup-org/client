@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { IsAdminGuard } from '@app/auth/is-admin.guard';
 import { AdminItemListComponent } from './admin-item-list/admin-item-list.component';
+import { ForceCreatePlayerAccountComponent } from './force-create-player-account/force-create-player-account.component';
 import { MapPoolEditComponent } from './map-pool-edit/map-pool-edit.component';
 import { PlayerSkillTableComponent } from './player-skill-table/player-skill-table.component';
 
@@ -30,8 +31,18 @@ const routes: Routes = [
     component: PlayerSkillTableComponent,
     data: {
       title: 'player skill table',
-      animation: 'PlayerSkillTable',
+      animation: 'PlayerSkillTablePage',
     },
+    canActivate: [ IsAdminGuard ],
+  },
+  {
+    path: 'force-create-player-account',
+    component: ForceCreatePlayerAccountComponent,
+    data: {
+      title: 'force create player account',
+      animation: 'ForceCreatePlayerAccountPage',
+    },
+    canActivate: [ IsAdminGuard ],
   },
 ];
 

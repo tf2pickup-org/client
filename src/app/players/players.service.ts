@@ -87,4 +87,8 @@ export class PlayersService {
     );
   }
 
+  forceCreatePlayer(player: Partial<Player>) {
+    return this.http.post<Player>(`${this.apiUrl}/players`, player);
+  }
+
 }
