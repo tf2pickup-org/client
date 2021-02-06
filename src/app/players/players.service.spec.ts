@@ -184,4 +184,13 @@ describe('PlayersService', () => {
       });
     }));
   });
+
+  describe('#forceCreatePlayer()', () => {
+    it('should post the new player', inject([PlayersService], (service: PlayersService) => {
+      service.forceCreatePlayer({ name: 'FAKE_PLAYER_NAME', steamId: 'FAKE_STEAM_ID' }).subscribe();
+      const req = httpContoller.expectOne('FAKE_URL/players');
+      expect(req.request.method).toBe('POST');
+      expect(req.request.body).toEqual({ name: 'FAKE_PLAYER_NAME', steamId: 'FAKE_STEAM_ID' });
+    }));
+  });
 });

@@ -10,6 +10,7 @@ import { SharedModule } from '@app/shared/shared.module';
 import { AdminItemListComponent } from './admin-item-list/admin-item-list.component';
 import { PlayerSkillTableComponent } from './player-skill-table/player-skill-table.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { ForceCreatePlayerAccountComponent } from './force-create-player-account/force-create-player-account.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     MapEditComponent,
     AdminItemListComponent,
     PlayerSkillTableComponent,
+    ForceCreatePlayerAccountComponent,
   ],
   imports: [
     CommonModule,
