@@ -1,3 +1,31 @@
+# [3.3.0](https://github.com/tf2pickup-pl/client/compare/3.2.7...3.3.0) (2021-02-06)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @angular/cdk to v11.1.2 ([#668](https://github.com/tf2pickup-pl/client/issues/668)) ([dcc0d10](https://github.com/tf2pickup-pl/client/commit/dcc0d10f3465e2b011af9c4a272953fec021e1f0))
+* move skill table to admin panel ([#657](https://github.com/tf2pickup-pl/client/issues/657)) ([3b6bace](https://github.com/tf2pickup-pl/client/commit/3b6baceb021a990994e36347687ae7cd32a1eaed))
+* **deps:** update angular monorepo to v11.0.8 ([#609](https://github.com/tf2pickup-pl/client/issues/609)) ([1c648fb](https://github.com/tf2pickup-pl/client/commit/1c648fbab33d162bf602e30114ebf1a4cea8a7e4))
+* **deps:** update angular monorepo to v11.0.9 ([#613](https://github.com/tf2pickup-pl/client/issues/613)) ([c275dde](https://github.com/tf2pickup-pl/client/commit/c275dde2dec2ef0ddefeafd06eceab77265d6ef6))
+* **deps:** update angular monorepo to v11.1.0 ([#636](https://github.com/tf2pickup-pl/client/issues/636)) ([b79a85d](https://github.com/tf2pickup-pl/client/commit/b79a85d757c90826da1a04c5ef4e86aa17ce7304))
+* **deps:** update angular monorepo to v11.1.1 ([#652](https://github.com/tf2pickup-pl/client/issues/652)) ([97be68c](https://github.com/tf2pickup-pl/client/commit/97be68c5c69e574c4bd32aba1c93f7aa5354f700))
+* **deps:** update dependency @angular/cdk to v11.0.4 ([#621](https://github.com/tf2pickup-pl/client/issues/621)) ([905e9aa](https://github.com/tf2pickup-pl/client/commit/905e9aa3725fec1875321bbb7342d9ce2f079a10))
+* **deps:** update dependency @angular/cdk to v11.1.0 ([#637](https://github.com/tf2pickup-pl/client/issues/637)) ([f8459f6](https://github.com/tf2pickup-pl/client/commit/f8459f6bd844d728992d1cdbd7fead22fff82503))
+* **deps:** update dependency @angular/cdk to v11.1.1 ([#651](https://github.com/tf2pickup-pl/client/issues/651)) ([0e00e4f](https://github.com/tf2pickup-pl/client/commit/0e00e4fafdd1ee2c3f3d80b4ff48693e14ef4b4a))
+* **deps:** update dependency bootstrap to v4.6.0 ([#630](https://github.com/tf2pickup-pl/client/issues/630)) ([0f48c8c](https://github.com/tf2pickup-pl/client/commit/0f48c8c0f02ce20adb56e16675087d5ad8a557f8))
+
+
+### Features
+
+* force create player account ([#672](https://github.com/tf2pickup-pl/client/issues/672)) ([748298d](https://github.com/tf2pickup-pl/client/commit/748298dee317c26071fd1bc415cca1a9923e5eaf))
+* handle offline state ([#606](https://github.com/tf2pickup-pl/client/issues/606)) ([ff49dea](https://github.com/tf2pickup-pl/client/commit/ff49deaa0e03ac950f69114a3fa0fa4b8baf9c93))
+* map pool configuration ([#656](https://github.com/tf2pickup-pl/client/issues/656)) ([e153587](https://github.com/tf2pickup-pl/client/commit/e153587a78960abea11ef2476a6b99f353292adf))
+
+
+### Performance Improvements
+
+* optimize images ([#605](https://github.com/tf2pickup-pl/client/issues/605)) ([6d44a68](https://github.com/tf2pickup-pl/client/commit/6d44a6833a238ebd1d44121c5151a49a27f59911))
+
 ## [3.2.7](https://github.com/tf2pickup-pl/client/compare/3.2.6...3.2.7) (2021-01-09)
 
 
