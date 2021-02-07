@@ -1,3 +1,11 @@
+## [3.3.1](https://github.com/tf2pickup-pl/client/compare/3.3.0...3.3.1) (2021-02-07)
+
+
+### Bug Fixes
+
+* new ux support for tf2pickup.es ([#679](https://github.com/tf2pickup-pl/client/issues/679)) ([95036c0](https://github.com/tf2pickup-pl/client/commit/95036c0f1d26f00c58490c52c4187a98165ef7fc))
+* **deps:** update angular monorepo to v11.1.2 ([#667](https://github.com/tf2pickup-pl/client/issues/667)) ([cd50a41](https://github.com/tf2pickup-pl/client/commit/cd50a4177c10b09c93309f28c679748552543246))
+
 # [3.3.0](https://github.com/tf2pickup-pl/client/compare/3.2.7...3.3.0) (2021-02-06)
 
 
