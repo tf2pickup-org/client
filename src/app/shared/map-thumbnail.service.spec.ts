@@ -37,6 +37,8 @@ describe('MapThumbnailService', () => {
       'cp_metalworks',
       'koth_lakeside_final',
       'pl_summercoast_rc8d',
+      'cp_logjam_rc11',
+      'koth_ashville_rc2c',
     ].forEach(map => it(`should return valid thumbnail for ${map}`, inject([MapThumbnailService], (service: MapThumbnailService) => {
       const thumbnail = service.getMapThumbnail(map);
       expect(thumbnail).toBeTruthy();
