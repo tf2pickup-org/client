@@ -1,3 +1,15 @@
+## [3.3.3](https://github.com/tf2pickup-pl/client/compare/3.3.2...3.3.3) (2021-02-08)
+
+
+### Bug Fixes
+
+* add missing map thumbnails ([#684](https://github.com/tf2pickup-pl/client/issues/684)) ([fce6ed2](https://github.com/tf2pickup-pl/client/commit/fce6ed2b4e5162b756dca4c8d860f3e06c677d25))
+
+
+### Performance Improvements
+
+* optimize images ([#683](https://github.com/tf2pickup-pl/client/issues/683)) ([5d6f8aa](https://github.com/tf2pickup-pl/client/commit/5d6f8aa6f05cf6a8619c8cd5baac30e4dfd7478f))
+
 ## [3.3.2](https://github.com/tf2pickup-pl/client/compare/3.3.1...3.3.2) (2021-02-08)
 
 
