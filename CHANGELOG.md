@@ -1,3 +1,15 @@
+## [3.3.2](https://github.com/tf2pickup-pl/client/compare/3.3.1...3.3.2) (2021-02-08)
+
+
+### Bug Fixes
+
+* add ashville & logjam thumbnails ([#682](https://github.com/tf2pickup-pl/client/issues/682)) ([e9cfd38](https://github.com/tf2pickup-pl/client/commit/e9cfd381f232955118536b88e9ad1bbd5d167ca8))
+
+
+### Performance Improvements
+
+* optimize images ([#680](https://github.com/tf2pickup-pl/client/issues/680)) ([2e3f026](https://github.com/tf2pickup-pl/client/commit/2e3f0261ed627a8508aee3db0102ad3dad788c0f))
+
 ## [3.3.1](https://github.com/tf2pickup-pl/client/compare/3.3.0...3.3.1) (2021-02-07)
 
 
