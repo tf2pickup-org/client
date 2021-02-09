@@ -162,6 +162,12 @@
               }
             },
             "tf2pickup.fr": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/tf2pickup.fr.ts"
+                }
+              ],
               "assets": [
                 {
                   "glob": "**/*",
