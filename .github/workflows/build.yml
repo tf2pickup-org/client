@@ -10,7 +10,7 @@ jobs:
 
     strategy:
       matrix:
-        branding: [ tf2pickup.pl, hl.tf2pickup.pl, tf2pickup.es ]
+        branding: [ tf2pickup.pl, hl.tf2pickup.pl, tf2pickup.es, tf2pickup.fr ]
 
     steps:
       - name: Checkout repository
