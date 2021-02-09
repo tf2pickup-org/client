@@ -160,6 +160,34 @@
                   "src/styles/themes/tf2pickup.es"
                 ]
               }
+            },
+            "tf2pickup.fr": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/tf2pickup.fr.ts"
+                }
+              ],
+              "assets": [
+                {
+                  "glob": "**/*",
+                  "input": "src/assets/",
+                  "output": "/assets/",
+                  "ignore": [
+                    "custom/**/*"
+                  ]
+                },
+                {
+                  "glob": "favicon.ico",
+                  "input": "src/assets/custom/tf2pickup.fr",
+                  "output": "/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/assets/custom/tf2pickup.fr",
+                  "output": "/assets/"
+                }
+              ]
             }
           }
         },
