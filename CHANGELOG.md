@@ -1,3 +1,10 @@
+# [3.4.0](https://github.com/tf2pickup-pl/client/compare/3.3.3...3.4.0) (2021-02-09)
+
+
+### Features
+
+* tf2pickup.fr branding ([#688](https://github.com/tf2pickup-pl/client/issues/688)) ([2b617b1](https://github.com/tf2pickup-pl/client/commit/2b617b13dfd59c5c2e78d2348f4b6adf2c4c7dd1))
+
 ## [3.3.3](https://github.com/tf2pickup-pl/client/compare/3.3.2...3.3.3) (2021-02-08)
 
 
