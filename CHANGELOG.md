@@ -1,3 +1,10 @@
+## [3.4.2](https://github.com/tf2pickup-pl/client/compare/3.4.1...3.4.2) (2021-02-10)
+
+
+### Bug Fixes
+
+* add tf2pickup.fr RULES.md ([#695](https://github.com/tf2pickup-pl/client/issues/695)) ([8037be3](https://github.com/tf2pickup-pl/client/commit/8037be33b85d2ae0c5e1520039ae428a7a64f40d))
+
 ## [3.4.1](https://github.com/tf2pickup-pl/client/compare/3.4.0...3.4.1) (2021-02-10)
 
 
