@@ -1,3 +1,12 @@
+## [3.4.3](https://github.com/tf2pickup-pl/client/compare/3.4.2...3.4.3) (2021-02-10)
+
+
+### Bug Fixes
+
+* bump copyright year ([#697](https://github.com/tf2pickup-pl/client/issues/697)) ([9050432](https://github.com/tf2pickup-pl/client/commit/9050432da8184c235638dd165c15e5ea8c59b421))
+* make french rules etf2l link clickable ([#699](https://github.com/tf2pickup-pl/client/issues/699)) ([6822ba5](https://github.com/tf2pickup-pl/client/commit/6822ba5a687ed3d423e9b4b2d7d129682abd40ca))
+* tf2pickup.fr title suffix ([#696](https://github.com/tf2pickup-pl/client/issues/696)) ([fca3b32](https://github.com/tf2pickup-pl/client/commit/fca3b32ee73bb1d37f6b0429c168266b90c11fcf))
+
 ## [3.4.2](https://github.com/tf2pickup-pl/client/compare/3.4.1...3.4.2) (2021-02-10)
 
 
