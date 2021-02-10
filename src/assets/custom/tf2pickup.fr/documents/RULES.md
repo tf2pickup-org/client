@@ -5,7 +5,7 @@ _tf2pickup.fr_ was created with Team Fortress 2 competitive gameplay in mind.
 
 3. **Mumble est obligatoire**. Ne vous ajoutez pas à la file d'attente du pickup si vous n'avez pas Mumble d'installé et configuré. Assurez vous que votre voix soit clairement audible.
 
-4. Vous ne pouvez pas participer si vous n'avez pas de compte sur le site ETF2L.org ainsi qu'un minimum de 500 heures de jeu.
+4. Vous ne pouvez pas participer si vous n'avez pas de compte sur le site [ETF2L.org](https://etf2l.org/) ainsi qu'un minimum de 500 heures de jeu.
 
 5. Les pickups doivent être pris au sérieux. Le troll et le gaspillage du temps des autres joueurs seront punis.
 
