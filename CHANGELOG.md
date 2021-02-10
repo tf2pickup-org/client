@@ -1,3 +1,16 @@
+## [3.4.1](https://github.com/tf2pickup-pl/client/compare/3.4.0...3.4.1) (2021-02-10)
+
+
+### Bug Fixes
+
+* use populated queue model ([#692](https://github.com/tf2pickup-pl/client/issues/692)) ([0739f66](https://github.com/tf2pickup-pl/client/commit/0739f6691a31f966c740d3bda05a0673da618854))
+* **deps:** update dependency @angular/cdk to v11.2.0 ([#691](https://github.com/tf2pickup-pl/client/issues/691)) ([76ae2ed](https://github.com/tf2pickup-pl/client/commit/76ae2ed82569734036f0c02f524a422b7f947d67))
+
+
+### Performance Improvements
+
+* optimize images ([#689](https://github.com/tf2pickup-pl/client/issues/689)) ([2783cb3](https://github.com/tf2pickup-pl/client/commit/2783cb331d5fb2a14da5f3653bf80fbfc88621db))
+
 # [3.4.0](https://github.com/tf2pickup-pl/client/compare/3.3.3...3.4.0) (2021-02-09)
 
 
