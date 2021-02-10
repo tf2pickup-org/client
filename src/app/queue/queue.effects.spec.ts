@@ -1,11 +1,11 @@
 import { TestBed } from '@angular/core/testing';
 import { QueueEffects } from './queue.effects';
 import { provideMockActions } from '@ngrx/effects/testing';
-import { ReplaySubject, of, throwError, NEVER } from 'rxjs';
+import { ReplaySubject, of, throwError } from 'rxjs';
 import { Action, MemoizedSelector } from '@ngrx/store';
 import { QueueService } from './queue.service';
 import { queueLoaded, loadQueue, joinQueue, joinQueueError, markFriend, mapVoteReset, voteForMap, mapVoted, mapVoteResultsUpdated,
-  queueSlotsUpdated, queueStateUpdated, substituteRequestsUpdated, friendshipsUpdated, readyUp, leaveQueue } from './queue.actions';
+  queueSlotsUpdated, queueStateUpdated, substituteRequestsUpdated, friendshipsUpdated } from './queue.actions';
 import { Queue } from './models/queue';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { QueueSlot } from './models/queue-slot';
@@ -15,9 +15,9 @@ import { Socket } from '@app/io/socket';
 import { EventEmitter } from 'eventemitter3';
 import { isInQueue } from './queue.selectors';
 import { awaitsReadyUp } from '@app/selectors';
-import { QueueReadyUpAction } from './queue-ready-up-dialog/queue-ready-up-dialog.component';
 import { ReadyUpService } from './ready-up.service';
 import { Tf2ClassName } from '@app/shared/models/tf2-class-name';
+import { Player } from '@app/players/models/player';
 
 const queue: Queue = {
   config: {
@@ -35,6 +35,7 @@ const queue: Queue = {
       gameClass: 'soldier',
       ready: false,
       playerId: 'FAKE_ID',
+      player: { id: 'FAKE_ID' } as Player,
     },
     {
       id: 1,
@@ -97,44 +98,82 @@ describe('QueueEffects', () => {
     expect(queueServiceStub.fetchQueue).toHaveBeenCalled();
   });
 
-  it('should handle queue events', () => {
-    const socket = TestBed.inject(Socket);
-    const spy = spyOn(store, 'dispatch');
+  describe('when event happens', () => {
+    const _ = () => new EventEmitter();
+    let socket: ReturnType<typeof _>;
 
-    const slots: QueueSlot[] = [
-      { id: 0, gameClass: 'soldier', playerId: 'FAKE_ID_1', ready: false, },
-      { id: 1, gameClass: 'medic', playerId: 'FAKE_ID_2', ready: true, }
-    ];
+    beforeEach(() => {
+      socket = TestBed.inject(Socket) as unknown as typeof socket;
+      spyOn(store, 'dispatch');
+    });
 
-    // @ts-ignore
-    socket.emit('queue slots update', slots);
-    expect(spy).toHaveBeenCalledWith(queueSlotsUpdated({ slots }));
+    describe('queue slots update', () => {
+      const slots: QueueSlot[] = [
+        { id: 0, gameClass: 'soldier', playerId: 'FAKE_ID_1', ready: false, player: { id: 'FAKE_ID_1' } as Player },
+        { id: 1, gameClass: 'medic', playerId: 'FAKE_ID_2', ready: true, player: { id: 'FAKE_ID_2' } as Player },
+      ];
 
-    // @ts-ignore
-    socket.emit('queue state update', 'waiting');
-    expect(spy).toHaveBeenCalledWith(queueStateUpdated({ queueState: 'waiting' }));
+      beforeEach(() => {
+        socket.emit('queue slots update', slots);
+      });
 
-    const results: MapVoteResult[] = [ { map: 'cp_fake_rc1', voteCount: 5 } ];
-    // @ts-ignore
-    socket.emit('map vote results update', results);
-    expect(spy).toHaveBeenCalledWith(mapVoteResultsUpdated({ results }));
+      it('should be handled', () => {
+        expect(store.dispatch).toHaveBeenCalledWith(queueSlotsUpdated({ slots }));
+      });
+    });
 
-    const substituteRequests = [
-      {
-        gameId: 'FAKE_GAME_ID',
-        gameNumber: 515,
-        gameClass: 'soldier',
-        team: 'BLU'
-      }
-    ];
-    // @ts-ignore
-    socket.emit('substitute requests update', substituteRequests);
-    expect(spy).toHaveBeenCalledWith(substituteRequestsUpdated({ substituteRequests }));
+    describe('queue state update', () => {
+      beforeEach(() => {
+        socket.emit('queue state update', 'waiting');
+      });
 
-    const friendships = [{ sourcePlayerId: 'FAKE_SOURCE', targetPlayerId: 'FAKE_TARGET' }];
-    // @ts-ignore
-    socket.emit('friendships update', friendships);
-    expect(spy).toHaveBeenCalledWith(friendshipsUpdated({ friendships }));
+      it('should be handled', () => {
+        expect(store.dispatch).toHaveBeenCalledWith(queueStateUpdated({ queueState: 'waiting' }));
+      });
+    });
+
+    describe('map vote results update', () => {
+      const results: MapVoteResult[] = [ { map: 'cp_fake_rc1', voteCount: 5 } ];
+
+      beforeEach(() => {
+        socket.emit('map vote results update', results);
+      });
+
+      it('should be handled', () => {
+        expect(store.dispatch).toHaveBeenCalledWith(mapVoteResultsUpdated({ results }));
+      });
+    });
+
+    describe('substitute requests update', () => {
+      const substituteRequests = [
+        {
+          gameId: 'FAKE_GAME_ID',
+          gameNumber: 515,
+          gameClass: 'soldier',
+          team: 'BLU'
+        }
+      ];
+
+      beforeEach(() => {
+        socket.emit('substitute requests update', substituteRequests);
+      });
+
+      it('should be handled', () => {
+        expect(store.dispatch).toHaveBeenCalledWith(substituteRequestsUpdated({ substituteRequests }));
+      });
+    });
+
+    describe('friendships update', () => {
+      const friendships = [{ sourcePlayerId: 'FAKE_SOURCE', targetPlayerId: 'FAKE_TARGET' }];
+
+      beforeEach(() => {
+        socket.emit('friendships update', friendships);
+      });
+
+      it('should be handled', () => {
+        expect(store.dispatch).toHaveBeenCalledWith(friendshipsUpdated({ friendships }));
+      });
+    });
   });
 
   describe('#joinQueue', () => {
