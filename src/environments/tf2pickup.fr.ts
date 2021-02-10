@@ -16,6 +16,6 @@ export const environment = {
     { name: 'discord', target: discordInvitation },
     { name: 'changelog', target: 'https://github.com/tf2pickup-pl/client/blob/master/CHANGELOG.md' },
   ],
-  titleSuffix: 'tf2pickup.es • French Team Fortress 2 Pickup-up games',
+  titleSuffix: 'tf2pickup.fr • French Team Fortress 2 Pickup-up games',
   entryQueue: entryQueue6v6,
 };
