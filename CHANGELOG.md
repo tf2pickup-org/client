@@ -1,3 +1,11 @@
+## [3.4.4](https://github.com/tf2pickup-pl/client/compare/3.4.3...3.4.4) (2021-02-11)
+
+
+### Bug Fixes
+
+* twitch integration card padding ([#702](https://github.com/tf2pickup-pl/client/issues/702)) ([a0379e7](https://github.com/tf2pickup-pl/client/commit/a0379e73915b645b84139124128e415aaa73a5d5))
+* **deps:** update angular monorepo to v11.2.0 ([#700](https://github.com/tf2pickup-pl/client/issues/700)) ([fe96092](https://github.com/tf2pickup-pl/client/commit/fe960923eecbc0e9732b64dffab800cee4d8f96b))
+
 ## [3.4.3](https://github.com/tf2pickup-pl/client/compare/3.4.2...3.4.3) (2021-02-10)
 
 
