@@ -1,28 +1,24 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FooterComponent } from './footer.component';
-import { TokenStoreService } from '@app/auth/token-store.service';
-import { AuthService } from '@app/auth/auth.service';
 import { RouterTestingModule } from '@angular/router/testing';
-import { ChangeDetectionStrategy } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { AppState } from '@app/app.state';
-import { Store, MemoizedSelector } from '@ngrx/store';
-import { isAdmin } from '@app/profile/profile.selectors';
-
-class TokenStoreServiceStub {
-  removeAllTokens() { }
-}
-
-class AuthServiceStub {
-  authenticated: false;
-}
+import { MemoizedSelector } from '@ngrx/store';
+import { isAdmin, isLoggedIn } from '@app/profile/profile.selectors';
+import { AuthService } from '@app/auth/auth.service';
 
 describe('FooterComponent', () => {
   let component: FooterComponent;
   let fixture: ComponentFixture<FooterComponent>;
   let store: MockStore<AppState>;
+  let authService: jasmine.SpyObj<AuthService>;
   let isAdminSelector: MemoizedSelector<AppState, boolean>;
+  let isLoggedInSelector: MemoizedSelector<AppState, boolean>;
+
+  beforeEach(() => {
+    authService = jasmine.createSpyObj<AuthService>(AuthService.name, ['logout']);
+  });
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
@@ -31,19 +27,17 @@ describe('FooterComponent', () => {
         RouterTestingModule,
       ],
       providers: [
-        { provide: TokenStoreService, useClass: TokenStoreServiceStub },
-        { provide: AuthService, useClass: AuthServiceStub },
+        { provide: AuthService, useValue: authService },
         provideMockStore(),
       ]
     })
-    // https://github.com/angular/angular/issues/12313
-    .overrideComponent(FooterComponent, { set: { changeDetection: ChangeDetectionStrategy.Default } })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    store = TestBed.get(Store);
+    store = TestBed.inject(MockStore);
     isAdminSelector = store.overrideSelector(isAdmin, false);
+    isLoggedInSelector = store.overrideSelector(isLoggedIn, false);
 
     fixture = TestBed.createComponent(FooterComponent);
     component = fixture.componentInstance;
@@ -54,37 +48,47 @@ describe('FooterComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should render logout button only if the user is authenticated', () => {
-    component.links = [];
-    fixture.detectChanges();
-    expect(fixture.debugElement.query(By.css('a'))).toBeNull();
-
-    component.isAuthenticated = true;
-    fixture.detectChanges();
-    const el = fixture.debugElement.query(By.css('a')).nativeElement as HTMLAnchorElement;
-    expect(el).toBeTruthy();
-    expect(el.innerText).toBe('logout');
-  });
-
-  describe('logout()', () => {
-    xit('should remove all tokens from the local storage', () => {
-      // todo handle window.location.reload
-      const spy = spyOn(TestBed.get(TokenStoreService), 'removeAllTokens');
-      component.logout();
-      expect(spy).toHaveBeenCalled();
+  describe('when the user is not logged in', () => {
+    it('should not render the logout button', () => {
+      expect(fixture.debugElement.query(By.css('a[logoutButton]'))).toBeFalsy();
     });
   });
 
-  describe('admin-only links', () => {
-    it('should not be rendered', () => {
-      expect(fixture.debugElement.query(By.css('a[href="/admin"]'))).toBeNull();
-    });
+  describe('when the user is logged in', () => {
+    let logoutButton: HTMLElement;
 
-    it('should be rendered if the current user is admin', () => {
-      isAdminSelector.setResult(true);
+    beforeEach(() => {
+      isLoggedInSelector.setResult(true);
       store.refreshState();
       fixture.detectChanges();
 
+      logoutButton = fixture.debugElement.query(By.css('a[logoutButton]')).nativeElement;
+    });
+
+    it('should render the logout button', () => {
+      expect(logoutButton).toBeTruthy();
+    });
+
+    describe('when the user clicks the logout button', () => {
+      beforeEach(() => {
+        logoutButton.click();
+      });
+
+      it('should logout', () => {
+        expect(authService.logout).toHaveBeenCalled();
+      });
+    });
+  });
+
+  describe('when the user is logged in as an admin', () => {
+    beforeEach(() => {
+      isLoggedInSelector.setResult(true);
+      isAdminSelector.setResult(true);
+      store.refreshState();
+      fixture.detectChanges();
+    });
+
+    it('should render admin panel link', () => {
       expect(fixture.debugElement.query(By.css('a[href="/admin"]'))).toBeTruthy();
     });
   });
