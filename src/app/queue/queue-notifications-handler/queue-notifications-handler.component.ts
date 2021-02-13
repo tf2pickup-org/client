@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { isPlayingGame } from '@app/games/games.selectors';
 import { awaitsReadyUp } from '@app/selectors';
+import { SoundPlayerService } from '@app/shared/sound-player.service';
 import { select, Store } from '@ngrx/store';
 import { Howl } from 'howler';
 import { NEVER, of, Subject } from 'rxjs';
@@ -23,6 +24,7 @@ export class QueueNotificationsHandlerComponent implements OnInit, OnDestroy {
   constructor(
     private store: Store,
     private readyUpService: ReadyUpService,
+    private soundPlayerService: SoundPlayerService,
   ) { }
 
   ngOnInit() {
@@ -61,10 +63,9 @@ export class QueueNotificationsHandlerComponent implements OnInit, OnDestroy {
       debounceTime(1000),
     ).subscribe(([requests, playingGame]) => {
       if (!playingGame) {
-        new Howl({
-          src: ['webm', 'wav'].map(format => `/assets/sounds/cmon_tough_guy.${format}`),
-          autoplay: true,
-        });
+        this.soundPlayerService
+          .playSound(['webm', 'wav'].map(format => `/assets/sounds/cmon_tough_guy.${format}`))
+          .subscribe();
 
         requests.forEach(request => {
           new Notification('A subsitute is needed!', {

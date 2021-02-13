@@ -12,12 +12,15 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { PortalModule } from '@angular/cdk/portal';
 import { IconsModule } from '@app/icons/icons.module';
 import { TwitchTvIntegrationComponent } from './twitch-tv-integration/twitch-tv-integration.component';
+import { PlayerPreferencesComponent } from './player-preferences/player-preferences.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AcceptRulesDialogComponent,
     SettingsComponent,
     TwitchTvIntegrationComponent,
+    PlayerPreferencesComponent,
   ],
   imports: [
     CommonModule,
@@ -27,6 +30,7 @@ import { TwitchTvIntegrationComponent } from './twitch-tv-integration/twitch-tv-
     OverlayModule,
     PortalModule,
     IconsModule,
+    ReactiveFormsModule,
 
     ProfileRoutingModule,
   ],

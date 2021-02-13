@@ -1,9 +1,9 @@
 import { Overlay } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { Injectable } from '@angular/core';
-import { Howl } from 'howler';
 import { Observable } from 'rxjs';
 import { QueueReadyUpAction, QueueReadyUpDialogComponent } from './queue-ready-up-dialog/queue-ready-up-dialog.component';
+import { SoundPlayerService } from '@app/shared/sound-player.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +12,7 @@ export class ReadyUpService {
 
   constructor(
     private overlay: Overlay,
+    private soundPlayerService: SoundPlayerService,
   ) { }
 
   /**
@@ -22,11 +23,7 @@ export class ReadyUpService {
       const overlay = this.overlay.create();
       const portal = new ComponentPortal(QueueReadyUpDialogComponent);
       const component = overlay.attach(portal);
-
-      const sound = new Howl({
-        src: ['webm', 'wav'].map(format => `/assets/sounds/ready_up.${format}`),
-        autoplay: true,
-      });
+      const player = this.soundPlayerService.playSound(['webm', 'wav'].map(format => `/assets/sounds/ready_up.${format}`)).subscribe();
 
       const notification = new Notification('Ready up!', {
         body: 'A new pickup game is starting',
@@ -41,7 +38,7 @@ export class ReadyUpService {
       return () => {
         subscription.unsubscribe();
         overlay.dispose();
-        sound.stop();
+        player.unsubscribe();
         notification.close();
       };
     });
