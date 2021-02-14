@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, OnInitEffects, createEffect, ofType } from '@ngrx/effects';
 import { ProfileService } from './profile.service';
-import { loadProfile, profileLoaded, acceptRules, rulesAccepted, profileUpdated } from './profile.actions';
+import { loadProfile, profileLoaded, acceptRules, rulesAccepted, profileUpdated, savePreferences, preferencesUpdated } from './profile.actions';
 import { AuthService } from '@app/auth/auth.service';
 import { filter, mergeMap, map, switchMap, mapTo } from 'rxjs/operators';
 import { fromEvent } from 'rxjs';
@@ -39,6 +39,12 @@ export class ProfileEffects implements OnInitEffects {
       )),
     )
   );
+
+  savePreferences = createEffect(() => this.actions.pipe(
+    ofType(savePreferences),
+    mergeMap(({ preferences }) => this.profileService.savePreferences(preferences)),
+    map(preferences => preferencesUpdated({ preferences })),
+  ));
 
   constructor(
     private actions: Actions,

@@ -33,3 +33,8 @@ export const twitchTvUser = createSelector(
   profile,
   theProfile => theProfile?.twitchTvUser
 );
+
+export const preferences = createSelector(
+  profile,
+  profile => profile?.preferences
+);

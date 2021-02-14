@@ -1,11 +1,11 @@
 import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { map, filter, pairwise, takeUntil } from 'rxjs/operators';
+import { map, filter, pairwise, takeUntil, mergeMap } from 'rxjs/operators';
 import { Title } from '@angular/platform-browser';
 import { environment } from '@environment';
 import { GameDetailsStore } from './game-details.store';
-import { Howl } from 'howler';
+import { SoundPlayerService } from '@app/shared/sound-player.service';
 
 @Component({
   selector: 'app-game-details',
@@ -22,6 +22,7 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private title: Title,
     public readonly store: GameDetailsStore,
+    private soundPlayerService: SoundPlayerService,
   ) { }
 
   ngOnInit() {
@@ -42,12 +43,8 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
       pairwise(),
       filter(([a, b])  => !a && !!b),
       takeUntil(this.destroyed),
-    ).subscribe(() => {
-      new Howl({
-        src: ['webm', 'wav'].map(format => `/assets/sounds/fight.${format}`),
-        autoplay: true,
-      });
-    });
+      mergeMap(() => this.soundPlayerService.playSound(['webm', 'wav'].map(format => `/assets/sounds/fight.${format}`))),
+    ).subscribe();
   }
 
   ngOnDestroy() {

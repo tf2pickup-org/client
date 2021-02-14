@@ -22,11 +22,10 @@ import { MumbleJoinButtonComponent } from '../mumble-join-button/mumble-join-but
 import { forceEndGame, loadGame, reinitializeServer, replacePlayer, requestSubstitute } from '../games.actions';
 import { Profile } from '@app/profile/models/profile';
 import { keyBy } from 'lodash';
-import { Howl } from 'howler';
 import { loadGameServer } from '@app/game-servers/game-servers.actions';
 import { Player } from '@app/players/models/player';
-import { loadPlayer } from '@app/players/actions';
 import { GamesService } from '../games.service';
+import { SoundPlayerService } from '@app/shared/sound-player.service';
 
 const gameInProgress: Game = {
   id: 'FAKE_GAME_ID',
@@ -119,11 +118,6 @@ const mockPlayers = [
   },
 ];
 
-const playersSkills = {
-  FAKE_PLAYER_1_ID: 2,
-  FAKE_PLAYER_2_ID: 4,
-};
-
 const makeState = (games: Game[], gameServers: GameServer[] = [mockGameServer], players: Player[] = mockPlayers) => ({
   games: {
     ids: games.map(g => g.id),
@@ -148,11 +142,6 @@ describe('GameDetailsComponent', () => {
   let routeParams: Subject<any>;
 
   beforeEach(() => {
-    // @ts-ignore
-    spyOn(Howl.prototype, 'init');
-  });
-
-  beforeEach(() => {
     routeParams = new Subject();
   });
 
@@ -170,6 +159,7 @@ describe('GameDetailsComponent', () => {
     .mock(MumbleJoinButtonComponent)
     .mock(GameTeamHeaderComponent)
     .mock(GameTeamPlayerListComponent)
+    .mock(SoundPlayerService)
   );
 
   beforeEach(() => {
@@ -185,6 +175,9 @@ describe('GameDetailsComponent', () => {
     spyOn(store, 'dispatch');
 
     fixture.detectChanges();
+
+    const soundPlayerService = TestBed.inject(SoundPlayerService) as jasmine.SpyObj<SoundPlayerService>;
+    soundPlayerService.playSound.and.returnValue(of(null));
   });
 
   afterEach(() => {
@@ -373,11 +366,8 @@ describe('GameDetailsComponent', () => {
           });
 
           it('should play the ready-up sound', () => {
-            // @ts-ignore
-            expect(Howl.prototype.init).toHaveBeenCalledOnceWith({
-              src: jasmine.any(Array),
-              autoplay: true,
-            });
+            const soundPlayerService = TestBed.inject(SoundPlayerService) as jasmine.SpyObj<SoundPlayerService>;
+            expect(soundPlayerService.playSound).toHaveBeenCalledTimes(1);
           });
         });
 

@@ -15,3 +15,13 @@ export const profileUpdated = createAction(
   '[WS] Profile updated',
   props<{ profileChanges: Partial<Profile> }>(),
 );
+
+export const savePreferences = createAction(
+  '[Player settings] Save preferences',
+  props<{ preferences: { [key: string]: string }}>(),
+);
+
+export const preferencesUpdated = createAction(
+  '[API] Preferences updated',
+  props<{ preferences: { [key: string]: string }}>(),
+);

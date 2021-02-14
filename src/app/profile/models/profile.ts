@@ -22,4 +22,8 @@ export interface Profile {
     displayName: string;
     profileImageUrl: string;
   };
+
+  preferences: {
+    [key: string]: string;
+  };
 }

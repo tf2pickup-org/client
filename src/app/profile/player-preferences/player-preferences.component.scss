@@ -1,0 +1,10 @@
+@use '@material/card';
+@use 'variables';
+
+.player-preferences {
+  @include card.shape-radius(variables.$default-border-radius);
+
+  &__content {
+    padding: 12px 20px;
+  }
+}
