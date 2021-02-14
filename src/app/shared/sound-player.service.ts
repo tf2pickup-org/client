@@ -33,7 +33,7 @@ export class SoundPlayerService {
     return this.store.pipe(
       select(preferences),
       take(1),
-      map(preferences => preferences.soundVolume ?? this.defaultVolume),
+      map(preferences => preferences?.soundVolume ?? this.defaultVolume),
       map(volume => parseFloat(volume)),
       switchMap(volume => player(volume)),
     );

@@ -1,8 +1,10 @@
 import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { Actions, ofType } from '@ngrx/effects';
 import { select, Store } from '@ngrx/store';
+import { BehaviorSubject } from 'rxjs';
 import { filter, map, take, tap } from 'rxjs/operators';
-import { savePreferences } from '../profile.actions';
+import { preferencesUpdated, savePreferences } from '../profile.actions';
 import { preferences } from '../profile.selectors';
 
 @Component({
@@ -17,9 +19,12 @@ export class PlayerPreferencesComponent implements OnInit {
     soundVolume: [1.0],
   });
 
+  isSaving = new BehaviorSubject<boolean>(false);
+
   constructor(
     private formBuilder: FormBuilder,
     private store: Store,
+    private actions: Actions,
   ) { }
 
   ngOnInit() {
@@ -36,6 +41,15 @@ export class PlayerPreferencesComponent implements OnInit {
   }
 
   save() {
+    this.isSaving.next(true);
+    this.actions.pipe(
+      ofType(preferencesUpdated),
+      take(1),
+    ).subscribe(({ preferences }) => {
+      this.form.reset(preferences);
+      this.isSaving.next(false);
+    });
+
     this.store.dispatch(savePreferences({ preferences: {
       soundVolume: `${this.form.value.soundVolume}`,
     } }));

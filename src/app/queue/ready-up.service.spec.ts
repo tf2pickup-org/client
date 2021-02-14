@@ -1,7 +1,7 @@
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { TestBed } from '@angular/core/testing';
-import { Howl } from 'howler';
-import { Subscription } from 'rxjs';
+import { SoundPlayerService } from '@app/shared/sound-player.service';
+import { of, Subscription } from 'rxjs';
 import { QueueReadyUpAction, QueueReadyUpDialogComponent } from './queue-ready-up-dialog/queue-ready-up-dialog.component';
 import { ReadyUpService } from './ready-up.service';
 
@@ -9,29 +9,27 @@ describe('ReadyUpService', () => {
   let service: ReadyUpService;
   let overlayService: jasmine.SpyObj<Overlay>;
   let overlayRef: jasmine.SpyObj<OverlayRef>;
+  let soundPlayerService: jasmine.SpyObj<SoundPlayerService>;
   let component: QueueReadyUpDialogComponent;
 
   beforeEach(() => {
     overlayService = jasmine.createSpyObj<Overlay>(Overlay.name, ['create']);
     overlayRef = jasmine.createSpyObj<OverlayRef>(OverlayRef.name, ['attach', 'dispose']);
+    soundPlayerService = jasmine.createSpyObj(SoundPlayerService.name, ['playSound']);
     component = new QueueReadyUpDialogComponent();
 
     overlayService.create.and.returnValue(overlayRef);
     overlayRef.attach.and.returnValue({
       instance: component,
     });
-  });
-
-  beforeEach(() => {
-    // @ts-ignore
-    spyOn(Howl.prototype, 'init');
-    spyOn(Howl.prototype, 'stop');
+    soundPlayerService.playSound.and.returnValue(of(null));
   });
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
         { provide: Overlay, useValue: overlayService },
+        { provide: SoundPlayerService, useValue: soundPlayerService },
       ],
     });
     service = TestBed.inject(ReadyUpService);
@@ -51,14 +49,9 @@ describe('ReadyUpService', () => {
     });
 
     it('should play the ready-up sound', () => {
-      // @ts-ignore
-      expect(Howl.prototype.init).toHaveBeenCalledOnceWith({
-        src: jasmine.any(Array),
-        autoplay: true,
-      });
+      expect(soundPlayerService.playSound).toHaveBeenCalledTimes(1);
 
-      // @ts-ignore
-      const src = Howl.prototype.init.calls.first().args[0].src;
+      const src = soundPlayerService.playSound.calls.first().args[0];
       expect(src.every(file => /ready_up\./.test(file)));
     });
 

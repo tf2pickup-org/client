@@ -1,9 +1,9 @@
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { isPlayingGame } from '@app/games/games.selectors';
 import { awaitsReadyUp } from '@app/selectors';
+import { SoundPlayerService } from '@app/shared/sound-player.service';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
-import { Howl } from 'howler';
-import { Subject } from 'rxjs';
+import { of, Subject } from 'rxjs';
 import { QueueReadyUpAction } from '../queue-ready-up-dialog/queue-ready-up-dialog.component';
 import { leaveQueue, readyUp } from '../queue.actions';
 import { isPreReadied, substituteRequests } from '../queue.selectors';
@@ -16,16 +16,14 @@ describe('QueueNotificationsHandlerComponent', () => {
   let store: MockStore;
   let readyUpService: jasmine.SpyObj<ReadyUpService>;
   let readyUpResult: Subject<QueueReadyUpAction>;
+  let soundPlayerService: jasmine.SpyObj<SoundPlayerService>;
 
   beforeEach(() => {
     readyUpResult = new Subject();
     readyUpService = jasmine.createSpyObj<ReadyUpService>(ReadyUpService.name, ['askUserToReadyUp']);
     readyUpService.askUserToReadyUp.and.returnValue(readyUpResult.asObservable());
-  });
-
-  beforeEach(() => {
-    // @ts-ignore
-    spyOn(Howl.prototype, 'init');
+    soundPlayerService = jasmine.createSpyObj<SoundPlayerService>(SoundPlayerService.name, ['playSound']);
+    soundPlayerService.playSound.and.returnValue(of(null));
   });
 
   beforeEach(async () => {
@@ -34,6 +32,7 @@ describe('QueueNotificationsHandlerComponent', () => {
       providers: [
         provideMockStore(),
         { provide: ReadyUpService, useValue: readyUpService },
+        { provide: SoundPlayerService, useValue: soundPlayerService },
       ],
     })
     .compileComponents();
@@ -117,11 +116,7 @@ describe('QueueNotificationsHandlerComponent', () => {
     }));
 
     it('should play the sound', () => {
-      // @ts-ignore
-      expect(Howl.prototype.init).toHaveBeenCalledOnceWith({
-        src: jasmine.any(Array),
-        autoplay: true,
-      });
+      expect(soundPlayerService.playSound).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -136,8 +131,7 @@ describe('QueueNotificationsHandlerComponent', () => {
     }));
 
     it('should not play the sound', () => {
-      // @ts-ignore
-      expect(Howl.prototype.init).not.toHaveBeenCalled();
+      expect(soundPlayerService.playSound).not.toHaveBeenCalled();
     });
   });
 });

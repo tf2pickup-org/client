@@ -20,7 +20,8 @@
 
     <div class="mdc-card__actions">
       <button type="submit"
-        class="mdc-button mdc-card__action mdc-card__action--button">
+        class="mdc-button mdc-card__action mdc-card__action--button"
+        [disabled]="(isSaving | async) || !form.valid || form.pristine">
         <div class="mdc-button__ripple"></div>
         <i-feather name="check" class="mdc-button__icon" aria-hidden="true"></i-feather>
         <span class="mdc-button__label">save</span>
