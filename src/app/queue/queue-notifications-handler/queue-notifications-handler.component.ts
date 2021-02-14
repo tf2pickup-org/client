@@ -3,7 +3,6 @@ import { isPlayingGame } from '@app/games/games.selectors';
 import { awaitsReadyUp } from '@app/selectors';
 import { SoundPlayerService } from '@app/shared/sound-player.service';
 import { select, Store } from '@ngrx/store';
-import { Howl } from 'howler';
 import { NEVER, of, Subject } from 'rxjs';
 import { debounceTime, switchMap, map, filter, withLatestFrom, takeUntil } from 'rxjs/operators';
 import { QueueReadyUpAction } from '../queue-ready-up-dialog/queue-ready-up-dialog.component';
