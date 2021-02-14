@@ -1,3 +1,17 @@
+# [3.5.0](https://github.com/tf2pickup-pl/client/compare/3.4.4...3.5.0) (2021-02-14)
+
+
+### Bug Fixes
+
+* **deps:** update dependency ng-inline-svg to v12 ([#706](https://github.com/tf2pickup-pl/client/issues/706)) ([541c9cd](https://github.com/tf2pickup-pl/client/commit/541c9cd0446880084a5a34737d6b605f529ff88d))
+* **deps:** update ngrx monorepo to v11 ([#687](https://github.com/tf2pickup-pl/client/issues/687)) ([5475860](https://github.com/tf2pickup-pl/client/commit/54758606cac0e71626679978a773187e004bd0c2))
+* better player logged in logic ([#711](https://github.com/tf2pickup-pl/client/issues/711)) ([af63a64](https://github.com/tf2pickup-pl/client/commit/af63a64f2025ecf3566622da73dfad8f2f090de6))
+
+
+### Features
+
+* sound volume preference ([#712](https://github.com/tf2pickup-pl/client/issues/712)) ([a5aa246](https://github.com/tf2pickup-pl/client/commit/a5aa2462f1f99592bf18d289fb58f53019660ffa))
+
 ## [3.4.4](https://github.com/tf2pickup-pl/client/compare/3.4.3...3.4.4) (2021-02-11)
 
 
