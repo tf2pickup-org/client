@@ -33,6 +33,11 @@ export class AuthService {
     window.location.href = `${this.apiUrl}/auth/steam`;
   }
 
+  logout() {
+    this.tokenStore.removeAllTokens();
+    location.reload();
+  }
+
   reauth(): Observable<string> {
     if (!this.isRefreshingToken) {
       this.isRefreshingToken = true;

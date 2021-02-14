@@ -1,9 +1,8 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { TokenStoreService } from '@app/auth/token-store.service';
-import { AuthService } from '@app/auth/auth.service';
 import { Store } from '@ngrx/store';
-import { isAdmin } from '@app/profile/profile.selectors';
+import { isAdmin, isLoggedIn } from '@app/profile/profile.selectors';
+import { AuthService } from '@app/auth/auth.service';
 
 @Component({
   selector: 'app-footer',
@@ -15,18 +14,16 @@ export class FooterComponent {
 
   version = environment.version;
   links = environment.footerLinks;
-  isAuthenticated = this.authService.authenticated;
+  isLoggedIn = this.store.select(isLoggedIn);
   isAdmin = this.store.select(isAdmin);
 
   constructor(
-    private tokenStore: TokenStoreService,
     private authService: AuthService,
     private store: Store,
   ) { }
 
   logout() {
-    this.tokenStore.removeAllTokens();
-    location.reload();
+    this.authService.logout();
   }
 
 }

@@ -62,7 +62,7 @@
 
   <div class="flex-xl-fill"></div>
 
-  <ng-container *ngIf="isAuthenticated; else notAuthenticated">
+  <ng-container *ngIf="isLoggedIn | async; else notAuthenticated">
     <a routerLink="/settings"
       routerLinkActive="active"
       tooltip="Settings"

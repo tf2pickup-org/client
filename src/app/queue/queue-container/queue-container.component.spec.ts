@@ -1,21 +1,14 @@
-import { ComponentFixture, TestBed, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { QueueContainerComponent } from './queue-container.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { queueRequiredPlayerCount, queueCurrentPlayerCount } from '../queue.selectors';
 import { Title } from '@angular/platform-browser';
-import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import { provideMockStore } from '@ngrx/store/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Store } from '@ngrx/store';
-import { AuthService } from '@app/auth/auth.service';
-
-class AuthServiceStub {
-  authenticated = false;
-}
 
 describe('QueueContainerComponent', () => {
   let component: QueueContainerComponent;
   let fixture: ComponentFixture<QueueContainerComponent>;
-  let store: MockStore<any>;
   let setTitleSpy: jasmine.Spy;
 
   beforeEach(waitForAsync(() => {
@@ -31,7 +24,6 @@ describe('QueueContainerComponent', () => {
             { selector: queueCurrentPlayerCount, value: 5 },
           ]
         }),
-        { provide: AuthService, useClass: AuthServiceStub },
       ],
       schemas: [ NO_ERRORS_SCHEMA ],
     })
@@ -39,7 +31,6 @@ describe('QueueContainerComponent', () => {
   }));
 
   beforeEach(() => {
-    store = TestBed.get(Store);
     setTitleSpy = spyOn(TestBed.get(Title), 'setTitle');
   });
 

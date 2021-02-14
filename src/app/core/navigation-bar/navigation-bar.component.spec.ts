@@ -1,34 +1,25 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NavigationBarComponent } from './navigation-bar.component';
-import { ChangeDetectionStrategy } from '@angular/core';
-import { AuthService } from '@app/auth/auth.service';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
-
-const authServiceStub = {
-  authenticated: false,
-};
 
 describe('NavigationBarComponent', () => {
   let component: NavigationBarComponent;
   let fixture: ComponentFixture<NavigationBarComponent>;
   let store: MockStore;
-  const initialState = { profile: { } };
+  const initialState = { profile: null };
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ NavigationBarComponent ],
       providers: [
-        { provide: AuthService, useValue: authServiceStub },
         provideMockStore({ initialState }),
       ],
       imports: [
         RouterTestingModule,
       ],
     })
-    // https://github.com/angular/angular/issues/12313
-    .overrideComponent(NavigationBarComponent, { set: { changeDetection: ChangeDetectionStrategy.Default } })
     .compileComponents();
   }));
 
@@ -62,7 +53,6 @@ describe('NavigationBarComponent', () => {
           },
         },
       });
-      component.isAuthenticated = true;
       fixture.detectChanges();
     });
 

@@ -8,9 +8,9 @@
     </span>
   </ng-container>
 
-  <ng-container *ngIf="isAuthenticated">
+  <ng-container *ngIf="isLoggedIn | async">
     <span class="footer__entry">
-      <a [routerLink]="" (click)="logout()">logout</a>
+      <a [routerLink]="" (click)="logout()" logoutButton>logout</a>
     </span>
   </ng-container>
 

@@ -5,7 +5,6 @@ import { queueRequiredPlayerCount, queueCurrentPlayerCount } from '../queue.sele
 import { Title } from '@angular/platform-browser';
 import { map, takeUntil, filter } from 'rxjs/operators';
 import { environment } from '@environment';
-import { AuthService } from '@app/auth/auth.service';
 
 @Component({
   selector: 'app-queue-container',
@@ -17,13 +16,11 @@ export class QueueContainerComponent implements OnInit, OnDestroy {
 
   requiredPlayerCount = this.store.select(queueRequiredPlayerCount);
   currentPlayerCount = this.store.select(queueCurrentPlayerCount);
-  authenticated = this.authService.authenticated;
   private destroyed = new Subject<void>();
 
   constructor(
     private store: Store,
     private title: Title,
-    private authService: AuthService,
   ) { }
 
   ngOnInit() {
