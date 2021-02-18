@@ -5,7 +5,7 @@ import { Player } from '@app/players/models/player';
 import { PlayerSkill } from '@app/players/models/player-skill';
 import { map, tap } from 'rxjs/operators';
 import { forkJoin, Observable } from 'rxjs';
-import { keyBy } from 'lodash';
+import { keyBy } from 'lodash-es';
 import { PlayerRow } from './player-row';
 import { select, Store } from '@ngrx/store';
 import { queueConfig } from '@app/queue/queue.selectors';
