@@ -21,7 +21,7 @@ import { GameAdminButtonsComponent } from '../game-admin-buttons/game-admin-butt
 import { MumbleJoinButtonComponent } from '../mumble-join-button/mumble-join-button.component';
 import { forceEndGame, loadGame, reinitializeServer, replacePlayer, requestSubstitute } from '../games.actions';
 import { Profile } from '@app/profile/models/profile';
-import { keyBy } from 'lodash';
+import { keyBy } from 'lodash-es';
 import { loadGameServer } from '@app/game-servers/game-servers.actions';
 import { Player } from '@app/players/models/player';
 import { GamesService } from '../games.service';

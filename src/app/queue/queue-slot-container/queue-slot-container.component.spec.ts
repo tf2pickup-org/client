@@ -8,7 +8,7 @@ import { Store } from '@ngrx/store';
 import { joinQueue, markFriend } from '../queue.actions';
 import { canJoinQueue } from '@app/selectors';
 import { By } from '@angular/platform-browser';
-import { merge, cloneDeep } from 'lodash';
+import { merge, cloneDeep } from 'lodash-es';
 import { ChangeDetectionStrategy } from '@angular/core';
 
 const initialState = {
