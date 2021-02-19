@@ -102,7 +102,7 @@
     "ng-mocks": "11.7.0",
     "postcss": "8.2.6",
     "protractor": "7.0.0",
-    "release-it": "14.4.0",
+    "release-it": "14.4.1",
     "stylelint": "13.10.0",
     "stylelint-config-sass-guidelines": "8.0.0",
     "stylelint-order": "4.1.0",
