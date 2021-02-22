@@ -2,6 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Map } from '@app/queue/models/map';
 import { QueueService } from '@app/queue/queue.service';
+import { AsFormGroupPipe } from '@app/shared/as-form-group.pipe';
 import { FeatherComponent } from 'angular-feather';
 import { MockBuilder, MockedComponentFixture, MockRender, ngMocks } from 'ng-mocks';
 import { Subject } from 'rxjs';
@@ -27,6 +28,7 @@ describe(MapPoolEditComponent.name, () => {
     })
     .keep(MapEditComponent)
     .mock(FeatherComponent)
+    .keep(AsFormGroupPipe)
   );
 
   beforeEach(() => {
