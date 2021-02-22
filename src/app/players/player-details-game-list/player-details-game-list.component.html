@@ -6,7 +6,7 @@
   <li *ngFor="let game of games | async | paginate: { itemsPerPage: gamesPerPage, currentPage: (page | async), totalItems: (gameCount | async) }"
     class="game-list-item">
     <a [routerLink]="['/game', game.id]">
-      <app-game-class-icon [gameClass]="game.classPlayed" size="20"></app-game-class-icon>
+      <app-game-class-icon [gameClass]="game.classPlayed" [size]="20"></app-game-class-icon>
       #{{ game.number }} - {{ game.launchedAt | date:'mediumDate'}} - {{ game.map }}
     </a>
   </li>

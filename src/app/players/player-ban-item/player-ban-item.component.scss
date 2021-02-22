@@ -12,6 +12,6 @@
 
   &--expired {
     @include surface.fill-color(color.change(theme.$surface, $alpha: 0.7));
-    @include surface.ink-color(color.adjust(theme.$on-surface, $lightness: 20%, $saturation: -100));
+    @include surface.ink-color(color.adjust(theme.$on-surface, $lightness: 20%, $saturation: -100%));
   }
 }

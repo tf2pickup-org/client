@@ -33,7 +33,7 @@
   </div>
 
   <div class="row mt-4">
-    <div *ngFor="let team of ['blu', 'red']"
+    <div *ngFor="let team of teams"
       class="col"
       [ngClass]="'team-' + team">
       <app-game-team-header

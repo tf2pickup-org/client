@@ -8,6 +8,7 @@ import { SafeMumbleUrlPipe } from './safe-mumble-url.pipe';
 import { GameClassIconComponent } from './game-class-icon/game-class-icon.component';
 import { MapThumbnailPipe } from './map-thumbnail.pipe';
 import { NavigateBackDirective } from './navigate-back.directive';
+import { AsFormGroupPipe } from './as-form-group.pipe';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { NavigateBackDirective } from './navigate-back.directive';
     GameClassIconComponent,
     MapThumbnailPipe,
     NavigateBackDirective,
+    AsFormGroupPipe,
   ],
   imports: [
     CommonModule,
@@ -31,6 +33,7 @@ import { NavigateBackDirective } from './navigate-back.directive';
     GameClassIconComponent,
     MapThumbnailPipe,
     NavigateBackDirective,
+    AsFormGroupPipe,
   ]
 })
 export class SharedModule { }
