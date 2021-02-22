@@ -24,5 +24,9 @@
       "@app/*": [ "src/app/*" ],
       "@environment": [ "src/environments/environment" ]
     }
+  },
+  "angularCompilerOptions": {
+    "fullTemplateTypeCheck": true,
+    "strictTemplates": true
   }
 }
