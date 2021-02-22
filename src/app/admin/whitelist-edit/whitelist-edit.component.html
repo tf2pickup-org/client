@@ -1,0 +1,56 @@
+<div class="container py-3">
+  <form
+    [formGroup]="form"
+    (submit)="save()">
+    <div class="d-flex align-items-center">
+      <button
+        type="button"
+        class="mdc-icon-button focus-none back-button"
+        tooltip="Go back"
+        placement="top"
+        container="body"
+        appNavigateBack>
+        <i-feather name="arrow-left" aria-hidden="true"></i-feather>
+      </button>
+
+      <div class="flex-grow-1 mdc-typography--headline5">
+        Whitelist
+      </div>
+
+      <button type="submit"
+        class="mdc-button mdc-button--raised mdc-button--secondary mx-2 submit-button"
+        [disabled]="(isSaving | async) === true || !form.valid || form.pristine">
+        <div class="mdc-button__ripple"></div>
+        <i-feather name="check" class="mdc-button__icon" aria-hidden="true"></i-feather>
+        <span class="mdc-button__label">save</span>
+      </button>
+    </div>
+
+    <div class="surface surface--white py-4">
+      <div class="mdc-typography--body1 mx-2">
+        Provide a whitelist ID which will be used in matches.
+        You may leave this field empty - no whitelist will be enforced if you do.
+      </div>
+
+      <label class="mdc-text-field mdc-text-field--outlined mdc-text-field--no-label mdc-text-field--dense mx-2 my-2" #whitelistId>
+        <span class="mdc-notched-outline">
+          <span class="mdc-notched-outline__leading"></span>
+          <span class="mdc-notched-outline__trailing"></span>
+        </span>
+        <input type="text"
+          class="mdc-text-field__input input-whitelist-id"
+          aria-labelledby="whitelist-id"
+          formControlName="whitelistId">
+      </label>
+
+      <div class="mdc-typography--body1 mx-2">
+        Please verify the whitelist is valid:
+      </div>
+      <div class="mdc-typography--body1 mx-2">
+        <a [href]="'http://whitelist.tf/' + form.get('whitelistId').value" target="_blank">
+          http://whitelist.tf/{{ form.get('whitelistId').value }}
+        </a>
+      </div>
+    </div>
+  </form>
+</div>

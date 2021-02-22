@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { AlertOctagon, Check, ChevronRight, Clipboard, Coffee, Edit2, ExternalLink, Eye, FileText, Film, Headphones, Heart, MessageSquare, Minus,
+import { AlertOctagon, ArrowLeft, Check, ChevronRight, Clipboard, Coffee, Edit2, ExternalLink, Eye, FileText, Film, Headphones, Heart, MessageSquare, Minus,
   Play, Plus, RefreshCcw, Star, Trash2, TrendingUp, User, UserX, Volume1, Volume2, VolumeX, Volume, X } from 'angular-feather/icons';
 import { FeatherModule } from 'angular-feather';
 
@@ -7,6 +7,7 @@ import { FeatherModule } from 'angular-feather';
 const icons = {
 /* eslint-disable @typescript-eslint/naming-convention */
   AlertOctagon,
+  ArrowLeft,
   Check,
   ChevronRight,
   Clipboard,
