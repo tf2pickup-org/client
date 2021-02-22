@@ -5,6 +5,7 @@ import { AdminItemListComponent } from './admin-item-list/admin-item-list.compon
 import { ForceCreatePlayerAccountComponent } from './force-create-player-account/force-create-player-account.component';
 import { MapPoolEditComponent } from './map-pool-edit/map-pool-edit.component';
 import { PlayerSkillTableComponent } from './player-skill-table/player-skill-table.component';
+import { WhitelistEditComponent } from './whitelist-edit/whitelist-edit.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,15 @@ const routes: Routes = [
     data: {
       title: 'map pool configuration',
       animation: 'MapPoolEditPage',
+    },
+    canActivate: [ IsAdminGuard ],
+  },
+  {
+    path: 'whitelist',
+    component: WhitelistEditComponent,
+    data: {
+      title: 'whitelist configuration',
+      animation: 'WhitelistEditPage',
     },
     canActivate: [ IsAdminGuard ],
   },

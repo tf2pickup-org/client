@@ -11,6 +11,7 @@ import { AdminItemListComponent } from './admin-item-list/admin-item-list.compon
 import { PlayerSkillTableComponent } from './player-skill-table/player-skill-table.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { ForceCreatePlayerAccountComponent } from './force-create-player-account/force-create-player-account.component';
+import { WhitelistEditComponent } from './whitelist-edit/whitelist-edit.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { ForceCreatePlayerAccountComponent } from './force-create-player-account
     AdminItemListComponent,
     PlayerSkillTableComponent,
     ForceCreatePlayerAccountComponent,
+    WhitelistEditComponent,
   ],
   imports: [
     CommonModule,
