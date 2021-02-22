@@ -30,7 +30,7 @@
       <ng-container formArrayName="maps">
         <div *ngFor="let map of maps.controls; index as i">
           <app-map-edit
-            [mapControl]="map"
+            [mapControl]="map | asFormGroup"
             (remove)="remove(i)"></app-map-edit>
         </div>
       </ng-container>

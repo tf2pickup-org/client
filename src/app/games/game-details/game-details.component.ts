@@ -6,6 +6,7 @@ import { Title } from '@angular/platform-browser';
 import { environment } from '@environment';
 import { GameDetailsStore } from './game-details.store';
 import { SoundPlayerService } from '@app/shared/sound-player.service';
+import { Tf2Team } from '../models/tf2-team';
 
 @Component({
   selector: 'app-game-details',
@@ -15,6 +16,8 @@ import { SoundPlayerService } from '@app/shared/sound-player.service';
   providers: [ GameDetailsStore ],
 })
 export class GameDetailsComponent implements OnInit, OnDestroy {
+
+  readonly teams: Tf2Team[] = ['blu', 'red'];
 
   private destroyed = new Subject<void>();
 

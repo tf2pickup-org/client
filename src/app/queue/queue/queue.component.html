@@ -8,7 +8,7 @@
   <div *ngFor="let class of _queueClasses"
     class="game-class-column">
     <h4 class="game-class-name">
-      <app-game-class-icon [gameClass]="class.name" size="30"></app-game-class-icon>
+      <app-game-class-icon [gameClass]="class.name" [size]="30"></app-game-class-icon>
       {{ class.name }}
     </h4>
     <app-queue-class-slot-list [gameClass]="class.name"></app-queue-class-slot-list>
