@@ -46,6 +46,14 @@ export class AddPlayerBanComponent implements OnInit, OnDestroy {
       },
     },
     {
+      label: '2 hours',
+      toDate: () => {
+        const date = new Date();
+        date.setHours(date.getHours() + 2);
+        return date;
+      },
+    },
+    {
       label: '6 hours',
       toDate: () => {
         const date = new Date();
