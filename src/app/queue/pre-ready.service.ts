@@ -11,7 +11,7 @@ export class PreReadyService {
 
   private readonly defaultTimeout = 300; // 5 minutes
   private _timeout = new BehaviorSubject<number>(this.defaultTimeout);
-  private timer: any;
+  private timer: ReturnType<typeof setInterval>;
 
   get timeout() {
     return this._timeout.asObservable();
