@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { timer, BehaviorSubject } from 'rxjs';
-import { takeWhile, finalize, debounceTime } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
 import { stopPreReady } from './queue.actions';
 import { isPreReadied } from './queue.selectors';
 
@@ -12,7 +11,7 @@ export class PreReadyService {
 
   private readonly defaultTimeout = 300; // 5 minutes
   private _timeout = new BehaviorSubject<number>(this.defaultTimeout);
-  private isCounting = false;
+  private timer: ReturnType<typeof setInterval>;
 
   get timeout() {
     return this._timeout.asObservable();
@@ -23,7 +22,6 @@ export class PreReadyService {
   ) {
     this.store.pipe(
       select(isPreReadied),
-      debounceTime(1000),
     ).subscribe(preReadied => {
       if (preReadied) {
         this.start();
@@ -34,30 +32,28 @@ export class PreReadyService {
   }
 
   start() {
-    if (this.isCounting) {
+    if (this.timer) {
       return;
     }
 
-    this.isCounting = true;
-    this._timeout.next(this.defaultTimeout);
-
-    timer(0, 1000).pipe(
-      // eslint-disable-next-line rxjs/no-ignored-takewhile-value
-      takeWhile(() => this.isCounting),
-      finalize(() => {
-        this.store.dispatch(stopPreReady());
-        this._timeout.next(this.defaultTimeout);
-      }),
-    ).subscribe(() => {
-      this._timeout.next(this._timeout.value - 1);
-      if (this._timeout.value <= 0) {
-        this.isCounting = false;
-      }
-    });
+    this.timer = setInterval(() => this.onTimeout(), 1000);
   }
 
   stop() {
-    this.isCounting = false;
+    if (this.timer) {
+      clearInterval(this.timer);
+      this.timer = undefined;
+    }
+
+    this.store.dispatch(stopPreReady());
+    this._timeout.next(this.defaultTimeout);
+  }
+
+  private onTimeout() {
+    this._timeout.next(this._timeout.value - 1);
+    if (this._timeout.value <= 0) {
+      this.stop();
+    }
   }
 
 }

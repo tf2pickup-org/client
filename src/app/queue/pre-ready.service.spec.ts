@@ -34,7 +34,7 @@ describe('PreReadyService', () => {
       take(3),
       toArray(),
     ).subscribe(values => {
-      expect(values).toEqual([ 300, 300, 299 ]);
+      expect(values).toEqual([ 300, 299, 298 ]);
       done();
     });
 
