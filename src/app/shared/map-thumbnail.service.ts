@@ -31,6 +31,9 @@ export class MapThumbnailService {
     { regex: /pl_summercoast/,    thumbnailName: 'summercoast' },
     { regex: /cp_logjam/,         thumbnailName: 'logjam' },
     { regex: /koth_ashville/,     thumbnailName: 'ashville' },
+    { regex: /cp_cardinal/,       thumbnailName: 'cardinal' },
+    { regex: /cp_kalinka/,        thumbnailName: 'kalinka' },
+    { regex: /cp_mannbase/,       thumbnailName: 'mannbase' },
   ];
 
   getMapThumbnail(map: string) {
