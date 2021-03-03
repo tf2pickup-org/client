@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { IsAdminGuard } from '@app/auth/is-admin.guard';
 import { AdminItemListComponent } from './admin-item-list/admin-item-list.component';
+import { DefaultPlayerSkillEditComponent } from './default-player-skill-edit/default-player-skill-edit.component';
 import { ForceCreatePlayerAccountComponent } from './force-create-player-account/force-create-player-account.component';
 import { MapPoolEditComponent } from './map-pool-edit/map-pool-edit.component';
 import { PlayerSkillTableComponent } from './player-skill-table/player-skill-table.component';
@@ -33,6 +34,15 @@ const routes: Routes = [
     data: {
       title: 'whitelist configuration',
       animation: 'WhitelistEditPage',
+    },
+    canActivate: [ IsAdminGuard ],
+  },
+  {
+    path: 'default-player-skill',
+    component: DefaultPlayerSkillEditComponent,
+    data: {
+      title: 'default player skill',
+      animation: 'DefaultPlayerSkillEditPage',
     },
     canActivate: [ IsAdminGuard ],
   },
