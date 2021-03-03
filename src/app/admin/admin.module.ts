@@ -12,6 +12,7 @@ import { PlayerSkillTableComponent } from './player-skill-table/player-skill-tab
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { ForceCreatePlayerAccountComponent } from './force-create-player-account/force-create-player-account.component';
 import { WhitelistEditComponent } from './whitelist-edit/whitelist-edit.component';
+import { DefaultPlayerSkillEditComponent } from './default-player-skill-edit/default-player-skill-edit.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { WhitelistEditComponent } from './whitelist-edit/whitelist-edit.componen
     PlayerSkillTableComponent,
     ForceCreatePlayerAccountComponent,
     WhitelistEditComponent,
+    DefaultPlayerSkillEditComponent,
   ],
   imports: [
     CommonModule,
