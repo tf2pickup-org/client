@@ -1,3 +1,37 @@
+# [3.6.0](https://github.com/tf2pickup-pl/client/compare/3.5.0...3.6.0) (2021-03-03)
+
+
+### Bug Fixes
+
+* add missing map thumbnails ([#756](https://github.com/tf2pickup-pl/client/issues/756)) ([5ed0a80](https://github.com/tf2pickup-pl/client/commit/5ed0a80efd219bfda1db1dcd1874a4033a3a259f))
+* **deps:** update dependency ngx-markdown to v11.1.1 ([#754](https://github.com/tf2pickup-pl/client/issues/754)) ([3cc0ead](https://github.com/tf2pickup-pl/client/commit/3cc0ead9352a6d301899d762159d1d4873a8db66))
+* add 2 hours ban length ([#751](https://github.com/tf2pickup-pl/client/issues/751)) ([d30f85c](https://github.com/tf2pickup-pl/client/commit/d30f85c5f421f939b4d25f520f93d1d03ad52450))
+* fix pre-ready up not always working properly ([#752](https://github.com/tf2pickup-pl/client/issues/752)) ([6c31ab4](https://github.com/tf2pickup-pl/client/commit/6c31ab444caa547fa4147d32b37635f3eb37430d))
+* **deps:** update angular monorepo to v11.2.1 ([#721](https://github.com/tf2pickup-pl/client/issues/721)) ([8bc39ac](https://github.com/tf2pickup-pl/client/commit/8bc39ac34b64910612c85daafb580af14a1357f5))
+* **deps:** update angular monorepo to v11.2.2 ([#740](https://github.com/tf2pickup-pl/client/issues/740)) ([3fc49ed](https://github.com/tf2pickup-pl/client/commit/3fc49ed6769537f65db012b0a322b3f5157901a5))
+* **deps:** update angular monorepo to v11.2.3 ([#744](https://github.com/tf2pickup-pl/client/issues/744)) ([93821c4](https://github.com/tf2pickup-pl/client/commit/93821c44d2b7d6435651799a324c5d7364622ee2))
+* **deps:** update dependency @angular/cdk to v11.2.1 ([#723](https://github.com/tf2pickup-pl/client/issues/723)) ([ad25531](https://github.com/tf2pickup-pl/client/commit/ad25531de7b7c00db7de2fc8779e46a60fb9a8b9))
+* **deps:** update dependency @angular/cdk to v11.2.2 ([#746](https://github.com/tf2pickup-pl/client/issues/746)) ([2382ce5](https://github.com/tf2pickup-pl/client/commit/2382ce5d6265f14a0ece77ba11a264cffd10f96a))
+* **deps:** update dependency lodash-es to v4.17.21 ([#733](https://github.com/tf2pickup-pl/client/issues/733)) ([4d2a566](https://github.com/tf2pickup-pl/client/commit/4d2a5664c831075ef64610221e227c138bf27808))
+* **deps:** update dependency ngx-markdown to v11.1.0 ([#727](https://github.com/tf2pickup-pl/client/issues/727)) ([d291c9f](https://github.com/tf2pickup-pl/client/commit/d291c9f0c132c22de06c48cee30c7b2c84e8e47f))
+* **deps:** update dependency rxjs to v6.6.6 ([#747](https://github.com/tf2pickup-pl/client/issues/747)) ([ce595c3](https://github.com/tf2pickup-pl/client/commit/ce595c36dbef2d031a58e8e3e60442fa5114b5bc))
+* **deps:** update material monorepo to v10 (major) ([#671](https://github.com/tf2pickup-pl/client/issues/671)) ([51d00eb](https://github.com/tf2pickup-pl/client/commit/51d00eb4a90f1af24835fe5d97121db59b684e71))
+* fix build errors ([#737](https://github.com/tf2pickup-pl/client/issues/737)) ([988000b](https://github.com/tf2pickup-pl/client/commit/988000b1d682111f0d849f24681b09217cbb6c93))
+* replace lodash with lodash-es ([#724](https://github.com/tf2pickup-pl/client/issues/724)) ([8652131](https://github.com/tf2pickup-pl/client/commit/86521314d68395d16758323f418d670e9e054cb0))
+* **deps:** update dependency zone.js to v0.11.4 ([#719](https://github.com/tf2pickup-pl/client/issues/719)) ([a4abc86](https://github.com/tf2pickup-pl/client/commit/a4abc8668ad8aa960d0db6aa43ad8388f7f10bba))
+* **deps:** update ngrx monorepo to v11.0.1 ([#716](https://github.com/tf2pickup-pl/client/issues/716)) ([f7024c4](https://github.com/tf2pickup-pl/client/commit/f7024c4df72379a3bc7383efbbe88dadf74d43c8))
+
+
+### Features
+
+* configure player default skill ([#755](https://github.com/tf2pickup-pl/client/issues/755)) ([5e401fc](https://github.com/tf2pickup-pl/client/commit/5e401fceb91aedaf67b786115e090e66ebfafbd3))
+* whitelist id configuration ([#736](https://github.com/tf2pickup-pl/client/issues/736)) ([d6a03bb](https://github.com/tf2pickup-pl/client/commit/d6a03bb3d022ec15440dcba784f19c6ad23caa4b))
+
+
+### Performance Improvements
+
+* optimize images ([#757](https://github.com/tf2pickup-pl/client/issues/757)) ([cb0b037](https://github.com/tf2pickup-pl/client/commit/cb0b0373ddc7237449a527b2a2578dc044361461))
+
 # [3.5.0](https://github.com/tf2pickup-pl/client/compare/3.4.4...3.5.0) (2021-02-14)
 
 
