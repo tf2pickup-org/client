@@ -1,3 +1,10 @@
+## [3.6.3](https://github.com/tf2pickup-pl/client/compare/3.6.2...3.6.3) (2021-03-04)
+
+
+### Bug Fixes
+
+* add ngPreserveWhitespaces to the rules page ([#763](https://github.com/tf2pickup-pl/client/issues/763)) ([e2428c5](https://github.com/tf2pickup-pl/client/commit/e2428c5670d2e0f37db21c29c08f2eb5f1e2e930))
+
 ## [3.6.2](https://github.com/tf2pickup-pl/client/compare/3.6.1...3.6.2) (2021-03-04)
 
 
