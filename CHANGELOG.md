@@ -1,3 +1,10 @@
+## [3.6.2](https://github.com/tf2pickup-pl/client/compare/3.6.1...3.6.2) (2021-03-04)
+
+
+### Bug Fixes
+
+* fr rules formatting ([0d17039](https://github.com/tf2pickup-pl/client/commit/0d17039ca205ed1560285067796e75431f1ed3db))
+
 ## [3.6.1](https://github.com/tf2pickup-pl/client/compare/3.6.0...3.6.1) (2021-03-04)
 
 
