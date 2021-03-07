@@ -24,7 +24,7 @@ export class ProfileEffects implements OnInitEffects {
   promptUserToAcceptRules = createEffect(() =>
     this.actions.pipe(
       ofType(profileLoaded),
-      filter(({ profile }) => !profile.hasAcceptedRules),
+      filter(({ profile }) => !profile.player.hasAcceptedRules),
       switchMap(() => this.acceptRulesDialogService.showAcceptRulesDialog().pipe(
         mapTo(acceptRules()),
       )),

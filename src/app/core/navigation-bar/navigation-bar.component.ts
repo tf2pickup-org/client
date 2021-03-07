@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { isLoggedIn, profile } from '@app/profile/profile.selectors';
+import { currentPlayer, isLoggedIn, profile } from '@app/profile/profile.selectors';
 import { environment } from '@environment';
 
 @Component({
@@ -12,7 +12,7 @@ import { environment } from '@environment';
 export class NavigationBarComponent {
 
   isLoggedIn = this.store.select(isLoggedIn);
-  profile = this.store.select(profile);
+  profile = this.store.select(currentPlayer);
   links = environment.headerLinks;
 
   constructor(

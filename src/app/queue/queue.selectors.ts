@@ -1,7 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { AppState } from '../app.state';
 import { State } from './queue.reducer';
-import { profile } from '@app/profile/profile.selectors';
+import { currentPlayer, profile } from '@app/profile/profile.selectors';
 
 const queueFeature = createFeatureSelector<AppState, State>('queue');
 
@@ -32,9 +32,9 @@ export const slotById = (slotId: number) => createSelector(
 );
 
 export const mySlot = createSelector(
-  profile,
+  currentPlayer,
   queueSlots,
-  (theProfile, slots) => theProfile && slots.find(s => s.playerId === theProfile.id)
+  (player, slots) => player && slots.find(s => s.playerId === player.id)
 );
 
 export const isInQueue = createSelector(mySlot, theSlot => !!theSlot);

@@ -5,7 +5,7 @@ import { gameAdded, loadGame, gameUpdated, forceEndGame, gameCreated, reinitiali
   cancelSubstitutionRequest, replacePlayer } from './games.actions';
 import { mergeMap, map, filter, withLatestFrom } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
-import { profile } from '@app/profile/profile.selectors';
+import { currentPlayer, profile } from '@app/profile/profile.selectors';
 import { profileLoaded } from '@app/profile/profile.actions';
 import { Router } from '@angular/router';
 import { routerNavigatedAction } from '@ngrx/router-store';
@@ -46,8 +46,8 @@ export class GamesEffects {
   ownGameStarted = createEffect(() =>
     this.actions.pipe(
       ofType(gameCreated),
-      withLatestFrom(this.store.select(profile)),
-      filter(([{ game }, theProfile]) => theProfile && !!game.slots.find(s => s.player === theProfile.id)),
+      withLatestFrom(this.store.select(currentPlayer)),
+      filter(([{ game }, player]) => player && !!game.slots.find(s => s.player === player.id)),
       map(([{ game }]) => game.id),
       map(gameId => ownGameAdded({ gameId })),
     )

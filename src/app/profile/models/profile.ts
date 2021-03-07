@@ -1,27 +1,14 @@
 import { PlayerRole } from '@app/players/models/player-role';
 import { PlayerBan } from '@app/players/models/player-ban';
 import { PlayerAvatar } from '@app/players/models/player-avatar';
+import { Player } from '@app/players/models/player';
 
 export interface Profile {
-  id: string;
-  name: string;
-  joinedAt: Date;
-  steamId: string;
-  avatar: PlayerAvatar;
-  role?: PlayerRole;
-  etf2lProfileId?: number;
+  player: Player;
 
   activeGameId: string;
-  hasAcceptedRules: boolean;
   bans: PlayerBan[];
   mapVote?: string;
-
-  twitchTvUser?: {
-    userId: string;
-    login: string;
-    displayName: string;
-    profileImageUrl: string;
-  };
 
   preferences: {
     [key: string]: string;

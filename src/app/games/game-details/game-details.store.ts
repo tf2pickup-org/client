@@ -5,7 +5,7 @@ import { GameServer } from '@app/game-servers/models/game-server';
 import { loadPlayer } from '@app/players/actions';
 import { Player } from '@app/players/models/player';
 import { playerById } from '@app/players/selectors';
-import { isAdmin, isBanned, isLoggedIn, profile } from '@app/profile/profile.selectors';
+import { currentPlayer, isAdmin, isBanned, isLoggedIn, profile } from '@app/profile/profile.selectors';
 import { ComponentStore } from '@ngrx/component-store';
 import { Store } from '@ngrx/store';
 import { from, Observable } from 'rxjs';
@@ -36,17 +36,17 @@ export class GameDetailsStore extends ComponentStore<GameDetailsState> {
   readonly serverName = this.select(state => state.server?.name);
 
   readonly isMyGame = this.select(
-    this.store.select(profile),
+    this.store.select(currentPlayer),
     this.game,
     // eslint-disable-next-line no-shadow
-    (profile, game) => !!(game?.slots.find(s => s.player === profile?.id)?.status.match(/active|waiting for substitute/))
+    (player, game) => !!(game?.slots.find(s => s.player === player?.id)?.status.match(/active|waiting for substitute/))
   );
 
   readonly mumbleUrl = this.select(
-    this.store.select(profile),
+    this.store.select(currentPlayer),
     this.game,
     // eslint-disable-next-line no-shadow
-    (profile, game) => createMumbleUrl(game, profile)
+    (player, game) => createMumbleUrl(game, player)
   );
 
   readonly canSubstitute = this.select(
