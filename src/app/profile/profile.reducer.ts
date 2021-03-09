@@ -2,13 +2,28 @@ import { Profile } from './models/profile';
 import { createReducer, Action, on } from '@ngrx/store';
 import { profileLoaded, rulesAccepted, profileUpdated, preferencesUpdated } from './profile.actions';
 
-export type State = Profile;
+// export type State = Profile;
+interface AuthenticatedState extends Profile {
+  authenticated: 'authenticated';
+}
 
-export const initialState: State = null;
+interface NotAuthenticatedState {
+  authenticated: 'not authenticated';
+}
 
-const profileReducer = createReducer(
+interface UnknownState {
+  authenticated: 'unknown';
+}
+
+export type State = UnknownState | NotAuthenticatedState | AuthenticatedState;
+
+export const initialState: State = {
+  authenticated: 'unknown',
+}
+
+const profileReducer = createReducer<State>(
   initialState,
-  on(profileLoaded, (state, { profile }) => ({ ...profile })),
+  on(profileLoaded, (state, { profile }) => ({ ...profile, authenticated: 'authenticated' })),
   on(rulesAccepted, state => ({ ...state, hasAcceptedRules: true })),
   on(profileUpdated, (state, { profileChanges }) => ({ ...state, ...profileChanges })),
   on(preferencesUpdated, (state, { preferences }) => ({ ...state, preferences })),

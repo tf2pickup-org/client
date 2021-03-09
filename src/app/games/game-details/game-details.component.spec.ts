@@ -20,7 +20,6 @@ import { ConnectStringComponent } from '../connect-string/connect-string.compone
 import { GameAdminButtonsComponent } from '../game-admin-buttons/game-admin-buttons.component';
 import { MumbleJoinButtonComponent } from '../mumble-join-button/mumble-join-button.component';
 import { forceEndGame, loadGame, reinitializeServer, replacePlayer, requestSubstitute } from '../games.actions';
-import { Profile } from '@app/profile/models/profile';
 import { keyBy } from 'lodash-es';
 import { loadGameServer } from '@app/game-servers/game-servers.actions';
 import { Player } from '@app/players/models/player';
@@ -266,7 +265,7 @@ describe('GameDetailsComponent', () => {
 
         describe('when logged in', () => {
           beforeEach(() => {
-            profile.setResult({ player: { id: 'FAKE_PLAYER_ID' } } as Profile);
+            profile.setResult({ authenticated: 'authenticated', player: { id: 'FAKE_PLAYER_ID' } } as any);
             isLoggedIn.setResult(true);
             store.refreshState();
             fixture.detectChanges();
@@ -308,7 +307,7 @@ describe('GameDetailsComponent', () => {
 
           describe('and takes part in this game', () => {
             beforeEach(() => {
-              profile.setResult({ player: { id: 'FAKE_PLAYER_1_ID', name: 'FAKE PLAYER' } } as Profile);
+              profile.setResult({ authenticated: 'authenticated', player: { id: 'FAKE_PLAYER_1_ID', name: 'FAKE PLAYER' } } as any);
               activeGame.setResult({ id: 'FAKE_GAME_ID' } as Game);
               store.refreshState();
               fixture.detectChanges();

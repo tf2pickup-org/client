@@ -4,11 +4,11 @@ import { State } from './profile.reducer';
 
 export const profile = createFeatureSelector<AppState, State>('profile');
 
-export const currentPlayer = createSelector(profile, profile => profile?.player);
+export const currentPlayer = createSelector(profile, profile => profile.authenticated === 'authenticated' ? profile.player : null);
 
 export const isLoggedIn = createSelector(
   profile,
-  theProfile => !!theProfile
+  profile => profile.authenticated === 'authenticated'
 );
 
 export const isAdmin = createSelector(
@@ -23,7 +23,7 @@ export const isSuperUser = createSelector(
 
 export const bans = createSelector(
   profile,
-  theProfile => theProfile?.bans
+  profile => profile.authenticated === 'authenticated' ? profile.bans : []
 );
 
 export const isBanned = createSelector(
@@ -38,5 +38,5 @@ export const twitchTvUser = createSelector(
 
 export const preferences = createSelector(
   profile,
-  profile => profile?.preferences
+  profile => profile.authenticated === 'authenticated' ? profile.preferences : { }
 );
