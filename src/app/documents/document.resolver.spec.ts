@@ -1,0 +1,38 @@
+import { TestBed } from '@angular/core/testing';
+import { RouterStateSnapshot } from '@angular/router';
+import { MockProvider } from 'ng-mocks';
+import { of } from 'rxjs';
+import { DocumentResolver } from './document.resolver';
+import { DocumentsService } from './documents.service';
+
+describe(DocumentResolver.name, () => {
+  let resolver: DocumentResolver;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [
+        MockProvider(DocumentsService, {
+          fetchDocument: name => of({
+            name,
+            language: 'en',
+            body: 'fake document body',
+          }),
+        }),
+      ],
+    });
+    resolver = TestBed.inject(DocumentResolver);
+  });
+
+  it('should be created', () => {
+    expect(resolver).toBeTruthy();
+  });
+
+  describe('#resolve()', () => {
+    it('should resolve the document', done => {
+      resolver.resolve({ data: { documentName: 'rules' } } as any, { } as RouterStateSnapshot).subscribe(document => {
+        expect(document.name).toEqual('rules');
+        done();
+      });
+    });
+  });
+});
