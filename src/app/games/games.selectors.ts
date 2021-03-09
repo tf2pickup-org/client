@@ -2,7 +2,7 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { AppState } from '@app/app.state';
 import { State } from './games.reducer';
 import { adapter } from './games.adapter';
-import { profile } from '@app/profile/profile.selectors';
+import { currentPlayer } from '@app/profile/profile.selectors';
 
 const gamesFeature = createFeatureSelector<AppState, State>('games');
 
@@ -18,9 +18,9 @@ export const activeGames = createSelector(
 );
 
 export const activeGame = createSelector(
-  profile,
+  currentPlayer,
   activeGames,
-  (theProfile, games) => theProfile && games?.find(g => g.slots.find(s => s.player === theProfile.id))
+  (player, games) => player && games?.find(g => g.slots.find(s => s.player === player.id))
 );
 
 export const isPlayingGame = createSelector(

@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { Player } from '@app/players/models/player';
 import { TwitchService } from '@app/twitch/twitch.service';
 import { MemoizedSelector } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
-import { Profile } from '../models/profile';
 import { twitchTvUser } from '../profile.selectors';
 import { TwitchTvIntegrationComponent } from './twitch-tv-integration.component';
 
@@ -11,7 +11,7 @@ describe('TwitchTvIntegrationComponent', () => {
   let component: TwitchTvIntegrationComponent;
   let fixture: ComponentFixture<TwitchTvIntegrationComponent>;
   let store: MockStore;
-  let twitchTvUserSelector: MemoizedSelector<unknown, Profile['twitchTvUser']>;
+  let twitchTvUserSelector: MemoizedSelector<unknown, Player['twitchTvUser']>;
   let twitchService: jasmine.SpyObj<TwitchService>;
 
   beforeEach(() => {

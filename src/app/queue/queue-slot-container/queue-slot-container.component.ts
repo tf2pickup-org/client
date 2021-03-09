@@ -7,7 +7,7 @@ import { slotById, mySlot, queueFriendships } from '../queue.selectors';
 import { canJoinQueue } from '@app/selectors';
 import { joinQueue, leaveQueue, markFriend } from '../queue.actions';
 import { switchMap, map, shareReplay } from 'rxjs/operators';
-import { profile } from '@app/profile/profile.selectors';
+import { currentPlayer, profile } from '@app/profile/profile.selectors';
 import { playerById } from '@app/players/selectors';
 import { FriendFlags } from '../friend-flags';
 
@@ -36,18 +36,18 @@ export class QueueSlotContainerComponent {
   );
 
   friendFlags: Observable<FriendFlags> = combineLatest([
-    this.store.select(profile),
+    this.store.select(currentPlayer),
     this.canMarkAsFriend,
     this.slot,
     this.store.select(queueFriendships),
   ]).pipe(
-    switchMap(([theProfile, canBefriend, theSlot, allFriendships]) => {
+    switchMap(([player, canBefriend, theSlot, allFriendships]) => {
       if (!canBefriend) {
         return of({ canMarkAsFriend: false });
       }
 
       const friendship = allFriendships.find(f => f.targetPlayerId === theSlot.playerId);
-      if (friendship?.sourcePlayerId === theProfile?.id) {
+      if (friendship?.sourcePlayerId === player?.id) {
         return of({ canMarkAsFriend: true, markedByMe: true });
       } else if (friendship?.sourcePlayerId) {
         return this.store.pipe(

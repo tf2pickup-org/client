@@ -53,14 +53,15 @@ const initialState = {
     },
   },
   profile: {
+    player: {
+      steamId: '76561198074409147',
+      name: 'mały',
+      role: 'super-user',
+      etf2lProfileId: 112758,
+      joinedAt: '2019-08-02T19:01:09.576Z',
+      id: 'FAKE_PLAYER_ID',
+    },
     hasAcceptedRules: true,
-    steamId: '76561198074409147',
-    name: 'mały',
-    avatarUrl: 'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/96/962ac5adb6b0cce647227a2c429c035e56197fb2.jpg',
-    role: 'super-user',
-    etf2lProfileId: 112758,
-    joinedAt: '2019-08-02T19:01:09.576Z',
-    id: 'FAKE_PLAYER_ID',
     activeGameId: null,
     bans: [],
   }

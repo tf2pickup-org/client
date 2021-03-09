@@ -9,7 +9,7 @@ import { Observable, BehaviorSubject, Subject } from 'rxjs';
 import { Player } from '../models/player';
 import { Actions, ofType } from '@ngrx/effects';
 import { Location } from '@angular/common';
-import { profile } from '@app/profile/profile.selectors';
+import { currentPlayer } from '@app/profile/profile.selectors';
 import { MDCTextField } from '@material/textfield';
 
 interface BanLengthValue {
@@ -196,8 +196,8 @@ export class AddPlayerBanComponent implements OnInit, OnDestroy {
         end: this.lengthValues[this.banForm.get('length').value].toDate(),
         reason: this.banForm.get('reason').value,
       })),
-      withLatestFrom(this.store.select(profile)),
-      map(([playerBan, theProfile]) => ({ ...playerBan, admin: theProfile.id })),
+      withLatestFrom(this.store.select(currentPlayer)),
+      map(([playerBan, admin]) => ({ ...playerBan, admin: admin.id })),
     ).subscribe(playerBan => this.store.dispatch(addPlayerBan({ playerBan })));
   }
 

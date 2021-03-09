@@ -66,9 +66,11 @@ const initialState = {
     friendships: [],
   },
   profile: {
-    name: 'maly',
-    id: 'FAKE_MEDIC_1_ID',
-    activeGameId: null,
+    player: {
+      name: 'maly',
+      id: 'FAKE_MEDIC_1_ID',
+      activeGameId: null,
+    },
   },
 };
 
