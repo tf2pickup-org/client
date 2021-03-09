@@ -26,6 +26,7 @@ import { NotificationsModule } from './notifications/notifications.module';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { IoModule } from './io/io.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DocumentsModule } from './documents/documents.module';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     GameServersModule,
     HallOfFameModule,
     NotificationsModule,
+    DocumentsModule,
   ],
   providers: [
     { provide: API_URL, useValue: environment.apiUrl },
