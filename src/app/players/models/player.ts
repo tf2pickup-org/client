@@ -10,7 +10,6 @@ export interface Player {
   avatar: PlayerAvatar;
   role?: PlayerRole;
   etf2lProfileId?: number;
-  hasAcceptedRules: boolean;
 
   skill?: Record<string, number>;
   stats?: PlayerStats;

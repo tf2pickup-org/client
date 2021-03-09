@@ -266,7 +266,7 @@ describe('GameDetailsComponent', () => {
 
         describe('when logged in', () => {
           beforeEach(() => {
-            profile.setResult({ id: 'FAKE_PLAYER_ID' } as Profile);
+            profile.setResult({ player: { id: 'FAKE_PLAYER_ID' } } as Profile);
             isLoggedIn.setResult(true);
             store.refreshState();
             fixture.detectChanges();
@@ -308,7 +308,7 @@ describe('GameDetailsComponent', () => {
 
           describe('and takes part in this game', () => {
             beforeEach(() => {
-              profile.setResult({ id: 'FAKE_PLAYER_1_ID', name: 'FAKE PLAYER' } as Profile);
+              profile.setResult({ player: { id: 'FAKE_PLAYER_1_ID', name: 'FAKE PLAYER' } } as Profile);
               activeGame.setResult({ id: 'FAKE_GAME_ID' } as Game);
               store.refreshState();
               fixture.detectChanges();

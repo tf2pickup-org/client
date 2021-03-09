@@ -9,7 +9,7 @@ import { Observable, BehaviorSubject, Subject } from 'rxjs';
 import { Player } from '../models/player';
 import { Actions, ofType } from '@ngrx/effects';
 import { Location } from '@angular/common';
-import { currentPlayer, profile } from '@app/profile/profile.selectors';
+import { currentPlayer } from '@app/profile/profile.selectors';
 import { MDCTextField } from '@material/textfield';
 
 interface BanLengthValue {

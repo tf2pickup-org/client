@@ -24,7 +24,9 @@ describe('AddPlayerBanComponent', () => {
 
   const initialState = {
     profile: {
-      id: 'FAKE_ADMIN_ID',
+      player: {
+        id: 'FAKE_ADMIN_ID',
+      },
     },
     players: {
       bans: {
