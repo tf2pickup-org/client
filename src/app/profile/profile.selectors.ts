@@ -28,7 +28,7 @@ export const bans = createSelector(
 
 export const isBanned = createSelector(
   bans,
-  theseBans => theseBans?.length > 0
+  bans => bans.length > 0
 );
 
 export const twitchTvUser = createSelector(

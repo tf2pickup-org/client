@@ -5,7 +5,7 @@ import { GameServer } from '@app/game-servers/models/game-server';
 import { loadPlayer } from '@app/players/actions';
 import { Player } from '@app/players/models/player';
 import { playerById } from '@app/players/selectors';
-import { currentPlayer, isAdmin, isBanned, isLoggedIn, profile } from '@app/profile/profile.selectors';
+import { currentPlayer, isAdmin, isBanned, isLoggedIn } from '@app/profile/profile.selectors';
 import { ComponentStore } from '@ngrx/component-store';
 import { Store } from '@ngrx/store';
 import { from, Observable } from 'rxjs';

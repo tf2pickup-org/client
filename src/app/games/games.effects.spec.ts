@@ -53,6 +53,7 @@ const initialState = {
     },
   },
   profile: {
+    authenticated: 'authenticated',
     player: {
       steamId: '76561198074409147',
       name: 'mały',

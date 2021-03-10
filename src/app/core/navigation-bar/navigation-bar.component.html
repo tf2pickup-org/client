@@ -70,13 +70,13 @@
       <img src="/assets/ui_settings.png">
     </a>
 
-    <a *ngIf="profile | async as _profile"
-      [routerLink]="['/player', _profile.id]"
+    <a *ngIf="currentPlayer | async as _currentPlayer"
+      [routerLink]="['/player', _currentPlayer.id]"
       class="navbar__link navbar__link--profile">
-      <img [src]="_profile.avatar.medium"
+      <img [src]="_currentPlayer.avatar.medium"
         class="profile-avatar"
         crossorigin="anonymous">
-      {{ _profile.name }}
+      {{ _currentPlayer.name }}
     </a>
   </ng-container>
 
@@ -84,5 +84,3 @@
     <app-steam-login-button class="steam-login-button"></app-steam-login-button>
   </ng-template>
 </nav>
-
-

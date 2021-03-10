@@ -24,6 +24,7 @@ describe('AddPlayerBanComponent', () => {
 
   const initialState = {
     profile: {
+      authenticated: 'authenticated',
       player: {
         id: 'FAKE_ADMIN_ID',
       },

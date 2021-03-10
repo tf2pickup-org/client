@@ -3,13 +3,13 @@ import { isAdmin, isSuperUser, bans, isBanned, twitchTvUser, isLoggedIn } from '
 describe('isLoggedIn', () => {
   describe('when the user is logged in', () => {
     it('should return true', () => {
-      expect(isLoggedIn.projector({ })).toBe(true);
+      expect(isLoggedIn.projector({ authenticated: 'authenticated' })).toBe(true);
     });
   });
 
   describe('when the user is not logged in', () => {
     it('should return false', () => {
-      expect(isLoggedIn.projector(null)).toBe(false);
+      expect(isLoggedIn.projector({ authenticated: 'not authenticated' })).toBe(false);
     });
   });
 });
@@ -36,15 +36,14 @@ describe('isSuperUser', () => {
 
 describe('bans', () => {
   it('should return player bans', () => {
-    expect(bans.projector(undefined)).toBeUndefined();
-    expect(bans.projector(null)).toBeUndefined();
-    expect(bans.projector({ bans: [] })).toEqual([]);
+    expect(bans.projector({ authenticated: 'unknown' })).toEqual([]);
+    expect(bans.projector({ authenticated: 'not authenticated' })).toEqual([]);
+    expect(bans.projector({ authenticated: 'authenticated', bans: [{ id: '1' }] })).toEqual([{ id: '1' } as any]);
   });
 });
 
 describe('isBanned', () => {
   it('should return true if the player has at least one ban', () => {
-    expect(isBanned.projector(null)).toBe(false);
     expect(isBanned.projector([])).toBe(false);
     expect(isBanned.projector([ { } ])).toBe(true);
   });
