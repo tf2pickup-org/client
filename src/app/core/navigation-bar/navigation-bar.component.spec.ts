@@ -8,7 +8,7 @@ describe('NavigationBarComponent', () => {
   let component: NavigationBarComponent;
   let fixture: ComponentFixture<NavigationBarComponent>;
   let store: MockStore;
-  const initialState = { profile: null };
+  const initialState = { profile: { authenticated: 'not authenticated' } };
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
@@ -44,6 +44,7 @@ describe('NavigationBarComponent', () => {
     beforeEach(() => {
       store.setState({
         profile: {
+          authenticated: 'authenticated',
           player: {
             name: 'FAKE_NAME',
             id: 'FAKE_ID',

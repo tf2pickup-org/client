@@ -13,14 +13,13 @@ import { GameTeamHeaderComponent } from '../game-team-header/game-team-header.co
 import { GameTeamPlayerListComponent } from '../game-team-player-list/game-team-player-list.component';
 import { Game } from '../models/game';
 import { map } from 'rxjs/operators';
-import { isAdmin, isBanned, isLoggedIn, profile } from '@app/profile/profile.selectors';
+import { currentPlayer, isAdmin, isBanned, isLoggedIn, profile } from '@app/profile/profile.selectors';
 import { activeGame } from '../games.selectors';
 import { GameServer } from '@app/game-servers/models/game-server';
 import { ConnectStringComponent } from '../connect-string/connect-string.component';
 import { GameAdminButtonsComponent } from '../game-admin-buttons/game-admin-buttons.component';
 import { MumbleJoinButtonComponent } from '../mumble-join-button/mumble-join-button.component';
 import { forceEndGame, loadGame, reinitializeServer, replacePlayer, requestSubstitute } from '../games.actions';
-import { Profile } from '@app/profile/models/profile';
 import { keyBy } from 'lodash-es';
 import { loadGameServer } from '@app/game-servers/game-servers.actions';
 import { Player } from '@app/players/models/player';
@@ -133,6 +132,9 @@ const makeState = (games: Game[], gameServers: GameServer[] = [mockGameServer], 
       entities: keyBy(players, 'id'),
     }
   },
+  profile: {
+    authenticated: 'unknown',
+  },
 });
 
 describe('GameDetailsComponent', () => {
@@ -167,11 +169,12 @@ describe('GameDetailsComponent', () => {
     component = fixture.point.componentInstance;
 
     store = TestBed.inject(MockStore);
-    store.overrideSelector(profile, null);
+    store.overrideSelector(profile, { authenticated: 'not authenticated' });
     store.overrideSelector(isLoggedIn, false);
     store.overrideSelector(isBanned, false);
     store.overrideSelector(activeGame, null);
     store.overrideSelector(isAdmin, false);
+    store.overrideSelector(currentPlayer, null);
     spyOn(store, 'dispatch');
 
     fixture.detectChanges();
@@ -266,7 +269,7 @@ describe('GameDetailsComponent', () => {
 
         describe('when logged in', () => {
           beforeEach(() => {
-            profile.setResult({ player: { id: 'FAKE_PLAYER_ID' } } as Profile);
+            profile.setResult({ authenticated: 'authenticated', player: { id: 'FAKE_PLAYER_ID' } } as any);
             isLoggedIn.setResult(true);
             store.refreshState();
             fixture.detectChanges();
@@ -308,7 +311,7 @@ describe('GameDetailsComponent', () => {
 
           describe('and takes part in this game', () => {
             beforeEach(() => {
-              profile.setResult({ player: { id: 'FAKE_PLAYER_1_ID', name: 'FAKE PLAYER' } } as Profile);
+              currentPlayer.setResult({ id: 'FAKE_PLAYER_1_ID', name: 'FAKE PLAYER' } as Player);
               activeGame.setResult({ id: 'FAKE_GAME_ID' } as Game);
               store.refreshState();
               fixture.detectChanges();
