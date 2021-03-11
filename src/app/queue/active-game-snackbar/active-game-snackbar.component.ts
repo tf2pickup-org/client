@@ -1,5 +1,4 @@
 import { Component, ChangeDetectionStrategy, Input, ViewChild, ElementRef, OnDestroy, AfterViewChecked } from '@angular/core';
-import { Game } from '@app/games/models/game';
 import { MDCSnackbar } from '@material/snackbar';
 
 @Component({
