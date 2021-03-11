@@ -34,9 +34,7 @@ describe('ActiveGameSnackbarComponent', () => {
 
   describe('with game', () => {
     beforeEach(() => {
-      component.game = {
-        id: 'FAKE_GAME_ID',
-      } as any;
+      component.gameId = 'FAKE_GAME_ID';
       fixture.detectChanges();
     });
 

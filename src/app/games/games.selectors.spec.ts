@@ -1,6 +1,6 @@
 /* eslint-disable id-blacklist */
 /* eslint-disable @typescript-eslint/naming-convention */
-import { gameById, activeGames, isPlayingGame, activeGame } from './games.selectors';
+import { gameById, activeGames, isPlayingGame, activeGame, activeGameId } from './games.selectors';
 import { Game } from './models/game';
 
 describe('gameById', () => {
@@ -58,6 +58,20 @@ describe('activeGame', () => {
 
     it('should return the active game', () => {
       expect(activeGame.projector({ id: 'FAKE_PLAYER_ID' }, [ game ])).toEqual(game);
+    });
+  });
+});
+
+describe('activeGameId', () => {
+  describe('when there is no active game', () => {
+    it('should return undefined', () => {
+      expect(activeGameId.projector(null)).toBe(undefined);
+    });
+  });
+
+  describe('when the active game is given', () => {
+    it('should extract the game\'s id', () => {
+      expect(activeGameId.projector({ id: 'FAKE_GAME_ID' })).toEqual('FAKE_GAME_ID');
     });
   });
 });

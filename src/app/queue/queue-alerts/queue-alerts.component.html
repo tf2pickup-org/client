@@ -1,8 +1,8 @@
 <app-ban-banner *ngFor="let ban of bans | async"
   [ban]="ban"></app-ban-banner>
 
-<app-active-game-snackbar *ngIf="activeGame | async as _activeGame"
-  [game]="_activeGame"></app-active-game-snackbar>
+<app-active-game-snackbar *ngIf="activeGameId | async as _activeGameId"
+  [gameId]="_activeGameId"></app-active-game-snackbar>
 
 <app-substitute-request-banner *ngFor="let sr of substituteRequests | async"
   [substituteRequest]="sr"></app-substitute-request-banner>

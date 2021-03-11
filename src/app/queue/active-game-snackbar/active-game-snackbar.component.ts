@@ -11,7 +11,7 @@ import { MDCSnackbar } from '@material/snackbar';
 export class ActiveGameSnackbarComponent implements AfterViewChecked, OnDestroy {
 
   @Input()
-  game: Game;
+  gameId: string;
 
   @ViewChild('container')
   container: ElementRef;
@@ -19,7 +19,7 @@ export class ActiveGameSnackbarComponent implements AfterViewChecked, OnDestroy 
   private snackbar?: MDCSnackbar;
 
   ngAfterViewChecked() {
-    if (this.game && this.container) {
+    if (this.gameId && this.container) {
       this.createSnackbar();
     }
   }
