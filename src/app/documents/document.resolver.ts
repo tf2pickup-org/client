@@ -14,6 +14,7 @@ export class DocumentResolver implements Resolve<Document> {
   ) { }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Document> {
-    return this.documentsService.fetchDocument(route.data.documentName);
+    const documentName = route.data.documentName ?? route.params.documentName;
+    return this.documentsService.fetchDocument(documentName);
   }
 }

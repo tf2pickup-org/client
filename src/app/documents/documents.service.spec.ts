@@ -31,4 +31,17 @@ describe('DocumentsService', () => {
       expect().nothing();
     });
   });
+
+  describe('#saveDocument()', () => {
+    it('should call the endpoint', () => {
+      service.saveDocument('rules', 'bla bla bla').subscribe();
+      const request = httpController.expectOne('FAKE_URL/documents/rules').request;
+      expect(request.method).toBe('PUT');
+      expect(request.body).toEqual({
+        name: 'rules',
+        language: 'en',
+        body: 'bla bla bla',
+      });
+    });
+  });
 });

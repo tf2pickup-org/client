@@ -13,8 +13,22 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { ForceCreatePlayerAccountComponent } from './force-create-player-account/force-create-player-account.component';
 import { WhitelistEditComponent } from './whitelist-edit/whitelist-edit.component';
 import { DefaultPlayerSkillEditComponent } from './default-player-skill-edit/default-player-skill-edit.component';
+import { DocumentEditComponent } from './document-edit/document-edit.component';
+import { MarkdownModule } from 'ngx-markdown';
 
 @NgModule({
+  imports: [
+    CommonModule,
+    TooltipModule,
+    ReactiveFormsModule,
+    NgxDatatableModule,
+    MarkdownModule,
+
+    IconsModule,
+    SharedModule,
+
+    AdminRoutingModule,
+  ],
   declarations: [
     MapPoolEditComponent,
     MapEditComponent,
@@ -23,17 +37,7 @@ import { DefaultPlayerSkillEditComponent } from './default-player-skill-edit/def
     ForceCreatePlayerAccountComponent,
     WhitelistEditComponent,
     DefaultPlayerSkillEditComponent,
+    DocumentEditComponent,
   ],
-  imports: [
-    CommonModule,
-    TooltipModule,
-    ReactiveFormsModule,
-    NgxDatatableModule,
-
-    IconsModule,
-    SharedModule,
-
-    AdminRoutingModule,
-  ]
 })
 export class AdminModule { }
