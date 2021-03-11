@@ -28,10 +28,21 @@ describe(DocumentResolver.name, () => {
   });
 
   describe('#resolve()', () => {
-    it('should resolve the document', done => {
-      resolver.resolve({ data: { documentName: 'rules' } } as any, { } as RouterStateSnapshot).subscribe(document => {
-        expect(document.name).toEqual('rules');
-        done();
+    describe('when using route data', () => {
+      it('should resolve the document', done => {
+        resolver.resolve({ data: { documentName: 'rules' }, params: { } } as any, { } as RouterStateSnapshot).subscribe(document => {
+          expect(document.name).toEqual('rules');
+          done();
+        });
+      });
+    });
+
+    describe('when using route params', () => {
+      it('should resolve the document', done => {
+        resolver.resolve({ data: { }, params: { documentName: 'foo' } } as any, { } as RouterStateSnapshot).subscribe(document => {
+          expect(document.name).toEqual('foo');
+          done();
+        });
       });
     });
   });

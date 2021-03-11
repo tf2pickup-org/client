@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { IsAdminGuard } from '@app/auth/is-admin.guard';
+import { DocumentResolver } from '@app/documents/document.resolver';
 import { AdminItemListComponent } from './admin-item-list/admin-item-list.component';
 import { DefaultPlayerSkillEditComponent } from './default-player-skill-edit/default-player-skill-edit.component';
+import { DocumentEditComponent } from './document-edit/document-edit.component';
 import { ForceCreatePlayerAccountComponent } from './force-create-player-account/force-create-player-account.component';
 import { MapPoolEditComponent } from './map-pool-edit/map-pool-edit.component';
 import { PlayerSkillTableComponent } from './player-skill-table/player-skill-table.component';
@@ -61,6 +63,18 @@ const routes: Routes = [
     data: {
       title: 'force create player account',
       animation: 'ForceCreatePlayerAccountPage',
+    },
+    canActivate: [ IsAdminGuard ],
+  },
+  {
+    path: 'document-edit/:documentName',
+    component: DocumentEditComponent,
+    data: {
+      title: 'edit document',
+      animation: 'DocumentEditPage',
+    },
+    resolve: {
+      document: DocumentResolver,
     },
     canActivate: [ IsAdminGuard ],
   },

@@ -18,4 +18,12 @@ export class DocumentsService {
     return this.http.get<Document>(`${this.apiUrl}/documents/${name}`);
   }
 
+  saveDocument(name: string, body: string): Observable<Document> {
+    return this.http.put<Document>(`${this.apiUrl}/documents/${name}`, {
+      name,
+      body,
+      language: 'en',
+    });
+  }
+
 }
