@@ -15,6 +15,7 @@ import { WhitelistEditComponent } from './whitelist-edit/whitelist-edit.componen
 import { DefaultPlayerSkillEditComponent } from './default-player-skill-edit/default-player-skill-edit.component';
 import { DocumentEditComponent } from './document-edit/document-edit.component';
 import { MarkdownModule } from 'ngx-markdown';
+import { EditPageWrapperComponent } from './edit-page-wrapper/edit-page-wrapper.component';
 
 @NgModule({
   imports: [
@@ -38,6 +39,7 @@ import { MarkdownModule } from 'ngx-markdown';
     WhitelistEditComponent,
     DefaultPlayerSkillEditComponent,
     DocumentEditComponent,
+    EditPageWrapperComponent,
   ],
 })
 export class AdminModule { }

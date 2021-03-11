@@ -9,6 +9,7 @@ import { FeatherComponent } from 'angular-feather';
 import { MockBuilder, MockedComponentFixture, MockRender, ngMocks } from 'ng-mocks';
 import { Subject } from 'rxjs';
 import { take } from 'rxjs/operators';
+import { EditPageWrapperComponent } from '../edit-page-wrapper/edit-page-wrapper.component';
 import { DefaultPlayerSkillEditComponent } from './default-player-skill-edit.component';
 
 describe(DefaultPlayerSkillEditComponent.name, () => {
@@ -41,6 +42,7 @@ describe(DefaultPlayerSkillEditComponent.name, () => {
         },
       ]
     }))
+    .keep(EditPageWrapperComponent)
     .mock(FeatherComponent)
     .mock(GameClassIconComponent)
   );
@@ -68,7 +70,7 @@ describe(DefaultPlayerSkillEditComponent.name, () => {
 
   it('should render input for each game class', () => {
     expect(ngMocks.findAll('input[type=number]').length).toEqual(2);
-    const gameClassIcons = ngMocks.findInstances(GameClassIconComponent);
+    const gameClassIcons = ngMocks.findAll('app-game-class-icon').map(c => c.componentInstance);
     expect(gameClassIcons.length).toEqual(2);
     expect(gameClassIcons[0].gameClass).toEqual('scout');
     expect(gameClassIcons[1].gameClass).toEqual('soldier');

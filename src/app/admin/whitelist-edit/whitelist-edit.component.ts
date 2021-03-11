@@ -48,11 +48,15 @@ export class WhitelistEditComponent implements OnInit, AfterViewInit, OnDestroy 
   save() {
     this.isSaving.next(true);
     this.configurationService.fetchConfiguration().pipe(
-      switchMap(configuration => this.configurationService.setConfiguration({ ...configuration, whitelistId: this.form.get('whitelistId').value })),
+      switchMap(configuration => this.configurationService.setConfiguration({ ...configuration, whitelistId: this.whitelistId })),
       tap(configuration => this.form.reset(configuration)),
     ).subscribe(() => {
       this.isSaving.next(false);
     });
+  }
+
+  get whitelistId() {
+    return this.form.get('whitelistId').value;
   }
 
 }
