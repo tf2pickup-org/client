@@ -1,7 +1,7 @@
 import { version } from 'package.json';
 import { entryQueue6v6 } from './entry-queue-6v6';
 
-const discordInvitation = 'https://discord.gg/RuUqhCT8Ts';
+const discordInvitation = 'https://discord.gg/hSWN5mu2kf';
 
 export const environment = {
   production: true,
