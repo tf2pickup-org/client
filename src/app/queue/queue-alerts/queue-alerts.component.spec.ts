@@ -6,7 +6,7 @@ import { Store, MemoizedSelector } from '@ngrx/store';
 import { By } from '@angular/platform-browser';
 import { AppState } from '@app/app.state';
 import { Game } from '@app/games/models/game';
-import { activeGame } from '@app/games/games.selectors';
+import { activeGame, activeGameId } from '@app/games/games.selectors';
 import { PlayerBan } from '@app/players/models/player-ban';
 import { bans } from '@app/profile/profile.selectors';
 import { SubstituteRequest } from '../models/substitute-request';
@@ -20,7 +20,7 @@ describe('QueueAlertsComponent', () => {
   let component: QueueAlertsComponent;
   let fixture: ComponentFixture<QueueAlertsComponent>;
   let store: MockStore<any>;
-  let activeGameSelector: MemoizedSelector<AppState, Game>;
+  let activeGameIdSelector: MemoizedSelector<AppState, string>;
   let bansSelector: MemoizedSelector<AppState, PlayerBan[]>;
   let substituteRequestsSelector: MemoizedSelector<AppState, SubstituteRequest[]>;
 
@@ -44,7 +44,7 @@ describe('QueueAlertsComponent', () => {
 
   beforeEach(() => {
     store = TestBed.inject(MockStore);
-    activeGameSelector = store.overrideSelector(activeGame, null);
+    activeGameIdSelector = store.overrideSelector(activeGameId, null);
     bansSelector = store.overrideSelector(bans, []);
     substituteRequestsSelector = store.overrideSelector(substituteRequests, []);
 
@@ -81,16 +81,10 @@ describe('QueueAlertsComponent', () => {
   });
 
   describe('with active game', () => {
-    const mockGame: Game = {
-      id: 'FAKE_GAME_ID',
-      // eslint-disable-next-line id-blacklist
-      number: 234,
-      launchedAt: new Date(),
-      map: 'cp_badlands',
-    } as any;
+    const gameId = 'FAKE_GAME_ID';
 
     beforeEach(() => {
-      activeGameSelector.setResult(mockGame);
+      activeGameIdSelector.setResult(gameId);
       store.refreshState();
       fixture.detectChanges();
     });
@@ -99,7 +93,7 @@ describe('QueueAlertsComponent', () => {
       const activeGameSnackbar = fixture.debugElement.query(By.css('app-active-game-snackbar'))
         .componentInstance as ActiveGameSnackbarComponent;
       expect(activeGameSnackbar).toBeTruthy();
-      expect(activeGameSnackbar.game).toEqual(mockGame);
+      expect(activeGameSnackbar.gameId).toEqual(gameId);
     });
   });
 
@@ -117,7 +111,7 @@ describe('QueueAlertsComponent', () => {
       fixture.detectChanges();
     });
 
-    it('should render the subsitute alert banner', () => {
+    it('should render the substitute alert banner', () => {
       const substituteRequestBanner = fixture.debugElement.query(By.css('app-substitute-request-banner'))
         .componentInstance as SubstituteRequestBannerComponent;
       expect(substituteRequestBanner).toBeTruthy();

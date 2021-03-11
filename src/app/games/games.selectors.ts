@@ -23,6 +23,11 @@ export const activeGame = createSelector(
   (player, games) => player && games?.find(g => g.slots.find(s => s.player === player.id))
 );
 
+export const activeGameId = createSelector(
+  activeGame,
+  activeGame => activeGame?.id
+);
+
 export const isPlayingGame = createSelector(
   activeGame,
   game => !!game,

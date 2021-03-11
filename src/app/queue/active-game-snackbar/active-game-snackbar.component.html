@@ -1,4 +1,4 @@
-<div *ngIf="game"
+<div *ngIf="gameId"
   class="mdc-snackbar active-game-snackbar"
   #container>
   <div class="mdc-snackbar__surface" role="status" aria-relevant="additions">
@@ -6,7 +6,7 @@
       You are involved in a currently running game.
     </div>
     <div class="mdc-snackbar__actions" aria-atomic="true">
-      <a [routerLink]="['/game', game.id]"
+      <a [routerLink]="['/game', gameId]"
         class="mdc-button mdc-snackbar__action">
         <div class="mdc-button__ripple"></div>
         <span class="mdc-button__label">Go back to the game</span>
