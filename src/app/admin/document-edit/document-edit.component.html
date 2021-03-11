@@ -34,7 +34,9 @@
       </div>
       <div class="col-6">
         <div class="surface">
-          <markdown [data]="body.value" class="surface__content" ngPreserveWhitespace></markdown>
+          <div class="surface__content">
+            <markdown [data]="body.value" ngPreserveWhitespace></markdown>
+          </div>
         </div>
       </div>
     </div>
