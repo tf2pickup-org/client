@@ -6,6 +6,7 @@ import { FeatherComponent } from 'angular-feather';
 import { MockBuilder, MockedComponentFixture, MockRender, ngMocks } from 'ng-mocks';
 import { Subject } from 'rxjs';
 import { take } from 'rxjs/operators';
+import { EditPageWrapperComponent } from '../edit-page-wrapper/edit-page-wrapper.component';
 import { WhitelistEditComponent } from './whitelist-edit.component';
 
 describe(WhitelistEditComponent.name, () => {
@@ -26,6 +27,7 @@ describe(WhitelistEditComponent.name, () => {
       setConfiguration: jasmine.createSpy('setConfiguration').and.returnValue(configuration.asObservable().pipe(take(1))),
     })
     .mock(FeatherComponent)
+    .keep(EditPageWrapperComponent)
   );
 
   beforeEach(() => {

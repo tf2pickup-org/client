@@ -6,6 +6,7 @@ import { PlayersService } from '@app/players/players.service';
 import { FeatherComponent } from 'angular-feather';
 import { MockBuilder, MockedComponentFixture, MockRender, ngMocks } from 'ng-mocks';
 import { of } from 'rxjs';
+import { EditPageWrapperComponent } from '../edit-page-wrapper/edit-page-wrapper.component';
 import { ForceCreatePlayerAccountComponent } from './force-create-player-account.component';
 
 describe(ForceCreatePlayerAccountComponent.name, () => {
@@ -22,6 +23,7 @@ describe(ForceCreatePlayerAccountComponent.name, () => {
     .mock(PlayersService)
     .mock(Location)
     .mock(FeatherComponent)
+    .keep(EditPageWrapperComponent)
   );
 
   beforeEach(() => {

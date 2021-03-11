@@ -6,6 +6,7 @@ import { AsFormGroupPipe } from '@app/shared/as-form-group.pipe';
 import { FeatherComponent } from 'angular-feather';
 import { MockBuilder, MockedComponentFixture, MockRender, ngMocks } from 'ng-mocks';
 import { Subject } from 'rxjs';
+import { EditPageWrapperComponent } from '../edit-page-wrapper/edit-page-wrapper.component';
 import { MapEditComponent } from '../map-edit/map-edit.component';
 import { MapPoolEditComponent } from './map-pool-edit.component';
 
@@ -26,9 +27,10 @@ describe(MapPoolEditComponent.name, () => {
       fetchMaps: () => maps.asObservable(),
       setMaps: jasmine.createSpy('setMaps').and.returnValue(maps.asObservable()),
     })
+    .keep(EditPageWrapperComponent)
     .keep(MapEditComponent)
-    .mock(FeatherComponent)
     .keep(AsFormGroupPipe)
+    .mock(FeatherComponent)
   );
 
   beforeEach(() => {
@@ -50,13 +52,14 @@ describe(MapPoolEditComponent.name, () => {
   });
 
   describe('when maps are loaded', () => {
-    beforeEach(() => {
+    beforeEach(async () => {
       maps.next([{ name: 'cp_process_final' }, { name: 'cp_badlands' }]);
       fixture.detectChanges();
+      await fixture.whenStable();
     });
 
     it('should render map edits', () => {
-      const mapEdits = ngMocks.findInstances(MapEditComponent);
+      const mapEdits = ngMocks.findAll('app-map-edit');
       expect(mapEdits.length).toEqual(2);
     });
 
@@ -72,7 +75,7 @@ describe(MapPoolEditComponent.name, () => {
       });
 
       it('should add MapEditComponent', () => {
-        const mapEdits = ngMocks.findInstances(MapEditComponent);
+        const mapEdits = ngMocks.findAll('app-map-edit');
         expect(mapEdits.length).toEqual(3);
       });
 

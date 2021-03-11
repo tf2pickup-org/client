@@ -1,30 +1,7 @@
-<div class="container py-3">
-  <form
-    [formGroup]="form"
-    (submit)="save()">
-    <div class="d-flex align-items-center">
-      <button
-        type="button"
-        class="mdc-icon-button cancel-button focus-none"
-        tooltip="Cancel"
-        placement="top"
-        container="body"
-        appNavigateBack>
-        <i-feather name="arrow-left" aria-hidden="true"></i-feather>
-      </button>
-
-      <div class="flex-grow-1 mdc-typography--headline5">
-        Map pool
-      </div>
-
-      <button type="submit"
-        class="mdc-button mdc-button--raised mdc-button--secondary mx-2 submit-button"
-        [disabled]="(store.enabled | async) === false || !form.valid || form.pristine">
-        <div class="mdc-button__ripple"></div>
-        <i-feather name="check" class="mdc-button__icon" aria-hidden="true"></i-feather>
-        <span class="mdc-button__label">save</span>
-      </button>
-    </div>
+<form [formGroup]="form" (submit)="save()">
+  <app-edit-page-wrapper
+    title="Map pool"
+    [saveDisabled]="(store.enabled | async) === false || !form.valid || form.pristine">
 
     <div class="surface surface--white py-4">
       <ng-container formArrayName="maps">
@@ -45,5 +22,5 @@
         <span class="mdc-button__label">Add map</span>
       </button>
     </div>
-  </form>
-</div>
+  </app-edit-page-wrapper>
+</form>
