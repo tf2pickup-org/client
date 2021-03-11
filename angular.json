@@ -188,6 +188,34 @@
                   "output": "/assets/"
                 }
               ]
+            },
+            "tf2pickup.cz": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/tf2pickup.cz.ts"
+                }
+              ],
+              "assets": [
+                {
+                  "glob": "**/*",
+                  "input": "src/assets/",
+                  "output": "/assets/",
+                  "ignore": [
+                    "custom/**/*"
+                  ]
+                },
+                {
+                  "glob": "favicon.ico",
+                  "input": "src/assets/custom/tf2pickup.cz",
+                  "output": "/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/assets/custom/tf2pickup.cz",
+                  "output": "/assets/"
+                }
+              ]
             }
           }
         },
