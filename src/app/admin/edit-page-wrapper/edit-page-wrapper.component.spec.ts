@@ -1,19 +1,31 @@
+import { Component } from '@angular/core';
 import { NavigateBackDirective } from '@app/shared/navigate-back.directive';
 import { FeatherComponent } from 'angular-feather';
 import { MockBuilder, MockedComponentFixture, MockRender, ngMocks } from 'ng-mocks';
 import { EditPageWrapperComponent } from './edit-page-wrapper.component';
 
+@Component({
+  // eslint-disable-next-line @angular-eslint/component-selector
+  selector: 'test-wrapper',
+  template: '<app-edit-page-wrapper [title]="title" [saveDisabled]="saveDisabled"></app-edit-page-wrapper>',
+})
+class TestWrapperComponent {
+  title: string;
+  saveDisabled = false;
+}
+
 describe(EditPageWrapperComponent.name, () => {
-  let component: EditPageWrapperComponent;
+  let component: TestWrapperComponent;
   let fixture: MockedComponentFixture<EditPageWrapperComponent>;
 
-  beforeEach(() => MockBuilder(EditPageWrapperComponent)
+  beforeEach(() => MockBuilder(TestWrapperComponent)
+    .keep(EditPageWrapperComponent)
     .mock(FeatherComponent)
     .mock(NavigateBackDirective)
   );
 
   beforeEach(() => {
-    fixture = MockRender(EditPageWrapperComponent);
+    fixture = MockRender(TestWrapperComponent);
     component = fixture.point.componentInstance;
     component.title = 'just testing';
     fixture.detectChanges();
