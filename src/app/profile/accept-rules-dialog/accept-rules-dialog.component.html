@@ -34,7 +34,7 @@
       </div>
 
       <div class="mdc-dialog__content">
-        <p><markdown src="/assets/documents/RULES.md"></markdown></p>
+        <p><markdown [data]="rules | async" ngPreserveWhitespaces></markdown></p>
       </div>
 
       <div class="mdc-dialog__actions">
