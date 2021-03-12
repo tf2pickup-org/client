@@ -1,14 +1,33 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { AcceptRulesDialogComponent } from './accept-rules-dialog.component';
 import { By } from '@angular/platform-browser';
+import { MarkdownComponent } from 'ngx-markdown';
+import { MockComponent, MockProvider, ngMocks } from 'ng-mocks';
+import { DocumentsService } from '@app/documents/documents.service';
+import { Document } from '@app/documents/models/document';
+import { Subject } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 describe('AcceptRulesDialogComponent', () => {
   let component: AcceptRulesDialogComponent;
   let fixture: ComponentFixture<AcceptRulesDialogComponent>;
+  let document: Subject<Document>;
+
+  beforeEach(() => {
+    document = new Subject();
+  });
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ AcceptRulesDialogComponent ],
+      declarations: [
+        AcceptRulesDialogComponent,
+        MockComponent(MarkdownComponent),
+      ],
+      providers: [
+        MockProvider(DocumentsService, {
+          fetchDocument: jasmine.createSpy('fetchDocument').and.returnValue(document.pipe(take(1))),
+        }),
+      ]
     })
     .compileComponents();
   }));
@@ -36,6 +55,14 @@ describe('AcceptRulesDialogComponent', () => {
 
     it('should render the accept rules button', () => {
       expect(fixture.debugElement.query(By.css('.accept-rules-button')).nativeElement).toBeTruthy();
+    });
+
+    it('should render the rules document', () => {
+      document.next({ name: 'rules', language: 'en', body: 'some rules' });
+      fixture.detectChanges();
+
+      const rules = ngMocks.findInstance(MarkdownComponent);
+      expect(rules.data).toEqual('some rules');
     });
 
     describe('when the user accepts the rules', () => {
