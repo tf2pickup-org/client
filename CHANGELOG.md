@@ -1,3 +1,37 @@
+# [3.7.0](https://github.com/tf2pickup-pl/client/compare/3.6.4...3.7.0) (2021-03-12)
+
+
+### Bug Fixes
+
+* **deps:** pin dependency npm-run-all to 4.1.5 ([#785](https://github.com/tf2pickup-pl/client/issues/785)) ([ea5c3b1](https://github.com/tf2pickup-pl/client/commit/ea5c3b12ecdecebfeaeda6f3db2c2906b062be08))
+* documents' surface styling ([#782](https://github.com/tf2pickup-pl/client/issues/782)) ([236e03c](https://github.com/tf2pickup-pl/client/commit/236e03c94f5989d5f9cedbfcf934b1c4bbe84e71))
+* prevent re-creating the active game snackbar ([#783](https://github.com/tf2pickup-pl/client/issues/783)) ([bb768f9](https://github.com/tf2pickup-pl/client/commit/bb768f948abc83108fad4dede931f428c7672c0d))
+* **deps:** update angular monorepo to v11.2.4 ([#758](https://github.com/tf2pickup-pl/client/issues/758)) ([2a19f21](https://github.com/tf2pickup-pl/client/commit/2a19f21bb915667e29fbdb442f1faf598fdcecd0))
+* **deps:** update angular monorepo to v11.2.5 ([#776](https://github.com/tf2pickup-pl/client/issues/776)) ([50d3e99](https://github.com/tf2pickup-pl/client/commit/50d3e99b384b20efa4e807551987687a6fe48a01))
+* **deps:** update dependency @angular/cdk to v11.2.3 ([#759](https://github.com/tf2pickup-pl/client/issues/759)) ([96a3736](https://github.com/tf2pickup-pl/client/commit/96a3736d491a44ec4f1b9aa20cf52312bd43cab5))
+* **deps:** update dependency @angular/cdk to v11.2.4 ([#778](https://github.com/tf2pickup-pl/client/issues/778)) ([3d12b59](https://github.com/tf2pickup-pl/client/commit/3d12b59af3e4879440bef5ce0a9be2cef81795d2))
+* **deps:** update dependency ngx-markdown to v11.1.2 ([#774](https://github.com/tf2pickup-pl/client/issues/774)) ([ef0327c](https://github.com/tf2pickup-pl/client/commit/ef0327caf5ed700776a5ad0c00b4be293f19c013))
+* adapt the new profile model ([#768](https://github.com/tf2pickup-pl/client/issues/768)) ([815c461](https://github.com/tf2pickup-pl/client/commit/815c461b6dd445bc747bfdbc180f35fd5cc8280c))
+* fix IsAdminGuard ([#772](https://github.com/tf2pickup-pl/client/issues/772)) ([799c7aa](https://github.com/tf2pickup-pl/client/commit/799c7aacf817412c7e5996f425ef823698c8a4c6))
+
+
+### Features
+
+* edit documents ([#779](https://github.com/tf2pickup-pl/client/issues/779)) ([07d4a72](https://github.com/tf2pickup-pl/client/commit/07d4a72034a473821fc061c2bad6fa8a03d42107))
+* render documents using the document API ([#770](https://github.com/tf2pickup-pl/client/issues/770)) ([98dd0a6](https://github.com/tf2pickup-pl/client/commit/98dd0a638a21d39dd0442de36185fdbcb6c419e2))
+* tf2pickup.cz branding ([#784](https://github.com/tf2pickup-pl/client/issues/784)) ([1024dc5](https://github.com/tf2pickup-pl/client/commit/1024dc5500730f51d0fde331b61df608d6d5c4af))
+
+
+### Performance Improvements
+
+* optimize images ([#786](https://github.com/tf2pickup-pl/client/issues/786)) ([69fef3e](https://github.com/tf2pickup-pl/client/commit/69fef3e30aeff55f52155d7df7422074145c7bf3))
+
+
+### NOTES
+
+Requires server version 4 or greater.
+
+
 ## [3.6.4](https://github.com/tf2pickup-pl/client/compare/3.6.3...3.6.4) (2021-03-04)
 
 
