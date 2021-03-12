@@ -1,3 +1,10 @@
+## [3.7.1](https://github.com/tf2pickup-pl/client/compare/3.7.0...3.7.1) (2021-03-12)
+
+
+### Bug Fixes
+
+* render the correct rules document upon player registration ([#787](https://github.com/tf2pickup-pl/client/issues/787)) ([cc14df5](https://github.com/tf2pickup-pl/client/commit/cc14df5fdf98d36b73cd9efbf700d97908cb0b5e))
+
 # [3.7.0](https://github.com/tf2pickup-pl/client/compare/3.6.4...3.7.0) (2021-03-12)
 
 
