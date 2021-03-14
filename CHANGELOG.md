@@ -1,3 +1,15 @@
+# [3.8.0](https://github.com/tf2pickup-pl/client/compare/3.7.1...3.8.0) (2021-03-14)
+
+
+### Features
+
+* tf2pickup.de branding ([#795](https://github.com/tf2pickup-pl/client/issues/795)) ([2c2c115](https://github.com/tf2pickup-pl/client/commit/2c2c1152f5cd0b08701b4d605c05c5cb8097f2f3))
+
+
+### Performance Improvements
+
+* optimize images ([#796](https://github.com/tf2pickup-pl/client/issues/796)) ([fa8934d](https://github.com/tf2pickup-pl/client/commit/fa8934dd3b6d3d323767350d943a3b0f79468168))
+
 ## [3.7.1](https://github.com/tf2pickup-pl/client/compare/3.7.0...3.7.1) (2021-03-12)
 
 
