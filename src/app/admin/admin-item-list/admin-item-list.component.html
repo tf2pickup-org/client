@@ -40,6 +40,11 @@
     title: 'Player skill table'
   } }"></ng-template>
 
+  <ng-template *ngTemplateOutlet="item; context: { $implicit: {
+    link: 'scramble-maps',
+    title: 'Scramble maps'
+  } }"></ng-template>
+
   <ng-template *ngTemplateOutlet="header; context: { $implicit: 'Documents' }"></ng-template>
 
   <ng-template *ngTemplateOutlet="item; context: { $implicit: {

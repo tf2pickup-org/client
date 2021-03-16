@@ -5,7 +5,7 @@ import { ReplaySubject, of, throwError } from 'rxjs';
 import { Action, MemoizedSelector } from '@ngrx/store';
 import { QueueService } from './queue.service';
 import { queueLoaded, loadQueue, joinQueue, joinQueueError, markFriend, mapVoteReset, voteForMap, mapVoted, mapVoteResultsUpdated,
-  queueSlotsUpdated, queueStateUpdated, substituteRequestsUpdated, friendshipsUpdated } from './queue.actions';
+  queueSlotsUpdated, queueStateUpdated, substituteRequestsUpdated, friendshipsUpdated, scrambleMaps } from './queue.actions';
 import { Queue } from './models/queue';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { QueueSlot } from './models/queue-slot';
@@ -17,7 +17,7 @@ import { isInQueue } from './queue.selectors';
 import { awaitsReadyUp } from '@app/selectors';
 import { ReadyUpService } from './ready-up.service';
 import { Tf2ClassName } from '@app/shared/models/tf2-class-name';
-import { Player } from '@app/players/models/player';
+import { Player } from '@app/players/models/player';;
 
 const queue: Queue = {
   config: {
@@ -63,6 +63,7 @@ describe('QueueEffects', () => {
       'joinQueue',
       'markFriend',
       'voteForMap',
+      'scrambleMaps',
     ]);
 
     readyUpService = jasmine.createSpyObj<ReadyUpService>(ReadyUpService.name, ['askUserToReadyUp']);
@@ -173,6 +174,33 @@ describe('QueueEffects', () => {
       it('should be handled', () => {
         expect(store.dispatch).toHaveBeenCalledWith(friendshipsUpdated({ friendships }));
       });
+    });
+  });
+
+  describe('#scrambleMaps', () => {
+    const results = [
+      {
+        map: 'cp_process_final',
+        voteCount: 0
+      },
+      {
+        map: 'cp_sunshine',
+        voteCount: 0
+      },
+      {
+        map: 'cp_snakewater_final1',
+        voteCount: 0
+      },
+    ];
+
+    it('should attempt to scramble maps', done => {
+      queueServiceStub.scrambleMaps.and.returnValue(of(results));
+      effects.scrambleMaps.subscribe(action => {
+        expect(queueServiceStub.scrambleMaps).toHaveBeenCalled();
+        expect(action).toEqual(mapVoteResultsUpdated({ results }));
+        done();
+      });
+      actions.next(scrambleMaps());
     });
   });
 

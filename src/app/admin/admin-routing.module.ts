@@ -8,75 +8,82 @@ import { DocumentEditComponent } from './document-edit/document-edit.component';
 import { ForceCreatePlayerAccountComponent } from './force-create-player-account/force-create-player-account.component';
 import { MapPoolEditComponent } from './map-pool-edit/map-pool-edit.component';
 import { PlayerSkillTableComponent } from './player-skill-table/player-skill-table.component';
+import { ScrambleMapsComponent } from './scramble-maps/scramble-maps.component';
 import { WhitelistEditComponent } from './whitelist-edit/whitelist-edit.component';
 
 const routes: Routes = [
   {
     path: '',
-    pathMatch: 'full',
-    component: AdminItemListComponent,
-    data: {
-      title: 'admin panel',
-      animation: 'AdminItemListPage',
-    },
     canActivate: [ IsAdminGuard ],
-  },
-  {
-    path: 'map-pool',
-    component: MapPoolEditComponent,
-    data: {
-      title: 'map pool configuration',
-      animation: 'MapPoolEditPage',
-    },
-    canActivate: [ IsAdminGuard ],
-  },
-  {
-    path: 'whitelist',
-    component: WhitelistEditComponent,
-    data: {
-      title: 'whitelist configuration',
-      animation: 'WhitelistEditPage',
-    },
-    canActivate: [ IsAdminGuard ],
-  },
-  {
-    path: 'default-player-skill',
-    component: DefaultPlayerSkillEditComponent,
-    data: {
-      title: 'default player skill',
-      animation: 'DefaultPlayerSkillEditPage',
-    },
-    canActivate: [ IsAdminGuard ],
-  },
-  {
-    path: 'player-skill-table',
-    component: PlayerSkillTableComponent,
-    data: {
-      title: 'player skill table',
-      animation: 'PlayerSkillTablePage',
-    },
-    canActivate: [ IsAdminGuard ],
-  },
-  {
-    path: 'force-create-player-account',
-    component: ForceCreatePlayerAccountComponent,
-    data: {
-      title: 'force create player account',
-      animation: 'ForceCreatePlayerAccountPage',
-    },
-    canActivate: [ IsAdminGuard ],
-  },
-  {
-    path: 'document-edit/:documentName',
-    component: DocumentEditComponent,
-    data: {
-      title: 'edit document',
-      animation: 'DocumentEditPage',
-    },
-    resolve: {
-      document: DocumentResolver,
-    },
-    canActivate: [ IsAdminGuard ],
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        component: AdminItemListComponent,
+        data: {
+          title: 'admin panel',
+          animation: 'AdminItemListPage',
+        },
+      },
+      {
+        path: 'map-pool',
+        component: MapPoolEditComponent,
+        data: {
+          title: 'map pool configuration',
+          animation: 'MapPoolEditPage',
+        },
+      },
+      {
+        path: 'whitelist',
+        component: WhitelistEditComponent,
+        data: {
+          title: 'whitelist configuration',
+          animation: 'WhitelistEditPage',
+        },
+      },
+      {
+        path: 'default-player-skill',
+        component: DefaultPlayerSkillEditComponent,
+        data: {
+          title: 'default player skill',
+          animation: 'DefaultPlayerSkillEditPage',
+        },
+      },
+      {
+        path: 'player-skill-table',
+        component: PlayerSkillTableComponent,
+        data: {
+          title: 'player skill table',
+          animation: 'PlayerSkillTablePage',
+        },
+      },
+      {
+        path: 'force-create-player-account',
+        component: ForceCreatePlayerAccountComponent,
+        data: {
+          title: 'force create player account',
+          animation: 'ForceCreatePlayerAccountPage',
+        },
+      },
+      {
+        path: 'document-edit/:documentName',
+        component: DocumentEditComponent,
+        data: {
+          title: 'edit document',
+          animation: 'DocumentEditPage',
+        },
+        resolve: {
+          document: DocumentResolver,
+        },
+      },
+      {
+        path: 'scramble-maps',
+        component: ScrambleMapsComponent,
+        data: {
+          animation: 'ScrambleMapsPage',
+        },
+      },
+    ],
   },
 ];
 

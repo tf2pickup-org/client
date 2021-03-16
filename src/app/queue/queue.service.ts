@@ -7,6 +7,7 @@ import { QueueSlot } from './models/queue-slot';
 import { Friendship } from './models/friendship';
 import { Socket } from '@app/io/socket';
 import { Map } from './models/map';
+import { MapVoteResult } from './models/map-vote-result';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,10 @@ export class QueueService {
 
   fetchQueue(): Observable<Queue> {
     return this.http.get<Queue>(`${this.apiUrl}/queue`);
+  }
+
+  scrambleMaps(): Observable<MapVoteResult[]> {
+    return this.http.put<MapVoteResult[]>(`${this.apiUrl}/queue/map_vote_results/scramble`, { });
   }
 
   joinQueue(slotId: number): Observable<QueueSlot[]> {

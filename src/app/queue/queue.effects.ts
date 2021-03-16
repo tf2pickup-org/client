@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { loadQueue, queueLoaded, joinQueue, leaveQueue, queueStateUpdated, joinQueueError, leaveQueueError, readyUp, readyUpError,
   stopPreReady, voteForMap, mapVoteResultsUpdated, mapVoted, mapVoteReset, queueSlotsUpdated, markFriend, startPreReady,
-  substituteRequestsUpdated, friendshipsUpdated } from './queue.actions';
+  substituteRequestsUpdated, friendshipsUpdated, scrambleMaps } from './queue.actions';
 import { mergeMap, map, catchError, filter, mapTo, distinctUntilChanged } from 'rxjs/operators';
 import { QueueService } from './queue.service';
 import { Store, select } from '@ngrx/store';
@@ -32,6 +32,14 @@ export class QueueEffects {
       ofType(loadQueue),
       mergeMap(() => this.queueService.fetchQueue()),
       map(queue => queueLoaded({ queue })),
+    )
+  );
+
+  scrambleMaps = createEffect(() =>
+    this.actions.pipe(
+      ofType(scrambleMaps),
+      mergeMap(() => this.queueService.scrambleMaps()),
+      map(results => mapVoteResultsUpdated({ results })),
     )
   );
 

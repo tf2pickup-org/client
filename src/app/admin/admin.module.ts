@@ -16,6 +16,7 @@ import { DefaultPlayerSkillEditComponent } from './default-player-skill-edit/def
 import { DocumentEditComponent } from './document-edit/document-edit.component';
 import { MarkdownModule } from 'ngx-markdown';
 import { EditPageWrapperComponent } from './edit-page-wrapper/edit-page-wrapper.component';
+import { ScrambleMapsComponent } from './scramble-maps/scramble-maps.component';
 
 @NgModule({
   imports: [
@@ -40,6 +41,7 @@ import { EditPageWrapperComponent } from './edit-page-wrapper/edit-page-wrapper.
     DefaultPlayerSkillEditComponent,
     DocumentEditComponent,
     EditPageWrapperComponent,
+    ScrambleMapsComponent,
   ],
 })
 export class AdminModule { }
