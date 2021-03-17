@@ -13,6 +13,8 @@ export const queueLoaded = createAction(
   props<{ queue: Queue }>(),
 );
 
+export const scrambleMaps = createAction('[Admin] Scramble maps');
+
 export const joinQueue = createAction(
   '[Queue] Join queue',
   props<{ slotId: number }>(),

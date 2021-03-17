@@ -37,6 +37,14 @@ describe('QueueService', () => {
     }));
   });
 
+  describe('#scrambleMaps()', () => {
+    it('should call the endpoint', inject([QueueService], (service: QueueService) => {
+      service.scrambleMaps().subscribe();
+      const request = httpController.expectOne('FAKE_URL/queue/map_vote_results/scramble').request;
+      expect(request.method).toBe('PUT');
+    }));
+  });
+
   describe('#joinQueue()', () => {
     it('should call the endpoint', inject([QueueService], (service: QueueService) => {
       service.joinQueue(11);
