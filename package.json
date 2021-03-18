@@ -94,7 +94,7 @@
     "eslint-plugin-prefer-arrow": "1.2.3",
     "eslint-plugin-rxjs": "3.1.1",
     "eventemitter3": "4.0.7",
-    "jasmine-core": "3.6.0",
+    "jasmine-core": "3.7.0",
     "jasmine-spec-reporter": "5.0.2",
     "karma": "6.2.0",
     "karma-chrome-launcher": "3.1.0",
