@@ -1,0 +1,10 @@
+<div class="container">
+  <div class="surface surface--white py-4">
+    <h6 class="mdc-typography--headline6">{{ (gameServer | async).name }} diagnostics</h6>
+
+    <ng-container *ngIf="run | async as _run">
+      <span class="mdc-typography--body1">Status: {{ _run.status }}</span>
+      <app-diagnostic-check-info *ngFor="let check of _run.checks" [check]="check"></app-diagnostic-check-info>
+    </ng-container>
+  </div>
+</div>

@@ -1,0 +1,3 @@
+<div class="mdc-typography--body1">{{ check.name }}: {{ check.status }}</div>
+<div *ngFor="let error of check.reportedErrors" class="mdc-typography--body2">{{ error }}</div>
+<div *ngFor="let warning of check.reportedWarnings" class="mdc-typography--body2">{{ warning }}</div>

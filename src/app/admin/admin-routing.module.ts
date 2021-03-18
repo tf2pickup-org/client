@@ -6,10 +6,12 @@ import { AdminItemListComponent } from './admin-item-list/admin-item-list.compon
 import { DefaultPlayerSkillEditComponent } from './default-player-skill-edit/default-player-skill-edit.component';
 import { DocumentEditComponent } from './document-edit/document-edit.component';
 import { ForceCreatePlayerAccountComponent } from './force-create-player-account/force-create-player-account.component';
+import { GameServerDiagnosticsComponent } from './game-server-diagnostics/game-server-diagnostics.component';
 import { MapPoolEditComponent } from './map-pool-edit/map-pool-edit.component';
 import { PlayerSkillTableComponent } from './player-skill-table/player-skill-table.component';
 import { ScrambleMapsComponent } from './scramble-maps/scramble-maps.component';
 import { WhitelistEditComponent } from './whitelist-edit/whitelist-edit.component';
+import { GameServerResolver } from '@app/game-servers/game-server.resolver';
 
 const routes: Routes = [
   {
@@ -81,6 +83,16 @@ const routes: Routes = [
         component: ScrambleMapsComponent,
         data: {
           animation: 'ScrambleMapsPage',
+        },
+      },
+      {
+        path: 'game-server-diagnostics/:gameServerId',
+        component: GameServerDiagnosticsComponent,
+        data: {
+          animation: 'GameServerDiagnosticsPage',
+        },
+        resolve: {
+          gameServer: GameServerResolver,
         },
       },
     ],
