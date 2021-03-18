@@ -1,3 +1,11 @@
+## [3.8.1](https://github.com/tf2pickup-pl/client/compare/3.8.0...3.8.1) (2021-03-18)
+
+
+### Bug Fixes
+
+* **build:** regenerate package-lock.json ([b8268a3](https://github.com/tf2pickup-pl/client/commit/b8268a311b32f7a93fc2f69eb3dd940cecf20d5f))
+* **tf2pickup.de:** update discord invitation link ([4a773d0](https://github.com/tf2pickup-pl/client/commit/4a773d0ed0fa66069a752a363930892d53c60b6f))
+
 # [3.8.0](https://github.com/tf2pickup-pl/client/compare/3.7.1...3.8.0) (2021-03-14)
 
 
