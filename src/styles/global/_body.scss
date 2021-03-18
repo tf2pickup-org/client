@@ -1,13 +1,33 @@
+@use 'theme';
 @use 'variables';
 @use 'utils/respond';
+
+html,
+body {
+  height: 100%;
+}
+
+html {
+  overflow-y: scroll;
+  scrollbar-color: theme.$on-primary theme.$primary;
+  scrollbar-width: thin;
+
+  ::-webkit-scrollbar {
+    width: 8px;
+}
+
+  ::-webkit-scrollbar-track {
+      background-color: theme.$primary;
+  }
+
+  ::-webkit-scrollbar-thumb {
+      background-color: theme.$on-primary;
+  }
+}
 
 body {
   background-attachment: fixed;
   background-image: url('/assets/bg_night_blur.png');
   background-repeat: no-repeat;
   background-size: cover;
-
-  @include respond.above(large) {
-    padding-bottom: variables.$footer-height;
-  }
 }
