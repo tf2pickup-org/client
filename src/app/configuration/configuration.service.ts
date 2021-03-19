@@ -2,7 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { API_URL } from '@app/api-url';
 import { Observable } from 'rxjs';
-import { Configuration } from './models/configuration';
+import { map } from 'rxjs/operators';
+
+interface ConfigurationEntryResponse<T> {
+  key: string;
+  value: T;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -14,12 +19,16 @@ export class ConfigurationService {
     @Inject(API_URL) private apiUrl: string,
   ) { }
 
-  fetchConfiguration(): Observable<Configuration> {
-    return this.http.get<Configuration>(`${this.apiUrl}/configuration`);
+  fetchValue<T>(key: string): Observable<T> {
+    return this.http.get<ConfigurationEntryResponse<T>>(`${this.apiUrl}/configuration/${key.split(' ').join('-')}`).pipe(
+      map(response => response.value),
+    );
   }
 
-  setConfiguration(configuraton: Configuration): Observable<Configuration> {
-    return this.http.put<Configuration>(`${this.apiUrl}/configuration`, configuraton);
+  storeValue<T>(key: string, value: any): Observable<T> {
+    return this.http.put<ConfigurationEntryResponse<T>>(`${this.apiUrl}/configuration/${key.split(' ').join('-')}`, { key, value }).pipe(
+      map(response => response.value),
+    );
   }
 
 }
