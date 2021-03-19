@@ -1,9 +1,10 @@
 import { TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ConfigurationEntryKey } from '@app/configuration/configuration-entry-key';
 import { ConfigurationService } from '@app/configuration/configuration.service';
-import { Configuration } from '@app/configuration/models/configuration';
 import { queueConfig } from '@app/queue/queue.selectors';
 import { GameClassIconComponent } from '@app/shared/game-class-icon/game-class-icon.component';
+import { Tf2ClassName } from '@app/shared/models/tf2-class-name';
 import { provideMockStore } from '@ngrx/store/testing';
 import { FeatherComponent } from 'angular-feather';
 import { MockBuilder, MockedComponentFixture, MockRender, ngMocks } from 'ng-mocks';
@@ -15,18 +16,18 @@ import { DefaultPlayerSkillEditComponent } from './default-player-skill-edit.com
 describe(DefaultPlayerSkillEditComponent.name, () => {
   let component: DefaultPlayerSkillEditComponent;
   let fixture: MockedComponentFixture<DefaultPlayerSkillEditComponent>;
-  let configuration: Subject<Configuration>;
+  let defaultPlayerSkill: Subject<{ [className in Tf2ClassName]?: number }>;
   let submitButton: HTMLButtonElement;
 
   beforeEach(() => {
-    configuration = new Subject();
+    defaultPlayerSkill = new Subject();
   });
 
   beforeEach(() => MockBuilder(DefaultPlayerSkillEditComponent)
     .keep(ReactiveFormsModule)
     .mock(ConfigurationService, {
-      fetchConfiguration: jasmine.createSpy('fetchConfiguration').and.returnValue(configuration.asObservable().pipe(take(1))),
-      setConfiguration: jasmine.createSpy('setConfiguration').and.returnValue(configuration.asObservable().pipe(take(1))),
+      fetchValue: jasmine.createSpy('fetchValue').and.returnValue(defaultPlayerSkill.asObservable().pipe(take(1))),
+      storeValue: jasmine.createSpy('storeValue').and.returnValue(defaultPlayerSkill.asObservable().pipe(take(1))),
     })
     .provide(provideMockStore({
       selectors: [
@@ -54,11 +55,11 @@ describe(DefaultPlayerSkillEditComponent.name, () => {
 
     submitButton = ngMocks.find('button[type=submit]').nativeElement;
 
-    configuration.next({ defaultPlayerSkill: { scout: 1, soldier: 2 } });
+    defaultPlayerSkill.next({ scout: 1, soldier: 2 });
     fixture.detectChanges();
   });
 
-  afterEach(() => configuration.complete());
+  afterEach(() => defaultPlayerSkill.complete());
 
   it('should create', () => {
     expect(component).toBeTruthy();
@@ -94,7 +95,7 @@ describe(DefaultPlayerSkillEditComponent.name, () => {
       beforeEach(() => {
         submitButton.click();
         fixture.detectChanges();
-        configuration.next({ defaultPlayerSkill: { scout: 1, soldier: 2 } });
+        defaultPlayerSkill.next({ scout: 1, soldier: 2 });
       });
 
       it('should disable the submit button', () => {
@@ -103,12 +104,12 @@ describe(DefaultPlayerSkillEditComponent.name, () => {
 
       it('should call the api', () => {
         const configurationService = TestBed.inject(ConfigurationService);
-        expect(configurationService.setConfiguration).toHaveBeenCalledWith({ defaultPlayerSkill: { scout: 1, soldier: 4 } });
+        expect(configurationService.storeValue).toHaveBeenCalledWith(ConfigurationEntryKey.defaultPlayerSkill, { scout: 1, soldier: 4 });
       });
 
       describe('when accepted by the server', () => {
         beforeEach(() => {
-          configuration.next({ defaultPlayerSkill: { scout: 1, soldier: 4 } });
+          defaultPlayerSkill.next({ scout: 1, soldier: 4 });
           fixture.detectChanges();
         });
 

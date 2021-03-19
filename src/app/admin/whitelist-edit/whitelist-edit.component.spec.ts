@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ConfigurationEntryKey } from '@app/configuration/configuration-entry-key';
 import { ConfigurationService } from '@app/configuration/configuration.service';
-import { Configuration } from '@app/configuration/models/configuration';
 import { FeatherComponent } from 'angular-feather';
 import { MockBuilder, MockedComponentFixture, MockRender, ngMocks } from 'ng-mocks';
 import { Subject } from 'rxjs';
@@ -12,19 +12,19 @@ import { WhitelistEditComponent } from './whitelist-edit.component';
 describe(WhitelistEditComponent.name, () => {
   let component: WhitelistEditComponent;
   let fixture: MockedComponentFixture<WhitelistEditComponent>;
-  let configuration: Subject<Configuration>;
+  let whitelistId: Subject<string>;
   let submitButton: HTMLButtonElement;
   let input: HTMLInputElement;
 
   beforeEach(() => {
-    configuration = new Subject();
+    whitelistId = new Subject();
   });
 
   beforeEach(() => MockBuilder(WhitelistEditComponent)
     .keep(ReactiveFormsModule)
     .mock(ConfigurationService, {
-      fetchConfiguration: jasmine.createSpy('fetchConfiguration').and.returnValue(configuration.asObservable().pipe(take(1))),
-      setConfiguration: jasmine.createSpy('setConfiguration').and.returnValue(configuration.asObservable().pipe(take(1))),
+      fetchValue: jasmine.createSpy('fetchValue').and.returnValue(whitelistId.asObservable().pipe(take(1))),
+      storeValue: jasmine.createSpy('storeValue').and.returnValue(whitelistId.asObservable().pipe(take(1))),
     })
     .mock(FeatherComponent)
     .keep(EditPageWrapperComponent)
@@ -38,7 +38,7 @@ describe(WhitelistEditComponent.name, () => {
     submitButton = ngMocks.find('button[type=submit]').nativeElement;
     input = ngMocks.find('input[type=text]').nativeElement;
 
-    configuration.next({ whitelistId: 'etf2l_9v9' });
+    whitelistId.next('etf2l_9v9');
   });
 
   it('should create', () => {
@@ -68,7 +68,7 @@ describe(WhitelistEditComponent.name, () => {
       beforeEach(() => {
         submitButton.click();
         fixture.detectChanges();
-        configuration.next({ whitelistId: 'etf2l_9v9' });
+        whitelistId.next('etf2l_9v9');
       });
 
       it('should disable the submit button', () => {
@@ -77,12 +77,12 @@ describe(WhitelistEditComponent.name, () => {
 
       it('should set the new configuration', () => {
         const configurationService = TestBed.inject(ConfigurationService);
-        expect(configurationService.setConfiguration).toHaveBeenCalledWith({ whitelistId: 'etf2l_6v6' });
+        expect(configurationService.storeValue).toHaveBeenCalledWith(ConfigurationEntryKey.whitelistId, 'etf2l_6v6');
       });
 
       describe('when the new configuration is set', () => {
         beforeEach(() => {
-          configuration.next({ whitelistId: 'etf2l_6v6' });
+          whitelistId.next('etf2l_6v6');
           fixture.detectChanges();
         });
 

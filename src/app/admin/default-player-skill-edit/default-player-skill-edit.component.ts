@@ -2,9 +2,13 @@ import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ConfigurationService } from '@app/configuration/configuration.service';
 import { queueConfig } from '@app/queue/queue.selectors';
+import { Tf2ClassName } from '@app/shared/models/tf2-class-name';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, zip } from 'rxjs';
 import { map, switchMap, take, tap } from 'rxjs/operators';
+import { ConfigurationEntryKey } from '@app/configuration/configuration-entry-key';
+
+type DefaultPlayerSkillType = { [gameClass in Tf2ClassName]?: number };
 
 @Component({
   selector: 'app-default-player-skill-edit',
@@ -31,9 +35,7 @@ export class DefaultPlayerSkillEditComponent implements OnInit {
 
   ngOnInit() {
     zip(
-      this.configurationService.fetchConfiguration().pipe(
-        map(configuration => configuration.defaultPlayerSkill),
-      ),
+      this.configurationService.fetchValue<DefaultPlayerSkillType>(ConfigurationEntryKey.defaultPlayerSkill),
       this.queueConfig.pipe(
         take(1),
         map(queueConfig => queueConfig.classes),
@@ -55,18 +57,12 @@ export class DefaultPlayerSkillEditComponent implements OnInit {
 
   save() {
     this.isSaving.next(true);
-    this.configurationService.fetchConfiguration().pipe(
-      switchMap(configuration => this.configurationService.setConfiguration({
-        ...configuration,
-        defaultPlayerSkill: {
-          ...configuration.defaultPlayerSkill,
-          ...this.gameClasses.value,
-        }
-      })),
-      tap(configuration => this.form.reset({ gameClasses: configuration.defaultPlayerSkill })),
-    ).subscribe(() => {
-      this.isSaving.next(false);
-    });
+    this.configurationService
+      .storeValue<DefaultPlayerSkillType>(ConfigurationEntryKey.defaultPlayerSkill, this.gameClasses.value).pipe(
+        tap(defaultPlayerSkill => this.form.reset({ gameClasses: defaultPlayerSkill })),
+      ).subscribe(() => {
+        this.isSaving.next(false);
+      });
   }
 
   get gameClasses(): FormGroup {

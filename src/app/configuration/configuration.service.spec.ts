@@ -24,21 +24,25 @@ describe('ConfigurationService', () => {
     expect(service).toBeTruthy();
   });
 
-  describe('#fetchConfiguration()', () => {
-    it('should query the API', () => {
-      service.fetchConfiguration().subscribe();
-      httpController.expectOne('FAKE_URL/configuration');
-      expect().nothing();
+  describe('#fetchValue()', () => {
+    it('should query the api', () => {
+      let result: string;
+      service.fetchValue<string>('whitelist id').subscribe(r => result = r);
+      const request = httpController.expectOne('FAKE_URL/configuration/whitelist-id');
+      request.flush({ key: 'whitelist id', value: 'etf2l_9v9' });
+      expect(result).toEqual('etf2l_9v9');
     });
   });
 
-  describe('#setConfiguration()', () => {
-    it('should query the API', () => {
-      service.setConfiguration({ whitelistId: 'etf2l_6v6' }).subscribe();
-      const req = httpController.expectOne('FAKE_URL/configuration').request;
-      expect(req.method).toBe('PUT');
-      expect(req.body).toEqual({ whitelistId: 'etf2l_6v6' });
-    });
+  describe('#storeValue()', () => {
+    it('should query the api', () => {
+      let result: string;
+      service.storeValue<string>('whitelist id', 'etf2l_6v6').subscribe(r => result = r);
+      const request = httpController.expectOne('FAKE_URL/configuration/whitelist-id');
+      expect(request.request.method).toBe('PUT');
+      request.flush({ key: 'whitelist id', value: 'etf2l_6v6' });
+      expect(result).toEqual('etf2l_6v6');
+    })
   });
 
 });
