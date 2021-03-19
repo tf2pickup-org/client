@@ -18,14 +18,12 @@ $-text: theme.$footer-text;
   font-weight: 500;
 
   @include respond.below(huge) {
-    position: static;
     flex-flow: column nowrap;
     align-items: center;
     line-height: ($-height * 0.7);
   }
 
   @include respond.above(huge) {
-    position: fixed;
     flex-flow: row nowrap;
     justify-content: center;
     line-height: $-height;
