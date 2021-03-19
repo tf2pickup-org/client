@@ -1,0 +1,15 @@
+server {
+  listen       80;
+  listen  [::]:80;
+  server_name  ${CLIENT_BRANDING};
+
+  #access_log  /var/log/nginx/host.access.log  main;
+
+  location / {
+    root   /usr/share/nginx/html;
+    index  index.html index.htm;
+    try_files $uri $uri/ /index.html;
+  }
+
+  #error_page  404              /404.html;
+}
