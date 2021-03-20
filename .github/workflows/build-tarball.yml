@@ -1,11 +1,11 @@
-name: build
+name: build-tarball
 
 on:
   release:
     types: [ created, edited ]
 
 jobs:
-  build:
+  build-tarball:
     runs-on: ubuntu-latest
 
     strategy:
