@@ -19,7 +19,7 @@ class WindowHelperServiceStub {
 
 describe('TwitchService', () => {
   let service: TwitchService;
-  let httpContoller: HttpTestingController;
+  let httpController: HttpTestingController;
   let socket: Socket;
 
   beforeEach(() => {
@@ -37,11 +37,11 @@ describe('TwitchService', () => {
     });
 
     service = TestBed.inject(TwitchService);
-    httpContoller = TestBed.inject(HttpTestingController);
+    httpController = TestBed.inject(HttpTestingController);
     socket = TestBed.inject(Socket);
   });
 
-  afterEach(() => httpContoller.verify());
+  afterEach(() => httpController.verify());
 
   it('should be created', () => {
     expect(service).toBeTruthy();
@@ -50,7 +50,7 @@ describe('TwitchService', () => {
   describe('#fetchStreams()', () => {
     it('should call the endpoint', () => {
       service.fetchStreams().subscribe();
-      httpContoller.expectOne('FAKE_URL/twitch/streams');
+      httpController.expectOne('FAKE_URL/twitch/streams');
       expect().nothing();
     });
   });
@@ -62,6 +62,14 @@ describe('TwitchService', () => {
       expect(spy).toHaveBeenCalledWith(jasmine.objectContaining({
         url: 'FAKE_URL/twitch/auth?token=FAKE_AUTH_TOKEN',
       }));
+    });
+  });
+
+  describe('#disconnect()', () => {
+    it('should call the API', () => {
+      service.disconnect().subscribe();
+      const request = httpController.expectOne('FAKE_URL/twitch/disconnect').request;
+      expect(request.method).toBe('PUT');
     });
   });
 });

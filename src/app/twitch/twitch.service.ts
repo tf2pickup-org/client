@@ -8,6 +8,7 @@ import { twitchStreamsUpdated } from './twitch.actions';
 import { AuthService } from '@app/auth/auth.service';
 import { WindowHelperService } from '@app/shared/window-helper.service';
 import { Socket } from '@app/io/socket';
+import { Player } from '@app/players/models/player';
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +34,10 @@ export class TwitchService {
       const url = `${this.apiUrl}/twitch/auth?token=${authToken}`;
       this.windowHelperService.openWindow({ width, height, url });
     });
+  }
+
+  disconnect() {
+    return this.http.put<Player>(`${this.apiUrl}/twitch/disconnect`, { });
   }
 
   fetchStreams(): Observable<TwitchStream[]> {

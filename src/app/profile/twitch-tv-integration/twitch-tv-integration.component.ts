@@ -28,4 +28,8 @@ export class TwitchTvIntegrationComponent {
     this.twitchService.login();
   }
 
+  disconnect() {
+    this.twitchService.disconnect().subscribe();
+  }
+
 }

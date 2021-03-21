@@ -4,6 +4,7 @@ import { Player } from '@app/players/models/player';
 import { TwitchService } from '@app/twitch/twitch.service';
 import { MemoizedSelector } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import { EMPTY } from 'rxjs';
 import { twitchTvUser } from '../profile.selectors';
 import { TwitchTvIntegrationComponent } from './twitch-tv-integration.component';
 
@@ -15,7 +16,7 @@ describe('TwitchTvIntegrationComponent', () => {
   let twitchService: jasmine.SpyObj<TwitchService>;
 
   beforeEach(() => {
-    twitchService = jasmine.createSpyObj<TwitchService>(TwitchService.name, ['login']);
+    twitchService = jasmine.createSpyObj<TwitchService>(TwitchService.name, ['login', 'disconnect']);
   });
 
   beforeEach(async () => {
@@ -61,6 +62,7 @@ describe('TwitchTvIntegrationComponent', () => {
 
   describe('when logged in via twitch.tv', () => {
     beforeEach(() => {
+      twitchService.disconnect.and.returnValue(EMPTY);
       twitchTvUserSelector.setResult({
         userId: 'FAKE_USER_ID',
         login: 'FAKE_USER_LOGIN',
@@ -76,6 +78,12 @@ describe('TwitchTvIntegrationComponent', () => {
       expect(anchor).toBeTruthy();
       expect(anchor.href).toMatch(/^https:\/\/www.twitch.tv\/FAKE_USER_LOGIN\/$/);
       expect(anchor.target).toBe('_blank');
+    });
+
+    it('should render the disconnect button', () => {
+      const button = fixture.debugElement.query(By.css('button[disconnectTwitchTvProfile]')).nativeElement as HTMLButtonElement;
+      button.click();
+      expect(twitchService.disconnect).toHaveBeenCalled();
     });
   });
 });
