@@ -81,7 +81,7 @@ describe('TwitchTvIntegrationComponent', () => {
     });
 
     it('should render the disconnect button', () => {
-      const button = fixture.debugElement.query(By.css('button[disconnectTwitchTvProfile]')).nativeElement as HTMLButtonElement;
+      const button = fixture.debugElement.query(By.css('button.disconnect-button')).nativeElement as HTMLButtonElement;
       button.click();
       expect(twitchService.disconnect).toHaveBeenCalled();
     });
