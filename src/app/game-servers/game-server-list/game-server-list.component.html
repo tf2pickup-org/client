@@ -6,20 +6,29 @@
       {{ server.name }}
     </span>
 
+    <ng-container *ngIf="isSuperUser | async">
+      <a class="mdc-icon-button"
+        [routerLink]="['/admin', 'game-server-diagnostics', server.id]"
+        tooltip="Run diagnostics"
+        placement="top"
+        container="body">
+        <i-feather name="tool"></i-feather>
+      </a>
+
+      <button type="button"
+        class="mdc-icon-button remove-game-server-button mr-4"
+        (click)="removeGameServer(server)"
+        tooltip="Remove this game server"
+        placement="top"
+        container="body">
+        <i-feather name="trash2"></i-feather>
+      </button>
+    </ng-container>
+
     <ng-container [ngSwitch]="server.isOnline">
       <div *ngSwitchCase="true" class="indicator indicator--online" tooltip="online"></div>
       <div *ngSwitchCase="false" class="indicator indicator--offline" tooltip="offline"></div>
     </ng-container>
-
-    <button *ngIf="isSuperUser | async"
-      type="button"
-      class="mdc-icon-button ml-2 remove-game-server-button"
-      (click)="removeGameServer(server)"
-      tooltip="Remove this game server"
-      placement="top"
-      container="body">
-      <i-feather name="x"></i-feather>
-    </button>
   </div>
 
   <div class="d-flex justify-content-center mt-5">

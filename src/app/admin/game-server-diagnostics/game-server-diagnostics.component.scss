@@ -1,0 +1,13 @@
+@use 'theme';
+
+.run-status {
+  font-weight: 500;
+}
+
+.status-completed {
+  color: theme.$success;
+}
+
+.status-failed {
+  color: theme.$error;
+}

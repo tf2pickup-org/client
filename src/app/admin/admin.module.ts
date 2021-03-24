@@ -17,6 +17,8 @@ import { DocumentEditComponent } from './document-edit/document-edit.component';
 import { MarkdownModule } from 'ngx-markdown';
 import { EditPageWrapperComponent } from './edit-page-wrapper/edit-page-wrapper.component';
 import { ScrambleMapsComponent } from './scramble-maps/scramble-maps.component';
+import { GameServerDiagnosticsComponent } from './game-server-diagnostics/game-server-diagnostics.component';
+import { DiagnosticCheckInfoComponent } from './game-server-diagnostics/diagnostic-check-info/diagnostic-check-info.component';
 
 @NgModule({
   imports: [
@@ -42,6 +44,8 @@ import { ScrambleMapsComponent } from './scramble-maps/scramble-maps.component';
     DocumentEditComponent,
     EditPageWrapperComponent,
     ScrambleMapsComponent,
+    GameServerDiagnosticsComponent,
+    DiagnosticCheckInfoComponent,
   ],
 })
 export class AdminModule { }

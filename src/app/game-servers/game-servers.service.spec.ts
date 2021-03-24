@@ -1,4 +1,4 @@
-import { TestBed, inject } from '@angular/core/testing';
+import { TestBed, inject, fakeAsync, tick } from '@angular/core/testing';
 import { GameServersService } from './game-servers.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { API_URL } from '@app/api-url';
@@ -57,5 +57,24 @@ describe('GameServersService', () => {
       const req = httpController.expectOne('FAKE_URL/game-servers/FAKE_ID');
       expect(req.request.method).toBe('GET');
     }));
+  });
+
+  describe('#runDiagnostics()', () => {
+    it('should call the endpoint', inject([GameServersService], fakeAsync((service: GameServersService) => {
+      service.runDiagnostics('FAKE_GAME_SERVER_ID').subscribe();
+      const r = httpController.expectOne('FAKE_URL/game-servers/FAKE_GAME_SERVER_ID/diagnostics');
+      expect(r.request.method).toBe('POST');
+
+      r.flush({ tracking: { url: 'FAKE_URL/diagnostics/FAKE_DIAGNOSTICS_ID' } });
+      tick();
+      const r2 = httpController.expectOne('FAKE_URL/diagnostics/FAKE_DIAGNOSTICS_ID');
+      expect(r2.request.method).toBe('GET');
+      r2.flush({ status: 'pending' });
+      tick(500);
+
+      httpController.expectOne('FAKE_URL/diagnostics/FAKE_DIAGNOSTICS_ID').flush({ status: 'pending' });
+      tick(500);
+      httpController.expectOne('FAKE_URL/diagnostics/FAKE_DIAGNOSTICS_ID').flush({ status: 'completed' });
+    })));
   });
 });
