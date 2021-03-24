@@ -1,9 +1,27 @@
 <div class="container">
-  <div class="surface surface--white py-4">
-    <h6 class="mdc-typography--headline6">{{ (gameServer | async).name }} diagnostics</h6>
+  <div class="surface surface--white">
+    <h6 class="mdc-typography--headline6">{{ (gameServer | async)?.name }} diagnostics</h6>
 
     <ng-container *ngIf="run | async as _run">
-      <span class="mdc-typography--body1">Status: {{ _run.status }}</span>
+      <span class="mdc-typography--body1 run-status mb-2"
+        [ngSwitch]="_run.status">
+        Status:
+
+        <span *ngSwitchCase="'completed'" class="status-completed">
+          <i-feather name="check"></i-feather>
+          {{ _run.status }}
+        </span>
+
+        <span *ngSwitchCase="'failed'" class="status-failed">
+          <i-feather name="x"></i-feather>
+          {{ _run.status }}
+        </span>
+
+        <span *ngSwitchDefault>
+          {{ _run.status }}
+        </span>
+      </span>
+
       <app-diagnostic-check-info *ngFor="let check of _run.checks" [check]="check"></app-diagnostic-check-info>
     </ng-container>
   </div>

@@ -1,0 +1,19 @@
+@use 'theme';
+
+.status-completed {
+  color: theme.$success;
+}
+
+.status-failed,
+.reported-error {
+  color: theme.$error;
+}
+
+.reported-warning {
+  color: theme.$warning;
+}
+
+.icon-smaller {
+  height: 20px;
+  width: 20px;
+}

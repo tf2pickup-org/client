@@ -1,21 +1,18 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { FeatherComponent } from 'angular-feather';
+import { MockBuilder, MockedComponentFixture, MockRender } from 'ng-mocks';
 import { DiagnosticCheckInfoComponent } from './diagnostic-check-info.component';
 
-describe('DiagnosticCheckInfoComponent', () => {
+describe(DiagnosticCheckInfoComponent.name, () => {
   let component: DiagnosticCheckInfoComponent;
-  let fixture: ComponentFixture<DiagnosticCheckInfoComponent>;
+  let fixture: MockedComponentFixture<DiagnosticCheckInfoComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ DiagnosticCheckInfoComponent ]
-    })
-    .compileComponents();
-  });
+  beforeEach(() => MockBuilder(DiagnosticCheckInfoComponent)
+    .mock(FeatherComponent)
+  );
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DiagnosticCheckInfoComponent);
-    component = fixture.componentInstance;
+    fixture = MockRender(DiagnosticCheckInfoComponent);
+    component = fixture.point.componentInstance;
     fixture.detectChanges();
   });
 

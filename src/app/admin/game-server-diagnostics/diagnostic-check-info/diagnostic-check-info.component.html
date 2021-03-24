@@ -1,3 +1,20 @@
-<div class="mdc-typography--body1">{{ check.name }}: {{ check.status }}</div>
-<div *ngFor="let error of check.reportedErrors" class="mdc-typography--body2">{{ error }}</div>
-<div *ngFor="let warning of check.reportedWarnings" class="mdc-typography--body2">{{ warning }}</div>
+<div *ngIf="check"
+  class="my-2">
+  <div class="mdc-typography--body1"
+    [ngClass]="{'completed': 'status-completed', 'failed': 'status-failed' }[check.status]">
+    <i-feather [name]="{'completed': 'check-square', 'failed': 'x-square', 'pending': 'square', 'running': 'square'}[check.status]"></i-feather>
+    {{ check.name }}: {{ check.status }}
+  </div>
+
+  <div *ngFor="let error of check.reportedErrors"
+    class="mdc-typography--body2 reported-error ml-4 mt-1">
+    <i-feather name="x-octagon" class="icon-smaller"></i-feather>
+    {{ error }}
+  </div>
+
+  <div *ngFor="let warning of check.reportedWarnings"
+    class="mdc-typography--body2 reported-warning ml-4 mt-1">
+    <i-feather name="alert-octagon" class="icon-smaller"></i-feather>
+    {{ warning }}
+  </div>
+</div>

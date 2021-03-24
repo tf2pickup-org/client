@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
+import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { filter, take, tap } from 'rxjs/operators';
@@ -16,7 +16,7 @@ export class GameServerResolver implements Resolve<GameServer> {
     private store: Store,
   ) { }
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<GameServer> {
+  resolve(route: ActivatedRouteSnapshot): Observable<GameServer> {
     const gameServerId = route.params.gameServerId;
     return this.store.pipe(
       select(gameServerById(gameServerId)),
