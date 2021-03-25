@@ -1,3 +1,23 @@
+# [3.9.0](https://github.com/tf2pickup-pl/client/compare/3.8.0...3.9.0) (2021-03-25)
+
+
+### Bug Fixes
+
+* **configuration:** adapt new configuration model ([#809](https://github.com/tf2pickup-pl/client/issues/809)) ([6512011](https://github.com/tf2pickup-pl/client/commit/6512011319b1617bd339a551671e61c5a350b06f))
+* **css:** make scrollbar always visible ([#807](https://github.com/tf2pickup-pl/client/issues/807)) ([17b1133](https://github.com/tf2pickup-pl/client/commit/17b1133112fa2a12aefa21eae35bb6ee7f68b12e))
+* **deps:** update dependency @angular/cdk to v11.2.5 ([#805](https://github.com/tf2pickup-pl/client/issues/805)) ([bf42c57](https://github.com/tf2pickup-pl/client/commit/bf42c5775c5f058d0aaacb8b663223c48d5d7af0))
+* **deps:** update dependency @angular/cdk to v11.2.6 ([#818](https://github.com/tf2pickup-pl/client/issues/818)) ([6c583d2](https://github.com/tf2pickup-pl/client/commit/6c583d2796493f8fd4602bb2f0a3525261965e77))
+* **deps:** update dependency ng-inline-svg to v12.1.0 ([#815](https://github.com/tf2pickup-pl/client/issues/815)) ([86307ea](https://github.com/tf2pickup-pl/client/commit/86307ea29ef68adb45d5d9aa6720077bcfc991d2))
+* **tf2pickup.de:** update discord invitation link ([43ca345](https://github.com/tf2pickup-pl/client/commit/43ca34558d77d1d84cdacc3ed25269517d83f496))
+* **twitch.tv:** disconnect twitch.tv profile ([#813](https://github.com/tf2pickup-pl/client/issues/813)) ([311ee02](https://github.com/tf2pickup-pl/client/commit/311ee0229d997736efea86ef8bf03dbb293c59d1))
+
+
+### Features
+
+* **build:** build Docker images ([#812](https://github.com/tf2pickup-pl/client/issues/812)) ([c5f545c](https://github.com/tf2pickup-pl/client/commit/c5f545c0ceaee9797dd63a9d3229d1fcc8e7a9f9))
+* **game-servers:** game server diagnostics ([#820](https://github.com/tf2pickup-pl/client/issues/820)) ([4178bb7](https://github.com/tf2pickup-pl/client/commit/4178bb71de13cba598d9fbaa0fb01c0ce46034dc))
+* add scramble maps button ([#801](https://github.com/tf2pickup-pl/client/issues/801)) ([8f5d232](https://github.com/tf2pickup-pl/client/commit/8f5d232ca3c4825a292b9bc435c724f0c5495a5c))
+
 # [3.8.0](https://github.com/tf2pickup-pl/client/compare/3.7.1...3.8.0) (2021-03-14)
 
 
