@@ -11,14 +11,18 @@ jobs:
 
     strategy:
       matrix:
-        branding: [ tf2pickup.pl, hl.tf2pickup.pl, tf2pickup.es, tf2pickup.fr, tf2pickup.cz, tf2pickup.de ]
+        include:
+          - branding: tf2pickup.cz
+            apiUrl: api.tf2pickup.cz
+          - branding: tf2pickup.de
+            apiUrl: api.tf2pickup.de
 
     steps:
       - name: Docker meta
         id: docker_meta
         uses: crazy-max/ghaction-docker-meta@v1
         with:
-          images: tf2pickuppl/client-${{ matrix.branding }}
+          images: tf2pickuppl/${{ matrix.branding }}
 
       - name: Login to DockerHub
         uses: docker/login-action@v1
@@ -36,6 +40,7 @@ jobs:
           push: true
           build-args: |
             branding=${{ matrix.branding }}
+            apiUrl=${{ matrix.apiUrl }}
           tags: ${{ steps.docker_meta.outputs.tags }}
           labels: ${{ steps.docker_meta.outputs.labels }}
 
