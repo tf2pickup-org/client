@@ -89,7 +89,7 @@ describe(EditPlayerRolesComponent.name, () => {
               entities: {
                 FAKE_PLAYER_ID: {
                   name: 'maly',
-                  role: 'admin',
+                  roles: ['admin'],
                 },
               },
             },
@@ -134,11 +134,11 @@ describe(EditPlayerRolesComponent.name, () => {
 
           describe('when the server replies', () => {
             beforeEach(() => {
-              setPlayerRole.next({ name: 'maly', role: null } as Player);
+              setPlayerRole.next({ name: 'maly', roles: [] } as Player);
             });
 
             it('should update the player', () => {
-              expect(store.dispatch).toHaveBeenCalledWith(playerEdited({ player: { name: 'maly', role: null } as Player }));
+              expect(store.dispatch).toHaveBeenCalledWith(playerEdited({ player: { name: 'maly', roles: [] } as Player }));
             });
 
             it('should navigate back', () => {

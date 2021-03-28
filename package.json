@@ -33,6 +33,7 @@
     "@angular/router": "11.2.5",
     "@material/button": "10.0.0",
     "@material/card": "10.0.0",
+    "@material/checkbox": "^10.0.0",
     "@material/dialog": "10.0.0",
     "@material/form-field": "10.0.0",
     "@material/icon-button": "10.0.0",

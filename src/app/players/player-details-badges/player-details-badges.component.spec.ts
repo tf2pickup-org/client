@@ -1,16 +1,22 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { PlayerDetailsBadgesComponent } from './player-details-badges.component';
 import { By } from '@angular/platform-browser';
 import { Player } from '../models/player';
 import { ChangeDetectionStrategy } from '@angular/core';
+import { HasBadgePipe } from './has-badge.pipe';
+import { IsAdminPipe } from '../is-admin.pipe';
 
-describe('PlayerDetailsBadgesComponent', () => {
+describe(PlayerDetailsBadgesComponent.name, () => {
   let component: PlayerDetailsBadgesComponent;
   let fixture: ComponentFixture<PlayerDetailsBadgesComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ PlayerDetailsBadgesComponent ]
+      declarations: [
+        PlayerDetailsBadgesComponent,
+        HasBadgePipe,
+        IsAdminPipe,
+      ],
     })
     // https://github.com/angular/angular/issues/12313
     .overrideComponent(PlayerDetailsBadgesComponent, { set: { changeDetection: ChangeDetectionStrategy.Default } })
@@ -34,10 +40,7 @@ describe('PlayerDetailsBadgesComponent', () => {
   describe('with player', () => {
     describe('that is an admin', () => {
       beforeEach(() => {
-        component.player = {
-          role: 'admin',
-        } as Player;
-
+        component.player = { roles: ['admin'] } as Player;
         fixture.detectChanges();
       });
 
@@ -48,7 +51,7 @@ describe('PlayerDetailsBadgesComponent', () => {
 
     describe('that is not an admin', () => {
       beforeEach(() => {
-        component.player = { } as Player;
+        component.player = { roles: [] } as Player;
         fixture.detectChanges();
       });
 

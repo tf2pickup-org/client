@@ -25,23 +25,26 @@
     </div>
 
     <div class="surface surface--white d-flex flex-column">
-      <div *ngFor="let role of roles"
-        class="mdc-touch-target-wrapper d-flex align-items-center">
-        <div class="mdc-radio mdc-radio--touch">
-          <input
-            class="mdc-radio__native-control"
-            type="radio"
-            id="{{role.value}}"
-            value="{{role.value}}"
-            formControlName="role"
-            name="role">
-          <div class="mdc-radio__background">
-            <div class="mdc-radio__outer-circle"></div>
-            <div class="mdc-radio__inner-circle"></div>
+      <div formArrayName="roles"
+        *ngFor="let role of roles.controls; index as i"
+        class="mdc-form-field">
+        <div class="mdc-checkbox">
+          <input type="checkbox"
+            class="mdc-checkbox__native-control"
+            id="{{rolesAvailable[i].value}}"
+            [formControlName]="i" />
+          <div class="mdc-checkbox__background">
+            <svg class="mdc-checkbox__checkmark"
+              viewBox="0 0 24 24">
+              <path class="mdc-checkbox__checkmark-path"
+                fill="none"
+                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+            </svg>
+            <div class="mdc-checkbox__mixedmark"></div>
           </div>
-          <div class="mdc-radio__ripple"></div>
+          <div class="mdc-checkbox__ripple"></div>
         </div>
-        <label for="{{role.value}}" class="my-0">{{ role.text }}</label>
+        <label for="{{rolesAvailable[i].value}}">{{ rolesAvailable[i].label }}</label>
       </div>
     </div>
   </form>

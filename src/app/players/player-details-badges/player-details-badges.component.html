@@ -1,15 +1,10 @@
-<ng-container *ngIf="player?.role">
+<ng-container *ngIf="player | hasBadge">
   <div class="d-flex flex-row">
 
-    <div class="badge--admin">
+    <div *ngIf="player | isAdmin" class="badge--admin">
       admin
     </div>
 
-    <!-- <div class="badge badge-twitch">
-      live
-      <img src="/assets/TwitchGlitchWhite.png" height="18" class="ml-1">
-    </div> -->
   </div>
-
   <hr class="divider">
 </ng-container>

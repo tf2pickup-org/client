@@ -42,8 +42,8 @@ export class PlayersService {
     return this.http.patch<Player>(`${this.apiUrl}/players/${playerId}`, { name });
   }
 
-  setPlayerRole(playerId: string, role: PlayerRole): Observable<Player> {
-    return this.http.patch<Player>(`${this.apiUrl}/players/${playerId}`, { role });
+  setPlayerRoles(playerId: string, roles: PlayerRole[]): Observable<Player> {
+    return this.http.patch<Player>(`${this.apiUrl}/players/${playerId}`, { roles });
   }
 
   setPlayerSkill(playerId: string, skill: { [gameClass in Tf2ClassName]?: number }) {

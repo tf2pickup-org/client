@@ -16,6 +16,7 @@
 @use '@material/button';
 @use '@material/button/mdc-button';
 @use '@material/card';
+@use '@material/checkbox';
 @use '@material/dialog';
 @use '@material/floating-label/mdc-floating-label';
 @use '@material/icon-button';
@@ -34,6 +35,7 @@
 @use 'components/surface';
 
 @include card.core-styles;
+@include checkbox.core-styles;
 @include dialog.core-styles;
 @include form-field.core-styles;
 @include icon-button.core-styles;

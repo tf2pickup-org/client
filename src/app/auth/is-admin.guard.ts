@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import { CanActivate } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { isAdmin, profile } from '@app/profile/profile.selectors';
+import { profile } from '@app/profile/profile.selectors';
 import { filter, map } from 'rxjs/operators';
 import { Profile } from '@app/profile/models/profile';
+import { PlayerRole } from '@app/players/models/player-role';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,7 @@ export class IsAdminGuard implements CanActivate {
         if (profile.authenticated === 'not authenticated') {
           return false;
         } else {
-          return ['admin', 'super-user'].includes((profile as Profile).player.role);
+          return (['admin', 'super user'] as PlayerRole[]).some(role => (profile as Profile).player.roles.includes(role));
         }
       })
     );
