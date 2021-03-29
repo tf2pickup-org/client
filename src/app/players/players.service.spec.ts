@@ -87,12 +87,12 @@ describe('PlayersService', () => {
     }));
   });
 
-  describe('#setPlayerRole()', () => {
+  describe('#setPlayerRoles()', () => {
     it('should call the endpoint', inject([PlayersService], (service: PlayersService) => {
-      service.setPlayerRole('FAKE_PLAYER_ID', 'admin').subscribe();
+      service.setPlayerRoles('FAKE_PLAYER_ID', ['admin']).subscribe();
       const req = httpContoller.expectOne('FAKE_URL/players/FAKE_PLAYER_ID');
       expect(req.request.method).toBe('PATCH');
-      expect(req.request.body).toEqual({ role: 'admin' });
+      expect(req.request.body).toEqual({ roles: ['admin'] });
     }));
   });
 

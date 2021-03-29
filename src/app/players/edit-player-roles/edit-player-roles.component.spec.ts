@@ -21,11 +21,11 @@ describe(EditPlayerRolesComponent.name, () => {
   let store: MockStore;
   let playersService: jasmine.SpyObj<PlayersService>;
   let submitButton: HTMLButtonElement;
-  let setPlayerRole: Subject<Player>;
+  let setPlayerRoles: Subject<Player>;
 
   beforeEach(() => {
     routeParams = new Subject();
-    setPlayerRole = new Subject();
+    setPlayerRoles = new Subject();
   });
 
   beforeEach(() => MockBuilder(EditPlayerRolesComponent)
@@ -57,7 +57,7 @@ describe(EditPlayerRolesComponent.name, () => {
     store = TestBed.inject(MockStore);
     spyOn(store, 'dispatch');
     playersService = TestBed.inject(PlayersService) as jasmine.SpyObj<PlayersService>;
-    playersService.setPlayerRole.and.returnValue(setPlayerRole.asObservable());
+    playersService.setPlayerRoles.and.returnValue(setPlayerRoles.asObservable());
 
     fixture.detectChanges();
     submitButton = ngMocks.find('button[type=submit]').nativeElement;
@@ -103,13 +103,13 @@ describe(EditPlayerRolesComponent.name, () => {
       });
 
       it('should set the role', () => {
-        const option = ngMocks.find('input[type=radio]#admin').nativeElement as HTMLInputElement;
+        const option = ngMocks.find('input[type=checkbox]#admin').nativeElement as HTMLInputElement;
         expect(option.checked).toBe(true);
       });
 
       describe('when selecting another role', () => {
         beforeEach(() => {
-          const option = ngMocks.find('input[type=radio]#no-role').nativeElement as HTMLInputElement;
+          const option = ngMocks.find('input[type=checkbox]#super\\\ user').nativeElement as HTMLInputElement;
           option.click();
           fixture.detectChanges();
         });
@@ -125,7 +125,7 @@ describe(EditPlayerRolesComponent.name, () => {
           });
 
           it('should call the api', () => {
-            expect(playersService.setPlayerRole).toHaveBeenCalledWith('FAKE_PLAYER_ID', null);
+            expect(playersService.setPlayerRoles).toHaveBeenCalledWith('FAKE_PLAYER_ID', ['super user', 'admin']);
           });
 
           it('should disable the submit button', () => {
@@ -134,11 +134,11 @@ describe(EditPlayerRolesComponent.name, () => {
 
           describe('when the server replies', () => {
             beforeEach(() => {
-              setPlayerRole.next({ name: 'maly', roles: [] } as Player);
+              setPlayerRoles.next({ name: 'maly', roles: ['super user', 'admin'] } as Player);
             });
 
             it('should update the player', () => {
-              expect(store.dispatch).toHaveBeenCalledWith(playerEdited({ player: { name: 'maly', roles: [] } as Player }));
+              expect(store.dispatch).toHaveBeenCalledWith(playerEdited({ player: { name: 'maly', roles: ['super user', 'admin'] } as Player }));
             });
 
             it('should navigate back', () => {

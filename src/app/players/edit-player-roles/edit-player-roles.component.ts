@@ -21,9 +21,13 @@ import { PlayerRole } from '../models/player-role';
 export class EditPlayerRolesComponent implements OnInit, OnDestroy {
 
   readonly rolesAvailable: { label: string, value: PlayerRole }[] = [
-    { label: 'Admin', value: 'admin' },
     { label: 'Super user', value: 'super user' },
+    { label: 'Admin', value: 'admin' },
   ];
+
+  readonly autoRoles: Map<PlayerRole, PlayerRole[]> = new Map([
+    [ 'super user', [ 'admin' ] ],
+  ]);
 
   player = this.formBuilder.group({
     roles: new FormArray(this.rolesAvailable.map(() => new FormControl(false))),
@@ -80,6 +84,19 @@ export class EditPlayerRolesComponent implements OnInit, OnDestroy {
       this.playersService.setPlayerRoles(this.playerId, roles).subscribe(player => {
         this.store.dispatch(playerEdited({ player }));
         this.location.back();
+      });
+    }
+  }
+
+  checkDependentRoles(event: Event) {
+    const target = event.target as HTMLInputElement;
+    if (target.checked) {
+      const rolesToCheck = this.autoRoles.get(target.value as PlayerRole) ?? [];
+      rolesToCheck.forEach(role => {
+        const index = this.rolesAvailable.findIndex(r => r.value === role);
+        const roles = this.roles.value;
+        roles[index] = true;
+        this.player.patchValue({ roles });
       });
     }
   }

@@ -32,7 +32,9 @@
           <input type="checkbox"
             class="mdc-checkbox__native-control"
             id="{{rolesAvailable[i].value}}"
-            [formControlName]="i" />
+            value="{{rolesAvailable[i].value}}"
+            [formControlName]="i"
+            (change)="checkDependentRoles($event)" />
           <div class="mdc-checkbox__background">
             <svg class="mdc-checkbox__checkmark"
               viewBox="0 0 24 24">
