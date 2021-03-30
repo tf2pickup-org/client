@@ -13,12 +13,12 @@ export const isLoggedIn = createSelector(
 
 export const isAdmin = createSelector(
   currentPlayer,
-  player =>  /^(admin|super-user)$/.test(player?.role)
+  player => player?.roles.includes('admin')
 );
 
 export const isSuperUser = createSelector(
   currentPlayer,
-  player => player?.role === 'super-user'
+  player => player?.roles.includes('super user')
 );
 
 export const bans = createSelector(

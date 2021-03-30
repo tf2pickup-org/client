@@ -17,20 +17,19 @@ describe('isLoggedIn', () => {
 describe('isAdmin', () => {
   it('should return the correct value', () => {
     expect(isAdmin.projector(null)).toBeFalsy();
-    expect(isAdmin.projector({ })).toBe(false);
-    expect(isAdmin.projector({ role: 'whatever' })).toBe(false);
-    expect(isAdmin.projector({ role: 'admin' })).toBe(true);
-    expect(isAdmin.projector({ role: 'super-user' })).toBe(true);
+    expect(isAdmin.projector({ roles: [] })).toBe(false);
+    expect(isAdmin.projector({ roles: ['whatever'] })).toBe(false);
+    expect(isAdmin.projector({ roles: ['admin'] })).toBe(true);
   });
 });
 
 describe('isSuperUser', () => {
   it('should return the correct value', () => {
     expect(isSuperUser.projector(null)).toBeFalsy();
-    expect(isSuperUser.projector({ })).toBe(false);
-    expect(isSuperUser.projector({ role: 'something' })).toBe(false);
-    expect(isSuperUser.projector({ role: 'super-user' })).toBe(true);
-    expect(isSuperUser.projector({ role: 'admin' })).toBe(false);
+    expect(isSuperUser.projector({ roles: [] })).toBe(false);
+    expect(isSuperUser.projector({ roles: ['something'] })).toBe(false);
+    expect(isSuperUser.projector({ roles: ['super user'] })).toBe(true);
+    expect(isSuperUser.projector({ roles: ['admin'] })).toBe(false);
   });
 });
 

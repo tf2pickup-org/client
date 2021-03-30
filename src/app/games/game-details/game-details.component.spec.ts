@@ -98,6 +98,7 @@ const mockPlayers = [
     name: 'FAKE_PLAYER_1',
     joinedAt: new Date('2019-08-01T13:42:55.121Z'),
     steamId: 'FAKE_PLAYER_1_STEAM_ID',
+    roles: [],
     avatar: {
       small: 'FAKE_PLAYER_1_SMALL_AVATAR_URL',
       medium: 'FAKE_PLAYER_1_MEDIUM_AVATAR_URL',
@@ -109,6 +110,7 @@ const mockPlayers = [
     name: 'FAKE_PLAYER_2',
     joinedAt: new Date('2019-08-01T13:42:55.121Z'),
     steamId: 'FAKE_PLAYER_2_STEAM_ID',
+    roles: [],
     avatar: {
       small: 'FAKE_PLAYER_2_SMALL_AVATAR_URL',
       medium: 'FAKE_PLAYER_2_MEDIUM_AVATAR_URL',

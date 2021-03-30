@@ -104,7 +104,7 @@ describe('PlayerDetailsComponent', () => {
         medium: 'FAKE_MEDIUM_AVATAR_URL',
         large: 'FAKE_LARGE_AVATAR_URL',
       },
-      role: 'admin' as PlayerRole,
+      roles: ['admin'],
       etf2lProfileId: 12345,
       id: 'FAKE_ID',
     };

@@ -41,7 +41,7 @@ describe('IsAdminGuard', () => {
 
     describe('when the user is not an admin', () => {
       beforeEach(() => {
-        profileSelector.setResult({ authenticated: 'authenticated', player: { role: null } as Player } as any);
+        profileSelector.setResult({ authenticated: 'authenticated', player: { roles: [] } as Player } as any);
         store.refreshState();
       });
 
@@ -52,7 +52,7 @@ describe('IsAdminGuard', () => {
 
     describe('when the user is an admin', () => {
       beforeEach(() => {
-        profileSelector.setResult({ authenticated: 'authenticated', player: { role: 'admin' } as Player } as any);
+        profileSelector.setResult({ authenticated: 'authenticated', player: { roles: ['admin'] } as Player } as any);
         store.refreshState();
       });
 

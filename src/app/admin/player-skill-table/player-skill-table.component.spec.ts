@@ -42,6 +42,7 @@ const allPlayers = [
     name: 'FAKE_PLAYER_NAME',
     joinedAt: new Date(),
     steamId: 'FAKE_STEAM_ID',
+    roles: [],
     avatar: {
       small: 'FAKE_SMALL_AVATAR_URL',
       medium: 'FAKE_MEDIUM_AVATAR_URL',

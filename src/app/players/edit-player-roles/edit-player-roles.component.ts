@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, OnInit, OnDestroy } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { environment } from '@environment';
@@ -10,6 +10,7 @@ import { loadPlayer, playerEdited } from '../actions';
 import { playerById } from '../selectors';
 import { Location } from '@angular/common';
 import { PlayersService } from '../players.service';
+import { PlayerRole } from '../models/player-role';
 
 @Component({
   selector: 'app-edit-player-roles',
@@ -19,14 +20,17 @@ import { PlayersService } from '../players.service';
 })
 export class EditPlayerRolesComponent implements OnInit, OnDestroy {
 
-  readonly roles = [
-    { text: 'no role', value: 'no-role' },
-    { text: 'admin', value: 'admin' },
-    { text: 'super user', value: 'super-user' },
+  readonly rolesAvailable: { label: string, value: PlayerRole }[] = [
+    { label: 'Super user', value: 'super user' },
+    { label: 'Admin', value: 'admin' },
   ];
 
+  readonly autoRoles: Map<PlayerRole, PlayerRole[]> = new Map([
+    [ 'super user', [ 'admin' ] ],
+  ]);
+
   player = this.formBuilder.group({
-    role: ['', Validators.required],
+    roles: new FormArray(this.rolesAvailable.map(() => new FormControl(false))),
   });
 
   ready = new BehaviorSubject<boolean>(false);
@@ -59,7 +63,7 @@ export class EditPlayerRolesComponent implements OnInit, OnDestroy {
       filter(player => !!player),
       take(1),
     ).subscribe(player => {
-      this.player.patchValue({ role: player.role ?? 'no-role' });
+      this.player.patchValue({ roles: this.rolesAvailable.map(role => player.roles.includes(role.value)) });
       this.title.setTitle(`${player.name} • edit role • ${environment.titleSuffix}`);
       this.ready.next(true);
     });
@@ -73,13 +77,32 @@ export class EditPlayerRolesComponent implements OnInit, OnDestroy {
   save() {
     if (this.playerId) {
       this.ready.next(false);
-      const role = this.player.value.role === 'no-role' ? null : this.player.value.role;
+      const roles = this.rolesAvailable
+        .filter((role, i) => this.roles.controls[i].value)
+        .map(role => role.value);
 
-      this.playersService.setPlayerRole(this.playerId, role).subscribe(player => {
+      this.playersService.setPlayerRoles(this.playerId, roles).subscribe(player => {
         this.store.dispatch(playerEdited({ player }));
         this.location.back();
       });
     }
+  }
+
+  checkDependentRoles(event: Event) {
+    const target = event.target as HTMLInputElement;
+    if (target.checked) {
+      const rolesToCheck = this.autoRoles.get(target.value as PlayerRole) ?? [];
+      rolesToCheck.forEach(role => {
+        const index = this.rolesAvailable.findIndex(r => r.value === role);
+        const roles = this.roles.value;
+        roles[index] = true;
+        this.player.patchValue({ roles });
+      });
+    }
+  }
+
+  get roles(): FormArray {
+    return this.player.get('roles') as FormArray;
   }
 
 }

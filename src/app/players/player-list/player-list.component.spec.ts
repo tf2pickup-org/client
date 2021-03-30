@@ -6,6 +6,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { MemoizedSelector } from '@ngrx/store';
 import { allPlayers } from '../selectors';
 import { By } from '@angular/platform-browser';
+import { IsAdminPipe } from '../is-admin.pipe';
 
 describe('PlayerListComponent', () => {
   let component: PlayerListComponent;
@@ -15,7 +16,10 @@ describe('PlayerListComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ PlayerListComponent ],
+      declarations: [
+        PlayerListComponent,
+        IsAdminPipe,
+      ],
       imports: [ RouterTestingModule ],
       providers: [
         provideMockStore(),
@@ -39,7 +43,7 @@ describe('PlayerListComponent', () => {
 
   describe('with players', () => {
     beforeEach(() => {
-      allPlayersSelector.setResult([{ id: 'FAKE_ID', name: 'FAKE_NAME' }]);
+      allPlayersSelector.setResult([{ id: 'FAKE_ID', name: 'FAKE_NAME', roles: [] }]);
       store.refreshState();
       fixture.detectChanges();
     });
@@ -53,7 +57,7 @@ describe('PlayerListComponent', () => {
   });
 
   it('should render an admin badge', () => {
-    allPlayersSelector.setResult([{ id: 'FAKE_ID', name: 'FAKE_NAME', role: 'admin' }]);
+    allPlayersSelector.setResult([{ id: 'FAKE_ID', name: 'FAKE_NAME', roles: ['admin'] }]);
     store.refreshState();
     fixture.detectChanges();
 
