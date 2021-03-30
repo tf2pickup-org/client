@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Player } from '../models/player';
-import { PlayerRole } from '../models/player-role';
+import { Player } from './models/player';
+import { PlayerRole } from './models/player-role';
 
 @Pipe({
   name: 'hasBadge'

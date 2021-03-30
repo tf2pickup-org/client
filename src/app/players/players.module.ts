@@ -33,7 +33,7 @@ import { PlayerDetailsExternalProfileLinksComponent } from
 import { PlayerDetailsAdminButtonsComponent } from './player-details-admin-buttons/player-details-admin-buttons.component';
 import { IconsModule } from '@app/icons/icons.module';
 import { EditPlayerRolesComponent } from './edit-player-roles/edit-player-roles.component';
-import { HasBadgePipe } from './player-details-badges/has-badge.pipe';
+import { HasBadgePipe } from './has-badge.pipe';
 import { IsAdminPipe } from './is-admin.pipe';
 
 @NgModule({

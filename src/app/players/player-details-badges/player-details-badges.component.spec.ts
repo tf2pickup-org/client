@@ -3,7 +3,7 @@ import { PlayerDetailsBadgesComponent } from './player-details-badges.component'
 import { By } from '@angular/platform-browser';
 import { Player } from '../models/player';
 import { ChangeDetectionStrategy } from '@angular/core';
-import { HasBadgePipe } from './has-badge.pipe';
+import { HasBadgePipe } from '../has-badge.pipe';
 import { IsAdminPipe } from '../is-admin.pipe';
 
 describe(PlayerDetailsBadgesComponent.name, () => {
