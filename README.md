@@ -1,10 +1,12 @@
-<h1 align="center">
+<p align="center">
   <a href="https://tf2pickup.pl">
-    <img src="https://raw.githubusercontent.com/tf2pickup-pl/client/master/images/logo-gh.png" alt="tf2pickup.pl logo" width="800">
+    <img src="images/logo.png" alt="tf2pickup.pl logo" width="150" height="150">
   </a>
-</h1>
+</p>
 
-<h4 align="center">A Team Fortress 2 pickup system</h4>
+<h1 align="center">tf2pickup.pl</h1>
+
+<p align="center">Team Fortress 2 pick-up games for everyone</p>
 
 <p align="center">
   <a href="https://github.com/tf2pickup-pl/client/actions?query=workflow%3Atest">
@@ -18,5 +20,13 @@
   <a href="https://opensource.org/licenses/MIT">
     <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="MIT license">
   </a>
+
+  <a href="https://w.supra.tf/b/xYYTewYR5RcvfHBZ8/tf2pickup-pl">
+    <img src="https://img.shields.io/badge/project-wekan-%2300aecc.svg" alt="Project on Wekan">
+  </a>
 </p>
+
+<p align="center">
+  <img src="images/screenshot.png" alt="screenshot" width="820" height="416">
+</P>
 
