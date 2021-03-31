@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://tf2pickup.pl">
-    <img src="images/logo.png" alt="tf2pickup.pl logo" width="150" height="150">
+    <img src="images/logo.png" alt="tf2pickup.org logo" width="150" height="150">
   </a>
 </p>
 
@@ -9,12 +9,12 @@
 <p align="center">Team Fortress 2 pick-up games for everyone</p>
 
 <p align="center">
-  <a href="https://github.com/tf2pickup-pl/client/actions?query=workflow%3Atest">
-    <img src="https://github.com/tf2pickup-pl/client/workflows/test/badge.svg" alt="Test status">
+  <a href="https://github.com/tf2pickup-org/client/actions?query=workflow%3Atest">
+    <img src="https://github.com/tf2pickup-org/client/workflows/test/badge.svg" alt="Test status">
   </a>
 
-  <a href="https://codecov.io/gh/tf2pickup-pl/client">
-    <img src="https://codecov.io/gh/tf2pickup-pl/client/branch/master/graph/badge.svg" alt="Codecov">
+  <a href="https://codecov.io/gh/tf2pickup-org/client">
+    <img src="https://codecov.io/gh/tf2pickup-org/client/branch/master/graph/badge.svg" alt="Codecov">
   </a>
 
   <a href="https://opensource.org/licenses/MIT">
