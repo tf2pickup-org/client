@@ -4,7 +4,7 @@
   </a>
 </p>
 
-<h1 align="center">tf2pickup.pl</h1>
+<h1 align="center">tf2pickup.org</h1>
 
 <p align="center">Team Fortress 2 pick-up games for everyone</p>
 
@@ -27,6 +27,6 @@
 </p>
 
 <p align="center">
-  <img src="images/screenshot.png" alt="screenshot" width="820" height="416">
+  <img src="images/screenshot.png" alt="screenshot">
 </P>
 
