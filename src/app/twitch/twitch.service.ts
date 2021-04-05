@@ -5,10 +5,10 @@ import { Observable, fromEvent } from 'rxjs';
 import { TwitchStream } from './models/twitch-stream';
 import { Store } from '@ngrx/store';
 import { twitchStreamsUpdated } from './twitch.actions';
-import { AuthService } from '@app/auth/auth.service';
 import { WindowHelperService } from '@app/shared/window-helper.service';
 import { Socket } from '@app/io/socket';
 import { Player } from '@app/players/models/player';
+import { TokenStoreService } from '@app/auth/token-store.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,21 +19,20 @@ export class TwitchService {
     private http: HttpClient,
     @Inject(API_URL) private apiUrl: string,
     private store: Store,
-    private authService: AuthService,
     private windowHelperService: WindowHelperService,
     socket: Socket,
+    private tokenStore: TokenStoreService,
   ) {
     fromEvent<TwitchStream[]>(socket, 'twitch streams update')
       .subscribe(twitchStreams => this.store.dispatch(twitchStreamsUpdated({ twitchStreams })));
   }
 
   login() {
-    this.authService.reauth().subscribe(authToken => {
-      const width = 550;
-      const height = 850;
-      const url = `${this.apiUrl}/twitch/auth?token=${authToken}`;
-      this.windowHelperService.openWindow({ width, height, url });
-    });
+    const width = 550;
+    const height = 850;
+    const authToken = this.tokenStore.authToken;
+    const url = `${this.apiUrl}/twitch/auth?token=${authToken}`;
+    this.windowHelperService.openWindow({ width, height, url });
   }
 
   disconnect() {
