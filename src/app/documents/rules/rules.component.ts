@@ -11,13 +11,7 @@ import { Document } from '../models/document';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RulesComponent {
+  document: Observable<Document> = this.route.data.pipe(pluck('document'));
 
-  document: Observable<Document> = this.route.data.pipe(
-    pluck('document'),
-  );
-
-  constructor(
-    private route: ActivatedRoute,
-  ) { }
-
+  constructor(private route: ActivatedRoute) {}
 }

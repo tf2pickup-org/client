@@ -9,12 +9,8 @@ describe('AdminItemListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        AdminItemListComponent,
-        MockComponent(FeatherComponent),
-      ],
-    })
-    .compileComponents();
+      declarations: [AdminItemListComponent, MockComponent(FeatherComponent)],
+    }).compileComponents();
   });
 
   beforeEach(() => {

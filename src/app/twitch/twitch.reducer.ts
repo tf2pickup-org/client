@@ -12,8 +12,15 @@ const initialState: State = {
 
 const twitchReducer = createReducer(
   initialState,
-  on(twitchStreamsLoaded, (state, { twitchStreams }) => ({ ...state, streams: twitchStreams })),
-  on(twitchStreamsUpdated, (state, { twitchStreams }) => ({ ...state, streams: twitchStreams })),
+  on(twitchStreamsLoaded, (state, { twitchStreams }) => ({
+    ...state,
+    streams: twitchStreams,
+  })),
+  on(twitchStreamsUpdated, (state, { twitchStreams }) => ({
+    ...state,
+    streams: twitchStreams,
+  })),
 );
 
-export const reducer = (state: State | undefined, action: Action) => twitchReducer(state, action);
+export const reducer = (state: State | undefined, action: Action) =>
+  twitchReducer(state, action);

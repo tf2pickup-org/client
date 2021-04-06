@@ -6,8 +6,8 @@ describe(DiagnosticCheckInfoComponent.name, () => {
   let component: DiagnosticCheckInfoComponent;
   let fixture: MockedComponentFixture<DiagnosticCheckInfoComponent>;
 
-  beforeEach(() => MockBuilder(DiagnosticCheckInfoComponent)
-    .mock(FeatherComponent)
+  beforeEach(() =>
+    MockBuilder(DiagnosticCheckInfoComponent).mock(FeatherComponent),
   );
 
   beforeEach(() => {

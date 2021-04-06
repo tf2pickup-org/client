@@ -1,4 +1,9 @@
-import { Component, ChangeDetectionStrategy, OnInit, OnDestroy } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  OnInit,
+  OnDestroy,
+} from '@angular/core';
 import { FormArray, FormBuilder, FormControl } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
@@ -16,17 +21,16 @@ import { PlayerRole } from '../models/player-role';
   selector: 'app-edit-player-roles',
   templateUrl: './edit-player-roles.component.html',
   styleUrls: ['./edit-player-roles.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EditPlayerRolesComponent implements OnInit, OnDestroy {
-
-  readonly rolesAvailable: { label: string, value: PlayerRole }[] = [
+  readonly rolesAvailable: { label: string; value: PlayerRole }[] = [
     { label: 'Super user', value: 'super user' },
     { label: 'Admin', value: 'admin' },
   ];
 
   readonly autoRoles: Map<PlayerRole, PlayerRole[]> = new Map([
-    [ 'super user', [ 'admin' ] ],
+    ['super user', ['admin']],
   ]);
 
   player = this.formBuilder.group({
@@ -45,28 +49,38 @@ export class EditPlayerRolesComponent implements OnInit, OnDestroy {
     private title: Title,
     private location: Location,
     private playersService: PlayersService,
-  ) { }
+  ) {}
 
   ngOnInit() {
     // load the given player
-    this.route.paramMap.pipe(
-      map(params => params.get('id')),
-      tap(playerId => this.playerId = playerId),
-      takeUntil(this.destroyed),
-      switchMap(playerId => this.store.select(playerById(playerId)).pipe(
-        tap(player => {
-          if (!player) {
-            this.store.dispatch(loadPlayer({ playerId }));
-          }
-        }),
-      )),
-      filter(player => !!player),
-      take(1),
-    ).subscribe(player => {
-      this.player.patchValue({ roles: this.rolesAvailable.map(role => player.roles.includes(role.value)) });
-      this.title.setTitle(`${player.name} • edit role • ${environment.titleSuffix}`);
-      this.ready.next(true);
-    });
+    this.route.paramMap
+      .pipe(
+        map(params => params.get('id')),
+        tap(playerId => (this.playerId = playerId)),
+        takeUntil(this.destroyed),
+        switchMap(playerId =>
+          this.store.select(playerById(playerId)).pipe(
+            tap(player => {
+              if (!player) {
+                this.store.dispatch(loadPlayer({ playerId }));
+              }
+            }),
+          ),
+        ),
+        filter(player => !!player),
+        take(1),
+      )
+      .subscribe(player => {
+        this.player.patchValue({
+          roles: this.rolesAvailable.map(role =>
+            player.roles.includes(role.value),
+          ),
+        });
+        this.title.setTitle(
+          `${player.name} • edit role • ${environment.titleSuffix}`,
+        );
+        this.ready.next(true);
+      });
   }
 
   ngOnDestroy() {
@@ -81,10 +95,12 @@ export class EditPlayerRolesComponent implements OnInit, OnDestroy {
         .filter((role, i) => this.roles.controls[i].value)
         .map(role => role.value);
 
-      this.playersService.setPlayerRoles(this.playerId, roles).subscribe(player => {
-        this.store.dispatch(playerEdited({ player }));
-        this.location.back();
-      });
+      this.playersService
+        .setPlayerRoles(this.playerId, roles)
+        .subscribe(player => {
+          this.store.dispatch(playerEdited({ player }));
+          this.location.back();
+        });
     }
   }
 
@@ -104,5 +120,4 @@ export class EditPlayerRolesComponent implements OnInit, OnDestroy {
   get roles(): FormArray {
     return this.player.get('roles') as FormArray;
   }
-
 }

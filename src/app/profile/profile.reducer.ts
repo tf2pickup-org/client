@@ -1,6 +1,11 @@
 import { Profile } from './models/profile';
 import { createReducer, Action, on } from '@ngrx/store';
-import { profileLoaded, rulesAccepted, profileUpdated, preferencesUpdated } from './profile.actions';
+import {
+  profileLoaded,
+  rulesAccepted,
+  profileUpdated,
+  preferencesUpdated,
+} from './profile.actions';
 
 // export type State = Profile;
 interface AuthenticatedState extends Profile {
@@ -19,14 +24,24 @@ export type State = UnknownState | NotAuthenticatedState | AuthenticatedState;
 
 export const initialState: State = {
   authenticated: 'unknown',
-}
+};
 
 const profileReducer = createReducer<State>(
   initialState,
-  on(profileLoaded, (state, { profile }) => ({ ...profile, authenticated: 'authenticated' })),
+  on(profileLoaded, (state, { profile }) => ({
+    ...profile,
+    authenticated: 'authenticated',
+  })),
   on(rulesAccepted, state => ({ ...state, hasAcceptedRules: true })),
-  on(profileUpdated, (state, { profileChanges }) => ({ ...state, ...profileChanges })),
-  on(preferencesUpdated, (state, { preferences }) => ({ ...state, preferences })),
+  on(profileUpdated, (state, { profileChanges }) => ({
+    ...state,
+    ...profileChanges,
+  })),
+  on(preferencesUpdated, (state, { preferences }) => ({
+    ...state,
+    preferences,
+  })),
 );
 
-export const reducer = (state: State | undefined, action: Action) => profileReducer(state, action);
+export const reducer = (state: State | undefined, action: Action) =>
+  profileReducer(state, action);

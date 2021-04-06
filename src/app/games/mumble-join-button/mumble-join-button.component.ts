@@ -7,8 +7,6 @@ import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MumbleJoinButtonComponent {
-
   @Input()
   mumbleUrl: string;
-
 }

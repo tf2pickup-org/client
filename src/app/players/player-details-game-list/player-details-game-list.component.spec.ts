@@ -1,5 +1,11 @@
 /* eslint-disable id-blacklist */
-import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  fakeAsync,
+  TestBed,
+  tick,
+  waitForAsync,
+} from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { PaginatedList } from '@app/core/models/paginated-list';
@@ -19,26 +25,24 @@ describe('PlayerDetailsGameListComponent', () => {
 
   beforeEach(() => {
     results = new Subject();
-    playersService = jasmine.createSpyObj<PlayersService>(PlayersService.name, ['fetchPlayerGames']);
+    playersService = jasmine.createSpyObj<PlayersService>(PlayersService.name, [
+      'fetchPlayerGames',
+    ]);
     playersService.fetchPlayerGames.and.returnValue(results.asObservable());
   });
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [
-        PlayerDetailsGameListComponent,
-        MockComponent(GameClassIconComponent),
-      ],
-      imports: [
-        RouterTestingModule,
-        NgxPaginationModule,
-      ],
-      providers: [
-        { provide: PlayersService, useValue: playersService },
-      ],
-    })
-    .compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [
+          PlayerDetailsGameListComponent,
+          MockComponent(GameClassIconComponent),
+        ],
+        imports: [RouterTestingModule, NgxPaginationModule],
+        providers: [{ provide: PlayersService, useValue: playersService }],
+      }).compileComponents();
+    }),
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PlayerDetailsGameListComponent);
@@ -59,7 +63,11 @@ describe('PlayerDetailsGameListComponent', () => {
     });
 
     it('should load initial page of players games', () => {
-      expect(playersService.fetchPlayerGames).toHaveBeenCalledWith('FAKE_PLAYER_ID', 0, 10);
+      expect(playersService.fetchPlayerGames).toHaveBeenCalledWith(
+        'FAKE_PLAYER_ID',
+        0,
+        10,
+      );
     });
 
     describe('when there are no games', () => {
@@ -68,7 +76,8 @@ describe('PlayerDetailsGameListComponent', () => {
       });
 
       it('should render no games', () => {
-        const div = fixture.debugElement.query(By.css('.no-games')).nativeElement as HTMLDivElement;
+        const div = fixture.debugElement.query(By.css('.no-games'))
+          .nativeElement as HTMLDivElement;
         expect(div).toBeTruthy();
         expect(div.innerText).toEqual('no games');
       });
@@ -110,8 +119,12 @@ describe('PlayerDetailsGameListComponent', () => {
 
         fixture.detectChanges();
 
-        previousPageAnchor = fixture.debugElement.query(By.css('nav ul li:nth-child(1) a')).nativeElement as HTMLAnchorElement;
-        nextPageAnchor = fixture.debugElement.query(By.css('nav ul li:nth-child(3) a')).nativeElement as HTMLAnchorElement;
+        previousPageAnchor = fixture.debugElement.query(
+          By.css('nav ul li:nth-child(1) a'),
+        ).nativeElement as HTMLAnchorElement;
+        nextPageAnchor = fixture.debugElement.query(
+          By.css('nav ul li:nth-child(3) a'),
+        ).nativeElement as HTMLAnchorElement;
       });
 
       it('should render pagination controls', () => {
@@ -121,12 +134,15 @@ describe('PlayerDetailsGameListComponent', () => {
       });
 
       it('should render the game', () => {
-        const gameAnchor = fixture.debugElement.query(By.css('li.game-list-item a')).nativeElement as HTMLAnchorElement;
+        const gameAnchor = fixture.debugElement.query(
+          By.css('li.game-list-item a'),
+        ).nativeElement as HTMLAnchorElement;
         expect(gameAnchor).toBeTruthy();
         expect(gameAnchor.href).toMatch(/\/game\/FAKE_GAME_1$/);
 
-        const gameClassIcon = fixture.debugElement.query(By.css('li.game-list-item a app-game-class-icon'))
-          .componentInstance as GameClassIconComponent;
+        const gameClassIcon = fixture.debugElement.query(
+          By.css('li.game-list-item a app-game-class-icon'),
+        ).componentInstance as GameClassIconComponent;
 
         expect(gameClassIcon.gameClass).toEqual('soldier');
       });
@@ -138,12 +154,17 @@ describe('PlayerDetailsGameListComponent', () => {
         });
 
         it('should render loading gif', () => {
-          const loading = fixture.debugElement.query(By.css('.loading-wrapper')).nativeElement as HTMLDivElement;
+          const loading = fixture.debugElement.query(By.css('.loading-wrapper'))
+            .nativeElement as HTMLDivElement;
           expect(loading).toBeTruthy();
         });
 
         it('should request next page', () => {
-          expect(playersService.fetchPlayerGames).toHaveBeenCalledWith('FAKE_PLAYER_ID', 10, 10);
+          expect(playersService.fetchPlayerGames).toHaveBeenCalledWith(
+            'FAKE_PLAYER_ID',
+            10,
+            10,
+          );
         });
       });
     });

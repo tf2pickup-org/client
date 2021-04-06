@@ -3,18 +3,20 @@ import { TestBed, inject } from '@angular/core/testing';
 import { BrowserModule, DomSanitizer } from '@angular/platform-browser';
 
 class DomSanitizerStub {
-  bypassSecurityTrustUrl(input: string) { return input; }
+  bypassSecurityTrustUrl(input: string) {
+    return input;
+  }
 }
 
 describe('SafeMumbleUrlPipe', () => {
   let pipe: SafeMumbleUrlPipe;
 
-  beforeEach(() => TestBed.configureTestingModule({
-    imports: [ BrowserModule ],
-    providers: [
-      { provide: DomSanitizer, useClass: DomSanitizerStub },
-    ]
-  }));
+  beforeEach(() =>
+    TestBed.configureTestingModule({
+      imports: [BrowserModule],
+      providers: [{ provide: DomSanitizer, useClass: DomSanitizerStub }],
+    }),
+  );
 
   beforeEach(inject([DomSanitizer], (domSanitizer: DomSanitizer) => {
     pipe = new SafeMumbleUrlPipe(domSanitizer);

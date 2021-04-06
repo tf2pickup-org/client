@@ -8,9 +8,8 @@ describe('GameClassIconComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GameClassIconComponent ]
-    })
-    .compileComponents();
+      declarations: [GameClassIconComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

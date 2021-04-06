@@ -11,10 +11,9 @@ import { Player } from '@app/players/models/player';
 import { TokenStoreService } from '@app/auth/token-store.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TwitchService {
-
   constructor(
     private http: HttpClient,
     @Inject(API_URL) private apiUrl: string,
@@ -23,8 +22,12 @@ export class TwitchService {
     socket: Socket,
     private tokenStore: TokenStoreService,
   ) {
-    fromEvent<TwitchStream[]>(socket, 'twitch streams update')
-      .subscribe(twitchStreams => this.store.dispatch(twitchStreamsUpdated({ twitchStreams })));
+    fromEvent<TwitchStream[]>(
+      socket,
+      'twitch streams update',
+    ).subscribe(twitchStreams =>
+      this.store.dispatch(twitchStreamsUpdated({ twitchStreams })),
+    );
   }
 
   login() {
@@ -36,11 +39,10 @@ export class TwitchService {
   }
 
   disconnect() {
-    return this.http.put<Player>(`${this.apiUrl}/twitch/disconnect`, { });
+    return this.http.put<Player>(`${this.apiUrl}/twitch/disconnect`, {});
   }
 
   fetchStreams(): Observable<TwitchStream[]> {
     return this.http.get<TwitchStream[]>(`${this.apiUrl}/twitch/streams`);
   }
-
 }

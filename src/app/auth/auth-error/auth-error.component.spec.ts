@@ -6,12 +6,9 @@ import { HTTP_PARAMS } from '../http-params';
 
 const configureTestingModule = async (httpParams: HttpParams) => {
   await TestBed.configureTestingModule({
-    declarations: [ AuthErrorComponent ],
-    providers: [
-      { provide: HTTP_PARAMS, useValue: httpParams },
-    ],
-  })
-  .compileComponents();
+    declarations: [AuthErrorComponent],
+    providers: [{ provide: HTTP_PARAMS, useValue: httpParams }],
+  }).compileComponents();
 
   const fixture = TestBed.createComponent(AuthErrorComponent);
   fixture.detectChanges();
@@ -27,7 +24,8 @@ describe('AuthErrorComponent', () => {
     },
     {
       key: 'not enough steam hours',
-      message: 'You do not meet the required amount of hours in Team Fortress 2.',
+      message:
+        'You do not meet the required amount of hours in Team Fortress 2.',
     },
     {
       key: 'etf2l banned',
@@ -48,7 +46,9 @@ describe('AuthErrorComponent', () => {
   for (const error of testErrors) {
     describe(`when the error='${error.key}'`, () => {
       beforeEach(async () => {
-        const r = await configureTestingModule(new HttpParams().set('error', error.key));
+        const r = await configureTestingModule(
+          new HttpParams().set('error', error.key),
+        );
         errorMessage = r.errorMessage;
       });
 

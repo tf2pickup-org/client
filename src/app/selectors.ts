@@ -12,14 +12,13 @@ export const canJoinQueue = createSelector(
   activeGame,
   isBanned,
   // eslint-disable-next-line no-shadow
-  (ioConnected, isLoggedIn, activeGame, isBanned) => ioConnected && isLoggedIn && !activeGame && !isBanned
+  (ioConnected, isLoggedIn, activeGame, isBanned) =>
+    ioConnected && isLoggedIn && !activeGame && !isBanned,
 );
 
 export const awaitsReadyUp = createSelector(
   queueState,
   mySlot,
   // eslint-disable-next-line no-shadow
-  (queueState, mySlot) =>
-    queueState === 'ready'
-    && (!!mySlot && !mySlot.ready)
+  (queueState, mySlot) => queueState === 'ready' && !!mySlot && !mySlot.ready,
 );

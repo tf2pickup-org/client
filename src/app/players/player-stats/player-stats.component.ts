@@ -8,8 +8,6 @@ import { PlayerStats } from '../models/player-stats';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PlayerStatsComponent {
-
   @Input()
   playerStats: PlayerStats;
-
 }

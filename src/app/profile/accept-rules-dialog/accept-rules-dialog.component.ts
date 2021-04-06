@@ -11,14 +11,13 @@ import { pluck } from 'rxjs/operators';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AcceptRulesDialogComponent {
-
   rulesAccepted = new Subject<void>();
   phase = new BehaviorSubject<'mumble' | 'rules'>('mumble');
-  rules = this.documentsService.fetchDocument(Documents.rules).pipe(pluck('body'));
+  rules = this.documentsService
+    .fetchDocument(Documents.rules)
+    .pipe(pluck('body'));
 
-  constructor(
-    private documentsService: DocumentsService,
-  ) { }
+  constructor(private documentsService: DocumentsService) {}
 
   step() {
     switch (this.phase.value) {
@@ -31,5 +30,4 @@ export class AcceptRulesDialogComponent {
         break;
     }
   }
-
 }

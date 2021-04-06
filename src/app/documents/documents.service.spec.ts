@@ -1,4 +1,7 @@
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import {
+  HttpClientTestingModule,
+  HttpTestingController,
+} from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { API_URL } from '@app/api-url';
 import { DocumentsService } from './documents.service';
@@ -9,12 +12,8 @@ describe('DocumentsService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-      ],
-      providers: [
-        { provide: API_URL, useValue: 'FAKE_URL' },
-      ],
+      imports: [HttpClientTestingModule],
+      providers: [{ provide: API_URL, useValue: 'FAKE_URL' }],
     });
     service = TestBed.inject(DocumentsService);
     httpController = TestBed.inject(HttpTestingController);
@@ -35,7 +34,8 @@ describe('DocumentsService', () => {
   describe('#saveDocument()', () => {
     it('should call the endpoint', () => {
       service.saveDocument('rules', 'bla bla bla').subscribe();
-      const request = httpController.expectOne('FAKE_URL/documents/rules').request;
+      const request = httpController.expectOne('FAKE_URL/documents/rules')
+        .request;
       expect(request.method).toBe('PUT');
       expect(request.body).toEqual({
         name: 'rules',

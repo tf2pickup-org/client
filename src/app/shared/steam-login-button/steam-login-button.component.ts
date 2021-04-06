@@ -8,9 +8,5 @@ import { API_URL } from '@app/api-url';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SteamLoginButtonComponent {
-
-  constructor(
-    @Inject(API_URL) public apiUrl: string,
-  ) { }
-
+  constructor(@Inject(API_URL) public apiUrl: string) {}
 }

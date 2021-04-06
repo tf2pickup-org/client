@@ -13,20 +13,18 @@ import { PreReadyService } from '../pre-ready.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PreReadyUpButtonComponent {
-
   preReadied = this.store.select(isPreReadied);
   timeout = this.preReadyService.timeout;
-  text: Observable<string | number> = combineLatest([this.preReadied, this.timeout]).pipe(
-    map(([preReadied, timeout]) => preReadied ? timeout : 'Pre-ready up'),
+  text: Observable<string | number> = combineLatest([
+    this.preReadied,
+    this.timeout,
+  ]).pipe(
+    map(([preReadied, timeout]) => (preReadied ? timeout : 'Pre-ready up')),
   );
 
-  constructor(
-    private store: Store,
-    private preReadyService: PreReadyService,
-  ) { }
+  constructor(private store: Store, private preReadyService: PreReadyService) {}
 
   preReadyToggle() {
     this.store.dispatch(togglePreReady());
   }
-
 }

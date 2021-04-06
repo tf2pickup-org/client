@@ -7,7 +7,6 @@ import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GameBasicInfoComponent {
-
   @Input()
   launchedAt: Date;
 
@@ -22,5 +21,4 @@ export class GameBasicInfoComponent {
 
   @Input()
   error: string;
-
 }

@@ -1,5 +1,10 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { MockBuilder, MockedComponentFixture, MockRender, ngMocks } from 'ng-mocks';
+import {
+  MockBuilder,
+  MockedComponentFixture,
+  MockRender,
+  ngMocks,
+} from 'ng-mocks';
 import { MinimumTf2InGameHoursDialogComponent } from './minimum-tf2-in-game-hours-dialog.component';
 
 @Component({
@@ -9,7 +14,7 @@ import { MinimumTf2InGameHoursDialogComponent } from './minimum-tf2-in-game-hour
     [minimumTf2InGameHours]="minimumTf2InGameHours"
     (accept)="accept.next($event)"
     (cancel)="cancel.next()"
-    ></app-minimum-tf2-in-game-hours-dialog>`,
+  ></app-minimum-tf2-in-game-hours-dialog>`,
 })
 class TestWrapperComponent {
   minimumTf2InGameHours: number;
@@ -21,8 +26,11 @@ describe(MinimumTf2InGameHoursDialogComponent.name, () => {
   let component: TestWrapperComponent;
   let fixture: MockedComponentFixture<TestWrapperComponent>;
 
-  beforeEach(() => MockBuilder(TestWrapperComponent)
-    .keep(MinimumTf2InGameHoursDialogComponent));
+  beforeEach(() =>
+    MockBuilder(TestWrapperComponent).keep(
+      MinimumTf2InGameHoursDialogComponent,
+    ),
+  );
 
   beforeEach(() => {
     fixture = MockRender(TestWrapperComponent);
@@ -36,7 +44,8 @@ describe(MinimumTf2InGameHoursDialogComponent.name, () => {
   });
 
   it('should apply the value to the input', () => {
-    const input = ngMocks.find('input[type=number]').nativeElement as HTMLInputElement;
+    const input = ngMocks.find('input[type=number]')
+      .nativeElement as HTMLInputElement;
     expect(input.value).toEqual('500');
   });
 

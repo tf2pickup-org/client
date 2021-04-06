@@ -35,4 +35,4 @@ import { ReactiveFormsModule } from '@angular/forms';
     ProfileRoutingModule,
   ],
 })
-export class ProfileModule { }
+export class ProfileModule {}

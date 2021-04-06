@@ -1,5 +1,10 @@
 import { ActivatedRoute } from '@angular/router';
-import { MockBuilder, MockedComponentFixture, MockRender, ngMocks } from 'ng-mocks';
+import {
+  MockBuilder,
+  MockedComponentFixture,
+  MockRender,
+  ngMocks,
+} from 'ng-mocks';
 import { Subject } from 'rxjs';
 import { RulesComponent } from './rules.component';
 import { MarkdownComponent } from 'ngx-markdown';
@@ -9,13 +14,14 @@ describe(RulesComponent.name, () => {
   let fixture: MockedComponentFixture<RulesComponent>;
   let routeData: Subject<any>;
 
-  beforeEach(() => routeData = new Subject());
+  beforeEach(() => (routeData = new Subject()));
 
-  beforeEach(() => MockBuilder(RulesComponent)
-    .mock(ActivatedRoute, {
-      data: routeData.asObservable(),
-    })
-    .mock(MarkdownComponent)
+  beforeEach(() =>
+    MockBuilder(RulesComponent)
+      .mock(ActivatedRoute, {
+        data: routeData.asObservable(),
+      })
+      .mock(MarkdownComponent),
   );
 
   beforeEach(() => {

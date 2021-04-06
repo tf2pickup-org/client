@@ -11,20 +11,22 @@ describe('PlayerEditSkillComponent', () => {
   let fixture: ComponentFixture<PlayerEditSkillComponent>;
   const formGroup = new FormGroup({ soldier: new FormControl(5) });
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [
-        PlayerEditSkillComponent,
-        MockComponent(GameClassIconComponent),
-      ],
-      imports: [
-        ReactiveFormsModule,
-      ],
-    })
-    // https://github.com/angular/angular/issues/12313
-    .overrideComponent(PlayerEditSkillComponent, { set: { changeDetection: ChangeDetectionStrategy.Default } })
-    .compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [
+          PlayerEditSkillComponent,
+          MockComponent(GameClassIconComponent),
+        ],
+        imports: [ReactiveFormsModule],
+      })
+        // https://github.com/angular/angular/issues/12313
+        .overrideComponent(PlayerEditSkillComponent, {
+          set: { changeDetection: ChangeDetectionStrategy.Default },
+        })
+        .compileComponents();
+    }),
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PlayerEditSkillComponent);
@@ -44,7 +46,9 @@ describe('PlayerEditSkillComponent', () => {
     });
 
     it('should render the proper game class', () => {
-      const gameClassIcon = fixture.debugElement.query(By.css('app-game-class-icon')).componentInstance as GameClassIconComponent;
+      const gameClassIcon = fixture.debugElement.query(
+        By.css('app-game-class-icon'),
+      ).componentInstance as GameClassIconComponent;
       expect(gameClassIcon.gameClass).toEqual('soldier');
     });
   });

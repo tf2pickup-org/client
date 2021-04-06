@@ -6,9 +6,7 @@ describe(MapEditComponent.name, () => {
   let component: MapEditComponent;
   let fixture: MockedComponentFixture<MapEditComponent>;
 
-  beforeEach(() => MockBuilder(MapEditComponent)
-    .mock(FeatherComponent)
-  );
+  beforeEach(() => MockBuilder(MapEditComponent).mock(FeatherComponent));
 
   beforeEach(() => {
     fixture = MockRender(MapEditComponent);

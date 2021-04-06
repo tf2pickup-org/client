@@ -1,4 +1,13 @@
-import { Component, ChangeDetectionStrategy, Input, ViewChild, ElementRef, OnDestroy, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  Input,
+  ViewChild,
+  ElementRef,
+  OnDestroy,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MDCTextField } from '@material/textfield';
 
@@ -9,7 +18,6 @@ import { MDCTextField } from '@material/textfield';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MapEditComponent implements OnDestroy {
-
   @ViewChild('mapName')
   set mapNameControl(mapNameControl: ElementRef) {
     if (mapNameControl) {
@@ -17,7 +25,7 @@ export class MapEditComponent implements OnDestroy {
         this.mapNameField.destroy();
       }
 
-      this.mapNameField = new MDCTextField(mapNameControl.nativeElement)
+      this.mapNameField = new MDCTextField(mapNameControl.nativeElement);
     }
   }
 
@@ -28,7 +36,7 @@ export class MapEditComponent implements OnDestroy {
         this.execConfigField.destroy();
       }
 
-      this.execConfigField = new MDCTextField(execConfigControl.nativeElement)
+      this.execConfigField = new MDCTextField(execConfigControl.nativeElement);
     }
   }
 
@@ -57,5 +65,4 @@ export class MapEditComponent implements OnDestroy {
   focus() {
     this.mapNameInput?.nativeElement.focus();
   }
-
 }

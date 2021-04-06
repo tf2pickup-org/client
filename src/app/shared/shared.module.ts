@@ -18,9 +18,7 @@ import { AsFormGroupPipe } from './as-form-group.pipe';
     NavigateBackDirective,
     AsFormGroupPipe,
   ],
-  imports: [
-    CommonModule,
-  ],
+  imports: [CommonModule],
   exports: [
     SteamLoginButtonComponent,
     ConnectStringToLinkPipe,
@@ -29,6 +27,6 @@ import { AsFormGroupPipe } from './as-form-group.pipe';
     MapThumbnailPipe,
     NavigateBackDirective,
     AsFormGroupPipe,
-  ]
+  ],
 })
-export class SharedModule { }
+export class SharedModule {}

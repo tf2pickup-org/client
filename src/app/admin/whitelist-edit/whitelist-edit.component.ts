@@ -1,4 +1,13 @@
-import { Component, OnInit, ChangeDetectionStrategy, ElementRef, ViewChild, AfterViewInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  ElementRef,
+  ViewChild,
+  AfterViewInit,
+  OnDestroy,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ConfigurationEntryKey } from '@app/configuration/configuration-entry-key';
 import { ConfigurationService } from '@app/configuration/configuration.service';
@@ -12,8 +21,8 @@ import { finalize, tap } from 'rxjs/operators';
   styleUrls: ['./whitelist-edit.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class WhitelistEditComponent implements OnInit, AfterViewInit, OnDestroy {
-
+export class WhitelistEditComponent
+  implements OnInit, AfterViewInit, OnDestroy {
   isSaving = new BehaviorSubject<boolean>(false);
 
   form = this.formBuilder.group({
@@ -29,17 +38,21 @@ export class WhitelistEditComponent implements OnInit, AfterViewInit, OnDestroy 
     private formBuilder: FormBuilder,
     private configurationService: ConfigurationService,
     private changeDetector: ChangeDetectorRef,
-  ) { }
+  ) {}
 
   ngOnInit() {
-    this.configurationService.fetchValue<string>(ConfigurationEntryKey.whitelistId).subscribe(whitelistId => {
-      this.form.patchValue({ whitelistId });
-      this.changeDetector.markForCheck();
-    });
+    this.configurationService
+      .fetchValue<string>(ConfigurationEntryKey.whitelistId)
+      .subscribe(whitelistId => {
+        this.form.patchValue({ whitelistId });
+        this.changeDetector.markForCheck();
+      });
   }
 
   ngAfterViewInit() {
-    this.whitelistIdField = new MDCTextField(this.whitelistIdControl.nativeElement);
+    this.whitelistIdField = new MDCTextField(
+      this.whitelistIdControl.nativeElement,
+    );
   }
 
   ngOnDestroy() {
@@ -48,14 +61,19 @@ export class WhitelistEditComponent implements OnInit, AfterViewInit, OnDestroy 
 
   save() {
     this.isSaving.next(true);
-    this.configurationService.storeValue<string>(ConfigurationEntryKey.whitelistId, `${this.whitelistId}`).pipe(
-      tap(whitelistId => this.form.reset({ whitelistId })),
-      finalize(() => this.isSaving.next(false)),
-    ).subscribe();
+    this.configurationService
+      .storeValue<string>(
+        ConfigurationEntryKey.whitelistId,
+        `${this.whitelistId}`,
+      )
+      .pipe(
+        tap(whitelistId => this.form.reset({ whitelistId })),
+        finalize(() => this.isSaving.next(false)),
+      )
+      .subscribe();
   }
 
   get whitelistId() {
     return this.form.get('whitelistId').value;
   }
-
 }

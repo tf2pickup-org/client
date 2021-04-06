@@ -1,6 +1,9 @@
 import { TestBed } from '@angular/core/testing';
 import { TwitchService } from './twitch.service';
-import { HttpTestingController, HttpClientTestingModule } from '@angular/common/http/testing';
+import {
+  HttpTestingController,
+  HttpClientTestingModule,
+} from '@angular/common/http/testing';
 import { API_URL } from '@app/api-url';
 import { provideMockStore } from '@ngrx/store/testing';
 import { WindowHelperService } from '@app/shared/window-helper.service';
@@ -16,9 +19,7 @@ describe('TwitchService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-      ],
+      imports: [HttpClientTestingModule],
       providers: [
         { provide: API_URL, useValue: 'FAKE_URL' },
         provideMockStore(),
@@ -49,18 +50,23 @@ describe('TwitchService', () => {
 
   describe('#login()', () => {
     it('should open a new window', () => {
-      const windowHelperService = TestBed.inject(WindowHelperService) as jasmine.SpyObj<WindowHelperService>;
+      const windowHelperService = TestBed.inject(
+        WindowHelperService,
+      ) as jasmine.SpyObj<WindowHelperService>;
       service.login();
-      expect(windowHelperService.openWindow).toHaveBeenCalledWith(jasmine.objectContaining({
-        url: 'FAKE_URL/twitch/auth?token=FAKE_AUTH_TOKEN',
-      }));
+      expect(windowHelperService.openWindow).toHaveBeenCalledWith(
+        jasmine.objectContaining({
+          url: 'FAKE_URL/twitch/auth?token=FAKE_AUTH_TOKEN',
+        }),
+      );
     });
   });
 
   describe('#disconnect()', () => {
     it('should call the API', () => {
       service.disconnect().subscribe();
-      const request = httpController.expectOne('FAKE_URL/twitch/disconnect').request;
+      const request = httpController.expectOne('FAKE_URL/twitch/disconnect')
+        .request;
       expect(request.method).toBe('PUT');
     });
   });

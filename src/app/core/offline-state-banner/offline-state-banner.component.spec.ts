@@ -1,7 +1,12 @@
 import { fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { ioConnected } from '@app/io/io.selectors';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
-import { MockBuilder, MockedComponentFixture, MockRender, ngMocks } from 'ng-mocks';
+import {
+  MockBuilder,
+  MockedComponentFixture,
+  MockRender,
+  ngMocks,
+} from 'ng-mocks';
 import { OfflineStateBannerComponent } from './offline-state-banner.component';
 
 describe(OfflineStateBannerComponent.name, () => {
@@ -9,12 +14,12 @@ describe(OfflineStateBannerComponent.name, () => {
   let fixture: MockedComponentFixture;
   let store: MockStore;
 
-  beforeEach(() => MockBuilder(OfflineStateBannerComponent)
-    .provide(provideMockStore({
-      selectors: [
-        { selector: ioConnected, value: undefined },
-      ],
-    }))
+  beforeEach(() =>
+    MockBuilder(OfflineStateBannerComponent).provide(
+      provideMockStore({
+        selectors: [{ selector: ioConnected, value: undefined }],
+      }),
+    ),
   );
 
   beforeEach(() => {

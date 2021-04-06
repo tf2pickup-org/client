@@ -19,7 +19,6 @@ import { environment } from '@environment';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PlayerDetailsComponent implements OnInit {
-
   player: Observable<Player>;
   stats: Observable<PlayerStats>;
   isAdmin: Observable<boolean> = this.store.select(isAdmin);
@@ -30,7 +29,7 @@ export class PlayerDetailsComponent implements OnInit {
     private store: Store,
     private playersService: PlayersService,
     private title: Title,
-  ) { }
+  ) {}
 
   ngOnInit() {
     const getPlayerId = this.route.paramMap.pipe(
@@ -38,17 +37,23 @@ export class PlayerDetailsComponent implements OnInit {
     );
 
     this.player = getPlayerId.pipe(
-      tap(playerId => this.stats = this.playersService.fetchPlayerStats(playerId)),
-      switchMap(playerId => this.store.select(playerById(playerId)).pipe(
-        tap(player => {
-          if (!player) {
-            this.store.dispatch(loadPlayer({ playerId }));
-          } else {
-            this.title.setTitle(`${player.name} • ${environment.titleSuffix}`);
-          }
-        }),
-      )),
+      tap(
+        playerId =>
+          (this.stats = this.playersService.fetchPlayerStats(playerId)),
+      ),
+      switchMap(playerId =>
+        this.store.select(playerById(playerId)).pipe(
+          tap(player => {
+            if (!player) {
+              this.store.dispatch(loadPlayer({ playerId }));
+            } else {
+              this.title.setTitle(
+                `${player.name} • ${environment.titleSuffix}`,
+              );
+            }
+          }),
+        ),
+      ),
     );
   }
-
 }

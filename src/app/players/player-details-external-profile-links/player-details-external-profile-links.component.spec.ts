@@ -8,13 +8,14 @@ describe('PlayerDetailsExternalProfileLinksComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PlayerDetailsExternalProfileLinksComponent ]
-    })
-    .compileComponents();
+      declarations: [PlayerDetailsExternalProfileLinksComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PlayerDetailsExternalProfileLinksComponent);
+    fixture = TestBed.createComponent(
+      PlayerDetailsExternalProfileLinksComponent,
+    );
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

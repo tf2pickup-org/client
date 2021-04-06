@@ -6,15 +6,14 @@ describe('PlayerNameComponent', () => {
   let component: PlayerNameComponent;
   let fixture: ComponentFixture<PlayerNameComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ PlayerNameComponent ],
-      providers: [
-        provideMockStore(),
-      ]
-    })
-    .compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [PlayerNameComponent],
+        providers: [provideMockStore()],
+      }).compileComponents();
+    }),
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PlayerNameComponent);

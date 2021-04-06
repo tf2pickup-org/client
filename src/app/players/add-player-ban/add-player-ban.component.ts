@@ -1,6 +1,21 @@
-import { Component, OnInit, ChangeDetectionStrategy, OnDestroy, ViewChild, ElementRef } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  OnDestroy,
+  ViewChild,
+  ElementRef,
+} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { map, switchMap, tap, first, filter, takeUntil, withLatestFrom } from 'rxjs/operators';
+import {
+  map,
+  switchMap,
+  tap,
+  first,
+  filter,
+  takeUntil,
+  withLatestFrom,
+} from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { playerById, playerBansLocked } from '../selectors';
 import { loadPlayer, addPlayerBan, playerBanAdded } from '../actions';
@@ -24,7 +39,6 @@ interface BanLengthValue {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddPlayerBanComponent implements OnInit, OnDestroy {
-
   @ViewChild('reason')
   set reasonInput(reasonElement: ElementRef) {
     if (this._reason) {
@@ -133,8 +147,8 @@ export class AddPlayerBanComponent implements OnInit, OnDestroy {
   locked = this.store.select(playerBansLocked);
 
   banForm = this.formBuilder.group({
-    length: [ 0 ],
-    reason: [ '', Validators.required ],
+    length: [0],
+    reason: ['', Validators.required],
   });
 
   private destroyed = new Subject<void>();
@@ -159,21 +173,25 @@ export class AddPlayerBanComponent implements OnInit, OnDestroy {
     );
 
     this.player = getPlayerId.pipe(
-      switchMap(playerId => this.store.select(playerById(playerId)).pipe(
-        tap(player => {
-          if (!player) {
-            this.store.dispatch(loadPlayer({ playerId }));
-          }
-        }),
-      )),
+      switchMap(playerId =>
+        this.store.select(playerById(playerId)).pipe(
+          tap(player => {
+            if (!player) {
+              this.store.dispatch(loadPlayer({ playerId }));
+            }
+          }),
+        ),
+      ),
     );
 
     getPlayerId.subscribe(playerId => {
-      this.actions.pipe(
-        ofType(playerBanAdded),
-        filter(action => action.playerBan.player === playerId),
-        takeUntil(this.destroyed),
-      ).subscribe(() => this.router.navigate(['/player', playerId, 'bans']));
+      this.actions
+        .pipe(
+          ofType(playerBanAdded),
+          filter(action => action.playerBan.player === playerId),
+          takeUntil(this.destroyed),
+        )
+        .subscribe(() => this.router.navigate(['/player', playerId, 'bans']));
     });
   }
 
@@ -187,22 +205,23 @@ export class AddPlayerBanComponent implements OnInit, OnDestroy {
   }
 
   submit() {
-    this.player.pipe(
-      first(),
-      map(player => player.id),
-      map(player => ({
-        player,
-        start: new Date(),
-        end: this.lengthValues[this.banForm.get('length').value].toDate(),
-        reason: this.banForm.get('reason').value,
-      })),
-      withLatestFrom(this.store.select(currentPlayer)),
-      map(([playerBan, admin]) => ({ ...playerBan, admin: admin.id })),
-    ).subscribe(playerBan => this.store.dispatch(addPlayerBan({ playerBan })));
+    this.player
+      .pipe(
+        first(),
+        map(player => player.id),
+        map(player => ({
+          player,
+          start: new Date(),
+          end: this.lengthValues[this.banForm.get('length').value].toDate(),
+          reason: this.banForm.get('reason').value,
+        })),
+        withLatestFrom(this.store.select(currentPlayer)),
+        map(([playerBan, admin]) => ({ ...playerBan, admin: admin.id })),
+      )
+      .subscribe(playerBan => this.store.dispatch(addPlayerBan({ playerBan })));
   }
 
   cancel() {
     this.location.back();
   }
-
 }

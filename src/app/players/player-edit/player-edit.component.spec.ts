@@ -3,7 +3,12 @@ import { PlayerEditComponent } from './player-edit.component';
 import { of, Subject } from 'rxjs';
 import { ActivatedRoute, convertToParamMap } from '@angular/router';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
-import { MockBuilder, MockedComponentFixture, MockRender, ngMocks } from 'ng-mocks';
+import {
+  MockBuilder,
+  MockedComponentFixture,
+  MockRender,
+  ngMocks,
+} from 'ng-mocks';
 import { PlayersService } from '../players.service';
 import { map } from 'rxjs/operators';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -34,26 +39,29 @@ describe(PlayerEditComponent.name, () => {
     setPlayerSkill = new Subject();
   });
 
-  beforeEach(() => MockBuilder(PlayerEditComponent)
-    .provide(provideMockStore({
-      initialState: {
-        players: {
-          players: {
-            ids: [],
-            entities: { },
+  beforeEach(() =>
+    MockBuilder(PlayerEditComponent)
+      .provide(
+        provideMockStore({
+          initialState: {
+            players: {
+              players: {
+                ids: [],
+                entities: {},
+              },
+            },
           },
-        },
-      },
-    }))
-    .keep(ReactiveFormsModule)
-    .mock(ActivatedRoute, {
-      paramMap: routeParams.pipe(map(convertToParamMap)),
-    })
-    .mock(PlayersService)
-    .mock(Title)
-    .mock(Location)
-    .mock(PlayerEditSkillComponent)
-    .mock(FeatherComponent)
+        }),
+      )
+      .keep(ReactiveFormsModule)
+      .mock(ActivatedRoute, {
+        paramMap: routeParams.pipe(map(convertToParamMap)),
+      })
+      .mock(PlayersService)
+      .mock(Title)
+      .mock(Location)
+      .mock(PlayerEditSkillComponent)
+      .mock(FeatherComponent),
   );
 
   beforeEach(() => {
@@ -63,10 +71,16 @@ describe(PlayerEditComponent.name, () => {
     store = TestBed.inject(MockStore);
     spyOn(store, 'dispatch');
 
-    playersService = TestBed.inject(PlayersService) as jasmine.SpyObj<PlayersService>;
-    playersService.fetchPlayerSkill.and.returnValue(fetchPlayerSkill.asObservable());
+    playersService = TestBed.inject(
+      PlayersService,
+    ) as jasmine.SpyObj<PlayersService>;
+    playersService.fetchPlayerSkill.and.returnValue(
+      fetchPlayerSkill.asObservable(),
+    );
     playersService.setPlayerName.and.returnValue(setPlayerName.asObservable());
-    playersService.setPlayerSkill.and.returnValue(setPlayerSkill.asObservable());
+    playersService.setPlayerSkill.and.returnValue(
+      setPlayerSkill.asObservable(),
+    );
 
     fixture.detectChanges();
     saveButton = ngMocks.find('button[type=submit]').nativeElement;
@@ -83,11 +97,15 @@ describe(PlayerEditComponent.name, () => {
     });
 
     it('should load the player from the store', () => {
-      expect(store.dispatch).toHaveBeenCalledWith(loadPlayer({ playerId: 'FAKE_PLAYER_ID' }));
+      expect(store.dispatch).toHaveBeenCalledWith(
+        loadPlayer({ playerId: 'FAKE_PLAYER_ID' }),
+      );
     });
 
-    it('should load player\'s skill', () => {
-      expect(playersService.fetchPlayerSkill).toHaveBeenCalledWith('FAKE_PLAYER_ID');
+    it("should load player's skill", () => {
+      expect(playersService.fetchPlayerSkill).toHaveBeenCalledWith(
+        'FAKE_PLAYER_ID',
+      );
     });
 
     it('should disable the save button initially', () => {
@@ -99,12 +117,12 @@ describe(PlayerEditComponent.name, () => {
         store.setState({
           players: {
             players: {
-              ids: [ 'FAKE_PLAYER_ID' ],
+              ids: ['FAKE_PLAYER_ID'],
               entities: {
                 FAKE_PLAYER_ID: {
                   name: 'maly',
                   id: 'FAKE_PLAYER_ID',
-                }
+                },
               },
             },
           },
@@ -113,10 +131,12 @@ describe(PlayerEditComponent.name, () => {
 
       it('should set the title', () => {
         const title = TestBed.inject(Title);
-        expect(title.setTitle).toHaveBeenCalledWith(jasmine.stringMatching(/maly.+edit/));
+        expect(title.setTitle).toHaveBeenCalledWith(
+          jasmine.stringMatching(/maly.+edit/),
+        );
       });
 
-      it('should set the player\'s name', () => {
+      it("should set the player's name", () => {
         expect(nameInput.value).toEqual('maly');
       });
 
@@ -128,7 +148,9 @@ describe(PlayerEditComponent.name, () => {
         });
 
         it('should render skill forms', () => {
-          const playerEditSkillComponents = ngMocks.findInstances(PlayerEditSkillComponent);
+          const playerEditSkillComponents = ngMocks.findInstances(
+            PlayerEditSkillComponent,
+          );
           expect(playerEditSkillComponents.length).toBe(2); // scout and soldier
         });
 
@@ -150,8 +172,17 @@ describe(PlayerEditComponent.name, () => {
             });
 
             it('should set the new values', () => {
-              expect(playersService.setPlayerName).toHaveBeenCalledWith('FAKE_PLAYER_ID', 'maly2');
-              expect(playersService.setPlayerSkill).toHaveBeenCalledWith('FAKE_PLAYER_ID', { scout: 1, soldier: 2 });
+              expect(playersService.setPlayerName).toHaveBeenCalledWith(
+                'FAKE_PLAYER_ID',
+                'maly2',
+              );
+              expect(playersService.setPlayerSkill).toHaveBeenCalledWith(
+                'FAKE_PLAYER_ID',
+                {
+                  scout: 1,
+                  soldier: 2,
+                },
+              );
             });
 
             it('should disable the submit button', () => {
@@ -160,14 +191,21 @@ describe(PlayerEditComponent.name, () => {
 
             describe('when the values are updated', () => {
               beforeEach(() => {
-                setPlayerName.next({ name: 'maly2', id: 'FAKE_PLAYER_ID' } as Player);
+                setPlayerName.next({
+                  name: 'maly2',
+                  id: 'FAKE_PLAYER_ID',
+                } as Player);
                 setPlayerName.complete();
                 setPlayerSkill.next({ scout: 7, soldier: 8 });
                 setPlayerSkill.complete();
               });
 
               it('should store the edited player in the store', () => {
-                expect(store.dispatch).toHaveBeenCalledWith(playerEdited({ player: { name: 'maly2', id: 'FAKE_PLAYER_ID' } as Player }));
+                expect(store.dispatch).toHaveBeenCalledWith(
+                  playerEdited({
+                    player: { name: 'maly2', id: 'FAKE_PLAYER_ID' } as Player,
+                  }),
+                );
               });
 
               it('should redirect back', () => {
@@ -183,7 +221,8 @@ describe(PlayerEditComponent.name, () => {
 
   it('should render cancel button', () => {
     const location = TestBed.inject(Location);
-    const cancelButton = ngMocks.find('.cancel-button').nativeElement as HTMLButtonElement;
+    const cancelButton = ngMocks.find('.cancel-button')
+      .nativeElement as HTMLButtonElement;
     cancelButton.click();
     expect(location.back).toHaveBeenCalled();
   });

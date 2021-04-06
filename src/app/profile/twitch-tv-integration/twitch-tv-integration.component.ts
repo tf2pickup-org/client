@@ -11,7 +11,6 @@ import { twitchTvUser } from '../profile.selectors';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TwitchTvIntegrationComponent {
-
   twitchTvProfile = this.store.select(twitchTvUser);
   twitchTvProfileLink = this.twitchTvProfile.pipe(
     filter(profile => !!profile),
@@ -19,10 +18,7 @@ export class TwitchTvIntegrationComponent {
     map(login => `https://www.twitch.tv/${login}/`),
   );
 
-  constructor(
-    private twitchService: TwitchService,
-    private store: Store,
-  ) { }
+  constructor(private twitchService: TwitchService, private store: Store) {}
 
   loginViaTwitchTv() {
     this.twitchService.login();
@@ -31,5 +27,4 @@ export class TwitchTvIntegrationComponent {
   disconnect() {
     this.twitchService.disconnect().subscribe();
   }
-
 }

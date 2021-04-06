@@ -14,7 +14,6 @@ import { preferences } from '../profile.selectors';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PlayerPreferencesComponent implements OnInit {
-
   form = this.formBuilder.group({
     soundVolume: [1.0],
   });
@@ -25,34 +24,38 @@ export class PlayerPreferencesComponent implements OnInit {
     private formBuilder: FormBuilder,
     private store: Store,
     private actions: Actions,
-  ) { }
+  ) {}
 
   ngOnInit() {
     const defaultValues = this.form.value;
 
-    this.store.pipe(
-      select(preferences),
-      filter(preferences => !!preferences),
-      take(1),
-      map(preferences => ({ ...defaultValues, ...preferences })),
-    ).subscribe(preferences => {
-      this.form.patchValue(preferences);
-    });
+    this.store
+      .pipe(
+        select(preferences),
+        filter(preferences => !!preferences),
+        take(1),
+        map(preferences => ({ ...defaultValues, ...preferences })),
+      )
+      .subscribe(preferences => {
+        this.form.patchValue(preferences);
+      });
   }
 
   save() {
     this.isSaving.next(true);
-    this.actions.pipe(
-      ofType(preferencesUpdated),
-      take(1),
-    ).subscribe(({ preferences }) => {
-      this.form.reset(preferences);
-      this.isSaving.next(false);
-    });
+    this.actions
+      .pipe(ofType(preferencesUpdated), take(1))
+      .subscribe(({ preferences }) => {
+        this.form.reset(preferences);
+        this.isSaving.next(false);
+      });
 
-    this.store.dispatch(savePreferences({ preferences: {
-      soundVolume: `${this.form.value.soundVolume}`,
-    } }));
+    this.store.dispatch(
+      savePreferences({
+        preferences: {
+          soundVolume: `${this.form.value.soundVolume}`,
+        },
+      }),
+    );
   }
-
 }

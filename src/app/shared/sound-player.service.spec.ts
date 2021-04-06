@@ -14,9 +14,7 @@ describe(SoundPlayerService.name, () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [
-        provideMockStore(),
-      ],
+      providers: [provideMockStore()],
     });
 
     service = TestBed.inject(SoundPlayerService);
@@ -38,9 +36,11 @@ describe(SoundPlayerService.name, () => {
     it('should autoplay the sound', () => {
       service.playSound(['sound.wav']).subscribe();
       // @ts-ignore
-      expect(Howl.prototype.init).toHaveBeenCalledOnceWith(jasmine.objectContaining({
-        autoplay: true,
-      }));
+      expect(Howl.prototype.init).toHaveBeenCalledOnceWith(
+        jasmine.objectContaining({
+          autoplay: true,
+        }),
+      );
     });
 
     describe('when unsubscribed', () => {
@@ -54,24 +54,28 @@ describe(SoundPlayerService.name, () => {
       it('should set the volume to 1', () => {
         service.playSound(['sound.wav']).subscribe();
         // @ts-ignore
-        expect(Howl.prototype.init).toHaveBeenCalledOnceWith(jasmine.objectContaining({
-          volume: 1.0,
-        }));
+        expect(Howl.prototype.init).toHaveBeenCalledOnceWith(
+          jasmine.objectContaining({
+            volume: 1.0,
+          }),
+        );
       });
     });
 
     describe('when the volume is not set', () => {
       beforeEach(() => {
-        preferencesSelector.setResult({ });
+        preferencesSelector.setResult({});
         store.refreshState();
       });
 
       it('should set the volume to 1', () => {
         service.playSound(['sound.wav']).subscribe();
         // @ts-ignore
-        expect(Howl.prototype.init).toHaveBeenCalledOnceWith(jasmine.objectContaining({
-          volume: 1.0,
-        }));
+        expect(Howl.prototype.init).toHaveBeenCalledOnceWith(
+          jasmine.objectContaining({
+            volume: 1.0,
+          }),
+        );
       });
     });
 
@@ -84,9 +88,11 @@ describe(SoundPlayerService.name, () => {
       it('should respect the preference', () => {
         service.playSound(['sound.wav']).subscribe();
         // @ts-ignore
-        expect(Howl.prototype.init).toHaveBeenCalledOnceWith(jasmine.objectContaining({
-          volume: 0.5,
-        }));
+        expect(Howl.prototype.init).toHaveBeenCalledOnceWith(
+          jasmine.objectContaining({
+            volume: 0.5,
+          }),
+        );
       });
     });
   });

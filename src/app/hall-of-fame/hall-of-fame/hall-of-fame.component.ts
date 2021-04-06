@@ -10,15 +10,11 @@ import { HallOfFame } from '../models/hall-of-fame';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HallOfFameComponent implements OnInit {
-
   hallOfFame: Observable<HallOfFame>;
 
-  constructor(
-    private hallOfFameService: HallOfFameService,
-  ) { }
+  constructor(private hallOfFameService: HallOfFameService) {}
 
   ngOnInit() {
     this.hallOfFame = this.hallOfFameService.fetchHallOfFames();
   }
-
 }

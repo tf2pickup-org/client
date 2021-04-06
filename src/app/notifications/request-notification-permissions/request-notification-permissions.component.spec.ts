@@ -23,9 +23,7 @@ describe('RequestNotificationPermissionsComponent', () => {
         RequestNotificationPermissionsComponent,
         MockComponent(FeatherComponent),
       ],
-      imports: [
-        NoopAnimationsModule,
-      ],
+      imports: [NoopAnimationsModule],
       providers: [
         {
           provide: NotificationsService,
@@ -34,16 +32,17 @@ describe('RequestNotificationPermissionsComponent', () => {
             ['requestPermission'],
             {
               permission: permission.asObservable(),
-            }
+            },
           ),
         },
-      ]
-    })
-    .compileComponents();
+      ],
+    }).compileComponents();
   });
 
   beforeEach(() => {
-    notificationsService = TestBed.inject(NotificationsService) as jasmine.SpyObj<NotificationsService>;
+    notificationsService = TestBed.inject(
+      NotificationsService,
+    ) as jasmine.SpyObj<NotificationsService>;
 
     fixture = TestBed.createComponent(RequestNotificationPermissionsComponent);
     component = fixture.componentInstance;
@@ -61,12 +60,16 @@ describe('RequestNotificationPermissionsComponent', () => {
     });
 
     it('should render the banner', () => {
-      const div = fixture.debugElement.query(By.css('.request-notification-permissions')).nativeElement as HTMLElement;
+      const div = fixture.debugElement.query(
+        By.css('.request-notification-permissions'),
+      ).nativeElement as HTMLElement;
       expect(div.classList.contains('default')).toBe(true);
     });
 
     it('should render the allow notifications button', () => {
-      const button = fixture.debugElement.query(By.css('.allow-notifications-button')).nativeElement as HTMLButtonElement;
+      const button = fixture.debugElement.query(
+        By.css('.allow-notifications-button'),
+      ).nativeElement as HTMLButtonElement;
       button.click();
       expect(notificationsService.requestPermission).toHaveBeenCalled();
     });
@@ -79,7 +82,9 @@ describe('RequestNotificationPermissionsComponent', () => {
     });
 
     it('should render the banner', () => {
-      const div = fixture.debugElement.query(By.css('.request-notification-permissions')).nativeElement as HTMLElement;
+      const div = fixture.debugElement.query(
+        By.css('.request-notification-permissions'),
+      ).nativeElement as HTMLElement;
       expect(div.classList.contains('denied')).toBe(true);
     });
   });

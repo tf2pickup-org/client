@@ -9,15 +9,14 @@ describe('PlayerAvatarComponent', () => {
   let fixture: ComponentFixture<PlayerAvatarComponent>;
   let store: MockStore<any>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ PlayerAvatarComponent ],
-      providers: [
-        provideMockStore(),
-      ]
-    })
-    .compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [PlayerAvatarComponent],
+        providers: [provideMockStore()],
+      }).compileComponents();
+    }),
+  );
 
   beforeEach(() => {
     store = TestBed.get(Store);
@@ -32,7 +31,9 @@ describe('PlayerAvatarComponent', () => {
   });
 
   it('should render img with crossorigin="anonymous"', () => {
-    const imgs = fixture.debugElement.queryAll(By.css('img')).map(el => el.nativeElement) as HTMLImageElement[];
+    const imgs = fixture.debugElement
+      .queryAll(By.css('img'))
+      .map(el => el.nativeElement) as HTMLImageElement[];
     expect(imgs.every(img => img.crossOrigin === 'anonymous')).toBe(true);
   });
 });

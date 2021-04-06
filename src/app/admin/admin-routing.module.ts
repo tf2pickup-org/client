@@ -17,7 +17,7 @@ import { PlayerRestrictionsComponent } from './player-restrictions/player-restri
 const routes: Routes = [
   {
     path: '',
-    canActivate: [ IsAdminGuard ],
+    canActivate: [IsAdminGuard],
     children: [
       {
         path: '',
@@ -112,4 +112,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class AdminRoutingModule { }
+export class AdminRoutingModule {}

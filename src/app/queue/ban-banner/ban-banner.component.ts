@@ -8,8 +8,6 @@ import { PlayerBan } from '@app/players/models/player-ban';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BanBannerComponent {
-
   @Input()
   ban: PlayerBan;
-
 }

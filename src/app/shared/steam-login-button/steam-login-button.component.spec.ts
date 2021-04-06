@@ -7,15 +7,14 @@ describe('SteamLoginButtonComponent', () => {
   let component: SteamLoginButtonComponent;
   let fixture: ComponentFixture<SteamLoginButtonComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ SteamLoginButtonComponent ],
-      providers: [
-        { provide: API_URL, useValue: 'http://fake.host' },
-      ]
-    })
-    .compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [SteamLoginButtonComponent],
+        providers: [{ provide: API_URL, useValue: 'http://fake.host' }],
+      }).compileComponents();
+    }),
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(SteamLoginButtonComponent);
@@ -28,7 +27,8 @@ describe('SteamLoginButtonComponent', () => {
   });
 
   it('should redirect to the right location', () => {
-    const anchor = fixture.debugElement.query(By.css('a')).nativeElement as HTMLAnchorElement;
+    const anchor = fixture.debugElement.query(By.css('a'))
+      .nativeElement as HTMLAnchorElement;
     expect(anchor.href).toEqual('http://fake.host/auth/steam');
   });
 });

@@ -4,8 +4,22 @@ import { provideMockActions } from '@ngrx/effects/testing';
 import { ReplaySubject, of, throwError } from 'rxjs';
 import { Action, MemoizedSelector } from '@ngrx/store';
 import { QueueService } from './queue.service';
-import { queueLoaded, loadQueue, joinQueue, joinQueueError, markFriend, mapVoteReset, voteForMap, mapVoted, mapVoteResultsUpdated,
-  queueSlotsUpdated, queueStateUpdated, substituteRequestsUpdated, friendshipsUpdated, scrambleMaps } from './queue.actions';
+import {
+  queueLoaded,
+  loadQueue,
+  joinQueue,
+  joinQueueError,
+  markFriend,
+  mapVoteReset,
+  voteForMap,
+  mapVoted,
+  mapVoteResultsUpdated,
+  queueSlotsUpdated,
+  queueStateUpdated,
+  substituteRequestsUpdated,
+  friendshipsUpdated,
+  scrambleMaps,
+} from './queue.actions';
 import { Queue } from './models/queue';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { QueueSlot } from './models/queue-slot';
@@ -17,7 +31,7 @@ import { isInQueue } from './queue.selectors';
 import { awaitsReadyUp } from '@app/selectors';
 import { ReadyUpService } from './ready-up.service';
 import { Tf2ClassName } from '@app/shared/models/tf2-class-name';
-import { Player } from '@app/players/models/player';;
+import { Player } from '@app/players/models/player';
 
 const queue: Queue = {
   config: {
@@ -25,7 +39,7 @@ const queue: Queue = {
     classes: [
       {
         name: Tf2ClassName.soldier,
-        count: 1
+        count: 1,
       },
     ],
   },
@@ -41,7 +55,7 @@ const queue: Queue = {
       id: 1,
       gameClass: 'soldier',
       ready: false,
-    }
+    },
   ],
   state: 'waiting',
   mapVoteResults: [],
@@ -66,21 +80,25 @@ describe('QueueEffects', () => {
       'scrambleMaps',
     ]);
 
-    readyUpService = jasmine.createSpyObj<ReadyUpService>(ReadyUpService.name, ['askUserToReadyUp']);
+    readyUpService = jasmine.createSpyObj<ReadyUpService>(ReadyUpService.name, [
+      'askUserToReadyUp',
+    ]);
   });
 
-  beforeEach(() => actions = new ReplaySubject<Action>(1));
+  beforeEach(() => (actions = new ReplaySubject<Action>(1)));
 
-  beforeEach(() => TestBed.configureTestingModule({
-    providers: [
-      QueueEffects,
-      provideMockActions(() => actions.asObservable()),
-      { provide: QueueService, useValue: queueServiceStub },
-      provideMockStore(),
-      { provide: Socket, useClass: EventEmitter },
-      { provide: ReadyUpService, useValue: readyUpService },
-    ],
-  }));
+  beforeEach(() =>
+    TestBed.configureTestingModule({
+      providers: [
+        QueueEffects,
+        provideMockActions(() => actions.asObservable()),
+        { provide: QueueService, useValue: queueServiceStub },
+        provideMockStore(),
+        { provide: Socket, useClass: EventEmitter },
+        { provide: ReadyUpService, useValue: readyUpService },
+      ],
+    }),
+  );
 
   beforeEach(() => {
     store = TestBed.inject(MockStore);
@@ -94,7 +112,9 @@ describe('QueueEffects', () => {
 
   it('should load the queue', () => {
     queueServiceStub.fetchQueue.and.returnValue(of(queue));
-    effects.loadQueue.subscribe(action => expect(action).toEqual(queueLoaded({ queue })));
+    effects.loadQueue.subscribe(action =>
+      expect(action).toEqual(queueLoaded({ queue })),
+    );
     actions.next(loadQueue());
     expect(queueServiceStub.fetchQueue).toHaveBeenCalled();
   });
@@ -104,14 +124,26 @@ describe('QueueEffects', () => {
     let socket: ReturnType<typeof _>;
 
     beforeEach(() => {
-      socket = TestBed.inject(Socket) as unknown as typeof socket;
+      socket = (TestBed.inject(Socket) as unknown) as typeof socket;
       spyOn(store, 'dispatch');
     });
 
     describe('queue slots update', () => {
       const slots: QueueSlot[] = [
-        { id: 0, gameClass: 'soldier', playerId: 'FAKE_ID_1', ready: false, player: { id: 'FAKE_ID_1' } as Player },
-        { id: 1, gameClass: 'medic', playerId: 'FAKE_ID_2', ready: true, player: { id: 'FAKE_ID_2' } as Player },
+        {
+          id: 0,
+          gameClass: 'soldier',
+          playerId: 'FAKE_ID_1',
+          ready: false,
+          player: { id: 'FAKE_ID_1' } as Player,
+        },
+        {
+          id: 1,
+          gameClass: 'medic',
+          playerId: 'FAKE_ID_2',
+          ready: true,
+          player: { id: 'FAKE_ID_2' } as Player,
+        },
       ];
 
       beforeEach(() => {
@@ -119,7 +151,9 @@ describe('QueueEffects', () => {
       });
 
       it('should be handled', () => {
-        expect(store.dispatch).toHaveBeenCalledWith(queueSlotsUpdated({ slots }));
+        expect(store.dispatch).toHaveBeenCalledWith(
+          queueSlotsUpdated({ slots }),
+        );
       });
     });
 
@@ -129,19 +163,23 @@ describe('QueueEffects', () => {
       });
 
       it('should be handled', () => {
-        expect(store.dispatch).toHaveBeenCalledWith(queueStateUpdated({ queueState: 'waiting' }));
+        expect(store.dispatch).toHaveBeenCalledWith(
+          queueStateUpdated({ queueState: 'waiting' }),
+        );
       });
     });
 
     describe('map vote results update', () => {
-      const results: MapVoteResult[] = [ { map: 'cp_fake_rc1', voteCount: 5 } ];
+      const results: MapVoteResult[] = [{ map: 'cp_fake_rc1', voteCount: 5 }];
 
       beforeEach(() => {
         socket.emit('map vote results update', results);
       });
 
       it('should be handled', () => {
-        expect(store.dispatch).toHaveBeenCalledWith(mapVoteResultsUpdated({ results }));
+        expect(store.dispatch).toHaveBeenCalledWith(
+          mapVoteResultsUpdated({ results }),
+        );
       });
     });
 
@@ -151,8 +189,8 @@ describe('QueueEffects', () => {
           gameId: 'FAKE_GAME_ID',
           gameNumber: 515,
           gameClass: 'soldier',
-          team: 'BLU'
-        }
+          team: 'BLU',
+        },
       ];
 
       beforeEach(() => {
@@ -160,19 +198,25 @@ describe('QueueEffects', () => {
       });
 
       it('should be handled', () => {
-        expect(store.dispatch).toHaveBeenCalledWith(substituteRequestsUpdated({ substituteRequests }));
+        expect(store.dispatch).toHaveBeenCalledWith(
+          substituteRequestsUpdated({ substituteRequests }),
+        );
       });
     });
 
     describe('friendships update', () => {
-      const friendships = [{ sourcePlayerId: 'FAKE_SOURCE', targetPlayerId: 'FAKE_TARGET' }];
+      const friendships = [
+        { sourcePlayerId: 'FAKE_SOURCE', targetPlayerId: 'FAKE_TARGET' },
+      ];
 
       beforeEach(() => {
         socket.emit('friendships update', friendships);
       });
 
       it('should be handled', () => {
-        expect(store.dispatch).toHaveBeenCalledWith(friendshipsUpdated({ friendships }));
+        expect(store.dispatch).toHaveBeenCalledWith(
+          friendshipsUpdated({ friendships }),
+        );
       });
     });
   });
@@ -181,15 +225,15 @@ describe('QueueEffects', () => {
     const results = [
       {
         map: 'cp_process_final',
-        voteCount: 0
+        voteCount: 0,
       },
       {
         map: 'cp_sunshine',
-        voteCount: 0
+        voteCount: 0,
       },
       {
         map: 'cp_snakewater_final1',
-        voteCount: 0
+        voteCount: 0,
       },
     ];
 
@@ -206,11 +250,16 @@ describe('QueueEffects', () => {
 
   describe('#joinQueue', () => {
     it('should attempt to join the queue', done => {
-      const slot: QueueSlot = { id: 1, gameClass: 'soldier', playerId: 'FAKE_ID_2', ready: false, };
-      queueServiceStub.joinQueue.and.returnValue(of([ slot ]));
+      const slot: QueueSlot = {
+        id: 1,
+        gameClass: 'soldier',
+        playerId: 'FAKE_ID_2',
+        ready: false,
+      };
+      queueServiceStub.joinQueue.and.returnValue(of([slot]));
       effects.joinQueue.subscribe(action => {
         expect(queueServiceStub.joinQueue).toHaveBeenCalledWith(1);
-        expect(action).toEqual(queueSlotsUpdated({ slots: [ slot ] }));
+        expect(action).toEqual(queueSlotsUpdated({ slots: [slot] }));
         done();
       });
       actions.next(joinQueue({ slotId: 1 }));
@@ -228,10 +277,14 @@ describe('QueueEffects', () => {
 
   describe('#markFriend', () => {
     it('should call the service', done => {
-      const friendships = [ { sourcePlayerId: 'FAKE_PLAYER_ID', targetPlayerId: 'FAKE_FRIEND_ID' } ];
+      const friendships = [
+        { sourcePlayerId: 'FAKE_PLAYER_ID', targetPlayerId: 'FAKE_FRIEND_ID' },
+      ];
       queueServiceStub.markFriend.and.returnValue(of(friendships));
       effects.markFriend.subscribe(action => {
-        expect(queueServiceStub.markFriend).toHaveBeenCalledWith('FAKE_FRIEND_ID');
+        expect(queueServiceStub.markFriend).toHaveBeenCalledWith(
+          'FAKE_FRIEND_ID',
+        );
         expect(action).toEqual(friendshipsUpdated({ friendships }));
         done();
       });

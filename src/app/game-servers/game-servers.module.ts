@@ -12,10 +12,7 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { AddGameServerComponent } from './add-game-server/add-game-server.component';
 
 @NgModule({
-  declarations: [
-    GameServerListComponent,
-    AddGameServerComponent,
-  ],
+  declarations: [GameServerListComponent, AddGameServerComponent],
   imports: [
     CommonModule,
     StoreModule.forFeature('gameServers', reducer),
@@ -29,4 +26,4 @@ import { AddGameServerComponent } from './add-game-server/add-game-server.compon
     GameServersRoutingModule,
   ],
 })
-export class GameServersModule { }
+export class GameServersModule {}

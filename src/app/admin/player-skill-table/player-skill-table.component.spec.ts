@@ -19,20 +19,20 @@ const config: QueueConfig = {
   classes: [
     {
       name: Tf2ClassName.scout,
-      count: 2
+      count: 2,
     },
     {
       name: Tf2ClassName.soldier,
-      count: 2
+      count: 2,
     },
     {
       name: Tf2ClassName.demoman,
-      count: 1
+      count: 1,
     },
     {
       name: Tf2ClassName.medic,
-      count: 1
-    }
+      count: 1,
+    },
   ],
 };
 
@@ -76,26 +76,37 @@ describe(PlayerSkillTableComponent.name, () => {
     allPlayersResponse = new Subject();
     allPlayerSkillResponse = new Subject();
 
-    playersService = jasmine.createSpyObj<PlayersService>(PlayersService.name, ['fetchAllPlayers', 'fetchAllPlayerSkills']);
-    playersService.fetchAllPlayers.and.returnValue(allPlayersResponse.asObservable().pipe(first()));
-    playersService.fetchAllPlayerSkills.and.returnValue(allPlayerSkillResponse.asObservable().pipe(first()));
+    playersService = jasmine.createSpyObj<PlayersService>(PlayersService.name, [
+      'fetchAllPlayers',
+      'fetchAllPlayerSkills',
+    ]);
+    playersService.fetchAllPlayers.and.returnValue(
+      allPlayersResponse.asObservable().pipe(first()),
+    );
+    playersService.fetchAllPlayerSkills.and.returnValue(
+      allPlayerSkillResponse.asObservable().pipe(first()),
+    );
   });
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [
-        PlayerSkillTableComponent,
-        MockComponent(DatatableComponent),
-      ],
-      providers: [
-        provideMockStore(),
-        { provide: PlayersService, useValue: playersService },
-      ],
-    })
-    // https://github.com/angular/angular/issues/12313
-    .overrideComponent(PlayerSkillTableComponent, { set: { changeDetection: ChangeDetectionStrategy.Default } })
-    .compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [
+          PlayerSkillTableComponent,
+          MockComponent(DatatableComponent),
+        ],
+        providers: [
+          provideMockStore(),
+          { provide: PlayersService, useValue: playersService },
+        ],
+      })
+        // https://github.com/angular/angular/issues/12313
+        .overrideComponent(PlayerSkillTableComponent, {
+          set: { changeDetection: ChangeDetectionStrategy.Default },
+        })
+        .compileComponents();
+    }),
+  );
 
   beforeEach(() => {
     store = TestBed.inject(MockStore);
@@ -106,7 +117,8 @@ describe(PlayerSkillTableComponent.name, () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
 
-    datatable = fixture.debugElement.query(By.css('ngx-datatable')).componentInstance as DatatableComponent;
+    datatable = fixture.debugElement.query(By.css('ngx-datatable'))
+      .componentInstance as DatatableComponent;
   });
 
   beforeEach(() => {
@@ -121,7 +133,11 @@ describe(PlayerSkillTableComponent.name, () => {
 
   it('should render correct columns', () => {
     expect(datatable.columns).toEqual([
-      { prop: 'name' }, { prop: 'scout' }, { prop: 'soldier' }, { prop: 'demoman' }, { prop: 'medic' },
+      { prop: 'name' },
+      { prop: 'scout' },
+      { prop: 'soldier' },
+      { prop: 'demoman' },
+      { prop: 'medic' },
     ]);
   });
 

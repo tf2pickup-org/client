@@ -18,9 +18,7 @@ describe(GameServerResolver.name, () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [
-        provideMockStore({ initialState }),
-      ],
+      providers: [provideMockStore({ initialState })],
     });
     resolver = TestBed.inject(GameServerResolver);
   });
@@ -29,11 +27,15 @@ describe(GameServerResolver.name, () => {
     expect(resolver).toBeTruthy();
   });
 
-  describe('when the game server isn\'t fetched yet', () => {
+  describe("when the game server isn't fetched yet", () => {
     it('should attempt to load the game server', () => {
       const spy = spyOn(TestBed.inject(MockStore), 'dispatch');
-      resolver.resolve({ params: { gameServerId: 'FAKE_GAME_SERVER_ID' } } as any).subscribe();
-      expect(spy).toHaveBeenCalledWith(loadGameServer({ gameServerId: 'FAKE_GAME_SERVER_ID' }));
+      resolver
+        .resolve({ params: { gameServerId: 'FAKE_GAME_SERVER_ID' } } as any)
+        .subscribe();
+      expect(spy).toHaveBeenCalledWith(
+        loadGameServer({ gameServerId: 'FAKE_GAME_SERVER_ID' }),
+      );
     });
   });
 
@@ -42,22 +44,18 @@ describe(GameServerResolver.name, () => {
       const store = TestBed.inject(MockStore);
       store.setState({
         gameServers: {
-          ids: [
-            'FAKE_GAME_SERVER_ID',
-          ],
+          ids: ['FAKE_GAME_SERVER_ID'],
           entities: {
-            'FAKE_GAME_SERVER_ID': {
+            FAKE_GAME_SERVER_ID: {
               isAvailable: true,
               isOnline: true,
-              resolvedIpAddresses: [
-                '127.0.0.1'
-              ],
+              resolvedIpAddresses: ['127.0.0.1'],
               name: 'test',
               address: '127.0.0.1',
               port: '27015',
               mumbleChannelName: '1',
               createdAt: '2021-03-20T21:58:51.698Z',
-              id: 'FAKE_GAME_SERVER_ID'
+              id: 'FAKE_GAME_SERVER_ID',
             },
           },
         },
@@ -65,10 +63,12 @@ describe(GameServerResolver.name, () => {
     });
 
     it('should resolve with the the game server', done => {
-      resolver.resolve({ params: { gameServerId: 'FAKE_GAME_SERVER_ID' } } as any).subscribe(gameServer => {
-        expect(gameServer.id).toEqual('FAKE_GAME_SERVER_ID');
-        done();
-      });
+      resolver
+        .resolve({ params: { gameServerId: 'FAKE_GAME_SERVER_ID' } } as any)
+        .subscribe(gameServer => {
+          expect(gameServer.id).toEqual('FAKE_GAME_SERVER_ID');
+          done();
+        });
     });
-  })
+  });
 });

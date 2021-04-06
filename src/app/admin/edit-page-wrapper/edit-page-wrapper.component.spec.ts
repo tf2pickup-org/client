@@ -1,13 +1,19 @@
 import { Component } from '@angular/core';
 import { NavigateBackDirective } from '@app/shared/navigate-back.directive';
 import { FeatherComponent } from 'angular-feather';
-import { MockBuilder, MockedComponentFixture, MockRender, ngMocks } from 'ng-mocks';
+import {
+  MockBuilder,
+  MockedComponentFixture,
+  MockRender,
+  ngMocks,
+} from 'ng-mocks';
 import { EditPageWrapperComponent } from './edit-page-wrapper.component';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'test-wrapper',
-  template: '<app-edit-page-wrapper [title]="title" [saveDisabled]="saveDisabled"></app-edit-page-wrapper>',
+  template:
+    '<app-edit-page-wrapper [title]="title" [saveDisabled]="saveDisabled"></app-edit-page-wrapper>',
 })
 class TestWrapperComponent {
   title: string;
@@ -18,10 +24,11 @@ describe(EditPageWrapperComponent.name, () => {
   let component: TestWrapperComponent;
   let fixture: MockedComponentFixture<EditPageWrapperComponent>;
 
-  beforeEach(() => MockBuilder(TestWrapperComponent)
-    .keep(EditPageWrapperComponent)
-    .mock(FeatherComponent)
-    .mock(NavigateBackDirective)
+  beforeEach(() =>
+    MockBuilder(TestWrapperComponent)
+      .keep(EditPageWrapperComponent)
+      .mock(FeatherComponent)
+      .mock(NavigateBackDirective),
   );
 
   beforeEach(() => {
@@ -36,13 +43,16 @@ describe(EditPageWrapperComponent.name, () => {
   });
 
   it('should render the title', () => {
-    const title = ngMocks.find('div.mdc-typography--headline5').nativeElement as HTMLElement;
+    const title = ngMocks.find('div.mdc-typography--headline5')
+      .nativeElement as HTMLElement;
     expect(title.innerText).toEqual('just testing');
   });
 
   describe('go back button', () => {
     it('should have the appNavigateBack directive', () => {
-      expect(ngMocks.find('button[goBackButton][appNavigateBack]')).toBeTruthy();
+      expect(
+        ngMocks.find('button[goBackButton][appNavigateBack]'),
+      ).toBeTruthy();
     });
   });
 

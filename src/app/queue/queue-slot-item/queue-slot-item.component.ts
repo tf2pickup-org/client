@@ -1,4 +1,10 @@
-import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  Input,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { QueueSlot } from '../models/queue-slot';
 import { FriendFlags } from '../friend-flags';
 
@@ -9,7 +15,6 @@ import { FriendFlags } from '../friend-flags';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class QueueSlotItemComponent {
-
   @Input()
   slot: QueueSlot;
 
@@ -46,5 +51,4 @@ export class QueueSlotItemComponent {
     this.markFriend.emit(this.friendFlags.markedByMe ? null : friendId);
     event.stopPropagation();
   }
-
 }

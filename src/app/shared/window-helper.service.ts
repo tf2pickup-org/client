@@ -7,21 +7,26 @@ interface NewWindowParams {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class WindowHelperService {
-
   openWindow(params: NewWindowParams) {
     // https://stackoverflow.com/questions/4068373/center-a-popup-window-on-screen
-    const dualScreenLeft = window.screenLeft !==  undefined ? window.screenLeft : window.screenX;
-    const dualScreenTop = window.screenTop !==  undefined   ? window.screenTop  : window.screenY;
+    const dualScreenLeft =
+      window.screenLeft !== undefined ? window.screenLeft : window.screenX;
+    const dualScreenTop =
+      window.screenTop !== undefined ? window.screenTop : window.screenY;
 
-    const width = window.innerWidth ?
-      window.innerWidth : document.documentElement.clientWidth ?
-        document.documentElement.clientWidth : screen.width;
-    const height = window.innerHeight ?
-      window.innerHeight : document.documentElement.clientHeight ?
-        document.documentElement.clientHeight : screen.height;
+    const width = window.innerWidth
+      ? window.innerWidth
+      : document.documentElement.clientWidth
+      ? document.documentElement.clientWidth
+      : screen.width;
+    const height = window.innerHeight
+      ? window.innerHeight
+      : document.documentElement.clientHeight
+      ? document.documentElement.clientHeight
+      : screen.height;
 
     const systemZoom = width / window.screen.availWidth;
     const left = (width - params.width) / 2 / systemZoom + dualScreenLeft;
@@ -37,5 +42,4 @@ export class WindowHelperService {
 
     return window.open(params.url, '', features.join(','));
   }
-
 }

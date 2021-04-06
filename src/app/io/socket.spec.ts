@@ -5,7 +5,9 @@ import EventEmitter from 'eventemitter3';
 
 class SocketFactoryServiceStub {
   socket = new EventEmitter();
-  createSocket() { return this.socket; }
+  createSocket() {
+    return this.socket;
+  }
 }
 
 describe('Socket', () => {
@@ -25,21 +27,25 @@ describe('Socket', () => {
 
   describe('#on()', () => {
     it('should add event listener', () => {
-      socket.on('queue state update', () => { });
+      socket.on('queue state update', () => {});
       // @ts-ignore
-      expect(socketFactoryService.socket.listenerCount('queue state update')).toEqual(1);
+      expect(
+        socketFactoryService.socket.listenerCount('queue state update'),
+      ).toEqual(1);
     });
   });
 
   describe('#off()', () => {
     beforeEach(() => {
-      socket.on('queue state update', () => { });
+      socket.on('queue state update', () => {});
     });
 
     it('should remove event listener', () => {
       socket.off('queue state update');
       // @ts-ignore
-      expect(socketFactoryService.socket.listenerCount('queue state update')).toEqual(0);
+      expect(
+        socketFactoryService.socket.listenerCount('queue state update'),
+      ).toEqual(0);
     });
   });
 
@@ -48,7 +54,11 @@ describe('Socket', () => {
       // @ts-ignore
       const spy = spyOn(socketFactoryService.socket, 'emit');
       socket.call<any>('mark friend').subscribe();
-      expect(spy).toHaveBeenCalledWith('mark friend', { }, jasmine.any(Function));
+      expect(spy).toHaveBeenCalledWith(
+        'mark friend',
+        {},
+        jasmine.any(Function),
+      );
     });
   });
 });

@@ -10,16 +10,14 @@ describe('ActiveGameSnackbarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        ActiveGameSnackbarComponent,
-      ],
-      imports: [
-        RouterTestingModule,
-      ],
+      declarations: [ActiveGameSnackbarComponent],
+      imports: [RouterTestingModule],
     })
-    // https://github.com/angular/angular/issues/12313
-    .overrideComponent(ActiveGameSnackbarComponent, { set: { changeDetection: ChangeDetectionStrategy.Default } })
-    .compileComponents();
+      // https://github.com/angular/angular/issues/12313
+      .overrideComponent(ActiveGameSnackbarComponent, {
+        set: { changeDetection: ChangeDetectionStrategy.Default },
+      })
+      .compileComponents();
   });
 
   beforeEach(() => {
@@ -39,7 +37,8 @@ describe('ActiveGameSnackbarComponent', () => {
     });
 
     it('should redirect user to the game', () => {
-      const anchor = fixture.debugElement.query(By.css('a')).nativeElement as HTMLAnchorElement;
+      const anchor = fixture.debugElement.query(By.css('a'))
+        .nativeElement as HTMLAnchorElement;
       expect(anchor).toBeTruthy();
       expect(anchor.href).toMatch(/\/game\/FAKE_GAME_ID$/);
     });

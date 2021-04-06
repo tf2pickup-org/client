@@ -1,60 +1,70 @@
-import { queueRequiredPlayerCount, queueCurrentPlayerCount, queueSlotsForClass, mySlot, mapVoteResults, mapVoteTotalCount, mapVote,
-  isPreReadied, substituteRequests, slotById, queueFriendships } from './queue.selectors';
+import {
+  queueRequiredPlayerCount,
+  queueCurrentPlayerCount,
+  queueSlotsForClass,
+  mySlot,
+  mapVoteResults,
+  mapVoteTotalCount,
+  mapVote,
+  isPreReadied,
+  substituteRequests,
+  slotById,
+  queueFriendships,
+} from './queue.selectors';
 import { QueueSlot } from './models/queue-slot';
 
 describe('queue selectors', () => {
   describe('queueRequiredPlayerCount', () => {
     it('returns the correct amount', () => {
-      expect(queueRequiredPlayerCount.projector(
-        [ { soldier: 2, count: 2 } ],
-        { teamCount: 2 },
-      )).toBe(4);
+      expect(
+        queueRequiredPlayerCount.projector([{ soldier: 2, count: 2 }], {
+          teamCount: 2,
+        }),
+      ).toBe(4);
     });
   });
 
   describe('queueCurrentPlayerCount', () => {
     it('returns the correct amount', () => {
-      expect(queueCurrentPlayerCount.projector(
-        [
-          { playerId: 'FAKE_ID' },
-          { },
-        ],
-      )).toBe(1);
+      expect(
+        queueCurrentPlayerCount.projector([{ playerId: 'FAKE_ID' }, {}]),
+      ).toBe(1);
     });
   });
 
   describe('queueSlotsForClass', () => {
     it('should return all the right slots', () => {
-      expect(queueSlotsForClass('soldier').projector(
-        [
+      expect(
+        queueSlotsForClass('soldier').projector([
           { gameClass: 'soldier' },
           { gameClass: 'scout' },
-          { }
-        ],
-      )).toEqual([{ gameClass: 'soldier' }] as QueueSlot[]);
+          {},
+        ]),
+      ).toEqual([{ gameClass: 'soldier' }] as QueueSlot[]);
     });
   });
 
   describe('slotById', () => {
     it('should return the right slot', () => {
-      expect(slotById(1).projector([
-        { id: 0, gameClass: 'scout' },
-        { id: 1, gameClass: 'soldier' },
-      ])).toEqual({ id: 1, gameClass: 'soldier' } as any);
+      expect(
+        slotById(1).projector([
+          { id: 0, gameClass: 'scout' },
+          { id: 1, gameClass: 'soldier' },
+        ]),
+      ).toEqual({ id: 1, gameClass: 'soldier' } as any);
     });
   });
 
   describe('mySlot', () => {
     it('should return the right slot', () => {
-      expect(mySlot.projector(
-        { id: 'FAKE_ID' },
-        [
+      expect(
+        mySlot.projector({ id: 'FAKE_ID' }, [
           { gameClass: 'soldier', playerId: 'FAKE_ID' },
           { gameClass: 'scout', playerId: 'FAKE_ID_2' },
           { gameClass: 'scout' },
-          { }
-        ],
-      )).toEqual({ gameClass: 'soldier', playerId: 'FAKE_ID' } as QueueSlot);
+          {},
+        ]),
+      ).toEqual({ gameClass: 'soldier', playerId: 'FAKE_ID' } as QueueSlot);
     });
   });
 
@@ -70,14 +80,16 @@ describe('queue selectors', () => {
     {
       map: 'cp_snakewater_final1',
       voteCount: 0,
-    }
+    },
   ];
 
   describe('mapVoteResults', () => {
     it('should return results', () => {
-      expect(mapVoteResults.projector({
-        mapVoteResults: results
-      })).toEqual(results);
+      expect(
+        mapVoteResults.projector({
+          mapVoteResults: results,
+        }),
+      ).toEqual(results);
     });
   });
 
@@ -106,19 +118,32 @@ describe('queue selectors', () => {
         gameId: '5e1fb93d9cacb6d6e08bc6bf',
         gameNumber: 514,
         gameClass: 'soldier',
-        team: 'BLU'
-      }
+        team: 'BLU',
+      },
     ];
 
     it('should return substitute requests', () => {
-      expect(substituteRequests.projector({ substituteRequests: requests })).toEqual(requests);
+      expect(
+        substituteRequests.projector({ substituteRequests: requests }),
+      ).toEqual(requests);
     });
   });
 
   describe('friendships', () => {
     it('should pluck friendships', () => {
-      const friendships = [{ sourcePlayerId: 'SOURCE_PLAYER_ID', targetPlayerId: 'TARGET_PLAYER_ID' }];
-      expect(queueFriendships.projector({ slots: [], state: 'waiting', friendships })).toEqual(friendships);
+      const friendships = [
+        {
+          sourcePlayerId: 'SOURCE_PLAYER_ID',
+          targetPlayerId: 'TARGET_PLAYER_ID',
+        },
+      ];
+      expect(
+        queueFriendships.projector({
+          slots: [],
+          state: 'waiting',
+          friendships,
+        }),
+      ).toEqual(friendships);
     });
   });
 });

@@ -3,19 +3,21 @@ import { TokenStoreService } from './token-store.service';
 import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
 
 class StorageServiceStub {
-  get(key: string) { return 'FAKE_TOKEN'; }
-  set(key: string) { }
-  remove(key: string) { }
+  get(key: string) {
+    return 'FAKE_TOKEN';
+  }
+  set(key: string) {}
+  remove(key: string) {}
 }
 
 describe('TokenStoreService', () => {
   let storageService: StorageService;
 
-  beforeEach(() => TestBed.configureTestingModule({
-    providers: [
-      { provide: LOCAL_STORAGE, useClass: StorageServiceStub },
-    ]
-  }));
+  beforeEach(() =>
+    TestBed.configureTestingModule({
+      providers: [{ provide: LOCAL_STORAGE, useClass: StorageServiceStub }],
+    }),
+  );
 
   beforeEach(() => {
     storageService = TestBed.get(LOCAL_STORAGE);
@@ -27,30 +29,42 @@ describe('TokenStoreService', () => {
   });
 
   describe('refreshToken', () => {
-    it('should be retrieved from the store', inject([TokenStoreService], (service: TokenStoreService) => {
-      const spy = spyOn(storageService, 'get') as any;
-      const _ = service.refreshToken;
-      expect(spy).toHaveBeenCalledWith('refresh_token');
-    }));
+    it('should be retrieved from the store', inject(
+      [TokenStoreService],
+      (service: TokenStoreService) => {
+        const spy = spyOn(storageService, 'get') as any;
+        const _ = service.refreshToken;
+        expect(spy).toHaveBeenCalledWith('refresh_token');
+      },
+    ));
 
-    it('should be stored in the store', inject([TokenStoreService], (service: TokenStoreService) => {
-      const spy = spyOn(storageService, 'set') as any;
-      service.refreshToken = 'FAKE_TOKEN';
-      expect(spy).toHaveBeenCalledWith('refresh_token', 'FAKE_TOKEN');
-    }));
+    it('should be stored in the store', inject(
+      [TokenStoreService],
+      (service: TokenStoreService) => {
+        const spy = spyOn(storageService, 'set') as any;
+        service.refreshToken = 'FAKE_TOKEN';
+        expect(spy).toHaveBeenCalledWith('refresh_token', 'FAKE_TOKEN');
+      },
+    ));
   });
 
   describe('authToken', () => {
-    it('should be retrieved from the store', inject([TokenStoreService], (service: TokenStoreService) => {
-      const spy = spyOn(storageService, 'get') as any;
-      const _ = service.authToken;
-      expect(spy).toHaveBeenCalledWith('auth_token');
-    }));
+    it('should be retrieved from the store', inject(
+      [TokenStoreService],
+      (service: TokenStoreService) => {
+        const spy = spyOn(storageService, 'get') as any;
+        const _ = service.authToken;
+        expect(spy).toHaveBeenCalledWith('auth_token');
+      },
+    ));
 
-    it('should be stored in the store', inject([TokenStoreService], (service: TokenStoreService) => {
-      const spy = spyOn(storageService, 'set') as any;
-      service.authToken = 'FAKE_TOKEN';
-      expect(spy).toHaveBeenCalledWith('auth_token', 'FAKE_TOKEN');
-    }));
+    it('should be stored in the store', inject(
+      [TokenStoreService],
+      (service: TokenStoreService) => {
+        const spy = spyOn(storageService, 'set') as any;
+        service.authToken = 'FAKE_TOKEN';
+        expect(spy).toHaveBeenCalledWith('auth_token', 'FAKE_TOKEN');
+      },
+    ));
   });
 });

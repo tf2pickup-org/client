@@ -10,19 +10,21 @@ describe('MumbleJoinButtonComponent', () => {
   let component: MumbleJoinButtonComponent;
   let fixture: ComponentFixture<MumbleJoinButtonComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [
-        MumbleJoinButtonComponent,
-        MockPipe(SafeMumbleUrlPipe, (...args) => JSON.stringify(args)),
-      ],
-      imports: [
-        SharedModule,
-      ],
-    })
-    .overrideComponent(MumbleJoinButtonComponent, { set: { changeDetection: ChangeDetectionStrategy.Default } })
-    .compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [
+          MumbleJoinButtonComponent,
+          MockPipe(SafeMumbleUrlPipe, (...args) => JSON.stringify(args)),
+        ],
+        imports: [SharedModule],
+      })
+        .overrideComponent(MumbleJoinButtonComponent, {
+          set: { changeDetection: ChangeDetectionStrategy.Default },
+        })
+        .compileComponents();
+    }),
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(MumbleJoinButtonComponent);
@@ -41,7 +43,8 @@ describe('MumbleJoinButtonComponent', () => {
     });
 
     it('should render the button', () => {
-      const button = fixture.debugElement.query(By.css('a')).nativeElement as HTMLAnchorElement;
+      const button = fixture.debugElement.query(By.css('a'))
+        .nativeElement as HTMLAnchorElement;
       expect(button).toBeTruthy();
       expect(button.href).toMatch(/FAKE_MUMBLE_URL/);
     });

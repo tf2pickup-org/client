@@ -1,4 +1,9 @@
-import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  OnDestroy,
+} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { map, tap, switchMap, takeUntil, filter } from 'rxjs/operators';
 import { PlayerBan } from '../models/player-ban';
@@ -18,7 +23,6 @@ import { environment } from '@environment';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PlayerBansComponent implements OnInit, OnDestroy {
-
   player: Observable<Player>;
   bans: Observable<PlayerBan[]>;
   private destroyed = new Subject<void>();
@@ -28,7 +32,7 @@ export class PlayerBansComponent implements OnInit, OnDestroy {
     private store: Store,
     private location: Location,
     private title: Title,
-  ) { }
+  ) {}
 
   ngOnInit() {
     const getPlayerId = this.route.paramMap.pipe(
@@ -36,22 +40,28 @@ export class PlayerBansComponent implements OnInit, OnDestroy {
     );
 
     this.player = getPlayerId.pipe(
-      switchMap(playerId => this.store.select(playerById(playerId)).pipe(
-        tap(player => {
-          if (!player) {
-            this.store.dispatch(loadPlayer({ playerId }));
-          }
-        })
-      )),
+      switchMap(playerId =>
+        this.store.select(playerById(playerId)).pipe(
+          tap(player => {
+            if (!player) {
+              this.store.dispatch(loadPlayer({ playerId }));
+            }
+          }),
+        ),
+      ),
       filter(player => !!player),
-      tap(player => this.title.setTitle(`${player.name} bans • ${environment.titleSuffix}`)),
+      tap(player =>
+        this.title.setTitle(`${player.name} bans • ${environment.titleSuffix}`),
+      ),
     );
 
-    getPlayerId.pipe(
-      takeUntil(this.destroyed),
-    ).subscribe(playerId => this.store.dispatch(loadPlayerBans({ playerId })));
+    getPlayerId
+      .pipe(takeUntil(this.destroyed))
+      .subscribe(playerId => this.store.dispatch(loadPlayerBans({ playerId })));
 
-    this.bans = getPlayerId.pipe(switchMap(playerId => this.store.select(playerBans(playerId))));
+    this.bans = getPlayerId.pipe(
+      switchMap(playerId => this.store.select(playerBans(playerId))),
+    );
   }
 
   ngOnDestroy() {
@@ -66,5 +76,4 @@ export class PlayerBansComponent implements OnInit, OnDestroy {
   revoke(playerBan: PlayerBan) {
     this.store.dispatch(revokePlayerBan({ playerBan }));
   }
-
 }

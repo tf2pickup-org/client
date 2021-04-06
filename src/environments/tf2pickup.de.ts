@@ -9,12 +9,20 @@ export const environment = {
   wsUrl: 'https://api.tf2pickup.de',
   version,
   headerLinks: [
-    { name: 'discord', icon: '/assets/ui_icon_discord.png', target: discordInvitation, tooltip: 'Join us on discord!' },
+    {
+      name: 'discord',
+      icon: '/assets/ui_icon_discord.png',
+      target: discordInvitation,
+      tooltip: 'Join us on discord!',
+    },
   ],
   footerLinks: [
     { name: 'github', target: 'https://github.com/tf2pickup-pl' },
     { name: 'discord', target: discordInvitation },
-    { name: 'changelog', target: 'https://github.com/tf2pickup-pl/client/blob/master/CHANGELOG.md' },
+    {
+      name: 'changelog',
+      target: 'https://github.com/tf2pickup-pl/client/blob/master/CHANGELOG.md',
+    },
   ],
   titleSuffix: 'tf2pickup.de • Deutsche Team Fortress 2 Pick-up games',
   entryQueue: entryQueue6v6,

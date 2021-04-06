@@ -14,18 +14,14 @@ import { groupPlayers } from './group-players';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PlayerListComponent implements OnInit {
-
   players: Observable<PlayerGroup[]> = this.store.pipe(
     select(allPlayers),
     map(players => groupPlayers(players)),
   );
 
-  constructor(
-    private store: Store,
-  ) { }
+  constructor(private store: Store) {}
 
   ngOnInit() {
     this.store.dispatch(loadPlayers());
   }
-
 }

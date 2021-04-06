@@ -1,10 +1,15 @@
-import { Component, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 
 // eslint-disable-next-line no-shadow
 export enum QueueReadyUpAction {
   readyUp,
   leaveQueue,
-};
+}
 
 @Component({
   selector: 'app-queue-ready-up-dialog',
@@ -13,7 +18,6 @@ export enum QueueReadyUpAction {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class QueueReadyUpDialogComponent {
-
   @Output()
   action = new EventEmitter<QueueReadyUpAction>();
 
@@ -24,5 +28,4 @@ export class QueueReadyUpDialogComponent {
   leaveQueue() {
     this.action.emit(QueueReadyUpAction.leaveQueue);
   }
-
 }

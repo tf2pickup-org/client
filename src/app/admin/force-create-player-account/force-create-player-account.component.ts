@@ -1,5 +1,12 @@
 import { Location } from '@angular/common';
-import { Component, ChangeDetectionStrategy, ElementRef, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  ElementRef,
+  ViewChild,
+  AfterViewInit,
+  OnDestroy,
+} from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { PlayersService } from '@app/players/players.service';
 import { MDCTextField } from '@material/textfield';
@@ -10,11 +17,11 @@ import { MDCTextField } from '@material/textfield';
   styleUrls: ['./force-create-player-account.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ForceCreatePlayerAccountComponent implements AfterViewInit, OnDestroy {
-
+export class ForceCreatePlayerAccountComponent
+  implements AfterViewInit, OnDestroy {
   form = this.formBuilder.group({
     name: ['', Validators.required],
-    steamId: ['', [ Validators.required, Validators.pattern(/^\d{17}$/) ]],
+    steamId: ['', [Validators.required, Validators.pattern(/^\d{17}$/)]],
   });
 
   @ViewChild('name')
@@ -29,17 +36,18 @@ export class ForceCreatePlayerAccountComponent implements AfterViewInit, OnDestr
     private formBuilder: FormBuilder,
     private playersService: PlayersService,
     private location: Location,
-  ) { }
+  ) {}
 
   save() {
-    this.playersService.forceCreatePlayer(this.form.value).subscribe(() => this.location.back());
+    this.playersService
+      .forceCreatePlayer(this.form.value)
+      .subscribe(() => this.location.back());
   }
 
   ngAfterViewInit() {
-    this.fields = [
-      this.nameInput,
-      this.steamIdInput,
-    ].map(input => new MDCTextField(input.nativeElement));
+    this.fields = [this.nameInput, this.steamIdInput].map(
+      input => new MDCTextField(input.nativeElement),
+    );
 
     setTimeout(() => this.nameInput.nativeElement.focus(), 0);
   }
@@ -47,5 +55,4 @@ export class ForceCreatePlayerAccountComponent implements AfterViewInit, OnDestr
   ngOnDestroy() {
     this.fields.forEach(field => field.destroy());
   }
-
 }

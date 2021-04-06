@@ -6,29 +6,27 @@ import { Observable } from 'rxjs';
 import { map, switchMap, take } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SoundPlayerService {
-
   private readonly defaultVolume = '1.0';
 
-  constructor(
-    private store: Store,
-  ) { }
+  constructor(private store: Store) {}
 
   playSound(sources: string[]): Observable<void> {
-    const player = (volume: number) => new Observable<void>(subscriber => {
-      const sound = new Howl({
-        src: sources,
-        autoplay: true,
-        volume,
-        onend: () => subscriber.complete(),
-      });
+    const player = (volume: number) =>
+      new Observable<void>(subscriber => {
+        const sound = new Howl({
+          src: sources,
+          autoplay: true,
+          volume,
+          onend: () => subscriber.complete(),
+        });
 
-      return () => {
-        sound.stop();
-      };
-    });
+        return () => {
+          sound.stop();
+        };
+      });
 
     return this.store.pipe(
       select(preferences),
@@ -38,5 +36,4 @@ export class SoundPlayerService {
       switchMap(volume => player(volume)),
     );
   }
-
 }

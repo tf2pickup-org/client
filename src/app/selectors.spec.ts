@@ -16,7 +16,7 @@ describe('canJoinQueue', () => {
 
   describe('when the user has an active game', () => {
     it('should return false', () => {
-      expect(canJoinQueue.projector(true, true, { }, false)).toBe(false);
+      expect(canJoinQueue.projector(true, true, {}, false)).toBe(false);
     });
   });
 
@@ -32,12 +32,17 @@ describe('awaitsReadyUp', () => {
 
   describe('when the user is in the queue', () => {
     beforeEach(() => {
-      mySlot = { id: 0, gameClass: 'soldier', playerId: 'FAKE_PLAYER_ID', ready: false };
+      mySlot = {
+        id: 0,
+        gameClass: 'soldier',
+        playerId: 'FAKE_PLAYER_ID',
+        ready: false,
+      };
     });
 
     describe('when the queue is in ready state', () => {
       describe('when the user is not ready', () => {
-        beforeEach(() => mySlot.ready = false);
+        beforeEach(() => (mySlot.ready = false));
 
         it('should return true', () => {
           expect(awaitsReadyUp.projector('ready', mySlot)).toBe(true);
@@ -45,7 +50,7 @@ describe('awaitsReadyUp', () => {
       });
 
       describe('when the user is ready', () => {
-        beforeEach(() => mySlot.ready = true);
+        beforeEach(() => (mySlot.ready = true));
 
         it('should return false', () => {
           expect(awaitsReadyUp.projector('ready', mySlot)).toBe(false);

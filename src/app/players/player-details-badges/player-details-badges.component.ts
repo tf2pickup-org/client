@@ -8,8 +8,6 @@ import { Player } from '../models/player';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PlayerDetailsBadgesComponent {
-
   @Input()
   player: Player;
-
 }

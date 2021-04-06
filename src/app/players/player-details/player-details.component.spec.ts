@@ -8,8 +8,7 @@ import { of } from 'rxjs';
 import { convertToParamMap, ActivatedRoute } from '@angular/router';
 import { loadPlayer } from '../actions';
 import { MockComponent } from 'ng-mocks';
-import { PlayerDetailsExternalProfileLinksComponent } from
-  '../player-details-external-profile-links/player-details-external-profile-links.component';
+import { PlayerDetailsExternalProfileLinksComponent } from '../player-details-external-profile-links/player-details-external-profile-links.component';
 import { PlayerDetailsBadgesComponent } from '../player-details-badges/player-details-badges.component';
 import { PlayerDetailsHeaderComponent } from '../player-details-header/player-details-header.component';
 import { PlayerStatsComponent } from '../player-stats/player-stats.component';
@@ -36,39 +35,40 @@ describe('PlayerDetailsComponent', () => {
     players: {
       players: {
         ids: [],
-        entities: { },
-      }
+        entities: {},
+      },
     },
-    profile: { },
+    profile: {},
   };
 
   beforeEach(() => {
-    playersService = jasmine.createSpyObj<PlayersService>(PlayersService.name, ['fetchPlayerStats']);
+    playersService = jasmine.createSpyObj<PlayersService>(PlayersService.name, [
+      'fetchPlayerStats',
+    ]);
   });
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [
-        PlayerDetailsComponent,
-        MockComponent(PlayerDetailsExternalProfileLinksComponent),
-        MockComponent(PlayerDetailsBadgesComponent),
-        MockComponent(PlayerDetailsHeaderComponent),
-        MockComponent(PlayerStatsComponent),
-        MockComponent(PlayerDetailsGameListComponent),
-        MockComponent(PlayerDetailsAdminButtonsComponent),
-        MockComponent(FeatherComponent),
-      ],
-      imports: [
-        RouterTestingModule,
-      ],
-      providers: [
-        { provide: PlayersService, useValue: playersService  },
-        provideMockStore({ initialState }),
-        { provide: ActivatedRoute, useValue: { paramMap } },
-      ],
-    })
-    .compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [
+          PlayerDetailsComponent,
+          MockComponent(PlayerDetailsExternalProfileLinksComponent),
+          MockComponent(PlayerDetailsBadgesComponent),
+          MockComponent(PlayerDetailsHeaderComponent),
+          MockComponent(PlayerStatsComponent),
+          MockComponent(PlayerDetailsGameListComponent),
+          MockComponent(PlayerDetailsAdminButtonsComponent),
+          MockComponent(FeatherComponent),
+        ],
+        imports: [RouterTestingModule],
+        providers: [
+          { provide: PlayersService, useValue: playersService },
+          provideMockStore({ initialState }),
+          { provide: ActivatedRoute, useValue: { paramMap } },
+        ],
+      }).compileComponents();
+    }),
+  );
 
   beforeEach(() => {
     store = TestBed.inject(MockStore);
@@ -86,10 +86,12 @@ describe('PlayerDetailsComponent', () => {
 
   describe('#ngOnInit()', () => {
     it('should load the player', () => {
-      expect(storeDispatchSpy).toHaveBeenCalledWith(loadPlayer({ playerId: 'FAKE_ID' }));
+      expect(storeDispatchSpy).toHaveBeenCalledWith(
+        loadPlayer({ playerId: 'FAKE_ID' }),
+      );
     });
 
-    it('should load player\'s stats', () => {
+    it("should load player's stats", () => {
       expect(playersService.fetchPlayerStats).toHaveBeenCalledWith('FAKE_ID');
     });
   });
@@ -113,13 +115,11 @@ describe('PlayerDetailsComponent', () => {
       ...initialState,
       players: {
         players: {
-          ids: [
-            'FAKE_ID',
-          ],
+          ids: ['FAKE_ID'],
           entities: {
             FAKE_ID: player,
           },
-          locked: false
+          locked: false,
         },
       },
     };
@@ -130,33 +130,36 @@ describe('PlayerDetailsComponent', () => {
     });
 
     it('should render external profile links', () => {
-      const externalProfileLinksComponent =
-        fixture.debugElement.query(By.css('app-player-details-external-profile-links'))
-          .componentInstance as PlayerDetailsExternalProfileLinksComponent;
+      const externalProfileLinksComponent = fixture.debugElement.query(
+        By.css('app-player-details-external-profile-links'),
+      ).componentInstance as PlayerDetailsExternalProfileLinksComponent;
 
       expect(externalProfileLinksComponent).toBeTruthy();
       expect(externalProfileLinksComponent.player).toEqual(player);
     });
 
     it('should render player badges', () => {
-      const playerBadgesComponent =
-        fixture.debugElement.query(By.css('app-player-details-badges')).componentInstance as PlayerDetailsBadgesComponent;
+      const playerBadgesComponent = fixture.debugElement.query(
+        By.css('app-player-details-badges'),
+      ).componentInstance as PlayerDetailsBadgesComponent;
 
       expect(playerBadgesComponent).toBeTruthy();
       expect(playerBadgesComponent.player).toEqual(player);
     });
 
     it('should render details header', () => {
-      const playerDetailsHeaderComponent =
-        fixture.debugElement.query(By.css('app-player-details-header')).componentInstance as PlayerDetailsHeaderComponent;
+      const playerDetailsHeaderComponent = fixture.debugElement.query(
+        By.css('app-player-details-header'),
+      ).componentInstance as PlayerDetailsHeaderComponent;
 
       expect(playerDetailsHeaderComponent).toBeTruthy();
       expect(playerDetailsHeaderComponent.player).toEqual(player);
     });
 
-    it('should render the player\'s game list', () => {
-      const gameListComponent =
-        fixture.debugElement.query(By.css('app-player-details-game-list')).componentInstance as PlayerDetailsGameListComponent;
+    it("should render the player's game list", () => {
+      const gameListComponent = fixture.debugElement.query(
+        By.css('app-player-details-game-list'),
+      ).componentInstance as PlayerDetailsGameListComponent;
 
       expect(gameListComponent).toBeTruthy();
       expect(gameListComponent.playerId).toEqual('FAKE_ID');
@@ -170,8 +173,9 @@ describe('PlayerDetailsComponent', () => {
       });
 
       it('should render admin buttons', () => {
-        const playerDetailsAdminButtonsComponent =
-          fixture.debugElement.query(By.css('app-player-details-admin-buttons')).componentInstance as PlayerDetailsAdminButtonsComponent;
+        const playerDetailsAdminButtonsComponent = fixture.debugElement.query(
+          By.css('app-player-details-admin-buttons'),
+        ).componentInstance as PlayerDetailsAdminButtonsComponent;
 
         expect(playerDetailsAdminButtonsComponent).toBeTruthy();
         expect(playerDetailsAdminButtonsComponent.playerId).toEqual('FAKE_ID');

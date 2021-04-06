@@ -15,13 +15,7 @@ import { OfflineStateBannerComponent } from './offline-state-banner/offline-stat
     TitleControllerComponent,
     OfflineStateBannerComponent,
   ],
-  imports: [
-    CommonModule,
-    RouterModule,
-    SharedModule,
-
-    TooltipModule,
-  ],
+  imports: [CommonModule, RouterModule, SharedModule, TooltipModule],
   exports: [
     NavigationBarComponent,
     FooterComponent,
@@ -29,4 +23,4 @@ import { OfflineStateBannerComponent } from './offline-state-banner/offline-stat
     OfflineStateBannerComponent,
   ],
 })
-export class CoreModule { }
+export class CoreModule {}

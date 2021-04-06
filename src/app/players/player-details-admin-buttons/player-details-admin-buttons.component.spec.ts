@@ -10,20 +10,22 @@ describe('PlayerDetailsAdminButtonsComponent', () => {
   let component: PlayerDetailsAdminButtonsComponent;
   let fixture: ComponentFixture<PlayerDetailsAdminButtonsComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [
-        PlayerDetailsAdminButtonsComponent,
-        MockComponent(FeatherComponent),
-      ],
-      imports: [
-        RouterTestingModule,
-      ],
-    })
-    // https://github.com/angular/angular/issues/12313
-    .overrideComponent(PlayerDetailsAdminButtonsComponent, { set: { changeDetection: ChangeDetectionStrategy.Default } })
-    .compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [
+          PlayerDetailsAdminButtonsComponent,
+          MockComponent(FeatherComponent),
+        ],
+        imports: [RouterTestingModule],
+      })
+        // https://github.com/angular/angular/issues/12313
+        .overrideComponent(PlayerDetailsAdminButtonsComponent, {
+          set: { changeDetection: ChangeDetectionStrategy.Default },
+        })
+        .compileComponents();
+    }),
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PlayerDetailsAdminButtonsComponent);
@@ -37,11 +39,15 @@ describe('PlayerDetailsAdminButtonsComponent', () => {
   });
 
   it('should render correct links', () => {
-    const editPlayerAnchor = fixture.debugElement.query(By.css('.edit-player-button')).nativeElement as HTMLAnchorElement;
+    const editPlayerAnchor = fixture.debugElement.query(
+      By.css('.edit-player-button'),
+    ).nativeElement as HTMLAnchorElement;
     expect(editPlayerAnchor).toBeTruthy();
     expect(editPlayerAnchor.href).toMatch(/\/player\/FAKE_PLAYER_ID\/edit$/);
 
-    const playerBansAnchor = fixture.debugElement.query(By.css('.player-bans-button')).nativeElement as HTMLAnchorElement;
+    const playerBansAnchor = fixture.debugElement.query(
+      By.css('.player-bans-button'),
+    ).nativeElement as HTMLAnchorElement;
     expect(playerBansAnchor).toBeTruthy();
     expect(playerBansAnchor.href).toMatch(/\/player\/FAKE_PLAYER_ID\/bans$/);
   });
@@ -53,9 +59,13 @@ describe('PlayerDetailsAdminButtonsComponent', () => {
     });
 
     it('should render roles link', () => {
-      const playerRolesAnchor = fixture.debugElement.query(By.css('.edit-player-roles-button')).nativeElement as HTMLAnchorElement;
+      const playerRolesAnchor = fixture.debugElement.query(
+        By.css('.edit-player-roles-button'),
+      ).nativeElement as HTMLAnchorElement;
       expect(playerRolesAnchor).toBeTruthy();
-      expect(playerRolesAnchor.href).toMatch(/\/player\/FAKE_PLAYER_ID\/roles$/);
+      expect(playerRolesAnchor.href).toMatch(
+        /\/player\/FAKE_PLAYER_ID\/roles$/,
+      );
     });
   });
 });

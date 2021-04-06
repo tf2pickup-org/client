@@ -7,18 +7,12 @@ import { fadeIn } from '@app/animations';
   templateUrl: './game-summary.component.html',
   styleUrls: ['./game-summary.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [
-    trigger('fadeIn', [
-      transition(':enter', useAnimation(fadeIn)),
-    ]),
-  ],
+  animations: [trigger('fadeIn', [transition(':enter', useAnimation(fadeIn))])],
 })
 export class GameSummaryComponent {
-
   @Input()
   logsUrl: string;
 
   @Input()
   demoUrl: string;
-
 }

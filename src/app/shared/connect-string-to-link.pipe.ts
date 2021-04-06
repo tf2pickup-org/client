@@ -8,13 +8,10 @@ interface SteamConnect {
 }
 
 @Pipe({
-  name: 'connectStringToLink'
+  name: 'connectStringToLink',
 })
 export class ConnectStringToLinkPipe implements PipeTransform {
-
-  constructor(
-    private sanitizer: DomSanitizer,
-  ) { }
+  constructor(private sanitizer: DomSanitizer) {}
 
   transform(connect: string): SafeUrl {
     const c = this.parseConnectString(connect);
@@ -35,7 +32,9 @@ export class ConnectStringToLinkPipe implements PipeTransform {
   }
 
   private parseConnectString(connect: string): SteamConnect {
-    const match = connect.match(/^connect (.[^:;]+):?(\d+)?(?:;\s?password\s(.+))?$/);
+    const match = connect.match(
+      /^connect (.[^:;]+):?(\d+)?(?:;\s?password\s(.+))?$/,
+    );
     if (match && match[1]) {
       const ret: SteamConnect = { server: match[1] };
 
@@ -50,5 +49,4 @@ export class ConnectStringToLinkPipe implements PipeTransform {
       return ret;
     }
   }
-
 }

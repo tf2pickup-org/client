@@ -1,5 +1,8 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { QueueReadyUpAction, QueueReadyUpDialogComponent } from './queue-ready-up-dialog.component';
+import {
+  QueueReadyUpAction,
+  QueueReadyUpDialogComponent,
+} from './queue-ready-up-dialog.component';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { By } from '@angular/platform-browser';
 
@@ -8,15 +11,14 @@ describe('QueueReadyUpDialogComponent', () => {
   let fixture: ComponentFixture<QueueReadyUpDialogComponent>;
   let store: MockStore<any>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ QueueReadyUpDialogComponent ],
-      providers: [
-        provideMockStore(),
-      ]
-    })
-    .compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [QueueReadyUpDialogComponent],
+        providers: [provideMockStore()],
+      }).compileComponents();
+    }),
+  );
 
   beforeEach(() => {
     store = TestBed.inject(MockStore);
@@ -34,11 +36,14 @@ describe('QueueReadyUpDialogComponent', () => {
     let readyUpButton: HTMLButtonElement;
 
     beforeEach(() => {
-      readyUpButton = fixture.debugElement.query(By.css('.ready-up-button')).nativeElement as HTMLButtonElement;
+      readyUpButton = fixture.debugElement.query(By.css('.ready-up-button'))
+        .nativeElement as HTMLButtonElement;
     });
 
     it('should emit ready up', () => {
-      component.action.subscribe(action => expect(action).toEqual(QueueReadyUpAction.readyUp));
+      component.action.subscribe(action =>
+        expect(action).toEqual(QueueReadyUpAction.readyUp),
+      );
       readyUpButton.click();
     });
   });
@@ -47,11 +52,15 @@ describe('QueueReadyUpDialogComponent', () => {
     let leaveQueueButton: HTMLButtonElement;
 
     beforeEach(() => {
-      leaveQueueButton = fixture.debugElement.query(By.css('.leave-queue-button')).nativeElement as HTMLButtonElement;
+      leaveQueueButton = fixture.debugElement.query(
+        By.css('.leave-queue-button'),
+      ).nativeElement as HTMLButtonElement;
     });
 
     it('should emit leave queue', () => {
-      component.action.subscribe(action => expect(action).toEqual(QueueReadyUpAction.leaveQueue));
+      component.action.subscribe(action =>
+        expect(action).toEqual(QueueReadyUpAction.leaveQueue),
+      );
       leaveQueueButton.click();
     });
   });

@@ -3,7 +3,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ConfigurationEntryKey } from '@app/configuration/configuration-entry-key';
 import { ConfigurationService } from '@app/configuration/configuration.service';
 import { FeatherComponent } from 'angular-feather';
-import { MockBuilder, MockedComponentFixture, MockRender, ngMocks } from 'ng-mocks';
+import {
+  MockBuilder,
+  MockedComponentFixture,
+  MockRender,
+  ngMocks,
+} from 'ng-mocks';
 import { Subject } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { EditPageWrapperComponent } from '../edit-page-wrapper/edit-page-wrapper.component';
@@ -20,14 +25,19 @@ describe(WhitelistEditComponent.name, () => {
     whitelistId = new Subject();
   });
 
-  beforeEach(() => MockBuilder(WhitelistEditComponent)
-    .keep(ReactiveFormsModule)
-    .mock(ConfigurationService, {
-      fetchValue: jasmine.createSpy('fetchValue').and.returnValue(whitelistId.asObservable().pipe(take(1))),
-      storeValue: jasmine.createSpy('storeValue').and.returnValue(whitelistId.asObservable().pipe(take(1))),
-    })
-    .mock(FeatherComponent)
-    .keep(EditPageWrapperComponent)
+  beforeEach(() =>
+    MockBuilder(WhitelistEditComponent)
+      .keep(ReactiveFormsModule)
+      .mock(ConfigurationService, {
+        fetchValue: jasmine
+          .createSpy('fetchValue')
+          .and.returnValue(whitelistId.asObservable().pipe(take(1))),
+        storeValue: jasmine
+          .createSpy('storeValue')
+          .and.returnValue(whitelistId.asObservable().pipe(take(1))),
+      })
+      .mock(FeatherComponent)
+      .keep(EditPageWrapperComponent),
   );
 
   beforeEach(() => {
@@ -77,7 +87,10 @@ describe(WhitelistEditComponent.name, () => {
 
       it('should set the new configuration', () => {
         const configurationService = TestBed.inject(ConfigurationService);
-        expect(configurationService.storeValue).toHaveBeenCalledWith(ConfigurationEntryKey.whitelistId, 'etf2l_6v6');
+        expect(configurationService.storeValue).toHaveBeenCalledWith(
+          ConfigurationEntryKey.whitelistId,
+          'etf2l_6v6',
+        );
       });
 
       describe('when the new configuration is set', () => {
@@ -92,5 +105,4 @@ describe(WhitelistEditComponent.name, () => {
       });
     });
   });
-
 });

@@ -69,8 +69,6 @@ import { QueueNotificationsHandlerComponent } from './queue-notifications-handle
 
     QueueRoutingModule,
   ],
-  exports: [
-    QueueNotificationsHandlerComponent,
-  ],
+  exports: [QueueNotificationsHandlerComponent],
 })
-export class QueueModule { }
+export class QueueModule {}

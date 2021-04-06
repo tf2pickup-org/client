@@ -2,7 +2,6 @@ import { IsAdminPipe } from './is-admin.pipe';
 import { Player } from './models/player';
 
 describe(IsAdminPipe.name, () => {
-
   it('create an instance', () => {
     const pipe = new IsAdminPipe();
     expect(pipe).toBeTruthy();
@@ -27,6 +26,5 @@ describe(IsAdminPipe.name, () => {
       const pipe = new IsAdminPipe();
       expect(pipe.transform({ roles: ['admin'] } as Player)).toBe(true);
     });
-  })
-
+  });
 });

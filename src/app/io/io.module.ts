@@ -5,9 +5,6 @@ import { reducer } from './io.reducer';
 
 @NgModule({
   declarations: [],
-  imports: [
-    HttpClientModule,
-    StoreModule.forFeature('io', reducer),
-  ],
+  imports: [HttpClientModule, StoreModule.forFeature('io', reducer)],
 })
-export class IoModule { }
+export class IoModule {}

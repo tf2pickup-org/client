@@ -6,22 +6,16 @@ import { AcceptRulesDialogComponent } from './accept-rules-dialog/accept-rules-d
 import { tap } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AcceptRulesDialogService {
-
-  constructor(
-    private overlay: Overlay,
-  ) { }
+  constructor(private overlay: Overlay) {}
 
   showAcceptRulesDialog(): Observable<void> {
     const overlay = this.overlay.create();
     const portal = new ComponentPortal(AcceptRulesDialogComponent);
     const component = overlay.attach(portal);
 
-    return component.instance.rulesAccepted.pipe(
-      tap(() => overlay.dispose()),
-    );
+    return component.instance.rulesAccepted.pipe(tap(() => overlay.dispose()));
   }
-
 }

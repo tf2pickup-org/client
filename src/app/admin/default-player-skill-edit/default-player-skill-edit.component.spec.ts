@@ -7,7 +7,12 @@ import { GameClassIconComponent } from '@app/shared/game-class-icon/game-class-i
 import { Tf2ClassName } from '@app/shared/models/tf2-class-name';
 import { provideMockStore } from '@ngrx/store/testing';
 import { FeatherComponent } from 'angular-feather';
-import { MockBuilder, MockedComponentFixture, MockRender, ngMocks } from 'ng-mocks';
+import {
+  MockBuilder,
+  MockedComponentFixture,
+  MockRender,
+  ngMocks,
+} from 'ng-mocks';
 import { Subject } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { EditPageWrapperComponent } from '../edit-page-wrapper/edit-page-wrapper.component';
@@ -23,29 +28,36 @@ describe(DefaultPlayerSkillEditComponent.name, () => {
     defaultPlayerSkill = new Subject();
   });
 
-  beforeEach(() => MockBuilder(DefaultPlayerSkillEditComponent)
-    .keep(ReactiveFormsModule)
-    .mock(ConfigurationService, {
-      fetchValue: jasmine.createSpy('fetchValue').and.returnValue(defaultPlayerSkill.asObservable().pipe(take(1))),
-      storeValue: jasmine.createSpy('storeValue').and.returnValue(defaultPlayerSkill.asObservable().pipe(take(1))),
-    })
-    .provide(provideMockStore({
-      selectors: [
-        {
-          selector: queueConfig,
-          value: {
-            teamCount: 2,
-            classes: [
-              { name: 'scout', count: 2 },
-              { name: 'soldier', count: 2 },
-            ],
-          },
-        },
-      ]
-    }))
-    .keep(EditPageWrapperComponent)
-    .mock(FeatherComponent)
-    .mock(GameClassIconComponent)
+  beforeEach(() =>
+    MockBuilder(DefaultPlayerSkillEditComponent)
+      .keep(ReactiveFormsModule)
+      .mock(ConfigurationService, {
+        fetchValue: jasmine
+          .createSpy('fetchValue')
+          .and.returnValue(defaultPlayerSkill.asObservable().pipe(take(1))),
+        storeValue: jasmine
+          .createSpy('storeValue')
+          .and.returnValue(defaultPlayerSkill.asObservable().pipe(take(1))),
+      })
+      .provide(
+        provideMockStore({
+          selectors: [
+            {
+              selector: queueConfig,
+              value: {
+                teamCount: 2,
+                classes: [
+                  { name: 'scout', count: 2 },
+                  { name: 'soldier', count: 2 },
+                ],
+              },
+            },
+          ],
+        }),
+      )
+      .keep(EditPageWrapperComponent)
+      .mock(FeatherComponent)
+      .mock(GameClassIconComponent),
   );
 
   beforeEach(() => {
@@ -71,7 +83,9 @@ describe(DefaultPlayerSkillEditComponent.name, () => {
 
   it('should render input for each game class', () => {
     expect(ngMocks.findAll('input[type=number]').length).toEqual(2);
-    const gameClassIcons = ngMocks.findAll('app-game-class-icon').map(c => c.componentInstance);
+    const gameClassIcons = ngMocks
+      .findAll('app-game-class-icon')
+      .map(c => c.componentInstance);
     expect(gameClassIcons.length).toEqual(2);
     expect(gameClassIcons[0].gameClass).toEqual('scout');
     expect(gameClassIcons[1].gameClass).toEqual('soldier');
@@ -81,7 +95,8 @@ describe(DefaultPlayerSkillEditComponent.name, () => {
     let soldierInput: HTMLInputElement;
 
     beforeEach(() => {
-      soldierInput = ngMocks.find('input[type=number][name=soldier]').nativeElement;
+      soldierInput = ngMocks.find('input[type=number][name=soldier]')
+        .nativeElement;
       soldierInput.valueAsNumber = 4;
       soldierInput.dispatchEvent(new Event('input'));
       fixture.detectChanges();
@@ -104,7 +119,13 @@ describe(DefaultPlayerSkillEditComponent.name, () => {
 
       it('should call the api', () => {
         const configurationService = TestBed.inject(ConfigurationService);
-        expect(configurationService.storeValue).toHaveBeenCalledWith(ConfigurationEntryKey.defaultPlayerSkill, { scout: 1, soldier: 4 });
+        expect(configurationService.storeValue).toHaveBeenCalledWith(
+          ConfigurationEntryKey.defaultPlayerSkill,
+          {
+            scout: 1,
+            soldier: 4,
+          },
+        );
       });
 
       describe('when accepted by the server', () => {

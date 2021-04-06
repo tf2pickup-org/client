@@ -2,7 +2,10 @@ import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { TestBed } from '@angular/core/testing';
 import { SoundPlayerService } from '@app/shared/sound-player.service';
 import { of, Subscription } from 'rxjs';
-import { QueueReadyUpAction, QueueReadyUpDialogComponent } from './queue-ready-up-dialog/queue-ready-up-dialog.component';
+import {
+  QueueReadyUpAction,
+  QueueReadyUpDialogComponent,
+} from './queue-ready-up-dialog/queue-ready-up-dialog.component';
 import { ReadyUpService } from './ready-up.service';
 
 describe('ReadyUpService', () => {
@@ -14,8 +17,13 @@ describe('ReadyUpService', () => {
 
   beforeEach(() => {
     overlayService = jasmine.createSpyObj<Overlay>(Overlay.name, ['create']);
-    overlayRef = jasmine.createSpyObj<OverlayRef>(OverlayRef.name, ['attach', 'dispose']);
-    soundPlayerService = jasmine.createSpyObj(SoundPlayerService.name, ['playSound']);
+    overlayRef = jasmine.createSpyObj<OverlayRef>(OverlayRef.name, [
+      'attach',
+      'dispose',
+    ]);
+    soundPlayerService = jasmine.createSpyObj(SoundPlayerService.name, [
+      'playSound',
+    ]);
     component = new QueueReadyUpDialogComponent();
 
     overlayService.create.and.returnValue(overlayRef);
@@ -45,7 +53,9 @@ describe('ReadyUpService', () => {
 
     beforeEach(() => {
       lastAction = null;
-      subscription = service.askUserToReadyUp().subscribe(action => lastAction = action);
+      subscription = service
+        .askUserToReadyUp()
+        .subscribe(action => (lastAction = action));
     });
 
     it('should play the ready-up sound', () => {

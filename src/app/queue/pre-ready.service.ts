@@ -5,10 +5,9 @@ import { stopPreReady } from './queue.actions';
 import { isPreReadied } from './queue.selectors';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PreReadyService {
-
   private readonly defaultTimeout = 300; // 5 minutes
   private _timeout = new BehaviorSubject<number>(this.defaultTimeout);
   private timer: ReturnType<typeof setInterval>;
@@ -17,12 +16,8 @@ export class PreReadyService {
     return this._timeout.asObservable();
   }
 
-  constructor(
-    private store: Store,
-  ) {
-    this.store.pipe(
-      select(isPreReadied),
-    ).subscribe(preReadied => {
+  constructor(private store: Store) {
+    this.store.pipe(select(isPreReadied)).subscribe(preReadied => {
       if (preReadied) {
         this.start();
       } else {
@@ -55,5 +50,4 @@ export class PreReadyService {
       this.stop();
     }
   }
-
 }

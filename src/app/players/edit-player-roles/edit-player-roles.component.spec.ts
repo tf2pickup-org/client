@@ -6,7 +6,12 @@ import { ActivatedRoute, convertToParamMap } from '@angular/router';
 import { NavigateBackDirective } from '@app/shared/navigate-back.directive';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { FeatherComponent } from 'angular-feather';
-import { MockBuilder, MockedComponentFixture, MockRender, ngMocks } from 'ng-mocks';
+import {
+  MockBuilder,
+  MockedComponentFixture,
+  MockRender,
+  ngMocks,
+} from 'ng-mocks';
 import { Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { loadPlayer, playerEdited } from '../actions';
@@ -28,26 +33,29 @@ describe(EditPlayerRolesComponent.name, () => {
     setPlayerRoles = new Subject();
   });
 
-  beforeEach(() => MockBuilder(EditPlayerRolesComponent)
-    .provide(provideMockStore({
-      initialState: {
-        players: {
-          players: {
-            ids: [],
-            entities: {},
+  beforeEach(() =>
+    MockBuilder(EditPlayerRolesComponent)
+      .provide(
+        provideMockStore({
+          initialState: {
+            players: {
+              players: {
+                ids: [],
+                entities: {},
+              },
+            },
           },
-        },
-      },
-    }))
-    .keep(ReactiveFormsModule)
-    .mock(ActivatedRoute, {
-      paramMap: routeParams.pipe(map(convertToParamMap)),
-    })
-    .mock(PlayersService)
-    .mock(Title)
-    .mock(Location)
-    .mock(FeatherComponent)
-    .keep(NavigateBackDirective)
+        }),
+      )
+      .keep(ReactiveFormsModule)
+      .mock(ActivatedRoute, {
+        paramMap: routeParams.pipe(map(convertToParamMap)),
+      })
+      .mock(PlayersService)
+      .mock(Title)
+      .mock(Location)
+      .mock(FeatherComponent)
+      .keep(NavigateBackDirective),
   );
 
   beforeEach(() => {
@@ -56,8 +64,12 @@ describe(EditPlayerRolesComponent.name, () => {
 
     store = TestBed.inject(MockStore);
     spyOn(store, 'dispatch');
-    playersService = TestBed.inject(PlayersService) as jasmine.SpyObj<PlayersService>;
-    playersService.setPlayerRoles.and.returnValue(setPlayerRoles.asObservable());
+    playersService = TestBed.inject(
+      PlayersService,
+    ) as jasmine.SpyObj<PlayersService>;
+    playersService.setPlayerRoles.and.returnValue(
+      setPlayerRoles.asObservable(),
+    );
 
     fixture.detectChanges();
     submitButton = ngMocks.find('button[type=submit]').nativeElement;
@@ -73,7 +85,9 @@ describe(EditPlayerRolesComponent.name, () => {
     });
 
     it('should load the player from the store', () => {
-      expect(store.dispatch).toHaveBeenCalledWith(loadPlayer({ playerId: 'FAKE_PLAYER_ID' }));
+      expect(store.dispatch).toHaveBeenCalledWith(
+        loadPlayer({ playerId: 'FAKE_PLAYER_ID' }),
+      );
     });
 
     it('should disable the submit button initially', () => {
@@ -85,7 +99,7 @@ describe(EditPlayerRolesComponent.name, () => {
         store.setState({
           players: {
             players: {
-              ids: [ 'FAKE_PLAYER_ID' ],
+              ids: ['FAKE_PLAYER_ID'],
               entities: {
                 FAKE_PLAYER_ID: {
                   name: 'maly',
@@ -99,17 +113,21 @@ describe(EditPlayerRolesComponent.name, () => {
 
       it('should set the title', () => {
         const title = TestBed.inject(Title);
-        expect(title.setTitle).toHaveBeenCalledWith(jasmine.stringMatching(/maly/));
+        expect(title.setTitle).toHaveBeenCalledWith(
+          jasmine.stringMatching(/maly/),
+        );
       });
 
       it('should set the role', () => {
-        const option = ngMocks.find('input[type=checkbox]#admin').nativeElement as HTMLInputElement;
+        const option = ngMocks.find('input[type=checkbox]#admin')
+          .nativeElement as HTMLInputElement;
         expect(option.checked).toBe(true);
       });
 
       describe('when selecting another role', () => {
         beforeEach(() => {
-          const option = ngMocks.find('input[type=checkbox]#super\\\ user').nativeElement as HTMLInputElement;
+          const option = ngMocks.find('input[type=checkbox]#super\\ user')
+            .nativeElement as HTMLInputElement;
           option.click();
           fixture.detectChanges();
         });
@@ -125,7 +143,9 @@ describe(EditPlayerRolesComponent.name, () => {
           });
 
           it('should call the api', () => {
-            expect(playersService.setPlayerRoles).toHaveBeenCalledWith('FAKE_PLAYER_ID', ['super user', 'admin']);
+            expect(
+              playersService.setPlayerRoles,
+            ).toHaveBeenCalledWith('FAKE_PLAYER_ID', ['super user', 'admin']);
           });
 
           it('should disable the submit button', () => {
@@ -134,11 +154,21 @@ describe(EditPlayerRolesComponent.name, () => {
 
           describe('when the server replies', () => {
             beforeEach(() => {
-              setPlayerRoles.next({ name: 'maly', roles: ['super user', 'admin'] } as Player);
+              setPlayerRoles.next({
+                name: 'maly',
+                roles: ['super user', 'admin'],
+              } as Player);
             });
 
             it('should update the player', () => {
-              expect(store.dispatch).toHaveBeenCalledWith(playerEdited({ player: { name: 'maly', roles: ['super user', 'admin'] } as Player }));
+              expect(store.dispatch).toHaveBeenCalledWith(
+                playerEdited({
+                  player: {
+                    name: 'maly',
+                    roles: ['super user', 'admin'],
+                  } as Player,
+                }),
+              );
             });
 
             it('should navigate back', () => {
@@ -153,7 +183,8 @@ describe(EditPlayerRolesComponent.name, () => {
 
   it('should be able to cancel and go back', () => {
     const location = TestBed.inject(Location);
-    const cancelButton = ngMocks.find('button.cancel-button').nativeElement as HTMLButtonElement;
+    const cancelButton = ngMocks.find('button.cancel-button')
+      .nativeElement as HTMLButtonElement;
     cancelButton.click();
     expect(location.back).toHaveBeenCalled();
   });

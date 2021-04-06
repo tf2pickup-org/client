@@ -1,6 +1,9 @@
 import { TestBed } from '@angular/core/testing';
 import { AuthInterceptorService } from './auth-interceptor.service';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import {
+  HttpClientTestingModule,
+  HttpTestingController,
+} from '@angular/common/http/testing';
 import { AuthService } from './auth.service';
 import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import { of, noop } from 'rxjs';
@@ -17,19 +20,25 @@ describe('AuthInterceptorService', () => {
   let httpController: HttpTestingController;
 
   beforeEach(() => {
-    authServiceStub = jasmine.createSpyObj<AuthService>('AuthService', ['reauth']);
+    authServiceStub = jasmine.createSpyObj<AuthService>('AuthService', [
+      'reauth',
+    ]);
   });
 
-  beforeEach(() => TestBed.configureTestingModule({
-    imports: [
-      HttpClientTestingModule,
-    ],
-    providers: [
-      { provide: AuthService, useValue: authServiceStub },
-      { provide: TokenStoreService, useClass: TokenStoreServiceStub },
-      { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true },
-    ]
-  }));
+  beforeEach(() =>
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+      providers: [
+        { provide: AuthService, useValue: authServiceStub },
+        { provide: TokenStoreService, useClass: TokenStoreServiceStub },
+        {
+          provide: HTTP_INTERCEPTORS,
+          useClass: AuthInterceptorService,
+          multi: true,
+        },
+      ],
+    }),
+  );
 
   beforeEach(() => {
     http = TestBed.inject(HttpClient);
@@ -50,7 +59,9 @@ describe('AuthInterceptorService', () => {
     it('should add an Authorization header', () => {
       http.get('FAKE_URL').subscribe();
       const request = httpController.expectOne('FAKE_URL');
-      expect(request.request.headers.get('Authorization')).toEqual('Bearer FAKE_AUTH_TOKEN');
+      expect(request.request.headers.get('Authorization')).toEqual(
+        'Bearer FAKE_AUTH_TOKEN',
+      );
     });
 
     it('should refresh the auth token if the server responds with 401', () => {
@@ -59,7 +70,9 @@ describe('AuthInterceptorService', () => {
       httpController.expectOne('FAKE_URL').error(null, { status: 401 });
       expect(authServiceStub.reauth).toHaveBeenCalled();
       const req = httpController.expectOne('FAKE_URL');
-      expect(req.request.headers.get('Authorization')).toEqual('Bearer FAKE_NEW_AUTH_TOKEN');
+      expect(req.request.headers.get('Authorization')).toEqual(
+        'Bearer FAKE_NEW_AUTH_TOKEN',
+      );
     });
 
     it('should throw an error on any other server error', done => {

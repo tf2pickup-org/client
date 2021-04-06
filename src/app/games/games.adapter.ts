@@ -10,5 +10,5 @@ export const adapter: EntityAdapter<Game> = createEntityAdapter<Game>({
     } else {
       return 0;
     }
-  }
+  },
 });

@@ -10,18 +10,15 @@ describe('NavigationBarComponent', () => {
   let store: MockStore;
   const initialState = { profile: { authenticated: 'not authenticated' } };
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ NavigationBarComponent ],
-      providers: [
-        provideMockStore({ initialState }),
-      ],
-      imports: [
-        RouterTestingModule,
-      ],
-    })
-    .compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [NavigationBarComponent],
+        providers: [provideMockStore({ initialState })],
+        imports: [RouterTestingModule],
+      }).compileComponents();
+    }),
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(NavigationBarComponent);
@@ -60,20 +57,24 @@ describe('NavigationBarComponent', () => {
     });
 
     it('should render profile link', () => {
-      const el = fixture.debugElement.query(By.css('a.navbar__link--profile')).nativeElement as HTMLAnchorElement;
+      const el = fixture.debugElement.query(By.css('a.navbar__link--profile'))
+        .nativeElement as HTMLAnchorElement;
       expect(el).toBeTruthy();
       expect(el.innerText.trim()).toBe('FAKE_NAME');
       expect(el.href).toMatch(/\/player\/FAKE_ID$/);
     });
 
     it('should render profile avatar', () => {
-      const img = fixture.debugElement.query(By.css('.navbar__link--profile img')).nativeElement as HTMLImageElement;
+      const img = fixture.debugElement.query(
+        By.css('.navbar__link--profile img'),
+      ).nativeElement as HTMLImageElement;
       expect(img).toBeTruthy();
       expect(img.crossOrigin).toEqual('anonymous');
     });
 
     it('should render link to the settings page', () => {
-      const el = fixture.debugElement.query(By.css('a.navbar__link--settings')).nativeElement as HTMLAnchorElement;
+      const el = fixture.debugElement.query(By.css('a.navbar__link--settings'))
+        .nativeElement as HTMLAnchorElement;
       expect(el).toBeTruthy();
       expect(el.href).toMatch(/\/settings/);
     });

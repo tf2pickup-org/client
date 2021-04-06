@@ -1,4 +1,12 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, HostListener, OnDestroy, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  HostListener,
+  OnDestroy,
+  ViewChild,
+} from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MDCTextField } from '@material/textfield/component';
@@ -17,7 +25,6 @@ import { Location } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddGameServerComponent implements AfterViewInit, OnDestroy {
-
   @ViewChild('name')
   nameInput: ElementRef;
 
@@ -47,7 +54,7 @@ export class AddGameServerComponent implements AfterViewInit, OnDestroy {
     private router: Router,
     private actions: Actions,
     private location: Location,
-  ) { }
+  ) {}
 
   @HostListener('document:keydown.escape', ['$event'])
   onEscDown() {
@@ -76,10 +83,12 @@ export class AddGameServerComponent implements AfterViewInit, OnDestroy {
         port: `${this.gameServer.value.port}`,
       };
 
-      this.actions.pipe(
-        ofType(gameServerAdded),
-        first(action => action.gameServer.name === gameServer.name),
-      ).subscribe(() => this.router.navigate(['/servers']));
+      this.actions
+        .pipe(
+          ofType(gameServerAdded),
+          first(action => action.gameServer.name === gameServer.name),
+        )
+        .subscribe(() => this.router.navigate(['/servers']));
 
       this.store.dispatch(addGameServer({ gameServer }));
     }
@@ -88,5 +97,4 @@ export class AddGameServerComponent implements AfterViewInit, OnDestroy {
   cancel() {
     this.location.back();
   }
-
 }

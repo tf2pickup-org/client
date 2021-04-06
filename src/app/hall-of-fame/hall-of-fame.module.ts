@@ -6,11 +6,6 @@ import { PlayersModule } from '@app/players/players.module';
 
 @NgModule({
   declarations: [HallOfFameComponent],
-  imports: [
-    CommonModule,
-    HallOfFameRoutingModule,
-
-    PlayersModule,
-  ]
+  imports: [CommonModule, HallOfFameRoutingModule, PlayersModule],
 })
-export class HallOfFameModule { }
+export class HallOfFameModule {}

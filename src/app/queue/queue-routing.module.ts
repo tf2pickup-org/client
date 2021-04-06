@@ -7,11 +7,11 @@ export const routes: Routes = [
     path: '',
     component: QueueContainerComponent,
     pathMatch: 'full',
-  }
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class QueueRoutingModule { }
+export class QueueRoutingModule {}
