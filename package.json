@@ -41,6 +41,7 @@
     "@material/radio": "10.0.0",
     "@material/ripple": "10.0.0",
     "@material/snackbar": "10.0.0",
+    "@material/switch": "10.0.0",
     "@material/textfield": "10.0.0",
     "@material/typography": "10.0.0",
     "@ngrx/component-store": "11.0.1",
