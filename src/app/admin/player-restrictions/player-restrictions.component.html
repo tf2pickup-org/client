@@ -34,7 +34,9 @@
           </span>
         </li>
 
-        <li class="mdc-list-item" (click)="openMinimumTf2InGameHoursDialog()">
+        <li class="mdc-list-item"
+          (click)="openMinimumTf2InGameHoursDialog()"
+          minimumTf2InGameHoursItem>
           <span class="mdc-list-item__ripple"></span>
           <span class="mdc-list-item__text">
             <span class="mdc-list-item__primary-text">Minimum TF2 in-game time spent</span>
@@ -46,5 +48,7 @@
 
   </app-edit-page-wrapper>
 
-  <input type="hidden" formControlName="minimumTf2InGameHours">
+  <input type="hidden"
+    formControlName="minimumTf2InGameHours"
+    id="minimum-tf2-in-game-hours-field">
 </form>

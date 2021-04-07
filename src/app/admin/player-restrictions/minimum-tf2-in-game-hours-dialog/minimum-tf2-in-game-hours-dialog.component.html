@@ -29,11 +29,17 @@
         </ul>
       </div>
       <div class="mdc-dialog__actions">
-        <button type="button" class="mdc-button mdc-dialog__button" (click)="cancel.next()">
+        <button cancelButton
+          type="button"
+          class="mdc-button mdc-dialog__button"
+          (click)="cancel.next()">
           <div class="mdc-button__ripple"></div>
           <span class="mdc-button__label">Cancel</span>
         </button>
-        <button type="button" class="mdc-button mdc-dialog__button" (click)="doAccept()">
+        <button okButton
+          type="button"
+          class="mdc-button mdc-dialog__button"
+          (click)="doAccept()">
           <div class="mdc-button__ripple"></div>
           <span class="mdc-button__label">OK</span>
         </button>

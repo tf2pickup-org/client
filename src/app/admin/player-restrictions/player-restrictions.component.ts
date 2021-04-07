@@ -7,6 +7,7 @@ import { MDCSwitch } from '@material/switch';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { Overlay } from '@angular/cdk/overlay';
 import { MinimumTf2InGameHoursDialogComponent } from './minimum-tf2-in-game-hours-dialog/minimum-tf2-in-game-hours-dialog.component';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-player-restrictions',
@@ -31,6 +32,7 @@ export class PlayerRestrictionsComponent implements OnInit, AfterViewInit, OnDes
     private configurationService: ConfigurationService,
     private changeDetector: ChangeDetectorRef,
     private overlay: Overlay,
+    private location: Location,
   ) { }
 
   ngOnInit() {
@@ -52,7 +54,10 @@ export class PlayerRestrictionsComponent implements OnInit, AfterViewInit, OnDes
   }
 
   save() {
-
+    zip(
+      this.configurationService.storeValue<boolean>(ConfigurationEntryKey.etf2lAccountRequired, this.etf2lAccountRequired),
+      this.configurationService.storeValue<number>(ConfigurationEntryKey.minimumTf2InGameHours, this.minimumTf2InGameHours),
+    ).subscribe(() => this.location.back());
   }
 
   openMinimumTf2InGameHoursDialog() {
