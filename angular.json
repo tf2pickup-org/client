@@ -245,11 +245,11 @@
                 }
               ]
             },
-            "tf2pickup.rs": {
+            "yu.tf2pickup.eu": {
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/tf2pickup.rs.ts"
+                  "with": "src/environments/yu.tf2pickup.eu.ts"
                 }
               ],
               "assets": [
@@ -263,12 +263,12 @@
                 },
                 {
                   "glob": "favicon.ico",
-                  "input": "src/assets/custom/tf2pickup.rs",
+                  "input": "src/assets/custom/yu.tf2pickup.eu",
                   "output": "/"
                 },
                 {
                   "glob": "**/*",
-                  "input": "src/assets/custom/tf2pickup.rs",
+                  "input": "src/assets/custom/yu.tf2pickup.eu",
                   "output": "/assets/"
                 }
               ]
