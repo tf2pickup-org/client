@@ -18,7 +18,7 @@ import { Location } from '@angular/common';
 export class PlayerRestrictionsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   form = this.formBuilder.group({
-    etf2lAccountRequired: [true],
+    etf2lAccountRequired: [false],
     minimumTf2InGameHours: [0],
   });
 
@@ -41,6 +41,7 @@ export class PlayerRestrictionsComponent implements OnInit, AfterViewInit, OnDes
       this.configurationService.fetchValue<number>(ConfigurationEntryKey.minimumTf2InGameHours),
     ).subscribe(([ etf2lAccountRequired, minimumTf2InGameHours ]) => {
       this.form.patchValue({ etf2lAccountRequired, minimumTf2InGameHours });
+      this.etf2lAccountRequiredSwitch.checked = etf2lAccountRequired;
       this.changeDetector.markForCheck();
     });
   }
