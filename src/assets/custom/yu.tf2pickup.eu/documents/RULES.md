@@ -1,5 +1,5 @@
 1. The main language used on mumble and in the game is **Serbo-Croatian**. Do not add to the pickup queue if you are not comfortable with using Serbo-Croatian for in-game communication.
-2. _tf2pickup.rs_ was created with Team Fortress 2 **competitive gameplay** in mind.
+2. _yu.tf2pickup.eu_ was created with Team Fortress 2 **competitive gameplay** in mind.
 3. **Mumble is obligatory**. Do not add to the pickup queue if you do not have the Mumble application installed and configured properly. Please make sure your voice is clear and audible.
 4. Readying up for the pickup means you can play the entire 30 minutes of the match. Not joining the game or leaving the pickup mid-game will be punished.
     1. If you are forced to leave the game, find a substitute player for yourself and give him all the game details. Also, let your team know you are to be replaced.
