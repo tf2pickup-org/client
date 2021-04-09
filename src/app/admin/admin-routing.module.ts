@@ -12,6 +12,7 @@ import { PlayerSkillTableComponent } from './player-skill-table/player-skill-tab
 import { ScrambleMapsComponent } from './scramble-maps/scramble-maps.component';
 import { WhitelistEditComponent } from './whitelist-edit/whitelist-edit.component';
 import { GameServerResolver } from '@app/game-servers/game-server.resolver';
+import { PlayerRestrictionsComponent } from './player-restrictions/player-restrictions.component';
 
 const routes: Routes = [
   {
@@ -93,6 +94,14 @@ const routes: Routes = [
         },
         resolve: {
           gameServer: GameServerResolver,
+        },
+      },
+      {
+        path: 'player-restrictions',
+        component: PlayerRestrictionsComponent,
+        data: {
+          title: 'edit player restrictions',
+          Animation: 'PlayerRestrictionsPage',
         },
       },
     ],
