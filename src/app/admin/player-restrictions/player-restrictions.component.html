@@ -1,0 +1,54 @@
+<form [formGroup]="form" (submit)="save()">
+  <app-edit-page-wrapper
+    title="Player restrictions"
+    [saveDisabled]="!form.valid || form.pristine"
+    (save)="save()">
+
+    <div class="surface surface--white">
+      <ul class="mdc-list mdc-list--two-line">
+        <li class="mdc-list-item" tabindex="0">
+          <span class="mdc-list-item__ripple"></span>
+          <div class="mdc-list-item__text flex-grow-1">
+            <label class="mdc-list-item__primary-text" for="etf2l-account-required-switch">Require ETF2L account</label>
+            <span class="mdc-list-item__secondary-text"
+              [ngSwitch]="this.form.get('etf2lAccountRequired').value">
+              <ng-container *ngSwitchCase="true">Players that do not have an ETF2L profile will not be able to register</ng-container>
+              <ng-container *ngSwitchCase="false">All players will be able to register</ng-container>
+            </span>
+          </div>
+
+          <span class="mdc-list-item__graphic">
+            <div class="mdc-switch" #etf2lAccountRequiredSwitch>
+              <div class="mdc-switch__track"></div>
+              <div class="mdc-switch__thumb-underlay">
+                <div class="mdc-switch__thumb"></div>
+                <input type="checkbox"
+                  id="etf2l-account-required-switch"
+                  class="mdc-switch__native-control"
+                  role="switch"
+                  aria-checked="false"
+                  formControlName="etf2lAccountRequired"
+                  #etf2lAccountRequiredCheckbox>
+              </div>
+            </div>
+          </span>
+        </li>
+
+        <li class="mdc-list-item"
+          (click)="openMinimumTf2InGameHoursDialog()"
+          minimumTf2InGameHoursItem>
+          <span class="mdc-list-item__ripple"></span>
+          <span class="mdc-list-item__text">
+            <span class="mdc-list-item__primary-text">Minimum TF2 in-game time spent</span>
+            <span class="mdc-list-item__secondary-text">{{ this.form.get('minimumTf2InGameHours').value }} hours</span>
+          </span>
+        </li>
+      </ul>
+    </div>
+
+  </app-edit-page-wrapper>
+
+  <input type="hidden"
+    formControlName="minimumTf2InGameHours"
+    id="minimum-tf2-in-game-hours-field">
+</form>

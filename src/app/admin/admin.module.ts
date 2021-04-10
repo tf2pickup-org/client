@@ -19,6 +19,8 @@ import { EditPageWrapperComponent } from './edit-page-wrapper/edit-page-wrapper.
 import { ScrambleMapsComponent } from './scramble-maps/scramble-maps.component';
 import { GameServerDiagnosticsComponent } from './game-server-diagnostics/game-server-diagnostics.component';
 import { DiagnosticCheckInfoComponent } from './game-server-diagnostics/diagnostic-check-info/diagnostic-check-info.component';
+import { PlayerRestrictionsComponent } from './player-restrictions/player-restrictions.component';
+import { MinimumTf2InGameHoursDialogComponent } from './player-restrictions/minimum-tf2-in-game-hours-dialog/minimum-tf2-in-game-hours-dialog.component';
 
 @NgModule({
   imports: [
@@ -46,6 +48,8 @@ import { DiagnosticCheckInfoComponent } from './game-server-diagnostics/diagnost
     ScrambleMapsComponent,
     GameServerDiagnosticsComponent,
     DiagnosticCheckInfoComponent,
+    PlayerRestrictionsComponent,
+    MinimumTf2InGameHoursDialogComponent,
   ],
 })
 export class AdminModule { }
