@@ -1,3 +1,22 @@
+# [3.10.0](https://github.com/tf2pickup-pl/client/compare/3.9.0...3.10.0) (2021-04-10)
+
+
+### Bug Fixes
+
+* **profile:** get rid of warning when opening the popup ([#835](https://github.com/tf2pickup-pl/client/issues/835)) ([31bb911](https://github.com/tf2pickup-pl/client/commit/31bb9119690fa6644814d54bc09be8e410241426))
+* **yu.tf2pickup.eu:** update yu.tf2pickup.eu branding ([#852](https://github.com/tf2pickup-pl/client/issues/852)) ([bf857dd](https://github.com/tf2pickup-pl/client/commit/bf857dd22cf1e58dd79e0bc4afc90db51894488e))
+
+
+### Features
+
+* **yu.tf2pickup.pl:** add yu.tf2pickup.eu branding ([#837](https://github.com/tf2pickup-pl/client/issues/837)) ([5461097](https://github.com/tf2pickup-pl/client/commit/54610976bc3ebeb8a46c5f049c1a9cec4461c0b8))
+
+
+### Performance Improvements
+
+* **yu.tf2pickup.eu:** optimize images ([#844](https://github.com/tf2pickup-pl/client/issues/844)) ([b95ba61](https://github.com/tf2pickup-pl/client/commit/b95ba6144ceb979f407b372d68cb356233306a46))
+* **yu.tf2pickup.eu:** optimize images ([#853](https://github.com/tf2pickup-pl/client/issues/853)) ([09ccb53](https://github.com/tf2pickup-pl/client/commit/09ccb5304e37ca766b64e4cd177769628528deb7))
+
 # [3.9.0](https://github.com/tf2pickup-pl/client/compare/3.8.0...3.9.0) (2021-03-25)
 
 
