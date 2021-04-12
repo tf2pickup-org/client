@@ -18,6 +18,8 @@ jobs:
             apiUrl: api.tf2pickup.de
           - branding: yu.tf2pickup.eu
             apiUrl: api.yu.tf2pickup.eu
+          - branding: tf2pickup.fi
+            apiUrl: api.tf2pickup.fi
 
     steps:
       - name: Docker meta
