@@ -22,7 +22,6 @@ export const environment = {
     { name: 'discord', target: discordInvitation },
     { name: 'changelog', target: changelog },
   ],
-  titleSuffix:
-    'tf2pickup.cz • Czech & Slovakian Team Fortress 2 Pick-up games',
+  titleSuffix: 'tf2pickup.cz • Czech & Slovakian Team Fortress 2 Pick-up games',
   entryQueue: entryQueue6v6,
 };
