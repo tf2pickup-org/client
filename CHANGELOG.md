@@ -1,3 +1,10 @@
+## [3.10.1](https://github.com/tf2pickup-org/client/compare/3.10.0...3.10.1) (2021-04-12)
+
+
+### Bug Fixes
+
+* **build:** build yu.tf2pickup.eu docker image ([1653233](https://github.com/tf2pickup-org/client/commit/16532337fe4ac92a8bb7281fb87bc7ec1759e5e8))
+
 # [3.10.0](https://github.com/tf2pickup-pl/client/compare/3.9.0...3.10.0) (2021-04-10)
 
 
