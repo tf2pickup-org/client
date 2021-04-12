@@ -1,3 +1,18 @@
+# [3.11.0](https://github.com/tf2pickup-org/client/compare/3.10.1...3.11.0) (2021-04-12)
+
+
+### Bug Fixes
+
+* update github & changelog links ([#859](https://github.com/tf2pickup-org/client/issues/859)) ([c5da93d](https://github.com/tf2pickup-org/client/commit/c5da93dfa75d655edbb813ffa8b30473ed2fb3da))
+* **tf2pickup.cz:** fix typo ([b441294](https://github.com/tf2pickup-org/client/commit/b4412945bc115154f7b69ffb1def4d6f0f9d9098))
+* **tf2pickup.es:** fix typo ([456c699](https://github.com/tf2pickup-org/client/commit/456c69906ad539fd6c4aaa08254040fc98d9a5be))
+* **tf2pickup.fr:** fix typo ([6ea133a](https://github.com/tf2pickup-org/client/commit/6ea133a5d43de2fe6c09de0d163c690c35f7e4ef))
+
+
+### Features
+
+* **tf2pickup.fi:** add tf2pickup.fi branding ([#858](https://github.com/tf2pickup-org/client/issues/858)) ([7725c4e](https://github.com/tf2pickup-org/client/commit/7725c4e8a8362670a62e17c372d3683f29ef365e))
+
 ## [3.10.1](https://github.com/tf2pickup-org/client/compare/3.10.0...3.10.1) (2021-04-12)
 
 
