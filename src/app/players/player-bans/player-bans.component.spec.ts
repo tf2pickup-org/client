@@ -21,7 +21,7 @@ describe('PlayerBansComponent', () => {
   const initialState = {
     players: {
       players: {
-        ids: [ 'FAKE_PLAYER_ID' ],
+        ids: ['FAKE_PLAYER_ID'],
         entities: {
           FAKE_PLAYER_ID: {
             id: 'FAKE_PLAYER_ID',
@@ -36,20 +36,21 @@ describe('PlayerBansComponent', () => {
     },
   };
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [
-        PlayerBansComponent,
-        MockComponent(PlayerBanItemComponent),
-      ],
-      imports: [ RouterTestingModule ],
-      providers: [
-        provideMockStore({ initialState }),
-        { provide: ActivatedRoute, useValue: { paramMap } },
-      ]
-    })
-    .compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [
+          PlayerBansComponent,
+          MockComponent(PlayerBanItemComponent),
+        ],
+        imports: [RouterTestingModule],
+        providers: [
+          provideMockStore({ initialState }),
+          { provide: ActivatedRoute, useValue: { paramMap } },
+        ],
+      }).compileComponents();
+    }),
+  );
 
   beforeEach(() => {
     store = TestBed.inject(MockStore);
@@ -67,7 +68,9 @@ describe('PlayerBansComponent', () => {
   });
 
   it('should load player bans', () => {
-    expect(store.dispatch).toHaveBeenCalledWith(loadPlayerBans({ playerId: 'FAKE_PLAYER_ID' }));
+    expect(store.dispatch).toHaveBeenCalledWith(
+      loadPlayerBans({ playerId: 'FAKE_PLAYER_ID' }),
+    );
   });
 
   describe('with bans', () => {
@@ -77,7 +80,7 @@ describe('PlayerBansComponent', () => {
       end: new Date(),
       reason: 'FAKE_PLAYER_BAN_REASON',
       admin: 'FAKE_ADMIN_ID',
-      id: 'FAKE_PLAYER_BAN_ID'
+      id: 'FAKE_PLAYER_BAN_ID',
     };
 
     let playerBanItem: PlayerBanItemComponent;
@@ -86,7 +89,7 @@ describe('PlayerBansComponent', () => {
       store.setState({
         players: {
           players: {
-            ids: [ 'FAKE_PLAYER_ID' ],
+            ids: ['FAKE_PLAYER_ID'],
             entities: {
               FAKE_ID: {
                 id: 'FAKE_PLAYER_ID',
@@ -102,7 +105,8 @@ describe('PlayerBansComponent', () => {
       });
 
       fixture.detectChanges();
-      playerBanItem = fixture.debugElement.query(By.css('app-player-ban-item')).componentInstance;
+      playerBanItem = fixture.debugElement.query(By.css('app-player-ban-item'))
+        .componentInstance;
     });
 
     it('should render PlayerBanItem', () => {
@@ -111,7 +115,9 @@ describe('PlayerBansComponent', () => {
 
     it('should be able to revoke a ban', () => {
       playerBanItem.revoke.emit();
-      expect(store.dispatch).toHaveBeenCalledWith(revokePlayerBan({ playerBan: mockBan }));
+      expect(store.dispatch).toHaveBeenCalledWith(
+        revokePlayerBan({ playerBan: mockBan }),
+      );
     });
   });
 
@@ -119,7 +125,8 @@ describe('PlayerBansComponent', () => {
     let cancelButton: HTMLButtonElement;
 
     beforeEach(() => {
-      cancelButton = fixture.debugElement.query(By.css('.cancel-button')).nativeElement as HTMLButtonElement;
+      cancelButton = fixture.debugElement.query(By.css('.cancel-button'))
+        .nativeElement as HTMLButtonElement;
     });
 
     it('should go back in history', () => {

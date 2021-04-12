@@ -10,28 +10,27 @@ import { NotificationsService } from '../notifications.service';
   animations: [
     trigger('fadeOut', [
       transition(':leave', [
-        animate('400ms ease-in-out', style({
-          opacity: 0,
-          height: 0,
-          paddingTop: 0,
-          paddingBottom: 0,
-          marginTop: 0,
-          marginBottom: 0,
-        })),
+        animate(
+          '400ms ease-in-out',
+          style({
+            opacity: 0,
+            height: 0,
+            paddingTop: 0,
+            paddingBottom: 0,
+            marginTop: 0,
+            marginBottom: 0,
+          }),
+        ),
       ]),
     ]),
   ],
 })
 export class RequestNotificationPermissionsComponent {
-
   permission = this.notificationsService.permission;
 
-  constructor(
-    private notificationsService: NotificationsService,
-  ) { }
+  constructor(private notificationsService: NotificationsService) {}
 
   requestPermission() {
     this.notificationsService.requestPermission();
   }
-
 }

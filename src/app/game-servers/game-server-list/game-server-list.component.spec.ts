@@ -16,17 +16,19 @@ describe('GameServerListComponent', () => {
   let allGameServersSelector: MemoizedSelector<AppState, any[]>;
   let isSuperUserSelector: MemoizedSelector<AppState, boolean>;
 
-  beforeEach(waitForAsync(() =>
-    TestBed.configureTestingModule({
-      declarations: [ GameServerListComponent ],
-      providers: [
-        provideMockStore(),
-      ]
-    })
-    // https://github.com/angular/angular/issues/12313
-    .overrideComponent(GameServerListComponent, { set: { changeDetection: ChangeDetectionStrategy.Default } })
-    .compileComponents()
-  ));
+  beforeEach(
+    waitForAsync(() =>
+      TestBed.configureTestingModule({
+        declarations: [GameServerListComponent],
+        providers: [provideMockStore()],
+      })
+        // https://github.com/angular/angular/issues/12313
+        .overrideComponent(GameServerListComponent, {
+          set: { changeDetection: ChangeDetectionStrategy.Default },
+        })
+        .compileComponents(),
+    ),
+  );
 
   beforeEach(() => {
     store = TestBed.inject(MockStore);
@@ -56,14 +58,18 @@ describe('GameServerListComponent', () => {
 
   describe('remove button', () => {
     beforeEach(() => {
-      allGameServersSelector.setResult([ { id: 'FAKE_ID', name: 'some server', isOnline: true } ]);
+      allGameServersSelector.setResult([
+        { id: 'FAKE_ID', name: 'some server', isOnline: true },
+      ]);
       store.refreshState();
       fixture.detectChanges();
     });
 
     describe('when the current user is a regular one', () => {
       it('should not be rendered', () => {
-        expect(fixture.debugElement.query(By.css('.remove-game-server-button'))).toBeNull();
+        expect(
+          fixture.debugElement.query(By.css('.remove-game-server-button')),
+        ).toBeNull();
       });
     });
 
@@ -75,7 +81,9 @@ describe('GameServerListComponent', () => {
         store.refreshState();
         fixture.detectChanges();
 
-        removeGameServerButton = fixture.debugElement.query(By.css('.remove-game-server-button')).nativeElement as HTMLButtonElement;
+        removeGameServerButton = fixture.debugElement.query(
+          By.css('.remove-game-server-button'),
+        ).nativeElement as HTMLButtonElement;
       });
 
       it('should be rendered', () => {
@@ -84,7 +92,9 @@ describe('GameServerListComponent', () => {
 
       it('should dispatch an action', () => {
         removeGameServerButton.click();
-        expect(store.dispatch).toHaveBeenCalledWith(removeGameServer({ gameServerId: 'FAKE_ID' }));
+        expect(store.dispatch).toHaveBeenCalledWith(
+          removeGameServer({ gameServerId: 'FAKE_ID' }),
+        );
       });
     });
   });
@@ -92,7 +102,9 @@ describe('GameServerListComponent', () => {
   describe('add button', () => {
     describe('when the current user is a regular one', () => {
       it('should not be rendered for a regular user', () => {
-        expect(fixture.debugElement.query(By.css('.add-game-server-button'))).toBeNull();
+        expect(
+          fixture.debugElement.query(By.css('.add-game-server-button')),
+        ).toBeNull();
       });
     });
 
@@ -104,7 +116,9 @@ describe('GameServerListComponent', () => {
         store.refreshState();
         fixture.detectChanges();
 
-        addGameServerButton = fixture.debugElement.query(By.css('.add-game-server-button')).nativeElement as HTMLAnchorElement;
+        addGameServerButton = fixture.debugElement.query(
+          By.css('.add-game-server-button'),
+        ).nativeElement as HTMLAnchorElement;
       });
 
       it('should be rendered', () => {

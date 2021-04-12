@@ -2,13 +2,10 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { SafeUrl, DomSanitizer } from '@angular/platform-browser';
 
 @Pipe({
-  name: 'safeMumbleUrl'
+  name: 'safeMumbleUrl',
 })
 export class SafeMumbleUrlPipe implements PipeTransform {
-
-  constructor(
-    private sanitizer: DomSanitizer,
-  ) { }
+  constructor(private sanitizer: DomSanitizer) {}
 
   transform(value: string): SafeUrl {
     const url = new URL(value);
@@ -18,5 +15,4 @@ export class SafeMumbleUrlPipe implements PipeTransform {
       return value;
     }
   }
-
 }

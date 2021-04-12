@@ -9,11 +9,13 @@ describe('BanBannerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BanBannerComponent ]
+      declarations: [BanBannerComponent],
     })
-    // https://github.com/angular/angular/issues/12313
-    .overrideComponent(BanBannerComponent, { set: { changeDetection: ChangeDetectionStrategy.Default } })
-    .compileComponents();
+      // https://github.com/angular/angular/issues/12313
+      .overrideComponent(BanBannerComponent, {
+        set: { changeDetection: ChangeDetectionStrategy.Default },
+      })
+      .compileComponents();
   });
 
   beforeEach(() => {

@@ -7,12 +7,13 @@ describe('SettingsComponent', () => {
   let component: SettingsComponent;
   let fixture: ComponentFixture<SettingsComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ SettingsComponent ],
-    })
-    .compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [SettingsComponent],
+      }).compileComponents();
+    }),
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(SettingsComponent);
@@ -28,7 +29,8 @@ describe('SettingsComponent', () => {
     let cancelButton: HTMLButtonElement;
 
     beforeEach(() => {
-      cancelButton = fixture.debugElement.query(By.css('.cancel-button')).nativeElement as HTMLButtonElement;
+      cancelButton = fixture.debugElement.query(By.css('.cancel-button'))
+        .nativeElement as HTMLButtonElement;
     });
 
     it('should go back in history', () => {

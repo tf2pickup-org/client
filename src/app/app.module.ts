@@ -29,9 +29,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DocumentsModule } from './documents/documents.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -65,6 +63,6 @@ import { DocumentsModule } from './documents/documents.module';
     { provide: API_URL, useValue: environment.apiUrl },
     { provide: WS_URL, useValue: environment.wsUrl },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

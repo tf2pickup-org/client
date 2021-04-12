@@ -11,10 +11,7 @@ describe(ScrambleMapsComponent.name, () => {
   let store: jasmine.SpyObj<Store>;
   let router: jasmine.SpyObj<Router>;
 
-  beforeEach(() => MockBuilder(ScrambleMapsComponent)
-    .mock(Store)
-    .mock(Router)
-  );
+  beforeEach(() => MockBuilder(ScrambleMapsComponent).mock(Store).mock(Router));
 
   beforeEach(() => {
     fixture = MockRender(ScrambleMapsComponent);

@@ -1,4 +1,12 @@
-import { Component, ChangeDetectionStrategy, Input, ViewChild, ElementRef, OnDestroy, AfterViewChecked } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  Input,
+  ViewChild,
+  ElementRef,
+  OnDestroy,
+  AfterViewChecked,
+} from '@angular/core';
 import { MDCSnackbar } from '@material/snackbar';
 
 @Component({
@@ -7,8 +15,8 @@ import { MDCSnackbar } from '@material/snackbar';
   styleUrls: ['./active-game-snackbar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ActiveGameSnackbarComponent implements AfterViewChecked, OnDestroy {
-
+export class ActiveGameSnackbarComponent
+  implements AfterViewChecked, OnDestroy {
   @Input()
   gameId: string;
 
@@ -38,5 +46,4 @@ export class ActiveGameSnackbarComponent implements AfterViewChecked, OnDestroy 
     this.snackbar.timeoutMs = -1;
     this.snackbar.open();
   }
-
 }

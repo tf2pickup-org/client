@@ -4,7 +4,10 @@ export const fadeIn = animation([
   style({
     opacity: 0,
   }),
-  animate('100ms', style({
-    opacity: 1,
-  })),
+  animate(
+    '100ms',
+    style({
+      opacity: 1,
+    }),
+  ),
 ]);

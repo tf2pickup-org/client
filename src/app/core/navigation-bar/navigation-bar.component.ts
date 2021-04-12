@@ -10,13 +10,9 @@ import { environment } from '@environment';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavigationBarComponent {
-
   isLoggedIn = this.store.select(isLoggedIn);
   currentPlayer = this.store.select(currentPlayer);
   links = environment.headerLinks;
 
-  constructor(
-    private store: Store,
-  ) { }
-
+  constructor(private store: Store) {}
 }

@@ -7,15 +7,14 @@ import { ioConnected, ioDisconnected } from './io.actions';
 import { noop } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SocketFactoryService {
-
   constructor(
     private wsTokenService: WsTokenService,
     @Inject(WS_URL) private wsUrl: string,
     private store: Store,
-  ) { }
+  ) {}
 
   createSocket(): SocketIOClient.Socket {
     const socket = io(this.wsUrl, {
@@ -30,9 +29,13 @@ export class SocketFactoryService {
         case 'Signature verification failed':
         case 'Token expired': {
           socket.disconnect();
-          this.wsTokenService.getWsToken({ force: true }).subscribe(wsToken => {
-            socket.io.opts.query = `auth_token=${wsToken}`;
-          }, noop, () => socket.connect());
+          this.wsTokenService.getWsToken({ force: true }).subscribe(
+            wsToken => {
+              socket.io.opts.query = `auth_token=${wsToken}`;
+            },
+            noop,
+            () => socket.connect(),
+          );
           break;
         }
 
@@ -49,13 +52,16 @@ export class SocketFactoryService {
     socket.on('reconnect', () => this.store.dispatch(ioConnected()));
     socket.on('disconnect', () => this.store.dispatch(ioDisconnected()));
 
-    this.wsTokenService.getWsToken().subscribe(wsToken => {
-      if (wsToken) {
-        socket.io.opts.query = `auth_token=${wsToken}`;
-      }
-    }, noop, () => socket.connect());
+    this.wsTokenService.getWsToken().subscribe(
+      wsToken => {
+        if (wsToken) {
+          socket.io.opts.query = `auth_token=${wsToken}`;
+        }
+      },
+      noop,
+      () => socket.connect(),
+    );
 
     return socket;
   }
-
 }

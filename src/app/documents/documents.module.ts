@@ -6,10 +6,6 @@ import { MarkdownModule } from 'ngx-markdown';
 
 @NgModule({
   declarations: [RulesComponent],
-  imports: [
-    CommonModule,
-    DocumentsRoutingModule,
-    MarkdownModule.forChild(),
-  ],
+  imports: [CommonModule, DocumentsRoutingModule, MarkdownModule.forChild()],
 })
-export class DocumentsModule { }
+export class DocumentsModule {}

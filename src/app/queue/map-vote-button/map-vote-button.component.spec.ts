@@ -11,24 +11,29 @@ describe('MapVoteButtonComponent', () => {
   let mapThumbnailService: jasmine.SpyObj<MapThumbnailService>;
 
   beforeEach(() => {
-    mapThumbnailService = jasmine.createSpyObj<MapThumbnailService>(MapThumbnailService.name, ['getMapThumbnailPath']);
+    mapThumbnailService = jasmine.createSpyObj<MapThumbnailService>(
+      MapThumbnailService.name,
+      ['getMapThumbnailPath'],
+    );
     mapThumbnailService.getMapThumbnailPath.and.callFake(map => `${map}.png`);
   });
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ MapVoteButtonComponent ],
-      providers: [
-        { provide: MapThumbnailService, useValue: mapThumbnailService },
-      ],
-      imports: [
-        NoopAnimationsModule,
-      ],
-    })
-    // https://github.com/angular/angular/issues/12313
-    .overrideComponent(MapVoteButtonComponent, { set: { changeDetection: ChangeDetectionStrategy.Default } })
-    .compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [MapVoteButtonComponent],
+        providers: [
+          { provide: MapThumbnailService, useValue: mapThumbnailService },
+        ],
+        imports: [NoopAnimationsModule],
+      })
+        // https://github.com/angular/angular/issues/12313
+        .overrideComponent(MapVoteButtonComponent, {
+          set: { changeDetection: ChangeDetectionStrategy.Default },
+        })
+        .compileComponents();
+    }),
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(MapVoteButtonComponent);
@@ -47,7 +52,8 @@ describe('MapVoteButtonComponent', () => {
       component.map = 'cp_fake_rc1';
       fixture.detectChanges();
 
-      button = fixture.debugElement.query(By.css('button')).nativeElement as HTMLButtonElement;
+      button = fixture.debugElement.query(By.css('button'))
+        .nativeElement as HTMLButtonElement;
     });
 
     it('should render the button', () => {
@@ -55,12 +61,17 @@ describe('MapVoteButtonComponent', () => {
     });
 
     it('should set proper background-image', () => {
-      const div = fixture.debugElement.query(By.css('.thumbnail')).nativeElement as HTMLDivElement;
-      expect(div.style.backgroundImage).toMatch(/url\(['"]cp_fake_rc1\.png["']\)/);
+      const div = fixture.debugElement.query(By.css('.thumbnail'))
+        .nativeElement as HTMLDivElement;
+      expect(div.style.backgroundImage).toMatch(
+        /url\(['"]cp_fake_rc1\.png["']\)/,
+      );
     });
 
     it('should render the map name', () => {
-      const span = fixture.debugElement.query(By.css('.thumbnail__overlay__name > span')).nativeElement as HTMLSpanElement;
+      const span = fixture.debugElement.query(
+        By.css('.thumbnail__overlay__name > span'),
+      ).nativeElement as HTMLSpanElement;
       expect(span.innerText).toEqual('cp_fake_rc1');
     });
 
@@ -71,7 +82,9 @@ describe('MapVoteButtonComponent', () => {
       });
 
       it('should render results', () => {
-        const span = fixture.debugElement.query(By.css('.thumbnail__overlay__vote-result > div')).nativeElement as HTMLSpanElement;
+        const span = fixture.debugElement.query(
+          By.css('.thumbnail__overlay__vote-result > div'),
+        ).nativeElement as HTMLSpanElement;
         expect(span.innerText).toEqual('75%');
       });
     });
@@ -88,7 +101,9 @@ describe('MapVoteButtonComponent', () => {
     });
 
     it('should render content-fill', () => {
-      expect(fixture.debugElement.query(By.css('.thumbnail__overlay__fill'))).toBeTruthy();
+      expect(
+        fixture.debugElement.query(By.css('.thumbnail__overlay__fill')),
+      ).toBeTruthy();
     });
 
     describe('when selected', () => {

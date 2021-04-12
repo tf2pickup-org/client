@@ -6,8 +6,12 @@ describe('MapThumbnailPipe', () => {
   let mapThumbnailService: jasmine.SpyObj<MapThumbnailService>;
 
   beforeEach(() => {
-    mapThumbnailService = jasmine.createSpyObj<MapThumbnailService>([ 'getMapThumbnailPath' ]);
-    mapThumbnailService.getMapThumbnailPath.and.returnValue('FAKE_THUMBNAIL_PATH');
+    mapThumbnailService = jasmine.createSpyObj<MapThumbnailService>([
+      'getMapThumbnailPath',
+    ]);
+    mapThumbnailService.getMapThumbnailPath.and.returnValue(
+      'FAKE_THUMBNAIL_PATH',
+    );
     pipe = new MapThumbnailPipe(mapThumbnailService);
   });
 

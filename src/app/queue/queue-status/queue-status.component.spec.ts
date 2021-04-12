@@ -3,7 +3,12 @@ import { QueueStatusComponent } from './queue-status.component';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { By } from '@angular/platform-browser';
-import { isInQueue, queueCurrentPlayerCount, queueRequiredPlayerCount, queueState } from '../queue.selectors';
+import {
+  isInQueue,
+  queueCurrentPlayerCount,
+  queueRequiredPlayerCount,
+  queueState,
+} from '../queue.selectors';
 import { MemoizedSelector } from '@ngrx/store';
 import { AppState } from '@app/app.state';
 import { MockComponent } from 'ng-mocks';
@@ -17,27 +22,25 @@ describe('QueueStatusComponent', () => {
   let isInQueueSelector: MemoizedSelector<AppState, boolean>;
   let queueStateSelector: MemoizedSelector<AppState, string>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [
-        QueueStatusComponent,
-        MockComponent(PreReadyUpButtonComponent),
-      ],
-      imports: [
-        RouterTestingModule,
-        NoopAnimationsModule,
-      ],
-      providers: [
-        provideMockStore({
-          selectors: [
-            { selector: queueCurrentPlayerCount, value: 2 },
-            { selector: queueRequiredPlayerCount, value: 12 },
-          ],
-        }),
-      ],
-    })
-    .compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [
+          QueueStatusComponent,
+          MockComponent(PreReadyUpButtonComponent),
+        ],
+        imports: [RouterTestingModule, NoopAnimationsModule],
+        providers: [
+          provideMockStore({
+            selectors: [
+              { selector: queueCurrentPlayerCount, value: 2 },
+              { selector: queueRequiredPlayerCount, value: 12 },
+            ],
+          }),
+        ],
+      }).compileComponents();
+    }),
+  );
 
   beforeEach(() => {
     store = TestBed.inject(MockStore);
@@ -55,7 +58,8 @@ describe('QueueStatusComponent', () => {
 
   describe('when loading', () => {
     it('should apply correct css class', () => {
-      const div = fixture.debugElement.query(By.css('.queue-status')).nativeElement as HTMLDivElement;
+      const div = fixture.debugElement.query(By.css('.queue-status'))
+        .nativeElement as HTMLDivElement;
       expect(div.classList.contains('waiting')).toBe(true);
     });
 
@@ -72,7 +76,8 @@ describe('QueueStatusComponent', () => {
     });
 
     it('should apply corrent css class', () => {
-      const div = fixture.debugElement.query(By.css('.queue-status')).nativeElement as HTMLDivElement;
+      const div = fixture.debugElement.query(By.css('.queue-status'))
+        .nativeElement as HTMLDivElement;
       expect(div.classList.contains('waiting')).toBe(true);
     });
 
@@ -84,7 +89,9 @@ describe('QueueStatusComponent', () => {
       });
 
       it('should render the pre-ready up button', () => {
-        expect(fixture.debugElement.query(By.css('app-pre-ready-up-button'))).toBeTruthy();
+        expect(
+          fixture.debugElement.query(By.css('app-pre-ready-up-button')),
+        ).toBeTruthy();
       });
     });
   });
@@ -97,7 +104,8 @@ describe('QueueStatusComponent', () => {
     });
 
     it('should apply correct css class', () => {
-      const div = fixture.debugElement.query(By.css('.queue-status')).nativeElement as HTMLDivElement;
+      const div = fixture.debugElement.query(By.css('.queue-status'))
+        .nativeElement as HTMLDivElement;
       expect(div.classList.contains('ready')).toBe(true);
     });
   });
@@ -110,7 +118,8 @@ describe('QueueStatusComponent', () => {
     });
 
     it('should apply correct css class', () => {
-      const div = fixture.debugElement.query(By.css('.queue-status')).nativeElement as HTMLDivElement;
+      const div = fixture.debugElement.query(By.css('.queue-status'))
+        .nativeElement as HTMLDivElement;
       expect(div.classList.contains('launching')).toBe(true);
     });
   });

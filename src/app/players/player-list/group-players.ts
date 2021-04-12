@@ -8,7 +8,7 @@ export const groupPlayers = (players: Player[]): PlayerGroup[] => {
     result[key].push(player);
 
     return result;
-  }, { });
+  }, {});
 
   return Object.keys(grouped).map(key => ({ key, players: grouped[key] }));
 };

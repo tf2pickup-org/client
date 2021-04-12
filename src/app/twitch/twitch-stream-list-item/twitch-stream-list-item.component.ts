@@ -8,8 +8,6 @@ import { TwitchStream } from '../models/twitch-stream';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TwitchStreamListItemComponent {
-
   @Input()
   stream: TwitchStream;
-
 }

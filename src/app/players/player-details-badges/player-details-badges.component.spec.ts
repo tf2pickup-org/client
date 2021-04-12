@@ -10,18 +10,18 @@ describe(PlayerDetailsBadgesComponent.name, () => {
   let component: PlayerDetailsBadgesComponent;
   let fixture: ComponentFixture<PlayerDetailsBadgesComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [
-        PlayerDetailsBadgesComponent,
-        HasBadgePipe,
-        IsAdminPipe,
-      ],
-    })
-    // https://github.com/angular/angular/issues/12313
-    .overrideComponent(PlayerDetailsBadgesComponent, { set: { changeDetection: ChangeDetectionStrategy.Default } })
-    .compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [PlayerDetailsBadgesComponent, HasBadgePipe, IsAdminPipe],
+      })
+        // https://github.com/angular/angular/issues/12313
+        .overrideComponent(PlayerDetailsBadgesComponent, {
+          set: { changeDetection: ChangeDetectionStrategy.Default },
+        })
+        .compileComponents();
+    }),
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PlayerDetailsBadgesComponent);
@@ -45,7 +45,9 @@ describe(PlayerDetailsBadgesComponent.name, () => {
       });
 
       it('should render admin badge', () => {
-        expect(fixture.debugElement.query(By.css('.badge--admin'))).toBeTruthy();
+        expect(
+          fixture.debugElement.query(By.css('.badge--admin')),
+        ).toBeTruthy();
       });
     });
 

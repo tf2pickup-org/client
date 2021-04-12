@@ -9,12 +9,20 @@ export const environment = {
   wsUrl: '/',
   version,
   headerLinks: [
-    { name: 'discord', icon: '/assets/ui_icon_discord.png', target: discordInvitation, tooltip: 'Join us on discord!' },
+    {
+      name: 'discord',
+      icon: '/assets/ui_icon_discord.png',
+      target: discordInvitation,
+      tooltip: 'Join us on discord!',
+    },
   ],
   footerLinks: [
     { name: 'github', target: 'https://github.com/tf2pickup-pl' },
     { name: 'discord', target: discordInvitation },
-    { name: 'changelog', target: 'https://github.com/tf2pickup-pl/client/blob/master/CHANGELOG.md' },
+    {
+      name: 'changelog',
+      target: 'https://github.com/tf2pickup-pl/client/blob/master/CHANGELOG.md',
+    },
   ],
   titleSuffix: 'tf2pickup.pl • dev',
 
@@ -29,4 +37,4 @@ export const environment = {
  * This import should be commented out in production mode because it will have a negative impact
  * on performance if an error is thrown.
  */
-import 'zone.js/dist/zone-error';  // Included with Angular CLI.
+import 'zone.js/dist/zone-error'; // Included with Angular CLI.

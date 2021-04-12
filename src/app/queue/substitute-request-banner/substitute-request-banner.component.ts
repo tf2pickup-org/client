@@ -8,8 +8,6 @@ import { SubstituteRequest } from '../models/substitute-request';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SubstituteRequestBannerComponent {
-
   @Input()
   substituteRequest: SubstituteRequest;
-
 }

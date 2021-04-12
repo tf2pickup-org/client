@@ -20,12 +20,7 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
     PlayersModule,
     IconsModule,
   ],
-  declarations: [
-    TwitchStreamListComponent,
-    TwitchStreamListItemComponent,
-  ],
-  exports: [
-    TwitchStreamListComponent,
-  ],
+  declarations: [TwitchStreamListComponent, TwitchStreamListItemComponent],
+  exports: [TwitchStreamListComponent],
 })
-export class TwitchModule { }
+export class TwitchModule {}

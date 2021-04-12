@@ -11,18 +11,19 @@ import { environment } from '@environment';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TitleControllerComponent implements OnInit {
-
-  constructor(
-    private router: Router,
-    private title: Title,
-  ) { }
+  constructor(private router: Router, private title: Title) {}
 
   ngOnInit() {
-    this.router.events.pipe(
-      filter(event => event instanceof RoutesRecognized),
-      map((event: RoutesRecognized) => event.state.root.firstChild.data.title),
-      filter(title => !!title),
-    ).subscribe(title => this.title.setTitle(`${title} • ${environment.titleSuffix}`));
+    this.router.events
+      .pipe(
+        filter(event => event instanceof RoutesRecognized),
+        map(
+          (event: RoutesRecognized) => event.state.root.firstChild.data.title,
+        ),
+        filter(title => !!title),
+      )
+      .subscribe(title =>
+        this.title.setTitle(`${title} • ${environment.titleSuffix}`),
+      );
   }
-
 }

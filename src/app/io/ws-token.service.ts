@@ -8,16 +8,15 @@ import { API_URL } from '@app/api-url';
 import { map, tap } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class WsTokenService {
-
   constructor(
     private authService: AuthService,
     private tokenStore: TokenStoreService,
     private http: HttpClient,
     @Inject(API_URL) private apiUrl: string,
-  ) { }
+  ) {}
 
   getWsToken(options?: { force?: boolean }): Observable<string | null> {
     if (!this.authService.authenticated) {
@@ -46,10 +45,11 @@ export class WsTokenService {
   }
 
   private refreshToken(): Observable<string> {
-    return this.http.get<{ wsToken: string }>(`${this.apiUrl}/auth/wstoken`).pipe(
-      map(({ wsToken }) => wsToken),
-      tap(wsToken => this.tokenStore.wsToken = wsToken),
-    );
+    return this.http
+      .get<{ wsToken: string }>(`${this.apiUrl}/auth/wstoken`)
+      .pipe(
+        map(({ wsToken }) => wsToken),
+        tap(wsToken => (this.tokenStore.wsToken = wsToken)),
+      );
   }
-
 }

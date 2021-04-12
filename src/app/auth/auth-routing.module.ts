@@ -6,11 +6,11 @@ export const routes: Routes = [
   {
     path: 'auth-error',
     component: AuthErrorComponent,
-  }
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class AuthRoutingModule { }
+export class AuthRoutingModule {}

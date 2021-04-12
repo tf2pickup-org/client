@@ -2,7 +2,6 @@ import { Player } from './models/player';
 import { HasBadgePipe } from './has-badge.pipe';
 
 describe(HasBadgePipe.name, () => {
-
   it('create an instance', () => {
     const pipe = new HasBadgePipe();
     expect(pipe).toBeTruthy();
@@ -19,6 +18,6 @@ describe(HasBadgePipe.name, () => {
     it('should return true', () => {
       const pipe = new HasBadgePipe();
       expect(pipe.transform({ roles: ['admin'] } as Player)).toBe(true);
-    })
+    });
   });
 });

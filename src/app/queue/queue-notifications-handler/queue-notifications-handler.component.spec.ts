@@ -1,4 +1,9 @@
-import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  fakeAsync,
+  TestBed,
+  tick,
+} from '@angular/core/testing';
 import { isPlayingGame } from '@app/games/games.selectors';
 import { awaitsReadyUp } from '@app/selectors';
 import { SoundPlayerService } from '@app/shared/sound-player.service';
@@ -20,22 +25,28 @@ describe('QueueNotificationsHandlerComponent', () => {
 
   beforeEach(() => {
     readyUpResult = new Subject();
-    readyUpService = jasmine.createSpyObj<ReadyUpService>(ReadyUpService.name, ['askUserToReadyUp']);
-    readyUpService.askUserToReadyUp.and.returnValue(readyUpResult.asObservable());
-    soundPlayerService = jasmine.createSpyObj<SoundPlayerService>(SoundPlayerService.name, ['playSound']);
+    readyUpService = jasmine.createSpyObj<ReadyUpService>(ReadyUpService.name, [
+      'askUserToReadyUp',
+    ]);
+    readyUpService.askUserToReadyUp.and.returnValue(
+      readyUpResult.asObservable(),
+    );
+    soundPlayerService = jasmine.createSpyObj<SoundPlayerService>(
+      SoundPlayerService.name,
+      ['playSound'],
+    );
     soundPlayerService.playSound.and.returnValue(of(null));
   });
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ QueueNotificationsHandlerComponent ],
+      declarations: [QueueNotificationsHandlerComponent],
       providers: [
         provideMockStore(),
         { provide: ReadyUpService, useValue: readyUpService },
         { provide: SoundPlayerService, useValue: soundPlayerService },
       ],
-    })
-    .compileComponents();
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -109,7 +120,12 @@ describe('QueueNotificationsHandlerComponent', () => {
   describe('when a substitute is needed', () => {
     beforeEach(fakeAsync(() => {
       substituteRequests.setResult([
-        { team: 'RED', gameClass: 'soldier', gameNumber: 1, gameId: 'FAKE_GAME_ID' },
+        {
+          team: 'RED',
+          gameClass: 'soldier',
+          gameNumber: 1,
+          gameId: 'FAKE_GAME_ID',
+        },
       ]);
       store.refreshState();
       tick(1000);
@@ -124,7 +140,12 @@ describe('QueueNotificationsHandlerComponent', () => {
     beforeEach(fakeAsync(() => {
       isPlayingGame.setResult(true);
       substituteRequests.setResult([
-        { team: 'RED', gameClass: 'soldier', gameNumber: 1, gameId: 'FAKE_GAME_ID' },
+        {
+          team: 'RED',
+          gameClass: 'soldier',
+          gameNumber: 1,
+          gameId: 'FAKE_GAME_ID',
+        },
       ]);
       store.refreshState();
       tick(1000);

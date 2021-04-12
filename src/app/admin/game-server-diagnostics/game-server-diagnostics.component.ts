@@ -14,27 +14,31 @@ import { map, pluck, switchMap, take } from 'rxjs/operators';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GameServerDiagnosticsComponent implements OnInit {
-
-  gameServer: Observable<GameServer> = this.route.data.pipe(pluck('gameServer'));
+  gameServer: Observable<GameServer> = this.route.data.pipe(
+    pluck('gameServer'),
+  );
   run = new ReplaySubject<GameServerDiagnosticRun>(1);
 
   constructor(
     private route: ActivatedRoute,
     private title: Title,
     private gameServersService: GameServersService,
-  ) { }
+  ) {}
 
   ngOnInit() {
-    this.gameServer.pipe(
-      take(1),
-      map(gameServer => gameServer.name),
-    ).subscribe(name => this.title.setTitle(`${name} diagnostics`));
+    this.gameServer
+      .pipe(
+        take(1),
+        map(gameServer => gameServer.name),
+      )
+      .subscribe(name => this.title.setTitle(`${name} diagnostics`));
 
-    this.gameServer.pipe(
-      take(1),
-      map(gameServer => gameServer.id),
-      switchMap(id => this.gameServersService.runDiagnostics(id)),
-    ).subscribe(run => this.run.next(run));
+    this.gameServer
+      .pipe(
+        take(1),
+        map(gameServer => gameServer.id),
+        switchMap(id => this.gameServersService.runDiagnostics(id)),
+      )
+      .subscribe(run => this.run.next(run));
   }
-
 }

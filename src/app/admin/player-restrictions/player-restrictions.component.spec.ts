@@ -6,7 +6,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ConfigurationEntryKey } from '@app/configuration/configuration-entry-key';
 import { ConfigurationService } from '@app/configuration/configuration.service';
 import { FeatherComponent } from 'angular-feather';
-import { MockBuilder, MockComponent, MockedComponentFixture, MockRender, ngMocks } from 'ng-mocks';
+import {
+  MockBuilder,
+  MockComponent,
+  MockedComponentFixture,
+  MockRender,
+  ngMocks,
+} from 'ng-mocks';
 import { Subject } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { EditPageWrapperComponent } from '../edit-page-wrapper/edit-page-wrapper.component';
@@ -26,23 +32,38 @@ describe(PlayerRestrictionsComponent.name, () => {
     minimumTf2InGameHours = new Subject();
   });
 
-  beforeEach(() => MockBuilder(PlayerRestrictionsComponent)
-    .keep(ReactiveFormsModule)
-    .mock(ConfigurationService, {
-      fetchValue: jasmine.createSpy('fetchValue').and.callFake(key => ({
-        [ConfigurationEntryKey.etf2lAccountRequired]: etf2lAccountRequired.pipe(take(1)),
-        [ConfigurationEntryKey.minimumTf2InGameHours]: minimumTf2InGameHours.pipe(take(1)),
-      }[key])),
-      storeValue: jasmine.createSpy('storeValue').and.callFake(key => ({
-        [ConfigurationEntryKey.etf2lAccountRequired]: etf2lAccountRequired.pipe(take(1)),
-        [ConfigurationEntryKey.minimumTf2InGameHours]: minimumTf2InGameHours.pipe(take(1)),
-      }[key])),
-    })
-    .mock(Overlay)
-    .keep(ChangeDetectorRef)
-    .keep(EditPageWrapperComponent)
-    .mock(FeatherComponent)
-    .mock(Location)
+  beforeEach(() =>
+    MockBuilder(PlayerRestrictionsComponent)
+      .keep(ReactiveFormsModule)
+      .mock(ConfigurationService, {
+        fetchValue: jasmine.createSpy('fetchValue').and.callFake(
+          key =>
+            ({
+              [ConfigurationEntryKey.etf2lAccountRequired]: etf2lAccountRequired.pipe(
+                take(1),
+              ),
+              [ConfigurationEntryKey.minimumTf2InGameHours]: minimumTf2InGameHours.pipe(
+                take(1),
+              ),
+            }[key]),
+        ),
+        storeValue: jasmine.createSpy('storeValue').and.callFake(
+          key =>
+            ({
+              [ConfigurationEntryKey.etf2lAccountRequired]: etf2lAccountRequired.pipe(
+                take(1),
+              ),
+              [ConfigurationEntryKey.minimumTf2InGameHours]: minimumTf2InGameHours.pipe(
+                take(1),
+              ),
+            }[key]),
+        ),
+      })
+      .mock(Overlay)
+      .keep(ChangeDetectorRef)
+      .keep(EditPageWrapperComponent)
+      .mock(FeatherComponent)
+      .mock(Location),
   );
 
   beforeEach(() => {
@@ -51,7 +72,9 @@ describe(PlayerRestrictionsComponent.name, () => {
     fixture.detectChanges();
 
     overlay = TestBed.inject(Overlay) as jasmine.SpyObj<Overlay>;
-    configurationService = TestBed.inject(ConfigurationService) as jasmine.SpyObj<ConfigurationService>;
+    configurationService = TestBed.inject(
+      ConfigurationService,
+    ) as jasmine.SpyObj<ConfigurationService>;
   });
 
   it('should create', () => {
@@ -66,10 +89,14 @@ describe(PlayerRestrictionsComponent.name, () => {
     });
 
     it('should set values on inputs', () => {
-      const etf2lAccountRequiredCheckbox = ngMocks.find('#etf2l-account-required-switch').nativeElement as HTMLInputElement;
+      const etf2lAccountRequiredCheckbox = ngMocks.find(
+        '#etf2l-account-required-switch',
+      ).nativeElement as HTMLInputElement;
       expect(etf2lAccountRequiredCheckbox.checked).toBe(true);
 
-      const minimumTf2InGameHoursField = ngMocks.find('#minimum-tf2-in-game-hours-field').nativeElement as HTMLInputElement;
+      const minimumTf2InGameHoursField = ngMocks.find(
+        '#minimum-tf2-in-game-hours-field',
+      ).nativeElement as HTMLInputElement;
       expect(minimumTf2InGameHoursField.value).toEqual('500');
     });
 
@@ -77,13 +104,14 @@ describe(PlayerRestrictionsComponent.name, () => {
       let dialog: MinimumTf2InGameHoursDialogComponent;
 
       beforeEach(() => {
-        dialog = new (MockComponent(MinimumTf2InGameHoursDialogComponent));
+        dialog = new (MockComponent(MinimumTf2InGameHoursDialogComponent))();
         overlay.create.and.returnValue({
           attach: () => ({ instance: dialog }),
           dispose: () => null,
         } as any);
 
-        const item = ngMocks.find('li[minimumTf2InGameHoursItem]').nativeElement as HTMLElement;
+        const item = ngMocks.find('li[minimumTf2InGameHoursItem]')
+          .nativeElement as HTMLElement;
         item.click();
       });
 
@@ -98,18 +126,24 @@ describe(PlayerRestrictionsComponent.name, () => {
         });
 
         it('should update the value in the form', () => {
-          const minimumTf2InGameHoursField = ngMocks.find('#minimum-tf2-in-game-hours-field').nativeElement as HTMLInputElement;
+          const minimumTf2InGameHoursField = ngMocks.find(
+            '#minimum-tf2-in-game-hours-field',
+          ).nativeElement as HTMLInputElement;
           expect(minimumTf2InGameHoursField.value).toEqual('600');
         });
 
         describe('and when the form is saved', () => {
           beforeEach(() => {
-            const saveButton = ngMocks.find('button[type=submit]').nativeElement as HTMLButtonElement;
+            const saveButton = ngMocks.find('button[type=submit]')
+              .nativeElement as HTMLButtonElement;
             saveButton.click();
           });
 
           it('should update the value', () => {
-            expect(configurationService.storeValue).toHaveBeenCalledWith(ConfigurationEntryKey.minimumTf2InGameHours, 600);
+            expect(configurationService.storeValue).toHaveBeenCalledWith(
+              ConfigurationEntryKey.minimumTf2InGameHours,
+              600,
+            );
           });
 
           describe('and when the values are updated', () => {
@@ -119,7 +153,9 @@ describe(PlayerRestrictionsComponent.name, () => {
             });
 
             it('should navigate back', () => {
-              const location = TestBed.inject(Location) as jasmine.SpyObj<Location>;
+              const location = TestBed.inject(
+                Location,
+              ) as jasmine.SpyObj<Location>;
               expect(location.back).toHaveBeenCalled();
             });
           });

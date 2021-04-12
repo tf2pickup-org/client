@@ -5,7 +5,12 @@ import { GameDetailsComponent } from './game-details.component';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { ActivatedRoute, convertToParamMap } from '@angular/router';
 import { of, Subject } from 'rxjs';
-import { MockBuilder, MockedComponentFixture, MockRender, ngMocks } from 'ng-mocks';
+import {
+  MockBuilder,
+  MockedComponentFixture,
+  MockRender,
+  ngMocks,
+} from 'ng-mocks';
 import { GameBasicInfoComponent } from '../game-basic-info/game-basic-info.component';
 import { Title } from '@angular/platform-browser';
 import { GameSummaryComponent } from '../game-summary/game-summary.component';
@@ -13,13 +18,25 @@ import { GameTeamHeaderComponent } from '../game-team-header/game-team-header.co
 import { GameTeamPlayerListComponent } from '../game-team-player-list/game-team-player-list.component';
 import { Game } from '../models/game';
 import { map } from 'rxjs/operators';
-import { currentPlayer, isAdmin, isBanned, isLoggedIn, profile } from '@app/profile/profile.selectors';
+import {
+  currentPlayer,
+  isAdmin,
+  isBanned,
+  isLoggedIn,
+  profile,
+} from '@app/profile/profile.selectors';
 import { activeGame } from '../games.selectors';
 import { GameServer } from '@app/game-servers/models/game-server';
 import { ConnectStringComponent } from '../connect-string/connect-string.component';
 import { GameAdminButtonsComponent } from '../game-admin-buttons/game-admin-buttons.component';
 import { MumbleJoinButtonComponent } from '../mumble-join-button/mumble-join-button.component';
-import { forceEndGame, loadGame, reinitializeServer, replacePlayer, requestSubstitute } from '../games.actions';
+import {
+  forceEndGame,
+  loadGame,
+  reinitializeServer,
+  replacePlayer,
+  requestSubstitute,
+} from '../games.actions';
 import { keyBy } from 'lodash-es';
 import { loadGameServer } from '@app/game-servers/game-servers.actions';
 import { Player } from '@app/players/models/player';
@@ -50,7 +67,7 @@ const gameInProgress: Game = {
       team: 'blu',
       connectionStatus: 'offline',
       status: 'active',
-    }
+    },
   ],
 };
 
@@ -119,7 +136,11 @@ const mockPlayers = [
   },
 ];
 
-const makeState = (games: Game[], gameServers: GameServer[] = [mockGameServer], players: Player[] = mockPlayers) => ({
+const makeState = (
+  games: Game[],
+  gameServers: GameServer[] = [mockGameServer],
+  players: Player[] = mockPlayers,
+) => ({
   games: {
     ids: games.map(g => g.id),
     entities: keyBy(games, 'id'),
@@ -132,7 +153,7 @@ const makeState = (games: Game[], gameServers: GameServer[] = [mockGameServer], 
     players: {
       ids: players.map(p => p.id),
       entities: keyBy(players, 'id'),
-    }
+    },
   },
   profile: {
     authenticated: 'unknown',
@@ -149,21 +170,22 @@ describe('GameDetailsComponent', () => {
     routeParams = new Subject();
   });
 
-  beforeEach(() => MockBuilder(GameDetailsComponent)
-    .provide(provideMockStore({ initialState: makeState([]) }))
-    .mock(ActivatedRoute, {
-      paramMap: routeParams.pipe(map(convertToParamMap)),
-    })
-    .mock(GamesService)
-    .mock(Title)
-    .mock(GameAdminButtonsComponent)
-    .mock(GameSummaryComponent)
-    .mock(GameBasicInfoComponent)
-    .mock(ConnectStringComponent)
-    .mock(MumbleJoinButtonComponent)
-    .mock(GameTeamHeaderComponent)
-    .mock(GameTeamPlayerListComponent)
-    .mock(SoundPlayerService)
+  beforeEach(() =>
+    MockBuilder(GameDetailsComponent)
+      .provide(provideMockStore({ initialState: makeState([]) }))
+      .mock(ActivatedRoute, {
+        paramMap: routeParams.pipe(map(convertToParamMap)),
+      })
+      .mock(GamesService)
+      .mock(Title)
+      .mock(GameAdminButtonsComponent)
+      .mock(GameSummaryComponent)
+      .mock(GameBasicInfoComponent)
+      .mock(ConnectStringComponent)
+      .mock(MumbleJoinButtonComponent)
+      .mock(GameTeamHeaderComponent)
+      .mock(GameTeamPlayerListComponent)
+      .mock(SoundPlayerService),
   );
 
   beforeEach(() => {
@@ -181,7 +203,9 @@ describe('GameDetailsComponent', () => {
 
     fixture.detectChanges();
 
-    const soundPlayerService = TestBed.inject(SoundPlayerService) as jasmine.SpyObj<SoundPlayerService>;
+    const soundPlayerService = TestBed.inject(
+      SoundPlayerService,
+    ) as jasmine.SpyObj<SoundPlayerService>;
     soundPlayerService.playSound.and.returnValue(of(null));
   });
 
@@ -199,7 +223,9 @@ describe('GameDetailsComponent', () => {
     });
 
     it('should attempt to load the game', () => {
-      expect(store.dispatch).toHaveBeenCalledWith(loadGame({ gameId: 'FAKE_GAME_ID' }));
+      expect(store.dispatch).toHaveBeenCalledWith(
+        loadGame({ gameId: 'FAKE_GAME_ID' }),
+      );
     });
 
     describe('without game server', () => {
@@ -209,7 +235,9 @@ describe('GameDetailsComponent', () => {
       });
 
       it('should attempt to load the game server', () => {
-        expect(store.dispatch).toHaveBeenCalledWith(loadGameServer({ gameServerId: 'FAKE_GAME_SERVER_ID' }));
+        expect(store.dispatch).toHaveBeenCalledWith(
+          loadGameServer({ gameServerId: 'FAKE_GAME_SERVER_ID' }),
+        );
       });
     });
 
@@ -234,34 +262,47 @@ describe('GameDetailsComponent', () => {
 
       it('should set the title', () => {
         const title = TestBed.inject(Title);
-        expect(title.setTitle).toHaveBeenCalledWith(jasmine.stringMatching(/Pickup #3/));
+        expect(title.setTitle).toHaveBeenCalledWith(
+          jasmine.stringMatching(/Pickup #3/),
+        );
       });
 
       it('should render game basic info', () => {
-        const gameBasicInfo = ngMocks.find(GameBasicInfoComponent).componentInstance;
+        const gameBasicInfo = ngMocks.find(GameBasicInfoComponent)
+          .componentInstance;
         expect(gameBasicInfo.map).toEqual('cp_sunshine');
         expect(gameBasicInfo.state).toEqual('launching');
         expect(gameBasicInfo.gameServerName).toEqual('FAKE_GAME_SERVER');
       });
 
-      ['blu', 'red'].forEach(team => it(`should render ${team} header`, () => {
-        const gameTeamHeader = ngMocks.find(`.team-${team} app-game-team-header`)?.componentInstance as GameTeamHeaderComponent;
-        expect(gameTeamHeader).toBeTruthy();
-        expect(gameTeamHeader.team).toEqual(team);
-      }));
+      ['blu', 'red'].forEach(team =>
+        it(`should render ${team} header`, () => {
+          const gameTeamHeader = ngMocks.find(
+            `.team-${team} app-game-team-header`,
+          )?.componentInstance as GameTeamHeaderComponent;
+          expect(gameTeamHeader).toBeTruthy();
+          expect(gameTeamHeader.team).toEqual(team);
+        }),
+      );
 
-      ['blu', 'red'].forEach(team => it(`should render ${team} players`, () => {
-        const gameTeamPlayerList = ngMocks.find(`.team-${team} app-game-team-player-list`)
-          ?.componentInstance as GameTeamPlayerListComponent;
-        expect(gameTeamPlayerList).toBeTruthy();
-        expect(gameTeamPlayerList.showAdminActionButtons).toBe(false);
-        expect(gameTeamPlayerList.locked).toBe(true);
-      }));
+      ['blu', 'red'].forEach(team =>
+        it(`should render ${team} players`, () => {
+          const gameTeamPlayerList = ngMocks.find(
+            `.team-${team} app-game-team-player-list`,
+          )?.componentInstance as GameTeamPlayerListComponent;
+          expect(gameTeamPlayerList).toBeTruthy();
+          expect(gameTeamPlayerList.showAdminActionButtons).toBe(false);
+          expect(gameTeamPlayerList.locked).toBe(true);
+        }),
+      );
 
       describe('when the game is running', () => {
         it('should render the connect string', () => {
-          const connectString = ngMocks.find(ConnectStringComponent).componentInstance;
-          expect(connectString.stvConnectString).toEqual('FAKE_STV_CONNECT_STRING');
+          const connectString = ngMocks.find(ConnectStringComponent)
+            .componentInstance;
+          expect(connectString.stvConnectString).toEqual(
+            'FAKE_STV_CONNECT_STRING',
+          );
           expect(connectString.connectString).toBeUndefined();
         });
 
@@ -271,18 +312,27 @@ describe('GameDetailsComponent', () => {
 
         describe('when logged in', () => {
           beforeEach(() => {
-            profile.setResult({ authenticated: 'authenticated', player: { id: 'FAKE_PLAYER_ID' } } as any);
+            profile.setResult({
+              authenticated: 'authenticated',
+              player: { id: 'FAKE_PLAYER_ID' },
+            } as any);
             isLoggedIn.setResult(true);
             store.refreshState();
             fixture.detectChanges();
           });
 
           it('should be able to take the substitute spot', () => {
-            const gameTeamPlayerList = ngMocks.find(GameTeamPlayerListComponent).componentInstance;
+            const gameTeamPlayerList = ngMocks.find(GameTeamPlayerListComponent)
+              .componentInstance;
             expect(gameTeamPlayerList.locked).toBe(false);
 
             gameTeamPlayerList.replacePlayer.emit('FAKE_PLAYER_1_ID');
-            expect(store.dispatch).toHaveBeenCalledWith(replacePlayer({ gameId: 'FAKE_GAME_ID', replaceeId: 'FAKE_PLAYER_1_ID' }));
+            expect(store.dispatch).toHaveBeenCalledWith(
+              replacePlayer({
+                gameId: 'FAKE_GAME_ID',
+                replaceeId: 'FAKE_PLAYER_1_ID',
+              }),
+            );
           });
 
           describe('and banned', () => {
@@ -293,7 +343,9 @@ describe('GameDetailsComponent', () => {
             });
 
             it('should not be able to take the substitute spot', () => {
-              const gameTeamPlayerList = ngMocks.find(GameTeamPlayerListComponent).componentInstance;
+              const gameTeamPlayerList = ngMocks.find(
+                GameTeamPlayerListComponent,
+              ).componentInstance;
               expect(gameTeamPlayerList.locked).toBe(true);
             });
           });
@@ -306,55 +358,72 @@ describe('GameDetailsComponent', () => {
             });
 
             it('should not be able to take the substitute spot', () => {
-              const gameTeamPlayerList = ngMocks.find(GameTeamPlayerListComponent).componentInstance;
+              const gameTeamPlayerList = ngMocks.find(
+                GameTeamPlayerListComponent,
+              ).componentInstance;
               expect(gameTeamPlayerList.locked).toBe(true);
             });
           });
 
           describe('and takes part in this game', () => {
             beforeEach(() => {
-              currentPlayer.setResult({ id: 'FAKE_PLAYER_1_ID', name: 'FAKE PLAYER' } as Player);
+              currentPlayer.setResult({
+                id: 'FAKE_PLAYER_1_ID',
+                name: 'FAKE PLAYER',
+              } as Player);
               activeGame.setResult({ id: 'FAKE_GAME_ID' } as Game);
               store.refreshState();
               fixture.detectChanges();
             });
 
             it('should have access to the connect string', () => {
-              const connectString = ngMocks.find(ConnectStringComponent).componentInstance;
-              expect(connectString.connectString).toEqual('FAKE_CONNECT_STRING');
+              const connectString = ngMocks.find(ConnectStringComponent)
+                .componentInstance;
+              expect(connectString.connectString).toEqual(
+                'FAKE_CONNECT_STRING',
+              );
               expect(connectString.stvConnectString).toBeUndefined();
             });
 
             it('should have the join mumble button', () => {
-              const mumbleJoinButton = ngMocks.find(MumbleJoinButtonComponent).componentInstance;
-              expect(mumbleJoinButton.mumbleUrl).toEqual('mumble://FAKE_PLAYER@melkor.tf/tf2pickup/5/RED');
+              const mumbleJoinButton = ngMocks.find(MumbleJoinButtonComponent)
+                .componentInstance;
+              expect(mumbleJoinButton.mumbleUrl).toEqual(
+                'mumble://FAKE_PLAYER@melkor.tf/tf2pickup/5/RED',
+              );
             });
 
             describe('when subbed out', () => {
               beforeEach(() => {
-                store.setState(makeState([{
-                  ...gameInProgress,
-                  slots: [
+                store.setState(
+                  makeState([
                     {
-                      player: 'FAKE_PLAYER_1_ID',
-                      gameClass: 'soldier',
-                      team: 'red',
-                      connectionStatus: 'offline',
-                      status: 'waiting for substitute',
+                      ...gameInProgress,
+                      slots: [
+                        {
+                          player: 'FAKE_PLAYER_1_ID',
+                          gameClass: 'soldier',
+                          team: 'red',
+                          connectionStatus: 'offline',
+                          status: 'waiting for substitute',
+                        },
+                        {
+                          player: 'FAKE_PLAYER_2_ID',
+                          gameClass: 'soldier',
+                          team: 'blu',
+                          connectionStatus: 'offline',
+                          status: 'active',
+                        },
+                      ],
                     },
-                    {
-                      player: 'FAKE_PLAYER_2_ID',
-                      gameClass: 'soldier',
-                      team: 'blu',
-                      connectionStatus: 'offline',
-                      status: 'active',
-                    },
-                  ],
-                }]));
+                  ]),
+                );
               });
 
               it('should be able to sub himself', () => {
-                const gameTeamPlayerList = ngMocks.find(GameTeamPlayerListComponent).componentInstance;
+                const gameTeamPlayerList = ngMocks.find(
+                  GameTeamPlayerListComponent,
+                ).componentInstance;
                 expect(gameTeamPlayerList.locked).toBe(false);
               });
             });
@@ -363,40 +432,50 @@ describe('GameDetailsComponent', () => {
 
         describe('and the connect string becomes available', () => {
           beforeEach(() => {
-            store.setState(makeState([{
-              ...gameInProgress,
-              connectString: undefined,
-            }]));
-            store.setState(makeState([ gameInProgress ]));
+            store.setState(
+              makeState([
+                {
+                  ...gameInProgress,
+                  connectString: undefined,
+                },
+              ]),
+            );
+            store.setState(makeState([gameInProgress]));
           });
 
           it('should play the ready-up sound', () => {
-            const soundPlayerService = TestBed.inject(SoundPlayerService) as jasmine.SpyObj<SoundPlayerService>;
+            const soundPlayerService = TestBed.inject(
+              SoundPlayerService,
+            ) as jasmine.SpyObj<SoundPlayerService>;
             expect(soundPlayerService.playSound).toHaveBeenCalledTimes(1);
           });
         });
 
         describe('when a player is replaced', () => {
           beforeEach(() => {
-            store.setState(makeState([{
-              ...gameInProgress,
-              slots: [
+            store.setState(
+              makeState([
                 {
-                  player: 'FAKE_PLAYER_1_ID',
-                  gameClass: 'soldier',
-                  team: 'red',
-                  connectionStatus: 'offline',
-                  status: 'active',
+                  ...gameInProgress,
+                  slots: [
+                    {
+                      player: 'FAKE_PLAYER_1_ID',
+                      gameClass: 'soldier',
+                      team: 'red',
+                      connectionStatus: 'offline',
+                      status: 'active',
+                    },
+                    {
+                      player: 'FAKE_PLAYER_2_ID',
+                      gameClass: 'soldier',
+                      team: 'blu',
+                      connectionStatus: 'offline',
+                      status: 'replaced',
+                    },
+                  ],
                 },
-                {
-                  player: 'FAKE_PLAYER_2_ID',
-                  gameClass: 'soldier',
-                  team: 'blu',
-                  connectionStatus: 'offline',
-                  status: 'replaced',
-                },
-              ],
-            }]));
+              ]),
+            );
             fixture.detectChanges();
           });
 
@@ -411,25 +490,29 @@ describe('GameDetailsComponent', () => {
 
         describe('when a player is waiting for substitute', () => {
           beforeEach(() => {
-            store.setState(makeState([{
-              ...gameInProgress,
-              slots: [
+            store.setState(
+              makeState([
                 {
-                  player: 'FAKE_PLAYER_1_ID',
-                  gameClass: 'soldier',
-                  team: 'red',
-                  connectionStatus: 'offline',
-                  status: 'active',
+                  ...gameInProgress,
+                  slots: [
+                    {
+                      player: 'FAKE_PLAYER_1_ID',
+                      gameClass: 'soldier',
+                      team: 'red',
+                      connectionStatus: 'offline',
+                      status: 'active',
+                    },
+                    {
+                      player: 'FAKE_PLAYER_2_ID',
+                      gameClass: 'soldier',
+                      team: 'blu',
+                      connectionStatus: 'offline',
+                      status: 'waiting for substitute',
+                    },
+                  ],
                 },
-                {
-                  player: 'FAKE_PLAYER_2_ID',
-                  gameClass: 'soldier',
-                  team: 'blu',
-                  connectionStatus: 'offline',
-                  status: 'waiting for substitute',
-                },
-              ],
-            }]));
+              ]),
+            );
             fixture.detectChanges();
           });
 
@@ -449,7 +532,8 @@ describe('GameDetailsComponent', () => {
         });
 
         it('should render game summary', () => {
-          const gameSummary = ngMocks.find(GameSummaryComponent).componentInstance;
+          const gameSummary = ngMocks.find(GameSummaryComponent)
+            .componentInstance;
           expect(gameSummary.demoUrl).toEqual('FAKE_DEMO_URL');
           expect(gameSummary.logsUrl).toEqual('FAKE_LOGS_URL');
         });
@@ -459,12 +543,15 @@ describe('GameDetailsComponent', () => {
         });
 
         it('should not render player connection statuses', () => {
-          const playerList = ngMocks.find(GameTeamPlayerListComponent).componentInstance;
+          const playerList = ngMocks.find(GameTeamPlayerListComponent)
+            .componentInstance;
           expect(playerList.showPlayerConnectionStatus).toBe(false);
         });
 
         it('should render score', () => {
-          const gameTeamHeaders = ngMocks.findAll(GameTeamHeaderComponent).map(m => m.componentInstance);
+          const gameTeamHeaders = ngMocks
+            .findAll(GameTeamHeaderComponent)
+            .map(m => m.componentInstance);
 
           const bluHeader = gameTeamHeaders.find(h => h.team === 'blu');
           expect(bluHeader.score).toEqual(1);
@@ -485,34 +572,53 @@ describe('GameDetailsComponent', () => {
         store.refreshState();
         fixture.detectChanges();
 
-        gameAdminButtons = ngMocks.find(GameAdminButtonsComponent).componentInstance;
-        gameTeamPlayerLists = ngMocks.findAll(GameTeamPlayerListComponent).map(m => m.componentInstance);
+        gameAdminButtons = ngMocks.find(GameAdminButtonsComponent)
+          .componentInstance;
+        gameTeamPlayerLists = ngMocks
+          .findAll(GameTeamPlayerListComponent)
+          .map(m => m.componentInstance);
       });
 
       it('should render admin buttons', () => {
         expect(gameAdminButtons).toBeTruthy();
-        expect(gameTeamPlayerLists.every(playerList => playerList.showAdminActionButtons)).toBe(true);
+        expect(
+          gameTeamPlayerLists.every(
+            playerList => playerList.showAdminActionButtons,
+          ),
+        ).toBe(true);
       });
 
       it('should be able to reinitialize the game server', () => {
         gameAdminButtons.reinitializeServer.emit();
-        expect(store.dispatch).toHaveBeenCalledWith(reinitializeServer({ gameId: 'FAKE_GAME_ID' }));
+        expect(store.dispatch).toHaveBeenCalledWith(
+          reinitializeServer({ gameId: 'FAKE_GAME_ID' }),
+        );
       });
 
       it('should be able to force-end the game', () => {
         gameAdminButtons.forceEnd.emit();
-        expect(store.dispatch).toHaveBeenCalledWith(forceEndGame({ gameId: 'FAKE_GAME_ID' }));
+        expect(store.dispatch).toHaveBeenCalledWith(
+          forceEndGame({ gameId: 'FAKE_GAME_ID' }),
+        );
       });
 
       it('should be able to request substitute', () => {
-        const gameTeamPlayerList = ngMocks.find(GameTeamPlayerListComponent).componentInstance;
+        const gameTeamPlayerList = ngMocks.find(GameTeamPlayerListComponent)
+          .componentInstance;
         gameTeamPlayerList.requestSubstitute.emit('FAKE_PLAYER_1_ID');
-        expect(store.dispatch).toHaveBeenCalledWith(requestSubstitute({ gameId: 'FAKE_GAME_ID', playerId: 'FAKE_PLAYER_1_ID' }));
+        expect(store.dispatch).toHaveBeenCalledWith(
+          requestSubstitute({
+            gameId: 'FAKE_GAME_ID',
+            playerId: 'FAKE_PLAYER_1_ID',
+          }),
+        );
       });
 
       it('should attempt to load assigned skills', () => {
         const gamesService = TestBed.inject(GamesService);
-        expect(gamesService.fetchGameSkills).toHaveBeenCalledWith('FAKE_GAME_ID');
+        expect(gamesService.fetchGameSkills).toHaveBeenCalledWith(
+          'FAKE_GAME_ID',
+        );
       });
     });
   });

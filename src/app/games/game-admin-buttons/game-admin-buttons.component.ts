@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Output,
+} from '@angular/core';
 
 @Component({
   selector: 'app-game-admin-buttons',
@@ -7,11 +12,9 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angul
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GameAdminButtonsComponent {
-
   @Output()
   reinitializeServer = new EventEmitter<void>();
 
   @Output()
   forceEnd = new EventEmitter<void>();
-
 }

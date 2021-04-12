@@ -8,13 +8,10 @@ import { gameServerById } from './game-servers.selectors';
 import { GameServer } from './models/game-server';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class GameServerResolver implements Resolve<GameServer> {
-
-  constructor(
-    private store: Store,
-  ) { }
+  constructor(private store: Store) {}
 
   resolve(route: ActivatedRouteSnapshot): Observable<GameServer> {
     const gameServerId = route.params.gameServerId;
@@ -29,5 +26,4 @@ export class GameServerResolver implements Resolve<GameServer> {
       take(1),
     );
   }
-
 }

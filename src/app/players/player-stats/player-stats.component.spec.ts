@@ -9,17 +9,21 @@ describe('PlayerStatsComponent', () => {
   let component: PlayerStatsComponent;
   let fixture: ComponentFixture<PlayerStatsComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [
-        PlayerStatsComponent,
-        MockComponent(GameClassIconComponent),
-      ],
-    })
-    // https://github.com/angular/angular/issues/12313
-    .overrideComponent(PlayerStatsComponent, { set: { changeDetection: ChangeDetectionStrategy.Default } })
-    .compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [
+          PlayerStatsComponent,
+          MockComponent(GameClassIconComponent),
+        ],
+      })
+        // https://github.com/angular/angular/issues/12313
+        .overrideComponent(PlayerStatsComponent, {
+          set: { changeDetection: ChangeDetectionStrategy.Default },
+        })
+        .compileComponents();
+    }),
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PlayerStatsComponent);
@@ -32,7 +36,9 @@ describe('PlayerStatsComponent', () => {
   });
 
   it('should render ghost', () => {
-    expect(fixture.debugElement.query(By.css('.games-player-total .ghost'))).toBeDefined();
+    expect(
+      fixture.debugElement.query(By.css('.games-player-total .ghost')),
+    ).toBeDefined();
   });
 
   describe('for 6v6 stats', () => {
@@ -52,7 +58,8 @@ describe('PlayerStatsComponent', () => {
     });
 
     it('should render all class icons', () => {
-      const classIcons = fixture.debugElement.queryAll(By.css('app-game-class-icon'))
+      const classIcons = fixture.debugElement
+        .queryAll(By.css('app-game-class-icon'))
         .map(i => i.componentInstance as GameClassIconComponent);
       expect(classIcons.length).toBe(4);
     });

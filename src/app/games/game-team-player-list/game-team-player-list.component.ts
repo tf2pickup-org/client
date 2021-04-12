@@ -1,4 +1,10 @@
-import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  Input,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { ResolvedGameSlot } from '../models/resolved-game-slot';
 
 @Component({
@@ -8,7 +14,6 @@ import { ResolvedGameSlot } from '../models/resolved-game-slot';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GameTeamPlayerListComponent {
-
   @Input()
   players: ResolvedGameSlot[];
 
@@ -36,5 +41,4 @@ export class GameTeamPlayerListComponent {
   emitReplacePlayer(player: ResolvedGameSlot) {
     this.replacePlayer.emit(player.id);
   }
-
 }

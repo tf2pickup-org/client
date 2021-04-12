@@ -9,24 +9,21 @@ import { TokenStoreService } from './token-store.service';
 import { HTTP_PARAMS } from './http-params';
 
 @NgModule({
-  declarations: [
-    AuthErrorComponent,
-  ],
-  imports: [
-    CommonModule,
-    AuthRoutingModule,
-  ],
+  declarations: [AuthErrorComponent],
+  imports: [CommonModule, AuthRoutingModule],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptorService,
       multi: true,
-      deps: [ TokenStoreService, AuthService ],
+      deps: [TokenStoreService, AuthService],
     },
     {
       provide: HTTP_PARAMS,
-      useValue: new HttpParams({ fromString: window.location.search.substr(1) }),
-    }
+      useValue: new HttpParams({
+        fromString: window.location.search.substr(1),
+      }),
+    },
   ],
 })
-export class AuthModule { }
+export class AuthModule {}

@@ -1,4 +1,9 @@
-import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  OnDestroy,
+} from '@angular/core';
 import { Subject } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { map, filter, pairwise, takeUntil, mergeMap } from 'rxjs/operators';
@@ -13,10 +18,9 @@ import { Tf2Team } from '../models/tf2-team';
   templateUrl: './game-details.component.html',
   styleUrls: ['./game-details.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [ GameDetailsStore ],
+  providers: [GameDetailsStore],
 })
 export class GameDetailsComponent implements OnInit, OnDestroy {
-
   readonly teams: Tf2Team[] = ['blu', 'red'];
 
   private destroyed = new Subject<void>();
@@ -26,28 +30,42 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
     private title: Title,
     public readonly store: GameDetailsStore,
     private soundPlayerService: SoundPlayerService,
-  ) { }
+  ) {}
 
   ngOnInit() {
-    this.route.paramMap.pipe(
-      map(params => params.get('id')),
-      takeUntil(this.destroyed),
-    ).subscribe(gameId => this.store.setGameId(gameId));
+    this.route.paramMap
+      .pipe(
+        map(params => params.get('id')),
+        takeUntil(this.destroyed),
+      )
+      .subscribe(gameId => this.store.setGameId(gameId));
 
-    this.store.game.pipe(
-      filter(game => !!game),
-      takeUntil(this.destroyed),
-    ).subscribe(game => this.title.setTitle(`Pickup #${game.number} • ${environment.titleSuffix}`));
+    this.store.game
+      .pipe(
+        filter(game => !!game),
+        takeUntil(this.destroyed),
+      )
+      .subscribe(game =>
+        this.title.setTitle(
+          `Pickup #${game.number} • ${environment.titleSuffix}`,
+        ),
+      );
 
     // play sound when the connect is available
-    this.store.game.pipe(
-      filter(game => !!game),
-      map(game => game.connectString),
-      pairwise(),
-      filter(([a, b])  => !a && !!b),
-      takeUntil(this.destroyed),
-      mergeMap(() => this.soundPlayerService.playSound(['webm', 'wav'].map(format => `/assets/sounds/fight.${format}`))),
-    ).subscribe();
+    this.store.game
+      .pipe(
+        filter(game => !!game),
+        map(game => game.connectString),
+        pairwise(),
+        filter(([a, b]) => !a && !!b),
+        takeUntil(this.destroyed),
+        mergeMap(() =>
+          this.soundPlayerService.playSound(
+            ['webm', 'wav'].map(format => `/assets/sounds/fight.${format}`),
+          ),
+        ),
+      )
+      .subscribe();
   }
 
   ngOnDestroy() {
@@ -70,5 +88,4 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
   replacePlayer(replaceeId: string) {
     this.store.replacePlayer(replaceeId);
   }
-
 }

@@ -8,8 +8,15 @@ import { provideMockActions } from '@ngrx/effects/testing';
 import { GamesService } from './games.service';
 import { RouterTestingModule } from '@angular/router/testing';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
-import { requestSubstitute, cancelSubstitutionRequest, replacePlayer, gameUpdated, loadGame, gameCreated,
-  ownGameAdded } from './games.actions';
+import {
+  requestSubstitute,
+  cancelSubstitutionRequest,
+  replacePlayer,
+  gameUpdated,
+  loadGame,
+  gameCreated,
+  ownGameAdded,
+} from './games.actions';
 import { routerNavigatedAction } from '@ngrx/router-store';
 import { NavigationEnd } from '@angular/router';
 import { Socket } from '@app/io/socket';
@@ -34,20 +41,18 @@ const fakeGame: Game = {
       player: 'PLAYER_ID_2',
       gameClass: 'soldier',
       team: 'blu',
-    }
+    },
   ],
   launchedAt: new Date('2020-01-02T21:54:23.036Z'),
   gameServer: '5e0145b90ea72823a3059ced',
   mumbleUrl: 'mumble://melkor.tf/tf2pickup/1',
   connectString: 'connect 192.168.1.11:27015; password 0I9vNJTDpC',
-  id: 'FAKE_GAME_ID'
+  id: 'FAKE_GAME_ID',
 };
 
 const initialState = {
   games: {
-    ids: [
-      'FAKE_GAME_ID'
-    ],
+    ids: ['FAKE_GAME_ID'],
     entities: {
       FAKE_GAME_ID: fakeGame,
     },
@@ -65,7 +70,7 @@ const initialState = {
     hasAcceptedRules: true,
     activeGameId: null,
     bans: [],
-  }
+  },
 };
 
 describe('GamesEffects', () => {
@@ -76,25 +81,28 @@ describe('GamesEffects', () => {
   beforeEach(() => {
     actions = new ReplaySubject<Action>(1);
 
-    gamesService = jasmine.createSpyObj<GamesService>(GamesService.name,
-      ['requestSubstitute', 'cancelSubstitutionRequest', 'replacePlayer']);
+    gamesService = jasmine.createSpyObj<GamesService>(GamesService.name, [
+      'requestSubstitute',
+      'cancelSubstitutionRequest',
+      'replacePlayer',
+    ]);
     gamesService.requestSubstitute.and.returnValue(of(null));
     gamesService.cancelSubstitutionRequest.and.returnValue(of(null));
     gamesService.replacePlayer.and.returnValue(of(fakeGame));
   });
 
-  beforeEach(() => TestBed.configureTestingModule({
-    imports: [
-      RouterTestingModule,
-    ],
-    providers: [
-      GamesEffects,
-      provideMockActions(() => actions.asObservable()),
-      { provide: GamesService, useValue: gamesService },
-      provideMockStore({ initialState }),
-      { provide: Socket, useClass: EventEmitter },
-    ],
-  }));
+  beforeEach(() =>
+    TestBed.configureTestingModule({
+      imports: [RouterTestingModule],
+      providers: [
+        GamesEffects,
+        provideMockActions(() => actions.asObservable()),
+        { provide: GamesService, useValue: gamesService },
+        provideMockStore({ initialState }),
+        { provide: Socket, useClass: EventEmitter },
+      ],
+    }),
+  );
 
   beforeEach(() => {
     effects = TestBed.inject(GamesEffects);
@@ -119,24 +127,28 @@ describe('GamesEffects', () => {
 
   describe('loadRoutedGame', () => {
     it('should load the given game', () => {
-      effects.loadRoutedGame.subscribe(action => expect(action).toEqual(loadGame({ gameId: 'FAKE_GAME_ID' })));
-      actions.next(routerNavigatedAction({
-        payload: {
-          routerState: {
-            url: '/game/FAKE_GAME_ID',
-            root: {
-              children: [
-                {
-                  params: {
-                    id: 'FAKE_GAME_ID',
-                  },
-                } as any,
-              ],
-            } as any,
+      effects.loadRoutedGame.subscribe(action =>
+        expect(action).toEqual(loadGame({ gameId: 'FAKE_GAME_ID' })),
+      );
+      actions.next(
+        routerNavigatedAction({
+          payload: {
+            routerState: {
+              url: '/game/FAKE_GAME_ID',
+              root: {
+                children: [
+                  {
+                    params: {
+                      id: 'FAKE_GAME_ID',
+                    },
+                  } as any,
+                ],
+              } as any,
+            },
+            event: {} as NavigationEnd,
           },
-          event: { } as NavigationEnd,
-        },
-      }));
+        }),
+      );
     });
   });
 
@@ -172,23 +184,46 @@ describe('GamesEffects', () => {
   describe('requestSubstitute', () => {
     it('should call service', () => {
       effects.requestSubstitute.subscribe();
-      actions.next(requestSubstitute({ gameId: 'FAKE_GAME_ID', playerId: 'FAKE_PLAYER_ID' }));
-      expect(gamesService.requestSubstitute).toHaveBeenCalledWith('FAKE_GAME_ID', 'FAKE_PLAYER_ID');
+      actions.next(
+        requestSubstitute({
+          gameId: 'FAKE_GAME_ID',
+          playerId: 'FAKE_PLAYER_ID',
+        }),
+      );
+      expect(gamesService.requestSubstitute).toHaveBeenCalledWith(
+        'FAKE_GAME_ID',
+        'FAKE_PLAYER_ID',
+      );
     });
   });
 
   describe('cancelSubstitutionRequest', () => {
     it('should call service', () => {
       effects.cancelSubstitutionRequest.subscribe();
-      actions.next(cancelSubstitutionRequest({ gameId: 'FAKE_GAME_ID', playerId: 'FAKE_PLAYER_ID' }));
-      expect(gamesService.cancelSubstitutionRequest).toHaveBeenCalledWith('FAKE_GAME_ID', 'FAKE_PLAYER_ID');
+      actions.next(
+        cancelSubstitutionRequest({
+          gameId: 'FAKE_GAME_ID',
+          playerId: 'FAKE_PLAYER_ID',
+        }),
+      );
+      expect(gamesService.cancelSubstitutionRequest).toHaveBeenCalledWith(
+        'FAKE_GAME_ID',
+        'FAKE_PLAYER_ID',
+      );
     });
   });
 
   describe('replacePlayer', () => {
     it('should replace the player', () => {
-      effects.replacePlayer.subscribe(game => expect(game).toEqual(gameUpdated({ game: fakeGame as any })));
-      actions.next(replacePlayer({ gameId: 'FAKE_GAME_ID', replaceeId: 'FAKE_REPLACEE_PLAYER_ID' }));
+      effects.replacePlayer.subscribe(game =>
+        expect(game).toEqual(gameUpdated({ game: fakeGame as any })),
+      );
+      actions.next(
+        replacePlayer({
+          gameId: 'FAKE_GAME_ID',
+          replaceeId: 'FAKE_REPLACEE_PLAYER_ID',
+        }),
+      );
       expect(gamesService.replacePlayer).toHaveBeenCalled();
     });
   });

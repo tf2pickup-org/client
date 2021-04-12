@@ -5,14 +5,13 @@ import { Observable } from 'rxjs';
 import { Document } from './models/document';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DocumentsService {
-
   constructor(
     private http: HttpClient,
     @Inject(API_URL) private apiUrl: string,
-  ) { }
+  ) {}
 
   fetchDocument(name: string): Observable<Document> {
     return this.http.get<Document>(`${this.apiUrl}/documents/${name}`);
@@ -25,5 +24,4 @@ export class DocumentsService {
       language: 'en',
     });
   }
-
 }

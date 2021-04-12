@@ -11,11 +11,11 @@ describe('PreReadyService', () => {
   let store: MockStore<AppState>;
   let isPreReadiedSelector: MemoizedSelector<AppState, boolean>;
 
-  beforeEach(() => TestBed.configureTestingModule({
-    providers: [
-      provideMockStore(),
-    ],
-  }));
+  beforeEach(() =>
+    TestBed.configureTestingModule({
+      providers: [provideMockStore()],
+    }),
+  );
 
   beforeEach(() => {
     store = TestBed.get(Store);
@@ -27,21 +27,21 @@ describe('PreReadyService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should start', done => fakeAsync(inject([PreReadyService], (service: PreReadyService) => {
-    const spy = spyOn(store, 'dispatch');
+  it('should start', done =>
+    fakeAsync(
+      inject([PreReadyService], (service: PreReadyService) => {
+        const spy = spyOn(store, 'dispatch');
 
-    service.timeout.pipe(
-      take(3),
-      toArray(),
-    ).subscribe(values => {
-      expect(values).toEqual([ 300, 299, 298 ]);
-      done();
-    });
+        service.timeout.pipe(take(3), toArray()).subscribe(values => {
+          expect(values).toEqual([300, 299, 298]);
+          done();
+        });
 
-    isPreReadiedSelector.setResult(true);
-    store.refreshState();
-    tick(1000 * 301);
+        isPreReadiedSelector.setResult(true);
+        store.refreshState();
+        tick(1000 * 301);
 
-    expect(spy).toHaveBeenCalledWith(stopPreReady());
-  }))());
+        expect(spy).toHaveBeenCalledWith(stopPreReady());
+      }),
+    )());
 });

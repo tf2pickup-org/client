@@ -11,19 +11,14 @@ import { AuthService } from '@app/auth/auth.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FooterComponent {
-
   version = environment.version;
   links = environment.footerLinks;
   isLoggedIn = this.store.select(isLoggedIn);
   isAdmin = this.store.select(isAdmin);
 
-  constructor(
-    private authService: AuthService,
-    private store: Store,
-  ) { }
+  constructor(private authService: AuthService, private store: Store) {}
 
   logout() {
     this.authService.logout();
   }
-
 }

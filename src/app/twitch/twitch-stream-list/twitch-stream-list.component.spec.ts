@@ -15,18 +15,17 @@ describe('TwitchStreamListComponent', () => {
   let store: MockStore;
   let twitchStreamsSelector: MemoizedSelector<AppState, TwitchStream[]>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [
-        TwitchStreamListComponent,
-        MockComponent(TwitchStreamListItemComponent),
-      ],
-      providers: [
-        provideMockStore(),
-      ],
-    })
-    .compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [
+          TwitchStreamListComponent,
+          MockComponent(TwitchStreamListItemComponent),
+        ],
+        providers: [provideMockStore()],
+      }).compileComponents();
+    }),
+  );
 
   beforeEach(() => {
     store = TestBed.inject(MockStore);
@@ -43,22 +42,25 @@ describe('TwitchStreamListComponent', () => {
 
   describe('with at least one stream', () => {
     const stream = {
-        playerId: 'FAKE_PLAYER_ID',
-        id: '1481304945',
-        userName: 'FAKE_TWITCH_USER_NAME',
-        title: 'Virtus.pro 1-1 Team Spirit | BO3 | KVYZEE & Shadowehh | WePlay! Pushka League',
-        viewerCount: 43170,
-        thumbnailUrl: 'https://static-cdn.jtvnw.net/previews-ttv/live_user_weplayesport_ru-{width}x{height}.jpg',
-      };
+      playerId: 'FAKE_PLAYER_ID',
+      id: '1481304945',
+      userName: 'FAKE_TWITCH_USER_NAME',
+      title:
+        'Virtus.pro 1-1 Team Spirit | BO3 | KVYZEE & Shadowehh | WePlay! Pushka League',
+      viewerCount: 43170,
+      thumbnailUrl:
+        'https://static-cdn.jtvnw.net/previews-ttv/live_user_weplayesport_ru-{width}x{height}.jpg',
+    };
 
     beforeEach(() => {
-      twitchStreamsSelector.setResult([ stream ]);
+      twitchStreamsSelector.setResult([stream]);
       store.refreshState();
       fixture.detectChanges();
     });
 
     it('should render TwitchStreamListItemComponent', () => {
-      const twitchStreamListItemComponents = fixture.debugElement.queryAll(By.css('app-twitch-stream-list-item'))
+      const twitchStreamListItemComponents = fixture.debugElement
+        .queryAll(By.css('app-twitch-stream-list-item'))
         .map(e => e.componentInstance as TwitchStreamListItemComponent);
       expect(twitchStreamListItemComponents.length).toEqual(1);
       expect(twitchStreamListItemComponents[0].stream).toEqual(stream);

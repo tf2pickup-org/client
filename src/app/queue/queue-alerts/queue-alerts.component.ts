@@ -11,13 +11,9 @@ import { substituteRequests } from '../queue.selectors';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class QueueAlertsComponent {
-
   activeGameId = this.store.select(activeGameId);
   bans = this.store.select(bans);
   substituteRequests = this.store.select(substituteRequests);
 
-  constructor(
-    private store: Store,
-  ) { }
-
+  constructor(private store: Store) {}
 }

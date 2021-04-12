@@ -12,7 +12,6 @@ import { loadPlayer } from '../actions';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PlayerNameComponent {
-
   name: Observable<string>;
 
   @Input()
@@ -33,8 +32,5 @@ export class PlayerNameComponent {
     );
   }
 
-  constructor(
-    private store: Store,
-  ) { }
-
+  constructor(private store: Store) {}
 }

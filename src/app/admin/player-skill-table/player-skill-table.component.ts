@@ -7,13 +7,10 @@ import { PlayerSkillTableStore } from './player-skill-table.store';
   templateUrl: './player-skill-table.component.html',
   styleUrls: ['./player-skill-table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [ PlayerSkillTableStore ],
+  providers: [PlayerSkillTableStore],
 })
 export class PlayerSkillTableComponent implements OnInit {
-
-  constructor(
-    public readonly store: PlayerSkillTableStore,
-  ) { }
+  constructor(public readonly store: PlayerSkillTableStore) {}
 
   ngOnInit() {
     this.store.loadAll();
@@ -22,5 +19,4 @@ export class PlayerSkillTableComponent implements OnInit {
   getRowId(row: PlayerRow) {
     return row.id;
   }
-
 }

@@ -10,12 +10,8 @@ import { map } from 'rxjs/operators';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TwitchStreamListComponent {
-
   streams = this.store.select(twitchStreams);
   streamCount = this.streams.pipe(map(streams => streams.length));
 
-  constructor(
-    private store: Store,
-  ) { }
-
+  constructor(private store: Store) {}
 }

@@ -12,7 +12,6 @@ import { PlayerAvatar } from '../models/player-avatar';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PlayerAvatarComponent {
-
   @Input()
   size: keyof PlayerAvatar = 'small';
 
@@ -27,8 +26,5 @@ export class PlayerAvatarComponent {
     );
   }
 
-  constructor(
-    private store: Store,
-  ) { }
-
+  constructor(private store: Store) {}
 }

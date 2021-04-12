@@ -17,22 +17,23 @@ describe('FooterComponent', () => {
   let isLoggedInSelector: MemoizedSelector<AppState, boolean>;
 
   beforeEach(() => {
-    authService = jasmine.createSpyObj<AuthService>(AuthService.name, ['logout']);
+    authService = jasmine.createSpyObj<AuthService>(AuthService.name, [
+      'logout',
+    ]);
   });
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ FooterComponent ],
-      imports: [
-        RouterTestingModule,
-      ],
-      providers: [
-        { provide: AuthService, useValue: authService },
-        provideMockStore(),
-      ]
-    })
-    .compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [FooterComponent],
+        imports: [RouterTestingModule],
+        providers: [
+          { provide: AuthService, useValue: authService },
+          provideMockStore(),
+        ],
+      }).compileComponents();
+    }),
+  );
 
   beforeEach(() => {
     store = TestBed.inject(MockStore);
@@ -62,7 +63,8 @@ describe('FooterComponent', () => {
       store.refreshState();
       fixture.detectChanges();
 
-      logoutButton = fixture.debugElement.query(By.css('a[logoutButton]')).nativeElement;
+      logoutButton = fixture.debugElement.query(By.css('a[logoutButton]'))
+        .nativeElement;
     });
 
     it('should render the logout button', () => {
@@ -89,7 +91,9 @@ describe('FooterComponent', () => {
     });
 
     it('should render admin panel link', () => {
-      expect(fixture.debugElement.query(By.css('a[href="/admin"]'))).toBeTruthy();
+      expect(
+        fixture.debugElement.query(By.css('a[href="/admin"]')),
+      ).toBeTruthy();
     });
   });
 });

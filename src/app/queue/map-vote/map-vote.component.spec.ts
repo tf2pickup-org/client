@@ -26,27 +26,28 @@ describe('MapVoteComponent', () => {
         {
           map: 'cp_snakewater_final1',
           voteCount: 0,
-        }
+        },
       ],
-    }
+    },
   };
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ MapVoteComponent ],
-      providers: [
-        provideMockStore({
-          initialState,
-          selectors: [
-            { selector: mapVote, value: null },
-            { selector: isInQueue, value: false },
-          ],
-        }),
-      ],
-      schemas: [ NO_ERRORS_SCHEMA ],
-    })
-    .compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [MapVoteComponent],
+        providers: [
+          provideMockStore({
+            initialState,
+            selectors: [
+              { selector: mapVote, value: null },
+              { selector: isInQueue, value: false },
+            ],
+          }),
+        ],
+        schemas: [NO_ERRORS_SCHEMA],
+      }).compileComponents();
+    }),
+  );
 
   beforeEach(() => {
     store = TestBed.get(Store);
@@ -85,7 +86,7 @@ describe('MapVoteComponent', () => {
             map: 'cp_snakewater_final1',
             voteCount: 0,
             votePercent: 0,
-          }
+          },
         ]);
       });
     });

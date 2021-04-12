@@ -1,5 +1,17 @@
-import { animate, style, transition, trigger, useAnimation } from '@angular/animations';
-import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import {
+  animate,
+  style,
+  transition,
+  trigger,
+  useAnimation,
+} from '@angular/animations';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  Input,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { MapThumbnailService } from '../../shared/map-thumbnail.service';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { pulsate } from '@app/animations';
@@ -16,19 +28,19 @@ import { pulsate } from '@app/animations';
           height: '0px',
           opacity: 0,
         }),
-        animate('250ms ease-out', style({
-          height: '*',
-          opacity: 1,
-        })),
+        animate(
+          '250ms ease-out',
+          style({
+            height: '*',
+            opacity: 1,
+          }),
+        ),
       ]),
     ]),
-    trigger('pulsate', [
-      transition(':increment', useAnimation(pulsate)),
-    ]),
+    trigger('pulsate', [transition(':increment', useAnimation(pulsate))]),
   ],
 })
 export class MapVoteButtonComponent {
-
   @Input()
   map: string;
 
@@ -53,10 +65,9 @@ export class MapVoteButtonComponent {
   constructor(
     private mapThumbnailService: MapThumbnailService,
     private breakpointObserver: BreakpointObserver,
-  ) { }
+  ) {}
 
   toggleVote() {
     this.voteToggle.emit(!this.selected);
   }
-
 }

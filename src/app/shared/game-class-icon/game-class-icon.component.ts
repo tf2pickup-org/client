@@ -7,11 +7,9 @@ import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GameClassIconComponent {
-
   @Input()
   gameClass: string;
 
   @Input()
   size = 30;
-
 }

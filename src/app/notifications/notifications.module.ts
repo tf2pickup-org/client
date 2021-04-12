@@ -4,15 +4,8 @@ import { RequestNotificationPermissionsComponent } from './request-notification-
 import { IconsModule } from '@app/icons/icons.module';
 
 @NgModule({
-  declarations: [
-    RequestNotificationPermissionsComponent,
-  ],
-  imports: [
-    CommonModule,
-    IconsModule,
-  ],
-  exports: [
-    RequestNotificationPermissionsComponent,
-  ],
+  declarations: [RequestNotificationPermissionsComponent],
+  imports: [CommonModule, IconsModule],
+  exports: [RequestNotificationPermissionsComponent],
 })
-export class NotificationsModule { }
+export class NotificationsModule {}

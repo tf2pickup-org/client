@@ -1,7 +1,12 @@
 import { ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, convertToParamMap } from '@angular/router';
 import { DocumentsService } from '@app/documents/documents.service';
-import { MockBuilder, MockedComponentFixture, MockRender, ngMocks } from 'ng-mocks';
+import {
+  MockBuilder,
+  MockedComponentFixture,
+  MockRender,
+  ngMocks,
+} from 'ng-mocks';
 import { Subject } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { DocumentEditComponent } from './document-edit.component';
@@ -23,16 +28,19 @@ describe(DocumentEditComponent.name, () => {
     saveDocument = new Subject();
   });
 
-  beforeEach(() => MockBuilder(DocumentEditComponent)
-    .keep(ReactiveFormsModule)
-    .mock(ActivatedRoute, {
-      data: routeData.asObservable(),
-    })
-    .mock(DocumentsService, {
-      saveDocument: jasmine.createSpy('saveDocument').and.returnValue(saveDocument.pipe(take(1))),
-    })
-    .mock(FeatherComponent)
-    .mock(MarkdownComponent)
+  beforeEach(() =>
+    MockBuilder(DocumentEditComponent)
+      .keep(ReactiveFormsModule)
+      .mock(ActivatedRoute, {
+        data: routeData.asObservable(),
+      })
+      .mock(DocumentsService, {
+        saveDocument: jasmine
+          .createSpy('saveDocument')
+          .and.returnValue(saveDocument.pipe(take(1))),
+      })
+      .mock(FeatherComponent)
+      .mock(MarkdownComponent),
   );
 
   beforeEach(() => {
@@ -54,11 +62,13 @@ describe(DocumentEditComponent.name, () => {
 
   describe('when the document is loaded', () => {
     beforeEach(() => {
-      routeData.next({ document: {
-        name: 'rules',
-        language: 'en',
-        body: 'some rules bla bla bla',
-      } });
+      routeData.next({
+        document: {
+          name: 'rules',
+          language: 'en',
+          body: 'some rules bla bla bla',
+        },
+      });
       fixture.detectChanges();
     });
 
@@ -99,7 +109,10 @@ describe(DocumentEditComponent.name, () => {
 
         it('should attempt to update the document', () => {
           const documentsService = TestBed.inject(DocumentsService);
-          expect(documentsService.saveDocument).toHaveBeenCalledWith('rules', 'lol');
+          expect(documentsService.saveDocument).toHaveBeenCalledWith(
+            'rules',
+            'lol',
+          );
         });
 
         describe('when the document is updated', () => {

@@ -13,14 +13,13 @@ describe('IsAdminGuard', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [
-        IsAdminGuard,
-        provideMockStore(),
-      ]
+      providers: [IsAdminGuard, provideMockStore()],
     });
 
     store = TestBed.inject(MockStore);
-    profileSelector = store.overrideSelector(profile, { authenticated: 'unknown' });
+    profileSelector = store.overrideSelector(profile, {
+      authenticated: 'unknown',
+    });
   });
 
   it('should be created', inject([IsAdminGuard], (guard: IsAdminGuard) => {
@@ -34,25 +33,37 @@ describe('IsAdminGuard', () => {
         store.refreshState();
       });
 
-      it('should return false', inject([IsAdminGuard], (guard: IsAdminGuard) => {
-        guard.canActivate().subscribe(value => expect(value).toBe(false));
-      }));
+      it('should return false', inject(
+        [IsAdminGuard],
+        (guard: IsAdminGuard) => {
+          guard.canActivate().subscribe(value => expect(value).toBe(false));
+        },
+      ));
     });
 
     describe('when the user is not an admin', () => {
       beforeEach(() => {
-        profileSelector.setResult({ authenticated: 'authenticated', player: { roles: [] } as Player } as any);
+        profileSelector.setResult({
+          authenticated: 'authenticated',
+          player: { roles: [] } as Player,
+        } as any);
         store.refreshState();
       });
 
-      it('should return false', inject([IsAdminGuard], (guard: IsAdminGuard) => {
-        guard.canActivate().subscribe(value => expect(value).toBe(false));
-      }));
+      it('should return false', inject(
+        [IsAdminGuard],
+        (guard: IsAdminGuard) => {
+          guard.canActivate().subscribe(value => expect(value).toBe(false));
+        },
+      ));
     });
 
     describe('when the user is an admin', () => {
       beforeEach(() => {
-        profileSelector.setResult({ authenticated: 'authenticated', player: { roles: ['admin'] } as Player } as any);
+        profileSelector.setResult({
+          authenticated: 'authenticated',
+          player: { roles: ['admin'] } as Player,
+        } as any);
         store.refreshState();
       });
 

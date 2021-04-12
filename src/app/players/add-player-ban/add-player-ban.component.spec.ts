@@ -34,7 +34,7 @@ describe('AddPlayerBanComponent', () => {
         locked: false,
       },
       players: {
-        ids: [ 'FAKE_ID' ],
+        ids: ['FAKE_ID'],
         entities: {
           FAKE_ID: {
             id: 'FAKE_ID',
@@ -49,21 +49,19 @@ describe('AddPlayerBanComponent', () => {
     actions = new Subject<Action>();
   });
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ AddPlayerBanComponent ],
-      imports: [
-        ReactiveFormsModule,
-        RouterTestingModule,
-      ],
-      providers: [
-        provideMockStore({ initialState }),
-        { provide: Actions, useValue: actions },
-        { provide: ActivatedRoute, useValue: { paramMap } },
-      ]
-    })
-    .compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [AddPlayerBanComponent],
+        imports: [ReactiveFormsModule, RouterTestingModule],
+        providers: [
+          provideMockStore({ initialState }),
+          { provide: Actions, useValue: actions },
+          { provide: ActivatedRoute, useValue: { paramMap } },
+        ],
+      }).compileComponents();
+    }),
+  );
 
   beforeEach(() => {
     store = TestBed.inject(MockStore);
@@ -73,7 +71,8 @@ describe('AddPlayerBanComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
 
-    submit = fixture.debugElement.query(By.css('button[type=submit]')).nativeElement;
+    submit = fixture.debugElement.query(By.css('button[type=submit]'))
+      .nativeElement;
   });
 
   afterEach(() => actions.complete());
@@ -88,14 +87,18 @@ describe('AddPlayerBanComponent', () => {
 
   it('should redirect to player ban list when adding a ban is done', () => {
     const spy = spyOn(TestBed.inject(Router), 'navigate');
-    actions.next(playerBanAdded({ playerBan: { player: 'FAKE_ID' } } as { playerBan: PlayerBan }));
+    actions.next(
+      playerBanAdded({ playerBan: { player: 'FAKE_ID' } } as {
+        playerBan: PlayerBan;
+      }),
+    );
     expect(spy).toHaveBeenCalledWith(['/player', 'FAKE_ID', 'bans']);
   });
 
   describe('when valid', () => {
-
     beforeEach(() => {
-      const reasonDiv = fixture.debugElement.query(By.css('input.reason-input')).nativeElement as HTMLInputElement;
+      const reasonDiv = fixture.debugElement.query(By.css('input.reason-input'))
+        .nativeElement as HTMLInputElement;
       reasonDiv.value = 'FAKE_REASON';
       reasonDiv.dispatchEvent(new Event('input'));
       fixture.detectChanges();
@@ -108,13 +111,17 @@ describe('AddPlayerBanComponent', () => {
     it('should submit', () => {
       submit.click();
 
-      expect(store.dispatch).toHaveBeenCalledWith(addPlayerBan({ playerBan: {
-        player: 'FAKE_ID',
-        start: jasmine.any(Date) as any,
-        end: jasmine.any(Date) as any,
-        reason: 'FAKE_REASON',
-        admin: 'FAKE_ADMIN_ID',
-      }}));
+      expect(store.dispatch).toHaveBeenCalledWith(
+        addPlayerBan({
+          playerBan: {
+            player: 'FAKE_ID',
+            start: jasmine.any(Date) as any,
+            end: jasmine.any(Date) as any,
+            reason: 'FAKE_REASON',
+            admin: 'FAKE_ADMIN_ID',
+          },
+        }),
+      );
     });
   });
 

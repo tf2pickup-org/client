@@ -22,7 +22,6 @@ const initialState: GameListState = {
 
 @Injectable()
 export class GameListStore extends ComponentStore<GameListState> {
-
   readonly gamesPerPage = 5;
 
   isLoading = this.select(state => state.loading);
@@ -30,15 +29,19 @@ export class GameListStore extends ComponentStore<GameListState> {
   gameCount = this.select(state => state.gameCount);
   page = this.select(state => state.page);
 
-  loadPage = this.effect((page: Observable<number>) => page.pipe(
-    tap(() => this.setLoading()),
-    tap(_page => this.setPage(_page)),
-    map(_page => (_page - 1) * this.gamesPerPage),
-    switchMap(offset => this.gamesService.fetchGames(offset, this.gamesPerPage).pipe(
-      tap(result => this.gamesLoaded(result)),
-      catchError(() => EMPTY),
-    )),
-  ));
+  loadPage = this.effect((page: Observable<number>) =>
+    page.pipe(
+      tap(() => this.setLoading()),
+      tap(_page => this.setPage(_page)),
+      map(_page => (_page - 1) * this.gamesPerPage),
+      switchMap(offset =>
+        this.gamesService.fetchGames(offset, this.gamesPerPage).pipe(
+          tap(result => this.gamesLoaded(result)),
+          catchError(() => EMPTY),
+        ),
+      ),
+    ),
+  );
 
   private setPage = this.updater((state, page: number) => ({
     ...state,
@@ -57,10 +60,7 @@ export class GameListStore extends ComponentStore<GameListState> {
     loading: false,
   }));
 
-  constructor(
-    private gamesService: GamesService,
-  ) {
+  constructor(private gamesService: GamesService) {
     super(initialState);
   }
-
 }

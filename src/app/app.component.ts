@@ -7,12 +7,10 @@ import { fadeThrough } from './app.animations';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [ fadeThrough ],
+  animations: [fadeThrough],
 })
 export class AppComponent {
-
   prepareRoute(outlet: RouterOutlet) {
     return outlet?.activatedRouteData?.animation;
   }
-
 }

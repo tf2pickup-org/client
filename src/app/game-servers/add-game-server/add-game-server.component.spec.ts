@@ -18,21 +18,17 @@ describe('AddGameServerComponent', () => {
   let actions: ReplaySubject<Action>;
   let router: Router;
 
-  beforeEach(() => actions = new ReplaySubject<Action>(1));
+  beforeEach(() => (actions = new ReplaySubject<Action>(1)));
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddGameServerComponent ],
-      imports: [
-        ReactiveFormsModule,
-        RouterTestingModule,
-      ],
+      declarations: [AddGameServerComponent],
+      imports: [ReactiveFormsModule, RouterTestingModule],
       providers: [
         provideMockStore(),
         provideMockActions(() => actions.asObservable()),
       ],
-    })
-    .compileComponents();
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -54,13 +50,15 @@ describe('AddGameServerComponent', () => {
   });
 
   it('should render save button', () => {
-    const saveButton = fixture.debugElement.query(By.css('.save-button')).nativeElement as HTMLButtonElement;
+    const saveButton = fixture.debugElement.query(By.css('.save-button'))
+      .nativeElement as HTMLButtonElement;
     expect(saveButton).toBeTruthy();
     expect(saveButton.disabled).toBe(true);
   });
 
   it('should render cancel button', () => {
-    const cancelButton = fixture.debugElement.query(By.css('.cancel-button')).nativeElement as HTMLButtonElement;
+    const cancelButton = fixture.debugElement.query(By.css('.cancel-button'))
+      .nativeElement as HTMLButtonElement;
     expect(cancelButton).toBeTruthy();
   });
 
@@ -68,25 +66,33 @@ describe('AddGameServerComponent', () => {
     let saveButton: HTMLButtonElement;
 
     beforeEach(() => {
-      const nameInput = fixture.debugElement.query(By.css('.name-field input[type=text]')).nativeElement as HTMLInputElement;
+      const nameInput = fixture.debugElement.query(
+        By.css('.name-field input[type=text]'),
+      ).nativeElement as HTMLInputElement;
       nameInput.value = 'FAKE_GAME_SERVER_NAME';
       nameInput.dispatchEvent(new Event('input'));
 
-      const addressInput = fixture.debugElement.query(By.css('.address-field input[type=text]')).nativeElement as HTMLInputElement;
+      const addressInput = fixture.debugElement.query(
+        By.css('.address-field input[type=text]'),
+      ).nativeElement as HTMLInputElement;
       addressInput.value = 'FAKE_GAME_SERVER_ADDRESS';
       addressInput.dispatchEvent(new Event('input'));
 
-      const portInput = fixture.debugElement.query(By.css('.port-field input[type=number]')).nativeElement as HTMLInputElement;
+      const portInput = fixture.debugElement.query(
+        By.css('.port-field input[type=number]'),
+      ).nativeElement as HTMLInputElement;
       portInput.value = '27015';
       portInput.dispatchEvent(new Event('input'));
 
-      const rconPasswordInput = fixture.debugElement.query(By.css('.rcon-password-field input[type=text]'))
-        .nativeElement as HTMLInputElement;
+      const rconPasswordInput = fixture.debugElement.query(
+        By.css('.rcon-password-field input[type=text]'),
+      ).nativeElement as HTMLInputElement;
       rconPasswordInput.value = 'FAKE_GAME_SERVER_RCON_PASSWORD';
       rconPasswordInput.dispatchEvent(new Event('input'));
 
       fixture.detectChanges();
-      saveButton = fixture.debugElement.query(By.css('.save-button')).nativeElement as HTMLButtonElement;
+      saveButton = fixture.debugElement.query(By.css('.save-button'))
+        .nativeElement as HTMLButtonElement;
     });
 
     it('should enable the save button', () => {
@@ -106,14 +112,16 @@ describe('AddGameServerComponent', () => {
       it('should dispatch an event', () => {
         saveButton.click();
         actions.next(action);
-        expect(store.dispatch).toHaveBeenCalledWith(addGameServer({
-          gameServer: {
-            name: 'FAKE_GAME_SERVER_NAME',
-            address: 'FAKE_GAME_SERVER_ADDRESS',
-            port: '27015',
-            rconPassword: 'FAKE_GAME_SERVER_RCON_PASSWORD',
-          },
-        }));
+        expect(store.dispatch).toHaveBeenCalledWith(
+          addGameServer({
+            gameServer: {
+              name: 'FAKE_GAME_SERVER_NAME',
+              address: 'FAKE_GAME_SERVER_ADDRESS',
+              port: '27015',
+              rconPassword: 'FAKE_GAME_SERVER_RCON_PASSWORD',
+            },
+          }),
+        );
       });
 
       it('should disable the save button', () => {
@@ -143,7 +151,8 @@ describe('AddGameServerComponent', () => {
     let cancelButton: HTMLButtonElement;
 
     beforeEach(() => {
-      cancelButton = fixture.debugElement.query(By.css('.cancel-button')).nativeElement as HTMLButtonElement;
+      cancelButton = fixture.debugElement.query(By.css('.cancel-button'))
+        .nativeElement as HTMLButtonElement;
     });
 
     it('should go back in history', () => {

@@ -39,19 +39,18 @@ describe('QueueComponent', () => {
   let fixture: ComponentFixture<QueueComponent>;
   let store: MockStore;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [
-        QueueComponent,
-        MockComponent(QueueClassSlotListComponent),
-        MockComponent(GameClassIconComponent),
-      ],
-      providers: [
-        provideMockStore(),
-      ],
-    })
-    .compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [
+          QueueComponent,
+          MockComponent(QueueClassSlotListComponent),
+          MockComponent(GameClassIconComponent),
+        ],
+        providers: [provideMockStore()],
+      }).compileComponents();
+    }),
+  );
 
   beforeEach(() => {
     store = TestBed.inject(MockStore);
@@ -67,13 +66,16 @@ describe('QueueComponent', () => {
   });
 
   it('should render the QueueClassSlotListComponent instance', () => {
-    const queueClassSlotListComponent = fixture.debugElement.query(By.css('app-queue-class-slot-list')).componentInstance;
+    const queueClassSlotListComponent = fixture.debugElement.query(
+      By.css('app-queue-class-slot-list'),
+    ).componentInstance;
     expect(queueClassSlotListComponent).toBeTruthy();
   });
 
   describe('for 6v6', () => {
     it('should apply 4x1 grid', () => {
-      const div = fixture.debugElement.query(By.css('.queue')).nativeElement as HTMLElement;
+      const div = fixture.debugElement.query(By.css('.queue'))
+        .nativeElement as HTMLElement;
       expect(div.classList.contains('queue--4x1')).toBe(true);
     });
   });
@@ -86,7 +88,8 @@ describe('QueueComponent', () => {
     });
 
     it('should apply 3x3 grid', () => {
-      const div = fixture.debugElement.query(By.css('.queue')).nativeElement as HTMLElement;
+      const div = fixture.debugElement.query(By.css('.queue'))
+        .nativeElement as HTMLElement;
       expect(div.classList.contains('queue--3x3')).toBe(true);
     });
   });

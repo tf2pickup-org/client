@@ -22,25 +22,25 @@ describe('QueueAlertsComponent', () => {
   let store: MockStore<any>;
   let activeGameIdSelector: MemoizedSelector<AppState, string>;
   let bansSelector: MemoizedSelector<AppState, PlayerBan[]>;
-  let substituteRequestsSelector: MemoizedSelector<AppState, SubstituteRequest[]>;
+  let substituteRequestsSelector: MemoizedSelector<
+    AppState,
+    SubstituteRequest[]
+  >;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [
-        QueueAlertsComponent,
-        MockComponent(ActiveGameSnackbarComponent),
-        MockComponent(SubstituteRequestBannerComponent),
-        MockComponent(BanBannerComponent),
-      ],
-      imports: [
-        RouterTestingModule,
-      ],
-      providers: [
-        provideMockStore(),
-      ],
-    })
-    .compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [
+          QueueAlertsComponent,
+          MockComponent(ActiveGameSnackbarComponent),
+          MockComponent(SubstituteRequestBannerComponent),
+          MockComponent(BanBannerComponent),
+        ],
+        imports: [RouterTestingModule],
+        providers: [provideMockStore()],
+      }).compileComponents();
+    }),
+  );
 
   beforeEach(() => {
     store = TestBed.inject(MockStore);
@@ -68,13 +68,14 @@ describe('QueueAlertsComponent', () => {
     };
 
     beforeEach(() => {
-      bansSelector.setResult([ mockBan ]);
+      bansSelector.setResult([mockBan]);
       store.refreshState();
       fixture.detectChanges();
     });
 
     it('should show alert', () => {
-      const banBanner = fixture.debugElement.query(By.css('app-ban-banner')).componentInstance as BanBannerComponent;
+      const banBanner = fixture.debugElement.query(By.css('app-ban-banner'))
+        .componentInstance as BanBannerComponent;
       expect(banBanner).toBeTruthy();
       expect(banBanner.ban).toEqual(mockBan);
     });
@@ -90,8 +91,9 @@ describe('QueueAlertsComponent', () => {
     });
 
     it('should show the snackbar', () => {
-      const activeGameSnackbar = fixture.debugElement.query(By.css('app-active-game-snackbar'))
-        .componentInstance as ActiveGameSnackbarComponent;
+      const activeGameSnackbar = fixture.debugElement.query(
+        By.css('app-active-game-snackbar'),
+      ).componentInstance as ActiveGameSnackbarComponent;
       expect(activeGameSnackbar).toBeTruthy();
       expect(activeGameSnackbar.gameId).toEqual(gameId);
     });
@@ -106,16 +108,19 @@ describe('QueueAlertsComponent', () => {
     };
 
     beforeEach(() => {
-      substituteRequestsSelector.setResult([ mockSubstituteRequest ]);
+      substituteRequestsSelector.setResult([mockSubstituteRequest]);
       store.refreshState();
       fixture.detectChanges();
     });
 
     it('should render the substitute alert banner', () => {
-      const substituteRequestBanner = fixture.debugElement.query(By.css('app-substitute-request-banner'))
-        .componentInstance as SubstituteRequestBannerComponent;
+      const substituteRequestBanner = fixture.debugElement.query(
+        By.css('app-substitute-request-banner'),
+      ).componentInstance as SubstituteRequestBannerComponent;
       expect(substituteRequestBanner).toBeTruthy();
-      expect(substituteRequestBanner.substituteRequest).toEqual(mockSubstituteRequest);
+      expect(substituteRequestBanner.substituteRequest).toEqual(
+        mockSubstituteRequest,
+      );
     });
   });
 });

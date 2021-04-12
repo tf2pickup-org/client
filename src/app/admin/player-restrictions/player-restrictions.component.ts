@@ -1,4 +1,13 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, AfterViewInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  AfterViewInit,
+  ViewChild,
+  ElementRef,
+  OnDestroy,
+} from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ConfigurationEntryKey } from '@app/configuration/configuration-entry-key';
 import { ConfigurationService } from '@app/configuration/configuration.service';
@@ -15,8 +24,8 @@ import { Location } from '@angular/common';
   styleUrls: ['./player-restrictions.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PlayerRestrictionsComponent implements OnInit, AfterViewInit, OnDestroy {
-
+export class PlayerRestrictionsComponent
+  implements OnInit, AfterViewInit, OnDestroy {
   form = this.formBuilder.group({
     etf2lAccountRequired: [false],
     minimumTf2InGameHours: [0],
@@ -33,13 +42,17 @@ export class PlayerRestrictionsComponent implements OnInit, AfterViewInit, OnDes
     private changeDetector: ChangeDetectorRef,
     private overlay: Overlay,
     private location: Location,
-  ) { }
+  ) {}
 
   ngOnInit() {
     zip(
-      this.configurationService.fetchValue<boolean>(ConfigurationEntryKey.etf2lAccountRequired),
-      this.configurationService.fetchValue<number>(ConfigurationEntryKey.minimumTf2InGameHours),
-    ).subscribe(([ etf2lAccountRequired, minimumTf2InGameHours ]) => {
+      this.configurationService.fetchValue<boolean>(
+        ConfigurationEntryKey.etf2lAccountRequired,
+      ),
+      this.configurationService.fetchValue<number>(
+        ConfigurationEntryKey.minimumTf2InGameHours,
+      ),
+    ).subscribe(([etf2lAccountRequired, minimumTf2InGameHours]) => {
       this.form.patchValue({ etf2lAccountRequired, minimumTf2InGameHours });
       this.etf2lAccountRequiredSwitch.checked = etf2lAccountRequired;
       this.changeDetector.markForCheck();
@@ -47,7 +60,9 @@ export class PlayerRestrictionsComponent implements OnInit, AfterViewInit, OnDes
   }
 
   ngAfterViewInit() {
-    this.etf2lAccountRequiredSwitch = new MDCSwitch(this.etf2lAccountRequiredControl.nativeElement);
+    this.etf2lAccountRequiredSwitch = new MDCSwitch(
+      this.etf2lAccountRequiredControl.nativeElement,
+    );
   }
 
   ngOnDestroy() {
@@ -56,8 +71,14 @@ export class PlayerRestrictionsComponent implements OnInit, AfterViewInit, OnDes
 
   save() {
     zip(
-      this.configurationService.storeValue<boolean>(ConfigurationEntryKey.etf2lAccountRequired, this.etf2lAccountRequired),
-      this.configurationService.storeValue<number>(ConfigurationEntryKey.minimumTf2InGameHours, this.minimumTf2InGameHours),
+      this.configurationService.storeValue<boolean>(
+        ConfigurationEntryKey.etf2lAccountRequired,
+        this.etf2lAccountRequired,
+      ),
+      this.configurationService.storeValue<number>(
+        ConfigurationEntryKey.minimumTf2InGameHours,
+        this.minimumTf2InGameHours,
+      ),
     ).subscribe(() => this.location.back());
   }
 
@@ -85,5 +106,4 @@ export class PlayerRestrictionsComponent implements OnInit, AfterViewInit, OnDes
   get minimumTf2InGameHours(): number {
     return this.form.get('minimumTf2InGameHours').value;
   }
-
 }

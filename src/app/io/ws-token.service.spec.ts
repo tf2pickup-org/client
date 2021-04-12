@@ -1,6 +1,9 @@
 import { TestBed } from '@angular/core/testing';
 import { WsTokenService } from './ws-token.service';
-import { HttpTestingController, HttpClientTestingModule } from '@angular/common/http/testing';
+import {
+  HttpTestingController,
+  HttpClientTestingModule,
+} from '@angular/common/http/testing';
 import { TokenStoreService } from '@app/auth/token-store.service';
 import { AuthService } from '@app/auth/auth.service';
 import { API_URL } from '@app/api-url';
@@ -21,9 +24,7 @@ describe('WsTokenService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-      ],
+      imports: [HttpClientTestingModule],
       providers: [
         { provide: AuthService, useClass: AuthServiceStub },
         { provide: TokenStoreService, useClass: TokenStoreServiceStub },
@@ -64,8 +65,12 @@ describe('WsTokenService', () => {
 
         it('should refresh the token', () => {
           expect(authService.authenticated).toBe(true);
-          service.getWsToken().subscribe(token => expect(token).toEqual('FAKE_TOKEN'));
-          httpController.expectOne('FAKE_URL/auth/wstoken').flush({ wsToken: 'FAKE_TOKEN' });
+          service
+            .getWsToken()
+            .subscribe(token => expect(token).toEqual('FAKE_TOKEN'));
+          httpController
+            .expectOne('FAKE_URL/auth/wstoken')
+            .flush({ wsToken: 'FAKE_TOKEN' });
           expect(tokenStoreService.wsToken).toEqual('FAKE_TOKEN');
         });
       });
@@ -83,8 +88,12 @@ describe('WsTokenService', () => {
         });
 
         it('should refresh the token if forcing', () => {
-          service.getWsToken().subscribe(token => expect(token).toEqual('FAKE_NEW_TOKEN'));
-          httpController.expectOne('FAKE_URL/auth/wstoken').flush({ wsToken: 'FAKE_NEW_TOKEN' });
+          service
+            .getWsToken()
+            .subscribe(token => expect(token).toEqual('FAKE_NEW_TOKEN'));
+          httpController
+            .expectOne('FAKE_URL/auth/wstoken')
+            .flush({ wsToken: 'FAKE_NEW_TOKEN' });
           expect(tokenStoreService.wsToken).toEqual('FAKE_NEW_TOKEN');
         });
       });

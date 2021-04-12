@@ -4,7 +4,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { Player } from '@app/players/models/player';
 import { PlayersService } from '@app/players/players.service';
 import { FeatherComponent } from 'angular-feather';
-import { MockBuilder, MockedComponentFixture, MockRender, ngMocks } from 'ng-mocks';
+import {
+  MockBuilder,
+  MockedComponentFixture,
+  MockRender,
+  ngMocks,
+} from 'ng-mocks';
 import { of } from 'rxjs';
 import { EditPageWrapperComponent } from '../edit-page-wrapper/edit-page-wrapper.component';
 import { ForceCreatePlayerAccountComponent } from './force-create-player-account.component';
@@ -18,12 +23,13 @@ describe(ForceCreatePlayerAccountComponent.name, () => {
   let steamIdInput: HTMLInputElement;
   let submitButton: HTMLButtonElement;
 
-  beforeEach(() => MockBuilder(ForceCreatePlayerAccountComponent)
-    .keep(ReactiveFormsModule)
-    .mock(PlayersService)
-    .mock(Location)
-    .mock(FeatherComponent)
-    .keep(EditPageWrapperComponent)
+  beforeEach(() =>
+    MockBuilder(ForceCreatePlayerAccountComponent)
+      .keep(ReactiveFormsModule)
+      .mock(PlayersService)
+      .mock(Location)
+      .mock(FeatherComponent)
+      .keep(EditPageWrapperComponent),
   );
 
   beforeEach(() => {
@@ -31,12 +37,17 @@ describe(ForceCreatePlayerAccountComponent.name, () => {
     component = fixture.point.componentInstance;
     fixture.detectChanges();
 
-    playersService = TestBed.inject(PlayersService) as jasmine.SpyObj<PlayersService>;
+    playersService = TestBed.inject(
+      PlayersService,
+    ) as jasmine.SpyObj<PlayersService>;
     location = TestBed.inject(Location) as jasmine.SpyObj<Location>;
 
-    nameInput = ngMocks.find('input.input-name').nativeElement as HTMLInputElement;
-    steamIdInput = ngMocks.find('input.input-steam-id').nativeElement as HTMLInputElement;
-    submitButton = ngMocks.find('button[type=submit]').nativeElement as HTMLButtonElement;
+    nameInput = ngMocks.find('input.input-name')
+      .nativeElement as HTMLInputElement;
+    steamIdInput = ngMocks.find('input.input-steam-id')
+      .nativeElement as HTMLInputElement;
+    submitButton = ngMocks.find('button[type=submit]')
+      .nativeElement as HTMLButtonElement;
   });
 
   it('should create', () => {
@@ -75,12 +86,20 @@ describe(ForceCreatePlayerAccountComponent.name, () => {
 
     describe('and when submitted', () => {
       beforeEach(() => {
-        playersService.forceCreatePlayer.and.returnValue(of({ name: 'FAKE_PLAYER_NAME', steamId: '76561198074409147' } as Player));
+        playersService.forceCreatePlayer.and.returnValue(
+          of({
+            name: 'FAKE_PLAYER_NAME',
+            steamId: '76561198074409147',
+          } as Player),
+        );
         submitButton.click();
       });
 
       it('should call the api', () => {
-        expect(playersService.forceCreatePlayer).toHaveBeenCalledOnceWith({ name: 'FAKE_PLAYER_NAME', steamId: '76561198074409147' });
+        expect(playersService.forceCreatePlayer).toHaveBeenCalledOnceWith({
+          name: 'FAKE_PLAYER_NAME',
+          steamId: '76561198074409147',
+        });
       });
 
       it('should eventually redirect back', () => {

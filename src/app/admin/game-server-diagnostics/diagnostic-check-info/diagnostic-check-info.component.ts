@@ -5,11 +5,9 @@ import { DiagnosticCheck } from '@app/game-servers/models/diagnostic-check';
   selector: 'app-diagnostic-check-info',
   templateUrl: './diagnostic-check-info.component.html',
   styleUrls: ['./diagnostic-check-info.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DiagnosticCheckInfoComponent {
-
   @Input()
   check: DiagnosticCheck;
-
 }

@@ -1,4 +1,11 @@
-import { Component, ChangeDetectionStrategy, Input, ViewChild, ElementRef, OnDestroy } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  Input,
+  ViewChild,
+  ElementRef,
+  OnDestroy,
+} from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MDCTextField } from '@material/textfield/component';
 
@@ -9,7 +16,6 @@ import { MDCTextField } from '@material/textfield/component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PlayerEditSkillComponent implements OnDestroy {
-
   @Input()
   gameClass: string;
 
@@ -34,5 +40,4 @@ export class PlayerEditSkillComponent implements OnDestroy {
       this.field.destroy();
     }
   }
-
 }

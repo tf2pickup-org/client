@@ -9,12 +9,8 @@ import { queueClasses, queueConfig } from '../queue.selectors';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class QueueComponent {
-
   queueClasses = this.store.select(queueClasses);
   queueConfig = this.store.select(queueConfig);
 
-  constructor(
-    private store: Store,
-  ) { }
-
+  constructor(private store: Store) {}
 }

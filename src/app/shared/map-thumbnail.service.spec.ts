@@ -44,20 +44,33 @@ describe('MapThumbnailService', () => {
       'cp_villa_b18',
       'cp_kalinka_rc5',
       'cp_cardinal_rc1a',
-    ].forEach(map => it(`should return valid thumbnail for ${map}`, inject([MapThumbnailService], (service: MapThumbnailService) => {
-      const thumbnail = service.getMapThumbnail(map);
-      expect(thumbnail).toBeTruthy();
-      expect(thumbnail === 'unknown').toBe(false);
-    })));
+    ].forEach(map =>
+      it(`should return valid thumbnail for ${map}`, inject(
+        [MapThumbnailService],
+        (service: MapThumbnailService) => {
+          const thumbnail = service.getMapThumbnail(map);
+          expect(thumbnail).toBeTruthy();
+          expect(thumbnail === 'unknown').toBe(false);
+        },
+      )),
+    );
 
-    it('should return unknown.png for unknown map', inject([MapThumbnailService], (service: MapThumbnailService) => {
-      expect(service.getMapThumbnail('some fake map')).toEqual('unknown');
-    }));
+    it('should return unknown.png for unknown map', inject(
+      [MapThumbnailService],
+      (service: MapThumbnailService) => {
+        expect(service.getMapThumbnail('some fake map')).toEqual('unknown');
+      },
+    ));
   });
 
   describe('#getMapThumbnailPath()', () => {
-    it('should return full file path', inject([MapThumbnailService], (service: MapThumbnailService) => {
-      expect(service.getMapThumbnailPath('fake map')).toMatch(/^\/assets\/.+\.png$/);
-    }));
+    it('should return full file path', inject(
+      [MapThumbnailService],
+      (service: MapThumbnailService) => {
+        expect(service.getMapThumbnailPath('fake map')).toMatch(
+          /^\/assets\/.+\.png$/,
+        );
+      },
+    ));
   });
 });

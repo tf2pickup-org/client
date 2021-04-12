@@ -16,18 +16,20 @@ describe('TwitchTvIntegrationComponent', () => {
   let twitchService: jasmine.SpyObj<TwitchService>;
 
   beforeEach(() => {
-    twitchService = jasmine.createSpyObj<TwitchService>(TwitchService.name, ['login', 'disconnect']);
+    twitchService = jasmine.createSpyObj<TwitchService>(TwitchService.name, [
+      'login',
+      'disconnect',
+    ]);
   });
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TwitchTvIntegrationComponent ],
+      declarations: [TwitchTvIntegrationComponent],
       providers: [
         provideMockStore(),
         { provide: TwitchService, useValue: twitchService },
       ],
-    })
-    .compileComponents();
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -47,7 +49,9 @@ describe('TwitchTvIntegrationComponent', () => {
     let loginViaTwitchTvButton: HTMLButtonElement;
 
     beforeEach(() => {
-      loginViaTwitchTvButton = fixture.debugElement.query(By.css('.login-via-twitch-tv-button')).nativeElement as HTMLButtonElement;
+      loginViaTwitchTvButton = fixture.debugElement.query(
+        By.css('.login-via-twitch-tv-button'),
+      ).nativeElement as HTMLButtonElement;
     });
 
     it('should render the login via twitch.tv button', () => {
@@ -67,21 +71,26 @@ describe('TwitchTvIntegrationComponent', () => {
         userId: 'FAKE_USER_ID',
         login: 'FAKE_USER_LOGIN',
         displayName: 'FAKE_USER',
-        profileImageUrl: 'FAKE_IMAGE_URL'
+        profileImageUrl: 'FAKE_IMAGE_URL',
       });
       store.refreshState();
       fixture.detectChanges();
     });
 
     it('should render link to the profile', () => {
-      const anchor = fixture.debugElement.query(By.css('a')).nativeElement as HTMLAnchorElement;
+      const anchor = fixture.debugElement.query(By.css('a'))
+        .nativeElement as HTMLAnchorElement;
       expect(anchor).toBeTruthy();
-      expect(anchor.href).toMatch(/^https:\/\/www.twitch.tv\/FAKE_USER_LOGIN\/$/);
+      expect(anchor.href).toMatch(
+        /^https:\/\/www.twitch.tv\/FAKE_USER_LOGIN\/$/,
+      );
       expect(anchor.target).toBe('_blank');
     });
 
     it('should render the disconnect button', () => {
-      const button = fixture.debugElement.query(By.css('button.disconnect-button')).nativeElement as HTMLButtonElement;
+      const button = fixture.debugElement.query(
+        By.css('button.disconnect-button'),
+      ).nativeElement as HTMLButtonElement;
       button.click();
       expect(twitchService.disconnect).toHaveBeenCalled();
     });

@@ -14,26 +14,22 @@ import { ChangeDetectionStrategy } from '@angular/core';
 const initialState = {
   players: {
     players: {
-      ids: [
-        'FAKE_SOLDIER_ID',
-        'FAKE_MEDIC_1_ID',
-        'FAKE_MEDIC_2_ID'
-      ],
+      ids: ['FAKE_SOLDIER_ID', 'FAKE_MEDIC_1_ID', 'FAKE_MEDIC_2_ID'],
       entities: {
         FAKE_SOLDIER_ID: {
           name: 'majiwem171',
-          id: 'FAKE_SOLDIER_ID'
+          id: 'FAKE_SOLDIER_ID',
         },
         FAKE_MEDIC_1_ID: {
           name: 'maly',
-          id: 'FAKE_MEDIC_1_ID'
+          id: 'FAKE_MEDIC_1_ID',
         },
         FAKE_MEDIC_2_ID: {
           name: 'niewielki',
-          id: 'FAKE_MEDIC_2_ID'
-        }
+          id: 'FAKE_MEDIC_2_ID',
+        },
       },
-      locked: false
+      locked: false,
     },
   },
   queue: {
@@ -42,25 +38,25 @@ const initialState = {
         id: 0,
         gameClass: 'soldier',
         playerId: 'FAKE_SOLDIER_ID',
-        ready: false
+        ready: false,
       },
       {
         id: 1,
         gameClass: 'soldier',
         playerId: null,
-        ready: false
+        ready: false,
       },
       {
         id: 2,
         gameClass: 'medic',
         playerId: 'FAKE_MEDIC_1_ID',
-        ready: false
+        ready: false,
       },
       {
         id: 3,
         gameClass: 'medic',
         playerId: 'FAKE_MEDIC_2_ID',
-        ready: false
+        ready: false,
       },
     ],
     friendships: [],
@@ -80,25 +76,27 @@ describe('QueueSlotContainerComponent', () => {
   let fixture: ComponentFixture<QueueSlotContainerComponent>;
   let store: MockStore;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [
-        QueueSlotContainerComponent,
-        MockComponent(QueueSlotItemComponent),
-      ],
-      providers: [
-        provideMockStore({
-          initialState,
-          selectors: [
-            { selector: canJoinQueue, value: true },
-          ],
-        }),
-      ],
-    })
-    // https://github.com/angular/angular/issues/12313
-    .overrideComponent(QueueSlotContainerComponent, { set: { changeDetection: ChangeDetectionStrategy.Default } })
-    .compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [
+          QueueSlotContainerComponent,
+          MockComponent(QueueSlotItemComponent),
+        ],
+        providers: [
+          provideMockStore({
+            initialState,
+            selectors: [{ selector: canJoinQueue, value: true }],
+          }),
+        ],
+      })
+        // https://github.com/angular/angular/issues/12313
+        .overrideComponent(QueueSlotContainerComponent, {
+          set: { changeDetection: ChangeDetectionStrategy.Default },
+        })
+        .compileComponents();
+    }),
+  );
 
   beforeEach(() => {
     store = TestBed.get(Store);
@@ -113,11 +111,21 @@ describe('QueueSlotContainerComponent', () => {
 
   it('should fetch a slot', () => {
     component.slotId = 2;
-    component.slot.subscribe(slot => expect(slot).toEqual({ id: 2, gameClass: 'medic', playerId: 'FAKE_MEDIC_1_ID', ready: false }));
+    component.slot.subscribe(slot =>
+      expect(slot).toEqual({
+        id: 2,
+        gameClass: 'medic',
+        playerId: 'FAKE_MEDIC_1_ID',
+        ready: false,
+      }),
+    );
   });
 
   it('should render the slot item', () => {
-    expect(fixture.debugElement.query(By.css('app-queue-slot-item')).componentInstance).toBeTruthy();
+    expect(
+      fixture.debugElement.query(By.css('app-queue-slot-item'))
+        .componentInstance,
+    ).toBeTruthy();
   });
 
   describe('takenByMe', () => {
@@ -133,61 +141,91 @@ describe('QueueSlotContainerComponent', () => {
   });
 
   describe('friendFlags', () => {
-    it('should return canMarkAsFriend: false if I\'m not a medic', () => {
-      store.setState(merge(cloneDeep(initialState), {
-        profile: {
-          id: 'FAKE_SOLDIER_ID',
-        },
-      }));
+    it("should return canMarkAsFriend: false if I'm not a medic", () => {
+      store.setState(
+        merge(cloneDeep(initialState), {
+          profile: {
+            id: 'FAKE_SOLDIER_ID',
+          },
+        }),
+      );
 
       component.slotId = 2;
-      component.friendFlags.subscribe(value => expect(value).toEqual({ canMarkAsFriend: false }));
+      component.friendFlags.subscribe(value =>
+        expect(value).toEqual({ canMarkAsFriend: false }),
+      );
     });
 
     it('should return canMarkAsFriend: false if this slot is mine', () => {
       component.slotId = 2;
-      component.friendFlags.subscribe(value => expect(value).toEqual({ canMarkAsFriend: false }));
+      component.friendFlags.subscribe(value =>
+        expect(value).toEqual({ canMarkAsFriend: false }),
+      );
     });
 
-    it('should return canMarkAsFriend: false if this is the other medic\'s slot', () => {
+    it("should return canMarkAsFriend: false if this is the other medic's slot", () => {
       component.slotId = 3;
-      component.friendFlags.subscribe(value => expect(value).toEqual({ canMarkAsFriend: false }));
+      component.friendFlags.subscribe(value =>
+        expect(value).toEqual({ canMarkAsFriend: false }),
+      );
     });
 
     it('should return canMarkAsFriend: true if the player on the slot can be marked as friend', () => {
       component.slotId = 0;
-      component.friendFlags.subscribe(value => expect(value).toEqual({ canMarkAsFriend: true }));
+      component.friendFlags.subscribe(value =>
+        expect(value).toEqual({ canMarkAsFriend: true }),
+      );
     });
 
     it('should return markedByMe: true if the player on the slot is marked as friend by me', () => {
-      store.setState(merge(cloneDeep(initialState), {
-        queue: {
-          friendships: [{ sourcePlayerId: 'FAKE_MEDIC_1_ID', targetPlayerId: 'FAKE_SOLDIER_ID' }],
-        },
-      }));
+      store.setState(
+        merge(cloneDeep(initialState), {
+          queue: {
+            friendships: [
+              {
+                sourcePlayerId: 'FAKE_MEDIC_1_ID',
+                targetPlayerId: 'FAKE_SOLDIER_ID',
+              },
+            ],
+          },
+        }),
+      );
       component.slotId = 0;
-      component.friendFlags.subscribe(value => expect(value).toEqual({ canMarkAsFriend: true, markedByMe: true }));
+      component.friendFlags.subscribe(value =>
+        expect(value).toEqual({ canMarkAsFriend: true, markedByMe: true }),
+      );
     });
 
     it('should return markedBy if the player on the slot is marked as friend by another medic', () => {
-      store.setState(merge(cloneDeep(initialState), {
-        queue: {
-          friendships: [{ sourcePlayerId: 'FAKE_MEDIC_2_ID', targetPlayerId: 'FAKE_SOLDIER_ID' }],
-        },
-      }));
+      store.setState(
+        merge(cloneDeep(initialState), {
+          queue: {
+            friendships: [
+              {
+                sourcePlayerId: 'FAKE_MEDIC_2_ID',
+                targetPlayerId: 'FAKE_SOLDIER_ID',
+              },
+            ],
+          },
+        }),
+      );
       component.slotId = 0;
-      component.friendFlags.subscribe(value => expect(value).toEqual({
-        canMarkAsFriend: true,
-        markedBy: {
-          name: 'niewielki',
-          id: 'FAKE_MEDIC_2_ID',
-        },
-      } as any));
+      component.friendFlags.subscribe(value =>
+        expect(value).toEqual({
+          canMarkAsFriend: true,
+          markedBy: {
+            name: 'niewielki',
+            id: 'FAKE_MEDIC_2_ID',
+          },
+        } as any),
+      );
     });
   });
 
   it('should pass the correct locked value', () => {
-    const queueSlotItem = fixture.debugElement.query(By.css('app-queue-slot-item')).componentInstance as QueueSlotItemComponent;
+    const queueSlotItem = fixture.debugElement.query(
+      By.css('app-queue-slot-item'),
+    ).componentInstance as QueueSlotItemComponent;
     expect(queueSlotItem.locked).toBe(false);
   });
 
@@ -211,7 +249,9 @@ describe('QueueSlotContainerComponent', () => {
     it('should dispatch the markFriend action', () => {
       const spy = spyOn(store, 'dispatch');
       component.markFriend('FAKE_PLAYER_ID');
-      expect(spy).toHaveBeenCalledWith(markFriend({ friendId: 'FAKE_PLAYER_ID' }));
+      expect(spy).toHaveBeenCalledWith(
+        markFriend({ friendId: 'FAKE_PLAYER_ID' }),
+      );
     });
   });
 });

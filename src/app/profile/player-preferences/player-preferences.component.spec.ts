@@ -3,7 +3,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { FeatherComponent } from 'angular-feather';
-import { MockBuilder, MockedComponentFixture, MockRender, ngMocks } from 'ng-mocks';
+import {
+  MockBuilder,
+  MockedComponentFixture,
+  MockRender,
+  ngMocks,
+} from 'ng-mocks';
 import { Subject } from 'rxjs';
 import { preferencesUpdated, savePreferences } from '../profile.actions';
 import { preferences } from '../profile.selectors';
@@ -21,13 +26,16 @@ describe(PlayerPreferencesComponent.name, () => {
     actions = new Subject();
   });
 
-  beforeEach(() => MockBuilder(PlayerPreferencesComponent)
-    .keep(ReactiveFormsModule)
-    .provide(provideMockStore({
-      selectors: [ { selector: preferences, value: { soundVolume: '0.5' } } ],
-    }))
-    .provide(provideMockActions(() => actions.asObservable()))
-    .mock(FeatherComponent)
+  beforeEach(() =>
+    MockBuilder(PlayerPreferencesComponent)
+      .keep(ReactiveFormsModule)
+      .provide(
+        provideMockStore({
+          selectors: [{ selector: preferences, value: { soundVolume: '0.5' } }],
+        }),
+      )
+      .provide(provideMockActions(() => actions.asObservable()))
+      .mock(FeatherComponent),
   );
 
   beforeEach(() => {
@@ -71,7 +79,9 @@ describe(PlayerPreferencesComponent.name, () => {
       });
 
       it('should dispatch savePreferences action', () => {
-        expect(store.dispatch).toHaveBeenCalledWith(savePreferences({ preferences: { soundVolume: '0.7' } }));
+        expect(store.dispatch).toHaveBeenCalledWith(
+          savePreferences({ preferences: { soundVolume: '0.7' } }),
+        );
       });
 
       it('should disable the submit button', () => {
@@ -80,7 +90,9 @@ describe(PlayerPreferencesComponent.name, () => {
 
       describe('when saved', () => {
         beforeEach(() => {
-          actions.next(preferencesUpdated({ preferences: { soundVolume: '0.7' } }));
+          actions.next(
+            preferencesUpdated({ preferences: { soundVolume: '0.7' } }),
+          );
           fixture.detectChanges();
         });
 

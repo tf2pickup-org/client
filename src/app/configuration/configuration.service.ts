@@ -10,25 +10,28 @@ interface ConfigurationEntryResponse<T> {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ConfigurationService {
-
   constructor(
     private http: HttpClient,
     @Inject(API_URL) private apiUrl: string,
-  ) { }
+  ) {}
 
   fetchValue<T>(key: string): Observable<T> {
-    return this.http.get<ConfigurationEntryResponse<T>>(`${this.apiUrl}/configuration/${key.split(' ').join('-')}`).pipe(
-      map(response => response.value),
-    );
+    return this.http
+      .get<ConfigurationEntryResponse<T>>(
+        `${this.apiUrl}/configuration/${key.split(' ').join('-')}`,
+      )
+      .pipe(map(response => response.value));
   }
 
   storeValue<T>(key: string, value: any): Observable<T> {
-    return this.http.put<ConfigurationEntryResponse<T>>(`${this.apiUrl}/configuration/${key.split(' ').join('-')}`, { key, value }).pipe(
-      map(response => response.value),
-    );
+    return this.http
+      .put<ConfigurationEntryResponse<T>>(
+        `${this.apiUrl}/configuration/${key.split(' ').join('-')}`,
+        { key, value },
+      )
+      .pipe(map(response => response.value));
   }
-
 }

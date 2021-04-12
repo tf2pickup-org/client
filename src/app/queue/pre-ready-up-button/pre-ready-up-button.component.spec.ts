@@ -16,21 +16,23 @@ describe('PreReadyUpButtonComponent', () => {
   let store: MockStore;
   let isPreReadiedSelector: MemoizedSelector<any, boolean>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [
-        PreReadyUpButtonComponent,
-        SecondsPipe,
-        MockComponent(FeatherComponent),
-      ],
-      providers: [
-        provideMockStore(),
-      ],
-    })
-    // https://github.com/angular/angular/issues/12313
-    .overrideComponent(PreReadyUpButtonComponent, { set: { changeDetection: ChangeDetectionStrategy.Default } })
-    .compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [
+          PreReadyUpButtonComponent,
+          SecondsPipe,
+          MockComponent(FeatherComponent),
+        ],
+        providers: [provideMockStore()],
+      })
+        // https://github.com/angular/angular/issues/12313
+        .overrideComponent(PreReadyUpButtonComponent, {
+          set: { changeDetection: ChangeDetectionStrategy.Default },
+        })
+        .compileComponents();
+    }),
+  );
 
   beforeEach(() => {
     store = TestBed.inject(MockStore);
@@ -47,7 +49,8 @@ describe('PreReadyUpButtonComponent', () => {
   });
 
   it('should dispatch togglePreReady action', () => {
-    const button = fixture.debugElement.query(By.css('button.pre-ready-up-btn')).nativeElement as HTMLButtonElement;
+    const button = fixture.debugElement.query(By.css('button.pre-ready-up-btn'))
+      .nativeElement as HTMLButtonElement;
     button.click();
     expect(store.dispatch).toHaveBeenCalledWith(togglePreReady());
   });
@@ -60,7 +63,9 @@ describe('PreReadyUpButtonComponent', () => {
     });
 
     it('should apply the active class', () => {
-      const button = fixture.debugElement.query(By.css('button.pre-ready-up-btn')).nativeElement as HTMLButtonElement;
+      const button = fixture.debugElement.query(
+        By.css('button.pre-ready-up-btn'),
+      ).nativeElement as HTMLButtonElement;
       expect(button.classList.contains('active')).toBe(true);
     });
   });

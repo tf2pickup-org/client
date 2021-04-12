@@ -1,9 +1,35 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { loadQueue, queueLoaded, joinQueue, leaveQueue, queueStateUpdated, joinQueueError, leaveQueueError, readyUp, readyUpError,
-  stopPreReady, voteForMap, mapVoteResultsUpdated, mapVoted, mapVoteReset, queueSlotsUpdated, markFriend, startPreReady,
-  substituteRequestsUpdated, friendshipsUpdated, scrambleMaps } from './queue.actions';
-import { mergeMap, map, catchError, filter, mapTo, distinctUntilChanged } from 'rxjs/operators';
+import {
+  loadQueue,
+  queueLoaded,
+  joinQueue,
+  leaveQueue,
+  queueStateUpdated,
+  joinQueueError,
+  leaveQueueError,
+  readyUp,
+  readyUpError,
+  stopPreReady,
+  voteForMap,
+  mapVoteResultsUpdated,
+  mapVoted,
+  mapVoteReset,
+  queueSlotsUpdated,
+  markFriend,
+  startPreReady,
+  substituteRequestsUpdated,
+  friendshipsUpdated,
+  scrambleMaps,
+} from './queue.actions';
+import {
+  mergeMap,
+  map,
+  catchError,
+  filter,
+  mapTo,
+  distinctUntilChanged,
+} from 'rxjs/operators';
 import { QueueService } from './queue.service';
 import { Store, select } from '@ngrx/store';
 import { of, fromEvent } from 'rxjs';
@@ -19,12 +45,8 @@ import { ioConnected } from '@app/io/io.actions';
 
 @Injectable()
 export class QueueEffects {
-
   loadQueueWhenOnline = createEffect(() =>
-    this.actions.pipe(
-      ofType(ioConnected),
-      mapTo(loadQueue()),
-    )
+    this.actions.pipe(ofType(ioConnected), mapTo(loadQueue())),
   );
 
   loadQueue = createEffect(() =>
@@ -32,7 +54,7 @@ export class QueueEffects {
       ofType(loadQueue),
       mergeMap(() => this.queueService.fetchQueue()),
       map(queue => queueLoaded({ queue })),
-    )
+    ),
   );
 
   scrambleMaps = createEffect(() =>
@@ -40,76 +62,86 @@ export class QueueEffects {
       ofType(scrambleMaps),
       mergeMap(() => this.queueService.scrambleMaps()),
       map(results => mapVoteResultsUpdated({ results })),
-    )
+    ),
   );
 
   joinQueue = createEffect(() =>
     this.actions.pipe(
       ofType(joinQueue),
-      mergeMap(({ slotId }) => this.queueService.joinQueue(slotId).pipe(
-        map(slots => queueSlotsUpdated({ slots })),
-        catchError((error: unknown) => of(joinQueueError({ error: error as string }))),
-      )),
-    )
+      mergeMap(({ slotId }) =>
+        this.queueService.joinQueue(slotId).pipe(
+          map(slots => queueSlotsUpdated({ slots })),
+          catchError((error: unknown) =>
+            of(joinQueueError({ error: error as string })),
+          ),
+        ),
+      ),
+    ),
   );
 
   leaveQueue = createEffect(() =>
     this.actions.pipe(
       ofType(leaveQueue),
-      mergeMap(() => this.queueService.leaveQueue().pipe(
-        map(slot => queueSlotsUpdated({ slots: [ slot ] })),
-        catchError((error: unknown) => of(leaveQueueError({ error: error as string }))),
-      )),
-    )
+      mergeMap(() =>
+        this.queueService.leaveQueue().pipe(
+          map(slot => queueSlotsUpdated({ slots: [slot] })),
+          catchError((error: unknown) =>
+            of(leaveQueueError({ error: error as string })),
+          ),
+        ),
+      ),
+    ),
   );
 
   readyUp = createEffect(() =>
     this.actions.pipe(
       ofType(readyUp),
-      mergeMap(() => this.queueService.readyUp().pipe(
-        map(slot => queueSlotsUpdated({ slots: [ slot ] })),
-        catchError((error: unknown) => of(readyUpError({ error: error as string }))),
-      )),
-    )
+      mergeMap(() =>
+        this.queueService.readyUp().pipe(
+          map(slot => queueSlotsUpdated({ slots: [slot] })),
+          catchError((error: unknown) =>
+            of(readyUpError({ error: error as string })),
+          ),
+        ),
+      ),
+    ),
   );
 
   autoPreReady = createEffect(() =>
-    this.actions.pipe(
-      ofType(readyUp),
-      mapTo(startPreReady()),
-    )
+    this.actions.pipe(ofType(readyUp), mapTo(startPreReady())),
   );
 
   cancelPreReadyOnQueueLeave = createEffect(() =>
     this.store.select(isInQueue).pipe(
       filter(inQueue => !inQueue),
       mapTo(stopPreReady()),
-    )
+    ),
   );
 
   cancelPreReadyOnGameLaunch = createEffect(() =>
-    this.actions.pipe(
-      ofType(ownGameAdded),
-      mapTo(stopPreReady()),
-    )
+    this.actions.pipe(ofType(ownGameAdded), mapTo(stopPreReady())),
   );
 
   markFriend = createEffect(() =>
     this.actions.pipe(
       ofType(markFriend),
-      mergeMap(({ friendId }) => this.queueService.markFriend(friendId).pipe(
-        map(friendships => friendshipsUpdated({ friendships })),
-      ))
-    )
+      mergeMap(({ friendId }) =>
+        this.queueService
+          .markFriend(friendId)
+          .pipe(map(friendships => friendshipsUpdated({ friendships }))),
+      ),
+    ),
   );
 
   voteForMap = createEffect(() =>
     this.actions.pipe(
       ofType(voteForMap),
-      mergeMap(({ map: aMap }) => this.queueService.voteForMap(aMap).pipe(
-        map(theMap => mapVoted({ map: theMap })),
-      )),
-    )
+      mergeMap(({ map: aMap }) =>
+        this.queueService
+          .voteForMap(aMap)
+          .pipe(map(theMap => mapVoted({ map: theMap }))),
+      ),
+    ),
   );
 
   resetMapVote = createEffect(() =>
@@ -118,7 +150,7 @@ export class QueueEffects {
       filter(inQueue => !inQueue),
       distinctUntilChanged(),
       mapTo(mapVoteReset()),
-    )
+    ),
   );
 
   constructor(
@@ -127,16 +159,29 @@ export class QueueEffects {
     private store: Store,
     socket: Socket,
   ) {
-    fromEvent<QueueSlot[]>(socket, 'queue slots update')
-      .subscribe(slots => this.store.dispatch(queueSlotsUpdated({ slots })));
-    fromEvent<QueueState>(socket, 'queue state update')
-      .subscribe(queueState => this.store.dispatch(queueStateUpdated({ queueState })));
-    fromEvent<MapVoteResult[]>(socket, 'map vote results update')
-      .subscribe(results => this.store.dispatch(mapVoteResultsUpdated({ results })));
-    fromEvent<SubstituteRequest[]>(socket, 'substitute requests update')
-      .subscribe(substituteRequests => this.store.dispatch(substituteRequestsUpdated({ substituteRequests })));
-    fromEvent<Friendship[]>(socket, 'friendships update')
-      .subscribe(friendships => this.store.dispatch(friendshipsUpdated({ friendships })));
+    fromEvent<QueueSlot[]>(socket, 'queue slots update').subscribe(slots =>
+      this.store.dispatch(queueSlotsUpdated({ slots })),
+    );
+    fromEvent<QueueState>(socket, 'queue state update').subscribe(queueState =>
+      this.store.dispatch(queueStateUpdated({ queueState })),
+    );
+    fromEvent<MapVoteResult[]>(
+      socket,
+      'map vote results update',
+    ).subscribe(results =>
+      this.store.dispatch(mapVoteResultsUpdated({ results })),
+    );
+    fromEvent<SubstituteRequest[]>(
+      socket,
+      'substitute requests update',
+    ).subscribe(substituteRequests =>
+      this.store.dispatch(substituteRequestsUpdated({ substituteRequests })),
+    );
+    fromEvent<Friendship[]>(
+      socket,
+      'friendships update',
+    ).subscribe(friendships =>
+      this.store.dispatch(friendshipsUpdated({ friendships })),
+    );
   }
-
 }

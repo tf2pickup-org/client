@@ -14,4 +14,5 @@ const gameReducer = createReducer(
   on(gameUpdated, (state, { game }) => adapter.upsertOne(game, state)),
 );
 
-export const reducer = (state: State | undefined, action: Action) => gameReducer(state, action);
+export const reducer = (state: State | undefined, action: Action) =>
+  gameReducer(state, action);

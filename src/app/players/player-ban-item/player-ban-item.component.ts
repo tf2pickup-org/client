@@ -1,4 +1,11 @@
-import { Component, ChangeDetectionStrategy, Input, HostBinding, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  Input,
+  HostBinding,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { PlayerBan } from '../models/player-ban';
 
 @Component({
@@ -8,7 +15,6 @@ import { PlayerBan } from '../models/player-ban';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PlayerBanItemComponent {
-
   @Input()
   playerBan: PlayerBan;
 
@@ -18,5 +24,4 @@ export class PlayerBanItemComponent {
   isExpired() {
     return new Date(this.playerBan.end) < new Date();
   }
-
 }

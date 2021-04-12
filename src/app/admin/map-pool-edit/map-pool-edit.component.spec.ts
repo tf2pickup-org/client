@@ -4,7 +4,12 @@ import { Map } from '@app/queue/models/map';
 import { QueueService } from '@app/queue/queue.service';
 import { AsFormGroupPipe } from '@app/shared/as-form-group.pipe';
 import { FeatherComponent } from 'angular-feather';
-import { MockBuilder, MockedComponentFixture, MockRender, ngMocks } from 'ng-mocks';
+import {
+  MockBuilder,
+  MockedComponentFixture,
+  MockRender,
+  ngMocks,
+} from 'ng-mocks';
 import { Subject } from 'rxjs';
 import { EditPageWrapperComponent } from '../edit-page-wrapper/edit-page-wrapper.component';
 import { MapEditComponent } from '../map-edit/map-edit.component';
@@ -21,16 +26,19 @@ describe(MapPoolEditComponent.name, () => {
     maps = new Subject();
   });
 
-  beforeEach(() => MockBuilder(MapPoolEditComponent)
-    .keep(ReactiveFormsModule)
-    .mock(QueueService, {
-      fetchMaps: () => maps.asObservable(),
-      setMaps: jasmine.createSpy('setMaps').and.returnValue(maps.asObservable()),
-    })
-    .keep(EditPageWrapperComponent)
-    .keep(MapEditComponent)
-    .keep(AsFormGroupPipe)
-    .mock(FeatherComponent)
+  beforeEach(() =>
+    MockBuilder(MapPoolEditComponent)
+      .keep(ReactiveFormsModule)
+      .mock(QueueService, {
+        fetchMaps: () => maps.asObservable(),
+        setMaps: jasmine
+          .createSpy('setMaps')
+          .and.returnValue(maps.asObservable()),
+      })
+      .keep(EditPageWrapperComponent)
+      .keep(MapEditComponent)
+      .keep(AsFormGroupPipe)
+      .mock(FeatherComponent),
   );
 
   beforeEach(() => {
@@ -69,7 +77,8 @@ describe(MapPoolEditComponent.name, () => {
 
     describe('when a new map is added', () => {
       beforeEach(() => {
-        const addButton = ngMocks.find('.add-map-button').nativeElement as HTMLButtonElement;
+        const addButton = ngMocks.find('.add-map-button')
+          .nativeElement as HTMLButtonElement;
         addButton.click();
         fixture.detectChanges();
       });
@@ -81,7 +90,8 @@ describe(MapPoolEditComponent.name, () => {
 
       describe('when the new map is valid', () => {
         beforeEach(() => {
-          const input = ngMocks.findAll('input.map-name-input')[2].nativeElement as HTMLInputElement;
+          const input = ngMocks.findAll('input.map-name-input')[2]
+            .nativeElement as HTMLInputElement;
           input.value = 'cp_snakewater_final1';
           input.dispatchEvent(new Event('input'));
           fixture.detectChanges();
@@ -100,7 +110,7 @@ describe(MapPoolEditComponent.name, () => {
           it('should save the maps', () => {
             expect(queueService.setMaps).toHaveBeenCalledWith([
               { name: 'cp_process_final', execConfig: null },
-              { name: 'cp_badlands',execConfig: null },
+              { name: 'cp_badlands', execConfig: null },
               { name: 'cp_snakewater_final1', execConfig: null },
             ]);
           });
@@ -114,7 +124,8 @@ describe(MapPoolEditComponent.name, () => {
 
     describe('when a map is removed', () => {
       beforeEach(() => {
-        const removeMapButton = ngMocks.find('button.remove-map-button').nativeElement as HTMLButtonElement;
+        const removeMapButton = ngMocks.find('button.remove-map-button')
+          .nativeElement as HTMLButtonElement;
         removeMapButton.click();
         fixture.detectChanges();
       });
@@ -130,7 +141,7 @@ describe(MapPoolEditComponent.name, () => {
 
         it('should save the maps', () => {
           expect(queueService.setMaps).toHaveBeenCalledWith([
-            { name: 'cp_badlands',execConfig: null },
+            { name: 'cp_badlands', execConfig: null },
           ]);
         });
       });

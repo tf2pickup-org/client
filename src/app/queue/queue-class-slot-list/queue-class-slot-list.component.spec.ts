@@ -33,20 +33,22 @@ describe('QueueClassSlotListComponent', () => {
     },
   };
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [
-        QueueClassSlotListComponent,
-        MockComponent(QueueSlotContainerComponent),
-      ],
-      providers: [
-        provideMockStore({ initialState }),
-      ],
-    })
-    // https://github.com/angular/angular/issues/12313
-    .overrideComponent(QueueClassSlotListComponent, { set: { changeDetection: ChangeDetectionStrategy.Default } })
-    .compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [
+          QueueClassSlotListComponent,
+          MockComponent(QueueSlotContainerComponent),
+        ],
+        providers: [provideMockStore({ initialState })],
+      })
+        // https://github.com/angular/angular/issues/12313
+        .overrideComponent(QueueClassSlotListComponent, {
+          set: { changeDetection: ChangeDetectionStrategy.Default },
+        })
+        .compileComponents();
+    }),
+  );
 
   beforeEach(() => {
     store = TestBed.inject(MockStore);
@@ -67,12 +69,22 @@ describe('QueueClassSlotListComponent', () => {
     });
 
     it('should fetch slots of the given class', () => {
-      component.slots.subscribe(slots => expect(slots)
-        .toEqual([{ id: 8, gameClass: 'demoman', playerId: 'FAKE_PLAYER_ID', ready: false }]));
+      component.slots.subscribe(slots =>
+        expect(slots).toEqual([
+          {
+            id: 8,
+            gameClass: 'demoman',
+            playerId: 'FAKE_PLAYER_ID',
+            ready: false,
+          },
+        ]),
+      );
     });
 
     it('should render slots', () => {
-      const container = fixture.debugElement.query(By.css('app-queue-slot-container')).componentInstance as QueueSlotContainerComponent;
+      const container = fixture.debugElement.query(
+        By.css('app-queue-slot-container'),
+      ).componentInstance as QueueSlotContainerComponent;
       expect(container.slotId).toEqual(8);
     });
   });

@@ -10,20 +10,19 @@ describe('GameSummaryComponent', () => {
   let component: GameSummaryComponent;
   let fixture: ComponentFixture<GameSummaryComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [
-        GameSummaryComponent,
-        MockComponent(FeatherComponent),
-      ],
-      imports: [
-        NoopAnimationsModule,
-      ],
-    })
-    // https://github.com/angular/angular/issues/12313
-    .overrideComponent(GameSummaryComponent, { set: { changeDetection: ChangeDetectionStrategy.Default } })
-    .compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [GameSummaryComponent, MockComponent(FeatherComponent)],
+        imports: [NoopAnimationsModule],
+      })
+        // https://github.com/angular/angular/issues/12313
+        .overrideComponent(GameSummaryComponent, {
+          set: { changeDetection: ChangeDetectionStrategy.Default },
+        })
+        .compileComponents();
+    }),
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(GameSummaryComponent);
@@ -42,7 +41,8 @@ describe('GameSummaryComponent', () => {
     });
 
     it('should render logs link', () => {
-      const anchor = fixture.debugElement.query(By.css('a[href=FAKE_LOGS_URL]')).nativeElement as HTMLAnchorElement;
+      const anchor = fixture.debugElement.query(By.css('a[href=FAKE_LOGS_URL]'))
+        .nativeElement as HTMLAnchorElement;
       expect(anchor).toBeTruthy();
       expect(anchor.target).toEqual('_blank');
     });
@@ -55,7 +55,8 @@ describe('GameSummaryComponent', () => {
     });
 
     it('should render demo link', () => {
-      const anchor = fixture.debugElement.query(By.css('a[href=FAKE_DEMO_URL]')).nativeElement as HTMLAnchorElement;
+      const anchor = fixture.debugElement.query(By.css('a[href=FAKE_DEMO_URL]'))
+        .nativeElement as HTMLAnchorElement;
       expect(anchor).toBeTruthy();
       expect(anchor.target).toEqual('_blank');
     });

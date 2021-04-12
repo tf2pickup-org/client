@@ -11,7 +11,6 @@ import { queueSlotsForClass } from '../queue.selectors';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class QueueClassSlotListComponent {
-
   slots: Observable<QueueSlot[]>;
 
   @Input()
@@ -19,12 +18,9 @@ export class QueueClassSlotListComponent {
     this.slots = this.store.select(queueSlotsForClass(gameClass));
   }
 
-  constructor(
-    private store: Store,
-  ) { }
+  constructor(private store: Store) {}
 
   slotId(index: number, slot: QueueSlot) {
     return slot.id;
   }
-
 }

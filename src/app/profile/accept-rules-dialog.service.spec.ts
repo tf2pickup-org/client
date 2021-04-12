@@ -7,9 +7,7 @@ describe('AcceptRulesDialogService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        OverlayModule,
-      ],
+      imports: [OverlayModule],
     });
     service = TestBed.inject(AcceptRulesDialogService);
   });

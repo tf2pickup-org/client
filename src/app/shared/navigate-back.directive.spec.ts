@@ -1,15 +1,19 @@
 import { Location } from '@angular/common';
 import { TestBed } from '@angular/core/testing';
-import { MockBuilder, MockedComponentFixture, MockRender, MockReset, ngMocks } from 'ng-mocks';
+import {
+  MockBuilder,
+  MockedComponentFixture,
+  MockRender,
+  MockReset,
+  ngMocks,
+} from 'ng-mocks';
 import { NavigateBackDirective } from './navigate-back.directive';
 
 describe(NavigateBackDirective.name, () => {
   let fixture: MockedComponentFixture;
   let directive: NavigateBackDirective;
 
-  beforeEach(() => MockBuilder(NavigateBackDirective)
-    .mock(Location)
-  );
+  beforeEach(() => MockBuilder(NavigateBackDirective).mock(Location));
 
   beforeEach(() => {
     fixture = MockRender(`<button appNavigateBack>`);

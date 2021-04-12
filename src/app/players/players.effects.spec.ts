@@ -27,17 +27,21 @@ describe('PlayerEffects', () => {
 
   beforeEach(() => {
     actions = new ReplaySubject<Action>(1);
-    playersService = jasmine.createSpyObj<PlayersService>(PlayersService.name, ['fetchPlayer']);
+    playersService = jasmine.createSpyObj<PlayersService>(PlayersService.name, [
+      'fetchPlayer',
+    ]);
     playersService.fetchPlayer.and.returnValue(of(mockPlayer));
   });
 
-  beforeEach(() => TestBed.configureTestingModule({
-    providers: [
-      PlayerEffects,
-      provideMockActions(() => actions.asObservable()),
-      { provide: PlayersService, useValue: playersService },
-    ],
-  }));
+  beforeEach(() =>
+    TestBed.configureTestingModule({
+      providers: [
+        PlayerEffects,
+        provideMockActions(() => actions.asObservable()),
+        { provide: PlayersService, useValue: playersService },
+      ],
+    }),
+  );
 
   beforeEach(() => {
     effects = TestBed.get(PlayerEffects);
@@ -52,7 +56,9 @@ describe('PlayerEffects', () => {
 
   describe('loadPlayer', () => {
     it('should attempt to fetch the given player', () => {
-      effects.loadPlayer.subscribe(action => expect(action).toEqual(playerLoaded({ player: mockPlayer })));
+      effects.loadPlayer.subscribe(action =>
+        expect(action).toEqual(playerLoaded({ player: mockPlayer })),
+      );
       actions.next(loadPlayer({ playerId: 'FAKE_PLAYER_ID' }));
       expect(playersService.fetchPlayer).toHaveBeenCalledWith('FAKE_PLAYER_ID');
     });

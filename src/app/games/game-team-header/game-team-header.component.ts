@@ -8,11 +8,9 @@ import { Tf2Team } from '../models/tf2-team';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GameTeamHeaderComponent {
-
   @Input()
   team: Tf2Team;
 
   @Input()
   score: number;
-
 }

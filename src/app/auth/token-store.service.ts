@@ -4,17 +4,14 @@ import { HttpParams } from '@angular/common/http';
 import jwt_decode from 'jwt-decode';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TokenStoreService {
-
   private readonly refreshTokenKey = 'refresh_token';
   private readonly authTokenKey = 'auth_token';
   private readonly wsTokenKey = 'ws_token';
 
-  constructor(
-    @Inject(LOCAL_STORAGE) private storage: StorageService,
-  ) {
+  constructor(@Inject(LOCAL_STORAGE) private storage: StorageService) {
     this.retrieveTokens();
   }
 
@@ -68,7 +65,8 @@ export class TokenStoreService {
           this.storage.remove(this.refreshTokenKey);
           return;
         }
-      } catch (error) { // failed to decode token
+      } catch (error) {
+        // failed to decode token
         console.error(error);
         this.storage.remove(this.refreshTokenKey);
         return;
@@ -89,5 +87,4 @@ export class TokenStoreService {
   private removeHash() {
     history.pushState('', document.title, window.location.pathname);
   }
-
 }

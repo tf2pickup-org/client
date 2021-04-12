@@ -8,13 +8,9 @@ import { Location } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SettingsComponent {
-
-  constructor(
-    private location: Location,
-  ) { }
+  constructor(private location: Location) {}
 
   cancel() {
     this.location.back();
   }
-
 }

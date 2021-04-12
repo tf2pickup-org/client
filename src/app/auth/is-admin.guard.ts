@@ -8,26 +8,26 @@ import { Profile } from '@app/profile/models/profile';
 import { PlayerRole } from '@app/players/models/player-role';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class IsAdminGuard implements CanActivate {
-
-  constructor(
-    private store: Store,
-  ) { }
+  constructor(private store: Store) {}
 
   canActivate(): Observable<boolean> {
     return this.store.select(profile).pipe(
-      filter(profile => ['authenticated', 'not authenticated'].includes(profile.authenticated)),
+      filter(profile =>
+        ['authenticated', 'not authenticated'].includes(profile.authenticated),
+      ),
       // eslint-disable-next-line ngrx/avoid-mapping-selectors
       map(profile => {
         if (profile.authenticated === 'not authenticated') {
           return false;
         } else {
-          return (['admin', 'super user'] as PlayerRole[]).some(role => (profile as Profile).player.roles.includes(role));
+          return (['admin', 'super user'] as PlayerRole[]).some(role =>
+            (profile as Profile).player.roles.includes(role),
+          );
         }
-      })
+      }),
     );
   }
-
 }

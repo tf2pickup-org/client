@@ -8,9 +8,8 @@ describe('GameAdminButtonsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ GameAdminButtonsComponent ]
-    })
-    .compileComponents();
+      declarations: [GameAdminButtonsComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -24,7 +23,9 @@ describe('GameAdminButtonsComponent', () => {
   });
 
   it('should render the reinitialize server button', done => {
-    const reinitializeBtn = fixture.debugElement.query(By.css('.reinitialize-server-button')).nativeElement as HTMLButtonElement;
+    const reinitializeBtn = fixture.debugElement.query(
+      By.css('.reinitialize-server-button'),
+    ).nativeElement as HTMLButtonElement;
     expect(reinitializeBtn).toBeTruthy();
 
     component.reinitializeServer.subscribe(done);
@@ -32,7 +33,8 @@ describe('GameAdminButtonsComponent', () => {
   });
 
   it('should render the force end button', done => {
-    const forceEndBtn = fixture.debugElement.query(By.css('.force-end-button')).nativeElement as HTMLButtonElement;
+    const forceEndBtn = fixture.debugElement.query(By.css('.force-end-button'))
+      .nativeElement as HTMLButtonElement;
     expect(forceEndBtn).toBeTruthy();
 
     component.forceEnd.subscribe(done);

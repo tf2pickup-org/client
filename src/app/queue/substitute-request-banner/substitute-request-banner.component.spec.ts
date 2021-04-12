@@ -10,14 +10,14 @@ describe('SubstituteRequestBannerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SubstituteRequestBannerComponent ],
-      imports: [
-        RouterTestingModule,
-      ],
+      declarations: [SubstituteRequestBannerComponent],
+      imports: [RouterTestingModule],
     })
-    // https://github.com/angular/angular/issues/12313
-    .overrideComponent(SubstituteRequestBannerComponent, { set: { changeDetection: ChangeDetectionStrategy.Default } })
-    .compileComponents();
+      // https://github.com/angular/angular/issues/12313
+      .overrideComponent(SubstituteRequestBannerComponent, {
+        set: { changeDetection: ChangeDetectionStrategy.Default },
+      })
+      .compileComponents();
   });
 
   beforeEach(() => {
@@ -42,11 +42,14 @@ describe('SubstituteRequestBannerComponent', () => {
     });
 
     it('should render the banner', () => {
-      expect(fixture.debugElement.query(By.css('.substitute-request-banner'))).toBeTruthy();
+      expect(
+        fixture.debugElement.query(By.css('.substitute-request-banner')),
+      ).toBeTruthy();
     });
 
     it('should redirect to the game', () => {
-      const anchor = fixture.debugElement.query(By.css('a')).nativeElement as HTMLAnchorElement;
+      const anchor = fixture.debugElement.query(By.css('a'))
+        .nativeElement as HTMLAnchorElement;
       expect(anchor).toBeTruthy();
       expect(anchor.href).toMatch(/\/game\/FAKE_GAME_ID$/);
     });

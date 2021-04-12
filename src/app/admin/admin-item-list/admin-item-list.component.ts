@@ -4,6 +4,6 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
   selector: 'app-admin-item-list',
   templateUrl: './admin-item-list.component.html',
   styleUrls: ['./admin-item-list.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AdminItemListComponent { }
+export class AdminItemListComponent {}

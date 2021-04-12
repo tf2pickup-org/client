@@ -11,18 +11,22 @@ describe('QueueSlotItemComponent', () => {
   let component: QueueSlotItemComponent;
   let fixture: ComponentFixture<QueueSlotItemComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [
-        QueueSlotItemComponent,
-        MockComponent(PlayerAvatarComponent),
-        MockComponent(PlayerNameComponent),
-      ],
-    })
-    // https://github.com/angular/angular/issues/12313
-    .overrideComponent(QueueSlotItemComponent, { set: { changeDetection: ChangeDetectionStrategy.Default } })
-    .compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [
+          QueueSlotItemComponent,
+          MockComponent(PlayerAvatarComponent),
+          MockComponent(PlayerNameComponent),
+        ],
+      })
+        // https://github.com/angular/angular/issues/12313
+        .overrideComponent(QueueSlotItemComponent, {
+          set: { changeDetection: ChangeDetectionStrategy.Default },
+        })
+        .compileComponents();
+    }),
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(QueueSlotItemComponent);
@@ -41,7 +45,8 @@ describe('QueueSlotItemComponent', () => {
     beforeEach(() => {
       component.slot = { ...slot };
       fixture.detectChanges();
-      slotDiv = fixture.debugElement.query(By.css('.queue-slot-item')).nativeElement as HTMLDivElement;
+      slotDiv = fixture.debugElement.query(By.css('.queue-slot-item'))
+        .nativeElement as HTMLDivElement;
     });
 
     it('should render the slot div', () => {
@@ -76,37 +81,47 @@ describe('QueueSlotItemComponent', () => {
     });
 
     it('should not render an avatar', () => {
-      expect(fixture.debugElement.query(By.css('app-player-avatar'))).toBeNull();
+      expect(
+        fixture.debugElement.query(By.css('app-player-avatar')),
+      ).toBeNull();
     });
   });
 
   describe('with an occupied slot', () => {
-    const slot: QueueSlot = { id: 0, gameClass: 'soldier', ready: false, playerId: 'FAKE_PLAYER_ID' };
+    const slot: QueueSlot = {
+      id: 0,
+      gameClass: 'soldier',
+      ready: false,
+      playerId: 'FAKE_PLAYER_ID',
+    };
     let slotDiv: HTMLElement;
 
     beforeEach(() => {
       component.slot = { ...slot };
       fixture.detectChanges();
-      slotDiv = fixture.debugElement.query(By.css('.queue-slot-item')).nativeElement as HTMLDivElement;
+      slotDiv = fixture.debugElement.query(By.css('.queue-slot-item'))
+        .nativeElement as HTMLDivElement;
     });
 
     it('should be marked as taken', () => {
       expect(slotDiv.classList.contains('is-taken')).toBe(true);
     });
 
-    it('should render player\'s avatar', () => {
-      const avatar = fixture.debugElement.query(By.css('app-player-avatar')).componentInstance as PlayerAvatarComponent;
+    it("should render player's avatar", () => {
+      const avatar = fixture.debugElement.query(By.css('app-player-avatar'))
+        .componentInstance as PlayerAvatarComponent;
       expect(avatar.playerId).toEqual('FAKE_PLAYER_ID');
     });
 
     it('should render player name', () => {
-      const name = fixture.debugElement.query(By.css('app-player-name')).componentInstance as PlayerNameComponent;
+      const name = fixture.debugElement.query(By.css('app-player-name'))
+        .componentInstance as PlayerNameComponent;
       expect(name.playerId).toEqual('FAKE_PLAYER_ID');
     });
 
     it('should not emit takeSlot when clicked', () => {
       let emitted = false;
-      component.takeSlot.subscribe(() => emitted = true);
+      component.takeSlot.subscribe(() => (emitted = true));
       slotDiv.click();
       expect(emitted).toBe(false);
     });
@@ -135,7 +150,8 @@ describe('QueueSlotItemComponent', () => {
       });
 
       it('should render the free slot button', done => {
-        const freeSlotBtn = fixture.debugElement.query(By.css('.free-slot-btn')).nativeElement as HTMLButtonElement;
+        const freeSlotBtn = fixture.debugElement.query(By.css('.free-slot-btn'))
+          .nativeElement as HTMLButtonElement;
         expect(freeSlotBtn).toBeTruthy();
         component.freeSlot.subscribe(done);
         freeSlotBtn.click();
@@ -143,19 +159,21 @@ describe('QueueSlotItemComponent', () => {
 
       it('should not emit takeSlot when clicked', () => {
         let emitted = false;
-        component.takeSlot.subscribe(() => emitted = true);
+        component.takeSlot.subscribe(() => (emitted = true));
         slotDiv.click();
         expect(emitted).toBe(false);
       });
 
-      describe('when I\'m readied up', () => {
+      describe("when I'm readied up", () => {
         beforeEach(() => {
           component.slot.ready = true;
           fixture.detectChanges();
         });
 
         it('should not render the free slot button', () => {
-          expect(fixture.debugElement.query(By.css('.free-slot-btn'))).toBeNull();
+          expect(
+            fixture.debugElement.query(By.css('.free-slot-btn')),
+          ).toBeNull();
         });
       });
     });
@@ -173,7 +191,9 @@ describe('QueueSlotItemComponent', () => {
           component.locked = false;
           component.friendFlags = { canMarkAsFriend: true };
           fixture.detectChanges();
-          markAsFriendBtn = fixture.debugElement.query(By.css('.mark-as-friend-btn')).nativeElement as HTMLButtonElement;
+          markAsFriendBtn = fixture.debugElement.query(
+            By.css('.mark-as-friend-btn'),
+          ).nativeElement as HTMLButtonElement;
         });
 
         it('should render the mark as friend button', () => {
@@ -191,7 +211,9 @@ describe('QueueSlotItemComponent', () => {
 
         describe('when not marked by me', () => {
           it('should apply correct css class', () => {
-            expect(markAsFriendBtn.classList.contains('is-marked-by-me')).toBe(false);
+            expect(markAsFriendBtn.classList.contains('is-marked-by-me')).toBe(
+              false,
+            );
           });
         });
 
@@ -202,7 +224,9 @@ describe('QueueSlotItemComponent', () => {
           });
 
           it('should apply correct css classes', () => {
-            expect(markAsFriendBtn.classList.contains('is-marked-by-me')).toBe(true);
+            expect(markAsFriendBtn.classList.contains('is-marked-by-me')).toBe(
+              true,
+            );
           });
 
           it('should emit markFriend(null)', done => {
@@ -216,12 +240,20 @@ describe('QueueSlotItemComponent', () => {
 
         describe('when marked by someone else', () => {
           beforeEach(() => {
-            component.friendFlags = { canMarkAsFriend: true, markedBy: { id: 'FAKE_ENEMY_MEDIC_ID', name: 'FAKE_ENEMY_MEDIC' } as any };
+            component.friendFlags = {
+              canMarkAsFriend: true,
+              markedBy: {
+                id: 'FAKE_ENEMY_MEDIC_ID',
+                name: 'FAKE_ENEMY_MEDIC',
+              } as any,
+            };
             fixture.detectChanges();
           });
 
           it('should apply correct css classes', () => {
-            expect(markAsFriendBtn.classList.contains('is-marked-by-me')).toBe(false);
+            expect(markAsFriendBtn.classList.contains('is-marked-by-me')).toBe(
+              false,
+            );
           });
 
           it('should render the button disabled', () => {

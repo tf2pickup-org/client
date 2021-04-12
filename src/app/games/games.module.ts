@@ -51,8 +51,6 @@ import { OrderTf2ClassesPipe } from './order-tf2-classes.pipe';
 
     GamesRoutingModule,
   ],
-  exports: [
-    GameListComponent,
-  ],
+  exports: [GameListComponent],
 })
-export class GamesModule { }
+export class GamesModule {}

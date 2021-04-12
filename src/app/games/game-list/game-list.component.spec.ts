@@ -16,15 +16,17 @@ import { MockPipe } from 'ng-mocks';
 import { MapThumbnailPipe } from '@app/shared/map-thumbnail.pipe';
 
 const mockGameListResponse = {
-  results: [{
-    id: 'FAKE_GAME_ID',
-    state: 'ended',
-    number: 1905,
-    map: 'cp_reckoner_rc5',
-    slots: [],
-    launchedAt: new Date('2020-12-08T17:24:21.003Z'),
-  }],
-  itemCount: 1905
+  results: [
+    {
+      id: 'FAKE_GAME_ID',
+      state: 'ended',
+      number: 1905,
+      map: 'cp_reckoner_rc5',
+      slots: [],
+      launchedAt: new Date('2020-12-08T17:24:21.003Z'),
+    },
+  ],
+  itemCount: 1905,
 };
 
 describe('GameListComponent', () => {
@@ -41,37 +43,45 @@ describe('GameListComponent', () => {
     activatedRoute = { queryParamMap: queryParams.asObservable() };
   });
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [
-        GameListComponent,
-        MockPipe(MapThumbnailPipe, value => ''),
-      ],
-      imports: [
-        RouterTestingModule,
-        NgxPaginationModule,
-        NoopAnimationsModule,
-      ],
-      providers: [
-        {
-          provide: GamesService,
-          useValue: jasmine.createSpyObj<GamesService>(GamesService.name, ['fetchGames']),
-        },
-        {
-          provide: ActivatedRoute,
-          useValue: activatedRoute,
-        },
-      ],
-    })
-    // https://github.com/angular/angular/issues/12313
-    .overrideComponent(GameListComponent, { set: { changeDetection: ChangeDetectionStrategy.Default } })
-    .compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [
+          GameListComponent,
+          MockPipe(MapThumbnailPipe, value => ''),
+        ],
+        imports: [
+          RouterTestingModule,
+          NgxPaginationModule,
+          NoopAnimationsModule,
+        ],
+        providers: [
+          {
+            provide: GamesService,
+            useValue: jasmine.createSpyObj<GamesService>(GamesService.name, [
+              'fetchGames',
+            ]),
+          },
+          {
+            provide: ActivatedRoute,
+            useValue: activatedRoute,
+          },
+        ],
+      })
+        // https://github.com/angular/angular/issues/12313
+        .overrideComponent(GameListComponent, {
+          set: { changeDetection: ChangeDetectionStrategy.Default },
+        })
+        .compileComponents();
+    }),
+  );
 
   beforeEach(() => {
     results = new Subject();
     gamesService = TestBed.inject(GamesService) as jasmine.SpyObj<GamesService>;
-    gamesService.fetchGames.and.returnValue(results.asObservable().pipe(first()));
+    gamesService.fetchGames.and.returnValue(
+      results.asObservable().pipe(first()),
+    );
 
     fixture = TestBed.createComponent(GameListComponent);
     component = fixture.componentInstance;
@@ -79,7 +89,7 @@ describe('GameListComponent', () => {
 
     router = TestBed.inject(Router);
     spyOn(router, 'navigate').and.callFake((commands, extras) => {
-      queryParams.next(convertToParamMap(extras.queryParams || { }));
+      queryParams.next(convertToParamMap(extras.queryParams || {}));
       return Promise.resolve(true);
     });
   });
@@ -95,7 +105,10 @@ describe('GameListComponent', () => {
 
   describe('when there is not more than 1 page', () => {
     beforeEach(() => {
-      results.next({ results: mockGameListResponse.results, itemCount: 5 } as any);
+      results.next({
+        results: mockGameListResponse.results,
+        itemCount: 5,
+      } as any);
       fixture.detectChanges();
     });
 
@@ -119,10 +132,11 @@ describe('GameListComponent', () => {
     });
 
     it('should request given page', () => {
-      const second = fixture.debugElement.query(By.css('.pagination__item:nth-child(3) a')).nativeElement as HTMLAnchorElement;
+      const second = fixture.debugElement.query(
+        By.css('.pagination__item:nth-child(3) a'),
+      ).nativeElement as HTMLAnchorElement;
       second.click();
       expect(gamesService.fetchGames).toHaveBeenCalledWith(5, 5);
     });
   });
-
 });

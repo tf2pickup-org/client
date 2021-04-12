@@ -10,23 +10,24 @@ class RouterStub {
 }
 
 class TitleStub {
-  setTitle(title: string) { }
+  setTitle(title: string) {}
 }
 
 describe('TitleControllerComponent', () => {
   let component: TitleControllerComponent;
   let fixture: ComponentFixture<TitleControllerComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ TitleControllerComponent ],
-      providers: [
-        { provide: Router, useClass: RouterStub },
-        { provide: Title, useClass: TitleStub },
-      ],
-    })
-    .compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [TitleControllerComponent],
+        providers: [
+          { provide: Router, useClass: RouterStub },
+          { provide: Title, useClass: TitleStub },
+        ],
+      }).compileComponents();
+    }),
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TitleControllerComponent);
@@ -42,7 +43,9 @@ describe('TitleControllerComponent', () => {
     environment.titleSuffix = 'FAKE_TITLE_SUFFIX';
     const spy = spyOn(TestBed.get(Title), 'setTitle');
     const router = TestBed.get(Router) as RouterStub;
-    const snapshot = { root: { firstChild: { data: { title: 'FAKE_TITLE' } } } } as unknown as RouterStateSnapshot;
+    const snapshot = ({
+      root: { firstChild: { data: { title: 'FAKE_TITLE' } } },
+    } as unknown) as RouterStateSnapshot;
     router.events.next(new RoutesRecognized(0, '', '', snapshot));
     expect(spy).toHaveBeenCalledWith('FAKE_TITLE • FAKE_TITLE_SUFFIX');
   });

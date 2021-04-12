@@ -52,4 +52,4 @@ import { MinimumTf2InGameHoursDialogComponent } from './player-restrictions/mini
     MinimumTf2InGameHoursDialogComponent,
   ],
 })
-export class AdminModule { }
+export class AdminModule {}

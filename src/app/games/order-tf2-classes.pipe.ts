@@ -17,12 +17,12 @@ const tf2ClassPriority = {
 };
 
 @Pipe({
-  name: 'orderTf2Classes'
+  name: 'orderTf2Classes',
 })
 export class OrderTf2ClassesPipe implements PipeTransform {
-
   transform(value: ResolvedGameSlot[]): ResolvedGameSlot[] {
-    return value.sort((a, b) => tf2ClassPriority[b.gameClass] - tf2ClassPriority[a.gameClass]);
+    return value.sort(
+      (a, b) => tf2ClassPriority[b.gameClass] - tf2ClassPriority[a.gameClass],
+    );
   }
-
 }

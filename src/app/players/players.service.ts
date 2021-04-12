@@ -20,42 +20,63 @@ type AllPlayerSkillsResponse = {
 }[];
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PlayersService {
-
   constructor(
     private http: HttpClient,
     @Inject(API_URL) private apiUrl: string,
     private store: Store,
-  ) { }
+  ) {}
 
   fetchPlayer(playerId: string): Observable<Player> {
     return this.http.get<Player>(`${this.apiUrl}/players/${playerId}`);
   }
 
-  fetchPlayerGames(playerId: string, offset: number, limit: number = 10): Observable<PaginatedList<Game>> {
-    return this.http.get<PaginatedList<Game>>(`${this.apiUrl}/players/${playerId}/games?offset=${offset}&limit=${limit}`);
+  fetchPlayerGames(
+    playerId: string,
+    offset: number,
+    limit: number = 10,
+  ): Observable<PaginatedList<Game>> {
+    return this.http.get<PaginatedList<Game>>(
+      `${this.apiUrl}/players/${playerId}/games?offset=${offset}&limit=${limit}`,
+    );
   }
 
   setPlayerName(playerId: string, name: string): Observable<Player> {
-    return this.http.patch<Player>(`${this.apiUrl}/players/${playerId}`, { name });
+    return this.http.patch<Player>(`${this.apiUrl}/players/${playerId}`, {
+      name,
+    });
   }
 
   setPlayerRoles(playerId: string, roles: PlayerRole[]): Observable<Player> {
-    return this.http.patch<Player>(`${this.apiUrl}/players/${playerId}`, { roles });
+    return this.http.patch<Player>(`${this.apiUrl}/players/${playerId}`, {
+      roles,
+    });
   }
 
-  setPlayerSkill(playerId: string, skill: { [gameClass in Tf2ClassName]?: number }) {
-    return this.http.put<{ [gameClass in Tf2ClassName]?: number }>(`${this.apiUrl}/players/${playerId}/skill`, skill);
+  setPlayerSkill(
+    playerId: string,
+    skill: { [gameClass in Tf2ClassName]?: number },
+  ) {
+    return this.http.put<{ [gameClass in Tf2ClassName]?: number }>(
+      `${this.apiUrl}/players/${playerId}/skill`,
+      skill,
+    );
   }
 
   fetchAllPlayerSkills(): Observable<AllPlayerSkillsResponse> {
-    return this.http.get<AllPlayerSkillsResponse>(`${this.apiUrl}/players/all/skill`);
+    return this.http.get<AllPlayerSkillsResponse>(
+      `${this.apiUrl}/players/all/skill`,
+    );
   }
 
-  fetchPlayerSkill(playerId: string): Observable<{ [gameClass in Tf2ClassName]?: number }> {
-    return this.http.get<Record<Tf2ClassName, number>>(`${this.apiUrl}/players/${playerId}/skill`);
+  fetchPlayerSkill(
+    playerId: string,
+  ): Observable<{ [gameClass in Tf2ClassName]?: number }> {
+    return this.http.get<Record<Tf2ClassName, number>>(
+      `${this.apiUrl}/players/${playerId}/skill`,
+    );
   }
 
   fetchAllPlayers(): Observable<Player[]> {
@@ -63,32 +84,47 @@ export class PlayersService {
   }
 
   fetchPlayerStats(playerId: string): Observable<PlayerStats> {
-    return this.http.get<PlayerStats>(`${this.apiUrl}/players/${playerId}/stats`);
+    return this.http.get<PlayerStats>(
+      `${this.apiUrl}/players/${playerId}/stats`,
+    );
   }
 
   fetchPlayerBans(playerId: string): Observable<PlayerBan[]> {
-    return this.http.get<PlayerBan[]>(`${this.apiUrl}/players/${playerId}/bans`);
+    return this.http.get<PlayerBan[]>(
+      `${this.apiUrl}/players/${playerId}/bans`,
+    );
   }
 
   addPlayerBan(playerBan: Partial<PlayerBan>): Observable<PlayerBan> {
-    return this.http.post<PlayerBan>(`${this.apiUrl}/players/${playerBan.player}/bans`, playerBan);
+    return this.http.post<PlayerBan>(
+      `${this.apiUrl}/players/${playerBan.player}/bans`,
+      playerBan,
+    );
   }
 
   revokePlayerBan(playerBan: PlayerBan): Observable<PlayerBan> {
-    return this.http.post<PlayerBan>(`${this.apiUrl}/players/${playerBan.player}/bans/${playerBan.id}?revoke`, { });
+    return this.http.post<PlayerBan>(
+      `${this.apiUrl}/players/${playerBan.player}/bans/${playerBan.id}?revoke`,
+      {},
+    );
   }
 
-  defaultSkill(playerId: string): Observable<{ [gameClass in Tf2ClassName]?: number }> {
+  defaultSkill(
+    playerId: string,
+  ): Observable<{ [gameClass in Tf2ClassName]?: number }> {
     return this.store.pipe(
       select(queueConfig),
       first(config => !!config),
-      map(config => config.classes.reduce((_skill, curr) => { _skill[curr.name] = 1; return _skill; },
-        { } as Record<Tf2ClassName, number>)),
+      map(config =>
+        config.classes.reduce((_skill, curr) => {
+          _skill[curr.name] = 1;
+          return _skill;
+        }, {} as Record<Tf2ClassName, number>),
+      ),
     );
   }
 
   forceCreatePlayer(player: Partial<Player>) {
     return this.http.post<Player>(`${this.apiUrl}/players`, player);
   }
-
 }

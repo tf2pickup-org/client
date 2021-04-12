@@ -14,29 +14,32 @@ interface MapPoolState {
 const initialState: MapPoolState = {
   loading: true,
   saving: false,
-}
+};
 
 @Injectable()
 export class MapPoolStore extends ComponentStore<MapPoolState> {
-
   // selectors
   readonly maps = this.select(state => state.maps);
   readonly enabled = this.select(state => !state.loading && !state.saving);
 
   // effects
-  readonly loadMaps = this.effect(() => this.queueService.fetchMaps().pipe(
-    tap(() => this.setLoading(true)),
-    tap(maps => this.setMaps(maps)),
-    tap(() => this.setLoading(false)),
-  ));
-
-  readonly save = this.effect((maps: Observable<Map[]>) => maps.pipe(
-    tap(() => this.setSaving(true)),
-    mergeMap(maps => this.queueService.setMaps(maps).pipe(
+  readonly loadMaps = this.effect(() =>
+    this.queueService.fetchMaps().pipe(
+      tap(() => this.setLoading(true)),
       tap(maps => this.setMaps(maps)),
-    )),
-    tap(() => this.setSaving(false)),
-  ));
+      tap(() => this.setLoading(false)),
+    ),
+  );
+
+  readonly save = this.effect((maps: Observable<Map[]>) =>
+    maps.pipe(
+      tap(() => this.setSaving(true)),
+      mergeMap(maps =>
+        this.queueService.setMaps(maps).pipe(tap(maps => this.setMaps(maps))),
+      ),
+      tap(() => this.setSaving(false)),
+    ),
+  );
 
   // updaters
   private setLoading = this.updater((state, loading: boolean) => ({
@@ -54,10 +57,7 @@ export class MapPoolStore extends ComponentStore<MapPoolState> {
     maps,
   }));
 
-  constructor(
-    private queueService: QueueService,
-  ) {
+  constructor(private queueService: QueueService) {
     super(initialState);
   }
-
 }

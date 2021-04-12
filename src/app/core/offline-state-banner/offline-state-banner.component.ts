@@ -11,7 +11,6 @@ import { of } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OfflineStateBannerComponent {
-
   ioConnected = this.store.select(ioConnected).pipe(
     switchMap(connected => {
       if (connected) {
@@ -22,8 +21,5 @@ export class OfflineStateBannerComponent {
     }),
   );
 
-  constructor(
-    private store: Store,
-  ) { }
-
+  constructor(private store: Store) {}
 }

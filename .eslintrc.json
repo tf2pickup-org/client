@@ -16,7 +16,8 @@
         "plugin:@angular-eslint/recommended",
         "plugin:@angular-eslint/template/process-inline-templates",
         "plugin:rxjs/recommended",
-        "plugin:ngrx/recommended"
+        "plugin:ngrx/recommended",
+        "plugin:prettier/recommended"
       ],
       "rules": {
         "@angular-eslint/component-selector": [
