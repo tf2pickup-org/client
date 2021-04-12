@@ -28,8 +28,8 @@ describe('Socket', () => {
   describe('#on()', () => {
     it('should add event listener', () => {
       socket.on('queue state update', () => {});
-      // @ts-ignore
       expect(
+        // @ts-expect-error
         socketFactoryService.socket.listenerCount('queue state update'),
       ).toEqual(1);
     });
@@ -42,8 +42,8 @@ describe('Socket', () => {
 
     it('should remove event listener', () => {
       socket.off('queue state update');
-      // @ts-ignore
       expect(
+        // @ts-expect-error
         socketFactoryService.socket.listenerCount('queue state update'),
       ).toEqual(0);
     });
