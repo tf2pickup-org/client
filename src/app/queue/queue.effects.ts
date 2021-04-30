@@ -45,28 +45,28 @@ import { ioConnected } from '@app/io/io.actions';
 
 @Injectable()
 export class QueueEffects {
-  loadQueueWhenOnline = createEffect(() =>
-    this.actions.pipe(ofType(ioConnected), mapTo(loadQueue())),
-  );
+  loadQueueWhenOnline = createEffect(() => {
+    return this.actions.pipe(ofType(ioConnected), mapTo(loadQueue()));
+  });
 
-  loadQueue = createEffect(() =>
-    this.actions.pipe(
+  loadQueue = createEffect(() => {
+    return this.actions.pipe(
       ofType(loadQueue),
       mergeMap(() => this.queueService.fetchQueue()),
       map(queue => queueLoaded({ queue })),
-    ),
-  );
+    );
+  });
 
-  scrambleMaps = createEffect(() =>
-    this.actions.pipe(
+  scrambleMaps = createEffect(() => {
+    return this.actions.pipe(
       ofType(scrambleMaps),
       mergeMap(() => this.queueService.scrambleMaps()),
       map(results => mapVoteResultsUpdated({ results })),
-    ),
-  );
+    );
+  });
 
-  joinQueue = createEffect(() =>
-    this.actions.pipe(
+  joinQueue = createEffect(() => {
+    return this.actions.pipe(
       ofType(joinQueue),
       mergeMap(({ slotId }) =>
         this.queueService.joinQueue(slotId).pipe(
@@ -76,11 +76,11 @@ export class QueueEffects {
           ),
         ),
       ),
-    ),
-  );
+    );
+  });
 
-  leaveQueue = createEffect(() =>
-    this.actions.pipe(
+  leaveQueue = createEffect(() => {
+    return this.actions.pipe(
       ofType(leaveQueue),
       mergeMap(() =>
         this.queueService.leaveQueue().pipe(
@@ -90,11 +90,11 @@ export class QueueEffects {
           ),
         ),
       ),
-    ),
-  );
+    );
+  });
 
-  readyUp = createEffect(() =>
-    this.actions.pipe(
+  readyUp = createEffect(() => {
+    return this.actions.pipe(
       ofType(readyUp),
       mergeMap(() =>
         this.queueService.readyUp().pipe(
@@ -104,54 +104,54 @@ export class QueueEffects {
           ),
         ),
       ),
-    ),
-  );
+    );
+  });
 
-  autoPreReady = createEffect(() =>
-    this.actions.pipe(ofType(readyUp), mapTo(startPreReady())),
-  );
+  autoPreReady = createEffect(() => {
+    return this.actions.pipe(ofType(readyUp), mapTo(startPreReady()));
+  });
 
-  cancelPreReadyOnQueueLeave = createEffect(() =>
-    this.store.select(isInQueue).pipe(
+  cancelPreReadyOnQueueLeave = createEffect(() => {
+    return this.store.select(isInQueue).pipe(
       filter(inQueue => !inQueue),
       mapTo(stopPreReady()),
-    ),
-  );
+    );
+  });
 
-  cancelPreReadyOnGameLaunch = createEffect(() =>
-    this.actions.pipe(ofType(ownGameAdded), mapTo(stopPreReady())),
-  );
+  cancelPreReadyOnGameLaunch = createEffect(() => {
+    return this.actions.pipe(ofType(ownGameAdded), mapTo(stopPreReady()));
+  });
 
-  markFriend = createEffect(() =>
-    this.actions.pipe(
+  markFriend = createEffect(() => {
+    return this.actions.pipe(
       ofType(markFriend),
       mergeMap(({ friendId }) =>
         this.queueService
           .markFriend(friendId)
           .pipe(map(friendships => friendshipsUpdated({ friendships }))),
       ),
-    ),
-  );
+    );
+  });
 
-  voteForMap = createEffect(() =>
-    this.actions.pipe(
+  voteForMap = createEffect(() => {
+    return this.actions.pipe(
       ofType(voteForMap),
       mergeMap(({ map: aMap }) =>
         this.queueService
           .voteForMap(aMap)
           .pipe(map(theMap => mapVoted({ map: theMap }))),
       ),
-    ),
-  );
+    );
+  });
 
-  resetMapVote = createEffect(() =>
-    this.store.pipe(
+  resetMapVote = createEffect(() => {
+    return this.store.pipe(
       select(isInQueue),
       filter(inQueue => !inQueue),
       distinctUntilChanged(),
       mapTo(mapVoteReset()),
-    ),
-  );
+    );
+  });
 
   constructor(
     private actions: Actions,
