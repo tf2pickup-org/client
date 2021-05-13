@@ -16,7 +16,8 @@ import { MDCSnackbar } from '@material/snackbar';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ActiveGameSnackbarComponent
-  implements AfterViewChecked, OnDestroy {
+  implements AfterViewChecked, OnDestroy
+{
   @Input()
   gameId: string;
 

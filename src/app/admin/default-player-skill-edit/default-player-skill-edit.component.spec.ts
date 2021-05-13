@@ -95,8 +95,9 @@ describe(DefaultPlayerSkillEditComponent.name, () => {
     let soldierInput: HTMLInputElement;
 
     beforeEach(() => {
-      soldierInput = ngMocks.find('input[type=number][name=soldier]')
-        .nativeElement;
+      soldierInput = ngMocks.find(
+        'input[type=number][name=soldier]',
+      ).nativeElement;
       soldierInput.valueAsNumber = 4;
       soldierInput.dispatchEvent(new Event('input'));
       fixture.detectChanges();

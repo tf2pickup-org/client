@@ -22,11 +22,9 @@ export class TwitchService {
     socket: Socket,
     private tokenStore: TokenStoreService,
   ) {
-    fromEvent<TwitchStream[]>(
-      socket,
-      'twitch streams update',
-    ).subscribe(twitchStreams =>
-      this.store.dispatch(twitchStreamsUpdated({ twitchStreams })),
+    fromEvent<TwitchStream[]>(socket, 'twitch streams update').subscribe(
+      twitchStreams =>
+        this.store.dispatch(twitchStreamsUpdated({ twitchStreams })),
     );
   }
 

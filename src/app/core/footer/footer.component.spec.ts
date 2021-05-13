@@ -63,8 +63,9 @@ describe('FooterComponent', () => {
       store.refreshState();
       fixture.detectChanges();
 
-      logoutButton = fixture.debugElement.query(By.css('a[logoutButton]'))
-        .nativeElement;
+      logoutButton = fixture.debugElement.query(
+        By.css('a[logoutButton]'),
+      ).nativeElement;
     });
 
     it('should render the logout button', () => {

@@ -22,7 +22,8 @@ import { finalize, tap } from 'rxjs/operators';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WhitelistEditComponent
-  implements OnInit, AfterViewInit, OnDestroy {
+  implements OnInit, AfterViewInit, OnDestroy
+{
   isSaving = new BehaviorSubject<boolean>(false);
 
   form = this.formBuilder.group({

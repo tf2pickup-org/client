@@ -124,7 +124,7 @@ describe('QueueEffects', () => {
     let socket: ReturnType<typeof _>;
 
     beforeEach(() => {
-      socket = (TestBed.inject(Socket) as unknown) as typeof socket;
+      socket = TestBed.inject(Socket) as unknown as typeof socket;
       spyOn(store, 'dispatch');
     });
 
