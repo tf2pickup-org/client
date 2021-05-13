@@ -105,8 +105,9 @@ describe('PlayerBansComponent', () => {
       });
 
       fixture.detectChanges();
-      playerBanItem = fixture.debugElement.query(By.css('app-player-ban-item'))
-        .componentInstance;
+      playerBanItem = fixture.debugElement.query(
+        By.css('app-player-ban-item'),
+      ).componentInstance;
     });
 
     it('should render PlayerBanItem', () => {

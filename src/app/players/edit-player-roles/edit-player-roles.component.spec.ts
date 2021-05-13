@@ -143,9 +143,10 @@ describe(EditPlayerRolesComponent.name, () => {
           });
 
           it('should call the api', () => {
-            expect(
-              playersService.setPlayerRoles,
-            ).toHaveBeenCalledWith('FAKE_PLAYER_ID', ['super user', 'admin']);
+            expect(playersService.setPlayerRoles).toHaveBeenCalledWith(
+              'FAKE_PLAYER_ID',
+              ['super user', 'admin'],
+            );
           });
 
           it('should disable the submit button', () => {

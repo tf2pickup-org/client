@@ -165,11 +165,8 @@ export class QueueEffects {
     fromEvent<QueueState>(socket, 'queue state update').subscribe(queueState =>
       this.store.dispatch(queueStateUpdated({ queueState })),
     );
-    fromEvent<MapVoteResult[]>(
-      socket,
-      'map vote results update',
-    ).subscribe(results =>
-      this.store.dispatch(mapVoteResultsUpdated({ results })),
+    fromEvent<MapVoteResult[]>(socket, 'map vote results update').subscribe(
+      results => this.store.dispatch(mapVoteResultsUpdated({ results })),
     );
     fromEvent<SubstituteRequest[]>(
       socket,
@@ -177,11 +174,8 @@ export class QueueEffects {
     ).subscribe(substituteRequests =>
       this.store.dispatch(substituteRequestsUpdated({ substituteRequests })),
     );
-    fromEvent<Friendship[]>(
-      socket,
-      'friendships update',
-    ).subscribe(friendships =>
-      this.store.dispatch(friendshipsUpdated({ friendships })),
+    fromEvent<Friendship[]>(socket, 'friendships update').subscribe(
+      friendships => this.store.dispatch(friendshipsUpdated({ friendships })),
     );
   }
 }

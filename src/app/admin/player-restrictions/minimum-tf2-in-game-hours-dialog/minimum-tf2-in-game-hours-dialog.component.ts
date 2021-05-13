@@ -18,7 +18,8 @@ import { MDCTextField } from '@material/textfield';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MinimumTf2InGameHoursDialogComponent
-  implements AfterViewInit, OnDestroy {
+  implements AfterViewInit, OnDestroy
+{
   @ViewChild('input')
   inputControl: ElementRef;
 

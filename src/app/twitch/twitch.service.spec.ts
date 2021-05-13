@@ -65,8 +65,9 @@ describe('TwitchService', () => {
   describe('#disconnect()', () => {
     it('should call the API', () => {
       service.disconnect().subscribe();
-      const request = httpController.expectOne('FAKE_URL/twitch/disconnect')
-        .request;
+      const request = httpController.expectOne(
+        'FAKE_URL/twitch/disconnect',
+      ).request;
       expect(request.method).toBe('PUT');
     });
   });

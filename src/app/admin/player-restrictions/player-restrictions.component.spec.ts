@@ -39,23 +39,19 @@ describe(PlayerRestrictionsComponent.name, () => {
         fetchValue: jasmine.createSpy('fetchValue').and.callFake(
           key =>
             ({
-              [ConfigurationEntryKey.etf2lAccountRequired]: etf2lAccountRequired.pipe(
-                take(1),
-              ),
-              [ConfigurationEntryKey.minimumTf2InGameHours]: minimumTf2InGameHours.pipe(
-                take(1),
-              ),
+              [ConfigurationEntryKey.etf2lAccountRequired]:
+                etf2lAccountRequired.pipe(take(1)),
+              [ConfigurationEntryKey.minimumTf2InGameHours]:
+                minimumTf2InGameHours.pipe(take(1)),
             }[key]),
         ),
         storeValue: jasmine.createSpy('storeValue').and.callFake(
           key =>
             ({
-              [ConfigurationEntryKey.etf2lAccountRequired]: etf2lAccountRequired.pipe(
-                take(1),
-              ),
-              [ConfigurationEntryKey.minimumTf2InGameHours]: minimumTf2InGameHours.pipe(
-                take(1),
-              ),
+              [ConfigurationEntryKey.etf2lAccountRequired]:
+                etf2lAccountRequired.pipe(take(1)),
+              [ConfigurationEntryKey.minimumTf2InGameHours]:
+                minimumTf2InGameHours.pipe(take(1)),
             }[key]),
         ),
       })

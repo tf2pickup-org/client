@@ -71,8 +71,9 @@ describe('AddPlayerBanComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
 
-    submit = fixture.debugElement.query(By.css('button[type=submit]'))
-      .nativeElement;
+    submit = fixture.debugElement.query(
+      By.css('button[type=submit]'),
+    ).nativeElement;
   });
 
   afterEach(() => actions.complete());

@@ -43,9 +43,9 @@ describe('TitleControllerComponent', () => {
     environment.titleSuffix = 'FAKE_TITLE_SUFFIX';
     const spy = spyOn(TestBed.get(Title), 'setTitle');
     const router = TestBed.get(Router) as RouterStub;
-    const snapshot = ({
+    const snapshot = {
       root: { firstChild: { data: { title: 'FAKE_TITLE' } } },
-    } as unknown) as RouterStateSnapshot;
+    } as unknown as RouterStateSnapshot;
     router.events.next(new RoutesRecognized(0, '', '', snapshot));
     expect(spy).toHaveBeenCalledWith('FAKE_TITLE • FAKE_TITLE_SUFFIX');
   });

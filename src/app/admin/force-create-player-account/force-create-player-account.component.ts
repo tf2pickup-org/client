@@ -18,7 +18,8 @@ import { MDCTextField } from '@material/textfield';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ForceCreatePlayerAccountComponent
-  implements AfterViewInit, OnDestroy {
+  implements AfterViewInit, OnDestroy
+{
   form = this.formBuilder.group({
     name: ['', Validators.required],
     steamId: ['', [Validators.required, Validators.pattern(/^\d{17}$/)]],

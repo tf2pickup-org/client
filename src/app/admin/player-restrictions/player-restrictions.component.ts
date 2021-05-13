@@ -25,7 +25,8 @@ import { Location } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PlayerRestrictionsComponent
-  implements OnInit, AfterViewInit, OnDestroy {
+  implements OnInit, AfterViewInit, OnDestroy
+{
   form = this.formBuilder.group({
     etf2lAccountRequired: [false],
     minimumTf2InGameHours: [0],

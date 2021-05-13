@@ -47,7 +47,8 @@ describe('GameTeamPlayerListComponent', () => {
     `,
       {
         players: inputs.players.asObservable(),
-        showPlayerConnectionStatus: inputs.showPlayerConnectionStatus.asObservable(),
+        showPlayerConnectionStatus:
+          inputs.showPlayerConnectionStatus.asObservable(),
         showAdminActionButtons: inputs.showAdminActionButtons.asObservable(),
         locked: inputs.locked.asObservable(),
       },

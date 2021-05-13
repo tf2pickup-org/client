@@ -268,8 +268,9 @@ describe('GameDetailsComponent', () => {
       });
 
       it('should render game basic info', () => {
-        const gameBasicInfo = ngMocks.find(GameBasicInfoComponent)
-          .componentInstance;
+        const gameBasicInfo = ngMocks.find(
+          GameBasicInfoComponent,
+        ).componentInstance;
         expect(gameBasicInfo.map).toEqual('cp_sunshine');
         expect(gameBasicInfo.state).toEqual('launching');
         expect(gameBasicInfo.gameServerName).toEqual('FAKE_GAME_SERVER');
@@ -298,8 +299,9 @@ describe('GameDetailsComponent', () => {
 
       describe('when the game is running', () => {
         it('should render the connect string', () => {
-          const connectString = ngMocks.find(ConnectStringComponent)
-            .componentInstance;
+          const connectString = ngMocks.find(
+            ConnectStringComponent,
+          ).componentInstance;
           expect(connectString.stvConnectString).toEqual(
             'FAKE_STV_CONNECT_STRING',
           );
@@ -322,8 +324,9 @@ describe('GameDetailsComponent', () => {
           });
 
           it('should be able to take the substitute spot', () => {
-            const gameTeamPlayerList = ngMocks.find(GameTeamPlayerListComponent)
-              .componentInstance;
+            const gameTeamPlayerList = ngMocks.find(
+              GameTeamPlayerListComponent,
+            ).componentInstance;
             expect(gameTeamPlayerList.locked).toBe(false);
 
             gameTeamPlayerList.replacePlayer.emit('FAKE_PLAYER_1_ID');
@@ -377,8 +380,9 @@ describe('GameDetailsComponent', () => {
             });
 
             it('should have access to the connect string', () => {
-              const connectString = ngMocks.find(ConnectStringComponent)
-                .componentInstance;
+              const connectString = ngMocks.find(
+                ConnectStringComponent,
+              ).componentInstance;
               expect(connectString.connectString).toEqual(
                 'FAKE_CONNECT_STRING',
               );
@@ -386,8 +390,9 @@ describe('GameDetailsComponent', () => {
             });
 
             it('should have the join mumble button', () => {
-              const mumbleJoinButton = ngMocks.find(MumbleJoinButtonComponent)
-                .componentInstance;
+              const mumbleJoinButton = ngMocks.find(
+                MumbleJoinButtonComponent,
+              ).componentInstance;
               expect(mumbleJoinButton.mumbleUrl).toEqual(
                 'mumble://FAKE_PLAYER@melkor.tf/tf2pickup/5/RED',
               );
@@ -532,8 +537,8 @@ describe('GameDetailsComponent', () => {
         });
 
         it('should render game summary', () => {
-          const gameSummary = ngMocks.find(GameSummaryComponent)
-            .componentInstance;
+          const gameSummary =
+            ngMocks.find(GameSummaryComponent).componentInstance;
           expect(gameSummary.demoUrl).toEqual('FAKE_DEMO_URL');
           expect(gameSummary.logsUrl).toEqual('FAKE_LOGS_URL');
         });
@@ -543,8 +548,9 @@ describe('GameDetailsComponent', () => {
         });
 
         it('should not render player connection statuses', () => {
-          const playerList = ngMocks.find(GameTeamPlayerListComponent)
-            .componentInstance;
+          const playerList = ngMocks.find(
+            GameTeamPlayerListComponent,
+          ).componentInstance;
           expect(playerList.showPlayerConnectionStatus).toBe(false);
         });
 
@@ -572,8 +578,9 @@ describe('GameDetailsComponent', () => {
         store.refreshState();
         fixture.detectChanges();
 
-        gameAdminButtons = ngMocks.find(GameAdminButtonsComponent)
-          .componentInstance;
+        gameAdminButtons = ngMocks.find(
+          GameAdminButtonsComponent,
+        ).componentInstance;
         gameTeamPlayerLists = ngMocks
           .findAll(GameTeamPlayerListComponent)
           .map(m => m.componentInstance);
@@ -603,8 +610,9 @@ describe('GameDetailsComponent', () => {
       });
 
       it('should be able to request substitute', () => {
-        const gameTeamPlayerList = ngMocks.find(GameTeamPlayerListComponent)
-          .componentInstance;
+        const gameTeamPlayerList = ngMocks.find(
+          GameTeamPlayerListComponent,
+        ).componentInstance;
         gameTeamPlayerList.requestSubstitute.emit('FAKE_PLAYER_1_ID');
         expect(store.dispatch).toHaveBeenCalledWith(
           requestSubstitute({
