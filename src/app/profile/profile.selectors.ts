@@ -27,11 +27,6 @@ export const bans = createSelector(profile, profile =>
 
 export const isBanned = createSelector(bans, bans => bans.length > 0);
 
-export const twitchTvUser = createSelector(
-  currentPlayer,
-  player => player?.twitchTvUser,
-);
-
 export const preferences = createSelector(profile, profile =>
   profile.authenticated === 'authenticated' ? profile.preferences : {},
 );

@@ -3,7 +3,6 @@ import {
   isSuperUser,
   bans,
   isBanned,
-  twitchTvUser,
   isLoggedIn,
 } from './profile.selectors';
 
@@ -58,15 +57,5 @@ describe('isBanned', () => {
   it('should return true if the player has at least one ban', () => {
     expect(isBanned.projector([])).toBe(false);
     expect(isBanned.projector([{}])).toBe(true);
-  });
-});
-
-describe('twitchTvUser', () => {
-  it('should return twitch.tv user profile', () => {
-    expect(twitchTvUser.projector(null)).toBe(undefined);
-    expect(twitchTvUser.projector({})).toBe(undefined);
-    expect(
-      twitchTvUser.projector({ twitchTvUser: { displayName: 'foo' } }),
-    ).toEqual({ displayName: 'foo' } as any);
   });
 });

@@ -1,4 +1,5 @@
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import { LinkedProfiles } from '../models/linked-profiles';
 import { Player } from '../models/player';
 
 @Component({
@@ -10,4 +11,7 @@ import { Player } from '../models/player';
 export class PlayerDetailsExternalProfileLinksComponent {
   @Input()
   player: Player;
+
+  @Input()
+  linkedProfiles: LinkedProfiles;
 }

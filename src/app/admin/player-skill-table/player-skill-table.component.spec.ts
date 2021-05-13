@@ -48,6 +48,7 @@ const allPlayers = [
       medium: 'FAKE_MEDIUM_AVATAR_URL',
       large: 'FAKE_LARGE_AVATAR_URL',
     },
+    _links: [],
   },
 ];
 

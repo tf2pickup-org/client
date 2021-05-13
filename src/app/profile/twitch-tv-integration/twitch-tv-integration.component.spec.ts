@@ -5,14 +5,12 @@ import { TwitchService } from '@app/twitch/twitch.service';
 import { MemoizedSelector } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { EMPTY } from 'rxjs';
-import { twitchTvUser } from '../profile.selectors';
 import { TwitchTvIntegrationComponent } from './twitch-tv-integration.component';
 
 describe('TwitchTvIntegrationComponent', () => {
   let component: TwitchTvIntegrationComponent;
   let fixture: ComponentFixture<TwitchTvIntegrationComponent>;
   let store: MockStore;
-  let twitchTvUserSelector: MemoizedSelector<unknown, Player['twitchTvUser']>;
   let twitchService: jasmine.SpyObj<TwitchService>;
 
   beforeEach(() => {
@@ -34,7 +32,6 @@ describe('TwitchTvIntegrationComponent', () => {
 
   beforeEach(() => {
     store = TestBed.inject(MockStore);
-    twitchTvUserSelector = store.overrideSelector(twitchTvUser, undefined);
 
     fixture = TestBed.createComponent(TwitchTvIntegrationComponent);
     component = fixture.componentInstance;
@@ -67,12 +64,12 @@ describe('TwitchTvIntegrationComponent', () => {
   describe('when logged in via twitch.tv', () => {
     beforeEach(() => {
       twitchService.disconnect.and.returnValue(EMPTY);
-      twitchTvUserSelector.setResult({
-        userId: 'FAKE_USER_ID',
-        login: 'FAKE_USER_LOGIN',
-        displayName: 'FAKE_USER',
-        profileImageUrl: 'FAKE_IMAGE_URL',
-      });
+      // twitchTvUserSelector.setResult({
+      //   userId: 'FAKE_USER_ID',
+      //   login: 'FAKE_USER_LOGIN',
+      //   displayName: 'FAKE_USER',
+      //   profileImageUrl: 'FAKE_IMAGE_URL',
+      // });
       store.refreshState();
       fixture.detectChanges();
     });

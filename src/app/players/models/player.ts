@@ -1,6 +1,7 @@
 import { PlayerRole } from './player-role';
 import { PlayerStats } from './player-stats';
 import { PlayerAvatar } from './player-avatar';
+import { Link } from '@app/shared/models/link';
 
 export interface Player {
   id: string;
@@ -14,10 +15,5 @@ export interface Player {
   skill?: Record<string, number>;
   stats?: PlayerStats;
 
-  twitchTvUser?: {
-    userId: string;
-    login: string;
-    displayName: string;
-    profileImageUrl: string;
-  };
+  _links: Link[];
 }

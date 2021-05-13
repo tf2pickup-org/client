@@ -78,6 +78,7 @@ describe('GameTeamPlayerListComponent', () => {
       gameClass: 'scout',
       connectionStatus: 'offline',
       status: 'active',
+      _links: [],
     };
 
     beforeEach(() => {

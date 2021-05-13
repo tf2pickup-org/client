@@ -4,7 +4,6 @@ import { Player } from './models/player';
 import { API_URL } from '@app/api-url';
 import { HttpClient } from '@angular/common/http';
 import { Game } from '@app/games/models/game';
-import { PlayerSkill } from './models/player-skill';
 import { map, first } from 'rxjs/operators';
 import { PlayerStats } from './models/player-stats';
 import { PlayerBan } from './models/player-ban';
@@ -13,6 +12,7 @@ import { Store, select } from '@ngrx/store';
 import { queueConfig } from '@app/queue/queue.selectors';
 import { PlayerRole } from './models/player-role';
 import { Tf2ClassName } from '@app/shared/models/tf2-class-name';
+import { LinkedProfiles } from './models/linked-profiles';
 
 type AllPlayerSkillsResponse = {
   player: string;
@@ -126,5 +126,11 @@ export class PlayersService {
 
   forceCreatePlayer(player: Partial<Player>) {
     return this.http.post<Player>(`${this.apiUrl}/players`, player);
+  }
+
+  fetchPlayerLinkedProfiles(playerId: string): Observable<LinkedProfiles> {
+    return this.http.get<LinkedProfiles>(
+      `${this.apiUrl}/players/${playerId}/linked-profiles`,
+    );
   }
 }
