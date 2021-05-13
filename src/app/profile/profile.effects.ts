@@ -19,17 +19,17 @@ import { AcceptRulesDialogService } from './accept-rules-dialog.service';
 
 @Injectable()
 export class ProfileEffects implements OnInitEffects {
-  loadProfile = createEffect(() =>
-    this.actions.pipe(
+  loadProfile = createEffect(() => {
+    return this.actions.pipe(
       ofType(loadProfile),
       filter(() => this.authService.authenticated),
       mergeMap(() => this.profileService.fetchProfile()),
       map(profile => profileLoaded({ profile })),
-    ),
-  );
+    );
+  });
 
-  promptUserToAcceptRules = createEffect(() =>
-    this.actions.pipe(
+  promptUserToAcceptRules = createEffect(() => {
+    return this.actions.pipe(
       ofType(profileLoaded),
       filter(({ profile }) => !profile.hasAcceptedRules),
       switchMap(() =>
@@ -37,27 +37,27 @@ export class ProfileEffects implements OnInitEffects {
           .showAcceptRulesDialog()
           .pipe(mapTo(acceptRules())),
       ),
-    ),
-  );
+    );
+  });
 
-  acceptRules = createEffect(() =>
-    this.actions.pipe(
+  acceptRules = createEffect(() => {
+    return this.actions.pipe(
       ofType(acceptRules),
       switchMap(() =>
         this.profileService.acceptRules().pipe(mapTo(rulesAccepted())),
       ),
-    ),
-  );
+    );
+  });
 
-  savePreferences = createEffect(() =>
-    this.actions.pipe(
+  savePreferences = createEffect(() => {
+    return this.actions.pipe(
       ofType(savePreferences),
       mergeMap(({ preferences }) =>
         this.profileService.savePreferences(preferences),
       ),
       map(preferences => preferencesUpdated({ preferences })),
-    ),
-  );
+    );
+  });
 
   constructor(
     private actions: Actions,

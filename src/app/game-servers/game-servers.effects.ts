@@ -18,30 +18,30 @@ import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable()
 export class GameServersEffects {
-  loadGameServers = createEffect(() =>
-    this.actions.pipe(
+  loadGameServers = createEffect(() => {
+    return this.actions.pipe(
       ofType(loadGameServers),
       mergeMap(() =>
         this.gameServersService
           .fetchGameServers()
           .pipe(map(gameServers => gameServersLoaded({ gameServers }))),
       ),
-    ),
-  );
+    );
+  });
 
-  loadGameServer = createEffect(() =>
-    this.actions.pipe(
+  loadGameServer = createEffect(() => {
+    return this.actions.pipe(
       ofType(loadGameServer),
       mergeMap(({ gameServerId }) =>
         this.gameServersService
           .fetchGameServer(gameServerId)
           .pipe(map(gameServer => gameServerLoaded({ gameServer }))),
       ),
-    ),
-  );
+    );
+  });
 
-  addGameServer = createEffect(() =>
-    this.actions.pipe(
+  addGameServer = createEffect(() => {
+    return this.actions.pipe(
       ofType(addGameServer),
       mergeMap(({ gameServer }) =>
         this.gameServersService.addGameServer(gameServer).pipe(
@@ -57,19 +57,19 @@ export class GameServersEffects {
           }),
         ),
       ),
-    ),
-  );
+    );
+  });
 
-  removeGameServer = createEffect(() =>
-    this.actions.pipe(
+  removeGameServer = createEffect(() => {
+    return this.actions.pipe(
       ofType(removeGameServer),
       mergeMap(({ gameServerId }) =>
         this.gameServersService
           .removeGameServer(gameServerId)
           .pipe(map(() => gameServerRemoved({ gameServerId }))),
       ),
-    ),
-  );
+    );
+  });
 
   constructor(
     private actions: Actions,
