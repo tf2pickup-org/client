@@ -7,7 +7,7 @@ import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { EMPTY } from 'rxjs';
 import { TwitchTvIntegrationComponent } from './twitch-tv-integration.component';
 
-describe('TwitchTvIntegrationComponent', () => {
+fdescribe('TwitchTvIntegrationComponent', () => {
   let component: TwitchTvIntegrationComponent;
   let fixture: ComponentFixture<TwitchTvIntegrationComponent>;
   let store: MockStore;

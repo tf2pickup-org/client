@@ -15,5 +15,5 @@ export const linkedProfilesByPlayerId = (playerId: string) =>
 
 export const twitchTvProfile = (playerId: string) =>
   createSelector(linkedProfilesByPlayerId(playerId), profiles =>
-    profiles.linkedProfiles.find(profile => profile.provider === 'twitch.tv'),
+    profiles?.linkedProfiles.find(profile => profile.provider === 'twitch.tv'),
   );
