@@ -1,4 +1,4 @@
-import { version } from 'package.json';
+import version from 'package.json';
 import { entryQueue9v9 } from './entry-queue-9v9';
 import { github, changelog } from './links';
 

@@ -1,5 +1,4 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { isNumber } from 'util';
 
 @Pipe({
   name: 'seconds',

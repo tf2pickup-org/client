@@ -1,4 +1,4 @@
-import { version } from 'package.json';
+import version from 'package.json';
 import { entryQueue6v6 } from './entry-queue-6v6';
 
 const discordInvitation = 'https://discord.gg/UVFVfc4';
@@ -37,4 +37,4 @@ export const environment = {
  * This import should be commented out in production mode because it will have a negative impact
  * on performance if an error is thrown.
  */
-import 'zone.js/dist/zone-error'; // Included with Angular CLI.
+import 'zone.js/plugins/zone-error'; // Included with Angular CLI.
