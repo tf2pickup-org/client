@@ -5,6 +5,7 @@ import {
   rulesAccepted,
   profileUpdated,
   preferencesUpdated,
+  linkedProfilesLoaded,
 } from './profile.actions';
 
 // export type State = Profile;
@@ -40,6 +41,10 @@ const profileReducer = createReducer<State>(
   on(preferencesUpdated, (state, { preferences }) => ({
     ...state,
     preferences,
+  })),
+  on(linkedProfilesLoaded, (state, { linkedProfiles }) => ({
+    ...state,
+    linkedProfiles,
   })),
 );
 
