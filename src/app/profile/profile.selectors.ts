@@ -8,6 +8,11 @@ export const currentPlayer = createSelector(profile, profile =>
   profile.authenticated === 'authenticated' ? profile.player : null,
 );
 
+export const currentPlayerId = createSelector(
+  currentPlayer,
+  currentPlayer => currentPlayer?.id,
+);
+
 export const isLoggedIn = createSelector(
   profile,
   profile => profile.authenticated === 'authenticated',
@@ -29,4 +34,12 @@ export const isBanned = createSelector(bans, bans => bans.length > 0);
 
 export const preferences = createSelector(profile, profile =>
   profile.authenticated === 'authenticated' ? profile.preferences : {},
+);
+
+export const linkedProfiles = createSelector(profile, profile =>
+  profile.authenticated === 'authenticated' ? profile.linkedProfiles : [],
+);
+
+export const twitchTvProfile = createSelector(linkedProfiles, linkedProfiles =>
+  linkedProfiles?.find(p => p.provider === 'twitch.tv'),
 );

@@ -1,17 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { Player } from '@app/players/models/player';
+import { AppState } from '@app/app.state';
+import { TwitchTvProfile } from '@app/players/models/twitch-tv-profile';
 import { TwitchService } from '@app/twitch/twitch.service';
 import { MemoizedSelector } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { EMPTY } from 'rxjs';
+import { twitchTvProfile } from '../profile.selectors';
 import { TwitchTvIntegrationComponent } from './twitch-tv-integration.component';
 
-fdescribe('TwitchTvIntegrationComponent', () => {
+describe(TwitchTvIntegrationComponent.name, () => {
   let component: TwitchTvIntegrationComponent;
   let fixture: ComponentFixture<TwitchTvIntegrationComponent>;
   let store: MockStore;
   let twitchService: jasmine.SpyObj<TwitchService>;
+  let twitchTvProfileSelector: MemoizedSelector<AppState, TwitchTvProfile>;
 
   beforeEach(() => {
     twitchService = jasmine.createSpyObj<TwitchService>(TwitchService.name, [
@@ -32,6 +35,7 @@ fdescribe('TwitchTvIntegrationComponent', () => {
 
   beforeEach(() => {
     store = TestBed.inject(MockStore);
+    twitchTvProfileSelector = store.overrideSelector(twitchTvProfile, null);
 
     fixture = TestBed.createComponent(TwitchTvIntegrationComponent);
     component = fixture.componentInstance;
@@ -64,12 +68,14 @@ fdescribe('TwitchTvIntegrationComponent', () => {
   describe('when logged in via twitch.tv', () => {
     beforeEach(() => {
       twitchService.disconnect.and.returnValue(EMPTY);
-      // twitchTvUserSelector.setResult({
-      //   userId: 'FAKE_USER_ID',
-      //   login: 'FAKE_USER_LOGIN',
-      //   displayName: 'FAKE_USER',
-      //   profileImageUrl: 'FAKE_IMAGE_URL',
-      // });
+      twitchTvProfileSelector.setResult({
+        provider: 'twitch.tv',
+        player: 'FAKE_PLAYER_ID',
+        userId: 'FAKE_USER_ID',
+        login: 'FAKE_USER_LOGIN',
+        displayName: 'FAKE_USER',
+        profileImageUrl: 'FAKE_IMAGE_URL',
+      });
       store.refreshState();
       fixture.detectChanges();
     });
