@@ -10,7 +10,13 @@
     height="50"
     crossorigin>
     <div class="content">
-      <app-player-name [playerId]="stream.playerId"></app-player-name>
+      <app-player-name
+        *ngIf="stream.playerId; else streamDisplayName"
+        [playerId]="stream.playerId"
+      ></app-player-name>
+      <ng-template #streamDisplayName>
+        {{stream.userName}}
+      </ng-template>
       <span><i-feather name="eye" class="mx-2"></i-feather>{{ stream.viewerCount }}</span>
     </div>
 </a>

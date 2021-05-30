@@ -5,7 +5,7 @@ import { ChangeDetectionStrategy } from '@angular/core';
 import { MockComponent } from 'ng-mocks';
 import { PlayerNameComponent } from '@app/players/player-name/player-name.component';
 
-describe('TwitchStreamListItemComponent', () => {
+fdescribe('TwitchStreamListItemComponent', () => {
   let component: TwitchStreamListItemComponent;
   let fixture: ComponentFixture<TwitchStreamListItemComponent>;
 
@@ -71,6 +71,28 @@ describe('TwitchStreamListItemComponent', () => {
         By.css('app-player-name'),
       ).componentInstance as PlayerNameComponent;
       expect(playerNameComponent.playerId).toEqual('FAKE_PLAYER_ID');
+    });
+  });
+
+  describe('when the twitch stream is not bound to a player', () => {
+    beforeEach(() => {
+      component.stream = {
+        id: '42220566028',
+        userName: 'KritzKast',
+        title:
+          'ETF2L Highlander S24 Premiership W2: Feila eSports vs. inVision',
+        viewerCount: 155,
+        thumbnailUrl:
+          'https://static-cdn.jtvnw.net/previews-ttv/live_user_kritzkast-{width}x{height}.jpg',
+      };
+      fixture.detectChanges();
+    });
+
+    it('should render the stream username', () => {
+      expect(fixture.debugElement.query(By.css('app-player-name'))).toBe(null);
+      const content = fixture.debugElement.query(By.css('.content'))
+        .nativeElement as HTMLDivElement;
+      expect(content.innerText).toMatch(/^KritzKast/);
     });
   });
 });
