@@ -1,10 +1,48 @@
+import { Player } from '@app/players/models/player';
+import { TwitchTvProfile } from '@app/players/models/twitch-tv-profile';
 import {
   isAdmin,
   isSuperUser,
   bans,
   isBanned,
   isLoggedIn,
+  currentPlayer,
+  currentPlayerId,
+  linkedProfiles,
 } from './profile.selectors';
+
+describe('currentPlayer', () => {
+  describe('when authenticated', () => {
+    it("should return the player's profile", () => {
+      expect(
+        currentPlayer.projector({
+          authenticated: 'authenticated',
+          player: {
+            id: 'FAKE_PLAYER_ID',
+          },
+        }),
+      ).toEqual({
+        id: 'FAKE_PLAYER_ID',
+      } as Player);
+    });
+  });
+
+  describe('when not authenticated', () => {
+    it('should return null', () => {
+      expect(
+        currentPlayer.projector({ authenticated: 'not authenticated' }),
+      ).toBe(null);
+    });
+  });
+});
+
+describe('currentPlayerId', () => {
+  it("should return current player's id", () => {
+    expect(currentPlayerId.projector({ id: 'FAKE_PLAYER_ID' })).toEqual(
+      'FAKE_PLAYER_ID',
+    );
+  });
+});
 
 describe('isLoggedIn', () => {
   describe('when the user is logged in', () => {
@@ -57,5 +95,36 @@ describe('isBanned', () => {
   it('should return true if the player has at least one ban', () => {
     expect(isBanned.projector([])).toBe(false);
     expect(isBanned.projector([{}])).toBe(true);
+  });
+});
+
+describe('linkedProfiles', () => {
+  describe('when authenticated', () => {
+    it('should return linked profiles', () => {
+      expect(
+        linkedProfiles.projector({
+          authenticated: 'authenticated',
+          linkedProfiles: [
+            {
+              provider: 'twitch.tv',
+            },
+          ],
+        }),
+      ).toEqual([
+        {
+          provider: 'twitch.tv',
+        } as TwitchTvProfile,
+      ]);
+    });
+  });
+
+  describe('when not authenticated', () => {
+    it('should return an empty array', () => {
+      expect(
+        linkedProfiles.projector({
+          authenticated: 'not authenticated',
+        }),
+      ).toEqual([]);
+    });
   });
 });
