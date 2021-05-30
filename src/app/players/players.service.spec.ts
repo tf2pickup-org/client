@@ -5,7 +5,6 @@ import {
   HttpTestingController,
 } from '@angular/common/http/testing';
 import { API_URL } from '@app/api-url';
-import { Player } from './models/player';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { MemoizedSelector, Store } from '@ngrx/store';
 import { AppState } from '@app/app.state';
@@ -260,6 +259,19 @@ describe('PlayersService', () => {
           name: 'FAKE_PLAYER_NAME',
           steamId: 'FAKE_STEAM_ID',
         });
+      },
+    ));
+  });
+
+  describe('#fetchPlayerLinkedProfiles()', () => {
+    it('should query the api', inject(
+      [PlayersService],
+      (service: PlayersService) => {
+        service.fetchPlayerLinkedProfiles('FAKE_PLAYER_ID').subscribe();
+        httpContoller.expectOne(
+          'FAKE_URL/players/FAKE_PLAYER_ID/linked-profiles',
+        );
+        expect().nothing();
       },
     ));
   });
