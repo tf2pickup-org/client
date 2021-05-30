@@ -5,7 +5,7 @@ import { ChangeDetectionStrategy } from '@angular/core';
 import { MockComponent } from 'ng-mocks';
 import { PlayerNameComponent } from '@app/players/player-name/player-name.component';
 
-fdescribe('TwitchStreamListItemComponent', () => {
+describe('TwitchStreamListItemComponent', () => {
   let component: TwitchStreamListItemComponent;
   let fixture: ComponentFixture<TwitchStreamListItemComponent>;
 
