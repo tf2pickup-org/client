@@ -9,6 +9,7 @@ import {
   currentPlayer,
   currentPlayerId,
   linkedProfiles,
+  twitchTvProfile,
 } from './profile.selectors';
 
 describe('currentPlayer', () => {
@@ -126,5 +127,22 @@ describe('linkedProfiles', () => {
         }),
       ).toEqual([]);
     });
+  });
+});
+
+describe('twitchTvProfile', () => {
+  it('should find the twitch.tv profile', () => {
+    expect(
+      twitchTvProfile.projector([
+        {
+          provider: 'twitch.tv',
+        },
+        {
+          provider: 'other provider',
+        },
+      ]),
+    ).toEqual({
+      provider: 'twitch.tv',
+    } as TwitchTvProfile);
   });
 });
