@@ -1,3 +1,4 @@
+import { LinkedProfile } from '@app/players/models/linked-profile';
 import { createAction, props } from '@ngrx/store';
 import { Profile } from './models/profile';
 

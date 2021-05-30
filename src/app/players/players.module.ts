@@ -34,6 +34,7 @@ import { IconsModule } from '@app/icons/icons.module';
 import { EditPlayerRolesComponent } from './edit-player-roles/edit-player-roles.component';
 import { HasBadgePipe } from './has-badge.pipe';
 import { IsAdminPipe } from './is-admin.pipe';
+import { SelectTwitchTvProfilePipe } from './player-details-external-profile-links/select-twitch-tv-profile.pipe';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { IsAdminPipe } from './is-admin.pipe';
     EditPlayerRolesComponent,
     HasBadgePipe,
     IsAdminPipe,
+    SelectTwitchTvProfilePipe,
   ],
   imports: [
     CommonModule,

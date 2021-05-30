@@ -121,6 +121,7 @@ const mockPlayers = [
       medium: 'FAKE_PLAYER_1_MEDIUM_AVATAR_URL',
       large: 'FAKE_PLAYER_1_LARGE_AVATAR_URL',
     },
+    _links: [],
   },
   {
     id: 'FAKE_PLAYER_2_ID',
@@ -133,6 +134,7 @@ const mockPlayers = [
       medium: 'FAKE_PLAYER_2_MEDIUM_AVATAR_URL',
       large: 'FAKE_PLAYER_2_LARGE_AVATAR_URL',
     },
+    _links: [],
   },
 ];
 

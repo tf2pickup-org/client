@@ -13,6 +13,8 @@ import {
   playerBanUpdated,
   addPlayerBan,
   playerBanAdded,
+  loadLinkedProfiles,
+  linkedProfilesLoaded,
 } from './actions';
 
 @Injectable()
@@ -65,6 +67,19 @@ export class PlayerEffects {
         this.playersService
           .revokePlayerBan(ban)
           .pipe(map(playerBan => playerBanUpdated({ playerBan }))),
+      ),
+    );
+  });
+
+  loadLinkedProfiles = createEffect(() => {
+    return this.actions.pipe(
+      ofType(loadLinkedProfiles),
+      mergeMap(({ playerId }) =>
+        this.playersService
+          .fetchPlayerLinkedProfiles(playerId)
+          .pipe(
+            map(linkedProfiles => linkedProfilesLoaded({ linkedProfiles })),
+          ),
       ),
     );
   });

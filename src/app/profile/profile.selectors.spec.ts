@@ -1,11 +1,49 @@
+import { Player } from '@app/players/models/player';
+import { TwitchTvProfile } from '@app/players/models/twitch-tv-profile';
 import {
   isAdmin,
   isSuperUser,
   bans,
   isBanned,
-  twitchTvUser,
   isLoggedIn,
+  currentPlayer,
+  currentPlayerId,
+  linkedProfiles,
+  twitchTvProfile,
 } from './profile.selectors';
+
+describe('currentPlayer', () => {
+  describe('when authenticated', () => {
+    it("should return the player's profile", () => {
+      expect(
+        currentPlayer.projector({
+          authenticated: 'authenticated',
+          player: {
+            id: 'FAKE_PLAYER_ID',
+          },
+        }),
+      ).toEqual({
+        id: 'FAKE_PLAYER_ID',
+      } as Player);
+    });
+  });
+
+  describe('when not authenticated', () => {
+    it('should return null', () => {
+      expect(
+        currentPlayer.projector({ authenticated: 'not authenticated' }),
+      ).toBe(null);
+    });
+  });
+});
+
+describe('currentPlayerId', () => {
+  it("should return current player's id", () => {
+    expect(currentPlayerId.projector({ id: 'FAKE_PLAYER_ID' })).toEqual(
+      'FAKE_PLAYER_ID',
+    );
+  });
+});
 
 describe('isLoggedIn', () => {
   describe('when the user is logged in', () => {
@@ -61,12 +99,50 @@ describe('isBanned', () => {
   });
 });
 
-describe('twitchTvUser', () => {
-  it('should return twitch.tv user profile', () => {
-    expect(twitchTvUser.projector(null)).toBe(undefined);
-    expect(twitchTvUser.projector({})).toBe(undefined);
+describe('linkedProfiles', () => {
+  describe('when authenticated', () => {
+    it('should return linked profiles', () => {
+      expect(
+        linkedProfiles.projector({
+          authenticated: 'authenticated',
+          linkedProfiles: [
+            {
+              provider: 'twitch.tv',
+            },
+          ],
+        }),
+      ).toEqual([
+        {
+          provider: 'twitch.tv',
+        } as TwitchTvProfile,
+      ]);
+    });
+  });
+
+  describe('when not authenticated', () => {
+    it('should return an empty array', () => {
+      expect(
+        linkedProfiles.projector({
+          authenticated: 'not authenticated',
+        }),
+      ).toEqual([]);
+    });
+  });
+});
+
+describe('twitchTvProfile', () => {
+  it('should find the twitch.tv profile', () => {
     expect(
-      twitchTvUser.projector({ twitchTvUser: { displayName: 'foo' } }),
-    ).toEqual({ displayName: 'foo' } as any);
+      twitchTvProfile.projector([
+        {
+          provider: 'twitch.tv',
+        },
+        {
+          provider: 'other provider',
+        },
+      ]),
+    ).toEqual({
+      provider: 'twitch.tv',
+    } as TwitchTvProfile);
   });
 });

@@ -40,9 +40,9 @@
       <span class="visually-hidden">logs.tf profile</span>
     </a>
 
-    <a *ngIf="player.twitchTvUser"
+    <a *ngIf="linkedProfiles | selectTwitchTvProfile as twitchTvProfile"
       class="external-profile-link"
-      [href]="player.twitchTvUser.login | twitchTvProfileLink"
+      [href]="twitchTvProfile.login | twitchTvProfileLink"
       target="_blank"
       tooltip="twitch.tv profile"
       placement="left"

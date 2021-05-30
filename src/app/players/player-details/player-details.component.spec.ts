@@ -7,14 +7,13 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
 import { convertToParamMap, ActivatedRoute } from '@angular/router';
 import { loadPlayer } from '../actions';
-import { MockComponent } from 'ng-mocks';
+import { MockComponent, ngMocks } from 'ng-mocks';
 import { PlayerDetailsExternalProfileLinksComponent } from '../player-details-external-profile-links/player-details-external-profile-links.component';
 import { PlayerDetailsBadgesComponent } from '../player-details-badges/player-details-badges.component';
 import { PlayerDetailsHeaderComponent } from '../player-details-header/player-details-header.component';
 import { PlayerStatsComponent } from '../player-stats/player-stats.component';
 import { PlayerDetailsGameListComponent } from '../player-details-game-list/player-details-game-list.component';
 import { By } from '@angular/platform-browser';
-import { PlayerRole } from '../models/player-role';
 import { Player } from '../models/player';
 import { MemoizedSelector } from '@ngrx/store';
 import { PlayerDetailsAdminButtonsComponent } from '../player-details-admin-buttons/player-details-admin-buttons.component';
@@ -34,6 +33,10 @@ describe('PlayerDetailsComponent', () => {
   const initialState = {
     players: {
       players: {
+        ids: [],
+        entities: {},
+      },
+      linkedProfiles: {
         ids: [],
         entities: {},
       },
@@ -96,7 +99,7 @@ describe('PlayerDetailsComponent', () => {
     });
   });
 
-  describe('when player loaded', () => {
+  describe('when player is loaded', () => {
     const player: Player = {
       joinedAt: new Date(),
       steamId: '76561198977546450',
@@ -109,6 +112,12 @@ describe('PlayerDetailsComponent', () => {
       roles: ['admin'],
       etf2lProfileId: 12345,
       id: 'FAKE_ID',
+      _links: [
+        {
+          href: 'FAKE_URL/players/FAKE_ID/linked-profiles',
+          title: 'Linked profiles',
+        },
+      ],
     };
 
     const stateWithFakePlayer = {
@@ -120,6 +129,10 @@ describe('PlayerDetailsComponent', () => {
             FAKE_ID: player,
           },
           locked: false,
+        },
+        linkedProfiles: {
+          ids: [],
+          entities: {},
         },
       },
     };
@@ -179,6 +192,51 @@ describe('PlayerDetailsComponent', () => {
 
         expect(playerDetailsAdminButtonsComponent).toBeTruthy();
         expect(playerDetailsAdminButtonsComponent.playerId).toEqual('FAKE_ID');
+      });
+    });
+
+    describe('when the linked profiles are loaded', () => {
+      beforeEach(() => {
+        store.setState({
+          ...stateWithFakePlayer,
+          players: {
+            players: {
+              ids: ['FAKE_ID'],
+              entities: {
+                FAKE_ID: player,
+              },
+              locked: false,
+            },
+            linkedProfiles: {
+              ids: ['FAKE_ID'],
+              entities: {
+                FAKE_ID: {
+                  playerId: 'FAKE_ID',
+                  linkedProfiles: [
+                    {
+                      player: 'FAKE_ID',
+                      userId: '75739124',
+                      login: 'm_maly',
+                      displayName: 'm_maly',
+                      profileImageUrl:
+                        'https://static-cdn.jtvnw.net/jtv_user_pictures/9330a24b-a956-407c-910b-5b975950d122-profile_image-300x300.png',
+                      provider: 'twitch.tv',
+                    },
+                  ],
+                },
+              },
+            },
+          },
+        });
+        fixture.detectChanges();
+      });
+
+      it('should pass the linked profiles to PlayerDetailsExternalProfileLinksComponent', () => {
+        const c = ngMocks.findInstance(
+          PlayerDetailsExternalProfileLinksComponent,
+        );
+
+        expect(c.linkedProfiles).toBeTruthy();
       });
     });
   });

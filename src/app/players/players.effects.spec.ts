@@ -4,8 +4,14 @@ import { PlayerEffects } from './players.effects';
 import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { PlayersService } from './players.service';
-import { playerLoaded, loadPlayer } from './actions';
+import {
+  playerLoaded,
+  loadPlayer,
+  linkedProfilesLoaded,
+  loadLinkedProfiles,
+} from './actions';
 import { Player } from './models/player';
+import { LinkedProfiles } from './models/linked-profiles';
 
 const mockPlayer: Player = {
   id: 'FAKE_PLAYER_ID',
@@ -18,6 +24,19 @@ const mockPlayer: Player = {
     medium: 'FAKE_MEDIUM_AVATAR_URL',
     large: 'FAKE_LARGE_AVATAR_URL',
   },
+  _links: [],
+};
+
+const linkedProfiles: LinkedProfiles = {
+  playerId: 'FAKE_PLAYER_ID',
+  linkedProfiles: [
+    {
+      provider: 'twitch.tv',
+      player: 'FAKE_PLAYER_ID',
+      login: 'FAKE_LOGIN',
+      userId: 'FAKE_USER_ID',
+    },
+  ],
 };
 
 describe('PlayerEffects', () => {
@@ -29,8 +48,12 @@ describe('PlayerEffects', () => {
     actions = new ReplaySubject<Action>(1);
     playersService = jasmine.createSpyObj<PlayersService>(PlayersService.name, [
       'fetchPlayer',
+      'fetchPlayerLinkedProfiles',
     ]);
     playersService.fetchPlayer.and.returnValue(of(mockPlayer));
+    playersService.fetchPlayerLinkedProfiles.and.returnValue(
+      of(linkedProfiles),
+    );
   });
 
   beforeEach(() =>
@@ -61,6 +84,19 @@ describe('PlayerEffects', () => {
       );
       actions.next(loadPlayer({ playerId: 'FAKE_PLAYER_ID' }));
       expect(playersService.fetchPlayer).toHaveBeenCalledWith('FAKE_PLAYER_ID');
+    });
+  });
+
+  describe('loadLinkedProfiles', () => {
+    it('should attempt to fetch the linked profiles', done => {
+      effects.loadLinkedProfiles.subscribe(action => {
+        expect(action).toEqual(linkedProfilesLoaded({ linkedProfiles }));
+        done();
+      });
+      actions.next(loadLinkedProfiles({ playerId: 'FAKE_PLAYER_ID' }));
+      expect(playersService.fetchPlayerLinkedProfiles).toHaveBeenCalledOnceWith(
+        'FAKE_PLAYER_ID',
+      );
     });
   });
 });

@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { TwitchService } from '@app/twitch/twitch.service';
 import { Store } from '@ngrx/store';
 import { filter, map } from 'rxjs/operators';
-import { twitchTvUser } from '../profile.selectors';
+import { twitchTvProfile } from '../profile.selectors';
 
 @Component({
   selector: 'app-twitch-tv-integration',
@@ -11,7 +11,7 @@ import { twitchTvUser } from '../profile.selectors';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TwitchTvIntegrationComponent {
-  twitchTvProfile = this.store.select(twitchTvUser);
+  twitchTvProfile = this.store.select(twitchTvProfile);
   twitchTvProfileLink = this.twitchTvProfile.pipe(
     filter(profile => !!profile),
     map(profile => profile.login),
