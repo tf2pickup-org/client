@@ -1,3 +1,15 @@
+# [3.12.0](https://github.com/tf2pickup-org/client/compare/3.11.0...3.12.0) (2021-06-08)
+
+
+### Bug Fixes
+
+* **tf2pickup.nl:** fix title suffix ([c56bc96](https://github.com/tf2pickup-org/client/commit/c56bc96e901df200dde0dd9b5145a4e49e3f07a6))
+
+
+### Features
+
+* **tf2pickup.nl:** add tf2pickup.nl branding ([#1009](https://github.com/tf2pickup-org/client/issues/1009)) ([9ae584f](https://github.com/tf2pickup-org/client/commit/9ae584f0489a9b6b8029cb819123ec4e0325332a))
+
 # [3.11.0](https://github.com/tf2pickup-org/client/compare/3.10.1...3.11.0) (2021-04-12)
 
 
