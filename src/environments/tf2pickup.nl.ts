@@ -22,6 +22,6 @@ export const environment = {
     { name: 'discord', target: discordInvitation },
     { name: 'changelog', target: changelog },
   ],
-  titleSuffix: 'tf2pickup.nl • Nederlandse Ploeg Fort 2 Oppikspellen',
+  titleSuffix: 'tf2pickup.nl • Nederlandse Team Fortress 2 Pick-up games',
   entryQueue: entryQueue6v6,
 };
