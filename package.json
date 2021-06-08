@@ -15,6 +15,7 @@
     "build:tf2pickup.de": "ng build --configuration=production,tf2pickup.de --outputPath=dist/tf2pickup.de",
     "build:yu.tf2pickup.eu": "ng build --configuration=production,yu.tf2pickup.eu --outputPath=dist/yu.tf2pickup.eu",
     "build:tf2pickup.fi": "ng build --configuration=production,tf2pickup.fi --outputPath=dist/tf2pickup.fi",
+    "build:tf2pickup.nl": "ng build --configuration=production,tf2pickup.nl --outputPath=dist/tf2pickup.nl",
     "build:all": "npm-run-all build:*tf2pickup.*",
     "test": "ng test",
     "test:ci": "ng test --browsers=ChromeHeadless --watch=false --code-coverage=true",
