@@ -27,11 +27,11 @@
     link: 'default-player-skill',
     title: 'Default player skill'
   } }"></ng-template>
-
   <ng-template *ngTemplateOutlet="item; context: { $implicit: {
     link: 'player-restrictions',
     title: 'Player restrictions'
   } }"></ng-template>
+  <ng-template *ngTemplateOutlet="item; context: { $implicit: { link: 'voice-server', title: 'Voice server' } }"></ng-template>
 
   <ng-template *ngTemplateOutlet="header; context: { $implicit: 'Actions' }"></ng-template>
 

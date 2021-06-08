@@ -21,6 +21,7 @@ import { GameServerDiagnosticsComponent } from './game-server-diagnostics/game-s
 import { DiagnosticCheckInfoComponent } from './game-server-diagnostics/diagnostic-check-info/diagnostic-check-info.component';
 import { PlayerRestrictionsComponent } from './player-restrictions/player-restrictions.component';
 import { MinimumTf2InGameHoursDialogComponent } from './player-restrictions/minimum-tf2-in-game-hours-dialog/minimum-tf2-in-game-hours-dialog.component';
+import { VoiceServerEditComponent } from './voice-server-edit/voice-server-edit.component';
 
 @NgModule({
   imports: [
@@ -50,6 +51,7 @@ import { MinimumTf2InGameHoursDialogComponent } from './player-restrictions/mini
     DiagnosticCheckInfoComponent,
     PlayerRestrictionsComponent,
     MinimumTf2InGameHoursDialogComponent,
+    VoiceServerEditComponent,
   ],
 })
 export class AdminModule {}

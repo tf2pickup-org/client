@@ -13,6 +13,7 @@ import { ScrambleMapsComponent } from './scramble-maps/scramble-maps.component';
 import { WhitelistEditComponent } from './whitelist-edit/whitelist-edit.component';
 import { GameServerResolver } from '@app/game-servers/game-server.resolver';
 import { PlayerRestrictionsComponent } from './player-restrictions/player-restrictions.component';
+import { VoiceServerEditComponent } from './voice-server-edit/voice-server-edit.component';
 
 const routes: Routes = [
   {
@@ -50,6 +51,14 @@ const routes: Routes = [
         data: {
           title: 'default player skill',
           animation: 'DefaultPlayerSkillEditPage',
+        },
+      },
+      {
+        path: 'voice-server',
+        component: VoiceServerEditComponent,
+        data: {
+          title: 'voice server',
+          animation: 'VoiceServerEditPage',
         },
       },
       {
