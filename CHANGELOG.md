@@ -1,18 +1,17 @@
-# [3.12.0-beta.2](https://github.com/tf2pickup-org/client/compare/3.12.0-beta.1...3.12.0-beta.2) (2021-08-03)
-
+# [3.13.0-beta.2](https://github.com/tf2pickup-org/client/compare/3.12.0-beta.1...3.12.0-beta.2) (2021-08-03)
 
 ### Bug Fixes
 
 * **io:** handle jwt expired error ([#1114](https://github.com/tf2pickup-org/client/issues/1114)) ([a9b5abd](https://github.com/tf2pickup-org/client/commit/a9b5abdddac31ba291f36ff494e442d4370ddd74))
 
-# [3.12.0-beta.1](https://github.com/tf2pickup-org/client/compare/3.12.0-beta.0...3.12.0-beta.1) (2021-08-03)
+# [3.13.0-beta.1](https://github.com/tf2pickup-org/client/compare/3.12.0-beta.0...3.12.0-beta.1) (2021-08-03)
 
 
 ### Bug Fixes
 
 * **players:** handle lack of player's roles ([#1113](https://github.com/tf2pickup-org/client/issues/1113)) ([e73f0cf](https://github.com/tf2pickup-org/client/commit/e73f0cf4af135ebb0f1cf503fe9f763e8e383fe9))
 
-# [3.12.0-beta.0](https://github.com/tf2pickup-org/client/compare/3.9.0...3.12.0-beta.0) (2021-08-02)
+# [3.13.0-beta.0](https://github.com/tf2pickup-org/client/compare/3.9.0...3.12.0-beta.0) (2021-08-02)
 
 
 ### Bug Fixes
@@ -102,6 +101,18 @@
 * **tf2pickup.fi:** optimize images ([#861](https://github.com/tf2pickup-org/client/issues/861)) ([6664b1a](https://github.com/tf2pickup-org/client/commit/6664b1a3d9e68c423973b1168fc62ae3c23f8cbc))
 * **yu.tf2pickup.eu:** optimize images ([#844](https://github.com/tf2pickup-org/client/issues/844)) ([6683982](https://github.com/tf2pickup-org/client/commit/6683982a6f6216e0ba8b5ed3eb50453b7ffdb547))
 * **yu.tf2pickup.eu:** optimize images ([#853](https://github.com/tf2pickup-org/client/issues/853)) ([bd3b86d](https://github.com/tf2pickup-org/client/commit/bd3b86d38a379729e43be9d93819a6974a43fe3e))
+
+# [3.12.0](https://github.com/tf2pickup-org/client/compare/3.11.0...3.12.0) (2021-06-08)
+
+
+### Bug Fixes
+
+* **tf2pickup.nl:** add tf2pickup.nl branding ([#1009](https://github.com/tf2pickup-org/client/issues/1009)) ([9ae584f](https://github.com/tf2pickup-org/client/commit/9ae584f0489a9b6b8029cb819123ec4e0325332a))
+
+
+### Features
+
+* **tf2pickup.nl:** fix title suffix ([c56bc96](https://github.com/tf2pickup-org/client/commit/c56bc96e901df200dde0dd9b5145a4e49e3f07a6))
 
 # [3.11.0](https://github.com/tf2pickup-org/client/compare/3.10.1...3.11.0) (2021-04-12)
 
