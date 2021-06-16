@@ -22,11 +22,17 @@
 
       <div formGroupName="mumble" class="d-flex flex-column mt-2 ps-5">
         <div class="d-flex flex-row">
-          <label class="mdc-text-field mdc-text-field--outlined mdc-text-field--label-floating m-2 flex-fill" #mumbleServerUrl>
+          <label #mumbleServerUrl
+            class="mdc-text-field mdc-text-field--outlined m-2 flex-fill"
+            [class.mdc-text-field--label-floating]="!!(initialValue | async)?.url">
             <span class="mdc-notched-outline">
               <span class="mdc-notched-outline__leading"></span>
               <span class="mdc-notched-outline__notch">
-                <span class="mdc-floating-label mdc-floating-label--float-above" id="mumble-server-url">URL</span>
+                <span class="mdc-floating-label"
+                  [class.mdc-floating-label--float-above]="!!(initialValue | async)?.url"
+                  id="mumble-server-url">
+                  URL
+                </span>
               </span>
               <span class="mdc-notched-outline__trailing"></span>
             </span>
@@ -38,7 +44,8 @@
               id="mumble-server-url-input">
           </label>
 
-          <label class="mdc-text-field mdc-text-field--outlined m-2" #mumbleServerPort>
+          <label #mumbleServerPort
+            class="mdc-text-field mdc-text-field--outlined m-2">
             <span class="mdc-notched-outline">
               <span class="mdc-notched-outline__leading"></span>
               <span class="mdc-notched-outline__notch">
@@ -55,11 +62,17 @@
           </label>
         </div>
 
-        <label class="mdc-text-field mdc-text-field--outlined m-2" #mumbleServerPassword>
+        <label #mumbleServerPassword
+          class="mdc-text-field mdc-text-field--outlined m-2"
+          [class.mdc-text-field--label-floating]="!!(initialValue | async)?.password">
           <span class="mdc-notched-outline">
             <span class="mdc-notched-outline__leading"></span>
             <span class="mdc-notched-outline__notch">
-              <span class="mdc-floating-label" id="mumble-server-password">Password</span>
+              <span class="mdc-floating-label"
+                [class.mdc-floating-label--float-above]="!!(initialValue | async)?.password"
+                id="mumble-server-password">
+                Password
+              </span>
             </span>
             <span class="mdc-notched-outline__trailing"></span>
           </span>
@@ -71,11 +84,16 @@
             id="mumble-server-password-input">
         </label>
 
-        <label class="mdc-text-field mdc-text-field--outlined m-2" #mumbleServerChannelName>
+        <label #mumbleServerChannelName
+          class="mdc-text-field mdc-text-field--outlined m-2"
+          [class.mdc-text-field--label-floating]="!!(initialValue | async)?.channelName">
           <span class="mdc-notched-outline">
             <span class="mdc-notched-outline__leading"></span>
             <span class="mdc-notched-outline__notch">
-              <span class="mdc-floating-label" id="mumble-server-channel-name">Channel name</span>
+              <span class="mdc-floating-label" id="mumble-server-channel-name"
+                [class.mdc-floating-label--float-above]="!!(initialValue | async)?.channelName">
+                Channel name
+              </span>
             </span>
             <span class="mdc-notched-outline__trailing"></span>
           </span>

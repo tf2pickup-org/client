@@ -14,6 +14,7 @@ import { ConfigurationService } from '@app/configuration/configuration.service';
 import { MDCTextField } from '@material/textfield';
 import { VoiceServer } from '@app/configuration/models/voice-server';
 import { Location } from '@angular/common';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-voice-server-edit',
@@ -32,6 +33,8 @@ export class VoiceServerEditComponent
       channelName: '',
     }),
   });
+
+  initialValue = new Subject<VoiceServer>();
 
   @ViewChild('mumbleServerUrl')
   mumbleServerUrlInput: ElementRef;
@@ -59,7 +62,9 @@ export class VoiceServerEditComponent
       .fetchValue<VoiceServer>(ConfigurationEntryKey.voiceServer)
       .subscribe(mumble => {
         this.form.patchValue({ mumble });
+        this.initialValue.next(mumble);
         this.changeDetector.markForCheck();
+        this.textFields.forEach(field => field?.layout());
       });
   }
 
