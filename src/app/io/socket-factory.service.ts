@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import io from 'socket.io-client';
+import { io, Socket } from 'socket.io-client';
 import { WsTokenService } from './ws-token.service';
 import { WS_URL } from '@app/ws-url';
 import { Store } from '@ngrx/store';
@@ -16,7 +16,7 @@ export class SocketFactoryService {
     private store: Store,
   ) {}
 
-  createSocket(): SocketIOClient.Socket {
+  createSocket(): Socket {
     const socket = io(this.wsUrl, {
       autoConnect: false,
       secure: true,
@@ -24,23 +24,20 @@ export class SocketFactoryService {
       rejectUnauthorized: false,
     });
 
-    socket.on('error', (error: Error) => {
+    socket.on('connect_error', error => {
       switch (error.message) {
-        case 'Signature verification failed':
-        case 'Token expired': {
-          socket.disconnect();
+        case 'invalid signature':
           this.wsTokenService.getWsToken({ force: true }).subscribe(
             wsToken => {
-              socket.io.opts.query = `auth_token=${wsToken}`;
+              socket.auth = { token: `Bearer ${wsToken}` };
             },
             noop,
             () => socket.connect(),
           );
           break;
-        }
 
         default:
-          console.error(error.message);
+          console.error(error);
       }
     });
 
@@ -49,13 +46,12 @@ export class SocketFactoryService {
     });
 
     socket.on('connect', () => this.store.dispatch(ioConnected()));
-    socket.on('reconnect', () => this.store.dispatch(ioConnected()));
     socket.on('disconnect', () => this.store.dispatch(ioDisconnected()));
 
     this.wsTokenService.getWsToken().subscribe(
       wsToken => {
         if (wsToken) {
-          socket.io.opts.query = `auth_token=${wsToken}`;
+          socket.auth = { token: `Bearer ${wsToken}` };
         }
       },
       noop,
