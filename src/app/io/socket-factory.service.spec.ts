@@ -8,8 +8,7 @@ import {
 import { WS_URL } from '@app/ws-url';
 import { WsTokenService } from './ws-token.service';
 import { NEVER } from 'rxjs';
-import { provideMockStore, MockStore } from '@ngrx/store/testing';
-import { ioConnected, ioDisconnected } from './io.actions';
+import { provideMockStore } from '@ngrx/store/testing';
 
 class WsTokenServiceStub {
   getWsToken() {
@@ -46,49 +45,7 @@ describe('SocketFactoryService', () => {
       const socket = service.createSocket();
       expect(socket).toBeTruthy();
       expect(socket.connected).toBe(false);
-      expect(socket.nsp).toEqual('/');
-      expect(socket.io.uri).toEqual('http://FAKE_URL');
       expect(socket.io.opts.autoConnect).toBe(false);
-    });
-
-    describe('created socket', () => {
-      let socket: SocketIOClient.Socket;
-
-      beforeEach(() => {
-        socket = service.createSocket();
-      });
-
-      it('should handle signature verification error', () => {
-        const spy = spyOn(
-          TestBed.inject(WsTokenService),
-          'getWsToken',
-        ).and.callThrough();
-        socket.emit('error', new Error('Signature verification failed'));
-        expect(spy).toHaveBeenCalledWith({ force: true });
-      });
-
-      it('should handle token expired error', () => {
-        const spy = spyOn(
-          TestBed.inject(WsTokenService),
-          'getWsToken',
-        ).and.callThrough();
-        socket.emit('error', new Error('Token expired'));
-        expect(spy).toHaveBeenCalledWith({ force: true });
-      });
-
-      it('should update store when connection state changes', () => {
-        const spy = spyOn(TestBed.inject(MockStore), 'dispatch');
-
-        // todo: figure a way to mock socket properly
-        // socket.emit('connect');
-        // expect(spy).toHaveBeenCalledWith(ioConnected());
-
-        socket.emit('disconnect');
-        expect(spy).toHaveBeenCalledWith(ioDisconnected());
-
-        socket.emit('reconnect');
-        expect(spy).toHaveBeenCalledWith(ioConnected());
-      });
     });
   });
 });
