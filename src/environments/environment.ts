@@ -1,4 +1,4 @@
-import version from 'package.json';
+import { version } from './version';
 import { entryQueue6v6 } from './entry-queue-6v6';
 
 const discordInvitation = 'https://discord.gg/UVFVfc4';
