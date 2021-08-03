@@ -42,20 +42,26 @@ export class MapPoolStore extends ComponentStore<MapPoolState> {
   );
 
   // updaters
-  private setLoading = this.updater((state, loading: boolean) => ({
-    ...state,
-    loading,
-  }));
+  private setLoading = this.updater(
+    (state, loading: boolean): MapPoolState => ({
+      ...state,
+      loading,
+    }),
+  );
 
-  private setSaving = this.updater((state, saving: boolean) => ({
-    ...state,
-    saving,
-  }));
+  private setSaving = this.updater(
+    (state, saving: boolean): MapPoolState => ({
+      ...state,
+      saving,
+    }),
+  );
 
-  private setMaps = this.updater((state, maps: Map[]) => ({
-    ...state,
-    maps,
-  }));
+  private setMaps = this.updater(
+    (state, maps: Map[]): MapPoolState => ({
+      ...state,
+      maps,
+    }),
+  );
 
   constructor(private queueService: QueueService) {
     super(initialState);

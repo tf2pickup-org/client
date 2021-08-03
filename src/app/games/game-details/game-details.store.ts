@@ -169,23 +169,29 @@ export class GameDetailsStore extends ComponentStore<GameDetailsState> {
   );
 
   // updaters
-  private readonly setGame = this.updater((state, game: Game) => ({
-    ...state,
-    game,
-  }));
+  private readonly setGame = this.updater(
+    (state, game: Game): GameDetailsState => ({
+      ...state,
+      game,
+    }),
+  );
 
-  private readonly setServer = this.updater((state, server: GameServer) => ({
-    ...state,
-    server,
-  }));
+  private readonly setServer = this.updater(
+    (state, server: GameServer): GameDetailsState => ({
+      ...state,
+      server,
+    }),
+  );
 
-  private readonly addPlayer = this.updater((state, player: Player) => ({
-    ...state,
-    players: { ...state.players, [player.id]: { ...player } },
-  }));
+  private readonly addPlayer = this.updater(
+    (state, player: Player): GameDetailsState => ({
+      ...state,
+      players: { ...state.players, [player.id]: { ...player } },
+    }),
+  );
 
   private readonly setSkills = this.updater(
-    (state, skills: Record<string, number>) => ({
+    (state, skills: Record<string, number>): GameDetailsState => ({
       ...state,
       skills,
     }),

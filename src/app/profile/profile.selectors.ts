@@ -1,8 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { AppState } from '@app/app.state';
 import { State } from './profile.reducer';
 
-export const profile = createFeatureSelector<AppState, State>('profile');
+export const profile = createFeatureSelector<State>('profile');
 
 export const currentPlayer = createSelector(profile, profile =>
   profile.authenticated === 'authenticated' ? profile.player : null,

@@ -1,10 +1,9 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { AppState } from '@app/app.state';
 import { State } from './games.reducer';
 import { adapter } from './games.adapter';
 import { currentPlayer } from '@app/profile/profile.selectors';
 
-const gamesFeature = createFeatureSelector<AppState, State>('games');
+const gamesFeature = createFeatureSelector<State>('games');
 
 const { selectAll, selectEntities } = adapter.getSelectors();
 export const allGames = createSelector(gamesFeature, selectAll);

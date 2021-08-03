@@ -1,9 +1,8 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { AppState } from '../app.state';
 import { State } from './queue.reducer';
-import { currentPlayer, profile } from '@app/profile/profile.selectors';
+import { currentPlayer } from '@app/profile/profile.selectors';
 
-const queueFeature = createFeatureSelector<AppState, State>('queue');
+const queueFeature = createFeatureSelector<State>('queue');
 
 export const queueConfig = createSelector(
   queueFeature,
