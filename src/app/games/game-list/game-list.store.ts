@@ -43,22 +43,28 @@ export class GameListStore extends ComponentStore<GameListState> {
     ),
   );
 
-  private setPage = this.updater((state, page: number) => ({
-    ...state,
-    page,
-  }));
+  private setPage = this.updater(
+    (state, page: number): GameListState => ({
+      ...state,
+      page,
+    }),
+  );
 
-  private setLoading = this.updater(state => ({
-    ...state,
-    loading: true,
-  }));
+  private setLoading = this.updater(
+    (state): GameListState => ({
+      ...state,
+      loading: true,
+    }),
+  );
 
-  private gamesLoaded = this.updater((state, result: PaginatedList<Game>) => ({
-    ...state,
-    games: result.results,
-    gameCount: result.itemCount,
-    loading: false,
-  }));
+  private gamesLoaded = this.updater(
+    (state, result: PaginatedList<Game>): GameListState => ({
+      ...state,
+      games: result.results,
+      gameCount: result.itemCount,
+      loading: false,
+    }),
+  );
 
   constructor(private gamesService: GamesService) {
     super(initialState);

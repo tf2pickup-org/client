@@ -101,20 +101,26 @@ export class PlayerEditStore extends ComponentStore<PlayerEditState> {
       ),
   );
 
-  private readonly setPlayer = this.updater((state, player: Player) => ({
-    ...state,
-    player,
-  }));
+  private readonly setPlayer = this.updater(
+    (state, player: Player): PlayerEditState => ({
+      ...state,
+      player,
+    }),
+  );
 
-  private readonly setSkill = this.updater((state, skill: PlayerSkillSet) => ({
-    ...state,
-    skill,
-  }));
+  private readonly setSkill = this.updater(
+    (state, skill: PlayerSkillSet): PlayerEditState => ({
+      ...state,
+      skill,
+    }),
+  );
 
-  private readonly setSaving = this.updater((state, saving: boolean) => ({
-    ...state,
-    saving,
-  }));
+  private readonly setSaving = this.updater(
+    (state, saving: boolean): PlayerEditState => ({
+      ...state,
+      saving,
+    }),
+  );
 
   constructor(private store: Store, private playersService: PlayersService) {
     super(initialState);

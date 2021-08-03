@@ -49,15 +49,19 @@ export class PlayerSkillTableStore extends ComponentStore<SkillTableState> {
     ),
   );
 
-  private setPlayers = this.updater((state, players: Player[]) => ({
-    ...state,
-    players: keyBy(players, 'id'),
-  }));
+  private setPlayers = this.updater(
+    (state, players: Player[]): SkillTableState => ({
+      ...state,
+      players: keyBy(players, 'id'),
+    }),
+  );
 
-  private setPlayerSkills = this.updater((state, skills: PlayerSkill[]) => ({
-    ...state,
-    skills,
-  }));
+  private setPlayerSkills = this.updater(
+    (state, skills: PlayerSkill[]): SkillTableState => ({
+      ...state,
+      skills,
+    }),
+  );
 
   constructor(private playersService: PlayersService, private store: Store) {
     super(initialState);

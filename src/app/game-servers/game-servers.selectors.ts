@@ -1,10 +1,8 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { AppState } from '@app/app.state';
 import { State } from './game-servers.reducer';
 import { adapter } from './game-servers.adapter';
 
-const gameServersFeature =
-  createFeatureSelector<AppState, State>('gameServers');
+const gameServersFeature = createFeatureSelector<State>('gameServers');
 
 export const gameServersLocked = createSelector(
   gameServersFeature,
