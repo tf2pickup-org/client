@@ -14,6 +14,13 @@ describe(IsAdminPipe.name, () => {
     });
   });
 
+  describe('when the player has no assigned roles', () => {
+    it('should return false', () => {
+      const pipe = new IsAdminPipe();
+      expect(pipe.transform({} as Player)).toBe(false);
+    });
+  });
+
   describe('when the player is not an admin', () => {
     it('should return false', () => {
       const pipe = new IsAdminPipe();
