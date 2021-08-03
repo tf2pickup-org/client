@@ -1,3 +1,10 @@
+# [3.12.0-beta.2](https://github.com/tf2pickup-org/client/compare/3.12.0-beta.1...3.12.0-beta.2) (2021-08-03)
+
+
+### Bug Fixes
+
+* **io:** handle jwt expired error ([#1114](https://github.com/tf2pickup-org/client/issues/1114)) ([a9b5abd](https://github.com/tf2pickup-org/client/commit/a9b5abdddac31ba291f36ff494e442d4370ddd74))
+
 # [3.12.0-beta.1](https://github.com/tf2pickup-org/client/compare/3.12.0-beta.0...3.12.0-beta.1) (2021-08-03)
 
 
