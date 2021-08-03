@@ -1,3 +1,10 @@
+# [3.12.0-beta.1](https://github.com/tf2pickup-org/client/compare/3.12.0-beta.0...3.12.0-beta.1) (2021-08-03)
+
+
+### Bug Fixes
+
+* **players:** handle lack of player's roles ([#1113](https://github.com/tf2pickup-org/client/issues/1113)) ([e73f0cf](https://github.com/tf2pickup-org/client/commit/e73f0cf4af135ebb0f1cf503fe9f763e8e383fe9))
+
 # [3.12.0-beta.0](https://github.com/tf2pickup-org/client/compare/3.9.0...3.12.0-beta.0) (2021-08-02)
 
 
