@@ -27,6 +27,7 @@ export class SocketFactoryService {
     socket.on('connect_error', error => {
       switch (error.message) {
         case 'invalid signature':
+        case 'jwt expired':
           this.wsTokenService.getWsToken({ force: true }).subscribe(
             wsToken => {
               socket.auth = { token: `Bearer ${wsToken}` };
