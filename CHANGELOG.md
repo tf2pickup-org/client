@@ -1,3 +1,14 @@
+# [3.13.0](https://github.com/tf2pickup-org/client/compare/3.12.0-beta.2...3.13.0) (2021-08-05)
+
+
+### Bug Fixes
+
+* **build:** generate integrity tags ([#1122](https://github.com/tf2pickup-org/client/issues/1122)) ([be85fc2](https://github.com/tf2pickup-org/client/commit/be85fc2bd18e971dd00be8d412aa25b409fd06bd))
+* **deps:** update dependency @angular/cdk to v12.2.0 ([#1121](https://github.com/tf2pickup-org/client/issues/1121)) ([b4afca4](https://github.com/tf2pickup-org/client/commit/b4afca4b0644696cebcd15a559d91e99aa37c366))
+* **deps:** update dependency bootstrap to v5.1.0 ([#1117](https://github.com/tf2pickup-org/client/issues/1117)) ([0c58a28](https://github.com/tf2pickup-org/client/commit/0c58a2887f3d25f732a6206b5615d80d10e1d2a3))
+* **deps:** update dependency ngx-bootstrap to v7 ([#1087](https://github.com/tf2pickup-org/client/issues/1087)) ([38a6bdc](https://github.com/tf2pickup-org/client/commit/38a6bdce6fece760390c2e28092fbb1a33926eda))
+* get rid of sass warnings ([#1115](https://github.com/tf2pickup-org/client/issues/1115)) ([f0b0674](https://github.com/tf2pickup-org/client/commit/f0b067489f90aec06cc5393300f6b9605891af94))
+
 # [3.13.0-beta.2](https://github.com/tf2pickup-org/client/compare/3.12.0-beta.1...3.12.0-beta.2) (2021-08-03)
 
 ### Bug Fixes
