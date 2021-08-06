@@ -1,7 +1,7 @@
 <div *ngIf="store.game | async as _game"
   class="container py-3">
   <div class="d-flex flex-row align-items-center">
-    <div class="mdc-typography--headline4 mr-3">Pickup #{{ _game.number }}</div>
+    <div class="mdc-typography--headline4 me-3">Pickup #{{ _game.number }}</div>
 
     <app-game-admin-buttons *ngIf="store.showAdminTools | async"
       (reinitializeServer)="reinitializeServer()"
@@ -22,7 +22,7 @@
 
   <div *ngIf="store.isRunning | async" class="game-runtime-info">
     <div *ngIf="store.isMyGame | async; else watchGameInfo" class="d-flex align-items-center">
-      <app-connect-string [connectString]="_game.connectString" class="flex-grow-1 mr-3"></app-connect-string>
+      <app-connect-string [connectString]="_game.connectString" class="flex-grow-1 me-3"></app-connect-string>
       <app-mumble-join-button [mumbleUrl]="store.mumbleUrl | async"></app-mumble-join-button>
     </div>
 
