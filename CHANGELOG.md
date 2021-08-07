@@ -1,3 +1,11 @@
+## [3.13.1](https://github.com/tf2pickup-org/client/compare/3.13.0...3.13.1) (2021-08-07)
+
+
+### Bug Fixes
+
+* **deps:** update angular monorepo to v12.2.0 ([#1119](https://github.com/tf2pickup-org/client/issues/1119)) ([abe4469](https://github.com/tf2pickup-org/client/commit/abe446905451bed380f66e91789c19b6067ce82f))
+* fix multiple spacing issues ([#1123](https://github.com/tf2pickup-org/client/issues/1123)) ([3a4abd5](https://github.com/tf2pickup-org/client/commit/3a4abd5c47a06d1b19068053052ab8f051552764))
+
 # [3.13.0](https://github.com/tf2pickup-org/client/compare/3.12.0-beta.2...3.13.0) (2021-08-05)
 
 
