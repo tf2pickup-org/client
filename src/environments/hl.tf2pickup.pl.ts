@@ -1,14 +1,13 @@
-import { version } from './version';
-import { entryQueue9v9 } from './entry-queue-9v9';
-import { github, changelog } from './links';
+import { defaultEnvironment } from './default-environment';
+import { defaultFooterLinks } from './default-footer-links';
+import { entryQueue9v9 } from './entry-queues/entry-queue-9v9';
 
 const discordInvitation = 'https://discord.gg/UVFVfc4';
 
 export const environment = {
-  production: true,
+  ...defaultEnvironment,
   apiUrl: 'https://api.hl.tf2pickup.pl',
   wsUrl: 'https://api.hl.tf2pickup.pl',
-  version,
   headerLinks: [
     {
       name: 'discord',
@@ -18,9 +17,8 @@ export const environment = {
     },
   ],
   footerLinks: [
-    { name: 'github', target: github },
+    ...defaultFooterLinks,
     { name: 'discord', target: discordInvitation },
-    { name: 'changelog', target: changelog },
   ],
   titleSuffix: 'hl.tf2pickup.pl • Polskie Pickupy 9v9',
   entryQueue: entryQueue9v9,
