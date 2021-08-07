@@ -44,6 +44,12 @@ describe('MapThumbnailService', () => {
       'cp_villa_b18',
       'cp_kalinka_rc5',
       'cp_cardinal_rc1a',
+      'bball_tf_v2',
+      'ctf_ballin_comptf',
+      'ctf_ballin_sky',
+      'ctf_bball_eu_fix',
+      'ctf_bball_sweethills_v1',
+      'koth_proplant_v3',
     ].forEach(map =>
       it(`should return valid thumbnail for ${map}`, inject(
         [MapThumbnailService],
