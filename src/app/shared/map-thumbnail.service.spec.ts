@@ -48,7 +48,7 @@ describe('MapThumbnailService', () => {
       'ctf_ballin_comptf',
       'ctf_ballin_sky',
       'ctf_bball_eu_fix',
-      'ctf_bball_sweethill_v1',
+      'ctf_bball_sweethills_v1',
       'koth_proplant_v3',
     ].forEach(map =>
       it(`should return valid thumbnail for ${map}`, inject(
