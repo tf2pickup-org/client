@@ -1,3 +1,10 @@
+## [3.13.2](https://github.com/tf2pickup-org/client/compare/3.13.1...3.13.2) (2021-08-07)
+
+
+### Bug Fixes
+
+* **build:** fix CSP header ([#1124](https://github.com/tf2pickup-org/client/issues/1124)) ([2665593](https://github.com/tf2pickup-org/client/commit/26655930aee8b183f357fa12f35d41b3d057f69f))
+
 ## [3.13.1](https://github.com/tf2pickup-org/client/compare/3.13.0...3.13.1) (2021-08-07)
 
 
