@@ -1,13 +1,14 @@
 import { version } from './version';
-import { entryQueue6v6 } from './entry-queue-6v6';
+import { entryQueue6v6 } from './entry-queues/entry-queue-6v6';
+import { defaultEnvironment } from './default-environment';
 
 const discordInvitation = 'https://discord.gg/UVFVfc4';
 
 export const environment = {
+  ...defaultEnvironment,
   production: false,
   apiUrl: '/api', // goes via local proxy
   wsUrl: '/',
-  version,
   headerLinks: [
     {
       name: 'discord',
