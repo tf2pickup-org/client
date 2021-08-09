@@ -1,3 +1,16 @@
+# [3.14.0](https://github.com/tf2pickup-pl/client/compare/3.13.3...3.14.0) (2021-08-09)
+
+
+### Features
+
+* **bball.tf2pickup.eu:** add bball.tf2pickup.eu branding ([#1136](https://github.com/tf2pickup-pl/client/issues/1136)) ([0bb45d9](https://github.com/tf2pickup-pl/client/commit/0bb45d96463e92afa362e2d7d0bc45e5e145c14c))
+* **tf2pickup.dk:** add tf2pickup.dk branding ([#1137](https://github.com/tf2pickup-pl/client/issues/1137)) ([f7f3864](https://github.com/tf2pickup-pl/client/commit/f7f38643e827164db32132b8559237aae8158639))
+* **tf2pickup.it:** add tf2pickup.it branding ([#1134](https://github.com/tf2pickup-pl/client/issues/1134)) ([43070a1](https://github.com/tf2pickup-pl/client/commit/43070a1e362d8f397c2877cc7a8cb7d6b5da0093))
+* **tf2pickup.pt:** add tf2pickup.pt branding ([#1131](https://github.com/tf2pickup-pl/client/issues/1131)) ([4bdb1b4](https://github.com/tf2pickup-pl/client/commit/4bdb1b4188a3c75e60460494892130276c35399b))
+* **tf2pickup.ro:** add tf2pickup.ro branding ([#1133](https://github.com/tf2pickup-pl/client/issues/1133)) ([e1534c7](https://github.com/tf2pickup-pl/client/commit/e1534c75062278dc432a2378d4f72f56a1e825c1))
+* **tf2pickup.se:** add tf2pickup.se branding ([#1132](https://github.com/tf2pickup-pl/client/issues/1132)) ([2aaa351](https://github.com/tf2pickup-pl/client/commit/2aaa3514fd3097d1dff71d5c14f9b2b2c5a581e9))
+* **tf2pickup.web.tr:** add tf2pickup.web.tr branding ([#1135](https://github.com/tf2pickup-pl/client/issues/1135)) ([597249f](https://github.com/tf2pickup-pl/client/commit/597249f2019c73ff49424a713f0f1f15e4a4e00d))
+
 ## [3.13.3](https://github.com/tf2pickup-org/client/compare/3.13.2...3.13.3) (2021-08-09)
 
 
