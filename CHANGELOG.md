@@ -1,3 +1,11 @@
+## [3.13.3](https://github.com/tf2pickup-org/client/compare/3.13.2...3.13.3) (2021-08-09)
+
+
+### Bug Fixes
+
+* add missing map thumbnails ([#1125](https://github.com/tf2pickup-org/client/issues/1125)) ([eb66894](https://github.com/tf2pickup-org/client/commit/eb668941ed885a982da1a426120d1e2f930f5902))
+* **games:** fix active game selectors ([#1130](https://github.com/tf2pickup-org/client/issues/1130)) ([97065bb](https://github.com/tf2pickup-org/client/commit/97065bb7f324bb47ce0cd4353575f06ef7397c16))
+
 ## [3.13.2](https://github.com/tf2pickup-org/client/compare/3.13.1...3.13.2) (2021-08-07)
 
 
