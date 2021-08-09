@@ -20,6 +20,8 @@ jobs:
             apiUrl: api.yu.tf2pickup.eu
           - branding: tf2pickup.fi
             apiUrl: api.tf2pickup.fi
+          - branding: tf2pickup.pt
+            apiUrl: api.tf2pickup.pt
           - branding: tf2pickup.se
             apiUrl: api.tf2pickup.se
 
