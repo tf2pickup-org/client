@@ -4,7 +4,7 @@ import {
   ChangeDetectionStrategy,
   OnDestroy,
 } from '@angular/core';
-import { isPlayingGame } from '@app/games/games.selectors';
+import { isPlayingGame } from '@app/profile/profile.selectors';
 import { awaitsReadyUp } from '@app/selectors';
 import { SoundPlayerService } from '@app/shared/sound-player.service';
 import { select, Store } from '@ngrx/store';

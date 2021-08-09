@@ -6,6 +6,7 @@ import { loadPlayer } from '@app/players/actions';
 import { Player } from '@app/players/models/player';
 import { playerById } from '@app/players/selectors';
 import {
+  activeGameId,
   currentPlayer,
   isAdmin,
   isBanned,
@@ -30,7 +31,7 @@ import {
   replacePlayer,
   requestSubstitute,
 } from '../games.actions';
-import { activeGame, gameById } from '../games.selectors';
+import { gameById } from '../games.selectors';
 import { GamesService } from '../games.service';
 import { Game } from '../models/game';
 import { GameSlot } from '../models/game-slot';
@@ -75,13 +76,12 @@ export class GameDetailsStore extends ComponentStore<GameDetailsState> {
   readonly canSubstitute = this.select(
     this.store.select(isLoggedIn),
     this.store.select(isBanned),
-    this.store.select(activeGame),
+    this.store.select(activeGameId),
     this.game,
-    // eslint-disable-next-line no-shadow
-    (isLoggedIn, isBanned, activeGame, game) =>
+    (isLoggedIn, isBanned, activeGameId, game) =>
       isLoggedIn &&
       !isBanned &&
-      (!activeGame || activeGame.id === game.id) &&
+      (!activeGameId || activeGameId === game.id) &&
       /launching|started/.test(game?.state),
   );
 

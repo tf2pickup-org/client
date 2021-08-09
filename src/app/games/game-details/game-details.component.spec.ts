@@ -19,13 +19,13 @@ import { GameTeamPlayerListComponent } from '../game-team-player-list/game-team-
 import { Game } from '../models/game';
 import { map } from 'rxjs/operators';
 import {
+  activeGameId,
   currentPlayer,
   isAdmin,
   isBanned,
   isLoggedIn,
   profile,
 } from '@app/profile/profile.selectors';
-import { activeGame } from '../games.selectors';
 import { GameServer } from '@app/game-servers/models/game-server';
 import { ConnectStringComponent } from '../connect-string/connect-string.component';
 import { GameAdminButtonsComponent } from '../game-admin-buttons/game-admin-buttons.component';
@@ -198,7 +198,7 @@ describe('GameDetailsComponent', () => {
     store.overrideSelector(profile, { authenticated: 'not authenticated' });
     store.overrideSelector(isLoggedIn, false);
     store.overrideSelector(isBanned, false);
-    store.overrideSelector(activeGame, null);
+    store.overrideSelector(activeGameId, null);
     store.overrideSelector(isAdmin, false);
     store.overrideSelector(currentPlayer, null);
     spyOn(store, 'dispatch');
@@ -357,7 +357,7 @@ describe('GameDetailsComponent', () => {
 
           describe('and has active game', () => {
             beforeEach(() => {
-              activeGame.setResult({ id: 'OTHER_GAME_ID' } as Game);
+              activeGameId.setResult('OTHER_GAME_ID');
               store.refreshState();
               fixture.detectChanges();
             });
@@ -376,7 +376,7 @@ describe('GameDetailsComponent', () => {
                 id: 'FAKE_PLAYER_1_ID',
                 name: 'FAKE PLAYER',
               } as Player);
-              activeGame.setResult({ id: 'FAKE_GAME_ID' } as Game);
+              activeGameId.setResult('FAKE_GAME_ID');
               store.refreshState();
               fixture.detectChanges();
             });

@@ -1,7 +1,6 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { activeGameId } from '@app/games/games.selectors';
 import { Store } from '@ngrx/store';
-import { bans } from '@app/profile/profile.selectors';
+import { activeGameId, bans } from '@app/profile/profile.selectors';
 import { substituteRequests } from '../queue.selectors';
 
 @Component({

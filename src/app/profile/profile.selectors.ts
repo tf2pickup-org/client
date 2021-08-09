@@ -42,3 +42,14 @@ export const linkedProfiles = createSelector(profile, profile =>
 export const twitchTvProfile = createSelector(linkedProfiles, linkedProfiles =>
   linkedProfiles?.find(p => p.provider === 'twitch.tv'),
 );
+
+export const activeGameId = createSelector(profile, profile =>
+  profile.authenticated === 'authenticated'
+    ? profile.activeGameId ?? null
+    : null,
+);
+
+export const isPlayingGame = createSelector(
+  activeGameId,
+  gameId => gameId !== null,
+);
