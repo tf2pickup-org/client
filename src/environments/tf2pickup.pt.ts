@@ -19,5 +19,5 @@ export const environment = {
     ...defaultFooterLinks,
     { name: 'discord', target: discordInvitation },
   ],
-  titleSuffix: 'tf2pickup.pt • pickups portuguesas de TF2',
+  titleSuffix: 'tf2pickup.pt • Pickups Portuguesas de TF2',
 };
