@@ -4,7 +4,7 @@ import {
   TestBed,
   tick,
 } from '@angular/core/testing';
-import { isPlayingGame } from '@app/games/games.selectors';
+import { isPlayingGame } from '@app/profile/profile.selectors';
 import { awaitsReadyUp } from '@app/selectors';
 import { SoundPlayerService } from '@app/shared/sound-player.service';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';

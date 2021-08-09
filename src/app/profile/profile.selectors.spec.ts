@@ -10,6 +10,8 @@ import {
   currentPlayerId,
   linkedProfiles,
   twitchTvProfile,
+  activeGameId,
+  isPlayingGame,
 } from './profile.selectors';
 
 describe('currentPlayer', () => {
@@ -144,5 +146,54 @@ describe('twitchTvProfile', () => {
     ).toEqual({
       provider: 'twitch.tv',
     } as TwitchTvProfile);
+  });
+});
+
+describe('activeGameId', () => {
+  describe('when the user is not logged in', () => {
+    it('should return null', () => {
+      expect(
+        activeGameId.projector({
+          authenticated: 'not authenticated',
+        }),
+      ).toBe(null);
+    });
+  });
+
+  describe('when the user is logged in', () => {
+    describe('and not playing any game', () => {
+      it('should return null', () => {
+        expect(
+          activeGameId.projector({
+            authenticated: 'authenticated',
+          }),
+        ).toBe(null);
+      });
+    });
+
+    describe('and playing a game', () => {
+      it('should return the game id', () => {
+        expect(
+          activeGameId.projector({
+            authenticated: 'authenticated',
+            activeGameId: 'FAKE_GAME_ID',
+          }),
+        ).toEqual('FAKE_GAME_ID');
+      });
+    });
+  });
+});
+
+describe('isPlayingGame', () => {
+  describe('when the user is not playing any game', () => {
+    it('should return false', () => {
+      expect(isPlayingGame.projector(null)).toBe(false);
+    });
+  });
+
+  describe('when the user is playing a game', () => {
+    it('should return true', () => {
+      expect(isPlayingGame.projector('FAKE_GAME_ID')).toBe(true);
+    });
   });
 });
