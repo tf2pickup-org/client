@@ -29,7 +29,6 @@ import {
   filter,
   mapTo,
   distinctUntilChanged,
-  tap,
 } from 'rxjs/operators';
 import { QueueService } from './queue.service';
 import { Store } from '@ngrx/store';
@@ -149,7 +148,6 @@ export class QueueEffects {
     return this.store.select(isInQueue).pipe(
       distinctUntilChanged(),
       filter(inQueue => !inQueue),
-      tap(console.log),
       mapTo(mapVoteReset()),
     );
   });
