@@ -1,3 +1,14 @@
+## [3.14.1](https://github.com/tf2pickup-org/client/compare/3.14.0...3.14.1) (2021-08-13)
+
+
+### Bug Fixes
+
+* **deps:** update angular monorepo to v12.2.1 ([#1144](https://github.com/tf2pickup-org/client/issues/1144)) ([ce7a4cb](https://github.com/tf2pickup-org/client/commit/ce7a4cb7eaee1968b076bb15e8a760f230f193b4))
+* **deps:** update dependency @angular/cdk to v12.2.1 ([#1145](https://github.com/tf2pickup-org/client/issues/1145)) ([f32c2a9](https://github.com/tf2pickup-org/client/commit/f32c2a9cb66ca3d6185f9efc3adf3fc911e1fbe2))
+* **deps:** update dependency tslib to v2.3.1 ([#1147](https://github.com/tf2pickup-org/client/issues/1147)) ([a292996](https://github.com/tf2pickup-org/client/commit/a29299677985c7f775675324a977ee9c05de3e99))
+* **deps:** update ngrx monorepo to v12.4.0 ([#1146](https://github.com/tf2pickup-org/client/issues/1146)) ([1f1b512](https://github.com/tf2pickup-org/client/commit/1f1b512dc7261340d3f9fbf8141ce67744c87958))
+* **queue:** fix map vote outline being stuck ([#1149](https://github.com/tf2pickup-org/client/issues/1149)) ([5d74183](https://github.com/tf2pickup-org/client/commit/5d741835891198d6fe631c6e02aadde6e5a99475))
+
 # [3.14.0](https://github.com/tf2pickup-pl/client/compare/3.13.3...3.14.0) (2021-08-09)
 
 
