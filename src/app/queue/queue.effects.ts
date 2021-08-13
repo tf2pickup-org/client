@@ -31,7 +31,7 @@ import {
   distinctUntilChanged,
 } from 'rxjs/operators';
 import { QueueService } from './queue.service';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { of, fromEvent } from 'rxjs';
 import { isInQueue } from './queue.selectors';
 import { ownGameAdded } from '@app/games/games.actions';
@@ -145,10 +145,9 @@ export class QueueEffects {
   });
 
   resetMapVote = createEffect(() => {
-    return this.store.pipe(
-      select(isInQueue),
-      filter(inQueue => !inQueue),
+    return this.store.select(isInQueue).pipe(
       distinctUntilChanged(),
+      filter(inQueue => !inQueue),
       mapTo(mapVoteReset()),
     );
   });
