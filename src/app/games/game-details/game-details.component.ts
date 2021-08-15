@@ -6,7 +6,13 @@ import {
 } from '@angular/core';
 import { Subject } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { map, filter, pairwise, takeUntil, mergeMap } from 'rxjs/operators';
+import {
+  map,
+  filter,
+  takeUntil,
+  mergeMap,
+  distinctUntilChanged,
+} from 'rxjs/operators';
 import { Title } from '@angular/platform-browser';
 import { environment } from '@environment';
 import { GameDetailsStore } from './game-details.store';
@@ -52,12 +58,10 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
       );
 
     // play sound when the connect is available
-    this.store.game
+    this.store.hasConnectString
       .pipe(
-        filter(game => !!game),
-        map(game => game.connectString),
-        pairwise(),
-        filter(([a, b]) => !a && !!b),
+        distinctUntilChanged(),
+        filter(hasConnectString => !!hasConnectString),
         takeUntil(this.destroyed),
         mergeMap(() =>
           this.soundPlayerService.playSound(

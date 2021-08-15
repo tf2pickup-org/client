@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Game } from './models/game';
 import { PaginatedList } from '@app/core/models/paginated-list';
 import { Socket } from '@app/io/socket';
+import { ConnectInfo } from './models/connect-info';
 
 @Injectable({
   providedIn: 'root',
@@ -65,5 +66,11 @@ export class GamesService {
 
   replacePlayer(gameId: string, replaceeId: string): Observable<Game> {
     return this.socket.call<Game>('replace player', { gameId, replaceeId });
+  }
+
+  fetchConnectInfo(gameId: string): Observable<ConnectInfo> {
+    return this.http.get<ConnectInfo>(
+      `${this.apiUrl}/games/${gameId}/connect-info`,
+    );
   }
 }

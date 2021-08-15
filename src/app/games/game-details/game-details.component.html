@@ -22,8 +22,8 @@
 
   <div *ngIf="store.isRunning | async" class="game-runtime-info">
     <div *ngIf="store.isMyGame | async; else watchGameInfo" class="d-flex align-items-center">
-      <app-connect-string [connectString]="_game.connectString" class="flex-grow-1 me-3"></app-connect-string>
-      <app-mumble-join-button [mumbleUrl]="store.mumbleUrl | async"></app-mumble-join-button>
+      <app-connect-string [connectString]="store.connectString | async" class="flex-grow-1 me-3"></app-connect-string>
+      <app-mumble-join-button [mumbleUrl]="store.voiceChannelUrl | async"></app-mumble-join-button>
     </div>
 
     <ng-template #watchGameInfo>
