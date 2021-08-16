@@ -142,4 +142,17 @@ describe('GamesService', () => {
       },
     ));
   });
+
+  describe('#fetchConnectInfo()', () => {
+    it('should call api endpoint', inject(
+      [GamesService],
+      (service: GamesService) => {
+        service.fetchConnectInfo('FAKE_GAME_ID').subscribe();
+        const req = httpController.expectOne(
+          'FAKE_URL/games/FAKE_GAME_ID/connect-info',
+        );
+        expect(req.request.method).toBe('GET');
+      },
+    ));
+  });
 });
