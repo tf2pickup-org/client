@@ -5,7 +5,7 @@ import { LinkedProfile } from '@app/players/models/linked-profile';
 export interface Profile {
   player: Player;
 
-  activeGameId: string;
+  activeGameId: string | null;
   bans: PlayerBan[];
   mapVote?: string;
 
