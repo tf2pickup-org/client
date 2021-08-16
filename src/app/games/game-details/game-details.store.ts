@@ -110,10 +110,6 @@ export class GameDetailsStore extends ComponentStore<GameDetailsState> {
     this.connectInfo,
     connectInfo => connectInfo?.voiceChannelUrl,
   );
-  readonly hasConnectString = this.select(
-    this.connectString,
-    connectString => !!connectString,
-  );
 
   // effects
   readonly setGameId = this.effect((gameId: Observable<string>) =>
@@ -259,6 +255,7 @@ export class GameDetailsStore extends ComponentStore<GameDetailsState> {
         first(game => !!game),
         map(game => game.id),
       )
+      // eslint-disable-next-line ngrx/no-store-subscription
       .subscribe(gameId => this.store.dispatch(reinitializeServer({ gameId })));
   }
 
@@ -268,6 +265,7 @@ export class GameDetailsStore extends ComponentStore<GameDetailsState> {
         first(game => !!game),
         map(game => game.id),
       )
+      // eslint-disable-next-line ngrx/no-store-subscription
       .subscribe(gameId => this.store.dispatch(forceEndGame({ gameId })));
   }
 
@@ -277,6 +275,7 @@ export class GameDetailsStore extends ComponentStore<GameDetailsState> {
         first(game => !!game),
         map(game => game.id),
       )
+      // eslint-disable-next-line ngrx/no-store-subscription
       .subscribe(gameId =>
         this.store.dispatch(requestSubstitute({ gameId, playerId })),
       );
@@ -288,6 +287,7 @@ export class GameDetailsStore extends ComponentStore<GameDetailsState> {
         first(game => !!game),
         map(game => game.id),
       )
+      // eslint-disable-next-line ngrx/no-store-subscription
       .subscribe(gameId =>
         this.store.dispatch(replacePlayer({ gameId, replaceeId })),
       );

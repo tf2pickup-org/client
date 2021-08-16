@@ -112,6 +112,7 @@ describe('PlayerDetailsGameListComponent', () => {
                   status: 'active',
                 },
               ],
+              connectInfoVersion: 1,
             },
           ],
           itemCount: 20,
