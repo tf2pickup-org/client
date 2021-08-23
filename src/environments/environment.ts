@@ -18,7 +18,7 @@ export const environment = {
     },
     {
       name: 'ko-fi',
-      icon: 'https://uploads-ssl.webflow.com/5c14e387dab576fe667689cf/5ca5bf1dff3c03fbf7cc9b3c_Kofi_logo_RGB_rounded-p-500.png',
+      icon: '/assets/Ko-fi_logo_RGB_Outline.png',
       target: 'https://ko-fi.com/tf2pickuporg',
       tooltip: 'Support us on Ko-Fi!',
     },
