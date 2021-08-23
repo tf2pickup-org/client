@@ -1,0 +1,52 @@
+@use 'components/surface';
+@use 'theme';
+@use 'variables';
+
+$-caption-background-color: theme.$primary;
+
+.online-player-list {
+  @include surface.make;
+  @include surface.shadow;
+  @include surface.fill-color(theme.$surface);
+  @include surface.ink-color(theme.$on-surface);
+
+  margin: 2rem 0;
+  padding: 0;
+  border-radius: variables.$default-border-radius;
+  max-width: 300px;
+  min-width: 200px;
+
+  &__caption {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: variables.$default-border-radius;
+    background-color: $-caption-background-color;
+
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: theme.$on-primary;
+
+    &-small {
+      font-weight: 500;
+      font-size: 1rem;
+    }
+  }
+
+  &__item {
+    @include surface.ripple;
+
+    display: flex;
+    flex-flow: row nowrap;
+
+    padding: 4px 12px;
+    border-radius: variables.$default-border-radius;
+
+    font-weight: 600;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
