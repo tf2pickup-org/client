@@ -146,6 +146,25 @@ describe(VoiceServerEditComponent.name, () => {
         });
       });
     });
+
+    describe('when null voice server is selected and saved', () => {
+      beforeEach(() => {
+        const radio = ngMocks.find('#radio-voice-server-type-none')
+          .nativeElement as HTMLInputElement;
+        radio.click();
+        fixture.detectChanges();
+        submitButton.click();
+      });
+
+      it('should attempt to update the value', () => {
+        expect(configurationService.storeValue).toHaveBeenCalledOnceWith(
+          ConfigurationEntryKey.voiceServer,
+          {
+            type: 'null',
+          },
+        );
+      });
+    });
   });
 
   describe('when the configuration is null', () => {
@@ -160,21 +179,6 @@ describe(VoiceServerEditComponent.name, () => {
       const radio = ngMocks.find('#radio-voice-server-type-none')
         .nativeElement as HTMLInputElement;
       expect(radio.checked).toBe(true);
-    });
-
-    describe('when the form is saved', () => {
-      beforeEach(() => {
-        submitButton.click();
-      });
-
-      it('should attempt to update the value', () => {
-        expect(configurationService.storeValue).toHaveBeenCalledOnceWith(
-          ConfigurationEntryKey.voiceServer,
-          {
-            type: 'null',
-          },
-        );
-      });
     });
   });
 });
