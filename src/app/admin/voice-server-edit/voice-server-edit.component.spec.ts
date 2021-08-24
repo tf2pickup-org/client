@@ -161,5 +161,20 @@ describe(VoiceServerEditComponent.name, () => {
         .nativeElement as HTMLInputElement;
       expect(radio.checked).toBe(true);
     });
+
+    describe('when the form is saved', () => {
+      beforeEach(() => {
+        submitButton.click();
+      });
+
+      it('should attempt to update the value', () => {
+        expect(configurationService.storeValue).toHaveBeenCalledOnceWith(
+          ConfigurationEntryKey.voiceServer,
+          {
+            type: 'null',
+          },
+        );
+      });
+    });
   });
 });
