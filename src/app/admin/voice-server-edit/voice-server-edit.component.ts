@@ -15,6 +15,7 @@ import { MDCTextField } from '@material/textfield';
 import { VoiceServer } from '@app/configuration/models/voice-server';
 import { Location } from '@angular/common';
 import { Subject } from 'rxjs';
+import { MumbleOptions } from '@app/configuration/models/mumble-options';
 
 @Component({
   selector: 'app-voice-server-edit',
@@ -26,6 +27,7 @@ export class VoiceServerEditComponent
   implements OnInit, AfterViewInit, OnDestroy
 {
   form = this.formBuilder.group({
+    type: '',
     mumble: this.formBuilder.group({
       url: '',
       port: 64738,
@@ -34,7 +36,7 @@ export class VoiceServerEditComponent
     }),
   });
 
-  initialValue = new Subject<VoiceServer>();
+  initialMumbleOptions = new Subject<MumbleOptions>();
 
   @ViewChild('mumbleServerUrl')
   mumbleServerUrlInput: ElementRef;
@@ -60,12 +62,33 @@ export class VoiceServerEditComponent
   ngOnInit() {
     this.configurationService
       .fetchValue<VoiceServer>(ConfigurationEntryKey.voiceServer)
-      .subscribe(mumble => {
-        this.form.patchValue({ mumble });
-        this.initialValue.next(mumble);
+      .subscribe(voiceServer => {
+        this.form.patchValue({
+          type: voiceServer.type,
+          mumble: voiceServer,
+        });
+
+        switch (voiceServer.type) {
+          case 'mumble':
+            this.initialMumbleOptions.next(voiceServer);
+            break;
+        }
+
         this.changeDetector.markForCheck();
         this.textFields.forEach(field => field?.layout());
       });
+
+    this.form.get('type').valueChanges.subscribe(type => {
+      switch (type) {
+        case 'null':
+          this.form.get('mumble').disable();
+          break;
+
+        case 'mumble':
+          this.form.get('mumble').enable();
+          break;
+      }
+    });
   }
 
   ngAfterViewInit() {
@@ -81,12 +104,32 @@ export class VoiceServerEditComponent
     this.textFields.forEach(field => field.destroy());
   }
 
+  get type(): VoiceServer['type'] {
+    return this.form.get('type').value;
+  }
+
   save() {
-    const mumble = this.form.value.mumble as VoiceServer;
-    mumble.type = 'mumble';
+    let voiceServer: VoiceServer;
+
+    switch (this.type) {
+      case 'mumble':
+        const { url, port, password, channelName } = this.form.value.mumble;
+        voiceServer = {
+          type: 'mumble',
+          url,
+          port,
+          password,
+          channelName,
+        };
+        break;
+
+      case 'null':
+        voiceServer = { type: 'null' };
+        break;
+    }
 
     this.configurationService
-      .storeValue<VoiceServer>(ConfigurationEntryKey.voiceServer, mumble)
+      .storeValue<VoiceServer>(ConfigurationEntryKey.voiceServer, voiceServer)
       .subscribe(() => this.location.back());
   }
 }
