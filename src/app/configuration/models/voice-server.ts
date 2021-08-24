@@ -1,3 +1,3 @@
 import { MumbleOptions } from './mumble-options';
 
-export type VoiceServer = MumbleOptions;
+export type VoiceServer = { type: 'null' } | MumbleOptions;

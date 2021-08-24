@@ -4,32 +4,51 @@
     [saveDisabled]="!form.valid || form.pristine">
 
     <div class="surface surface--white py-4">
-      <div class="mdc-typography--body1 mx-2">
-        Voice server configuration
-      </div>
-
-      <div class="mdc-form-field">
+      <div class="mdc-form-field w-100">
         <div class="mdc-radio">
-          <input class="mdc-radio__native-control" type="radio" id="radio-voice-server" name="radios" checked>
+          <input
+            class="mdc-radio__native-control"
+            type="radio"
+            id="radio-voice-server-type-none"
+            value="null"
+            formControlName="type">
           <div class="mdc-radio__background">
             <div class="mdc-radio__outer-circle"></div>
             <div class="mdc-radio__inner-circle"></div>
           </div>
           <div class="mdc-radio__ripple"></div>
         </div>
-        <label for="radio-voice-server">Mumble</label>
+        <label for="radio-voice-server-type-none">Disabled</label>
+      </div>
+
+      <div class="mdc-form-field w-100">
+        <div class="mdc-radio">
+          <input
+            class="mdc-radio__native-control"
+            type="radio"
+            id="radio-voice-server-type-mumble"
+            value="mumble"
+            formControlName="type">
+          <div class="mdc-radio__background">
+            <div class="mdc-radio__outer-circle"></div>
+            <div class="mdc-radio__inner-circle"></div>
+          </div>
+          <div class="mdc-radio__ripple"></div>
+        </div>
+        <label for="radio-voice-server-type-mumble">Mumble</label>
       </div>
 
       <div formGroupName="mumble" class="d-flex flex-column mt-2 ps-5">
         <div class="d-flex flex-row">
           <label #mumbleServerUrl
             class="mdc-text-field mdc-text-field--outlined m-2 flex-fill"
-            [class.mdc-text-field--label-floating]="!!(initialValue | async)?.url">
+            [class.mdc-text-field--label-floating]="!!(initialMumbleOptions | async)?.url"
+            [class.mdc-text-field--disabled]="type !== 'mumble'">
             <span class="mdc-notched-outline">
               <span class="mdc-notched-outline__leading"></span>
               <span class="mdc-notched-outline__notch">
                 <span class="mdc-floating-label"
-                  [class.mdc-floating-label--float-above]="!!(initialValue | async)?.url"
+                  [class.mdc-floating-label--float-above]="!!(initialMumbleOptions | async)?.url"
                   id="mumble-server-url">
                   URL
                 </span>
@@ -45,7 +64,8 @@
           </label>
 
           <label #mumbleServerPort
-            class="mdc-text-field mdc-text-field--outlined m-2">
+            class="mdc-text-field mdc-text-field--outlined m-2"
+            [class.mdc-text-field--disabled]="type !== 'mumble'">
             <span class="mdc-notched-outline">
               <span class="mdc-notched-outline__leading"></span>
               <span class="mdc-notched-outline__notch">
@@ -64,12 +84,13 @@
 
         <label #mumbleServerPassword
           class="mdc-text-field mdc-text-field--outlined m-2"
-          [class.mdc-text-field--label-floating]="!!(initialValue | async)?.password">
+          [class.mdc-text-field--label-floating]="!!(initialMumbleOptions | async)?.password"
+          [class.mdc-text-field--disabled]="type !== 'mumble'">
           <span class="mdc-notched-outline">
             <span class="mdc-notched-outline__leading"></span>
             <span class="mdc-notched-outline__notch">
               <span class="mdc-floating-label"
-                [class.mdc-floating-label--float-above]="!!(initialValue | async)?.password"
+                [class.mdc-floating-label--float-above]="!!(initialMumbleOptions | async)?.password"
                 id="mumble-server-password">
                 Password
               </span>
@@ -86,12 +107,13 @@
 
         <label #mumbleServerChannelName
           class="mdc-text-field mdc-text-field--outlined m-2"
-          [class.mdc-text-field--label-floating]="!!(initialValue | async)?.channelName">
+          [class.mdc-text-field--label-floating]="!!(initialMumbleOptions | async)?.channelName"
+          [class.mdc-text-field--disabled]="type !== 'mumble'">
           <span class="mdc-notched-outline">
             <span class="mdc-notched-outline__leading"></span>
             <span class="mdc-notched-outline__notch">
               <span class="mdc-floating-label" id="mumble-server-channel-name"
-                [class.mdc-floating-label--float-above]="!!(initialValue | async)?.channelName">
+                [class.mdc-floating-label--float-above]="!!(initialMumbleOptions | async)?.channelName">
                 Channel name
               </span>
             </span>

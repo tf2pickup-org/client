@@ -70,7 +70,7 @@ describe(VoiceServerEditComponent.name, () => {
     expect(submitButton.disabled).toBe(true);
   });
 
-  describe('when the configuration is fetched', () => {
+  describe('when the configuration is mumble', () => {
     beforeEach(() => {
       voiceServer.next({
         type: 'mumble',
@@ -127,7 +127,7 @@ describe(VoiceServerEditComponent.name, () => {
           );
         });
 
-        describe('when the values and saved on the server', () => {
+        describe('when the values are saved on the server', () => {
           beforeEach(() => {
             voiceServer.next({
               type: 'mumble',
@@ -145,6 +145,21 @@ describe(VoiceServerEditComponent.name, () => {
           });
         });
       });
+    });
+  });
+
+  describe('when the configuration is null', () => {
+    beforeEach(() => {
+      voiceServer.next({
+        type: 'null',
+      });
+      fixture.detectChanges();
+    });
+
+    it('should check radio button', () => {
+      const radio = ngMocks.find('#radio-voice-server-type-none')
+        .nativeElement as HTMLInputElement;
+      expect(radio.checked).toBe(true);
     });
   });
 });
