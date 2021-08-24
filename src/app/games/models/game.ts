@@ -12,10 +12,10 @@ export interface Game {
   logsUrl?: string;
   demoUrl?: string;
   state: GameState;
-  connectString?: string;
   mumbleUrl?: string;
   error?: string;
   gameServer?: string;
   stvConnectString?: string;
   score?: Record<Tf2Team, number>;
+  connectInfoVersion: number;
 }

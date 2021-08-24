@@ -46,8 +46,8 @@ const fakeGame: Game = {
   launchedAt: new Date('2020-01-02T21:54:23.036Z'),
   gameServer: '5e0145b90ea72823a3059ced',
   mumbleUrl: 'mumble://melkor.tf/tf2pickup/1',
-  connectString: 'connect 192.168.1.11:27015; password 0I9vNJTDpC',
   id: 'FAKE_GAME_ID',
+  connectInfoVersion: 1,
 };
 
 const initialState = {
@@ -169,6 +169,7 @@ describe('GamesEffects', () => {
         ],
         map: 'cp_badlands',
         state: 'launching',
+        connectInfoVersion: 1,
       };
 
       it('should dispatch the ownGameAdded action', done => {

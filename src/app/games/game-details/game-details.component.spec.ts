@@ -42,6 +42,7 @@ import { loadGameServer } from '@app/game-servers/game-servers.actions';
 import { Player } from '@app/players/models/player';
 import { GamesService } from '../games.service';
 import { SoundPlayerService } from '@app/shared/sound-player.service';
+import { ConnectInfo } from '../models/connect-info';
 
 const gameInProgress: Game = {
   id: 'FAKE_GAME_ID',
@@ -50,7 +51,6 @@ const gameInProgress: Game = {
   launchedAt: new Date('2019-07-25T11:42:55.121Z'),
   number: 3,
   gameServer: 'FAKE_GAME_SERVER_ID',
-  connectString: 'FAKE_CONNECT_STRING',
   stvConnectString: 'FAKE_STV_CONNECT_STRING',
   mumbleUrl: 'mumble://melkor.tf/tf2pickup/5',
   slots: [
@@ -69,6 +69,7 @@ const gameInProgress: Game = {
       status: 'active',
     },
   ],
+  connectInfoVersion: 0,
 };
 
 const endedGame: Game = {
@@ -100,6 +101,7 @@ const endedGame: Game = {
     red: 2,
     blu: 1,
   },
+  connectInfoVersion: 1,
 };
 
 const mockGameServer: GameServer = {
@@ -167,9 +169,11 @@ describe('GameDetailsComponent', () => {
   let component: GameDetailsComponent;
   let store: MockStore<any>;
   let routeParams: Subject<any>;
+  let connectInfo: Subject<ConnectInfo>;
 
   beforeEach(() => {
     routeParams = new Subject();
+    connectInfo = new Subject();
   });
 
   beforeEach(() =>
@@ -178,7 +182,11 @@ describe('GameDetailsComponent', () => {
       .mock(ActivatedRoute, {
         paramMap: routeParams.pipe(map(convertToParamMap)),
       })
-      .mock(GamesService)
+      .mock(GamesService, {
+        fetchConnectInfo: jasmine
+          .createSpy('fetchConnectInfo')
+          .and.returnValue(connectInfo.asObservable()),
+      })
       .mock(Title)
       .mock(GameAdminButtonsComponent)
       .mock(GameSummaryComponent)
@@ -381,23 +389,59 @@ describe('GameDetailsComponent', () => {
               fixture.detectChanges();
             });
 
-            it('should have access to the connect string', () => {
-              const connectString = ngMocks.find(
-                ConnectStringComponent,
-              ).componentInstance;
-              expect(connectString.connectString).toEqual(
-                'FAKE_CONNECT_STRING',
-              );
-              expect(connectString.stvConnectString).toBeUndefined();
-            });
+            describe('when new connect info is announced', () => {
+              beforeEach(() => {
+                store.setState(
+                  makeState([
+                    {
+                      ...gameInProgress,
+                      connectInfoVersion: 1,
+                    },
+                  ]),
+                );
+                store.refreshState();
+                fixture.detectChanges();
+              });
 
-            it('should have the join mumble button', () => {
-              const mumbleJoinButton = ngMocks.find(
-                MumbleJoinButtonComponent,
-              ).componentInstance;
-              expect(mumbleJoinButton.mumbleUrl).toEqual(
-                'mumble://FAKE_PLAYER@melkor.tf/tf2pickup/5/RED',
-              );
+              it('should query for the connect info', () => {
+                const gamesService = TestBed.inject(
+                  GamesService,
+                ) as jasmine.SpyObj<GamesService>;
+                expect(gamesService.fetchConnectInfo).toHaveBeenCalledWith(
+                  'FAKE_GAME_ID',
+                );
+              });
+
+              describe('when the new connect info is returned', () => {
+                beforeEach(() => {
+                  connectInfo.next({
+                    connectInfoVersion: 1,
+                    gameId: 'FAKE_GAME_ID',
+                    connectString: 'FAKE_CONNECT_STRING',
+                    voiceChannelUrl: 'FAKE_VOICE_CHANNEL_URL',
+                  });
+                  fixture.detectChanges();
+                });
+
+                it('should have access to the connect string', () => {
+                  const connectString = ngMocks.find(
+                    ConnectStringComponent,
+                  ).componentInstance;
+                  expect(connectString.connectString).toEqual(
+                    'FAKE_CONNECT_STRING',
+                  );
+                  expect(connectString.stvConnectString).toBeUndefined();
+                });
+
+                it('should have access to the voice channel url', () => {
+                  const voiceChannelJoinButton = ngMocks.find(
+                    MumbleJoinButtonComponent,
+                  ).componentInstance;
+                  expect(voiceChannelJoinButton.mumbleUrl).toEqual(
+                    'FAKE_VOICE_CHANNEL_URL',
+                  );
+                });
+              });
             });
 
             describe('when subbed out', () => {
@@ -434,27 +478,6 @@ describe('GameDetailsComponent', () => {
                 expect(gameTeamPlayerList.locked).toBe(false);
               });
             });
-          });
-        });
-
-        describe('and the connect string becomes available', () => {
-          beforeEach(() => {
-            store.setState(
-              makeState([
-                {
-                  ...gameInProgress,
-                  connectString: undefined,
-                },
-              ]),
-            );
-            store.setState(makeState([gameInProgress]));
-          });
-
-          it('should play the ready-up sound', () => {
-            const soundPlayerService = TestBed.inject(
-              SoundPlayerService,
-            ) as jasmine.SpyObj<SoundPlayerService>;
-            expect(soundPlayerService.playSound).toHaveBeenCalledTimes(1);
           });
         });
 
