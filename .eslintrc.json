@@ -53,7 +53,8 @@
             "allowAfterThis": true
           }
         ],
-        "ngrx/on-function-explicit-return-type": "off"
+        "ngrx/on-function-explicit-return-type": "off",
+        "ngrx/prefix-selectors-with-select": "off"
       }
     },
     {

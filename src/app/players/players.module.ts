@@ -36,7 +36,6 @@ import { HasBadgePipe } from './has-badge.pipe';
 import { IsAdminPipe } from './is-admin.pipe';
 import { SelectTwitchTvProfilePipe } from './player-details-external-profile-links/select-twitch-tv-profile.pipe';
 import { OnlinePlayerListComponent } from './online-player-list/online-player-list.component';
-import { OnlinePlayerListItemComponent } from './online-player-list-item/online-player-list-item.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +63,6 @@ import { OnlinePlayerListItemComponent } from './online-player-list-item/online-
     IsAdminPipe,
     SelectTwitchTvProfilePipe,
     OnlinePlayerListComponent,
-    OnlinePlayerListItemComponent,
   ],
   imports: [
     CommonModule,

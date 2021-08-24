@@ -112,9 +112,9 @@ export class PlayersService {
   defaultSkill(
     playerId: string,
   ): Observable<{ [gameClass in Tf2ClassName]?: number }> {
-    return this.store.pipe(
-      select(queueConfig),
+    return this.store.select(queueConfig).pipe(
       first(config => !!config),
+      // eslint-disable-next-line ngrx/avoid-mapping-selectors
       map(config =>
         config.classes.reduce((_skill, curr) => {
           _skill[curr.name] = 1;
@@ -132,5 +132,9 @@ export class PlayersService {
     return this.http.get<LinkedProfiles>(
       `${this.apiUrl}/players/${playerId}/linked-profiles`,
     );
+  }
+
+  fetchOnlinePlayers(): Observable<Player[]> {
+    return this.http.get<Player[]>(`${this.apiUrl}/online-players`);
   }
 }

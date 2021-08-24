@@ -1,18 +1,19 @@
 <div class="online-player-list">
-  <div class="online-player-list__caption">
-    online
-    <div class="online-player-list__caption-small ms-2">
-      (10)
+  <div class="online-player-list__caption-bg">
+    <div class="online-player-list__caption">
+      <span>
+        online players:
+        <strong>
+          {{ onlinePlayerCount | async }}
+        </strong>
+      </span>
     </div>
   </div>
 
-  <a href="#" class="online-player-list__item">
-    mały
-  </a>
-  <a href="#" class="online-player-list__item">
-    RADMINATOR
-  </a>
-  <a href="#" class="online-player-list__item">
-    Kartky
+  <a *ngFor="let player of onlinePlayers | async; index as i"
+    [routerLink]="['/player', player.id]"
+    class="online-player-list__item"
+    [ngClass]="['online-player-list__item--odd', 'online-player-list__item--even'][i % 2]">
+    {{ player.name }}
   </a>
 </div>

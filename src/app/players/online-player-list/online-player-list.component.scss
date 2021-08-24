@@ -1,36 +1,53 @@
 @use 'components/surface';
 @use 'theme';
 @use 'variables';
+@use 'utils/border-radius';
 
-$-caption-background-color: theme.$primary;
+$-caption-background-color: rgb(6, 15, 30);
+$-border-radius: variables.$default-border-radius * 0.75;
+$-odd-item-background-color: rgba(33, 40, 62, 0.52);
+$-even-item-background-color: rgba(6, 15, 30, 0.52);
 
 .online-player-list {
   @include surface.make;
-  @include surface.shadow;
-  @include surface.fill-color(theme.$surface);
-  @include surface.ink-color(theme.$on-surface);
+  // @include surface.shadow;
+  // @include surface.fill-color(rgba(33, 40, 62, 0.52));
 
   margin: 2rem 0;
   padding: 0;
-  border-radius: variables.$default-border-radius;
+  border-radius: $-border-radius;
   max-width: 300px;
   min-width: 200px;
+
+  &__caption-bg {
+    @include border-radius.top($-border-radius);
+
+    display: flex;
+    justify-content: center;
+
+    background-color: $-odd-item-background-color;
+  }
 
   &__caption {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-flow: column nowrap;
+    flex: 1 0 auto;
 
-    border-radius: variables.$default-border-radius;
+    border-radius: $-border-radius;
     background-color: $-caption-background-color;
 
     font-weight: 600;
-    font-size: 1.5rem;
+    font-size: 1rem;
     color: theme.$on-primary;
 
-    &-small {
-      font-weight: 500;
+    padding: 0.5rem;
+
+    strong {
+      font-weight: 650;
       font-size: 1rem;
+      color: theme.$secondary;
     }
   }
 
@@ -39,14 +56,28 @@ $-caption-background-color: theme.$primary;
 
     display: flex;
     flex-flow: row nowrap;
+    justify-content: center;
 
     padding: 4px 12px;
-    border-radius: variables.$default-border-radius;
 
     font-weight: 600;
+    font-size: 0.9rem;
+    color: theme.$on-primary;
 
     &:hover {
       text-decoration: none;
+    }
+
+    &:last-child {
+      @include border-radius.bottom($-border-radius);
+    }
+
+    &--odd {
+      background-color: $-odd-item-background-color;
+    }
+
+    &--even {
+      background-color: $-even-item-background-color;
     }
   }
 }
