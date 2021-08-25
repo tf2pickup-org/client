@@ -275,4 +275,15 @@ describe('PlayersService', () => {
       },
     ));
   });
+
+  describe('#fetchOnlinePlayers()', () => {
+    it('should query the api', inject(
+      [PlayersService],
+      (service: PlayersService) => {
+        service.fetchOnlinePlayers().subscribe();
+        httpContoller.expectOne('FAKE_URL/online-players');
+        expect().nothing();
+      },
+    ));
+  });
 });
