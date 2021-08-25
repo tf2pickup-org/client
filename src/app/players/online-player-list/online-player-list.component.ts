@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { first, startWith } from 'rxjs/operators';
+import { first } from 'rxjs/operators';
 import { loadOnlinePlayers } from '../actions';
 import {
   onlinePlayerCount,
@@ -16,7 +16,7 @@ import {
 })
 export class OnlinePlayerListComponent implements OnInit {
   onlinePlayers = this.store.select(onlinePlayers);
-  onlinePlayerCount = this.store.select(onlinePlayerCount).pipe(startWith(0));
+  onlinePlayerCount = this.store.select(onlinePlayerCount);
 
   constructor(private store: Store) {}
 
