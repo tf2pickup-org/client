@@ -10,13 +10,12 @@ $-even-item-background-color: rgba(6, 15, 30, 0.52);
 
 .online-player-list {
   @include surface.make;
-  // @include surface.shadow;
-  // @include surface.fill-color(rgba(33, 40, 62, 0.52));
+  @include surface.shadow;
 
   margin: 2rem 0;
   padding: 0;
   border-radius: $-border-radius;
-  max-width: 300px;
+  max-width: 240px;
   min-width: 200px;
 
   &__caption-bg {
@@ -44,7 +43,8 @@ $-even-item-background-color: rgba(6, 15, 30, 0.52);
 
     padding: 0.5rem;
 
-    strong {
+    .online-player-count {
+      display: inline-block;
       font-weight: 650;
       font-size: 1rem;
       color: theme.$secondary;
@@ -57,12 +57,19 @@ $-even-item-background-color: rgba(6, 15, 30, 0.52);
     display: flex;
     flex-flow: row nowrap;
     justify-content: center;
+    min-width: 0;
 
     padding: 4px 12px;
 
     font-weight: 600;
     font-size: 0.9rem;
     color: theme.$on-primary;
+
+    span {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
 
     &:hover {
       text-decoration: none;

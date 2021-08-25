@@ -3,17 +3,19 @@
     <div class="online-player-list__caption">
       <span>
         online players:
-        <strong>
+        <div class="online-player-count" [@pulsate]="onlinePlayerCount | async">
           {{ onlinePlayerCount | async }}
-        </strong>
+        </div>
       </span>
     </div>
   </div>
 
-  <a *ngFor="let player of onlinePlayers | async; index as i"
-    [routerLink]="['/player', player.id]"
-    class="online-player-list__item"
-    [ngClass]="['online-player-list__item--odd', 'online-player-list__item--even'][i % 2]">
-    {{ player.name }}
-  </a>
+  <div [@onlinePlayerList]="(onlinePlayers | async)?.length">
+    <a *ngFor="let player of onlinePlayers | async; index as i"
+      [routerLink]="['/player', player.id]"
+      class="online-player-list__item"
+      [ngClass]="['online-player-list__item--odd', 'online-player-list__item--even'][i % 2]">
+      <span>{{ player.name }}</span>
+    </a>
+  </div>
 </div>
