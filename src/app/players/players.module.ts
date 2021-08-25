@@ -35,6 +35,7 @@ import { EditPlayerRolesComponent } from './edit-player-roles/edit-player-roles.
 import { HasBadgePipe } from './has-badge.pipe';
 import { IsAdminPipe } from './is-admin.pipe';
 import { SelectTwitchTvProfilePipe } from './player-details-external-profile-links/select-twitch-tv-profile.pipe';
+import { OnlinePlayerListComponent } from './online-player-list/online-player-list.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { SelectTwitchTvProfilePipe } from './player-details-external-profile-lin
     HasBadgePipe,
     IsAdminPipe,
     SelectTwitchTvProfilePipe,
+    OnlinePlayerListComponent,
   ],
   imports: [
     CommonModule,
@@ -79,6 +81,10 @@ import { SelectTwitchTvProfilePipe } from './player-details-external-profile-lin
 
     PlayersRoutingModule,
   ],
-  exports: [PlayerNameComponent, PlayerAvatarComponent],
+  exports: [
+    PlayerNameComponent,
+    PlayerAvatarComponent,
+    OnlinePlayerListComponent,
+  ],
 })
 export class PlayersModule {}

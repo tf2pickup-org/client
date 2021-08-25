@@ -1,3 +1,4 @@
+/* eslint-disable ngrx/no-store-subscription */
 import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { PlayersService } from './players.service';
@@ -15,7 +16,15 @@ import {
   playerBanAdded,
   loadLinkedProfiles,
   linkedProfilesLoaded,
+  onlinePlayersLoaded,
+  playerConnected,
+  playerDisconnected,
+  loadOnlinePlayers,
 } from './actions';
+import { Store } from '@ngrx/store';
+import { Socket } from '@app/io/socket';
+import { fromEvent } from 'rxjs';
+import { Player } from './models/player';
 
 @Injectable()
 export class PlayerEffects {
@@ -84,8 +93,28 @@ export class PlayerEffects {
     );
   });
 
+  loadOnlinePlayers = createEffect(() => {
+    return this.actions.pipe(
+      ofType(loadOnlinePlayers),
+      mergeMap(() =>
+        this.playersService
+          .fetchOnlinePlayers()
+          .pipe(map(players => onlinePlayersLoaded({ players }))),
+      ),
+    );
+  });
+
   constructor(
     private actions: Actions,
     private playersService: PlayersService,
-  ) {}
+    private store: Store,
+    socket: Socket,
+  ) {
+    fromEvent<Player>(socket, 'player connected').subscribe(player =>
+      this.store.dispatch(playerConnected({ player })),
+    );
+    fromEvent<Player>(socket, 'player disconnected').subscribe(player =>
+      this.store.dispatch(playerDisconnected({ player })),
+    );
+  }
 }

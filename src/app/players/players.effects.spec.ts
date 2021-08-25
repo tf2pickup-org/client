@@ -9,9 +9,16 @@ import {
   loadPlayer,
   linkedProfilesLoaded,
   loadLinkedProfiles,
+  onlinePlayersLoaded,
+  loadOnlinePlayers,
+  playerConnected,
+  playerDisconnected,
 } from './actions';
 import { Player } from './models/player';
 import { LinkedProfiles } from './models/linked-profiles';
+import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import { Socket } from '@app/io/socket';
+import { EventEmitter } from 'eventemitter3';
 
 const mockPlayer: Player = {
   id: 'FAKE_PLAYER_ID',
@@ -39,21 +46,54 @@ const linkedProfiles: LinkedProfiles = {
   ],
 };
 
+const onlinePlayers: Player[] = [
+  {
+    name: 'maly',
+    avatar: {
+      small:
+        'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/96/962ac5adb6b0cce647227a2c429c035e56197fb2.jpg',
+      medium:
+        'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/96/962ac5adb6b0cce647227a2c429c035e56197fb2_medium.jpg',
+      large:
+        'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/96/962ac5adb6b0cce647227a2c429c035e56197fb2_full.jpg',
+    },
+    roles: ['admin', 'super user'],
+    id: '612412523231b954417c429f',
+  } as Player,
+  {
+    name: 'majiwem171',
+    avatar: {
+      small:
+        'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/fe/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb.jpg',
+      medium:
+        'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/fe/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb_medium.jpg',
+      large:
+        'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/fe/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb_full.jpg',
+    },
+    roles: [],
+    id: '612412b63231b954417c42e8',
+  } as Player,
+];
+
 describe('PlayerEffects', () => {
   let actions: ReplaySubject<Action>;
   let effects: PlayerEffects;
   let playersService: jasmine.SpyObj<PlayersService>;
+  let store: MockStore;
+  let socket: Socket;
 
   beforeEach(() => {
     actions = new ReplaySubject<Action>(1);
     playersService = jasmine.createSpyObj<PlayersService>(PlayersService.name, [
       'fetchPlayer',
       'fetchPlayerLinkedProfiles',
+      'fetchOnlinePlayers',
     ]);
     playersService.fetchPlayer.and.returnValue(of(mockPlayer));
     playersService.fetchPlayerLinkedProfiles.and.returnValue(
       of(linkedProfiles),
     );
+    playersService.fetchOnlinePlayers.and.returnValue(of(onlinePlayers));
   });
 
   beforeEach(() =>
@@ -62,13 +102,21 @@ describe('PlayerEffects', () => {
         PlayerEffects,
         provideMockActions(() => actions.asObservable()),
         { provide: PlayersService, useValue: playersService },
+        provideMockStore(),
+        { provide: Socket, useClass: EventEmitter },
       ],
     }),
   );
 
   beforeEach(() => {
-    effects = TestBed.get(PlayerEffects);
-    playersService = TestBed.get(PlayersService);
+    effects = TestBed.inject(PlayerEffects);
+    playersService = TestBed.inject(
+      PlayersService,
+    ) as jasmine.SpyObj<PlayersService>;
+    store = TestBed.inject(MockStore);
+    socket = TestBed.inject(Socket);
+
+    spyOn(store, 'dispatch');
   });
 
   afterEach(() => actions.complete());
@@ -96,6 +144,43 @@ describe('PlayerEffects', () => {
       actions.next(loadLinkedProfiles({ playerId: 'FAKE_PLAYER_ID' }));
       expect(playersService.fetchPlayerLinkedProfiles).toHaveBeenCalledOnceWith(
         'FAKE_PLAYER_ID',
+      );
+    });
+  });
+
+  describe('loadOnlinePlayers', () => {
+    it('should attempt to fetch the online players', done => {
+      effects.loadOnlinePlayers.subscribe(action => {
+        expect(action).toEqual(onlinePlayersLoaded({ players: onlinePlayers }));
+        done();
+      });
+      actions.next(loadOnlinePlayers());
+      expect(playersService.fetchOnlinePlayers).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe('when player connects', () => {
+    beforeEach(() => {
+      // @ts-ignore
+      socket.emit('player connected', onlinePlayers[0]);
+    });
+
+    it('should dispatch action', () => {
+      expect(store.dispatch).toHaveBeenCalledWith(
+        playerConnected({ player: onlinePlayers[0] }),
+      );
+    });
+  });
+
+  describe('when player disconnects', () => {
+    beforeEach(() => {
+      // @ts-ignore
+      socket.emit('player disconnected', onlinePlayers[1]);
+    });
+
+    it('should dispatch action', () => {
+      expect(store.dispatch).toHaveBeenCalledWith(
+        playerDisconnected({ player: onlinePlayers[1] }),
       );
     });
   });
