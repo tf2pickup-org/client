@@ -1,3 +1,10 @@
+# [3.15.0](https://github.com/tf2pickup-org/client/compare/3.14.1...3.15.0) (2021-08-25)
+
+
+### Features
+
+* **tf2pickup.ru:** add tf2pickup.ru branding ([#1177](https://github.com/tf2pickup-org/client/issues/1177)) ([8a0015d](https://github.com/tf2pickup-org/client/commit/8a0015d640ad5653f6a59bce7efdd3a9861829b4))
+
 ## [3.14.1](https://github.com/tf2pickup-org/client/compare/3.14.0...3.14.1) (2021-08-13)
 
 
