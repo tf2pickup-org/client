@@ -1,4 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import {
@@ -28,7 +29,8 @@ describe(OnlinePlayerListComponent.name, () => {
   beforeAll(() =>
     MockBuilder(OnlinePlayerListComponent)
       .provide(provideMockStore())
-      .mock(RouterModule),
+      .mock(RouterModule)
+      .keep(NoopAnimationsModule),
   );
   beforeAll(() => factory.configureTestBed());
 
@@ -76,7 +78,7 @@ describe(OnlinePlayerListComponent.name, () => {
     });
 
     it('should render online player count', () => {
-      const strong = ngMocks.find('span>strong')
+      const strong = ngMocks.find('.online-player-count')
         .nativeElement as HTMLSpanElement;
       expect(strong.textContent.trim()).toEqual('0');
     });
@@ -126,7 +128,7 @@ describe(OnlinePlayerListComponent.name, () => {
       });
 
       it('should update online player count', () => {
-        const strong = ngMocks.find('span>strong')
+        const strong = ngMocks.find('.online-player-count')
           .nativeElement as HTMLSpanElement;
         expect(strong.textContent.trim()).toEqual('2');
       });
