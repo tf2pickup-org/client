@@ -22,6 +22,7 @@ import { DiagnosticCheckInfoComponent } from './game-server-diagnostics/diagnost
 import { PlayerRestrictionsComponent } from './player-restrictions/player-restrictions.component';
 import { MinimumTf2InGameHoursDialogComponent } from './player-restrictions/minimum-tf2-in-game-hours-dialog/minimum-tf2-in-game-hours-dialog.component';
 import { VoiceServerEditComponent } from './voice-server-edit/voice-server-edit.component';
+import { DiscordBotComponent } from './discord-bot/discord-bot.component';
 
 @NgModule({
   imports: [
@@ -52,6 +53,7 @@ import { VoiceServerEditComponent } from './voice-server-edit/voice-server-edit.
     PlayerRestrictionsComponent,
     MinimumTf2InGameHoursDialogComponent,
     VoiceServerEditComponent,
+    DiscordBotComponent,
   ],
 })
 export class AdminModule {}

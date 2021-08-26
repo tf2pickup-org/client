@@ -14,6 +14,7 @@ import { WhitelistEditComponent } from './whitelist-edit/whitelist-edit.componen
 import { GameServerResolver } from '@app/game-servers/game-server.resolver';
 import { PlayerRestrictionsComponent } from './player-restrictions/player-restrictions.component';
 import { VoiceServerEditComponent } from './voice-server-edit/voice-server-edit.component';
+import { DiscordBotComponent } from './discord-bot/discord-bot.component';
 
 const routes: Routes = [
   {
@@ -110,7 +111,15 @@ const routes: Routes = [
         component: PlayerRestrictionsComponent,
         data: {
           title: 'edit player restrictions',
-          Animation: 'PlayerRestrictionsPage',
+          animation: 'PlayerRestrictionsPage',
+        },
+      },
+      {
+        path: 'discord-bot',
+        component: DiscordBotComponent,
+        data: {
+          title: 'discord bot',
+          animation: 'DiscordBotConfigurationPage',
         },
       },
     ],
