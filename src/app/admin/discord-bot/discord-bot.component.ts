@@ -11,5 +11,7 @@ import { DiscordBotStore } from './discord-bot.store';
 export class DiscordBotComponent implements OnInit {
   constructor(private store: DiscordBotStore) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.store.loadAvailableGuilds();
+  }
 }
