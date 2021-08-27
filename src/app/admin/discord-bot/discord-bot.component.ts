@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { DiscordBotStore } from './discord-bot.store';
 
 @Component({
@@ -9,7 +10,14 @@ import { DiscordBotStore } from './discord-bot.store';
   providers: [DiscordBotStore],
 })
 export class DiscordBotComponent implements OnInit {
-  constructor(private store: DiscordBotStore) {}
+  form = this.formBuilder.group({
+    guildName: [''],
+  });
+
+  constructor(
+    public readonly store: DiscordBotStore,
+    private formBuilder: FormBuilder,
+  ) {}
 
   ngOnInit() {
     this.store.loadAvailableGuilds();

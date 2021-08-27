@@ -1,1 +1,34 @@
-<p>discord-bot works!</p>
+<form [formGroup]="form">
+  <app-edit-page-wrapper
+    title="Discord bot configuration"
+    [saveDisabled]="(store.isSaving | async) === true || !form.valid || form.pristine">
+
+    <div class="surface surface--white py-4">
+      <div class="mdc-typography--body1 mx-2">
+        Guild
+      </div>
+
+      <div *ngFor="let guild of store.availableGuilds | async; index as i"
+        class="mdc-form-field w-100 my-2">
+        <div class="mdc-radio">
+          <input
+            class="mdc-radio__native-control"
+            type="radio"
+            id="discord-guild-{{i}}"
+            [value]="guild"
+            formControlName="guildName">
+          <div class="mdc-radio__background">
+            <div class="mdc-radio__outer-circle"></div>
+            <div class="mdc-radio__inner-circle"></div>
+          </div>
+          <div class="mdc-radio__ripple"></div>
+        </div>
+        <label for="discord-guild-{{i}}">
+          <img [src]="guild.iconUrl" crossorigin="anonymous" width="36">
+          {{guild.name}}
+        </label>
+      </div>
+    </div>
+  </app-edit-page-wrapper>
+</form>
+

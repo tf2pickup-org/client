@@ -5,11 +5,15 @@ import { DiscordService } from '@app/admin/discord.service';
 import { HttpErrorResponse } from '@angular/common/http';
 
 interface DiscordBotState {
+  isSaving: boolean;
   availableGuilds: GuildInfo[];
 }
 
 @Injectable()
 export class DiscordBotStore extends ComponentStore<DiscordBotState> {
+  readonly isSaving = this.select(state => state.isSaving);
+  readonly availableGuilds = this.select(state => state.availableGuilds);
+
   readonly loadAvailableGuilds = this.effect(() => {
     return this.discordService.fetchGuilds().pipe(
       tapResponse(
@@ -28,6 +32,7 @@ export class DiscordBotStore extends ComponentStore<DiscordBotState> {
 
   constructor(private discordService: DiscordService) {
     super({
+      isSaving: false,
       availableGuilds: [],
     });
   }
