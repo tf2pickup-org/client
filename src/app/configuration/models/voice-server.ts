@@ -1,3 +1,13 @@
+import { ConfigurationEntryKey } from '../configuration-entry-key';
 import { MumbleOptions } from './mumble-options';
 
-export type VoiceServer = { type: 'null' } | MumbleOptions;
+export enum SelectedVoiceServer {
+  none = 'none',
+  mumble = 'mumble',
+}
+
+export interface VoiceServer {
+  key: ConfigurationEntryKey.voiceServer;
+  type: SelectedVoiceServer;
+  mumble?: MumbleOptions;
+}

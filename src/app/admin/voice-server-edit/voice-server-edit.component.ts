@@ -12,7 +12,10 @@ import { FormBuilder } from '@angular/forms';
 import { ConfigurationEntryKey } from '@app/configuration/configuration-entry-key';
 import { ConfigurationService } from '@app/configuration/configuration.service';
 import { MDCTextField } from '@material/textfield';
-import { VoiceServer } from '@app/configuration/models/voice-server';
+import {
+  SelectedVoiceServer,
+  VoiceServer,
+} from '@app/configuration/models/voice-server';
 import { Location } from '@angular/common';
 import { Subject } from 'rxjs';
 import { MumbleOptions } from '@app/configuration/models/mumble-options';
@@ -65,26 +68,21 @@ export class VoiceServerEditComponent
       .subscribe(voiceServer => {
         this.form.patchValue({
           type: voiceServer.type,
-          mumble: voiceServer,
+          mumble: voiceServer.mumble,
         });
 
-        switch (voiceServer.type) {
-          case 'mumble':
-            this.initialMumbleOptions.next(voiceServer);
-            break;
-        }
-
+        this.initialMumbleOptions.next(voiceServer.mumble);
         this.changeDetector.markForCheck();
         this.textFields.forEach(field => field?.layout());
       });
 
     this.form.get('type').valueChanges.subscribe(type => {
       switch (type) {
-        case 'null':
+        case SelectedVoiceServer.none:
           this.form.get('mumble').disable();
           break;
 
-        case 'mumble':
+        case SelectedVoiceServer.mumble:
           this.form.get('mumble').enable();
           break;
       }
@@ -112,24 +110,30 @@ export class VoiceServerEditComponent
     let voiceServer: VoiceServer;
 
     switch (this.type) {
-      case 'mumble':
+      case SelectedVoiceServer.mumble:
         const { url, port, password, channelName } = this.form.value.mumble;
         voiceServer = {
-          type: 'mumble',
-          url,
-          port,
-          password,
-          channelName,
+          key: ConfigurationEntryKey.voiceServer,
+          type: SelectedVoiceServer.mumble,
+          mumble: {
+            url,
+            port,
+            password,
+            channelName,
+          },
         };
         break;
 
-      case 'null':
-        voiceServer = { type: 'null' };
+      case 'none':
+        voiceServer = {
+          key: ConfigurationEntryKey.voiceServer,
+          type: SelectedVoiceServer.none,
+        };
         break;
     }
 
     this.configurationService
-      .storeValue<VoiceServer>(ConfigurationEntryKey.voiceServer, voiceServer)
+      .storeValue(voiceServer)
       .subscribe(() => this.location.back());
   }
 }

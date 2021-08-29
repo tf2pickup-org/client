@@ -4,7 +4,9 @@ import {
 } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { API_URL } from '@app/api-url';
+import { ConfigurationEntryKey } from './configuration-entry-key';
 import { ConfigurationService } from './configuration.service';
+import { WhitelistId } from './models/whihtelist-id';
 
 describe('ConfigurationService', () => {
   let service: ConfigurationService;
@@ -26,7 +28,9 @@ describe('ConfigurationService', () => {
   describe('#fetchValue()', () => {
     it('should query the api', () => {
       let result: string;
-      service.fetchValue<string>('whitelist id').subscribe(r => (result = r));
+      service
+        .fetchValue<WhitelistId>('whitelist id')
+        .subscribe(r => (result = r.value));
       const request = httpController.expectOne(
         'FAKE_URL/configuration/whitelist-id',
       );
@@ -39,8 +43,11 @@ describe('ConfigurationService', () => {
     it('should query the api', () => {
       let result: string;
       service
-        .storeValue<string>('whitelist id', 'etf2l_6v6')
-        .subscribe(r => (result = r));
+        .storeValue<WhitelistId>({
+          key: ConfigurationEntryKey.whitelistId,
+          value: 'etf2l_6v6',
+        })
+        .subscribe(r => (result = r.value));
       const request = httpController.expectOne(
         'FAKE_URL/configuration/whitelist-id',
       );

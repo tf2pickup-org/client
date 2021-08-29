@@ -2,6 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ConfigurationEntryKey } from '@app/configuration/configuration-entry-key';
 import { ConfigurationService } from '@app/configuration/configuration.service';
+import { DefaultPlayerSkill } from '@app/configuration/models/default-player-skill';
 import { queueConfig } from '@app/queue/queue.selectors';
 import { GameClassIconComponent } from '@app/shared/game-class-icon/game-class-icon.component';
 import { Tf2ClassName } from '@app/shared/models/tf2-class-name';
@@ -21,7 +22,7 @@ import { DefaultPlayerSkillEditComponent } from './default-player-skill-edit.com
 describe(DefaultPlayerSkillEditComponent.name, () => {
   let component: DefaultPlayerSkillEditComponent;
   let fixture: MockedComponentFixture<DefaultPlayerSkillEditComponent>;
-  let defaultPlayerSkill: Subject<{ [className in Tf2ClassName]?: number }>;
+  let defaultPlayerSkill: Subject<DefaultPlayerSkill>;
   let submitButton: HTMLButtonElement;
 
   beforeEach(() => {
@@ -67,7 +68,10 @@ describe(DefaultPlayerSkillEditComponent.name, () => {
 
     submitButton = ngMocks.find('button[type=submit]').nativeElement;
 
-    defaultPlayerSkill.next({ scout: 1, soldier: 2 });
+    defaultPlayerSkill.next({
+      key: ConfigurationEntryKey.defaultPlayerSkill,
+      value: { scout: 1, soldier: 2 },
+    });
     fixture.detectChanges();
   });
 
@@ -111,7 +115,10 @@ describe(DefaultPlayerSkillEditComponent.name, () => {
       beforeEach(() => {
         submitButton.click();
         fixture.detectChanges();
-        defaultPlayerSkill.next({ scout: 1, soldier: 2 });
+        defaultPlayerSkill.next({
+          key: ConfigurationEntryKey.defaultPlayerSkill,
+          value: { scout: 1, soldier: 2 },
+        });
       });
 
       it('should disable the submit button', () => {
@@ -120,18 +127,21 @@ describe(DefaultPlayerSkillEditComponent.name, () => {
 
       it('should call the api', () => {
         const configurationService = TestBed.inject(ConfigurationService);
-        expect(configurationService.storeValue).toHaveBeenCalledWith(
-          ConfigurationEntryKey.defaultPlayerSkill,
-          {
+        expect(configurationService.storeValue).toHaveBeenCalledWith({
+          key: ConfigurationEntryKey.defaultPlayerSkill,
+          value: {
             scout: 1,
             soldier: 4,
           },
-        );
+        } as DefaultPlayerSkill);
       });
 
       describe('when accepted by the server', () => {
         beforeEach(() => {
-          defaultPlayerSkill.next({ scout: 1, soldier: 4 });
+          defaultPlayerSkill.next({
+            key: ConfigurationEntryKey.defaultPlayerSkill,
+            value: { scout: 1, soldier: 4 },
+          });
           fixture.detectChanges();
         });
 

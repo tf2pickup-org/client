@@ -5,6 +5,8 @@ import { TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ConfigurationEntryKey } from '@app/configuration/configuration-entry-key';
 import { ConfigurationService } from '@app/configuration/configuration.service';
+import { Etf2lAccountRequired } from '@app/configuration/models/etf2l-account-required';
+import { MinimumTf2InGameHours } from '@app/configuration/models/minimum-tf2-in-game-hours';
 import { FeatherComponent } from 'angular-feather';
 import {
   MockBuilder,
@@ -22,8 +24,8 @@ import { PlayerRestrictionsComponent } from './player-restrictions.component';
 describe(PlayerRestrictionsComponent.name, () => {
   let component: PlayerRestrictionsComponent;
   let fixture: MockedComponentFixture<PlayerRestrictionsComponent>;
-  let etf2lAccountRequired: Subject<boolean>;
-  let minimumTf2InGameHours: Subject<number>;
+  let etf2lAccountRequired: Subject<Etf2lAccountRequired>;
+  let minimumTf2InGameHours: Subject<MinimumTf2InGameHours>;
   let overlay: jasmine.SpyObj<Overlay>;
   let configurationService: jasmine.SpyObj<ConfigurationService>;
 
@@ -46,13 +48,13 @@ describe(PlayerRestrictionsComponent.name, () => {
             }[key]),
         ),
         storeValue: jasmine.createSpy('storeValue').and.callFake(
-          key =>
+          entry =>
             ({
               [ConfigurationEntryKey.etf2lAccountRequired]:
                 etf2lAccountRequired.pipe(take(1)),
               [ConfigurationEntryKey.minimumTf2InGameHours]:
                 minimumTf2InGameHours.pipe(take(1)),
-            }[key]),
+            }[entry.key]),
         ),
       })
       .mock(Overlay)
@@ -79,8 +81,14 @@ describe(PlayerRestrictionsComponent.name, () => {
 
   describe('when configuration is fetched', () => {
     beforeEach(() => {
-      etf2lAccountRequired.next(true);
-      minimumTf2InGameHours.next(500);
+      etf2lAccountRequired.next({
+        key: ConfigurationEntryKey.etf2lAccountRequired,
+        value: true,
+      });
+      minimumTf2InGameHours.next({
+        key: ConfigurationEntryKey.minimumTf2InGameHours,
+        value: 500,
+      });
       fixture.detectChanges();
     });
 
@@ -136,16 +144,22 @@ describe(PlayerRestrictionsComponent.name, () => {
           });
 
           it('should update the value', () => {
-            expect(configurationService.storeValue).toHaveBeenCalledWith(
-              ConfigurationEntryKey.minimumTf2InGameHours,
-              600,
-            );
+            expect(configurationService.storeValue).toHaveBeenCalledWith({
+              key: ConfigurationEntryKey.minimumTf2InGameHours,
+              value: 600,
+            } as MinimumTf2InGameHours);
           });
 
           describe('and when the values are updated', () => {
             beforeEach(() => {
-              etf2lAccountRequired.next(true);
-              minimumTf2InGameHours.next(600);
+              etf2lAccountRequired.next({
+                key: ConfigurationEntryKey.etf2lAccountRequired,
+                value: true,
+              });
+              minimumTf2InGameHours.next({
+                key: ConfigurationEntryKey.minimumTf2InGameHours,
+                value: 600,
+              });
             });
 
             it('should navigate back', () => {

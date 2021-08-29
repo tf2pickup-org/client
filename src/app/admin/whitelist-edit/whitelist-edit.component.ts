@@ -13,7 +13,8 @@ import { ConfigurationEntryKey } from '@app/configuration/configuration-entry-ke
 import { ConfigurationService } from '@app/configuration/configuration.service';
 import { MDCTextField } from '@material/textfield';
 import { BehaviorSubject } from 'rxjs';
-import { finalize, tap } from 'rxjs/operators';
+import { finalize, map, tap } from 'rxjs/operators';
+import { WhitelistId } from '@app/configuration/models/whihtelist-id';
 
 @Component({
   selector: 'app-whitelist-edit',
@@ -43,7 +44,8 @@ export class WhitelistEditComponent
 
   ngOnInit() {
     this.configurationService
-      .fetchValue<string>(ConfigurationEntryKey.whitelistId)
+      .fetchValue<WhitelistId>(ConfigurationEntryKey.whitelistId)
+      .pipe(map(entry => entry.value))
       .subscribe(whitelistId => {
         this.form.patchValue({ whitelistId });
         this.changeDetector.markForCheck();
@@ -63,11 +65,12 @@ export class WhitelistEditComponent
   save() {
     this.isSaving.next(true);
     this.configurationService
-      .storeValue<string>(
-        ConfigurationEntryKey.whitelistId,
-        `${this.whitelistId}`,
-      )
+      .storeValue<WhitelistId>({
+        key: ConfigurationEntryKey.whitelistId,
+        value: `${this.whitelistId}`,
+      })
       .pipe(
+        map(entry => entry.value),
         tap(whitelistId => this.form.reset({ whitelistId })),
         finalize(() => this.isSaving.next(false)),
       )

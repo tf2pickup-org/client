@@ -17,6 +17,9 @@ import { ComponentPortal } from '@angular/cdk/portal';
 import { Overlay } from '@angular/cdk/overlay';
 import { MinimumTf2InGameHoursDialogComponent } from './minimum-tf2-in-game-hours-dialog/minimum-tf2-in-game-hours-dialog.component';
 import { Location } from '@angular/common';
+import { Etf2lAccountRequired } from '@app/configuration/models/etf2l-account-required';
+import { MinimumTf2InGameHours } from '@app/configuration/models/minimum-tf2-in-game-hours';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-player-restrictions',
@@ -47,12 +50,16 @@ export class PlayerRestrictionsComponent
 
   ngOnInit() {
     zip(
-      this.configurationService.fetchValue<boolean>(
-        ConfigurationEntryKey.etf2lAccountRequired,
-      ),
-      this.configurationService.fetchValue<number>(
-        ConfigurationEntryKey.minimumTf2InGameHours,
-      ),
+      this.configurationService
+        .fetchValue<Etf2lAccountRequired>(
+          ConfigurationEntryKey.etf2lAccountRequired,
+        )
+        .pipe(map(entry => entry.value)),
+      this.configurationService
+        .fetchValue<MinimumTf2InGameHours>(
+          ConfigurationEntryKey.minimumTf2InGameHours,
+        )
+        .pipe(map(entry => entry.value)),
     ).subscribe(([etf2lAccountRequired, minimumTf2InGameHours]) => {
       this.form.patchValue({ etf2lAccountRequired, minimumTf2InGameHours });
       this.etf2lAccountRequiredSwitch.checked = etf2lAccountRequired;
@@ -72,14 +79,14 @@ export class PlayerRestrictionsComponent
 
   save() {
     zip(
-      this.configurationService.storeValue<boolean>(
-        ConfigurationEntryKey.etf2lAccountRequired,
-        this.etf2lAccountRequired,
-      ),
-      this.configurationService.storeValue<number>(
-        ConfigurationEntryKey.minimumTf2InGameHours,
-        this.minimumTf2InGameHours,
-      ),
+      this.configurationService.storeValue<Etf2lAccountRequired>({
+        key: ConfigurationEntryKey.etf2lAccountRequired,
+        value: this.etf2lAccountRequired,
+      }),
+      this.configurationService.storeValue<MinimumTf2InGameHours>({
+        key: ConfigurationEntryKey.minimumTf2InGameHours,
+        value: this.minimumTf2InGameHours,
+      }),
     ).subscribe(() => this.location.back());
   }
 
