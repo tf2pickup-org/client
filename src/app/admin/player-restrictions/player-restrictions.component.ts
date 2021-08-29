@@ -55,7 +55,7 @@ export class PlayerRestrictionsComponent
       ),
     ).subscribe(([etf2lAccountRequired, minimumTf2InGameHours]) => {
       this.form.patchValue({ etf2lAccountRequired, minimumTf2InGameHours });
-      this.etf2lAccountRequiredSwitch.checked = etf2lAccountRequired;
+      this.etf2lAccountRequiredSwitch.selected = etf2lAccountRequired;
       this.changeDetector.markForCheck();
     });
   }
@@ -81,6 +81,14 @@ export class PlayerRestrictionsComponent
         this.minimumTf2InGameHours,
       ),
     ).subscribe(() => this.location.back());
+  }
+
+  updateEtf2lAccountRequired() {
+    this.form.patchValue({
+      etf2lAccountRequired: !this.etf2lAccountRequired,
+    });
+    this.form.markAsDirty();
+    this.changeDetector.markForCheck();
   }
 
   openMinimumTf2InGameHoursDialog() {

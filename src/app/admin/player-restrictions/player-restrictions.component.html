@@ -5,42 +5,53 @@
     (save)="save()">
 
     <div class="surface surface--white">
-      <ul class="mdc-list mdc-list--two-line">
-        <li class="mdc-list-item" tabindex="0">
-          <span class="mdc-list-item__ripple"></span>
-          <div class="mdc-list-item__text flex-grow-1">
-            <label class="mdc-list-item__primary-text" for="etf2l-account-required-switch">Require ETF2L account</label>
-            <span class="mdc-list-item__secondary-text"
+      <ul class="mdc-deprecated-list mdc-deprecated-list--two-line">
+        <li class="mdc-deprecated-list-item" tabindex="0">
+          <span class="mdc-deprecated-list-item__ripple"></span>
+          <div class="mdc-deprecated-list-item__text flex-grow-1">
+            <label class="mdc-deprecated-list-item__primary-text" for="etf2l-account-required-switch">Require ETF2L account</label>
+            <span class="mdc-deprecated-list-item__secondary-text"
               [ngSwitch]="this.form.get('etf2lAccountRequired').value">
               <ng-container *ngSwitchCase="true">Players that do not have an ETF2L profile will not be able to register</ng-container>
               <ng-container *ngSwitchCase="false">All players will be able to register</ng-container>
             </span>
           </div>
 
-          <span class="mdc-list-item__graphic">
-            <div class="mdc-switch" #etf2lAccountRequiredSwitch>
+          <span class="mdc-deprecated-list-item__graphic">
+            <button type="button"
+              class="mdc-switch"
+              role="switch"
+              (click)="updateEtf2lAccountRequired()"
+              #etf2lAccountRequiredSwitch
+              id="etf2l-account-required-switch">
               <div class="mdc-switch__track"></div>
-              <div class="mdc-switch__thumb-underlay">
-                <div class="mdc-switch__thumb"></div>
-                <input type="checkbox"
-                  id="etf2l-account-required-switch"
-                  class="mdc-switch__native-control"
-                  role="switch"
-                  aria-checked="false"
-                  formControlName="etf2lAccountRequired"
-                  #etf2lAccountRequiredCheckbox>
+              <div class="mdc-switch__handle-track">
+                <div class="mdc-switch__handle">
+                  <div class="mdc-switch__shadow">
+                    <div class="mdc-elevation-overlay"></div>
+                  </div>
+                  <div class="mdc-switch__ripple"></div>
+                  <div class="mdc-switch__icons">
+                    <svg class="mdc-switch__icon mdc-switch__icon--on" viewBox="0 0 24 24">
+                      <path d="M19.69,5.23L8.96,15.96l-4.23-4.23L2.96,13.5l6,6L21.46,7L19.69,5.23z" />
+                    </svg>
+                    <svg class="mdc-switch__icon mdc-switch__icon--off" viewBox="0 0 24 24">
+                      <path d="M20 13H4v-2h16v2z" />
+                    </svg>
+                  </div>
+                </div>
               </div>
-            </div>
+            </button>
           </span>
         </li>
 
-        <li class="mdc-list-item"
+        <li class="mdc-deprecated-list-item"
           (click)="openMinimumTf2InGameHoursDialog()"
           minimumTf2InGameHoursItem>
-          <span class="mdc-list-item__ripple"></span>
-          <span class="mdc-list-item__text">
-            <span class="mdc-list-item__primary-text">Minimum TF2 in-game time spent</span>
-            <span class="mdc-list-item__secondary-text">{{ this.form.get('minimumTf2InGameHours').value }} hours</span>
+          <span class="mdc-deprecated-list-item__ripple"></span>
+          <span class="mdc-deprecated-list-item__text">
+            <span class="mdc-deprecated-list-item__primary-text">Minimum TF2 in-game time spent</span>
+            <span class="mdc-deprecated-list-item__secondary-text">{{ this.form.get('minimumTf2InGameHours').value }} hours</span>
           </span>
         </li>
       </ul>
