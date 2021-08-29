@@ -3,7 +3,10 @@ import { TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ConfigurationEntryKey } from '@app/configuration/configuration-entry-key';
 import { ConfigurationService } from '@app/configuration/configuration.service';
-import { VoiceServer } from '@app/configuration/models/voice-server';
+import {
+  SelectedVoiceServer,
+  VoiceServer,
+} from '@app/configuration/models/voice-server';
 import { FeatherComponent } from 'angular-feather';
 import {
   MockBuilder,
@@ -39,10 +42,10 @@ describe(VoiceServerEditComponent.name, () => {
             }[key]),
         ),
         storeValue: jasmine.createSpy('storeValue').and.callFake(
-          key =>
+          entry =>
             ({
               [ConfigurationEntryKey.voiceServer]: voiceServer.pipe(take(1)),
-            }[key]),
+            }[entry.key]),
         ),
       })
       .keep(EditPageWrapperComponent)
@@ -73,9 +76,12 @@ describe(VoiceServerEditComponent.name, () => {
   describe('when the configuration is mumble', () => {
     beforeEach(() => {
       voiceServer.next({
-        type: 'mumble',
-        url: 'mumble.melkor.tf',
-        port: 64738,
+        key: ConfigurationEntryKey.voiceServer,
+        type: SelectedVoiceServer.mumble,
+        mumble: {
+          url: 'mumble.melkor.tf',
+          port: 64738,
+        },
       });
       fixture.detectChanges();
     });
@@ -115,25 +121,28 @@ describe(VoiceServerEditComponent.name, () => {
         });
 
         it('should attempt to update the value', () => {
-          expect(configurationService.storeValue).toHaveBeenCalledOnceWith(
-            ConfigurationEntryKey.voiceServer,
-            {
-              type: 'mumble',
+          expect(configurationService.storeValue).toHaveBeenCalledOnceWith({
+            key: ConfigurationEntryKey.voiceServer,
+            type: SelectedVoiceServer.mumble,
+            mumble: {
               url: 'mumble.melkor.tf',
               port: 64738,
               password: 'FAKE_PASSWORD',
               channelName: '',
             },
-          );
+          } as VoiceServer);
         });
 
         describe('when the values are saved on the server', () => {
           beforeEach(() => {
             voiceServer.next({
-              type: 'mumble',
-              url: 'mumble.melkor.tf',
-              port: 64738,
-              password: 'FAKE_PASSWORD',
+              key: ConfigurationEntryKey.voiceServer,
+              type: SelectedVoiceServer.mumble,
+              mumble: {
+                url: 'mumble.melkor.tf',
+                port: 64738,
+                password: 'FAKE_PASSWORD',
+              },
             });
           });
 
@@ -157,12 +166,10 @@ describe(VoiceServerEditComponent.name, () => {
       });
 
       it('should attempt to update the value', () => {
-        expect(configurationService.storeValue).toHaveBeenCalledOnceWith(
-          ConfigurationEntryKey.voiceServer,
-          {
-            type: 'null',
-          },
-        );
+        expect(configurationService.storeValue).toHaveBeenCalledOnceWith({
+          key: ConfigurationEntryKey.voiceServer,
+          type: SelectedVoiceServer.none,
+        } as VoiceServer);
       });
     });
   });
@@ -170,7 +177,8 @@ describe(VoiceServerEditComponent.name, () => {
   describe('when the configuration is null', () => {
     beforeEach(() => {
       voiceServer.next({
-        type: 'null',
+        key: ConfigurationEntryKey.voiceServer,
+        type: SelectedVoiceServer.none,
       });
       fixture.detectChanges();
     });

@@ -2,11 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { API_URL } from '@app/api-url';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { ConfigurationEntryKey } from './configuration-entry-key';
 
-interface ConfigurationEntryResponse<T> {
-  key: string;
-  value: T;
+interface ConfigurationEntry {
+  key: ConfigurationEntryKey;
 }
 
 @Injectable({
@@ -18,20 +17,16 @@ export class ConfigurationService {
     @Inject(API_URL) private apiUrl: string,
   ) {}
 
-  fetchValue<T>(key: string): Observable<T> {
-    return this.http
-      .get<ConfigurationEntryResponse<T>>(
-        `${this.apiUrl}/configuration/${key.split(' ').join('-')}`,
-      )
-      .pipe(map(response => response.value));
+  fetchValue<T extends ConfigurationEntry>(key: string): Observable<T> {
+    return this.http.get<T>(
+      `${this.apiUrl}/configuration/${key.split(' ').join('-')}`,
+    );
   }
 
-  storeValue<T>(key: string, value: any): Observable<T> {
-    return this.http
-      .put<ConfigurationEntryResponse<T>>(
-        `${this.apiUrl}/configuration/${key.split(' ').join('-')}`,
-        { key, value },
-      )
-      .pipe(map(response => response.value));
+  storeValue<T extends ConfigurationEntry>(entry: T): Observable<T> {
+    return this.http.put<T>(
+      `${this.apiUrl}/configuration/${entry.key.split(' ').join('-')}`,
+      entry,
+    );
   }
 }

@@ -2,6 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ConfigurationEntryKey } from '@app/configuration/configuration-entry-key';
 import { ConfigurationService } from '@app/configuration/configuration.service';
+import { WhitelistId } from '@app/configuration/models/whihtelist-id';
 import { FeatherComponent } from 'angular-feather';
 import {
   MockBuilder,
@@ -17,7 +18,7 @@ import { WhitelistEditComponent } from './whitelist-edit.component';
 describe(WhitelistEditComponent.name, () => {
   let component: WhitelistEditComponent;
   let fixture: MockedComponentFixture<WhitelistEditComponent>;
-  let whitelistId: Subject<string>;
+  let whitelistId: Subject<WhitelistId>;
   let submitButton: HTMLButtonElement;
   let input: HTMLInputElement;
 
@@ -48,7 +49,10 @@ describe(WhitelistEditComponent.name, () => {
     submitButton = ngMocks.find('button[type=submit]').nativeElement;
     input = ngMocks.find('input[type=text]').nativeElement;
 
-    whitelistId.next('etf2l_9v9');
+    whitelistId.next({
+      key: ConfigurationEntryKey.whitelistId,
+      value: 'etf2l_9v9',
+    });
   });
 
   it('should create', () => {
@@ -78,7 +82,10 @@ describe(WhitelistEditComponent.name, () => {
       beforeEach(() => {
         submitButton.click();
         fixture.detectChanges();
-        whitelistId.next('etf2l_9v9');
+        whitelistId.next({
+          key: ConfigurationEntryKey.whitelistId,
+          value: 'etf2l_9v9',
+        });
       });
 
       it('should disable the submit button', () => {
@@ -87,15 +94,18 @@ describe(WhitelistEditComponent.name, () => {
 
       it('should set the new configuration', () => {
         const configurationService = TestBed.inject(ConfigurationService);
-        expect(configurationService.storeValue).toHaveBeenCalledWith(
-          ConfigurationEntryKey.whitelistId,
-          'etf2l_6v6',
-        );
+        expect(configurationService.storeValue).toHaveBeenCalledWith({
+          key: ConfigurationEntryKey.whitelistId,
+          value: 'etf2l_6v6',
+        } as WhitelistId);
       });
 
       describe('when the new configuration is set', () => {
         beforeEach(() => {
-          whitelistId.next('etf2l_6v6');
+          whitelistId.next({
+            key: ConfigurationEntryKey.whitelistId,
+            value: 'etf2l_6v6',
+          });
           fixture.detectChanges();
         });
 
