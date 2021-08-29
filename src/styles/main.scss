@@ -26,9 +26,9 @@
 @use '@material/ripple';
 @use '@material/snackbar';
 @use '@material/textfield';
-@use '@material/radio/styles';
+@use '@material/radio/styles' as mdc-radio;
 @use '@material/form-field';
-@use '@material/switch';
+@use '@material/switch/styles' as mdc-switch;
 
 @use 'components/detail';
 @use 'components/indicator';
@@ -40,12 +40,11 @@
 @include dialog.core-styles;
 @include form-field.core-styles;
 @include icon-button.core-styles;
-@include list.core-styles;
+@include list.deprecated-core-styles;
 @include ripple.core-styles;
 @include snackbar.core-styles;
 @include textfield.core-styles;
 @include typography.core-styles;
-@include switch.core-styles;
 
 @include detail.core-styles;
 @include indicator.core-styles;
