@@ -87,8 +87,10 @@ describe(PlayerRestrictionsComponent.name, () => {
     it('should set values on inputs', () => {
       const etf2lAccountRequiredCheckbox = ngMocks.find(
         '#etf2l-account-required-switch',
-      ).nativeElement as HTMLInputElement;
-      expect(etf2lAccountRequiredCheckbox.checked).toBe(true);
+      ).nativeElement as HTMLButtonElement;
+      expect(etf2lAccountRequiredCheckbox.getAttribute('aria-checked')).toBe(
+        'true',
+      );
 
       const minimumTf2InGameHoursField = ngMocks.find(
         '#minimum-tf2-in-game-hours-field',
