@@ -1,3 +1,11 @@
+## [3.15.1](https://github.com/tf2pickup-org/client/compare/3.15.0...3.15.1) (2021-08-30)
+
+
+### Bug Fixes
+
+* **players:** handle Player.roles being undefined ([#1189](https://github.com/tf2pickup-org/client/issues/1189)) ([e4b8ef4](https://github.com/tf2pickup-org/client/commit/e4b8ef4685ca8a4b0177e63c3a1ddfe7ce14f3f6))
+* **tf2pickup.pt:** update discord invitation link ([#1190](https://github.com/tf2pickup-org/client/issues/1190)) ([c71dc16](https://github.com/tf2pickup-org/client/commit/c71dc167fffc339eda070fabeed5bedecf1ce6f5))
+
 # [3.15.0](https://github.com/tf2pickup-org/client/compare/3.14.1...3.15.0) (2021-08-25)
 
 
