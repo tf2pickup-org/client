@@ -73,7 +73,7 @@ export class EditPlayerRolesComponent implements OnInit, OnDestroy {
       .subscribe(player => {
         this.player.patchValue({
           roles: this.rolesAvailable.map(role =>
-            player.roles.includes(role.value),
+            player.roles?.includes(role.value),
           ),
         });
         this.title.setTitle(

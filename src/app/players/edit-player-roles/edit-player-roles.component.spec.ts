@@ -180,6 +180,31 @@ describe(EditPlayerRolesComponent.name, () => {
         });
       });
     });
+
+    describe('when the player has rules=undefined', () => {
+      beforeEach(() => {
+        store.setState({
+          players: {
+            players: {
+              ids: ['FAKE_PLAYER_ID'],
+              entities: {
+                FAKE_PLAYER_ID: {
+                  name: 'maly',
+                },
+              },
+            },
+          },
+        });
+      });
+
+      it('should enable the submit button when the role is changed', () => {
+        const option = ngMocks.find('input[type=checkbox]#super\\ user')
+          .nativeElement as HTMLInputElement;
+        option.click();
+        fixture.detectChanges();
+        expect(submitButton.disabled).toBe(false);
+      });
+    });
   });
 
   it('should be able to cancel and go back', () => {
