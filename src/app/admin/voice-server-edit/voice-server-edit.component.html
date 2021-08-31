@@ -26,6 +26,48 @@
           <input
             class="mdc-radio__native-control"
             type="radio"
+            id="radio-voice-server-type-static-link"
+            value="static link"
+            formControlName="type">
+          <div class="mdc-radio__background">
+            <div class="mdc-radio__outer-circle"></div>
+            <div class="mdc-radio__inner-circle"></div>
+          </div>
+          <div class="mdc-radio__ripple"></div>
+        </div>
+        <label for="radio-voice-server-type-static-link">Static link</label>
+      </div>
+
+      <div class="d-flex flex-column mt-2 ps-5">
+        <label #staticLink
+          class="mdc-text-field mdc-text-field--outlined m-2"
+          [class.mdc-text-field--label-floating]="!!(initialStaticLink | async)"
+          [class.mdc-text-field--disabled]="type !== 'static link'">
+          <span class="mdc-notched-outline">
+            <span class="mdc-notched-outline__leading"></span>
+            <span class="mdc-notched-outline__notch">
+              <span class="mdc-floating-label"
+                [class.mdc-floating-label--float-above]="!!(initialStaticLink | async)"
+                id="static-link">
+                Static link
+              </span>
+            </span>
+            <span class="mdc-notched-outline__trailing"></span>
+          </span>
+          <input
+            type="text"
+            formControlName="staticLink"
+            class="mdc-text-field__input"
+            aria-labelledby="static-link"
+            id="static-link-input">
+        </label>
+      </div>
+
+      <div class="mdc-form-field w-100">
+        <div class="mdc-radio">
+          <input
+            class="mdc-radio__native-control"
+            type="radio"
             id="radio-voice-server-type-mumble"
             value="mumble"
             formControlName="type">
