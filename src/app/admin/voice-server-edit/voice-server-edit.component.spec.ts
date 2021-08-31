@@ -189,4 +189,66 @@ describe(VoiceServerEditComponent.name, () => {
       expect(radio.checked).toBe(true);
     });
   });
+
+  describe('when the configuration is static link', () => {
+    beforeEach(() => {
+      voiceServer.next({
+        key: ConfigurationEntryKey.voiceServer,
+        type: SelectedVoiceServer.staticLink,
+        staticLink: 'FAKE_STATIC_LINK',
+      });
+      fixture.detectChanges();
+    });
+
+    it('should check radio button', () => {
+      const radio = ngMocks.find('#radio-voice-server-type-static-link')
+        .nativeElement as HTMLInputElement;
+      expect(radio.checked).toBe(true);
+    });
+
+    describe('when the static link is changed', () => {
+      beforeEach(() => {
+        const input = ngMocks.find('#static-link-input')
+          .nativeElement as HTMLInputElement;
+        input.value = 'ANOTHER_FAKE_LINK';
+        input.dispatchEvent(new Event('input'));
+        fixture.detectChanges();
+      });
+
+      it('should enable the submit button', () => {
+        expect(submitButton.disabled).toBe(false);
+      });
+
+      describe('when the form is saved', () => {
+        beforeEach(() => {
+          submitButton.click();
+        });
+
+        it('should attempt to update the value', () => {
+          expect(configurationService.storeValue).toHaveBeenCalledOnceWith({
+            key: ConfigurationEntryKey.voiceServer,
+            type: SelectedVoiceServer.staticLink,
+            staticLink: 'ANOTHER_FAKE_LINK',
+          } as VoiceServer);
+        });
+
+        describe('when the values are saved on the server', () => {
+          beforeEach(() => {
+            voiceServer.next({
+              key: ConfigurationEntryKey.voiceServer,
+              type: SelectedVoiceServer.staticLink,
+              staticLink: 'ANOTHER_FAKE_LINK',
+            });
+          });
+
+          it('should navigate back', () => {
+            const location = TestBed.inject(
+              Location,
+            ) as jasmine.SpyObj<Location>;
+            expect(location.back).toHaveBeenCalledTimes(1);
+          });
+        });
+      });
+    });
+  });
 });
