@@ -1,25 +1,25 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { MumbleJoinButtonComponent } from './mumble-join-button.component';
+import { JoinVoiceButtonComponent } from './join-voice-button.component';
 import { SharedModule } from '@app/shared/shared.module';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { MockPipe } from 'ng-mocks';
 import { SafeMumbleUrlPipe } from '@app/shared/safe-mumble-url.pipe';
 
-describe('MumbleJoinButtonComponent', () => {
-  let component: MumbleJoinButtonComponent;
-  let fixture: ComponentFixture<MumbleJoinButtonComponent>;
+describe(JoinVoiceButtonComponent.name, () => {
+  let component: JoinVoiceButtonComponent;
+  let fixture: ComponentFixture<JoinVoiceButtonComponent>;
 
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [
-          MumbleJoinButtonComponent,
+          JoinVoiceButtonComponent,
           MockPipe(SafeMumbleUrlPipe, (...args) => JSON.stringify(args)),
         ],
         imports: [SharedModule],
       })
-        .overrideComponent(MumbleJoinButtonComponent, {
+        .overrideComponent(JoinVoiceButtonComponent, {
           set: { changeDetection: ChangeDetectionStrategy.Default },
         })
         .compileComponents();
@@ -27,7 +27,7 @@ describe('MumbleJoinButtonComponent', () => {
   );
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MumbleJoinButtonComponent);
+    fixture = TestBed.createComponent(JoinVoiceButtonComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

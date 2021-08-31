@@ -9,7 +9,7 @@ import { GamesEffects } from './games.effects';
 import { GameDetailsComponent } from './game-details/game-details.component';
 import { SharedModule } from '@app/shared/shared.module';
 import { InlineSVGModule } from 'ng-inline-svg';
-import { MumbleJoinButtonComponent } from './mumble-join-button/mumble-join-button.component';
+import { JoinVoiceButtonComponent } from './join-voice-button/join-voice-button.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { PlayerConnectionStatusComponent } from './player-connection-status/player-connection-status.component';
 import { GameBasicInfoComponent } from './game-basic-info/game-basic-info.component';
@@ -27,7 +27,7 @@ import { OrderTf2ClassesPipe } from './order-tf2-classes.pipe';
   declarations: [
     GameListComponent,
     GameDetailsComponent,
-    MumbleJoinButtonComponent,
+    JoinVoiceButtonComponent,
     PlayerConnectionStatusComponent,
     GameBasicInfoComponent,
     GameSummaryComponent,
