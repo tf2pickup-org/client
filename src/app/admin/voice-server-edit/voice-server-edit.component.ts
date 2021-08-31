@@ -8,7 +8,7 @@ import {
   OnInit,
   ChangeDetectorRef,
 } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ConfigurationEntryKey } from '@app/configuration/configuration-entry-key';
 import { ConfigurationService } from '@app/configuration/configuration.service';
 import { MDCTextField } from '@material/textfield';
@@ -31,6 +31,7 @@ export class VoiceServerEditComponent
 {
   form = this.formBuilder.group({
     type: '',
+    staticLink: '',
     mumble: this.formBuilder.group({
       url: '',
       port: 64738,
@@ -40,6 +41,10 @@ export class VoiceServerEditComponent
   });
 
   initialMumbleOptions = new Subject<MumbleOptions>();
+  initialStaticLink = new Subject<string>();
+
+  @ViewChild('staticLink')
+  staticLinkInput: ElementRef;
 
   @ViewChild('mumbleServerUrl')
   mumbleServerUrlInput: ElementRef;
@@ -68,9 +73,11 @@ export class VoiceServerEditComponent
       .subscribe(voiceServer => {
         this.form.patchValue({
           type: voiceServer.type,
+          staticLink: voiceServer.staticLink,
           mumble: voiceServer.mumble,
         });
 
+        this.initialStaticLink.next(voiceServer.staticLink);
         this.initialMumbleOptions.next(voiceServer.mumble);
         this.changeDetector.markForCheck();
         this.textFields.forEach(field => field?.layout());
@@ -79,10 +86,17 @@ export class VoiceServerEditComponent
     this.form.get('type').valueChanges.subscribe(type => {
       switch (type) {
         case SelectedVoiceServer.none:
+          this.form.get('staticLink').disable();
+          this.form.get('mumble').disable();
+          break;
+
+        case SelectedVoiceServer.staticLink:
+          this.form.get('staticLink').enable();
           this.form.get('mumble').disable();
           break;
 
         case SelectedVoiceServer.mumble:
+          this.form.get('staticLink').disable();
           this.form.get('mumble').enable();
           break;
       }
@@ -91,6 +105,7 @@ export class VoiceServerEditComponent
 
   ngAfterViewInit() {
     this.textFields = [
+      this.staticLinkInput,
       this.mumbleServerUrlInput,
       this.mumbleServerPortInput,
       this.mumbleServerPassword,
@@ -110,6 +125,21 @@ export class VoiceServerEditComponent
     let voiceServer: VoiceServer;
 
     switch (this.type) {
+      case SelectedVoiceServer.none:
+        voiceServer = {
+          key: ConfigurationEntryKey.voiceServer,
+          type: SelectedVoiceServer.none,
+        };
+        break;
+
+      case SelectedVoiceServer.staticLink:
+        voiceServer = {
+          key: ConfigurationEntryKey.voiceServer,
+          type: SelectedVoiceServer.staticLink,
+          staticLink: this.form.value.staticLink,
+        };
+        break;
+
       case SelectedVoiceServer.mumble:
         const { url, port, password, channelName } = this.form.value.mumble;
         voiceServer = {
@@ -121,13 +151,6 @@ export class VoiceServerEditComponent
             password,
             channelName,
           },
-        };
-        break;
-
-      case 'none':
-        voiceServer = {
-          key: ConfigurationEntryKey.voiceServer,
-          type: SelectedVoiceServer.none,
         };
         break;
     }
