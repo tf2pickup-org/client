@@ -29,7 +29,7 @@ import {
 import { GameServer } from '@app/game-servers/models/game-server';
 import { ConnectStringComponent } from '../connect-string/connect-string.component';
 import { GameAdminButtonsComponent } from '../game-admin-buttons/game-admin-buttons.component';
-import { MumbleJoinButtonComponent } from '../mumble-join-button/mumble-join-button.component';
+import { JoinVoiceButtonComponent } from '../join-voice-button/join-voice-button.component';
 import {
   forceEndGame,
   loadGame,
@@ -192,7 +192,7 @@ describe('GameDetailsComponent', () => {
       .mock(GameSummaryComponent)
       .mock(GameBasicInfoComponent)
       .mock(ConnectStringComponent)
-      .mock(MumbleJoinButtonComponent)
+      .mock(JoinVoiceButtonComponent)
       .mock(GameTeamHeaderComponent)
       .mock(GameTeamPlayerListComponent)
       .mock(SoundPlayerService),
@@ -319,7 +319,7 @@ describe('GameDetailsComponent', () => {
         });
 
         it('should not render the voice server button', () => {
-          expect(() => ngMocks.find(MumbleJoinButtonComponent)).toThrow();
+          expect(() => ngMocks.find(JoinVoiceButtonComponent)).toThrow();
         });
 
         describe('when logged in', () => {
@@ -435,7 +435,7 @@ describe('GameDetailsComponent', () => {
 
                 it('should have access to the voice channel url', () => {
                   const voiceChannelJoinButton = ngMocks.find(
-                    MumbleJoinButtonComponent,
+                    JoinVoiceButtonComponent,
                   ).componentInstance;
                   expect(voiceChannelJoinButton.mumbleUrl).toEqual(
                     'FAKE_VOICE_CHANNEL_URL',
