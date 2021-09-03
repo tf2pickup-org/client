@@ -1,3 +1,15 @@
+# [3.16.0](https://github.com/tf2pickup-org/client/compare/3.15.1...3.16.0) (2021-09-03)
+
+
+### Bug Fixes
+
+* **tf2pickup.ru:** add discord invitation ([#1200](https://github.com/tf2pickup-org/client/issues/1200)) ([ce68ee9](https://github.com/tf2pickup-org/client/commit/ce68ee9581aed56b493151eb9fd22f38c04282e8))
+
+
+### Features
+
+* **tf2pickup.co.il:** add tf2pickup.co.il branding ([#1199](https://github.com/tf2pickup-org/client/issues/1199)) ([2549ed4](https://github.com/tf2pickup-org/client/commit/2549ed45211cf7273ecab800bed506298b298799))
+
 ## [3.15.1](https://github.com/tf2pickup-org/client/compare/3.15.0...3.15.1) (2021-08-30)
 
 

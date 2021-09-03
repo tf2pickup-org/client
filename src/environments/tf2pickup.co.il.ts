@@ -1,12 +1,12 @@
 import { defaultEnvironment } from './default-environment';
 import { defaultFooterLinks } from './default-footer-links';
 
-const discordInvitation = 'https://discord.gg/jUATV48cYQ';
+const discordInvitation = 'https://discord.gg/83KXXmxNkv';
 
 export const environment = {
   ...defaultEnvironment,
-  apiUrl: 'https://api.tf2pickup.ru',
-  wsUrl: 'https://api.tf2pickup.ru',
+  apiUrl: 'https://api.tf2pickup.co.il',
+  wsUrl: 'https://api.tf2pickup.co.il',
   headerLinks: [
     {
       name: 'discord',
@@ -19,5 +19,5 @@ export const environment = {
     ...defaultFooterLinks,
     { name: 'discord', target: discordInvitation },
   ],
-  titleSuffix: 'tf2pickup.ru • Русские пикапы',
+  titleSuffix: 'tf2pickup.co.il • Israeli Team Fortress 2 Pick-up games',
 };
