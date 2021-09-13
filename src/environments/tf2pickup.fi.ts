@@ -1,5 +1,6 @@
 import { defaultEnvironment } from './default-environment';
 import { defaultFooterLinks } from './default-footer-links';
+import { defaultHeaderLinks } from './default-header-links';
 
 const discordInvitation = 'https://discord.gg/T6PfVC3bqQ';
 
@@ -14,6 +15,7 @@ export const environment = {
       target: discordInvitation,
       tooltip: 'Join us on discord!',
     },
+    ...defaultHeaderLinks,
   ],
   footerLinks: [
     ...defaultFooterLinks,
