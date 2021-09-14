@@ -1,3 +1,36 @@
+# [3.17.0](https://github.com/tf2pickup-org/client/compare/3.16.0...3.17.0) (2021-09-14)
+
+
+### Bug Fixes
+
+* add missing favicons ([#1214](https://github.com/tf2pickup-org/client/issues/1214)) ([524077d](https://github.com/tf2pickup-org/client/commit/524077d5e6315f7fa5183fb2772fd30a5657b90b))
+* **configuration:** update configuration model ([#1184](https://github.com/tf2pickup-org/client/issues/1184)) ([64f8fd2](https://github.com/tf2pickup-org/client/commit/64f8fd2b3c357a3ad5a3555f1360f7b13a692ae5))
+* **deps:** update dependency @angular/cdk to v12.2.2 ([#1160](https://github.com/tf2pickup-org/client/issues/1160)) ([e41f387](https://github.com/tf2pickup-org/client/commit/e41f387893215dce54c4a51d7bd58af586615410))
+* **deps:** update dependency @angular/cdk to v12.2.3 ([#1178](https://github.com/tf2pickup-org/client/issues/1178)) ([0505ea8](https://github.com/tf2pickup-org/client/commit/0505ea8a1935dce2f665159824f76d120c4c2bee))
+* **deps:** update dependency @angular/cdk to v12.2.4 ([#1196](https://github.com/tf2pickup-org/client/issues/1196)) ([d79558b](https://github.com/tf2pickup-org/client/commit/d79558bf72964c6f60901daaebd95aba2e25f174))
+* **deps:** update dependency @angular/cdk to v12.2.5 ([#1213](https://github.com/tf2pickup-org/client/issues/1213)) ([b755cb2](https://github.com/tf2pickup-org/client/commit/b755cb2f8328edeab9073e98f16229b50d88baf4))
+* **deps:** update dependency bootstrap to v5.1.1 ([#1208](https://github.com/tf2pickup-org/client/issues/1208)) ([4123c3d](https://github.com/tf2pickup-org/client/commit/4123c3d75a7a492a3ea3d48cef69402fee6d9d97))
+* **deps:** update dependency ngx-bootstrap to v7.1.0 ([#1217](https://github.com/tf2pickup-org/client/issues/1217)) ([571fc4f](https://github.com/tf2pickup-org/client/commit/571fc4f6419574907b1f4a2f37db42280a76784a))
+* **deps:** update dependency socket.io-client to v4.2.0 ([#1185](https://github.com/tf2pickup-org/client/issues/1185)) ([d6ab37e](https://github.com/tf2pickup-org/client/commit/d6ab37e14aa143af61f24bc3d0a2bf08d70cb1ff))
+* **deps:** update material monorepo to v12 (major) ([#871](https://github.com/tf2pickup-org/client/issues/871)) ([15e741d](https://github.com/tf2pickup-org/client/commit/15e741dba65b8666982d874882e1faaf1d0f108a))
+* **games:** handle new connect info model ([#1157](https://github.com/tf2pickup-org/client/issues/1157)) ([ec8979b](https://github.com/tf2pickup-org/client/commit/ec8979b077ebe88a27f9086ebaf5aeb8c881a2ec))
+* **players:** handle Player.roles being undefined ([#1189](https://github.com/tf2pickup-org/client/issues/1189)) ([05a97ca](https://github.com/tf2pickup-org/client/commit/05a97cafdbfadb3cdbde7c2d34b60352fb151187))
+* **tf2pickup.co.il:** update discord invitation link ([#1225](https://github.com/tf2pickup-org/client/issues/1225)) ([660068f](https://github.com/tf2pickup-org/client/commit/660068f1fe98a46c72aaca5da8b5a43a014ca4f6))
+* **tf2pickup.pt:** update discord invitation link ([#1190](https://github.com/tf2pickup-org/client/issues/1190)) ([1967466](https://github.com/tf2pickup-org/client/commit/1967466a525a2373efca64610013968eda7d5907))
+
+
+### Features
+
+* **admin:** add null voice server option ([#1171](https://github.com/tf2pickup-org/client/issues/1171)) ([0852405](https://github.com/tf2pickup-org/client/commit/0852405a3a61046c21d39e84cbdb600b1201a0ba))
+* **admin:** static link voice server option ([#1191](https://github.com/tf2pickup-org/client/issues/1191)) ([2440d5f](https://github.com/tf2pickup-org/client/commit/2440d5f1d5f2110cf62ff3e3d8f0b98acc503457))
+* donate button ([#1219](https://github.com/tf2pickup-org/client/issues/1219)) ([6ae8082](https://github.com/tf2pickup-org/client/commit/6ae8082439732aa1d056f492d584159cafe599ee))
+* **players:** online player list ([#1176](https://github.com/tf2pickup-org/client/issues/1176)) ([ef729dc](https://github.com/tf2pickup-org/client/commit/ef729dce90e9e4eaa3bab750e57123809de279fc))
+
+
+### Performance Improvements
+
+* optimize images ([#1202](https://github.com/tf2pickup-org/client/issues/1202)) ([7c974cc](https://github.com/tf2pickup-org/client/commit/7c974ccb8eddef51031acb8abe25abbd1c6d4f84))
+
 # [3.16.0](https://github.com/tf2pickup-org/client/compare/3.15.1...3.16.0) (2021-09-03)
 
 
