@@ -61,7 +61,7 @@
     "@ngrx/router-store": "12.4.0",
     "@ngrx/store": "12.4.0",
     "@ngrx/store-devtools": "12.4.0",
-    "@swimlane/ngx-datatable": "19.0.0",
+    "@swimlane/ngx-datatable": "20.0.0",
     "angular-feather": "6.1.0",
     "bootstrap": "5.1.1",
     "feather-icons": "4.28.0",
