@@ -1,7 +1,7 @@
 import { defaultEnvironment } from './default-environment';
 import { defaultFooterLinks } from './default-footer-links';
 
-const discordInvitation = 'https://discord.gg/j3MDHbDyWG';
+const discordInvitation = 'https://discord.gg/MY3yuZ8F';
 
 export const environment = {
   ...defaultEnvironment,
