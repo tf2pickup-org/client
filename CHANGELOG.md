@@ -1,3 +1,17 @@
+# [3.18.0](https://github.com/tf2pickup-org/client/compare/3.17.0...3.18.0) (2021-09-22)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @angular/cdk to v12.2.6 ([#1232](https://github.com/tf2pickup-org/client/issues/1232)) ([8d71a11](https://github.com/tf2pickup-org/client/commit/8d71a11c7e1a6a3dd84ab35c7b564071e9d09475))
+* **deps:** update dependency @swimlane/ngx-datatable to v20 ([#1228](https://github.com/tf2pickup-org/client/issues/1228)) ([f3d6d36](https://github.com/tf2pickup-org/client/commit/f3d6d361e5aa970e75b4607c616714fd29a5b0b3))
+* **games:** don't fetch the connect string unless the game is running ([#1244](https://github.com/tf2pickup-org/client/issues/1244)) ([76ae9bc](https://github.com/tf2pickup-org/client/commit/76ae9bc3e0964e6308b521864003bb48b6c7b1a6))
+
+
+### Features
+
+* **tf2pickup.us:** add tf2pickup.us branding ([#1237](https://github.com/tf2pickup-org/client/issues/1237)) ([61f9b92](https://github.com/tf2pickup-org/client/commit/61f9b920264cff7c04da02f3b5744f6830c9c24c))
+
 # [3.17.0](https://github.com/tf2pickup-org/client/compare/3.16.0...3.17.0) (2021-09-14)
 
 
