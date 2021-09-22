@@ -572,6 +572,13 @@ describe('GameDetailsComponent', () => {
           expect(() => ngMocks.find(ConnectStringComponent)).toThrow();
         });
 
+        it('should not attempt to fetch the connect string', () => {
+          const gamesService = TestBed.inject(
+            GamesService,
+          ) as jasmine.SpyObj<GamesService>;
+          expect(gamesService.fetchConnectInfo).not.toHaveBeenCalled();
+        });
+
         it('should not render player connection statuses', () => {
           const playerList = ngMocks.find(
             GameTeamPlayerListComponent,

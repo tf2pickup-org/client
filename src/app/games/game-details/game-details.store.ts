@@ -14,7 +14,7 @@ import {
 } from '@app/profile/profile.selectors';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { Store } from '@ngrx/store';
-import { from, Observable } from 'rxjs';
+import { from, Observable, zip } from 'rxjs';
 import {
   distinctUntilChanged,
   filter,
@@ -179,8 +179,8 @@ export class GameDetailsStore extends ComponentStore<GameDetailsState> {
   );
 
   private readonly fetchConnectInfo = this.effect((game: Observable<Game>) =>
-    this.isMyGame.pipe(
-      filter(isMyGame => isMyGame),
+    zip(this.isMyGame, this.isRunning).pipe(
+      filter(([isMyGame, isRunning]) => isMyGame && isRunning),
       switchMap(() => game),
       distinctUntilChanged(
         (game1, game2) => game1.connectInfoVersion === game2.connectInfoVersion,
