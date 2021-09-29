@@ -1,3 +1,10 @@
+## [3.19.1](https://github.com/tf2pickup-org/client/compare/3.19.0...3.19.1) (2021-09-29)
+
+
+### Bug Fixes
+
+* **tf2pickup.nl:** fix environment ([#1259](https://github.com/tf2pickup-org/client/issues/1259)) ([4782c1c](https://github.com/tf2pickup-org/client/commit/4782c1c8857a0e6790ea925e1e87854c68a52086))
+
 # [3.19.0](https://github.com/tf2pickup-org/client/compare/3.18.0...3.19.0) (2021-09-29)
 
 
