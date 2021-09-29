@@ -1,3 +1,17 @@
+# [3.19.0](https://github.com/tf2pickup-org/client/compare/3.18.0...3.19.0) (2021-09-29)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @angular/cdk to v12.2.7 ([#1247](https://github.com/tf2pickup-org/client/issues/1247)) ([575e02c](https://github.com/tf2pickup-org/client/commit/575e02c8a0d1bd51c39e431ef36defccdc0259c2))
+* **deps:** update dependency ng-inline-svg to v13.1.0 ([#1254](https://github.com/tf2pickup-org/client/issues/1254)) ([9cc45ee](https://github.com/tf2pickup-org/client/commit/9cc45eeff75382e74524db58c26df192a8354bc4))
+
+
+### Features
+
+* **hl.tf2pickup.ru:** add hl.tf2pickup.ru branding ([#1258](https://github.com/tf2pickup-org/client/issues/1258)) ([8c95e79](https://github.com/tf2pickup-org/client/commit/8c95e79191c1f0b858240bb1b615ad3b6a865535))
+* **tf2pickup.nl:** add tf2pickup.nl branding ([#1009](https://github.com/tf2pickup-org/client/issues/1009)) ([d76bc72](https://github.com/tf2pickup-org/client/commit/d76bc726edf819a14e6d122c197b7594d0567292))
+
 # [3.18.0](https://github.com/tf2pickup-org/client/compare/3.17.0...3.18.0) (2021-09-22)
 
 
