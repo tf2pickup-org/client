@@ -1,14 +1,13 @@
-import { version } from 'package.json';
-import { entryQueue6v6 } from './entry-queue-6v6';
-import { github, changelog } from './links';
+import { defaultEnvironment } from './default-environment';
+import { defaultFooterLinks } from './default-footer-links';
+import { defaultHeaderLinks } from './default-header-links';
 
 const discordInvitation = 'https://discord.com/invite/PVVqjgZCgj';
 
 export const environment = {
-  production: true,
+  ...defaultEnvironment,
   apiUrl: 'https://api.tf2pickup.nl',
   wsUrl: 'https://api.tf2pickup.nl',
-  version,
   headerLinks: [
     {
       name: 'discord',
@@ -16,12 +15,11 @@ export const environment = {
       target: discordInvitation,
       tooltip: 'Join us on discord!',
     },
+    ...defaultHeaderLinks,
   ],
   footerLinks: [
-    { name: 'github', target: github },
+    ...defaultFooterLinks,
     { name: 'discord', target: discordInvitation },
-    { name: 'changelog', target: changelog },
   ],
   titleSuffix: 'tf2pickup.nl • Nederlandse Ploeg Fort 2 Oppikspellen',
-  entryQueue: entryQueue6v6,
 };
