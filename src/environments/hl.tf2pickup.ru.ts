@@ -1,6 +1,7 @@
 import { defaultEnvironment } from './default-environment';
 import { defaultFooterLinks } from './default-footer-links';
 import { defaultHeaderLinks } from './default-header-links';
+import { entryQueue9v9 } from './entry-queues/entry-queue-9v9';
 
 const discordInvitation = 'https://discord.gg/jUATV48cYQ';
 
@@ -22,4 +23,5 @@ export const environment = {
     { name: 'discord', target: discordInvitation },
   ],
   titleSuffix: 'hl.tf2pickup.ru • Русские пикапы 9v9',
+  entryQueue: entryQueue9v9,
 };
