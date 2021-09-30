@@ -1,3 +1,11 @@
+## [3.19.2](https://github.com/tf2pickup-org/client/compare/3.19.1...3.19.2) (2021-09-30)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @angular/cdk to v12.2.8 ([#1257](https://github.com/tf2pickup-org/client/issues/1257)) ([e300df3](https://github.com/tf2pickup-org/client/commit/e300df3f9f9add414ee4246771683607b58acd04))
+* **tf2pickup.us:** fix discord invite ([#1260](https://github.com/tf2pickup-org/client/issues/1260)) ([f633d08](https://github.com/tf2pickup-org/client/commit/f633d08e2ab63f749824e32924a600927d625f35))
+
 ## [3.19.1](https://github.com/tf2pickup-org/client/compare/3.19.0...3.19.1) (2021-09-29)
 
 
