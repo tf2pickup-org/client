@@ -1,3 +1,10 @@
+## [3.19.3](https://github.com/tf2pickup-org/client/compare/3.19.2...3.19.3) (2021-09-30)
+
+
+### Bug Fixes
+
+* **tf2pickup.it:** fix discord invite ([#1261](https://github.com/tf2pickup-org/client/issues/1261)) ([bde6f8e](https://github.com/tf2pickup-org/client/commit/bde6f8eb67bf0808ec94bb2eee0f9caa15a2919d))
+
 ## [3.19.2](https://github.com/tf2pickup-org/client/compare/3.19.1...3.19.2) (2021-09-30)
 
 
