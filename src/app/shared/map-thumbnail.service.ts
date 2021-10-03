@@ -33,7 +33,7 @@ export class MapThumbnailService {
     { regex: /cp_cardinal/, thumbnailName: 'cardinal' },
     { regex: /cp_kalinka/, thumbnailName: 'kalinka' },
     { regex: /cp_mannbase/, thumbnailName: 'mannbase' },
-    { regex: /koth_proplant/, thumbnailName: 'koth_proplant_v3' },
+    { regex: /koth_proplant/, thumbnailName: 'proplant' },
     { regex: /bball_tf_v2/, thumbnailName: 'bball_tf_v2' },
     { regex: /ctf_ballin_comptf/, thumbnailName: 'ballin_comptf' },
     { regex: /ctf_ballin_sky/, thumbnailName: 'ballin_sky' },
