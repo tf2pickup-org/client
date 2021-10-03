@@ -1,3 +1,10 @@
+## [3.19.4](https://github.com/tf2pickup-org/client/compare/3.19.3...3.19.4) (2021-10-03)
+
+
+### Bug Fixes
+
+* **shared:** fix koth_proplant thumbnail ([#1268](https://github.com/tf2pickup-org/client/issues/1268)) ([d610b57](https://github.com/tf2pickup-org/client/commit/d610b572dc9c429790019b8824a8a316b5d8c3a5))
+
 ## [3.19.3](https://github.com/tf2pickup-org/client/compare/3.19.2...3.19.3) (2021-09-30)
 
 
