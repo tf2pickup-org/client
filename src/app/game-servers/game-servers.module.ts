@@ -9,10 +9,9 @@ import { GameServersEffects } from './game-servers.effects';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IconsModule } from '@app/icons/icons.module';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
-import { AddGameServerComponent } from './add-game-server/add-game-server.component';
 
 @NgModule({
-  declarations: [GameServerListComponent, AddGameServerComponent],
+  declarations: [GameServerListComponent],
   imports: [
     CommonModule,
     StoreModule.forFeature('gameServers', reducer),

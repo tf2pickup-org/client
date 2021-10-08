@@ -1,4 +1,4 @@
-import { ReplaySubject, of, throwError } from 'rxjs';
+import { ReplaySubject, of } from 'rxjs';
 import { Action } from '@ngrx/store';
 import { TestBed } from '@angular/core/testing';
 import { GameServersEffects } from './game-servers.effects';
@@ -9,14 +9,8 @@ import {
   loadGameServers,
   gameServerLoaded,
   loadGameServer,
-  gameServerAdded,
-  addGameServer,
-  failedToAddGameServer,
-  gameServerRemoved,
-  removeGameServer,
 } from './game-servers.actions';
 import { GameServer } from './models/game-server';
-import { HttpErrorResponse } from '@angular/common/http';
 
 class GameServersServiceStub {
   fetchGameServers() {
@@ -89,50 +83,6 @@ describe('GameServersEffects', () => {
         ),
       );
       actions.next(loadGameServer({ gameServerId: 'FAKE_ID' }));
-      expect(spy).toHaveBeenCalledWith('FAKE_ID');
-    });
-  });
-
-  describe('addGameServer', () => {
-    const gameServer: GameServer = {
-      name: 'some name',
-      address: '127.0.0.1',
-      port: '27015',
-      rconPassword: '123456',
-    };
-
-    it('should add the given server', () => {
-      const spy = spyOn(gameServersService, 'addGameServer').and.callThrough();
-      effects.addGameServer.subscribe(action =>
-        expect(action).toEqual(gameServerAdded({ gameServer })),
-      );
-      actions.next(addGameServer({ gameServer }));
-      expect(spy).toHaveBeenCalledWith(gameServer);
-    });
-
-    it('should handle errors', () => {
-      spyOn(gameServersService, 'addGameServer').and.returnValue(
-        throwError(
-          new HttpErrorResponse({ error: { message: 'haha failed' } }),
-        ),
-      );
-      effects.addGameServer.subscribe(action =>
-        expect(action).toEqual(failedToAddGameServer({ error: 'haha failed' })),
-      );
-      actions.next(addGameServer({ gameServer }));
-    });
-  });
-
-  describe('removeGameServer', () => {
-    it('should remove the  game server', () => {
-      const spy = spyOn(
-        gameServersService,
-        'removeGameServer',
-      ).and.callThrough();
-      effects.removeGameServer.subscribe(action =>
-        expect(action).toEqual(gameServerRemoved({ gameServerId: 'FAKE_ID' })),
-      );
-      actions.next(removeGameServer({ gameServerId: 'FAKE_ID' }));
       expect(spy).toHaveBeenCalledWith('FAKE_ID');
     });
   });

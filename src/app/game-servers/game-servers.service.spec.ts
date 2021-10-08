@@ -5,7 +5,6 @@ import {
   HttpTestingController,
 } from '@angular/common/http/testing';
 import { API_URL } from '@app/api-url';
-import { GameServer } from './models/game-server';
 
 describe('GameServersService', () => {
   let httpController: HttpTestingController;
@@ -33,34 +32,6 @@ describe('GameServersService', () => {
         service.fetchGameServers().subscribe();
         httpController.expectOne('FAKE_URL/game-servers');
         expect().nothing();
-      },
-    ));
-  });
-
-  describe('#addGameServer()', () => {
-    it('should call the endpoint', inject(
-      [GameServersService],
-      (service: GameServersService) => {
-        const server: GameServer = {
-          name: 'FAKE_NAME',
-          address: 'FAKE_ADDRESS',
-          port: '1234',
-        };
-        service.addGameServer(server).subscribe();
-        const req = httpController.expectOne('FAKE_URL/game-servers');
-        expect(req.request.method).toBe('POST');
-        expect(req.request.body).toEqual(server);
-      },
-    ));
-  });
-
-  describe('#removeGameServer()', () => {
-    it('should call the endpoint', inject(
-      [GameServersService],
-      (service: GameServersService) => {
-        service.removeGameServer('FAKE_ID').subscribe();
-        const req = httpController.expectOne('FAKE_URL/game-servers/FAKE_ID');
-        expect(req.request.method).toBe('DELETE');
       },
     ));
   });

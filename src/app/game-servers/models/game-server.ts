@@ -1,8 +1,7 @@
 export interface GameServer {
-  id?: string;
+  id: string;
   name: string;
   address: string;
   port: string;
-  rconPassword?: string;
-  isOnline?: boolean;
+  isOnline: boolean;
 }
