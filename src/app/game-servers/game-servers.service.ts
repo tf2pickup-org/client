@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { API_URL } from '@app/api-url';
-import { interval, Observable, timer } from 'rxjs';
+import { Observable, timer } from 'rxjs';
 import { GameServer } from './models/game-server';
 import { GameServerDiagnosticRun } from './models/game-server-diagnostic-run';
 import { map, mergeMap, switchMap, takeWhile } from 'rxjs/operators';
@@ -23,19 +23,6 @@ export class GameServersService {
 
   fetchGameServers(): Observable<GameServer[]> {
     return this.http.get<GameServer[]>(`${this.apiUrl}/game-servers`);
-  }
-
-  addGameServer(gameServer: GameServer): Observable<GameServer> {
-    return this.http.post<GameServer>(
-      `${this.apiUrl}/game-servers`,
-      gameServer,
-    );
-  }
-
-  removeGameServer(gameServerId: string): Observable<void> {
-    return this.http.delete<void>(
-      `${this.apiUrl}/game-servers/${gameServerId}`,
-    );
   }
 
   fetchGameServer(gameServerId: string): Observable<GameServer> {

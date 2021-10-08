@@ -1,13 +1,12 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { Store, select } from '@ngrx/store';
-import { GameServer } from '../models/game-server';
+import { Store } from '@ngrx/store';
 import {
   allGameServers,
   gameServersLoaded,
   gameServersLocked,
 } from '../game-servers.selectors';
 import { first } from 'rxjs/operators';
-import { loadGameServers, removeGameServer } from '../game-servers.actions';
+import { loadGameServers } from '../game-servers.actions';
 import { isSuperUser } from '@app/profile/profile.selectors';
 
 @Component({
@@ -25,14 +24,13 @@ export class GameServerListComponent implements OnInit {
 
   ngOnInit() {
     // TODO move loading game servers to the router
-    this.store.pipe(select(gameServersLoaded), first()).subscribe(loaded => {
-      if (!loaded) {
-        this.store.dispatch(loadGameServers());
-      }
-    });
-  }
-
-  removeGameServer(server: GameServer) {
-    this.store.dispatch(removeGameServer({ gameServerId: server.id }));
+    this.store
+      .select(gameServersLoaded)
+      .pipe(first())
+      .subscribe(loaded => {
+        if (!loaded) {
+          this.store.dispatch(loadGameServers());
+        }
+      });
   }
 }

@@ -8,31 +8,6 @@ export const gameServersLoaded = createAction(
   props<{ gameServers: GameServer[] }>(),
 );
 
-export const addGameServer = createAction(
-  '[Admin] Add game server',
-  props<{ gameServer: GameServer }>(),
-);
-
-export const gameServerAdded = createAction(
-  '[API] Game server added',
-  props<{ gameServer: GameServer }>(),
-);
-
-export const failedToAddGameServer = createAction(
-  '[API] Failed to add game server',
-  props<{ error: string }>(),
-);
-
-export const removeGameServer = createAction(
-  '[Admin] Remove game server',
-  props<{ gameServerId: string }>(),
-);
-
-export const gameServerRemoved = createAction(
-  '[API] Game server removed',
-  props<{ gameServerId: string }>(),
-);
-
 export const loadGameServer = createAction(
   '[Game servers] Load one game server',
   props<{ gameServerId: string }>(),

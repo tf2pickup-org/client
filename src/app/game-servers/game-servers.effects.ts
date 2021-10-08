@@ -4,17 +4,10 @@ import { GameServersService } from './game-servers.service';
 import {
   loadGameServers,
   gameServersLoaded,
-  addGameServer,
-  gameServerAdded,
-  removeGameServer,
-  gameServerRemoved,
-  failedToAddGameServer,
   loadGameServer,
   gameServerLoaded,
 } from './game-servers.actions';
-import { mergeMap, map, catchError } from 'rxjs/operators';
-import { of, throwError } from 'rxjs';
-import { HttpErrorResponse } from '@angular/common/http';
+import { mergeMap, map } from 'rxjs/operators';
 
 @Injectable()
 export class GameServersEffects {
@@ -36,37 +29,6 @@ export class GameServersEffects {
         this.gameServersService
           .fetchGameServer(gameServerId)
           .pipe(map(gameServer => gameServerLoaded({ gameServer }))),
-      ),
-    );
-  });
-
-  addGameServer = createEffect(() => {
-    return this.actions.pipe(
-      ofType(addGameServer),
-      mergeMap(({ gameServer }) =>
-        this.gameServersService.addGameServer(gameServer).pipe(
-          map(addedGameServer =>
-            gameServerAdded({ gameServer: addedGameServer }),
-          ),
-          catchError((error: unknown) => {
-            if (error instanceof HttpErrorResponse) {
-              return of(failedToAddGameServer({ error: error.error.message }));
-            } else {
-              return throwError(error);
-            }
-          }),
-        ),
-      ),
-    );
-  });
-
-  removeGameServer = createEffect(() => {
-    return this.actions.pipe(
-      ofType(removeGameServer),
-      mergeMap(({ gameServerId }) =>
-        this.gameServersService
-          .removeGameServer(gameServerId)
-          .pipe(map(() => gameServerRemoved({ gameServerId }))),
       ),
     );
   });

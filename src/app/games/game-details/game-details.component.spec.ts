@@ -109,6 +109,7 @@ const mockGameServer: GameServer = {
   name: 'FAKE_GAME_SERVER',
   address: 'FAKE_ADDRESS',
   port: '12345',
+  isOnline: true,
 };
 
 const mockPlayers = [
