@@ -20,10 +20,10 @@ jobs:
         uses: actions/setup-node@v2
 
       - name: Install dependencies
-        run: npm install
+        run: yarn install
 
       - name: Build ${{ matrix.branding }}
-        run: npm run build:${{ matrix.branding }}
+        run: yarn build:${{ matrix.branding }}
 
       - name: Create ${{ matrix.branding }} tarball
         run: tar -C dist/${{ matrix.branding }} -zcvf ${{ matrix.branding }}_client-${{ github.event.release.tag_name }}.tar.gz .

@@ -1,13 +1,14 @@
 FROM node:lts as build
 WORKDIR /build
 
-COPY package*.json .
-RUN npm install
+COPY package.json yarn.lock .yarnrc.yml ./
+COPY .yarn/releases .yarn/releases
+RUN yarn install
 
 COPY . .
 
 ARG branding=tf2pickup.pl
-RUN npm run build:${branding}
+RUN yarn build:${branding}
 
 
 FROM nginx:stable-alpine
