@@ -16,3 +16,12 @@ proxy.conf.json
 README.md
 renovate.json
 tsconfig.spec.json
+
+# Yarn
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
