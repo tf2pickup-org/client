@@ -1,3 +1,16 @@
+## [3.19.5](https://github.com/tf2pickup-org/client/compare/3.19.4...3.19.5) (2021-10-11)
+
+
+### Bug Fixes
+
+* add koth_cascade map thumbnail ([#1283](https://github.com/tf2pickup-org/client/issues/1283)) ([af75657](https://github.com/tf2pickup-org/client/commit/af75657fbf34f11013492ddec76ac99299f8b3fc))
+* add koth_ramjam map thumbnail ([#1284](https://github.com/tf2pickup-org/client/issues/1284)) ([aa38ac1](https://github.com/tf2pickup-org/client/commit/aa38ac1df316b027e9627ed8a2c499e87daeb85d))
+* **deps:** update angular monorepo to v12.2.9 ([#1159](https://github.com/tf2pickup-org/client/issues/1159)) ([0a5ef96](https://github.com/tf2pickup-org/client/commit/0a5ef9694066311abfcc4b1328b49057e3df5af0))
+* **deps:** update dependency @angular/cdk to v12.2.9 ([#1276](https://github.com/tf2pickup-org/client/issues/1276)) ([da64920](https://github.com/tf2pickup-org/client/commit/da64920659a77bb11ba91db3495a170fc50c0500))
+* **deps:** update dependency bootstrap to v5.1.2 ([#1273](https://github.com/tf2pickup-org/client/issues/1273)) ([fa99708](https://github.com/tf2pickup-org/client/commit/fa9970819312e74cb9bd28beba29751199ad4363))
+* **deps:** update dependency bootstrap to v5.1.3 ([#1281](https://github.com/tf2pickup-org/client/issues/1281)) ([5199134](https://github.com/tf2pickup-org/client/commit/5199134a85a9917370dc49ecb74ddcda7e076dc2))
+* **game-servers:** remove unused components ([#1278](https://github.com/tf2pickup-org/client/issues/1278)) ([b4ff6c8](https://github.com/tf2pickup-org/client/commit/b4ff6c8fb68d2285138b7bceae9a177a31909bc7))
+
 ## [3.19.4](https://github.com/tf2pickup-org/client/compare/3.19.3...3.19.4) (2021-10-03)
 
 
