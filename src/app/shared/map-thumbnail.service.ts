@@ -40,6 +40,7 @@ export class MapThumbnailService {
     { regex: /ctf_bball_eu/, thumbnailName: 'bball_eu' },
     { regex: /ctf_bball_sweethills/, thumbnailName: 'bball_sweethills' },
     { regex: /koth_cascade/, thumbnailName: 'cascade' },
+    { regex: /koth_ramjam/, thumbnailName: 'ramjam' },
   ];
 
   getMapThumbnail(map: string) {
