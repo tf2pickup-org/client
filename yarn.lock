@@ -9548,7 +9548,14 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"jasmine-core@npm:3.9.0, jasmine-core@npm:^3.6.0":
+"jasmine-core@npm:3.10.0":
+  version: 3.10.0
+  resolution: "jasmine-core@npm:3.10.0"
+  checksum: 31e09870d27cb818d9a10ab02e2a9185bb15ee41a767c62b66a4d1192a21cfa5cadaa1b003cd9f9a8af0122aa57aca944ee516e6f1617d3dfcb651a741be23ba
+  languageName: node
+  linkType: hard
+
+"jasmine-core@npm:^3.6.0":
   version: 3.9.0
   resolution: "jasmine-core@npm:3.9.0"
   checksum: af08d9aee93f956f4cb0eae7dcb4b669213fddab80e5e6b16c52e33a0f2f5c969e54de009a65dfde0111cb03cabe577a2aaa8803614c685111e85ebd51323649
@@ -15488,7 +15495,7 @@ fsevents@~2.3.2:
     eventemitter3: 4.0.7
     feather-icons: 4.28.0
     howler: 2.2.3
-    jasmine-core: 3.9.0
+    jasmine-core: 3.10.0
     jasmine-spec-reporter: 7.0.0
     jwt-decode: 3.1.2
     karma: 6.3.4
