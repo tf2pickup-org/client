@@ -13199,14 +13199,14 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"postcss@npm:8.3.10, postcss@npm:^8.3.7":
-  version: 8.3.10
-  resolution: "postcss@npm:8.3.10"
+"postcss@npm:8.3.11":
+  version: 8.3.11
+  resolution: "postcss@npm:8.3.11"
   dependencies:
     nanoid: ^3.1.30
     picocolors: ^1.0.0
     source-map-js: ^0.6.2
-  checksum: 9f6f5ddb403fb52cacf502bd42ee7a1b9df9b362db5e68e7129e643511bcdda429bbccf5d27e6d115dd4f0a61c811e6b28a91d2db3cf57ff8825e5a7166cbbd0
+  checksum: 1a230553d74c66aa9585c90781ed8ea75f19cefea405d2117b67fbeb24b5b5e0e17be2e0c5a07db31dd085643a13394127ab2222e940771b70498331bf20f35e
   languageName: node
   linkType: hard
 
@@ -13239,6 +13239,17 @@ fsevents@~2.3.2:
     picocolors: ^0.2.1
     source-map-js: ^0.6.2
   checksum: b64d0e59bc027b2f09e5a84ca32b4f0620553812110e42295a79fd0e6ea664779e575c2d5e8d35a1b0804f0933ec878404c6e161e008b5bc51cba44eaef216ef
+  languageName: node
+  linkType: hard
+
+"postcss@npm:^8.3.7":
+  version: 8.3.10
+  resolution: "postcss@npm:8.3.10"
+  dependencies:
+    nanoid: ^3.1.30
+    picocolors: ^1.0.0
+    source-map-js: ^0.6.2
+  checksum: 9f6f5ddb403fb52cacf502bd42ee7a1b9df9b362db5e68e7129e643511bcdda429bbccf5d27e6d115dd4f0a61c811e6b28a91d2db3cf57ff8825e5a7166cbbd0
   languageName: node
   linkType: hard
 
@@ -15684,7 +15695,7 @@ fsevents@~2.3.2:
     ngx-pagination: 5.1.1
     ngx-webstorage-service: 4.1.0
     npm-run-all: 4.1.5
-    postcss: 8.3.10
+    postcss: 8.3.11
     prettier: 2.4.1
     protractor: 7.0.0
     release-it: 14.11.6
