@@ -1,4 +1,9 @@
+import { TextChannelInfo } from './text-channel-info';
+
 export interface GuildInfo {
+  id: string;
   name: string;
-  iconUrl: string;
+  icon: string;
+
+  textChannels?: TextChannelInfo[];
 }

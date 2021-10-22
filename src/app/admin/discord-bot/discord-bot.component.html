@@ -8,25 +8,37 @@
         Guild
       </div>
 
-      <div *ngFor="let guild of store.availableGuilds | async; index as i"
+      <div *ngFor="let guild of store.availableGuilds | async"
         class="mdc-form-field w-100 my-2">
-        <div class="mdc-radio">
-          <input
-            class="mdc-radio__native-control"
-            type="radio"
-            id="discord-guild-{{i}}"
-            [value]="guild"
-            formControlName="guildName">
-          <div class="mdc-radio__background">
-            <div class="mdc-radio__outer-circle"></div>
-            <div class="mdc-radio__inner-circle"></div>
+        <div class="mdc-checkbox">
+          <input type="checkbox"
+            class="mdc-checkbox__native-control"
+            id="discord-guild-{{guild.id}}" />
+          <div class="mdc-checkbox__background">
+            <svg class="mdc-checkbox__checkmark"
+                  viewBox="0 0 24 24">
+              <path class="mdc-checkbox__checkmark-path"
+                    fill="none"
+                    d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+            </svg>
+            <div class="mdc-checkbox__mixedmark"></div>
           </div>
-          <div class="mdc-radio__ripple"></div>
+          <div class="mdc-checkbox__ripple"></div>
         </div>
-        <label for="discord-guild-{{i}}">
-          <img [src]="guild.iconUrl" crossorigin="anonymous" width="36">
-          {{guild.name}}
-        </label>
+
+        <div class="d-flex flex-column">
+          <label for="discord-guild-{{guild.id}}">
+            <div class="d-flex flex-row align-items-center">
+              <img [src]="guild.icon" crossorigin="anonymous" width="36" class="mx-2">
+              {{guild.name}}
+            </div>
+          </label>
+
+          <div>
+            Channel for admins' notifications:
+          </div>
+        </div>
+
       </div>
     </div>
   </app-edit-page-wrapper>

@@ -3,6 +3,8 @@ import { GuildInfo } from '@app/admin/models/guild-info';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { DiscordService } from '@app/admin/discord.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { TextChannelInfo } from '../models/text-channel-info';
+import { produce } from 'immer';
 
 interface DiscordBotState {
   isSaving: boolean;
@@ -23,11 +25,25 @@ export class DiscordBotStore extends ComponentStore<DiscordBotState> {
     );
   });
 
-  readonly setAvailableGuilds = this.updater(
+  private readonly setAvailableGuilds = this.updater(
     (state, availableGuilds: GuildInfo[]): DiscordBotState => ({
       ...state,
       availableGuilds,
     }),
+  );
+
+  private readonly setTextChannels = this.updater(
+    (
+      state,
+      {
+        guildId,
+        textChannels,
+      }: { guildId: string; textChannels: TextChannelInfo[] },
+    ): DiscordBotState =>
+      produce(state, draft => {
+        const guild = draft.availableGuilds.find(g => g.id === guildId);
+        guild.textChannels = textChannels;
+      }),
   );
 
   constructor(private discordService: DiscordService) {
@@ -35,5 +51,18 @@ export class DiscordBotStore extends ComponentStore<DiscordBotState> {
       isSaving: false,
       availableGuilds: [],
     });
+  }
+
+  loadTextChannels(guildId: string) {
+    this.discordService
+      .fetchTextChannels(guildId)
+      .pipe(
+        tapResponse(
+          (textChannels: TextChannelInfo[]) =>
+            this.setTextChannels({ guildId, textChannels }),
+          error => console.error(error),
+        ),
+      )
+      .subscribe();
   }
 }

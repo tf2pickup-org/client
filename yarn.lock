@@ -7939,6 +7939,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"immer@npm:9.0.6":
+  version: 9.0.6
+  resolution: "immer@npm:9.0.6"
+  checksum: 75da22f3b32f3f14604eb389b4f50e84a14f2e42f306f0cbe4d2969aed54ec7fda9a7e9ca42ebae2ba73ec9bb6ec1001fafbac535accaf03860054ab0f7e8388
+  languageName: node
+  linkType: hard
+
 "import-cwd@npm:3.0.0":
   version: 3.0.0
   resolution: "import-cwd@npm:3.0.0"
@@ -13468,6 +13475,7 @@ __metadata:
     eventemitter3: 4.0.7
     feather-icons: 4.28.0
     howler: 2.2.3
+    immer: 9.0.6
     jasmine-core: 3.10.1
     jasmine-spec-reporter: 7.0.0
     jwt-decode: 3.1.2
