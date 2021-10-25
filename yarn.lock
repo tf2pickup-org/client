@@ -10033,9 +10033,9 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"karma@npm:6.3.5":
-  version: 6.3.5
-  resolution: "karma@npm:6.3.5"
+"karma@npm:6.3.6":
+  version: 6.3.6
+  resolution: "karma@npm:6.3.6"
   dependencies:
     body-parser: ^1.19.0
     braces: ^3.0.2
@@ -10058,11 +10058,11 @@ fsevents@~2.3.2:
     socket.io: ^4.2.0
     source-map: ^0.6.1
     tmp: ^0.2.1
-    ua-parser-js: ^0.7.28
+    ua-parser-js: ^0.7.30
     yargs: ^16.1.1
   bin:
     karma: bin/karma
-  checksum: eb50278ae731b6376209b8ce640f4d57191c842e4b538802a02a23e798c2b0273316cb75c13367ef18195db4325178def22a6eb82db5b9bcebb05e3256fd9a42
+  checksum: 136d0742697b743b62a65b81b1554cf8176842a09b2256c0bd562aba45292fd87dbd7370d547c31181cb280c675f80a947c926ed0ca0a1a78f4b1e3ace145bc7
   languageName: node
   linkType: hard
 
@@ -15701,7 +15701,7 @@ fsevents@~2.3.2:
     jasmine-core: 3.10.1
     jasmine-spec-reporter: 7.0.0
     jwt-decode: 3.1.2
-    karma: 6.3.5
+    karma: 6.3.6
     karma-chrome-launcher: 3.1.0
     karma-coverage: 2.0.3
     karma-jasmine: 4.0.1
@@ -16122,10 +16122,10 @@ typescript@4.3.5:
   languageName: node
   linkType: hard
 
-"ua-parser-js@npm:^0.7.28":
-  version: 0.7.28
-  resolution: "ua-parser-js@npm:0.7.28"
-  checksum: a7da4ad54527211e878ee016c2ef64efad5c2f5a31277d36c9da93b4c89ecaa64f391ad4cf158ada76a9ad8e53004a950705ff1c2f27a52ca8bfb3f1381c39ff
+"ua-parser-js@npm:^0.7.30":
+  version: 0.7.30
+  resolution: "ua-parser-js@npm:0.7.30"
+  checksum: 19aad6e1b9e93cf3c57e139858811c2c94031ed769f1ac36dc3cda1e1e5d2c73c2e02ddf4f9e0ea140069f803315484f955488961172a6a01e9322b6c042ae98
   languageName: node
   linkType: hard
 
