@@ -2348,87 +2348,87 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ngrx/component-store@npm:12.5.0":
-  version: 12.5.0
-  resolution: "@ngrx/component-store@npm:12.5.0"
+"@ngrx/component-store@npm:12.5.1":
+  version: 12.5.1
+  resolution: "@ngrx/component-store@npm:12.5.1"
   dependencies:
     tslib: ^2.0.0
   peerDependencies:
     "@angular/core": ^12.0.0
     rxjs: ^6.5.3 || ^7.0.0
-  checksum: bc267b0a9d2bbe1ce8decf33a2e66a51e07bd9f2dcbdf23c3c07e5d0a81744e5e04b96bc21fb775753da8310e041c4423d4d45018f861f933d111bfd2ea7ff06
+  checksum: a5e3f4bf87d9be63d4fce21da73d58ce8a5a4129b24d4f0a3856b9e851b2df11d40582a1d0225f3ed2810e0f272bddf97639d6e6ad9d9738fe9601a1d1a17881
   languageName: node
   linkType: hard
 
-"@ngrx/effects@npm:12.5.0":
-  version: 12.5.0
-  resolution: "@ngrx/effects@npm:12.5.0"
+"@ngrx/effects@npm:12.5.1":
+  version: 12.5.1
+  resolution: "@ngrx/effects@npm:12.5.1"
   dependencies:
     tslib: ^2.0.0
   peerDependencies:
     "@angular/core": ^12.0.0
-    "@ngrx/store": 12.5.0
+    "@ngrx/store": 12.5.1
     rxjs: ^6.5.3 || ^7.0.0
-  checksum: 8b23104ed4a835e8130b9194dc6ec28cf8450bc1ef83204f4289ddf9b7072d2de591e5f9e08a203337048d2ddce2bf1fe92f05318a88bd12bd2019094e232b9e
+  checksum: 90670d4c18a0ba7a5a74ee4efd02591b25c53155455597379ef1d3c9d4d05e8a151f694f617353453cf2db7013d9c2d09fb290bda6c088299f38d384083df5d0
   languageName: node
   linkType: hard
 
-"@ngrx/entity@npm:12.5.0":
-  version: 12.5.0
-  resolution: "@ngrx/entity@npm:12.5.0"
+"@ngrx/entity@npm:12.5.1":
+  version: 12.5.1
+  resolution: "@ngrx/entity@npm:12.5.1"
   dependencies:
     tslib: ^2.0.0
   peerDependencies:
     "@angular/core": ^12.0.0
-    "@ngrx/store": 12.5.0
+    "@ngrx/store": 12.5.1
     rxjs: ^6.5.3 || ^7.0.0
-  checksum: 0e176058b3b42120fb5f8537e09ec47adca1a5e06fc11deb582a7eac1d7edab63f6ec797251060b7c333a54175b3313721b6735854c2e84686863c53c2154633
+  checksum: dbbb230592eb0c300e1516f5a5cba6830c4eb6b46abe593a1d898a14309da3a87de9b403ff6e56c0d6c26983e9ca6fc439f71afc0734d0bb22c0d16c09d86b3c
   languageName: node
   linkType: hard
 
-"@ngrx/router-store@npm:12.5.0":
-  version: 12.5.0
-  resolution: "@ngrx/router-store@npm:12.5.0"
+"@ngrx/router-store@npm:12.5.1":
+  version: 12.5.1
+  resolution: "@ngrx/router-store@npm:12.5.1"
   dependencies:
     tslib: ^2.0.0
   peerDependencies:
     "@angular/common": ^12.0.0
     "@angular/core": ^12.0.0
     "@angular/router": ^12.0.0
-    "@ngrx/store": 12.5.0
+    "@ngrx/store": 12.5.1
     rxjs: ^6.5.3 || ^7.0.0
-  checksum: 705437cb169906fb7adc66aef88460e6647573ced05cff64767c4306020770944ffae10d45cf1513ebea5889636f76f74077efdfeb049d190e4bfd87fe52bda0
+  checksum: 1786d40098f98668f7a0f3707d72c7e9ad7162cf1dd7abeef6812006dd056b3f1f70be342612459a35dcf207d2239e8a32b79e7604af0c2a247d0394b2ee3242
   languageName: node
   linkType: hard
 
-"@ngrx/schematics@npm:12.5.0":
-  version: 12.5.0
-  resolution: "@ngrx/schematics@npm:12.5.0"
-  checksum: 2a6d69d0103143973d6fa6dd84463def1778020f1ef297a5f67effd886a72f52dcf84aec08386a3a635bff1e39cb1223953aa9b7d8e222a4823be71e1e1120ee
+"@ngrx/schematics@npm:12.5.1":
+  version: 12.5.1
+  resolution: "@ngrx/schematics@npm:12.5.1"
+  checksum: 7b80bb5adddd3aec26964686f9fc6bc751288d01d6d7aae523b0707d34bba0e3a7b3dc94076919c368301a5a7f207b9fd78c7393597c409f5d449e6187f70f7d
   languageName: node
   linkType: hard
 
-"@ngrx/store-devtools@npm:12.5.0":
-  version: 12.5.0
-  resolution: "@ngrx/store-devtools@npm:12.5.0"
+"@ngrx/store-devtools@npm:12.5.1":
+  version: 12.5.1
+  resolution: "@ngrx/store-devtools@npm:12.5.1"
   dependencies:
     tslib: ^2.0.0
   peerDependencies:
-    "@ngrx/store": 12.5.0
+    "@ngrx/store": 12.5.1
     rxjs: ^6.5.3 || ^7.0.0
-  checksum: 4bdabc6db64870f4132bb4b0c3c73655bb73841b01d07875b9386e336edd222e3b3a8a8e5a52f5257167faeac5a0cd8c2f3667d7be8162f8944654d48ffc634a
+  checksum: e4256c10f73a09eda96f6caeb0788485d2fe4516b2374d5b31739711e76d12fa23d256be3e3a1c97411853bc06f3c4dee25fef30aef4b7cf269e238def7ea997
   languageName: node
   linkType: hard
 
-"@ngrx/store@npm:12.5.0":
-  version: 12.5.0
-  resolution: "@ngrx/store@npm:12.5.0"
+"@ngrx/store@npm:12.5.1":
+  version: 12.5.1
+  resolution: "@ngrx/store@npm:12.5.1"
   dependencies:
     tslib: ^2.0.0
   peerDependencies:
     "@angular/core": ^12.0.0
     rxjs: ^6.5.3 || ^7.0.0
-  checksum: a16cd548bdb5489a095cd75b11d5beaa9b006c74dedc14395b238bce3ab8ed49dae67922335f1392f31271780883e3e97e6127fe1f81ac45ff4987d886e6a5ba
+  checksum: b3a47cfee32b55e4a52a5b621fc8e67ad0d94e8d0a6a9f9ee2ef11936004f6716af20e122ffd2a3fce072e9341cacda6abfa808fd985fabe933b727eae20ab0f
   languageName: node
   linkType: hard
 
@@ -15668,13 +15668,13 @@ fsevents@~2.3.2:
     "@material/switch": 12.0.0
     "@material/textfield": 12.0.0
     "@material/typography": 12.0.0
-    "@ngrx/component-store": 12.5.0
-    "@ngrx/effects": 12.5.0
-    "@ngrx/entity": 12.5.0
-    "@ngrx/router-store": 12.5.0
-    "@ngrx/schematics": 12.5.0
-    "@ngrx/store": 12.5.0
-    "@ngrx/store-devtools": 12.5.0
+    "@ngrx/component-store": 12.5.1
+    "@ngrx/effects": 12.5.1
+    "@ngrx/entity": 12.5.1
+    "@ngrx/router-store": 12.5.1
+    "@ngrx/schematics": 12.5.1
+    "@ngrx/store": 12.5.1
+    "@ngrx/store-devtools": 12.5.1
     "@release-it/conventional-changelog": 3.3.0
     "@swimlane/ngx-datatable": 20.0.0
     "@types/howler": 2.2.4
