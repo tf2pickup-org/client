@@ -212,91 +212,91 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@angular-eslint/builder@npm:12.6.0":
-  version: 12.6.0
-  resolution: "@angular-eslint/builder@npm:12.6.0"
+"@angular-eslint/builder@npm:12.6.1":
+  version: 12.6.1
+  resolution: "@angular-eslint/builder@npm:12.6.1"
   dependencies:
     "@nrwl/devkit": 12.6.0
   peerDependencies:
     eslint: "*"
     typescript: "*"
-  checksum: 7b9a61199ae4416c6956875f7738db256d8ae96e8d2c17ab909f410f03b517f25174ece14fa3b17f4f5d9481253ca8663ac8025af22f9ad1c1a3e2eeaac135ff
+  checksum: accd91fd71b0a0d480357b7f70ded7626fac42dfc37f21b6fcce3499d49264d50d3e1e92300b6cbc3504634dc2226deabf315e3c2bf030b3a7ae878dbaca57e6
   languageName: node
   linkType: hard
 
-"@angular-eslint/bundled-angular-compiler@npm:12.6.0":
-  version: 12.6.0
-  resolution: "@angular-eslint/bundled-angular-compiler@npm:12.6.0"
-  checksum: cb21a274af505f1c583c41dbafb02f86f3dca4e07285eb9a72237db49ca1cd00f9445ef096382f9349ef4714723860118897fc022524a2d34d5ae5a359d93f04
+"@angular-eslint/bundled-angular-compiler@npm:12.6.1":
+  version: 12.6.1
+  resolution: "@angular-eslint/bundled-angular-compiler@npm:12.6.1"
+  checksum: c459eaa6ed84328d4a7e297917d1ea8cbb19a8eed1801c982cdf19592cdfe1199e4240f3a4c923a5ec1e757771cb88f45bc45505204a042e5e2d071bc893736a
   languageName: node
   linkType: hard
 
-"@angular-eslint/eslint-plugin-template@npm:12.6.0":
-  version: 12.6.0
-  resolution: "@angular-eslint/eslint-plugin-template@npm:12.6.0"
+"@angular-eslint/eslint-plugin-template@npm:12.6.1":
+  version: 12.6.1
+  resolution: "@angular-eslint/eslint-plugin-template@npm:12.6.1"
   dependencies:
-    "@angular-eslint/bundled-angular-compiler": 12.6.0
+    "@angular-eslint/bundled-angular-compiler": 12.6.1
     "@typescript-eslint/experimental-utils": 4.28.2
     aria-query: ^4.2.2
     axobject-query: ^2.2.0
   peerDependencies:
     eslint: "*"
     typescript: "*"
-  checksum: 437a210cf04edc2a1459e24135db5b0533765dc432d915fd562dc306f8a9251c02cb4e8136e10f0fbcb2d57bb1bc0283009b276122d7d2445dc093d87e1e4377
+  checksum: 97341a4768f6988fb213e93b32d993419df2fc80a424184970324cfaee6471151ef18ac01599ffff359f6dc6e89aea6c2fe636ef0121ae024648495c06e35e80
   languageName: node
   linkType: hard
 
-"@angular-eslint/eslint-plugin@npm:12.6.0":
-  version: 12.6.0
-  resolution: "@angular-eslint/eslint-plugin@npm:12.6.0"
+"@angular-eslint/eslint-plugin@npm:12.6.1":
+  version: 12.6.1
+  resolution: "@angular-eslint/eslint-plugin@npm:12.6.1"
   dependencies:
-    "@angular-eslint/utils": 12.6.0
+    "@angular-eslint/utils": 12.6.1
     "@typescript-eslint/experimental-utils": 4.28.2
   peerDependencies:
     eslint: "*"
     typescript: "*"
-  checksum: 48bb203f5cb7f7ef8c25f601b73836e04e76cd85a1b3f7d23d614dfe1a778f682cfb53af6c21ed912cd499986cd591e76452da55f94b9f9ab892e4659357a5f9
+  checksum: a1cd313f312423c82dbbac508e3056468c40a868c05635928affec2dd0c5086def01d147584cfe613db0a851bddff475edc10a5e2b134b64c6498d1f4982626a
   languageName: node
   linkType: hard
 
-"@angular-eslint/schematics@npm:12.6.0":
-  version: 12.6.0
-  resolution: "@angular-eslint/schematics@npm:12.6.0"
+"@angular-eslint/schematics@npm:12.6.1":
+  version: 12.6.1
+  resolution: "@angular-eslint/schematics@npm:12.6.1"
   dependencies:
-    "@angular-eslint/eslint-plugin": 12.6.0
-    "@angular-eslint/eslint-plugin-template": 12.6.0
+    "@angular-eslint/eslint-plugin": 12.6.1
+    "@angular-eslint/eslint-plugin-template": 12.6.1
     ignore: 5.1.8
     strip-json-comments: 3.1.1
     tmp: 0.2.1
   peerDependencies:
     "@angular/cli": ">= 12.0.0 < 13.0.0"
-  checksum: c9943aba22b35c3ffd49d86337a16c40d93597d53cf8a0987d0ccce0f2a52898b2530eefa688a5f55361b745633aef8028724ce8118ebc4198dce7243e87617e
+  checksum: 53a3397d5178ad1048dd6f6c9ce3a13fd0f9593cd56590e77e73553ff98a440b1f1b8854d6f9d2d8b6261b1477c0ddb50ef649550447fcb99d1bacd3f9c93f55
   languageName: node
   linkType: hard
 
-"@angular-eslint/template-parser@npm:12.6.0":
-  version: 12.6.0
-  resolution: "@angular-eslint/template-parser@npm:12.6.0"
+"@angular-eslint/template-parser@npm:12.6.1":
+  version: 12.6.1
+  resolution: "@angular-eslint/template-parser@npm:12.6.1"
   dependencies:
-    "@angular-eslint/bundled-angular-compiler": 12.6.0
+    "@angular-eslint/bundled-angular-compiler": 12.6.1
     eslint-scope: ^5.1.0
   peerDependencies:
     eslint: "*"
     typescript: "*"
-  checksum: bdb34cdfe17997125ca2c6f997c430473b37b91d6c0a12f5173ad8faa4f9bacbb3bc5e7331090129072e1812ef3e63e4560b93a742305f6095201ed7cedffd33
+  checksum: 07cd1c9cf7c56eb24cc10256c7fb42fbd53090130ae7abd251148b26fd86eeedf643c0e5ec241a0d2efdd1f6dd38e96ffd9efbd85f57a4b68f4bd5128db888a6
   languageName: node
   linkType: hard
 
-"@angular-eslint/utils@npm:12.6.0":
-  version: 12.6.0
-  resolution: "@angular-eslint/utils@npm:12.6.0"
+"@angular-eslint/utils@npm:12.6.1":
+  version: 12.6.1
+  resolution: "@angular-eslint/utils@npm:12.6.1"
   dependencies:
-    "@angular-eslint/bundled-angular-compiler": 12.6.0
+    "@angular-eslint/bundled-angular-compiler": 12.6.1
     "@typescript-eslint/experimental-utils": 4.28.2
   peerDependencies:
     eslint: "*"
     typescript: "*"
-  checksum: 8c0ce41c4514331ec3533b06fe46b3ce5a9d2e32d1c51ee6bbc2cc8bbe43d8b44a0cf284de9e000fecb899d926ef76868eb0f04507d97c108da2710ade8deea8
+  checksum: 2aa7dd0e8bc2d856b03dc77fa2c8e07d034e48b380ab7a1b40b3123f0c42356da75fac7063e48cd2b3ee66b6f8d064a214fbf61b00bc605a0bbf2f1a2bcae03c
   languageName: node
   linkType: hard
 
@@ -15638,11 +15638,11 @@ fsevents@~2.3.2:
   resolution: "tf2pickuppl@workspace:."
   dependencies:
     "@angular-devkit/build-angular": 12.2.11
-    "@angular-eslint/builder": 12.6.0
-    "@angular-eslint/eslint-plugin": 12.6.0
-    "@angular-eslint/eslint-plugin-template": 12.6.0
-    "@angular-eslint/schematics": 12.6.0
-    "@angular-eslint/template-parser": 12.6.0
+    "@angular-eslint/builder": 12.6.1
+    "@angular-eslint/eslint-plugin": 12.6.1
+    "@angular-eslint/eslint-plugin-template": 12.6.1
+    "@angular-eslint/schematics": 12.6.1
+    "@angular-eslint/template-parser": 12.6.1
     "@angular/animations": 12.2.11
     "@angular/cdk": 12.2.11
     "@angular/cli": 12.2.11
