@@ -1,40 +1,35 @@
-@use 'sass:color';
-@use 'sass:string';
-@use 'theme';
-@use 'variables';
-@use 'font';
-
-@use '@material/theme' as mdc-theme with (
+@use "sass:color";
+@use "sass:string";
+@use "theme";
+@use "variables";
+@use "font";
+@use "@material/theme" as mdc-theme with (
   $primary: theme.$primary,
   $secondary: theme.$secondary,
 );
-
-@use '@material/typography' with (
-  $font-family: string.unquote('Montserrat, sans-serif'),
+@use "@material/typography" with (
+  $font-family: string.unquote("Montserrat, sans-serif"),
 );
-
-@use '@material/button';
-@use '@material/button/mdc-button';
-@use '@material/card';
-@use '@material/checkbox';
-@use '@material/dialog';
-@use '@material/floating-label/mdc-floating-label';
-@use '@material/icon-button';
-@use '@material/line-ripple/mdc-line-ripple';
-@use '@material/list';
-@use '@material/notched-outline/mdc-notched-outline';
-@use '@material/ripple';
-@use '@material/snackbar';
-@use '@material/textfield';
-@use '@material/radio/styles' as mdc-radio;
-@use '@material/form-field';
-@use '@material/switch/styles' as mdc-switch;
-
-@use 'components/detail';
-@use 'components/indicator';
-@use 'components/pagination';
-@use 'components/surface';
-
+@use "@material/button";
+@use "@material/button/mdc-button";
+@use "@material/card";
+@use "@material/checkbox";
+@use "@material/dialog";
+@use "@material/floating-label/mdc-floating-label";
+@use "@material/icon-button";
+@use "@material/line-ripple/mdc-line-ripple";
+@use "@material/list";
+@use "@material/notched-outline/mdc-notched-outline";
+@use "@material/ripple";
+@use "@material/snackbar";
+@use "@material/textfield";
+@use "@material/radio/styles" as mdc-radio;
+@use "@material/form-field";
+@use "@material/switch/styles" as mdc-switch;
+@use "components/detail";
+@use "components/indicator";
+@use "components/pagination";
+@use "components/surface";
 @include card.core-styles;
 @include checkbox.core-styles;
 @include dialog.core-styles;
@@ -45,7 +40,6 @@
 @include snackbar.core-styles;
 @include textfield.core-styles;
 @include typography.core-styles;
-
 @include detail.core-styles;
 @include indicator.core-styles;
 @include pagination.core-styles;
@@ -53,30 +47,34 @@
 
 $body-bg: #0d1d36;
 $body-color: #fff;
-$font-family-sans-serif: 'Montserrat', sans-serif;
-
+$font-family-sans-serif: "Montserrat", sans-serif;
 $link-color: theme.$on-surface;
 $link-decoration: none;
 $link-hover-color: color.adjust($link-color, $lightness: -15%);
 $link-hover-decoration: underline;
 
-@import 'bootstrap/scss/functions';
-@import 'bootstrap/scss/variables';
-@import 'bootstrap/scss/mixins';
-@import 'bootstrap/scss/utilities';
-
-@import 'bootstrap/scss/root';
-@import 'bootstrap/scss/reboot';
-@import 'bootstrap/scss/type';
-@import 'bootstrap/scss/containers';
-@import 'bootstrap/scss/grid';
-@import 'bootstrap/scss/tooltip';
-
-@import 'bootstrap/scss/utilities/api';
-@import 'bootstrap/scss/helpers';
+/* stylelint-disable no-invalid-position-at-import-rule */
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/mixins";
+@import "bootstrap/scss/utilities";
+@import "bootstrap/scss/root";
+@import "bootstrap/scss/reboot";
+@import "bootstrap/scss/type";
+@import "bootstrap/scss/containers";
+@import "bootstrap/scss/grid";
+@import "bootstrap/scss/tooltip";
+@import "bootstrap/scss/utilities/api";
+@import "bootstrap/scss/helpers";
+/* stylelint-enable no-invalid-position-at-import-rule */
 
 .mdc-button {
   @include button.height(36px);
+}
+
+.mdc-button,
+.mdc-icon-button {
+  line-height: 16px; // vertical align of icons
 }
 
 .mdc-button,
@@ -88,11 +86,6 @@ $link-hover-decoration: underline;
   &:hover {
     text-decoration: none;
   }
-}
-
-.mdc-button,
-.mdc-icon-button {
-  line-height: 16px; // vertical align of icons
 }
 
 .mdc-button--inverted {
@@ -119,25 +112,24 @@ $link-hover-decoration: underline;
   @include button.height(46px);
   @include button.shape-radius(variables.$default-border-radius);
   @include button.horizontal-padding(1rem);
+
   font-size: 1.2rem;
   font-weight: 700;
 
-  /* stylelint-disable-next-line selector-class-pattern */
   .mdc-button__icon {
     width: 26px;
     height: 26px;
   }
 
-  /* stylelint-disable-next-line selector-class-pattern */
   .mdc-button__label {
     letter-spacing: normal;
   }
 }
 
 .mdc-text-field {
-  @include textfield.outline-color(color.adjust(black, $lightness: +80%));
-  @include textfield.hover-outline-color(color.adjust(black, $lightness: +70%));
-  @include textfield.focused-outline-color(color.adjust(theme.$primary, $lightness: +20%));
+  @include textfield.outline-color(color.adjust(black, $lightness: 80%));
+  @include textfield.hover-outline-color(color.adjust(black, $lightness: 70%));
+  @include textfield.focused-outline-color(color.adjust(theme.$primary, $lightness: 20%));
 }
 
 .mdc-text-field--dense {
@@ -154,11 +146,12 @@ $link-hover-decoration: underline;
   }
 }
 
-@import 'global/body';
-
-@import '@swimlane/ngx-datatable/index';
-@import '@swimlane/ngx-datatable/themes/bootstrap';
-@import '@swimlane/ngx-datatable/assets/icons.css';
+/* stylelint-disable no-invalid-position-at-import-rule */
+@import "global/body";
+@import "@swimlane/ngx-datatable/index";
+@import "@swimlane/ngx-datatable/themes/bootstrap";
+@import "@swimlane/ngx-datatable/assets/icons.css";
+/* stylelint-enable no-invalid-position-at-import-rule */
 
 .ngx-datatable.bootstrap .datatable-body .datatable-body-cell {
   padding: 0.3rem !important;

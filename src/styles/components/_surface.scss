@@ -1,6 +1,6 @@
-@use '@material/ripple';
-@use 'variables';
-@use 'theme';
+@use "@material/ripple";
+@use "variables";
+@use "theme";
 
 // A customizable surface for pretty much every textual
 // content.
@@ -9,7 +9,6 @@
   margin: 24px 8px;
   padding: 8px 16px;
   border-radius: variables.$default-border-radius;
-
   font-weight: 400;
 }
 
@@ -22,7 +21,7 @@
 }
 
 @mixin shadow {
-  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 1rem rgb(0 0 0 / 50%);
 }
 
 @mixin ripple {

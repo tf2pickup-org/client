@@ -1,9 +1,9 @@
-@use 'sass:color';
-@use '@material/ripple';
-@use 'theme';
-@use 'variables';
-@use 'utils/outline';
-@use 'utils/transition';
+@use "sass:color";
+@use "@material/ripple";
+@use "theme";
+@use "variables";
+@use "utils/outline";
+@use "utils/transition";
 
 $-slot-height: 48px;
 $-slot-action-size: 32px;
@@ -24,21 +24,27 @@ $-slot-action-size: 32px;
   flex-flow: row nowrap;
   align-items: center;
   justify-content: center;
-
   height: $-slot-height;
   margin: 0.5rem 0;
   padding: 0 1rem;
   max-width: 310px;
-
   border-radius: variables.$default-border-radius;
-  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
-
+  box-shadow: 0 0 1rem rgb(0 0 0 / 50%);
   position: relative;
 
   a {
     color: theme.$on-surface;
     font-size: 1.3rem;
     font-weight: bold;
+  }
+
+  > .player-name {
+    flex: 1 1 auto;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0 0.5rem;
   }
 
   &.is-free {
@@ -52,6 +58,7 @@ $-slot-action-size: 32px;
       @include ripple.surface;
       @include ripple.radius-bounded;
       @include ripple.states;
+
       overflow: hidden;
 
       &:hover {
@@ -84,15 +91,6 @@ $-slot-action-size: 32px;
   &.is-ready {
     background-color: theme.$queue-slot-ready-up;
   }
-
-  > .player-name {
-    flex: 1 1 auto;
-    text-align: center;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    padding: 0 0.5rem;
-  }
 }
 
 .avatar,
@@ -105,22 +103,19 @@ $-slot-action-size: 32px;
   @include ripple.surface;
   @include ripple.radius-bounded;
   @include ripple.states;
-  overflow: hidden;
 
+  overflow: hidden;
   width: $-slot-action-size;
   height: $-slot-action-size;
-
   margin: 0;
   padding: 0;
-
   border-radius: 0.3rem;
-  border: 1px solid color.adjust(rgb(255, 255, 255), $lightness: -10%);
+  border: 1px solid color.adjust(rgb(255 255 255), $lightness: -10%);
 
   &.mark-as-friend-btn {
     &.is-marked-by-me {
       background-color: theme.$queue-slot-mark-as-friend-button;
-      color: rgb(255, 255, 255);
+      color: rgb(255 255 255);
     }
   }
 }
-

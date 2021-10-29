@@ -1,10 +1,9 @@
-@use 'theme';
+@use "theme";
 
 .admin-buttons-container {
   display: flex;
   flex-flow: row;
   justify-content: center;
-
   margin: 1rem 0;
 
   > * {

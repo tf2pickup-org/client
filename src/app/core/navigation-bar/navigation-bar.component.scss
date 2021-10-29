@@ -1,14 +1,14 @@
-@use 'sass:color';
-@use 'theme';
-@use 'utils/border-radius';
-@use 'utils/outline';
-@use 'utils/respond';
+@use "sass:color";
+@use "theme";
+@use "utils/border-radius";
+@use "utils/outline";
+@use "utils/respond";
 
 // navigation bar itself
 $-navigation-bar-background-color: color.change(theme.$primary, $alpha: 0.8);
 $-navigation-bar-height: 76px;
 $-navigation-bar-border-radius: 45px;
-$-navigation-bar-shadow-color: rgba(0, 0, 0, 0.5);
+$-navigation-bar-shadow-color: rgb(0 0 0 / 50%);
 $-navigation-bar-shadow: 0 0 8px $-navigation-bar-shadow-color;
 
 // navigation bar links
@@ -24,10 +24,8 @@ $-link-icon-size: 30px;
   display: flex;
   flex-flow: row nowrap;
   justify-content: flex-start;
-
   background-color: $-navigation-bar-background-color;
   box-shadow: $-navigation-bar-shadow;
-
   max-height: $-navigation-bar-height;
   min-height: $-navigation-bar-height;
 
@@ -60,17 +58,12 @@ $-link-icon-size: 30px;
     height: $-link-height;
     line-height: $-link-height;
     padding: 0 32px;
-
     background-color: $-link-background-color;
-
     border-radius: 0 0 $-link-border-radius-bottom-right $-link-border-radius;
     box-shadow: $-navigation-bar-shadow;
-
     transition: 0.1s;
-
     position: relative;
     z-index: 1;
-
     color: #fff;
     font-size: 1.6rem;
     font-weight: 700;
@@ -105,7 +98,6 @@ $-link-icon-size: 30px;
 
     &--profile {
       padding: 0 32px 0 8px;
-
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;

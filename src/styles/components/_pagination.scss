@@ -1,33 +1,33 @@
-@use 'sass:color';
-@use 'utils/outline';
+@use "sass:color";
+@use "utils/outline";
 
 @mixin core-styles {
   .pagination {
     display: flex;
-
     justify-content: center;
     list-style: none;
-
-    &__item {
-      margin: 0 8px;
-
-      > a {
-        @include outline.disable;
-        color: rgb(255, 255, 255);
-
-        &:hover {
-          color: rgb(255, 255, 255);
-        }
-      }
-    }
 
     &__item--active a {
       font-weight: bold;
     }
 
     &__item--disabled a {
-      color: color.scale(rgb(255, 255, 255), $lightness: -40%);
+      color: color.scale(rgb(255 255 255), $lightness: -40%);
       pointer-events: none;
+    }
+
+    &__item {
+      margin: 0 8px;
+
+      > a {
+        @include outline.disable;
+
+        color: rgb(255 255 255);
+
+        &:hover {
+          color: rgb(255 255 255);
+        }
+      }
     }
   }
 }

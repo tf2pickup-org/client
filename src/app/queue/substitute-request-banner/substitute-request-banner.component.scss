@@ -1,5 +1,5 @@
-@use 'components/surface';
-@use 'theme';
+@use "components/surface";
+@use "theme";
 
 .substitute-request-banner {
   @include surface.make;

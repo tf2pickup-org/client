@@ -1,7 +1,7 @@
-@use 'components/surface';
-@use 'utils/respond';
-@use 'theme';
-@use 'variables';
+@use "components/surface";
+@use "utils/respond";
+@use "theme";
+@use "variables";
 
 .request-notification-permissions {
   @include surface.make;

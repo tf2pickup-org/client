@@ -1,10 +1,10 @@
-@use 'sass:color';
-@use '@material/ripple';
-@use '@material/typography';
-@use 'components/surface';
-@use 'utils/outline';
-@use 'utils/transition';
-@use 'theme';
+@use "sass:color";
+@use "@material/ripple";
+@use "@material/typography";
+@use "components/surface";
+@use "utils/outline";
+@use "utils/transition";
+@use "theme";
 
 .player-list {
   @include surface.make;
@@ -19,7 +19,6 @@
     flex-flow: row nowrap;
     align-items: center;
     min-width: 0;
-
     padding: 0 8px;
 
     &__icon,
@@ -33,19 +32,15 @@
       @include ripple.states;
 
       overflow: hidden;
-
       flex: 1 1 auto;
       margin: 0 5px;
       padding: 0 8px;
-
       display: flex;
       flex-flow: row nowrap;
       align-items: center;
       min-width: 0;
-
       font-weight: 500;
       line-height: 38px;
-
       border-radius: 4px;
 
       &:hover {
@@ -74,7 +69,6 @@
   @include outline.disable;
 
   overflow: hidden;
-
   border: 0;
   margin: 0 4px;
   border-radius: 8px;
@@ -84,7 +78,7 @@
 .request-substitute-button {
   @extend %button;
 
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(255 255 255);
   line-height: 40px;
   min-width: 44px;
 }

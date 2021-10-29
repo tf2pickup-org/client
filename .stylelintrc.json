@@ -1,9 +1,10 @@
 {
-  "extends": "stylelint-config-sass-guidelines",
+  "extends": ["stylelint-config-standard-scss"],
   "rules": {
     "max-nesting-depth": 4,
     "selector-max-compound-selectors": 4,
-    "order/properties-alphabetical-order": null,
+    "selector-class-pattern": "^[a-z0-9-_]+$",
+    "no-empty-source": null,
     "scss/dollar-variable-pattern": "^[a-z0-9-]+$",
     "scss/percent-placeholder-pattern": "^[a-z0-9-]+$"
   }

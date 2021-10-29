@@ -1,6 +1,6 @@
-@use 'sass:color';
-@use 'components/surface';
-@use 'theme';
+@use "sass:color";
+@use "components/surface";
+@use "theme";
 
 .list-item {
   @include surface.make;
@@ -12,7 +12,6 @@
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
-
   padding: 1rem 1.5rem;
   margin: 1.5rem 0;
 

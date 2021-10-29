@@ -1,11 +1,11 @@
-@use 'theme';
+@use "theme";
 
 $border-radius: 12px;
 $font-weight: 600;
 
 @mixin make($background-color) {
   border-radius: $border-radius;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 4px rgb(0 0 0 / 20%);
   font-weight: $font-weight;
   padding: 4px 14px;
   background-color: $background-color;
