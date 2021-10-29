@@ -1,6 +1,6 @@
-@use 'sass:color';
-@use 'components/surface';
-@use 'theme';
+@use "sass:color";
+@use "components/surface";
+@use "theme";
 
 .player-ban-item {
   @include surface.make;

@@ -1,6 +1,6 @@
-@use 'components/surface';
-@use 'utils/outline';
-@use 'theme';
+@use "components/surface";
+@use "utils/outline";
+@use "theme";
 
 .cancel-button {
   @include outline.disable;

@@ -1,9 +1,9 @@
-@use 'sass:color';
-@use 'theme';
-@use 'variables';
-@use 'components/surface';
-@use 'utils/ghost';
-@use 'utils/transition';
+@use "sass:color";
+@use "theme";
+@use "variables";
+@use "components/surface";
+@use "utils/ghost";
+@use "utils/transition";
 
 .queue-status {
   @include surface.make;
@@ -14,7 +14,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-
   text-align: center;
   font-size: 1.8rem;
 

@@ -1,4 +1,4 @@
-@use '@material/snackbar';
+@use "@material/snackbar";
 
 .active-game-snackbar {
   @include snackbar.viewport-margin(3.5rem);

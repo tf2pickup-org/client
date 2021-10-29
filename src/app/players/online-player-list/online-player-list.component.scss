@@ -1,12 +1,12 @@
-@use 'components/surface';
-@use 'theme';
-@use 'variables';
-@use 'utils/border-radius';
+@use "components/surface";
+@use "theme";
+@use "variables";
+@use "utils/border-radius";
 
-$-caption-background-color: rgb(6, 15, 30);
+$-caption-background-color: rgb(6 15 30);
 $-border-radius: variables.$default-border-radius * 0.75;
-$-odd-item-background-color: rgba(33, 40, 62, 0.52);
-$-even-item-background-color: rgba(6, 15, 30, 0.52);
+$-odd-item-background-color: rgb(33 40 62 / 52%);
+$-even-item-background-color: rgb(6 15 30 / 52%);
 
 .online-player-list {
   @include surface.make;
@@ -23,7 +23,6 @@ $-even-item-background-color: rgba(6, 15, 30, 0.52);
 
     display: flex;
     justify-content: center;
-
     background-color: $-odd-item-background-color;
   }
 
@@ -33,14 +32,11 @@ $-even-item-background-color: rgba(6, 15, 30, 0.52);
     align-items: center;
     flex-flow: column nowrap;
     flex: 1 0 auto;
-
     border-radius: $-border-radius;
     background-color: $-caption-background-color;
-
     font-weight: 600;
     font-size: 1rem;
     color: theme.$on-primary;
-
     padding: 0.5rem;
 
     .online-player-count {
@@ -58,9 +54,7 @@ $-even-item-background-color: rgba(6, 15, 30, 0.52);
     flex-flow: row nowrap;
     justify-content: center;
     min-width: 0;
-
     padding: 4px 12px;
-
     font-weight: 600;
     font-size: 0.9rem;
     color: theme.$on-primary;

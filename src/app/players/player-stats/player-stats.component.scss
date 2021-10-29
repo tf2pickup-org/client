@@ -1,7 +1,7 @@
-@use 'sass:color';
-@use 'components/surface';
-@use 'utils/ghost';
-@use 'theme';
+@use "sass:color";
+@use "components/surface";
+@use "utils/ghost";
+@use "theme";
 
 .games-player-total {
   @include surface.make;
@@ -16,6 +16,7 @@
 
   .ghost {
     @include ghost.make-line(300px, 29px, rgb(0, 0, 0));
+
     margin: 0 auto;
   }
 }

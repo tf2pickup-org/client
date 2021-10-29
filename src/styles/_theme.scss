@@ -1,71 +1,60 @@
-@use 'sass:color';
-@use 'sass:map';
-@use 'theme-overrides';
+@use "sass:color";
+@use "sass:map";
+@use "theme-overrides";
 
 $-default-colors: (
-  'primary': rgb(10, 26, 51),
-  'on-primary': rgb(255, 255, 255),
-
-  'secondary': rgb(255, 173, 23),
-  'on-secondary':  rgb(10, 26, 51),
-
-  'surface': rgba(255, 255, 255, 0.9),
-  'on-surface': rgb(10, 26, 51),
-
-  'success': rgb(65, 202, 37),
-  'warning':  rgb(255, 173, 23),
-  'error': rgb(192, 8, 15),
-
-  'team-blu': rgb(88, 121, 138),
-  'team-red': rgb(189, 59, 59),
-
-  'footer-background': rgba(255, 255, 255, 0.8),
-  'footer-text': rgb(10, 26, 51),
-
-  'queue-status-waiting': rgba(255, 255, 255, 0.7),
-  'queue-status-ready-up': rgba(65, 202, 37, 0.75),
-  'queue-status-launching': rgba(118, 154, 240, 0.95),
-  'queue-slot-free': rgba(255, 255, 255, 0.65),
-  'queue-slot-taken': rgba(255, 255, 255, 0.95),
-  'queue-slot-taken-by-me': rgba(255, 255, 255, 1),
-  'queue-slot-ready-up': rgba(65, 202, 37, 0.75),
-  'queue-slot-mark-as-friend-button': rgb(192, 50, 50),
+  "primary": rgb(10 26 51),
+  "on-primary": rgb(255 255 255),
+  "secondary": rgb(255 173 23),
+  "on-secondary":  rgb(10 26 51),
+  "surface": rgb(255 255 255 / 90%),
+  "on-surface": rgb(10 26 51),
+  "success": rgb(65 202 37),
+  "warning":  rgb(255 173 23),
+  "error": rgb(192 8 15),
+  "team-blu": rgb(88 121 138),
+  "team-red": rgb(189 59 59),
+  "footer-background": rgb(255 255 255 / 80%),
+  "footer-text": rgb(10 26 51),
+  "queue-status-waiting": rgb(255 255 255 / 70%),
+  "queue-status-ready-up": rgb(65 202 37 / 75%),
+  "queue-status-launching": rgb(118 154 240 / 95%),
+  "queue-slot-free": rgb(255 255 255 / 65%),
+  "queue-slot-taken": rgb(255 255 255 / 95%),
+  "queue-slot-taken-by-me": rgb(255 255 255 / 100%),
+  "queue-slot-ready-up": rgb(65 202 37 / 75%),
+  "queue-slot-mark-as-friend-button": rgb(192 50 50),
 );
-
 $-colors: map.merge($-default-colors, theme-overrides.$colors);
-
-$primary: map.get($-colors, 'primary');
-$secondary: map.get($-colors, 'secondary');
-$surface: map.get($-colors, 'surface');
-
-$success: map.get($-colors, 'success');
-$warning: map.get($-colors, 'warning');
-$error: map.get($-colors, 'error');
-
+$primary: map.get($-colors, "primary");
+$secondary: map.get($-colors, "secondary");
+$surface: map.get($-colors, "surface");
+$success: map.get($-colors, "success");
+$warning: map.get($-colors, "warning");
+$error: map.get($-colors, "error");
 $online: $success;
 $offline: $error;
-
-$twitchtv: rgb(145, 70, 255);
+$twitchtv: rgb(145 70 255);
 
 // font colors
-$on-primary: map.get($-colors, 'on-primary');
-$on-secondary: map.get($-colors, 'on-secondary');
-$on-surface: map.get($-colors, 'on-surface');
+$on-primary: map.get($-colors, "on-primary");
+$on-secondary: map.get($-colors, "on-secondary");
+$on-surface: map.get($-colors, "on-surface");
 
 // TF2-specific colors
-$tem-blu: map.get($-colors, 'team-blu');
-$team-red: map.get($-colors, 'team-red');
+$tem-blu: map.get($-colors, "team-blu");
+$team-red: map.get($-colors, "team-red");
 
 // footer
-$footer-background: map.get($-colors, 'footer-background');
-$footer-text: map.get($-colors, 'footer-text');
+$footer-background: map.get($-colors, "footer-background");
+$footer-text: map.get($-colors, "footer-text");
 
 // queue colors
-$queue-status-waiting: map.get($-colors, 'queue-status-waiting');
-$queue-status-ready-up: map.get($-colors, 'queue-status-ready-up');
-$queue-status-launching: map.get($-colors, 'queue-status-launching');
-$queue-slot-free: map.get($-colors, 'queue-slot-free');
-$queue-slot-taken: map.get($-colors, 'queue-slot-taken');
-$queue-slot-taken-by-me: map.get($-colors, 'queue-slot-taken-by-me');
-$queue-slot-ready-up: map.get($-colors, 'queue-slot-ready-up');
-$queue-slot-mark-as-friend-button: map.get($-colors, 'queue-slot-mark-as-friend-button');
+$queue-status-waiting: map.get($-colors, "queue-status-waiting");
+$queue-status-ready-up: map.get($-colors, "queue-status-ready-up");
+$queue-status-launching: map.get($-colors, "queue-status-launching");
+$queue-slot-free: map.get($-colors, "queue-slot-free");
+$queue-slot-taken: map.get($-colors, "queue-slot-taken");
+$queue-slot-taken-by-me: map.get($-colors, "queue-slot-taken-by-me");
+$queue-slot-ready-up: map.get($-colors, "queue-slot-ready-up");
+$queue-slot-mark-as-friend-button: map.get($-colors, "queue-slot-mark-as-friend-button");

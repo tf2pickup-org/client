@@ -1,9 +1,9 @@
-@use 'sass:color';
-@use 'components/surface';
-@use 'components/indicator';
-@use 'utils/border-radius';
-@use 'theme';
-@use 'variables';
+@use "sass:color";
+@use "components/surface";
+@use "components/indicator";
+@use "utils/border-radius";
+@use "theme";
+@use "variables";
 
 $-item-height: 80px;
 $-item-margin: 24px;
@@ -25,10 +25,8 @@ $-games-per-page: 5;
 
   display: flex;
   height: $-item-height;
-
   padding: 0;
   margin: $-item-margin 0;
-
   font-size: 1.5rem;
   font-weight: 600;
 
@@ -41,6 +39,7 @@ $-games-per-page: 5;
 
   &__map-thumbnail {
     @include border-radius.right(variables.$default-border-radius);
+
     height: $-item-height;
   }
 

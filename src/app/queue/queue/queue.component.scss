@@ -1,8 +1,9 @@
-@use 'utils/grid';
-@use 'utils/respond';
+@use "utils/grid";
+@use "utils/respond";
 
 .queue {
   @extend %row;
+
   justify-content: center;
 
   &--1x1 {
@@ -17,6 +18,7 @@
   &--4x1 {
     .game-class-column {
       @extend %column;
+
       margin: 1rem 0;
 
       @include respond.above(huge) {
@@ -36,6 +38,7 @@
   &--3x3 {
     .game-class-column {
       @extend %column;
+
       margin: 0.5rem 0;
 
       @include respond.above(huge) {

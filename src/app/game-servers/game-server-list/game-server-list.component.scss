@@ -1,6 +1,6 @@
-@use 'components/badge';
-@use 'components/surface';
-@use 'theme';
+@use "components/badge";
+@use "components/surface";
+@use "theme";
 
 $-item-height: 80px;
 $-item-margin: 24px;
@@ -21,7 +21,6 @@ $-item-margin: 24px;
 
 .server-name {
   flex: 1 1 auto;
-
   font-size: 1.5rem;
   font-weight: 600;
 }

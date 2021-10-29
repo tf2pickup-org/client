@@ -1,7 +1,7 @@
-@use 'components/surface';
-@use 'utils/outline';
-@use 'utils/respond';
-@use 'theme';
+@use "components/surface";
+@use "utils/outline";
+@use "utils/respond";
+@use "theme";
 
 $-external-profile-link-card-size: 80px;
 
@@ -48,7 +48,6 @@ $-external-profile-link-card-size: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
-
   font-weight: 600;
   font-size: 1.2rem;
   text-decoration: none;

@@ -1,15 +1,15 @@
-@use 'sass:color';
-@use '@material/button';
-@use 'theme';
-@use 'variables';
+@use "sass:color";
+@use "@material/button";
+@use "theme";
+@use "variables";
 
 .connect-string-wrapper {
   display: flex;
   flex-flow: row nowrap;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(255 255 255);
   border-radius: variables.$default-border-radius;
   padding: 0;
-  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 0.5rem rgb(0 0 0 / 50%);
   color: theme.$on-surface;
 
   .connect-string {
@@ -22,7 +22,7 @@
     font-weight: 500;
 
     &.connect-unavailable {
-      color: color.adjust(rgb(0, 0, 0), $lightness: 50%);
+      color: color.adjust(rgb(0 0 0), $lightness: 50%);
       font-size: 1.3rem;
     }
   }

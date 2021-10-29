@@ -1,5 +1,5 @@
-@use 'components/surface';
-@use 'theme';
+@use "components/surface";
+@use "theme";
 
 .team-header {
   @include surface.make;
@@ -9,18 +9,19 @@
   align-items: center;
   display: flex;
   justify-content: space-around;
-
   text-align: center;
   padding: 4px 0;
   margin: 4px 0;
 
   &--red {
     @include surface.fill-color(theme.$team-red);
+
     flex-flow: row-reverse nowrap;
   }
 
   &--blu {
     @include surface.fill-color(theme.$tem-blu);
+
     flex-flow: row nowrap;
   }
 

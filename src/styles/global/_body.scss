@@ -1,6 +1,6 @@
-@use 'theme';
-@use 'variables';
-@use 'utils/respond';
+@use "theme";
+@use "variables";
+@use "utils/respond";
 
 html,
 body {
@@ -27,7 +27,7 @@ html {
 
 body {
   background-attachment: fixed;
-  background-image: url('/assets/bg_night_blur.png');
+  background-image: url("/assets/bg_night_blur.png");
   background-repeat: no-repeat;
   background-size: cover;
 }
