@@ -125,7 +125,7 @@
     "protractor": "7.0.0",
     "release-it": "14.11.6",
     "stylelint": "14.0.1",
-    "stylelint-config-sass-guidelines": "8.0.0",
+    "stylelint-config-sass-guidelines": "9.0.0",
     "stylelint-config-standard-scss": "2.0.0",
     "stylelint-order": "5.0.0",
     "ts-node": "10.4.0",
