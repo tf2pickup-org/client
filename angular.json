@@ -668,6 +668,34 @@
                   "output": "/assets/"
                 }
               ]
+            },
+            "au.tf2pickup.org": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/au.tf2pickup.org.ts"
+                }
+              ],
+              "assets": [
+                {
+                  "glob": "**/*",
+                  "input": "src/assets/",
+                  "output": "/assets/",
+                  "ignore": [
+                    "custom/**/*"
+                  ]
+                },
+                {
+                  "glob": "favicon.ico",
+                  "input": "src/assets/custom/au.tf2pickup.org",
+                  "output": "/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/assets/custom/au.tf2pickup.org",
+                  "output": "/assets/"
+                }
+              ]
             }
           }
         },
