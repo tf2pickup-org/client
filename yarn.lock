@@ -12770,7 +12770,7 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"postcss-scss@npm:^4.0.1":
+"postcss-scss@npm:^4.0.1, postcss-scss@npm:^4.0.2":
   version: 4.0.2
   resolution: "postcss-scss@npm:4.0.2"
   peerDependencies:
@@ -14932,16 +14932,17 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"stylelint-config-sass-guidelines@npm:9.0.0":
-  version: 9.0.0
-  resolution: "stylelint-config-sass-guidelines@npm:9.0.0"
+"stylelint-config-sass-guidelines@npm:9.0.1":
+  version: 9.0.1
+  resolution: "stylelint-config-sass-guidelines@npm:9.0.1"
   dependencies:
-    postcss-scss: ^4.0.1
+    postcss-scss: ^4.0.2
     stylelint-order: ^5.0.0
     stylelint-scss: ^4.0.0
   peerDependencies:
-    stylelint: ^14.0.0
-  checksum: f28a853fae22481fc0b0864aabcb635d9efda4ad4a87b301baa55b2ea8045c9de9307fd591505aba86c7f2c1139b37407c42397269dc4fb60fd9b60494aa1c88
+    postcss: ^8.3.3
+    stylelint: ^14.0.1
+  checksum: 9844e0858b1175b30786cbca873cc5856313475de4b3cf3e4a8504d19f2673899f0fe4d56bef5cf73c93d0ed6c7c8c3d5a3dd91b7a9586aa52ddab12ef52a64b
   languageName: node
   linkType: hard
 
@@ -15372,7 +15373,7 @@ fsevents@~2.3.2:
     rxjs: 6.6.7
     socket.io-client: 4.3.2
     stylelint: 14.0.1
-    stylelint-config-sass-guidelines: 9.0.0
+    stylelint-config-sass-guidelines: 9.0.1
     stylelint-config-standard-scss: 2.0.0
     stylelint-order: 5.0.0
     ts-node: 10.4.0
