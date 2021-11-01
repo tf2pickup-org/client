@@ -9822,9 +9822,9 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"karma@npm:6.3.6":
-  version: 6.3.6
-  resolution: "karma@npm:6.3.6"
+"karma@npm:6.3.7":
+  version: 6.3.7
+  resolution: "karma@npm:6.3.7"
   dependencies:
     body-parser: ^1.19.0
     braces: ^3.0.2
@@ -9851,7 +9851,7 @@ fsevents@~2.3.2:
     yargs: ^16.1.1
   bin:
     karma: bin/karma
-  checksum: 136d0742697b743b62a65b81b1554cf8176842a09b2256c0bd562aba45292fd87dbd7370d547c31181cb280c675f80a947c926ed0ca0a1a78f4b1e3ace145bc7
+  checksum: 0f824bc1fd5653d6da1770472a50b85a8402413cb5abcf21ed773e17c279ca7f1c1a487251a008f49c20b08e5935b174f0bf143b82c2d8f1b805005c1cf06328
   languageName: node
   linkType: hard
 
@@ -15352,7 +15352,7 @@ fsevents@~2.3.2:
     jasmine-core: 3.10.1
     jasmine-spec-reporter: 7.0.0
     jwt-decode: 3.1.2
-    karma: 6.3.6
+    karma: 6.3.7
     karma-chrome-launcher: 3.1.0
     karma-coverage: 2.0.3
     karma-jasmine: 4.0.1
