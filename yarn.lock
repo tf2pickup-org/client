@@ -14966,15 +14966,15 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"stylelint-config-standard-scss@npm:2.0.0":
-  version: 2.0.0
-  resolution: "stylelint-config-standard-scss@npm:2.0.0"
+"stylelint-config-standard-scss@npm:2.0.1":
+  version: 2.0.1
+  resolution: "stylelint-config-standard-scss@npm:2.0.1"
   dependencies:
     stylelint-config-recommended-scss: ^5.0.0
     stylelint-config-standard: ^23.0.0
   peerDependencies:
     stylelint: ^14.0.0
-  checksum: 3ddb8692051007b686508fd1fe5ab6d44c04e880f0b79ae2c4e3ce47bbef164a1185e1d0eaf6e462557c7beb4b7bb5bc44ca6bd5ef7371ffc727d0e55550daae
+  checksum: 590accf17269298abbcdf02648facc119dfac2a730cbf75fb3e72b2fd2391c65dc20a025dc46d7c11a0b6ac34f12b2c68c92d797a092ca132f274529e0f16dfd
   languageName: node
   linkType: hard
 
@@ -15394,7 +15394,7 @@ fsevents@~2.3.2:
     socket.io-client: 4.3.2
     stylelint: 14.0.1
     stylelint-config-sass-guidelines: 9.0.1
-    stylelint-config-standard-scss: 2.0.0
+    stylelint-config-standard-scss: 2.0.1
     stylelint-order: 5.0.0
     ts-node: 10.4.0
     tslib: 2.3.1
