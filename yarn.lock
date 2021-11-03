@@ -10949,14 +10949,14 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"ng-inline-svg@npm:13.1.0":
-  version: 13.1.0
-  resolution: "ng-inline-svg@npm:13.1.0"
+"ng-inline-svg@npm:13.1.1":
+  version: 13.1.1
+  resolution: "ng-inline-svg@npm:13.1.1"
   peerDependencies:
     "@angular/common": ^12.0.0
     "@angular/core": ^12.0.0
-    rxjs: ^6.6.0
-  checksum: 4dfbac6a67c60fa82e44400566035ebd3713f6eadcb7dd534815428250e09b801c3b9e2c8570c824b8189cafe61acade9a502a11d0adfac7c350f40900743ff0
+    rxjs: ^6.6.0 || ^7.4.0
+  checksum: 836d4e50457e0c9a103891a3bc37feda6dbf986d12838aa7c1d9defdd198861722d70fbb19a3cba348d069da1d91ab31a854ed17d8a4d87ab07a9e9201cb83b7
   languageName: node
   linkType: hard
 
@@ -15379,7 +15379,7 @@ fsevents@~2.3.2:
     karma-jasmine-html-reporter: 1.7.0
     karma-spec-reporter: 0.0.32
     lodash-es: 4.17.21
-    ng-inline-svg: 13.1.0
+    ng-inline-svg: 13.1.1
     ng-mocks: 12.5.0
     ngx-bootstrap: 7.1.0
     ngx-markdown: 12.0.1
