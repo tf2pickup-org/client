@@ -110,6 +110,7 @@ const mockGameServer: GameServer = {
   address: 'FAKE_ADDRESS',
   port: '12345',
   isOnline: true,
+  priority: 1,
 };
 
 const mockPlayers = [
