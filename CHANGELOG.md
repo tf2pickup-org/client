@@ -1,3 +1,12 @@
+## [3.20.1](https://github.com/tf2pickup-org/client/compare/3.20.0...3.20.1) (2021-11-06)
+
+
+### Bug Fixes
+
+* **deps:** update angular monorepo to v12.2.13 ([#1348](https://github.com/tf2pickup-org/client/issues/1348)) ([0b7b028](https://github.com/tf2pickup-org/client/commit/0b7b028acd9fa1a9478a27d10ffffb829c2034d6))
+* **deps:** update dependency ng-inline-svg to v13.1.1 ([#1345](https://github.com/tf2pickup-org/client/issues/1345)) ([5baa90c](https://github.com/tf2pickup-org/client/commit/5baa90c6cb3fc299784d4cc835b7f496d5b491f7))
+* **game-servers:** sort game servers by priority ([#1352](https://github.com/tf2pickup-org/client/issues/1352)) ([460a9a1](https://github.com/tf2pickup-org/client/commit/460a9a1f22fc4d3a41bcf791f6d2cfd9d44afed9))
+
 # [3.20.0](https://github.com/tf2pickup-org/client/compare/3.19.5...3.20.0) (2021-10-31)
 
 
