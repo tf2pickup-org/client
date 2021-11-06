@@ -4,4 +4,5 @@ export interface GameServer {
   address: string;
   port: string;
   isOnline: boolean;
+  priority: number;
 }
