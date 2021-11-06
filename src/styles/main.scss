@@ -16,7 +16,7 @@
 @use "@material/checkbox";
 @use "@material/dialog";
 @use "@material/floating-label/mdc-floating-label";
-@use "@material/icon-button";
+@use "@material/icon-button/mdc-icon-button";
 @use "@material/line-ripple/mdc-line-ripple";
 @use "@material/list";
 @use "@material/notched-outline/mdc-notched-outline";
@@ -34,7 +34,6 @@
 @include checkbox.core-styles;
 @include dialog.core-styles;
 @include form-field.core-styles;
-@include icon-button.core-styles;
 @include list.deprecated-core-styles;
 @include ripple.core-styles;
 @include snackbar.core-styles;
