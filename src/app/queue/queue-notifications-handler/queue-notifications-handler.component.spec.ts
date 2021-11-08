@@ -1,6 +1,7 @@
 import {
   ComponentFixture,
   fakeAsync,
+  flushMicrotasks,
   TestBed,
   tick,
 } from '@angular/core/testing';
@@ -66,13 +67,17 @@ describe('QueueNotificationsHandlerComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  const timeout = (ms: number) =>
+    new Promise(resolve => setTimeout(resolve, ms));
+
   describe('when ready up is awaited', () => {
     describe('and the user is not pre-readied', () => {
-      beforeEach(fakeAsync(() => {
+      beforeEach(async () => {
         awaitsReadyUp.setResult(true);
         store.refreshState();
-        tick(100);
-      }));
+        await timeout(150);
+        fixture.detectChanges();
+      });
 
       it('should ask the user to ready up', () => {
         expect(readyUpService.askUserToReadyUp).toHaveBeenCalled();
@@ -100,12 +105,12 @@ describe('QueueNotificationsHandlerComponent', () => {
     });
 
     describe('and the user is pre-readied', () => {
-      beforeEach(fakeAsync(() => {
+      beforeEach(async () => {
         isPreReadied.setResult(true);
         awaitsReadyUp.setResult(true);
         store.refreshState();
-        tick(100);
-      }));
+        await timeout(150);
+      });
 
       it('should not ask the user to ready up', () => {
         expect(readyUpService.askUserToReadyUp).not.toHaveBeenCalled();
