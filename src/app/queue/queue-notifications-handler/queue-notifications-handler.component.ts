@@ -39,9 +39,9 @@ export class QueueNotificationsHandlerComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.store
+      .select(awaitsReadyUp)
       .pipe(
         takeUntil(this.destroyed),
-        select(awaitsReadyUp),
         debounceTime(100),
         withLatestFrom(this.store.select(isPreReadied)),
         // eslint-disable-next-line no-shadow
@@ -68,9 +68,9 @@ export class QueueNotificationsHandlerComponent implements OnInit, OnDestroy {
       .subscribe(action => this.store.dispatch(action));
 
     this.store
+      .select(substituteRequests)
       .pipe(
         takeUntil(this.destroyed),
-        select(substituteRequests),
         filter(requests => requests?.length > 0),
         withLatestFrom(this.store.select(isPlayingGame)),
         debounceTime(1000),
