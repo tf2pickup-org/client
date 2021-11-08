@@ -5887,7 +5887,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"emoji-toolkit@npm:^6.5.0":
+"emoji-toolkit@npm:^6.6.0":
   version: 6.6.0
   resolution: "emoji-toolkit@npm:6.6.0"
   checksum: 8f7a7216626d5d5cdb0505906dfd44cbe65cee76c8a9a15a3dfc20736fe98f457db23874376ec6e643da93fcb83a6c9dbc58cae76d24fb77e76dd87f06991ce2
@@ -9005,14 +9005,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"katex@npm:^0.13.0":
-  version: 0.13.24
-  resolution: "katex@npm:0.13.24"
+"katex@npm:^0.15.1":
+  version: 0.15.1
+  resolution: "katex@npm:0.15.1"
   dependencies:
     commander: ^8.0.0
   bin:
     katex: cli.js
-  checksum: 1b7c8295867073d0db4f6fb41ef1c0e3418b8e23924ff61b446b36134cb74cdadc7242dfbfb922d9c32f0b15eda6160a08cd30948c4e78141966ca2991a1726b
+  checksum: eab97bbe292cc60b15fec264cba86d110e5e089045de084cd3a0f27b21ef65857a4d296c418ec3b397ff987671a20c6a9a1fd30f1862b86a0e6b7dbe3fb893f6
   languageName: node
   linkType: hard
 
@@ -9882,23 +9882,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ngx-markdown@npm:12.0.1":
-  version: 12.0.1
-  resolution: "ngx-markdown@npm:12.0.1"
+"ngx-markdown@npm:13.0.0":
+  version: 13.0.0
+  resolution: "ngx-markdown@npm:13.0.0"
   dependencies:
     "@types/marked": ^2.0.0
-    emoji-toolkit: ^6.5.0
-    katex: ^0.13.0
+    emoji-toolkit: ^6.6.0
+    katex: ^0.15.1
     marked: ^2.0.0
-    prismjs: ^1.23.0
-    tslib: ^2.1.0
+    prismjs: ^1.25.0
+    tslib: ^2.3.0
   peerDependencies:
-    "@angular/common": ^12.0.0
-    "@angular/core": ^12.0.0
-    "@angular/platform-browser": ^12.0.0
-    rxjs: ^6.6.0
-    zone.js: ^0.10.2 || ^0.11.4
-  checksum: d0b184b50e2bec62f9674637ed60742e12088176d7bd3bd99021056845b9fe412df4deba1e62278f2995ed42844b5f6047bc0c213d72152b16ea353e3a03a89e
+    "@angular/common": ^13.0.0
+    "@angular/core": ^13.0.0
+    "@angular/platform-browser": ^13.0.0
+    rxjs: ^7.4.0
+    zone.js: ^0.11.4
+  checksum: 1d97bfa60fef45f25b1dc43736416fd6c8de106fb0d9e77f864eb152094b7314ea2d58046b863c05b208d035580ef3a5d6ac08d6bbcdea3f9e9907d3751fdfb4
   languageName: node
   linkType: hard
 
@@ -11422,7 +11422,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prismjs@npm:^1.23.0":
+"prismjs@npm:^1.25.0":
   version: 1.25.0
   resolution: "prismjs@npm:1.25.0"
   checksum: 04d8eae9d1b26b76c350bc65621584c8f8cab80ace7da3953f8aef2f9a8dd4b4f71c1d15bc5c67f126ddc90cd5af613919dc1340589a6c57355bed86fa3ac010
@@ -13481,7 +13481,7 @@ __metadata:
     ng-inline-svg: 13.1.1
     ng-mocks: 12.5.0
     ngx-bootstrap: 7.1.0
-    ngx-markdown: 12.0.1
+    ngx-markdown: 13.0.0
     ngx-pagination: 5.1.1
     ngx-webstorage-service: 4.1.0
     npm-run-all: 4.1.5
