@@ -3,17 +3,21 @@
     title="Discord bot configuration"
     [saveDisabled]="(store.isSaving | async) === true || !form.valid || form.pristine">
 
-    <div class="surface surface--white py-4">
+    <div formArrayName="servers"
+      class="surface surface--white py-4">
       <div class="mdc-typography--body1 mx-2">
         Guild
       </div>
 
-      <div *ngFor="let guild of store.availableGuilds | async"
+      <div *ngFor="let guild of store.availableGuilds | async; let i = index"
+        [formGroupName]="i"
         class="mdc-form-field w-100 my-2">
         <div class="mdc-checkbox">
           <input type="checkbox"
             class="mdc-checkbox__native-control"
-            id="discord-guild-{{guild.id}}" />
+            id="discord-guild-{{guild.id}}"
+            [value]="guild.id"
+            (change)="onServerSelectionChange($event)" />
           <div class="mdc-checkbox__background">
             <svg class="mdc-checkbox__checkmark"
                   viewBox="0 0 24 24">
@@ -36,9 +40,16 @@
 
           <div>
             Channel for admins' notifications:
+            <select formControlName="adminNotificationsChannelId">
+              <option value="null">Disabled</option>
+              <option *ngFor="let channel of guild.textChannels | sortChannels"
+                [ngValue]="channel.id"
+                >
+                {{channel.name}}
+              </option>
+            </select>
           </div>
         </div>
-
       </div>
     </div>
   </app-edit-page-wrapper>
