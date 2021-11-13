@@ -3,6 +3,7 @@ import { Inject, Injectable } from '@angular/core';
 import { API_URL } from '@app/api-url';
 import { Observable } from 'rxjs';
 import { PlayedMapCount } from './models/played-map-count';
+import { GameLaunchTimeSpan } from './models/game-launch-time-span';
 
 @Injectable({
   providedIn: 'root',
@@ -16,6 +17,12 @@ export class StatisticsService {
   fetchPlayedMapsCount(): Observable<PlayedMapCount[]> {
     return this.http.get<PlayedMapCount[]>(
       `${this.apiUrl}/statistics/played-maps-count`,
+    );
+  }
+
+  fetchGameLaunchTimeSpans(): Observable<GameLaunchTimeSpan[]> {
+    return this.http.get<GameLaunchTimeSpan[]>(
+      `${this.apiUrl}/statistics/game-launch-time-spans`,
     );
   }
 }

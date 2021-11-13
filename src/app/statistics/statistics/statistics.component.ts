@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { StatisticsService } from '@app/statistics/statistics.service';
 import { concat, dropRight, takeRight } from 'lodash';
 import { map } from 'rxjs/operators';
-import { EChartsOption } from 'echarts';
+import { BarSeriesOption, EChartsOption } from 'echarts';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -41,6 +41,65 @@ export class StatisticsComponent {
         label: {
           formatter: '{b}: {c}',
         },
+      })),
+    );
+
+  gameLaunchTimes: Observable<EChartsOption> = this.statisticsService
+    .fetchGameLaunchTimeSpans()
+    .pipe(
+      map(
+        data =>
+          ['night', 'morning', 'afternoon', 'evening'].map(timeOfTheDay => ({
+            type: 'bar',
+            name: timeOfTheDay,
+            stack: 'day',
+            label: {
+              show: true,
+            },
+            emphasis: {
+              focus: 'series',
+            },
+            data: data
+              .filter(d => d.timeOfTheDay === timeOfTheDay)
+              .map(d => ({
+                ...d,
+                /* From 1..7 to 0..6, where 0 is Monday and 6 is Sunday */
+                dayOfWeek: (d.dayOfWeek + 5) % 7,
+              }))
+              .sort((a, b) => b.dayOfWeek - a.dayOfWeek)
+              .map(d => d.count),
+          })) as BarSeriesOption[],
+      ),
+      map(series => ({
+        title: {
+          text: 'Game launch times',
+          x: 'center',
+        },
+        legend: {
+          top: 28,
+        },
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: {
+            type: 'shadow',
+          },
+        },
+        xAxis: {
+          type: 'value',
+        },
+        yAxis: {
+          type: 'category',
+          data: [
+            'Monday',
+            'Tuesday',
+            'Wednesday',
+            'Thursday',
+            'Friday',
+            'Saturday',
+            'Sunday',
+          ].reverse(),
+        },
+        series,
       })),
     );
 
