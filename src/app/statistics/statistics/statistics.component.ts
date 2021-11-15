@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { StatisticsService } from '@app/statistics/statistics.service';
 import { concat, dropRight, takeRight } from 'lodash';
-import { map } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
 import { BarSeriesOption, EChartsOption } from 'echarts';
 import { Observable } from 'rxjs';
 
@@ -100,6 +100,61 @@ export class StatisticsComponent {
           ].reverse(),
         },
         series,
+      })),
+    );
+
+  gameLaunchesPerDay: Observable<EChartsOption> = this.statisticsService
+    .fetchGameLaunchesPerDay()
+    .pipe(
+      filter(data => !!data),
+      map(data => {
+        const end = new Date();
+        const date = new Date(end);
+        date.setFullYear(date.getFullYear() - 1);
+        const result = [];
+        while (date < end) {
+          const day = date.toLocaleDateString(undefined, {
+            year: 'numeric',
+            month: 'numeric',
+            day: 'numeric',
+          });
+
+          const lookupDay = `${date.getFullYear()}-${(
+            '0' +
+            (date.getMonth() + 1)
+          ).slice(-2)}-${('0' + date.getDate()).slice(-2)}`;
+
+          result.push({
+            day,
+            count: data.find(d => d.day === lookupDay)?.count ?? 0,
+          });
+
+          date.setDate(date.getDate() + 1);
+        }
+
+        return result;
+      }),
+      map(data => ({
+        title: {
+          text: 'Played games per day in the last year',
+          x: 'center',
+        },
+        xAxis: {
+          data: data.map(d => d.day),
+        },
+        yAxis: {},
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: {
+            type: 'shadow',
+          },
+        },
+        series: [
+          {
+            type: 'line',
+            data: data.map(d => d.count),
+          },
+        ],
       })),
     );
 

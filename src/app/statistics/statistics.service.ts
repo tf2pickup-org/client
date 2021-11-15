@@ -4,6 +4,7 @@ import { API_URL } from '@app/api-url';
 import { Observable } from 'rxjs';
 import { PlayedMapCount } from './models/played-map-count';
 import { GameLaunchTimeSpan } from './models/game-launch-time-span';
+import { GameLaunchesPerDay } from './models/game-launches-per-day';
 
 @Injectable({
   providedIn: 'root',
@@ -23,6 +24,12 @@ export class StatisticsService {
   fetchGameLaunchTimeSpans(): Observable<GameLaunchTimeSpan[]> {
     return this.http.get<GameLaunchTimeSpan[]>(
       `${this.apiUrl}/statistics/game-launch-time-spans`,
+    );
+  }
+
+  fetchGameLaunchesPerDay(): Observable<GameLaunchesPerDay[]> {
+    return this.http.get<GameLaunchesPerDay[]>(
+      `${this.apiUrl}/statistics/game-launches-per-day`,
     );
   }
 }
