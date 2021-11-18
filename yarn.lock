@@ -5926,9 +5926,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"engine.io-client@npm:~6.0.1":
-  version: 6.0.2
-  resolution: "engine.io-client@npm:6.0.2"
+"engine.io-client@npm:~6.1.1":
+  version: 6.1.1
+  resolution: "engine.io-client@npm:6.1.1"
   dependencies:
     "@socket.io/component-emitter": ~3.0.0
     debug: ~4.3.1
@@ -5939,7 +5939,7 @@ __metadata:
     ws: ~8.2.3
     xmlhttprequest-ssl: ~2.0.0
     yeast: 0.1.2
-  checksum: c2f3bf016a0f71b77e298d155967752cf33018c4531754acbd758665e5f0087fd9c8ec35ea6a007b884df51197a31ad7d9dff7f4bcf574d0076f67468f69b540
+  checksum: c2e1cec87ac8cf45842527bd072d1b2c5f14fbf9e57f110b4120335ed7bf5310a86da0d33b5906dd4774094ee499d534a498db467d3c1cb53c7a1109a593b05d
   languageName: node
   linkType: hard
 
@@ -12619,17 +12619,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"socket.io-client@npm:4.3.2":
-  version: 4.3.2
-  resolution: "socket.io-client@npm:4.3.2"
+"socket.io-client@npm:4.4.0":
+  version: 4.4.0
+  resolution: "socket.io-client@npm:4.4.0"
   dependencies:
     "@socket.io/component-emitter": ~3.0.0
     backo2: ~1.0.2
     debug: ~4.3.2
-    engine.io-client: ~6.0.1
+    engine.io-client: ~6.1.1
     parseuri: 0.0.6
     socket.io-parser: ~4.1.1
-  checksum: e8c1c76848020f976958eed0a7630e1ed4a3108de75aa2cf7cb2c6babfcacff6d8fe1b70910b8b201a29e4965e238d520ac1868846c2872a948c9dd0e0761288
+  checksum: a56c2327709439dbf84a06130fabc9234b074b8d4e469de220af631ad686896ce51860209a209d10650f878f82d3068129545ed32ca55f6b606786a61b303a34
   languageName: node
   linkType: hard
 
@@ -13492,7 +13492,7 @@ __metadata:
     protractor: 7.0.0
     release-it: 14.11.7
     rxjs: 7.4.0
-    socket.io-client: 4.3.2
+    socket.io-client: 4.4.0
     stylelint: 14.1.0
     stylelint-config-sass-guidelines: 9.0.1
     stylelint-config-standard-scss: 2.0.1
