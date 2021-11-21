@@ -11308,7 +11308,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss-scss@npm:^4.0.1, postcss-scss@npm:^4.0.2":
+"postcss-scss@npm:^4.0.2":
   version: 4.0.2
   resolution: "postcss-scss@npm:4.0.2"
   peerDependencies:
@@ -13107,16 +13107,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stylelint-config-recommended-scss@npm:^5.0.0":
-  version: 5.0.1
-  resolution: "stylelint-config-recommended-scss@npm:5.0.1"
+"stylelint-config-recommended-scss@npm:^5.0.2":
+  version: 5.0.2
+  resolution: "stylelint-config-recommended-scss@npm:5.0.2"
   dependencies:
-    postcss-scss: ^4.0.1
+    postcss-scss: ^4.0.2
     stylelint-config-recommended: ^6.0.0
     stylelint-scss: ^4.0.0
   peerDependencies:
     stylelint: ^14.0.0
-  checksum: d1348994b709768d890c936102189349ab725ca3bc0f5c4e0616b88a33644492b52fd7f1492719910699c05b3f7575c9a24bbef6c5f9971c85868fe6f6db70bb
+  checksum: e882bde8a0846c421e2662f9e7a9c2646120c492528f7ad715d927db6954b8a2499476de0792b15f0044217f72c81edc97afc640c5b4d7618a9f96dc7045e4c1
   languageName: node
   linkType: hard
 
@@ -13143,26 +13143,26 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stylelint-config-standard-scss@npm:2.0.1":
-  version: 2.0.1
-  resolution: "stylelint-config-standard-scss@npm:2.0.1"
+"stylelint-config-standard-scss@npm:3.0.0":
+  version: 3.0.0
+  resolution: "stylelint-config-standard-scss@npm:3.0.0"
   dependencies:
-    stylelint-config-recommended-scss: ^5.0.0
-    stylelint-config-standard: ^23.0.0
+    stylelint-config-recommended-scss: ^5.0.2
+    stylelint-config-standard: ^24.0.0
   peerDependencies:
     stylelint: ^14.0.0
-  checksum: 590accf17269298abbcdf02648facc119dfac2a730cbf75fb3e72b2fd2391c65dc20a025dc46d7c11a0b6ac34f12b2c68c92d797a092ca132f274529e0f16dfd
+  checksum: b9be47e256e28e8f3e31ca51de53fc48d688b264f74d870b97c553cb3f799f3003a458d521644efc4feda0a1345da4e82d0595cfcba540dbb253f12c645234a0
   languageName: node
   linkType: hard
 
-"stylelint-config-standard@npm:^23.0.0":
-  version: 23.0.0
-  resolution: "stylelint-config-standard@npm:23.0.0"
+"stylelint-config-standard@npm:^24.0.0":
+  version: 24.0.0
+  resolution: "stylelint-config-standard@npm:24.0.0"
   dependencies:
     stylelint-config-recommended: ^6.0.0
   peerDependencies:
     stylelint: ^14.0.0
-  checksum: 96b6292d1408d762cb18c01eaf63faf8bafd740d897b4b3c519bb50eefc356e09ea300737c78b842b27b0c2a135c1c6a3ea86d12e2f969caeb4e2f22d857eb97
+  checksum: 5993ede913d81410830639db054a7a3f5c87e56254368be45ce876321106fad1c11ee4cb77247049aaf22e283a393dd90d93dec8f796f8f139ed21eb86a9a168
   languageName: node
   linkType: hard
 
@@ -13526,7 +13526,7 @@ __metadata:
     socket.io-client: 4.4.0
     stylelint: 14.1.0
     stylelint-config-sass-guidelines: 9.0.1
-    stylelint-config-standard-scss: 2.0.1
+    stylelint-config-standard-scss: 3.0.0
     stylelint-order: 5.0.0
     ts-node: 10.4.0
     tslib: 2.3.1
