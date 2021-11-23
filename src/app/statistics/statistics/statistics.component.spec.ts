@@ -1,21 +1,29 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { MockBuilder, MockedComponentFixture, MockRender } from 'ng-mocks';
+import { Subject } from 'rxjs';
+import { StatisticsService } from '../statistics.service';
 import { StatisticsComponent } from './statistics.component';
 
-describe('StatisticsComponent', () => {
+describe(StatisticsComponent.name, () => {
   let component: StatisticsComponent;
-  let fixture: ComponentFixture<StatisticsComponent>;
+  let fixture: MockedComponentFixture<StatisticsComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ StatisticsComponent ]
-    })
-    .compileComponents();
-  });
+  beforeEach(() =>
+    MockBuilder(StatisticsComponent).mock(StatisticsService, {
+      fetchPlayedMapsCount: jasmine
+        .createSpy('fetchPlayedMapsCount')
+        .and.returnValue(new Subject()),
+      fetchGameLaunchTimeSpans: jasmine
+        .createSpy('fetchGameLaunchTimeSpans')
+        .and.returnValue(new Subject()),
+      fetchGameLaunchesPerDay: jasmine
+        .createSpy('fetchGameLaunchesPerDay')
+        .and.returnValue(new Subject()),
+    }),
+  );
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(StatisticsComponent);
-    component = fixture.componentInstance;
+    fixture = MockRender(StatisticsComponent);
+    component = fixture.point.componentInstance;
     fixture.detectChanges();
   });
 
