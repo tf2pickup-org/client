@@ -9877,9 +9877,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ngx-bootstrap@npm:7.1.0":
-  version: 7.1.0
-  resolution: "ngx-bootstrap@npm:7.1.0"
+"ngx-bootstrap@npm:7.1.2":
+  version: 7.1.2
+  resolution: "ngx-bootstrap@npm:7.1.2"
   dependencies:
     tslib: ^2.0.0
   peerDependencies:
@@ -9887,7 +9887,7 @@ __metadata:
     "@angular/common": ^11.0.0 || ^12.0.0
     "@angular/core": ^11.0.0 || ^12.0.0
     "@angular/forms": ^11.0.0 || ^12.0.0
-  checksum: d2c189a4986f5b36fa8774ab8834c85ab614feccd0d841b471e1c2c1bc1e0418dc11198654b446c2f7827936b38a041388d116e69c393f2d8b7bddfd2aff7479
+  checksum: b9ef4a5bcf2d793f049335bb56128f97f3c567da54c09de0c9d43738c1190225bbde49a5812fe705865e17e484a7ba7edfc2293d841361fb707f2d83cf816d78
   languageName: node
   linkType: hard
 
@@ -13574,7 +13574,7 @@ __metadata:
     lodash-es: 4.17.21
     ng-inline-svg: 13.1.1
     ng-mocks: 12.5.1
-    ngx-bootstrap: 7.1.0
+    ngx-bootstrap: 7.1.2
     ngx-markdown: 13.0.0
     ngx-pagination: 5.1.1
     ngx-webstorage-service: 4.1.0
