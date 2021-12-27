@@ -9921,14 +9921,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ngx-webstorage-service@npm:4.1.0":
-  version: 4.1.0
-  resolution: "ngx-webstorage-service@npm:4.1.0"
+"ngx-webstorage-service@npm:5.0.0":
+  version: 5.0.0
+  resolution: "ngx-webstorage-service@npm:5.0.0"
   dependencies:
-    tslib: ^1.9.0
+    tslib: ^2.3.0
   peerDependencies:
-    "@angular/core": ">=7.0.0"
-  checksum: efbac41d1b13d717e5cd40142d8d584bb4fd987238ef3410adbd15f9caf72302807bf3990855ea9c2641e8cd6de5aef859f3d213e5fcbd46eed76d1ff1bff4b7
+    "@angular/core": ">=13.0.0"
+  checksum: 831f8889f86769add8754d795b86d90cea5f7265385eef601841efb7cc0db3f9e6c1db95b3993d367426baf52737d40df1e1f99eb84c273bb03ed3529cac4b89
   languageName: node
   linkType: hard
 
@@ -13577,7 +13577,7 @@ __metadata:
     ngx-bootstrap: 7.1.0
     ngx-markdown: 13.0.0
     ngx-pagination: 5.1.1
-    ngx-webstorage-service: 4.1.0
+    ngx-webstorage-service: 5.0.0
     npm-run-all: 4.1.5
     postcss: 8.4.5
     prettier: 2.5.1

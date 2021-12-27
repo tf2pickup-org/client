@@ -77,7 +77,7 @@
     "ngx-bootstrap": "7.1.0",
     "ngx-markdown": "13.0.0",
     "ngx-pagination": "5.1.1",
-    "ngx-webstorage-service": "4.1.0",
+    "ngx-webstorage-service": "5.0.0",
     "npm-run-all": "4.1.5",
     "rxjs": "7.4.0",
     "socket.io-client": "4.4.0",
