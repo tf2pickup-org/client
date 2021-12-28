@@ -12254,7 +12254,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rxjs@npm:7.4.0, rxjs@npm:^7.2.0":
+"rxjs@npm:7.5.0":
+  version: 7.5.0
+  resolution: "rxjs@npm:7.5.0"
+  dependencies:
+    tslib: ^2.1.0
+  checksum: 61d607b1559a4ca0a49cc7f8d601f2bc941291c9aaa11cf6ed27147704370fde27b659a1075d117ba25de6f655364b72c9697b210123fc6d080e92c0c1a9bc53
+  languageName: node
+  linkType: hard
+
+"rxjs@npm:^7.2.0":
   version: 7.4.0
   resolution: "rxjs@npm:7.4.0"
   dependencies:
@@ -13583,7 +13592,7 @@ __metadata:
     prettier: 2.5.1
     protractor: 7.0.0
     release-it: 14.11.8
-    rxjs: 7.4.0
+    rxjs: 7.5.0
     socket.io-client: 4.4.0
     stylelint: 14.2.0
     stylelint-config-sass-guidelines: 9.0.1
