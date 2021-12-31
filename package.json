@@ -111,7 +111,7 @@
     "eslint-plugin-ngrx": "2.0.3",
     "eslint-plugin-prefer-arrow": "1.2.3",
     "eslint-plugin-prettier": "4.0.0",
-    "eslint-plugin-rxjs": "4.0.3",
+    "eslint-plugin-rxjs": "4.0.4",
     "eventemitter3": "4.0.7",
     "jasmine-core": "3.10.1",
     "jasmine-spec-reporter": "7.0.0",

@@ -6514,9 +6514,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-rxjs@npm:4.0.3":
-  version: 4.0.3
-  resolution: "eslint-plugin-rxjs@npm:4.0.3"
+"eslint-plugin-rxjs@npm:4.0.4":
+  version: 4.0.4
+  resolution: "eslint-plugin-rxjs@npm:4.0.4"
   dependencies:
     "@typescript-eslint/experimental-utils": ^5.0.0
     common-tags: ^1.8.0
@@ -6530,7 +6530,7 @@ __metadata:
   peerDependencies:
     eslint: ^8.0.0
     typescript: ^4.0.0
-  checksum: 7d2745167e50a034de42e47ba7ca9de58b013231317c2dcfaa4d77e04d734476ce0611c7502692332564a2c1fb1bc18ac27911249bfe6c75ee520338590f65c1
+  checksum: e0a816e706871cd28cad0835a389119f0f196c59683fa00c934addc5f1bc888181f1b0d41413eaf6208560b83f44390bb9f236c84be34df85c97e15830900aeb
   languageName: node
   linkType: hard
 
@@ -13567,7 +13567,7 @@ __metadata:
     eslint-plugin-ngrx: 2.0.3
     eslint-plugin-prefer-arrow: 1.2.3
     eslint-plugin-prettier: 4.0.0
-    eslint-plugin-rxjs: 4.0.3
+    eslint-plugin-rxjs: 4.0.4
     eventemitter3: 4.0.7
     feather-icons: 4.28.0
     howler: 2.2.3
