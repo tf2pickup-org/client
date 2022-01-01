@@ -113,7 +113,7 @@
     "eslint-plugin-prettier": "4.0.0",
     "eslint-plugin-rxjs": "4.0.4",
     "eventemitter3": "4.0.7",
-    "jasmine-core": "3.10.1",
+    "jasmine-core": "3.99.0",
     "jasmine-spec-reporter": "7.0.0",
     "karma": "6.3.9",
     "karma-chrome-launcher": "3.1.0",
