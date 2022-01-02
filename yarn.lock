@@ -8665,10 +8665,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jasmine-core@npm:3.99.0":
-  version: 3.99.0
-  resolution: "jasmine-core@npm:3.99.0"
-  checksum: afab2049116105547619b6591a700a137c95b3535ddc83583df666db356d45a7ea5564eeef74321b414d839c796d619e5fa1584096a73f82bd978a2bdad06b1a
+"jasmine-core@npm:4.0.0":
+  version: 4.0.0
+  resolution: "jasmine-core@npm:4.0.0"
+  checksum: ebb5906c3e91f6d403e9122b8c2955c3272072c4b0fecc1cf1d356e8e4399b0c85b8d6dd0b5abbaa3b9afbdcd279c13394a4a71c0683d4e68fb18213abb68065
   languageName: node
   linkType: hard
 
@@ -13598,7 +13598,7 @@ __metadata:
     eventemitter3: 4.0.7
     feather-icons: 4.28.0
     howler: 2.2.3
-    jasmine-core: 3.99.0
+    jasmine-core: 4.0.0
     jasmine-spec-reporter: 7.0.0
     jwt-decode: 3.1.2
     karma: 6.3.9
