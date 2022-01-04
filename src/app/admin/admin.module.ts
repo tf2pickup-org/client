@@ -24,6 +24,7 @@ import { MinimumTf2InGameHoursDialogComponent } from './player-restrictions/mini
 import { VoiceServerEditComponent } from './voice-server-edit/voice-server-edit.component';
 import { DiscordBotComponent } from './discord-bot/discord-bot.component';
 import { SortChannelsPipe } from './discord-bot/sort-channels.pipe';
+import { SortRolesPipe } from './discord-bot/sort-roles.pipe';
 
 @NgModule({
   imports: [
@@ -56,6 +57,7 @@ import { SortChannelsPipe } from './discord-bot/sort-channels.pipe';
     VoiceServerEditComponent,
     DiscordBotComponent,
     SortChannelsPipe,
+    SortRolesPipe,
   ],
 })
 export class AdminModule {}

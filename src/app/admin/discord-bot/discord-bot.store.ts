@@ -5,6 +5,7 @@ import { DiscordService } from '@app/admin/discord.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { TextChannelInfo } from '../models/text-channel-info';
 import { produce } from 'immer';
+import { RoleInfo } from '../models/role-info';
 
 interface DiscordBotState {
   isSaving: boolean;
@@ -46,6 +47,17 @@ export class DiscordBotStore extends ComponentStore<DiscordBotState> {
       }),
   );
 
+  private readonly setRoles = this.updater(
+    (
+      state,
+      { guildId, roles }: { guildId: string; roles: RoleInfo[] },
+    ): DiscordBotState =>
+      produce(state, draft => {
+        const guild = draft.availableGuilds.find(g => g.id === guildId);
+        guild.roles = roles;
+      }),
+  );
+
   constructor(private discordService: DiscordService) {
     super({
       isSaving: false,
@@ -60,6 +72,18 @@ export class DiscordBotStore extends ComponentStore<DiscordBotState> {
         tapResponse(
           (textChannels: TextChannelInfo[]) =>
             this.setTextChannels({ guildId, textChannels }),
+          error => console.error(error),
+        ),
+      )
+      .subscribe();
+  }
+
+  loadRoles(guildId: string) {
+    this.discordService
+      .fetchRoles(guildId)
+      .pipe(
+        tapResponse(
+          (roles: RoleInfo[]) => this.setRoles({ guildId, roles }),
           error => console.error(error),
         ),
       )

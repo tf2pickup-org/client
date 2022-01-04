@@ -3,6 +3,7 @@ import { Inject, Injectable } from '@angular/core';
 import { API_URL } from '@app/api-url';
 import { Observable } from 'rxjs';
 import { GuildInfo } from './models/guild-info';
+import { RoleInfo } from './models/role-info';
 import { TextChannelInfo } from './models/text-channel-info';
 
 @Injectable({
@@ -21,6 +22,12 @@ export class DiscordService {
   fetchTextChannels(guildId: string): Observable<TextChannelInfo[]> {
     return this.http.get<TextChannelInfo[]>(
       `${this.apiUrl}/discord/guilds/${guildId}/text-channels`,
+    );
+  }
+
+  fetchRoles(guildId: string): Observable<RoleInfo[]> {
+    return this.http.get<RoleInfo[]>(
+      `${this.apiUrl}/discord/guilds/${guildId}/roles`,
     );
   }
 }

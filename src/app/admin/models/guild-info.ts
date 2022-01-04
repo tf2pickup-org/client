@@ -1,4 +1,5 @@
 import { TextChannelInfo } from './text-channel-info';
+import { RoleInfo } from './role-info';
 
 export interface GuildInfo {
   id: string;
@@ -6,4 +7,5 @@ export interface GuildInfo {
   icon: string;
 
   textChannels?: TextChannelInfo[];
+  roles?: RoleInfo[];
 }

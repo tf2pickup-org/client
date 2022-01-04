@@ -6,9 +6,8 @@ import { TextChannelInfo } from '../models/text-channel-info';
 })
 export class SortChannelsPipe implements PipeTransform {
   transform(channels: TextChannelInfo[]): TextChannelInfo[] {
-    console.log(channels);
     return channels
-      ? [...channels].sort((a, b) => b.position - a.position)
+      ? [...channels].sort((a, b) => a.position - b.position)
       : channels;
   }
 }

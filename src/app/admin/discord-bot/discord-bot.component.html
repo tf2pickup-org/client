@@ -12,42 +12,66 @@
       <div *ngFor="let guild of store.availableGuilds | async; let i = index"
         [formGroupName]="i"
         class="mdc-form-field w-100 my-2">
-        <div class="mdc-checkbox">
-          <input type="checkbox"
-            class="mdc-checkbox__native-control"
-            id="discord-guild-{{guild.id}}"
-            [value]="guild.id"
-            (change)="onServerSelectionChange($event)" />
-          <div class="mdc-checkbox__background">
-            <svg class="mdc-checkbox__checkmark"
-                  viewBox="0 0 24 24">
-              <path class="mdc-checkbox__checkmark-path"
-                    fill="none"
-                    d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
-            </svg>
-            <div class="mdc-checkbox__mixedmark"></div>
-          </div>
-          <div class="mdc-checkbox__ripple"></div>
-        </div>
-
-        <div class="d-flex flex-column">
-          <label for="discord-guild-{{guild.id}}">
-            <div class="d-flex flex-row align-items-center">
-              <img [src]="guild.icon" crossorigin="anonymous" width="36" class="mx-2">
-              {{guild.name}}
+        <div class="d-flex flex-row align-items-start">
+          <div class="mdc-checkbox">
+            <input type="checkbox"
+              class="mdc-checkbox__native-control"
+              id="discord-guild-{{guild.id}}"
+              formControlName="enabled"
+              [value]="guild.id"
+              (change)="onServerSelectionChange($event)" />
+            <div class="mdc-checkbox__background">
+              <svg class="mdc-checkbox__checkmark"
+                    viewBox="0 0 24 24">
+                <path class="mdc-checkbox__checkmark-path"
+                      fill="none"
+                      d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+              </svg>
+              <div class="mdc-checkbox__mixedmark"></div>
             </div>
-          </label>
+            <div class="mdc-checkbox__ripple"></div>
+          </div>
 
-          <div>
-            Channel for admins' notifications:
-            <select formControlName="adminNotificationsChannelId">
-              <option value="null">Disabled</option>
-              <option *ngFor="let channel of guild.textChannels | sortChannels"
-                [ngValue]="channel.id"
-                >
-                {{channel.name}}
-              </option>
-            </select>
+          <div class="d-flex flex-column">
+            <label for="discord-guild-{{guild.id}}">
+              <div class="d-flex flex-row align-items-center">
+                <img [src]="guild.icon" crossorigin="anonymous" width="36" class="mx-2">
+                {{guild.name}}
+              </div>
+            </label>
+
+            <div>
+              Admins' notifications channel:
+              <select formControlName="adminNotificationsChannelId">
+                <option value="null">Disabled</option>
+                <option *ngFor="let channel of guild.textChannels | sortChannels"
+                  [ngValue]="channel.id"
+                  >
+                  {{channel.name}}
+                </option>
+              </select>
+            </div>
+
+            <div>
+              Queue notifications channel:
+              <select formControlName="queueNotificationsChannelId">
+                <option value="null">Disabled</option>
+                <option *ngFor="let channel of guild.textChannels | sortChannels"
+                  [ngValue]="channel.id"
+                  >
+                  {{channel.name}}
+                </option>
+              </select>
+            </div>
+
+            <div>
+              Substitute notification mention role:
+              <select formControlName="substituteMentionRole">
+                <option value="null">Disabled</option>
+                <option *ngFor="let role of guild.roles"
+                  [ngValue]="role.id">{{role.name}}</option>
+              </select>
+            </div>
           </div>
         </div>
       </div>

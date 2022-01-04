@@ -31,6 +31,8 @@ export class DiscordBotComponent implements OnInit {
               guildId: new FormControl(guild.id),
               enabled: new FormControl(false),
               adminNotificationsChannelId: new FormControl(null),
+              queueNotificationsChannelId: new FormControl(null),
+              substituteMentionRole: new FormControl(null),
             }),
           );
         }
@@ -63,11 +65,13 @@ export class DiscordBotComponent implements OnInit {
 
     if (event.target.checked) {
       this.store.loadTextChannels(guildId);
+      this.store.loadRoles(guildId);
     }
+
+    console.log(event.target.checked);
   }
 
   guildInfo(guildId: string): Observable<GuildInfo> {
-    console.log(guildId);
     return this.store.availableGuilds.pipe(
       map(guilds => guilds.find(guild => guild.id === guildId)),
     );
