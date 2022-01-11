@@ -2687,9 +2687,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@release-it/conventional-changelog@npm:4.0.0":
-  version: 4.0.0
-  resolution: "@release-it/conventional-changelog@npm:4.0.0"
+"@release-it/conventional-changelog@npm:4.1.0":
+  version: 4.1.0
+  resolution: "@release-it/conventional-changelog@npm:4.1.0"
   dependencies:
     concat-stream: ^2.0.0
     conventional-changelog: ^3.1.25
@@ -2697,7 +2697,7 @@ __metadata:
     prepend-file: ^2.0.0
   peerDependencies:
     release-it: ^14.12.1
-  checksum: 17d5256678c2f5b5daa87571f4010feded9c649f8ab31f121538d48ac7453db458bca4898f5fac2c945cf66c2e2cce213997ce237f2b9d67072a064e82f1f4c0
+  checksum: 7168a9eb60f0f8eeec5ce96f6c5d4de18aaf9047fdd1fe5e6c9a422e11e8b9ae72efe9e8847146c3f3f025eadc5259952510f24f594abccc10f7340d62b8171e
   languageName: node
   linkType: hard
 
@@ -13588,7 +13588,7 @@ __metadata:
     "@ngrx/schematics": 12.5.1
     "@ngrx/store": 12.5.1
     "@ngrx/store-devtools": 12.5.1
-    "@release-it/conventional-changelog": 4.0.0
+    "@release-it/conventional-changelog": 4.1.0
     "@swimlane/ngx-datatable": 20.0.0
     "@types/howler": 2.2.4
     "@types/jasmine": 3.10.3
