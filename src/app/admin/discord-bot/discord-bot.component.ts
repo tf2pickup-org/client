@@ -3,6 +3,10 @@ import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { map, Observable } from 'rxjs';
 import { GuildInfo } from '../models/guild-info';
 import { DiscordBotStore } from './discord-bot.store';
+import { Discord } from '@app/configuration/models/discord';
+import { ConfigurationEntryKey } from '@app/configuration/configuration-entry-key';
+import { ConfigurationService } from '@app/configuration/configuration.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-discord-bot',
@@ -13,20 +17,22 @@ import { DiscordBotStore } from './discord-bot.store';
 })
 export class DiscordBotComponent implements OnInit {
   form = this.formBuilder.group({
-    servers: new FormArray([]),
+    guilds: new FormArray([]),
   });
 
   constructor(
     public readonly store: DiscordBotStore,
     private formBuilder: FormBuilder,
+    private configurationService: ConfigurationService,
+    private location: Location,
   ) {}
 
   ngOnInit() {
     this.store.availableGuilds.subscribe(guilds => {
       guilds.forEach(guild => {
-        const serverControl = this.getServerControl(guild.id);
+        const serverControl = this.getGuildControl(guild.id);
         if (!serverControl) {
-          this.servers.push(
+          this.guilds.push(
             new FormGroup({
               guildId: new FormControl(guild.id),
               enabled: new FormControl(false),
@@ -43,37 +49,69 @@ export class DiscordBotComponent implements OnInit {
     this.form.valueChanges.subscribe(form => console.log(form));
   }
 
-  get servers(): FormArray {
-    return this.form.get('servers') as FormArray;
+  get guilds(): FormArray {
+    return this.form.get('guilds') as FormArray;
   }
 
-  getServerControl(guildId: string): FormGroup {
-    const servers = this.servers;
-    for (let i = 0; i < servers.length; ++i) {
-      if (servers.at(i).get('guildId').value === guildId) {
-        return servers.at(i) as FormGroup;
+  getGuildControl(guildId: string): FormGroup {
+    const guilds = this.guilds;
+    for (let i = 0; i < guilds.length; ++i) {
+      if (guilds.at(i).get('guildId').value === guildId) {
+        return guilds.at(i) as FormGroup;
       }
     }
   }
 
-  onServerSelectionChange(event) {
+  onGuildSelectionChange(event) {
     const guildId = event.target.value;
 
-    this.getServerControl(guildId).patchValue({
+    this.getGuildControl(guildId).patchValue({
       enabled: event.target.checked,
     });
 
     if (event.target.checked) {
       this.store.loadTextChannels(guildId);
       this.store.loadRoles(guildId);
+      this.getGuildControl(guildId).get('adminNotificationsChannelId').enable();
+      this.getGuildControl(guildId).get('queueNotificationsChannelId').enable();
+      this.getGuildControl(guildId).get('substituteMentionRole').enable();
+    } else {
+      this.getGuildControl(guildId)
+        .get('adminNotificationsChannelId')
+        .disable();
+      this.getGuildControl(guildId)
+        .get('queueNotificationsChannelId')
+        .disable();
+      this.getGuildControl(guildId).get('substituteMentionRole').disable();
     }
-
-    console.log(event.target.checked);
   }
 
   guildInfo(guildId: string): Observable<GuildInfo> {
     return this.store.availableGuilds.pipe(
       map(guilds => guilds.find(guild => guild.id === guildId)),
     );
+  }
+
+  save() {
+    const value: Discord = { key: ConfigurationEntryKey.discord, guilds: [] };
+    for (let control of this.guilds.controls) {
+      if (control.get('enabled').value) {
+        value.guilds.push({
+          guildId: control.get('guildId').value,
+          queueNotificationsChannelId: control.get(
+            'queueNotificationsChannelId',
+          ).value,
+          substituteMentionRole: control.get('substituteMentionRole').value,
+          adminNotificationsChannelId: control.get(
+            'adminNotificationsChannelId',
+          ).value,
+        });
+      }
+    }
+
+    console.log(value);
+    this.configurationService
+      .storeValue<Discord>(value)
+      .subscribe(() => this.location.back());
   }
 }

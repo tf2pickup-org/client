@@ -7,9 +7,14 @@ import { TextChannelInfo } from '../models/text-channel-info';
 import { produce } from 'immer';
 import { RoleInfo } from '../models/role-info';
 
+interface GuildInfoEx extends GuildInfo {
+  isLoadingTextChannels: boolean;
+  isLoadingRoles: boolean;
+}
+
 interface DiscordBotState {
   isSaving: boolean;
-  availableGuilds: GuildInfo[];
+  availableGuilds: GuildInfoEx[];
 }
 
 @Injectable()
@@ -29,7 +34,11 @@ export class DiscordBotStore extends ComponentStore<DiscordBotState> {
   private readonly setAvailableGuilds = this.updater(
     (state, availableGuilds: GuildInfo[]): DiscordBotState => ({
       ...state,
-      availableGuilds,
+      availableGuilds: availableGuilds.map(guildInfo => ({
+        ...guildInfo,
+        isLoadingRoles: false,
+        isLoadingTextChannels: false,
+      })),
     }),
   );
 
