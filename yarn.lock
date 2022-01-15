@@ -12020,9 +12020,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"release-it@npm:14.12.1":
-  version: 14.12.1
-  resolution: "release-it@npm:14.12.1"
+"release-it@npm:14.12.2":
+  version: 14.12.2
+  resolution: "release-it@npm:14.12.2"
   dependencies:
     "@iarna/toml": 2.2.5
     "@octokit/rest": 18.12.0
@@ -12055,7 +12055,7 @@ __metadata:
     yargs-parser: 20.2.9
   bin:
     release-it: bin/release-it.js
-  checksum: c22d265ff42b6e35827466a0549f7faaca78e61af47cdd8656620421c92a8a949c4289b69027bb6524dc04429b371721652efce9757d0755de23e31b14160742
+  checksum: 01314c78c50a2918a918dc03c69f62657b2c975509df46e24924b9d3e2e7379835b99ccae2aee0b1dd936cad4c463500ae01d6c64c008340dbdd7380301295dc
   languageName: node
   linkType: hard
 
@@ -13650,7 +13650,7 @@ __metadata:
     postcss: 8.4.5
     prettier: 2.5.1
     protractor: 7.0.0
-    release-it: 14.12.1
+    release-it: 14.12.2
     rxjs: 7.5.2
     socket.io-client: 4.4.1
     stylelint: 14.2.0
