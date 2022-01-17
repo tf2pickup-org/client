@@ -14,36 +14,15 @@
 
       <div *ngFor="let guild of store.availableGuilds | async; let i = index"
         [formGroupName]="i"
-        class="w-100 my-2">
+        class="w-100 my-3">
         <div class="d-flex flex-row align-items-start">
-          <div class="mdc-checkbox">
-            <input type="checkbox"
-              class="mdc-checkbox__native-control"
-              id="discord-guild-{{guild.id}}"
-              formControlName="enabled"
-              [value]="guild.id"
-              (change)="onGuildSelectionChange($event)" />
-            <div class="mdc-checkbox__background">
-              <svg class="mdc-checkbox__checkmark"
-                    viewBox="0 0 24 24">
-                <path class="mdc-checkbox__checkmark-path"
-                      fill="none"
-                      d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
-              </svg>
-              <div class="mdc-checkbox__mixedmark"></div>
-            </div>
-            <div class="mdc-checkbox__ripple"></div>
-          </div>
-
           <div class="d-flex flex-column">
-            <label for="discord-guild-{{guild.id}}" class="mb-2">
-              <div class="d-flex flex-row align-items-center mdc-typography--headline6 fw-bold">
-                <img [src]="guild.icon" crossorigin="anonymous" width="36" class="mx-1">
-                {{guild.name}}
-              </div>
-            </label>
+            <div class="d-flex flex-row align-items-center mdc-typography--headline6 fw-bold">
+              <img [src]="guild.icon" crossorigin="anonymous" width="36" class="mx-2">
+              {{guild.name}}
+            </div>
 
-            <div class="d-flex flex-row my-1 ps-2">
+            <div class="d-flex flex-row my-1 ps-5">
               <span class="flex-fill me-2">Admins' notifications channel:</span>
               <select formControlName="adminNotificationsChannelId">
                 <option value="null">Disabled</option>
@@ -55,7 +34,7 @@
               </select>
             </div>
 
-            <div class="d-flex flex-row my-1 ps-2">
+            <div class="d-flex flex-row my-1 ps-5">
               <span class="flex-fill me-2">Queue notifications channel:</span>
               <select formControlName="queueNotificationsChannelId">
                 <option value="null">Disabled</option>
@@ -67,7 +46,7 @@
               </select>
             </div>
 
-            <div class="d-flex flex-row my-1 ps-2">
+            <div class="d-flex flex-row my-1 ps-5">
               <span class="flex-fill me-2">Substitute notification mention role:</span>
               <select formControlName="substituteMentionRole">
                 <option value="null">Disabled</option>

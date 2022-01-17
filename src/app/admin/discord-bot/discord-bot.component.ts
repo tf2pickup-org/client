@@ -35,12 +35,13 @@ export class DiscordBotComponent implements OnInit {
           this.guilds.push(
             new FormGroup({
               guildId: new FormControl(guild.id),
-              enabled: new FormControl(false),
               adminNotificationsChannelId: new FormControl(null),
               queueNotificationsChannelId: new FormControl(null),
               substituteMentionRole: new FormControl(null),
             }),
           );
+          this.store.loadTextChannels(guild.id);
+          this.store.loadRoles(guild.id);
         }
       });
     });
@@ -62,30 +63,6 @@ export class DiscordBotComponent implements OnInit {
     }
   }
 
-  onGuildSelectionChange(event) {
-    const guildId = event.target.value;
-
-    this.getGuildControl(guildId).patchValue({
-      enabled: event.target.checked,
-    });
-
-    if (event.target.checked) {
-      this.store.loadTextChannels(guildId);
-      this.store.loadRoles(guildId);
-      this.getGuildControl(guildId).get('adminNotificationsChannelId').enable();
-      this.getGuildControl(guildId).get('queueNotificationsChannelId').enable();
-      this.getGuildControl(guildId).get('substituteMentionRole').enable();
-    } else {
-      this.getGuildControl(guildId)
-        .get('adminNotificationsChannelId')
-        .disable();
-      this.getGuildControl(guildId)
-        .get('queueNotificationsChannelId')
-        .disable();
-      this.getGuildControl(guildId).get('substituteMentionRole').disable();
-    }
-  }
-
   guildInfo(guildId: string): Observable<GuildInfo> {
     return this.store.availableGuilds.pipe(
       map(guilds => guilds.find(guild => guild.id === guildId)),
@@ -95,18 +72,14 @@ export class DiscordBotComponent implements OnInit {
   save() {
     const value: Discord = { key: ConfigurationEntryKey.discord, guilds: [] };
     for (let control of this.guilds.controls) {
-      if (control.get('enabled').value) {
-        value.guilds.push({
-          guildId: control.get('guildId').value,
-          queueNotificationsChannelId: control.get(
-            'queueNotificationsChannelId',
-          ).value,
-          substituteMentionRole: control.get('substituteMentionRole').value,
-          adminNotificationsChannelId: control.get(
-            'adminNotificationsChannelId',
-          ).value,
-        });
-      }
+      value.guilds.push({
+        guildId: control.get('guildId').value,
+        queueNotificationsChannelId: control.get('queueNotificationsChannelId')
+          .value,
+        substituteMentionRole: control.get('substituteMentionRole').value,
+        adminNotificationsChannelId: control.get('adminNotificationsChannelId')
+          .value,
+      });
     }
 
     console.log(value);
