@@ -1,3 +1,34 @@
+# [3.21.0](https://github.com/tf2pickup-org/client/compare/3.20.1...3.21.0) (2022-01-18)
+
+
+### Bug Fixes
+
+* **deps:** update angular monorepo to v13 (major) ([#1350](https://github.com/tf2pickup-org/client/issues/1350)) ([7fcb13f](https://github.com/tf2pickup-org/client/commit/7fcb13f359068638f3137ff40d71d23dedcf77a0))
+* **deps:** update angular monorepo to v13.0.1 ([#1362](https://github.com/tf2pickup-org/client/issues/1362)) ([3b83374](https://github.com/tf2pickup-org/client/commit/3b8337482514e92cb068a4cf5d87a9cff423194c))
+* **deps:** update angular monorepo to v13.0.2 ([#1369](https://github.com/tf2pickup-org/client/issues/1369)) ([bea052c](https://github.com/tf2pickup-org/client/commit/bea052c63067bc272dc408a912c56f37a8bd9891))
+* **deps:** update dependency @angular/cdk to v13.0.1 ([#1363](https://github.com/tf2pickup-org/client/issues/1363)) ([d4ef3ec](https://github.com/tf2pickup-org/client/commit/d4ef3ecfc783934753c4fbc64b7eaf7bafe91521))
+* **deps:** update dependency @angular/cdk to v13.0.2 ([#1371](https://github.com/tf2pickup-org/client/issues/1371)) ([52b7823](https://github.com/tf2pickup-org/client/commit/52b78236de125d998f2b77dae9e986fd1f62bf58))
+* **deps:** update dependency @angular/cdk to v13.0.3 ([#1394](https://github.com/tf2pickup-org/client/issues/1394)) ([faa99d6](https://github.com/tf2pickup-org/client/commit/faa99d6ba4684ea8ac6b3903a5b2e1fb7312ed18))
+* **deps:** update dependency @angular/cdk to v13.0.4 ([#1404](https://github.com/tf2pickup-org/client/issues/1404)) ([3b50b66](https://github.com/tf2pickup-org/client/commit/3b50b6653c0f79281a8310b2c45dd21df2d3a6b1))
+* **deps:** update dependency @angular/cdk to v13.1.0 ([#1405](https://github.com/tf2pickup-org/client/issues/1405)) ([8a7a482](https://github.com/tf2pickup-org/client/commit/8a7a4821b61150ee2c7bb6687b3ed6907fb32437))
+* **deps:** update dependency @angular/cdk to v13.1.1 ([#1418](https://github.com/tf2pickup-org/client/issues/1418)) ([75e88c7](https://github.com/tf2pickup-org/client/commit/75e88c78e0b56afb6c78cf2e196bbc718f1823f2))
+* **deps:** update dependency @angular/cdk to v13.1.2 ([#1461](https://github.com/tf2pickup-org/client/issues/1461)) ([a80f5fb](https://github.com/tf2pickup-org/client/commit/a80f5fb117b32b0a1d724eecf9317c03f6795830))
+* **deps:** update dependency ngx-bootstrap to v7.1.2 ([#1432](https://github.com/tf2pickup-org/client/issues/1432)) ([e6f25e2](https://github.com/tf2pickup-org/client/commit/e6f25e21de21d97079ea842bdfa83587ce6e1c1a))
+* **deps:** update dependency ngx-bootstrap to v8 ([#1464](https://github.com/tf2pickup-org/client/issues/1464)) ([3cac9a1](https://github.com/tf2pickup-org/client/commit/3cac9a10155a58bd1915f43d0e0717173415cd8f))
+* **deps:** update dependency ngx-markdown to v13 ([#1355](https://github.com/tf2pickup-org/client/issues/1355)) ([8821dfc](https://github.com/tf2pickup-org/client/commit/8821dfcd78d192952fb6d1a18035ee553e0c14a6))
+* **deps:** update dependency ngx-webstorage-service to v5 ([#1431](https://github.com/tf2pickup-org/client/issues/1431)) ([c7a3f67](https://github.com/tf2pickup-org/client/commit/c7a3f67f416a93c3b0e03fdaadd71b8235cab3a3))
+* **deps:** update dependency rxjs to v7.5.0 ([#1434](https://github.com/tf2pickup-org/client/issues/1434)) ([f0d7b16](https://github.com/tf2pickup-org/client/commit/f0d7b167037c6f0796075368e0d294196b5db07c))
+* **deps:** update dependency rxjs to v7.5.1 ([#1435](https://github.com/tf2pickup-org/client/issues/1435)) ([8de327e](https://github.com/tf2pickup-org/client/commit/8de327e8bd8d224e3319dae72da7d9a448366640))
+* **deps:** update dependency rxjs to v7.5.2 ([#1458](https://github.com/tf2pickup-org/client/issues/1458)) ([6f47cc1](https://github.com/tf2pickup-org/client/commit/6f47cc104ab267663814f829a75fb03ca06a4ea2))
+* **deps:** update dependency socket.io-client to v4.4.0 ([#1373](https://github.com/tf2pickup-org/client/issues/1373)) ([4437944](https://github.com/tf2pickup-org/client/commit/4437944fcc413e2b847e356e19a7457e862f0bb1))
+* **deps:** update dependency socket.io-client to v4.4.1 ([#1449](https://github.com/tf2pickup-org/client/issues/1449)) ([ca0dde4](https://github.com/tf2pickup-org/client/commit/ca0dde4c270a5bfb992a5ffca41de0cde65fbede))
+* **deps:** update material-components-web monorepo to v13 (major) ([#1250](https://github.com/tf2pickup-org/client/issues/1250)) ([550439b](https://github.com/tf2pickup-org/client/commit/550439b557d0bbd69e95b27987f39b34de1c556c))
+
+
+### Features
+
+* **hl.br.tf2pickup.org:** add hl.br.tf2pickup.org branding ([#1470](https://github.com/tf2pickup-org/client/issues/1470)) ([072d3d7](https://github.com/tf2pickup-org/client/commit/072d3d70c2a89d3531d4bec93192650c8bd76501))
+
 ## [3.20.1](https://github.com/tf2pickup-org/client/compare/3.20.0...3.20.1) (2021-11-06)
 
 
