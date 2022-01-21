@@ -1,3 +1,12 @@
+## [3.21.1](https://github.com/tf2pickup-org/client/compare/3.21.0...3.21.1) (2022-01-21)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @angular/cdk to v13.1.3 ([#1473](https://github.com/tf2pickup-org/client/issues/1473)) ([6c29c33](https://github.com/tf2pickup-org/client/commit/6c29c33feee9c4904ec3ac1409e29a7abe7fba68))
+* **deps:** update dependency angular-feather to v6.2.0 ([#1474](https://github.com/tf2pickup-org/client/issues/1474)) ([989aceb](https://github.com/tf2pickup-org/client/commit/989aceb934e3ceac90173201fd103e79d38ea60b))
+* **hl.br.tf2pickup.org:** fix API address ([#1477](https://github.com/tf2pickup-org/client/issues/1477)) ([722be07](https://github.com/tf2pickup-org/client/commit/722be07c375c2b94f794bf2d2ecd0bcce92fd97d))
+
 # [3.21.0](https://github.com/tf2pickup-org/client/compare/3.20.1...3.21.0) (2022-01-18)
 
 
