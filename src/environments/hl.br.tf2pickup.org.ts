@@ -7,8 +7,8 @@ const discordInvitation = 'https://discord.gg/eJfrSPVYZy';
 
 export const environment = {
   ...defaultEnvironment,
-  apiUrl: 'https://api.br.tf2pickup.org',
-  wsUrl: 'https://api.br.tf2pickup.org',
+  apiUrl: 'https://api.hl.br.tf2pickup.org',
+  wsUrl: 'https://api.hl.br.tf2pickup.org',
   headerLinks: [
     {
       name: 'discord',
