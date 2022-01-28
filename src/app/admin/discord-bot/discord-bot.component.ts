@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { map, Observable } from 'rxjs';
+import { map, Observable, switchMap, take } from 'rxjs';
 import { GuildInfo } from '../models/guild-info';
 import { DiscordBotStore } from './discord-bot.store';
 import { Discord } from '@app/configuration/models/discord';
@@ -46,8 +46,23 @@ export class DiscordBotComponent implements OnInit {
       });
     });
 
+    this.store.availableGuilds
+      .pipe(
+        take(1),
+        switchMap(() =>
+          this.configurationService.fetchValue<Discord>(
+            ConfigurationEntryKey.discord,
+          ),
+        ),
+      )
+      .subscribe(discordConfiguration => {
+        discordConfiguration.guilds.forEach(guild => {
+          const control = this.getGuildControl(guild.guildId);
+          control.patchValue(guild);
+        });
+      });
+
     this.store.loadAvailableGuilds();
-    this.form.valueChanges.subscribe(form => console.log(form));
   }
 
   get guilds(): FormArray {
@@ -82,7 +97,6 @@ export class DiscordBotComponent implements OnInit {
       });
     }
 
-    console.log(value);
     this.configurationService
       .storeValue<Discord>(value)
       .subscribe(() => this.location.back());
