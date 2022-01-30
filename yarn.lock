@@ -3733,13 +3733,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"angular-feather@npm:6.2.0":
-  version: 6.2.0
-  resolution: "angular-feather@npm:6.2.0"
+"angular-feather@npm:6.3.0":
+  version: 6.3.0
+  resolution: "angular-feather@npm:6.3.0"
   dependencies:
-    feather-icons: 4.24.1
     tslib: ^2.0.0
-  checksum: 7912270f79656d7d8949e0fb757c457415e7e81ad3d2d07fdc9eb10a42098528f83cd52af658605f8c539acfceab35f0807afd760504d673ff8976b59ecf3300
+  peerDependencies:
+    "@angular/common": ~13.1.1
+    "@angular/core": ~13.1.1
+  checksum: 5726cbc36fe798d71910222384be951daa606dd769aef6d180fbc2f0a86c8097b24df34c7714f59f07748cb301faa0d002a58017804bc590d6aac166d4fc5e94
   languageName: node
   linkType: hard
 
@@ -6971,16 +6973,6 @@ __metadata:
   dependencies:
     websocket-driver: ">=0.5.1"
   checksum: d49a62caf027f871149fc2b3f3c7104dc6d62744277eb6f9f36e2d5714e847d846b9f7f0d0b7169b25a012e24a594cde11a93034b30732e4c683f20b8a5019fa
-  languageName: node
-  linkType: hard
-
-"feather-icons@npm:4.24.1":
-  version: 4.24.1
-  resolution: "feather-icons@npm:4.24.1"
-  dependencies:
-    classnames: ^2.2.5
-    core-js: ^3.1.3
-  checksum: d3b89363ddb1693dfcdac2147e7aff8966bbcf5d256cb945e09155ef087dd6f2f676bdc8fee11823f1d189462253c7097a9e5b5ec8f44937f0f995a181964def
   languageName: node
   linkType: hard
 
@@ -13648,7 +13640,7 @@ __metadata:
     "@types/node": 16.11.21
     "@typescript-eslint/eslint-plugin": 5.10.1
     "@typescript-eslint/parser": 5.10.1
-    angular-feather: 6.2.0
+    angular-feather: 6.3.0
     bootstrap: 5.1.3
     eslint: 8.8.0
     eslint-config-prettier: 8.3.0
