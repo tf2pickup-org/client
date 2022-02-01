@@ -5506,17 +5506,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"date-format@npm:^2.1.0":
-  version: 2.1.0
-  resolution: "date-format@npm:2.1.0"
-  checksum: ff2c80c76021a315409b6ce2f08997f6e4a61ae68042dbf2cefda450207712a804aa30ac52e235f3de495dc915842507249c74e4668659835cc4870892042394
-  languageName: node
-  linkType: hard
-
-"date-format@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "date-format@npm:3.0.0"
-  checksum: 9e1d224460d27f28fd0ce9ae72790bfb850a0d71ce97926633968d5ff9a4c86a537ff288edbe60cd4549a3c35bf5ad3b930d57cd5d579ce9da0a7e71605bdd74
+"date-format@npm:^4.0.3":
+  version: 4.0.3
+  resolution: "date-format@npm:4.0.3"
+  checksum: 8ae4d9de3532010169a89bc7b079342051ba3ec88552636aa677bfb53e8eb15113af8394679aea7d41367dc8bb6e9865da17f21ac2802202180b09d6e3f2339e
   languageName: node
   linkType: hard
 
@@ -7084,17 +7077,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"flatted@npm:^2.0.1":
-  version: 2.0.2
-  resolution: "flatted@npm:2.0.2"
-  checksum: 473c754db7a529e125a22057098f1a4c905ba17b8cc269c3acf77352f0ffa6304c851eb75f6a1845f74461f560e635129ca6b0b8a78fb253c65cea4de3d776f2
-  languageName: node
-  linkType: hard
-
 "flatted@npm:^3.1.0":
   version: 3.2.2
   resolution: "flatted@npm:3.2.2"
   checksum: 9d5e03fd9309b9103f345cf6d0cef4fa46201baa053b0ca3d57fa489449b0bee687b7355407898f630afbb1a1286d2a6658e7e77dea3b85c3cd6c6ce2894a5c3
+  languageName: node
+  linkType: hard
+
+"flatted@npm:^3.2.4":
+  version: 3.2.5
+  resolution: "flatted@npm:3.2.5"
+  checksum: 3c436e9695ccca29620b4be5671dd72e5dd0a7500e0856611b7ca9bd8169f177f408c3b9abfa78dfe1493ee2d873e2c119080a8a9bee4e1a186a9e60ca6c89f1
   languageName: node
   linkType: hard
 
@@ -7158,14 +7151,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fs-extra@npm:^8.1.0":
-  version: 8.1.0
-  resolution: "fs-extra@npm:8.1.0"
+"fs-extra@npm:^10.0.0":
+  version: 10.0.0
+  resolution: "fs-extra@npm:10.0.0"
   dependencies:
     graceful-fs: ^4.2.0
-    jsonfile: ^4.0.0
-    universalify: ^0.1.0
-  checksum: bf44f0e6cea59d5ce071bba4c43ca76d216f89e402dc6285c128abc0902e9b8525135aa808adad72c9d5d218e9f4bcc63962815529ff2f684ad532172a284880
+    jsonfile: ^6.0.1
+    universalify: ^2.0.0
+  checksum: 5285a3d8f34b917cf2b66af8c231a40c1623626e9d701a20051d3337be16c6d7cac94441c8b3732d47a92a2a027886ca93c69b6a4ae6aee3c89650d2a8880c0a
   languageName: node
   linkType: hard
 
@@ -8933,18 +8926,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jsonfile@npm:^4.0.0":
-  version: 4.0.0
-  resolution: "jsonfile@npm:4.0.0"
-  dependencies:
-    graceful-fs: ^4.1.6
-  dependenciesMeta:
-    graceful-fs:
-      optional: true
-  checksum: 6447d6224f0d31623eef9b51185af03ac328a7553efcee30fa423d98a9e276ca08db87d71e17f2310b0263fd3ffa6c2a90a6308367f661dc21580f9469897c9e
-  languageName: node
-  linkType: hard
-
 "jsonfile@npm:^6.0.1":
   version: 6.1.0
   resolution: "jsonfile@npm:6.1.0"
@@ -9061,9 +9042,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"karma@npm:6.3.12":
-  version: 6.3.12
-  resolution: "karma@npm:6.3.12"
+"karma@npm:6.3.13":
+  version: 6.3.13
+  resolution: "karma@npm:6.3.13"
   dependencies:
     body-parser: ^1.19.0
     braces: ^3.0.2
@@ -9077,7 +9058,7 @@ __metadata:
     http-proxy: ^1.18.1
     isbinaryfile: ^4.0.8
     lodash: ^4.17.21
-    log4js: ^6.3.0
+    log4js: ^6.4.1
     mime: ^2.5.2
     minimatch: ^3.0.4
     qjobs: ^1.2.0
@@ -9090,7 +9071,7 @@ __metadata:
     yargs: ^16.1.1
   bin:
     karma: bin/karma
-  checksum: 7d7f8038089b8dde9bdd01551698fddc1c8be8bdcc926830b3ccdb24b3b97bda5a5e546116e4da7794d0d9356ee32d3ba238168890b5c543fa8a3b7cea119515
+  checksum: 871875b38bbf44d43cf6f557396c49d5794924c5b684b084cebd8c299c2b49f28781cf3dd0267ecafddd73d96e03e8be1e8951fb7699518a2d0485224a38cb13
   languageName: node
   linkType: hard
 
@@ -9366,16 +9347,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"log4js@npm:^6.3.0":
-  version: 6.3.0
-  resolution: "log4js@npm:6.3.0"
+"log4js@npm:^6.4.1":
+  version: 6.4.1
+  resolution: "log4js@npm:6.4.1"
   dependencies:
-    date-format: ^3.0.0
-    debug: ^4.1.1
-    flatted: ^2.0.1
-    rfdc: ^1.1.4
-    streamroller: ^2.2.4
-  checksum: da2812bbe477d0594154562d63c8b23030d4a31964bbf9d5b708f528eb57adb9e4c2eec4caf087400776b5758e4f5e5a5ef90c1453bec471aba2a8c42ee9176c
+    date-format: ^4.0.3
+    debug: ^4.3.3
+    flatted: ^3.2.4
+    rfdc: ^1.3.0
+    streamroller: ^3.0.2
+  checksum: 0614949662314573ec7dcd841769a4d23d8cb8268685458a40fcd94f2ae6ec628234cfb9a6bc17821fb6ea6ce3765e779b4966ba1cf918f393dc37155a3615cb
   languageName: node
   linkType: hard
 
@@ -12245,7 +12226,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rfdc@npm:^1.1.4":
+"rfdc@npm:^1.3.0":
   version: 1.3.0
   resolution: "rfdc@npm:1.3.0"
   checksum: fb2ba8512e43519983b4c61bd3fa77c0f410eff6bae68b08614437bc3f35f91362215f7b4a73cbda6f67330b5746ce07db5dd9850ad3edc91271ad6deea0df32
@@ -13069,14 +13050,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"streamroller@npm:^2.2.4":
-  version: 2.2.4
-  resolution: "streamroller@npm:2.2.4"
+"streamroller@npm:^3.0.2":
+  version: 3.0.2
+  resolution: "streamroller@npm:3.0.2"
   dependencies:
-    date-format: ^2.1.0
+    date-format: ^4.0.3
     debug: ^4.1.1
-    fs-extra: ^8.1.0
-  checksum: 83060ded804747d2a9f202f142d24680a01f3bc5e36e9bd746b3e530252bbbf29a8030659f3c66e2dcd3d1ce403144bd302d9b4e51be0f9ed7d2f371a13d166b
+    fs-extra: ^10.0.0
+  checksum: 1f323824f0e81cc085c24f33addfd8ef00d0c15aafee520a8cf207ca6e2dc674fd852528c7b4450cc87f4335d1269ed18b3f0188853d45d7f0912c9a205d1fc1
   languageName: node
   linkType: hard
 
@@ -13656,7 +13637,7 @@ __metadata:
     jasmine-core: 4.0.0
     jasmine-spec-reporter: 7.0.0
     jwt-decode: 3.1.2
-    karma: 6.3.12
+    karma: 6.3.13
     karma-chrome-launcher: 3.1.0
     karma-coverage: 2.1.0
     karma-jasmine: 4.0.1
@@ -14138,13 +14119,6 @@ __metadata:
   version: 6.0.0
   resolution: "universal-user-agent@npm:6.0.0"
   checksum: 5092bbc80dd0d583cef0b62c17df0043193b74f425112ea6c1f69bc5eda21eeec7a08d8c4f793a277eb2202ffe9b44bec852fa3faff971234cd209874d1b79ef
-  languageName: node
-  linkType: hard
-
-"universalify@npm:^0.1.0":
-  version: 0.1.2
-  resolution: "universalify@npm:0.1.2"
-  checksum: 40cdc60f6e61070fe658ca36016a8f4ec216b29bf04a55dce14e3710cc84c7448538ef4dad3728d0bfe29975ccd7bfb5f414c45e7b78883567fb31b246f02dff
   languageName: node
   linkType: hard
 
