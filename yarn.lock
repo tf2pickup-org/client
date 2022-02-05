@@ -9438,9 +9438,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"karma-coverage@npm:2.1.0":
-  version: 2.1.0
-  resolution: "karma-coverage@npm:2.1.0"
+"karma-coverage@npm:2.1.1":
+  version: 2.1.1
+  resolution: "karma-coverage@npm:2.1.1"
   dependencies:
     istanbul-lib-coverage: ^3.2.0
     istanbul-lib-instrument: ^4.0.3
@@ -9448,7 +9448,7 @@ __metadata:
     istanbul-lib-source-maps: ^4.0.1
     istanbul-reports: ^3.0.5
     minimatch: ^3.0.4
-  checksum: 87dd7ad3353645dd5d0f08d685a0d189b0f62036ae2f70210044bd92bed2a5f6cd80c586f49ecd02fa60e11d924001486283e59da807526fd880af19425f99cd
+  checksum: c535ad34adb86c79708ff2c76caf62ab5db838e0a287d257acaef80110fadd6166b12fa3357fce5b5995cbb6837676cd17a7706e14b382a2aab53bbd54494a5f
   languageName: node
   linkType: hard
 
@@ -14138,7 +14138,7 @@ __metadata:
     jwt-decode: 3.1.2
     karma: 6.3.15
     karma-chrome-launcher: 3.1.0
-    karma-coverage: 2.1.0
+    karma-coverage: 2.1.1
     karma-jasmine: 4.0.1
     karma-jasmine-html-reporter: 1.7.0
     karma-spec-reporter: 0.0.33
