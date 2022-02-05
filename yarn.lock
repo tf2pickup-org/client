@@ -9494,9 +9494,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"karma@npm:6.3.13":
-  version: 6.3.13
-  resolution: "karma@npm:6.3.13"
+"karma@npm:6.3.15":
+  version: 6.3.15
+  resolution: "karma@npm:6.3.15"
   dependencies:
     body-parser: ^1.19.0
     braces: ^3.0.2
@@ -9513,6 +9513,7 @@ __metadata:
     log4js: ^6.4.1
     mime: ^2.5.2
     minimatch: ^3.0.4
+    mkdirp: ^0.5.5
     qjobs: ^1.2.0
     range-parser: ^1.2.1
     rimraf: ^3.0.2
@@ -9523,7 +9524,7 @@ __metadata:
     yargs: ^16.1.1
   bin:
     karma: bin/karma
-  checksum: 871875b38bbf44d43cf6f557396c49d5794924c5b684b084cebd8c299c2b49f28781cf3dd0267ecafddd73d96e03e8be1e8951fb7699518a2d0485224a38cb13
+  checksum: 28736fd4e69f449e9008c3e42cef38af13b860db3b3f9cdfbe84bb32e5570fd0ff29e40dd239946c200f99473d94853a77786f3531575bd7cf5b77581612cbc2
   languageName: node
   linkType: hard
 
@@ -14135,7 +14136,7 @@ __metadata:
     jasmine-core: 4.0.0
     jasmine-spec-reporter: 7.0.0
     jwt-decode: 3.1.2
-    karma: 6.3.13
+    karma: 6.3.15
     karma-chrome-launcher: 3.1.0
     karma-coverage: 2.1.0
     karma-jasmine: 4.0.1
