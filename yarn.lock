@@ -5828,6 +5828,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"css-functions-list@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "css-functions-list@npm:3.0.0"
+  checksum: 4499ff204b4c172300f1f452bd684b50271fc31085879a5f1515301d01596d1f803f3fdd1c58cc3b24332448519e7584f92c8f81bdd10114c37f26f0c24c61ab
+  languageName: node
+  linkType: hard
+
 "css-has-pseudo@npm:^3.0.3":
   version: 3.0.3
   resolution: "css-has-pseudo@npm:3.0.3"
@@ -11879,7 +11886,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss@npm:8.4.5, postcss@npm:^8.4.5":
+"postcss@npm:8.4.5":
   version: 8.4.5
   resolution: "postcss@npm:8.4.5"
   dependencies:
@@ -11890,7 +11897,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss@npm:8.4.6, postcss@npm:^8.2.14":
+"postcss@npm:8.4.6, postcss@npm:^8.2.14, postcss@npm:^8.4.6":
   version: 8.4.6
   resolution: "postcss@npm:8.4.6"
   dependencies:
@@ -13790,13 +13797,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stylelint@npm:14.3.0":
-  version: 14.3.0
-  resolution: "stylelint@npm:14.3.0"
+"stylelint@npm:14.4.0":
+  version: 14.4.0
+  resolution: "stylelint@npm:14.4.0"
   dependencies:
     balanced-match: ^2.0.0
     colord: ^2.9.2
     cosmiconfig: ^7.0.1
+    css-functions-list: ^3.0.0
     debug: ^4.3.3
     execall: ^2.0.0
     fast-glob: ^3.2.11
@@ -13818,7 +13826,7 @@ __metadata:
     normalize-path: ^3.0.0
     normalize-selector: ^0.2.0
     picocolors: ^1.0.0
-    postcss: ^8.4.5
+    postcss: ^8.4.6
     postcss-media-query-parser: ^0.2.3
     postcss-resolve-nested-selector: ^0.1.1
     postcss-safe-parser: ^6.0.0
@@ -13836,7 +13844,7 @@ __metadata:
     write-file-atomic: ^4.0.0
   bin:
     stylelint: bin/stylelint.js
-  checksum: aaec6712f875da4e71ad0b748ba2b001ab56ab892cd31aedb553fffc265ce427b668b817975a612c53e8f0e0d5b7edd211cc8842f201bc2622055a74befaedf0
+  checksum: 06dda5cd95dabbd53c5c94621c29d22ec07fee4ad91552019d68ec64dbd7f442ac94189e930d80e989da027c355152eeaa4c4de51c37394dfe83efd42dc828d6
   languageName: node
   linkType: hard
 
@@ -14156,7 +14164,7 @@ __metadata:
     release-it: 14.12.4
     rxjs: 7.5.3
     socket.io-client: 4.4.1
-    stylelint: 14.3.0
+    stylelint: 14.4.0
     stylelint-config-sass-guidelines: 9.0.1
     stylelint-config-standard-scss: 3.0.0
     stylelint-order: 5.0.0
