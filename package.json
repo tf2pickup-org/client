@@ -30,6 +30,7 @@
     "build:br.tf2pickup.org": "ng build --subresource-integrity --configuration=production,br.tf2pickup.org --outputPath=dist/br.tf2pickup.org",
     "build:au.tf2pickup.org": "ng build --subresource-integrity --configuration=production,au.tf2pickup.org --outputPath=dist/au.tf2pickup.org",
     "build:hl.br.tf2pickup.org": "ng build --subresource-integrity --configuration=production,hl.br.tf2pickup.org --outputPath=dist/hl.br.tf2pickup.org",
+    "build:tf2pickup.asia": "ng build --subresource-integrity --configuration=production,tf2pickup.asia --outputPath=dist/tf2pickup.asia",
     "build:all": "npm-run-all build:*tf2pickup.*",
     "test": "ng test",
     "test:ci": "ng test --browsers=ChromeHeadless --watch=false --code-coverage=true",
