@@ -1,3 +1,24 @@
+# [3.22.0](https://github.com/tf2pickup-org/client/compare/3.21.1...3.22.0) (2022-02-10)
+
+
+### Bug Fixes
+
+* **deps:** update angular monorepo to v13.1.3 ([#1395](https://github.com/tf2pickup-org/client/issues/1395)) ([f8843ba](https://github.com/tf2pickup-org/client/commit/f8843ba61cc24a078c455e27cdcac1c02f7228d9))
+* **deps:** update angular monorepo to v13.2.0 ([#1485](https://github.com/tf2pickup-org/client/issues/1485)) ([6a5b0ec](https://github.com/tf2pickup-org/client/commit/6a5b0ec78dc86631a19a919585eaa64a0893fecb))
+* **deps:** update angular monorepo to v13.2.1 ([#1493](https://github.com/tf2pickup-org/client/issues/1493)) ([4c98460](https://github.com/tf2pickup-org/client/commit/4c98460f653d9abc43913cfc22331a9c22372b11))
+* **deps:** update angular monorepo to v13.2.2 ([#1505](https://github.com/tf2pickup-org/client/issues/1505)) ([8b70a1d](https://github.com/tf2pickup-org/client/commit/8b70a1d9f63706b2227a094908d357fe2be80bb1))
+* **deps:** update dependency @angular/cdk to v13.2.0 ([#1486](https://github.com/tf2pickup-org/client/issues/1486)) ([803b9da](https://github.com/tf2pickup-org/client/commit/803b9daee4cd25a55f27fac7e2c22765b29519bc))
+* **deps:** update dependency @angular/cdk to v13.2.1 ([#1494](https://github.com/tf2pickup-org/client/issues/1494)) ([cb76a32](https://github.com/tf2pickup-org/client/commit/cb76a32370b807f8e7589b985ecd311e9c41c938))
+* **deps:** update dependency @angular/cdk to v13.2.2 ([#1510](https://github.com/tf2pickup-org/client/issues/1510)) ([fa22362](https://github.com/tf2pickup-org/client/commit/fa22362ef24fee3bfae251ea574ab74ee8949145))
+* **deps:** update dependency angular-feather to v6.3.0 ([#1488](https://github.com/tf2pickup-org/client/issues/1488)) ([0744b26](https://github.com/tf2pickup-org/client/commit/0744b269c8fcd3031aa81133b7ba830c178676a9))
+* **deps:** update dependency rxjs to v7.5.3 ([#1506](https://github.com/tf2pickup-org/client/issues/1506)) ([921b3ab](https://github.com/tf2pickup-org/client/commit/921b3ab2f8554e23128536dcf92e92c6956bca52))
+* **deps:** update dependency rxjs to v7.5.4 ([#1509](https://github.com/tf2pickup-org/client/issues/1509)) ([5352dbc](https://github.com/tf2pickup-org/client/commit/5352dbc4e1ceb8ba24aa319f68a99c074bbd6cf1))
+
+
+### Features
+
+* **tf2pickup.asia:** add tf2pickup.asia branding ([#1514](https://github.com/tf2pickup-org/client/issues/1514)) ([baa5171](https://github.com/tf2pickup-org/client/commit/baa5171635dcadfe8b9489dd473e7d648fca2252))
+
 ## [3.21.1](https://github.com/tf2pickup-org/client/compare/3.21.0...3.21.1) (2022-01-21)
 
 
