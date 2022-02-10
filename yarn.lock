@@ -537,7 +537,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/core@npm:^7.12.3, @babel/core@npm:^7.7.5, @babel/core@npm:^7.8.6":
+"@babel/core@npm:^7.12.3, @babel/core@npm:^7.8.6":
   version: 7.16.0
   resolution: "@babel/core@npm:7.16.0"
   dependencies:
@@ -9099,19 +9099,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"istanbul-lib-instrument@npm:^4.0.3":
-  version: 4.0.3
-  resolution: "istanbul-lib-instrument@npm:4.0.3"
-  dependencies:
-    "@babel/core": ^7.7.5
-    "@istanbuljs/schema": ^0.1.2
-    istanbul-lib-coverage: ^3.0.0
-    semver: ^6.3.0
-  checksum: fa1171d3022b1bb8f6a734042620ac5d9ee7dc80f3065a0bb12863e9f0494d0eefa3d86608fcc0254ab2765d29d7dad8bdc42e5f8df2f9a1fbe85ccc59d76cb9
-  languageName: node
-  linkType: hard
-
-"istanbul-lib-instrument@npm:^5.0.4":
+"istanbul-lib-instrument@npm:^5.0.4, istanbul-lib-instrument@npm:^5.1.0":
   version: 5.1.0
   resolution: "istanbul-lib-instrument@npm:5.1.0"
   dependencies:
@@ -9445,17 +9433,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"karma-coverage@npm:2.1.1":
-  version: 2.1.1
-  resolution: "karma-coverage@npm:2.1.1"
+"karma-coverage@npm:2.2.0":
+  version: 2.2.0
+  resolution: "karma-coverage@npm:2.2.0"
   dependencies:
     istanbul-lib-coverage: ^3.2.0
-    istanbul-lib-instrument: ^4.0.3
+    istanbul-lib-instrument: ^5.1.0
     istanbul-lib-report: ^3.0.0
     istanbul-lib-source-maps: ^4.0.1
     istanbul-reports: ^3.0.5
     minimatch: ^3.0.4
-  checksum: c535ad34adb86c79708ff2c76caf62ab5db838e0a287d257acaef80110fadd6166b12fa3357fce5b5995cbb6837676cd17a7706e14b382a2aab53bbd54494a5f
+  checksum: 79c9df27c2de956e3314077256e508befbb7bc797f77c1ec495fc3d905574047269bfd015ea2da644a9b188fde09da42a4186b466a1cce86db45026b566b8cf0
   languageName: node
   linkType: hard
 
@@ -14146,7 +14134,7 @@ __metadata:
     jwt-decode: 3.1.2
     karma: 6.3.15
     karma-chrome-launcher: 3.1.0
-    karma-coverage: 2.1.1
+    karma-coverage: 2.2.0
     karma-jasmine: 4.0.1
     karma-jasmine-html-reporter: 1.7.0
     karma-spec-reporter: 0.0.33
