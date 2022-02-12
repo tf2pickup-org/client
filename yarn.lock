@@ -6937,9 +6937,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-ngrx@npm:2.0.3":
-  version: 2.0.3
-  resolution: "eslint-plugin-ngrx@npm:2.0.3"
+"eslint-plugin-ngrx@npm:2.0.4":
+  version: 2.0.4
+  resolution: "eslint-plugin-ngrx@npm:2.0.4"
   dependencies:
     "@angular-devkit/schematics": ^13.0.3
     "@typescript-eslint/experimental-utils": ^5.4.0
@@ -6949,7 +6949,7 @@ __metadata:
   peerDependencies:
     eslint: ">=8.0.0"
     typescript: ">=4.4.0"
-  checksum: 1b5d44f4d3c8d198dd240b2830878a21071677ef0b08b4210de336d7c5f9c0df2a5474aeb739e65689d3f0dda0dabd52933da8c4945524fa5692f6abbaf7a0dd
+  checksum: 54b899b25bd3c51004c69651d0d05f3c9961166206e136c1b9af945ad1d94e25d9fe287ed81c3e5e6761579e8a671e0e1dc6a80094e468b8fcc680fc67e54d53
   languageName: node
   linkType: hard
 
@@ -14095,7 +14095,7 @@ __metadata:
     eslint-config-prettier: 8.3.0
     eslint-plugin-import: 2.25.4
     eslint-plugin-jsdoc: 37.9.1
-    eslint-plugin-ngrx: 2.0.3
+    eslint-plugin-ngrx: 2.0.4
     eslint-plugin-prefer-arrow: 1.2.3
     eslint-plugin-prettier: 4.0.0
     eslint-plugin-rxjs: 5.0.2
