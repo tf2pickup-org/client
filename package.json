@@ -123,7 +123,7 @@
     "karma-jasmine": "4.0.1",
     "karma-jasmine-html-reporter": "1.7.0",
     "karma-spec-reporter": "0.0.33",
-    "ng-mocks": "13.0.3",
+    "ng-mocks": "13.0.4",
     "postcss": "8.4.7",
     "prettier": "2.5.1",
     "protractor": "7.0.0",
