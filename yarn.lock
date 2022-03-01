@@ -2073,6 +2073,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@colors/colors@npm:1.5.0":
+  version: 1.5.0
+  resolution: "@colors/colors@npm:1.5.0"
+  checksum: d64d5260bed1d5012ae3fc617d38d1afc0329fec05342f4e6b838f46998855ba56e0a73833f4a80fa8378c84810da254f76a8a19c39d038260dc06dc4e007425
+  languageName: node
+  linkType: hard
+
 "@cspotcode/source-map-consumer@npm:0.8.0":
   version: 0.8.0
   resolution: "@cspotcode/source-map-consumer@npm:0.8.0"
@@ -9483,14 +9490,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"karma@npm:6.3.16":
-  version: 6.3.16
-  resolution: "karma@npm:6.3.16"
+"karma@npm:6.3.17":
+  version: 6.3.17
+  resolution: "karma@npm:6.3.17"
   dependencies:
+    "@colors/colors": 1.5.0
     body-parser: ^1.19.0
     braces: ^3.0.2
     chokidar: ^3.5.1
-    colors: 1.4.0
     connect: ^3.7.0
     di: ^0.0.1
     dom-serialize: ^2.2.1
@@ -9513,7 +9520,7 @@ __metadata:
     yargs: ^16.1.1
   bin:
     karma: bin/karma
-  checksum: eb1703d4907ac31a47019e2b6b5f69e1ecd7870dabee1ed8f284d9730f665e02ae9ef1a75733b5d4b6a27fe68069536d0845b9e41747c43507128b3ac645c87f
+  checksum: 5d72fd6ce72879071fbbcbd7f469232090a110349f131ddbc52b5df8a43901ef04ac000dda609d4d7f31aab320037fc25f5f1783f1adec74362c87b87865d228
   languageName: node
   linkType: hard
 
@@ -14149,7 +14156,7 @@ __metadata:
     jasmine-core: 4.0.1
     jasmine-spec-reporter: 7.0.0
     jwt-decode: 3.1.2
-    karma: 6.3.16
+    karma: 6.3.17
     karma-chrome-launcher: 3.1.0
     karma-coverage: 2.2.0
     karma-jasmine: 4.0.1
