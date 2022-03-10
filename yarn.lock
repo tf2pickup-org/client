@@ -9523,12 +9523,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"karma-chrome-launcher@npm:3.1.0":
-  version: 3.1.0
-  resolution: "karma-chrome-launcher@npm:3.1.0"
+"karma-chrome-launcher@npm:3.1.1":
+  version: 3.1.1
+  resolution: "karma-chrome-launcher@npm:3.1.1"
   dependencies:
     which: ^1.2.1
-  checksum: 63431ddec9aa40e2a0439d9e2bcfa58a6822efd08e2666bdbc3f55dfbe8fcc0b401035b71b1f6f21340339dc56c172edaed8e8c0ddc6949873318ad1666b2dd9
+  checksum: 8442219105e1f11a9284fd47f2e21e34720f7e725f25ea08f7525a7ec2088e2c1b65e2def4d7780139d296afc5c30bf4e1d4a839a097eb814031c2f6b379b39f
   languageName: node
   linkType: hard
 
@@ -14264,7 +14264,7 @@ __metadata:
     jasmine-spec-reporter: 7.0.0
     jwt-decode: 3.1.2
     karma: 6.3.17
-    karma-chrome-launcher: 3.1.0
+    karma-chrome-launcher: 3.1.1
     karma-coverage: 2.2.0
     karma-jasmine: 4.0.1
     karma-jasmine-html-reporter: 1.7.0
