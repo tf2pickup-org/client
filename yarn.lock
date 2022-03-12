@@ -10533,15 +10533,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ng-mocks@npm:13.1.0":
-  version: 13.1.0
-  resolution: "ng-mocks@npm:13.1.0"
+"ng-mocks@npm:13.1.1":
+  version: 13.1.1
+  resolution: "ng-mocks@npm:13.1.1"
   peerDependencies:
-    "@angular/common": 5.0.0-alpha - 5 || 6.0.0-alpha - 6 || 7.0.0-alpha - 7 || 8.0.0-alpha - 8 || 9.0.0-alpha - 9 || 10.0.0-alpha - 10 || 11.0.0-alpha - 11 || 12.0.0-alpha - 12 || 13.0.0-alpha - 13
-    "@angular/core": 5.0.0-alpha - 5 || 6.0.0-alpha - 6 || 7.0.0-alpha - 7 || 8.0.0-alpha - 8 || 9.0.0-alpha - 9 || 10.0.0-alpha - 10 || 11.0.0-alpha - 11 || 12.0.0-alpha - 12 || 13.0.0-alpha - 13
-    "@angular/forms": 5.0.0-alpha - 5 || 6.0.0-alpha - 6 || 7.0.0-alpha - 7 || 8.0.0-alpha - 8 || 9.0.0-alpha - 9 || 10.0.0-alpha - 10 || 11.0.0-alpha - 11 || 12.0.0-alpha - 12 || 13.0.0-alpha - 13
-    "@angular/platform-browser": 5.0.0-alpha - 5 || 6.0.0-alpha - 6 || 7.0.0-alpha - 7 || 8.0.0-alpha - 8 || 9.0.0-alpha - 9 || 10.0.0-alpha - 10 || 11.0.0-alpha - 11 || 12.0.0-alpha - 12 || 13.0.0-alpha - 13
-  checksum: c5bebe598ccd11c2952a2efa62bd6029529f69c765a6d883b3e76e5fdd0286c180f4543e8aca304a6f1dd222770df7fed3f9b907015c75e2e6c1fc192e01e63a
+    "@angular/common": 5.0.0-alpha - 5 || 6.0.0-alpha - 6 || 7.0.0-alpha - 7 || 8.0.0-alpha - 8 || 9.0.0-alpha - 9 || 10.0.0-alpha - 10 || 11.0.0-alpha - 11 || 12.0.0-alpha - 12 || 13.0.0-alpha - 13 || 14.0.0-alpha - 14
+    "@angular/core": 5.0.0-alpha - 5 || 6.0.0-alpha - 6 || 7.0.0-alpha - 7 || 8.0.0-alpha - 8 || 9.0.0-alpha - 9 || 10.0.0-alpha - 10 || 11.0.0-alpha - 11 || 12.0.0-alpha - 12 || 13.0.0-alpha - 13 || 14.0.0-alpha - 14
+    "@angular/forms": 5.0.0-alpha - 5 || 6.0.0-alpha - 6 || 7.0.0-alpha - 7 || 8.0.0-alpha - 8 || 9.0.0-alpha - 9 || 10.0.0-alpha - 10 || 11.0.0-alpha - 11 || 12.0.0-alpha - 12 || 13.0.0-alpha - 13 || 14.0.0-alpha - 14
+    "@angular/platform-browser": 5.0.0-alpha - 5 || 6.0.0-alpha - 6 || 7.0.0-alpha - 7 || 8.0.0-alpha - 8 || 9.0.0-alpha - 9 || 10.0.0-alpha - 10 || 11.0.0-alpha - 11 || 12.0.0-alpha - 12 || 13.0.0-alpha - 13 || 14.0.0-alpha - 14
+  checksum: 9d6e5a0ac0f9db889ef27c4ff86a459dd88ed6fb8d6ded58879ed0c39177b0ed740f96f1224baba2c161e16d7e1713b42e6aa9f81dd2c9ed691c271677035f47
   languageName: node
   linkType: hard
 
@@ -14264,7 +14264,7 @@ __metadata:
     karma-spec-reporter: 0.0.33
     lodash-es: 4.17.21
     ng-inline-svg: 13.1.1
-    ng-mocks: 13.1.0
+    ng-mocks: 13.1.1
     ngx-bootstrap: 8.0.0
     ngx-markdown: 13.0.0
     ngx-pagination: 5.1.1
