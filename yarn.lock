@@ -12617,9 +12617,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"release-it@npm:14.12.5":
-  version: 14.12.5
-  resolution: "release-it@npm:14.12.5"
+"release-it@npm:14.13.0":
+  version: 14.13.0
+  resolution: "release-it@npm:14.13.0"
   dependencies:
     "@iarna/toml": 2.2.5
     "@octokit/rest": 18.12.0
@@ -12647,11 +12647,12 @@ __metadata:
     update-notifier: 5.1.0
     url-join: 4.0.1
     uuid: 8.3.2
+    wildcard-match: 5.1.2
     yaml: 1.10.2
     yargs-parser: 20.2.9
   bin:
     release-it: bin/release-it.js
-  checksum: cb3a08f242e1c0bd28c9607b3b30fea81d590674c815f9c04eafd7e3138ab6f043220ef52be5a79eb48c9321a5222718190c7c0d155ba726ec6f02a3cc13b726
+  checksum: dfabcdc631cfa324d17bf0f42dcbcff6e65fd37669afb4c9e2ba0904166aa6b37f7bfc57233782bae635f66a90c55285a23d425228d3bac264848704f69c1f70
   languageName: node
   linkType: hard
 
@@ -14292,7 +14293,7 @@ __metadata:
     postcss: 8.4.12
     prettier: 2.5.1
     protractor: 7.0.0
-    release-it: 14.12.5
+    release-it: 14.13.0
     rxjs: 7.5.5
     socket.io-client: 4.4.1
     stylelint: 14.6.0
@@ -15219,6 +15220,13 @@ __metadata:
   dependencies:
     string-width: ^4.0.0
   checksum: 03db6c9d0af9329c37d74378ff1d91972b12553c7d72a6f4e8525fe61563fa7adb0b9d6e8d546b7e059688712ea874edd5ded475999abdeedf708de9849310e0
+  languageName: node
+  linkType: hard
+
+"wildcard-match@npm:5.1.2":
+  version: 5.1.2
+  resolution: "wildcard-match@npm:5.1.2"
+  checksum: d39ea5dcb807e9c515092adbb54c9a03743c9310e875919da5c25f268ed0c566a391c4afdca876e25d836fbbf5a71ce4a6e68ad034c24ce9751b5b60b4683bb9
   languageName: node
   linkType: hard
 
