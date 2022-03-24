@@ -3340,10 +3340,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/howler@npm:2.2.6":
-  version: 2.2.6
-  resolution: "@types/howler@npm:2.2.6"
-  checksum: 6e67c0dd6d7099e60ac13bd73936b19db9972ad5e9f6aea7b2b8fe695126ee2df72075b9a4b4781f17d18b458c087b2cf834eb2b09406aaa0ba1683a5b6c8780
+"@types/howler@npm:2.2.7":
+  version: 2.2.7
+  resolution: "@types/howler@npm:2.2.7"
+  checksum: e9d6723f946a7526c8562436c06ad64d55f63a0573bfbf08c776e3785ab520a3138da84058f280b0fe7d8a819af77af3dd62d88f873a316d3723dc2ad575aa0d
   languageName: node
   linkType: hard
 
@@ -14252,7 +14252,7 @@ __metadata:
     "@ngrx/store-devtools": 12.5.1
     "@release-it/conventional-changelog": 4.2.2
     "@swimlane/ngx-datatable": 20.0.0
-    "@types/howler": 2.2.6
+    "@types/howler": 2.2.7
     "@types/jasmine": 4.0.0
     "@types/jasminewd2": 2.0.10
     "@types/jwt-decode": 2.2.1
