@@ -98,7 +98,7 @@
     "@angular/language-service": "13.3.0",
     "@ngrx/schematics": "12.5.1",
     "@release-it/conventional-changelog": "4.2.2",
-    "@types/howler": "2.2.6",
+    "@types/howler": "2.2.7",
     "@types/jasmine": "4.0.0",
     "@types/jasminewd2": "2.0.10",
     "@types/jwt-decode": "2.2.1",
