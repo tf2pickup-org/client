@@ -3370,10 +3370,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/jasmine@npm:4.0.0":
-  version: 4.0.0
-  resolution: "@types/jasmine@npm:4.0.0"
-  checksum: af5f120477bdf07ccab3a13b8adea282df7ae4e71d67a416fed9271757122c1ebe272f0e063b51d5c076b3deee829e17f5c8e80551fcb298301cd2c3ac5ed70f
+"@types/jasmine@npm:4.0.1":
+  version: 4.0.1
+  resolution: "@types/jasmine@npm:4.0.1"
+  checksum: 9cee8c73a3bc72a5211cb5eefa6ddc3b731f6f6fe97e32ddb9f4c95894aee073e40cf41d86b2be5f37b994f3bfd46ceed68207fdb9253a8f9edcf03e99123bf3
   languageName: node
   linkType: hard
 
@@ -14253,7 +14253,7 @@ __metadata:
     "@release-it/conventional-changelog": 4.2.2
     "@swimlane/ngx-datatable": 20.0.0
     "@types/howler": 2.2.7
-    "@types/jasmine": 4.0.0
+    "@types/jasmine": 4.0.1
     "@types/jasminewd2": 2.0.10
     "@types/jwt-decode": 2.2.1
     "@types/lodash-es": 4.17.6
