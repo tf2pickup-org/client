@@ -9569,14 +9569,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"karma-jasmine@npm:4.0.1":
-  version: 4.0.1
-  resolution: "karma-jasmine@npm:4.0.1"
+"karma-jasmine@npm:4.0.2":
+  version: 4.0.2
+  resolution: "karma-jasmine@npm:4.0.2"
   dependencies:
     jasmine-core: ^3.6.0
   peerDependencies:
     karma: "*"
-  checksum: 28337c82941ed6c68e0c47ef432c2c91511214e84a336e78d9068daebd61a3c1cee6209207ddc5fe3ad78124597f58054b93aa0f973ff6dcc8a8fcd1951c9851
+  checksum: bf884704af1fd19816d9f4e96b25e286ff1a57adcabe1f15e3d2b3e9c1da873c1c843b9eab4274c27e63a99f1c3dea864f1f5eca1a10dc065e6e9d5796c207b4
   languageName: node
   linkType: hard
 
@@ -14279,7 +14279,7 @@ __metadata:
     karma: 6.3.17
     karma-chrome-launcher: 3.1.1
     karma-coverage: 2.2.0
-    karma-jasmine: 4.0.1
+    karma-jasmine: 4.0.2
     karma-jasmine-html-reporter: 1.7.0
     karma-spec-reporter: 0.0.33
     lodash-es: 4.17.21
