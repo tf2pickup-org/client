@@ -50,28 +50,26 @@ describe('PlayerDetailsComponent', () => {
     ]);
   });
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [
-          PlayerDetailsComponent,
-          MockComponent(PlayerDetailsExternalProfileLinksComponent),
-          MockComponent(PlayerDetailsBadgesComponent),
-          MockComponent(PlayerDetailsHeaderComponent),
-          MockComponent(PlayerStatsComponent),
-          MockComponent(PlayerDetailsGameListComponent),
-          MockComponent(PlayerDetailsAdminButtonsComponent),
-          MockComponent(FeatherComponent),
-        ],
-        imports: [RouterTestingModule],
-        providers: [
-          { provide: PlayersService, useValue: playersService },
-          provideMockStore({ initialState }),
-          { provide: ActivatedRoute, useValue: { paramMap } },
-        ],
-      }).compileComponents();
-    }),
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [
+        PlayerDetailsComponent,
+        MockComponent(PlayerDetailsExternalProfileLinksComponent),
+        MockComponent(PlayerDetailsBadgesComponent),
+        MockComponent(PlayerDetailsHeaderComponent),
+        MockComponent(PlayerStatsComponent),
+        MockComponent(PlayerDetailsGameListComponent),
+        MockComponent(PlayerDetailsAdminButtonsComponent),
+        MockComponent(FeatherComponent),
+      ],
+      imports: [RouterTestingModule],
+      providers: [
+        { provide: PlayersService, useValue: playersService },
+        provideMockStore({ initialState }),
+        { provide: ActivatedRoute, useValue: { paramMap } },
+      ],
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     store = TestBed.inject(MockStore);

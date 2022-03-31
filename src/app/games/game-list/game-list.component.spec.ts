@@ -43,38 +43,32 @@ describe('GameListComponent', () => {
     activatedRoute = { queryParamMap: queryParams.asObservable() };
   });
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [
-          GameListComponent,
-          MockPipe(MapThumbnailPipe, value => ''),
-        ],
-        imports: [
-          RouterTestingModule,
-          NgxPaginationModule,
-          NoopAnimationsModule,
-        ],
-        providers: [
-          {
-            provide: GamesService,
-            useValue: jasmine.createSpyObj<GamesService>(GamesService.name, [
-              'fetchGames',
-            ]),
-          },
-          {
-            provide: ActivatedRoute,
-            useValue: activatedRoute,
-          },
-        ],
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [
+        GameListComponent,
+        MockPipe(MapThumbnailPipe, value => ''),
+      ],
+      imports: [RouterTestingModule, NgxPaginationModule, NoopAnimationsModule],
+      providers: [
+        {
+          provide: GamesService,
+          useValue: jasmine.createSpyObj<GamesService>(GamesService.name, [
+            'fetchGames',
+          ]),
+        },
+        {
+          provide: ActivatedRoute,
+          useValue: activatedRoute,
+        },
+      ],
+    })
+      // https://github.com/angular/angular/issues/12313
+      .overrideComponent(GameListComponent, {
+        set: { changeDetection: ChangeDetectionStrategy.Default },
       })
-        // https://github.com/angular/angular/issues/12313
-        .overrideComponent(GameListComponent, {
-          set: { changeDetection: ChangeDetectionStrategy.Default },
-        })
-        .compileComponents();
-    }),
-  );
+      .compileComponents();
+  }));
 
   beforeEach(() => {
     results = new Subject();

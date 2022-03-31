@@ -89,25 +89,23 @@ describe(PlayerSkillTableComponent.name, () => {
     );
   });
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [
-          PlayerSkillTableComponent,
-          MockComponent(DatatableComponent),
-        ],
-        providers: [
-          provideMockStore(),
-          { provide: PlayersService, useValue: playersService },
-        ],
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [
+        PlayerSkillTableComponent,
+        MockComponent(DatatableComponent),
+      ],
+      providers: [
+        provideMockStore(),
+        { provide: PlayersService, useValue: playersService },
+      ],
+    })
+      // https://github.com/angular/angular/issues/12313
+      .overrideComponent(PlayerSkillTableComponent, {
+        set: { changeDetection: ChangeDetectionStrategy.Default },
       })
-        // https://github.com/angular/angular/issues/12313
-        .overrideComponent(PlayerSkillTableComponent, {
-          set: { changeDetection: ChangeDetectionStrategy.Default },
-        })
-        .compileComponents();
-    }),
-  );
+      .compileComponents();
+  }));
 
   beforeEach(() => {
     store = TestBed.inject(MockStore);

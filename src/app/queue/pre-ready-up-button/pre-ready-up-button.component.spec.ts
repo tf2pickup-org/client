@@ -16,23 +16,21 @@ describe('PreReadyUpButtonComponent', () => {
   let store: MockStore;
   let isPreReadiedSelector: MemoizedSelector<any, boolean>;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [
-          PreReadyUpButtonComponent,
-          SecondsPipe,
-          MockComponent(FeatherComponent),
-        ],
-        providers: [provideMockStore()],
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [
+        PreReadyUpButtonComponent,
+        SecondsPipe,
+        MockComponent(FeatherComponent),
+      ],
+      providers: [provideMockStore()],
+    })
+      // https://github.com/angular/angular/issues/12313
+      .overrideComponent(PreReadyUpButtonComponent, {
+        set: { changeDetection: ChangeDetectionStrategy.Default },
       })
-        // https://github.com/angular/angular/issues/12313
-        .overrideComponent(PreReadyUpButtonComponent, {
-          set: { changeDetection: ChangeDetectionStrategy.Default },
-        })
-        .compileComponents();
-    }),
-  );
+      .compileComponents();
+  }));
 
   beforeEach(() => {
     store = TestBed.inject(MockStore);

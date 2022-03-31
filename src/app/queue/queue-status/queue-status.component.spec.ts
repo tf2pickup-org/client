@@ -22,25 +22,23 @@ describe('QueueStatusComponent', () => {
   let isInQueueSelector: MemoizedSelector<AppState, boolean>;
   let queueStateSelector: MemoizedSelector<AppState, string>;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [
-          QueueStatusComponent,
-          MockComponent(PreReadyUpButtonComponent),
-        ],
-        imports: [RouterTestingModule, NoopAnimationsModule],
-        providers: [
-          provideMockStore({
-            selectors: [
-              { selector: queueCurrentPlayerCount, value: 2 },
-              { selector: queueRequiredPlayerCount, value: 12 },
-            ],
-          }),
-        ],
-      }).compileComponents();
-    }),
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [
+        QueueStatusComponent,
+        MockComponent(PreReadyUpButtonComponent),
+      ],
+      imports: [RouterTestingModule, NoopAnimationsModule],
+      providers: [
+        provideMockStore({
+          selectors: [
+            { selector: queueCurrentPlayerCount, value: 2 },
+            { selector: queueRequiredPlayerCount, value: 12 },
+          ],
+        }),
+      ],
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     store = TestBed.inject(MockStore);

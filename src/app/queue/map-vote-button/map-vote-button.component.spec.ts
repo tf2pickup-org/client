@@ -18,22 +18,20 @@ describe('MapVoteButtonComponent', () => {
     mapThumbnailService.getMapThumbnailPath.and.callFake(map => `${map}.png`);
   });
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [MapVoteButtonComponent],
-        providers: [
-          { provide: MapThumbnailService, useValue: mapThumbnailService },
-        ],
-        imports: [NoopAnimationsModule],
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [MapVoteButtonComponent],
+      providers: [
+        { provide: MapThumbnailService, useValue: mapThumbnailService },
+      ],
+      imports: [NoopAnimationsModule],
+    })
+      // https://github.com/angular/angular/issues/12313
+      .overrideComponent(MapVoteButtonComponent, {
+        set: { changeDetection: ChangeDetectionStrategy.Default },
       })
-        // https://github.com/angular/angular/issues/12313
-        .overrideComponent(MapVoteButtonComponent, {
-          set: { changeDetection: ChangeDetectionStrategy.Default },
-        })
-        .compileComponents();
-    }),
-  );
+      .compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(MapVoteButtonComponent);

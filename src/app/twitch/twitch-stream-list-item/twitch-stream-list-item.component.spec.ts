@@ -9,21 +9,19 @@ describe('TwitchStreamListItemComponent', () => {
   let component: TwitchStreamListItemComponent;
   let fixture: ComponentFixture<TwitchStreamListItemComponent>;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [
-          TwitchStreamListItemComponent,
-          MockComponent(PlayerNameComponent),
-        ],
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [
+        TwitchStreamListItemComponent,
+        MockComponent(PlayerNameComponent),
+      ],
+    })
+      // https://github.com/angular/angular/issues/12313
+      .overrideComponent(TwitchStreamListItemComponent, {
+        set: { changeDetection: ChangeDetectionStrategy.Default },
       })
-        // https://github.com/angular/angular/issues/12313
-        .overrideComponent(TwitchStreamListItemComponent, {
-          set: { changeDetection: ChangeDetectionStrategy.Default },
-        })
-        .compileComponents();
-    }),
-  );
+      .compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TwitchStreamListItemComponent);

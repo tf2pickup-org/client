@@ -9,21 +9,19 @@ describe('ConnectStringComponent', () => {
   let component: ConnectStringComponent;
   let fixture: ComponentFixture<ConnectStringComponent>;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [
-          ConnectStringComponent,
-          MockPipe(ConnectStringToLinkPipe, (...args) => JSON.stringify(args)),
-        ],
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [
+        ConnectStringComponent,
+        MockPipe(ConnectStringToLinkPipe, (...args) => JSON.stringify(args)),
+      ],
+    })
+      // https://github.com/angular/angular/issues/12313
+      .overrideComponent(ConnectStringComponent, {
+        set: { changeDetection: ChangeDetectionStrategy.Default },
       })
-        // https://github.com/angular/angular/issues/12313
-        .overrideComponent(ConnectStringComponent, {
-          set: { changeDetection: ChangeDetectionStrategy.Default },
-        })
-        .compileComponents();
-    }),
-  );
+      .compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ConnectStringComponent);

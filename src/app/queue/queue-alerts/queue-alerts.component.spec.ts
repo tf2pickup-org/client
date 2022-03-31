@@ -25,20 +25,18 @@ describe('QueueAlertsComponent', () => {
     SubstituteRequest[]
   >;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [
-          QueueAlertsComponent,
-          MockComponent(ActiveGameSnackbarComponent),
-          MockComponent(SubstituteRequestBannerComponent),
-          MockComponent(BanBannerComponent),
-        ],
-        imports: [RouterTestingModule],
-        providers: [provideMockStore()],
-      }).compileComponents();
-    }),
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [
+        QueueAlertsComponent,
+        MockComponent(ActiveGameSnackbarComponent),
+        MockComponent(SubstituteRequestBannerComponent),
+        MockComponent(BanBannerComponent),
+      ],
+      imports: [RouterTestingModule],
+      providers: [provideMockStore()],
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     store = TestBed.inject(MockStore);

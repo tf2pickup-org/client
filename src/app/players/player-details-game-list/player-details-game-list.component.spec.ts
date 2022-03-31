@@ -31,18 +31,16 @@ describe('PlayerDetailsGameListComponent', () => {
     playersService.fetchPlayerGames.and.returnValue(results.asObservable());
   });
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [
-          PlayerDetailsGameListComponent,
-          MockComponent(GameClassIconComponent),
-        ],
-        imports: [RouterTestingModule, NgxPaginationModule],
-        providers: [{ provide: PlayersService, useValue: playersService }],
-      }).compileComponents();
-    }),
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [
+        PlayerDetailsGameListComponent,
+        MockComponent(GameClassIconComponent),
+      ],
+      imports: [RouterTestingModule, NgxPaginationModule],
+      providers: [{ provide: PlayersService, useValue: playersService }],
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PlayerDetailsGameListComponent);

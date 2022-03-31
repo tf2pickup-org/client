@@ -7,14 +7,12 @@ describe('SteamLoginButtonComponent', () => {
   let component: SteamLoginButtonComponent;
   let fixture: ComponentFixture<SteamLoginButtonComponent>;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [SteamLoginButtonComponent],
-        providers: [{ provide: API_URL, useValue: 'http://fake.host' }],
-      }).compileComponents();
-    }),
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [SteamLoginButtonComponent],
+      providers: [{ provide: API_URL, useValue: 'http://fake.host' }],
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(SteamLoginButtonComponent);

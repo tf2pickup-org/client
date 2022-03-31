@@ -6,13 +6,11 @@ describe('PlayerDetailsHeaderComponent', () => {
   let component: PlayerDetailsHeaderComponent;
   let fixture: ComponentFixture<PlayerDetailsHeaderComponent>;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [PlayerDetailsHeaderComponent],
-      }).compileComponents();
-    }),
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [PlayerDetailsHeaderComponent],
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PlayerDetailsHeaderComponent);

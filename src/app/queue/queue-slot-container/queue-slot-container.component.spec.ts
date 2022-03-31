@@ -76,27 +76,25 @@ describe('QueueSlotContainerComponent', () => {
   let fixture: ComponentFixture<QueueSlotContainerComponent>;
   let store: MockStore;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [
-          QueueSlotContainerComponent,
-          MockComponent(QueueSlotItemComponent),
-        ],
-        providers: [
-          provideMockStore({
-            initialState,
-            selectors: [{ selector: canJoinQueue, value: true }],
-          }),
-        ],
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [
+        QueueSlotContainerComponent,
+        MockComponent(QueueSlotItemComponent),
+      ],
+      providers: [
+        provideMockStore({
+          initialState,
+          selectors: [{ selector: canJoinQueue, value: true }],
+        }),
+      ],
+    })
+      // https://github.com/angular/angular/issues/12313
+      .overrideComponent(QueueSlotContainerComponent, {
+        set: { changeDetection: ChangeDetectionStrategy.Default },
       })
-        // https://github.com/angular/angular/issues/12313
-        .overrideComponent(QueueSlotContainerComponent, {
-          set: { changeDetection: ChangeDetectionStrategy.Default },
-        })
-        .compileComponents();
-    }),
-  );
+      .compileComponents();
+  }));
 
   beforeEach(() => {
     store = TestBed.get(Store);

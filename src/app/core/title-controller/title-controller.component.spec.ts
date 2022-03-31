@@ -17,17 +17,15 @@ describe('TitleControllerComponent', () => {
   let component: TitleControllerComponent;
   let fixture: ComponentFixture<TitleControllerComponent>;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [TitleControllerComponent],
-        providers: [
-          { provide: Router, useClass: RouterStub },
-          { provide: Title, useClass: TitleStub },
-        ],
-      }).compileComponents();
-    }),
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [TitleControllerComponent],
+      providers: [
+        { provide: Router, useClass: RouterStub },
+        { provide: Title, useClass: TitleStub },
+      ],
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TitleControllerComponent);

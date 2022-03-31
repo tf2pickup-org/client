@@ -17,23 +17,21 @@ describe('AcceptRulesDialogComponent', () => {
     document = new Subject();
   });
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [
-          AcceptRulesDialogComponent,
-          MockComponent(MarkdownComponent),
-        ],
-        providers: [
-          MockProvider(DocumentsService, {
-            fetchDocument: jasmine
-              .createSpy('fetchDocument')
-              .and.returnValue(document.pipe(take(1))),
-          }),
-        ],
-      }).compileComponents();
-    }),
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [
+        AcceptRulesDialogComponent,
+        MockComponent(MarkdownComponent),
+      ],
+      providers: [
+        MockProvider(DocumentsService, {
+          fetchDocument: jasmine
+            .createSpy('fetchDocument')
+            .and.returnValue(document.pipe(take(1))),
+        }),
+      ],
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AcceptRulesDialogComponent);

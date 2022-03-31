@@ -33,22 +33,20 @@ describe('QueueClassSlotListComponent', () => {
     },
   };
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [
-          QueueClassSlotListComponent,
-          MockComponent(QueueSlotContainerComponent),
-        ],
-        providers: [provideMockStore({ initialState })],
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [
+        QueueClassSlotListComponent,
+        MockComponent(QueueSlotContainerComponent),
+      ],
+      providers: [provideMockStore({ initialState })],
+    })
+      // https://github.com/angular/angular/issues/12313
+      .overrideComponent(QueueClassSlotListComponent, {
+        set: { changeDetection: ChangeDetectionStrategy.Default },
       })
-        // https://github.com/angular/angular/issues/12313
-        .overrideComponent(QueueClassSlotListComponent, {
-          set: { changeDetection: ChangeDetectionStrategy.Default },
-        })
-        .compileComponents();
-    }),
-  );
+      .compileComponents();
+  }));
 
   beforeEach(() => {
     store = TestBed.inject(MockStore);

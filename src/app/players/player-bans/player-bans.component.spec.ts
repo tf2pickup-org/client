@@ -36,21 +36,19 @@ describe('PlayerBansComponent', () => {
     },
   };
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [
-          PlayerBansComponent,
-          MockComponent(PlayerBanItemComponent),
-        ],
-        imports: [RouterTestingModule],
-        providers: [
-          provideMockStore({ initialState }),
-          { provide: ActivatedRoute, useValue: { paramMap } },
-        ],
-      }).compileComponents();
-    }),
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [
+        PlayerBansComponent,
+        MockComponent(PlayerBanItemComponent),
+      ],
+      imports: [RouterTestingModule],
+      providers: [
+        provideMockStore({ initialState }),
+        { provide: ActivatedRoute, useValue: { paramMap } },
+      ],
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     store = TestBed.inject(MockStore);

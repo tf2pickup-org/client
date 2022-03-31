@@ -7,18 +7,16 @@ describe('GameTeamHeaderComponent', () => {
   let component: GameTeamHeaderComponent;
   let fixture: ComponentFixture<GameTeamHeaderComponent>;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [GameTeamHeaderComponent],
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [GameTeamHeaderComponent],
+    })
+      // https://github.com/angular/angular/issues/12313
+      .overrideComponent(GameTeamHeaderComponent, {
+        set: { changeDetection: ChangeDetectionStrategy.Default },
       })
-        // https://github.com/angular/angular/issues/12313
-        .overrideComponent(GameTeamHeaderComponent, {
-          set: { changeDetection: ChangeDetectionStrategy.Default },
-        })
-        .compileComponents();
-    }),
-  );
+      .compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(GameTeamHeaderComponent);

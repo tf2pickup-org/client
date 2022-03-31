@@ -10,21 +10,19 @@ describe(JoinVoiceButtonComponent.name, () => {
   let component: JoinVoiceButtonComponent;
   let fixture: ComponentFixture<JoinVoiceButtonComponent>;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [
-          JoinVoiceButtonComponent,
-          MockPipe(SafeMumbleUrlPipe, (...args) => JSON.stringify(args)),
-        ],
-        imports: [SharedModule],
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [
+        JoinVoiceButtonComponent,
+        MockPipe(SafeMumbleUrlPipe, (...args) => JSON.stringify(args)),
+      ],
+      imports: [SharedModule],
+    })
+      .overrideComponent(JoinVoiceButtonComponent, {
+        set: { changeDetection: ChangeDetectionStrategy.Default },
       })
-        .overrideComponent(JoinVoiceButtonComponent, {
-          set: { changeDetection: ChangeDetectionStrategy.Default },
-        })
-        .compileComponents();
-    }),
-  );
+      .compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(JoinVoiceButtonComponent);

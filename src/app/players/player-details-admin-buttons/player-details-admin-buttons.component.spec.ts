@@ -10,22 +10,20 @@ describe('PlayerDetailsAdminButtonsComponent', () => {
   let component: PlayerDetailsAdminButtonsComponent;
   let fixture: ComponentFixture<PlayerDetailsAdminButtonsComponent>;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [
-          PlayerDetailsAdminButtonsComponent,
-          MockComponent(FeatherComponent),
-        ],
-        imports: [RouterTestingModule],
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [
+        PlayerDetailsAdminButtonsComponent,
+        MockComponent(FeatherComponent),
+      ],
+      imports: [RouterTestingModule],
+    })
+      // https://github.com/angular/angular/issues/12313
+      .overrideComponent(PlayerDetailsAdminButtonsComponent, {
+        set: { changeDetection: ChangeDetectionStrategy.Default },
       })
-        // https://github.com/angular/angular/issues/12313
-        .overrideComponent(PlayerDetailsAdminButtonsComponent, {
-          set: { changeDetection: ChangeDetectionStrategy.Default },
-        })
-        .compileComponents();
-    }),
-  );
+      .compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PlayerDetailsAdminButtonsComponent);

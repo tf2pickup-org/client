@@ -50,29 +50,26 @@ describe('AuthService', () => {
       expect(req.request.method).toBe('POST');
     }));
 
-    it(
-      'should emit the new token',
-      waitForAsync(
-        inject([AuthService], (service: AuthService) => {
-          const tokenStore = TestBed.get(TokenStoreService);
+    it('should emit the new token', waitForAsync(
+      inject([AuthService], (service: AuthService) => {
+        const tokenStore = TestBed.get(TokenStoreService);
 
-          service
-            .reauth()
-            .subscribe(authToken =>
-              expect(authToken).toEqual('FAKE_NEW_AUTH_TOKEN'),
-            );
-          const req = httpContoller.expectOne(
-            'FAKE_URL/auth?refresh_token=FAKE_REFRESH_TOKEN',
+        service
+          .reauth()
+          .subscribe(authToken =>
+            expect(authToken).toEqual('FAKE_NEW_AUTH_TOKEN'),
           );
-          req.flush({
-            refreshToken: 'FAKE_NEW_REFRESH_TOKEN',
-            authToken: 'FAKE_NEW_AUTH_TOKEN',
-          });
-          expect(tokenStore.refreshToken).toEqual('FAKE_NEW_REFRESH_TOKEN');
-          expect(tokenStore.authToken).toEqual('FAKE_NEW_AUTH_TOKEN');
-        }),
-      ),
-    );
+        const req = httpContoller.expectOne(
+          'FAKE_URL/auth?refresh_token=FAKE_REFRESH_TOKEN',
+        );
+        req.flush({
+          refreshToken: 'FAKE_NEW_REFRESH_TOKEN',
+          authToken: 'FAKE_NEW_AUTH_TOKEN',
+        });
+        expect(tokenStore.refreshToken).toEqual('FAKE_NEW_REFRESH_TOKEN');
+        expect(tokenStore.authToken).toEqual('FAKE_NEW_AUTH_TOKEN');
+      }),
+    ));
 
     it('should call login() when the server returns 400', inject(
       [AuthService],

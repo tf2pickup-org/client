@@ -17,17 +17,13 @@ describe('HallOfFameComponent', () => {
     hallOfFameService.fetchHallOfFames.and.returnValue(NEVER);
   });
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [HallOfFameComponent],
-        imports: [RouterTestingModule],
-        providers: [
-          { provide: HallOfFameService, useValue: hallOfFameService },
-        ],
-      }).compileComponents();
-    }),
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [HallOfFameComponent],
+      imports: [RouterTestingModule],
+      providers: [{ provide: HallOfFameService, useValue: hallOfFameService }],
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(HallOfFameComponent);

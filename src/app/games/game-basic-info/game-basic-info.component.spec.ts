@@ -5,13 +5,11 @@ describe('GameBasicInfoComponent', () => {
   let component: GameBasicInfoComponent;
   let fixture: ComponentFixture<GameBasicInfoComponent>;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [GameBasicInfoComponent],
-      }).compileComponents();
-    }),
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [GameBasicInfoComponent],
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(GameBasicInfoComponent);

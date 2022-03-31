@@ -10,15 +10,13 @@ describe('NavigationBarComponent', () => {
   let store: MockStore;
   const initialState = { profile: { authenticated: 'not authenticated' } };
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [NavigationBarComponent],
-        providers: [provideMockStore({ initialState })],
-        imports: [RouterTestingModule],
-      }).compileComponents();
-    }),
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [NavigationBarComponent],
+      providers: [provideMockStore({ initialState })],
+      imports: [RouterTestingModule],
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(NavigationBarComponent);
