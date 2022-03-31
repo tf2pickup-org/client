@@ -49,19 +49,17 @@ describe('AddPlayerBanComponent', () => {
     actions = new Subject<Action>();
   });
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [AddPlayerBanComponent],
-        imports: [ReactiveFormsModule, RouterTestingModule],
-        providers: [
-          provideMockStore({ initialState }),
-          { provide: Actions, useValue: actions },
-          { provide: ActivatedRoute, useValue: { paramMap } },
-        ],
-      }).compileComponents();
-    }),
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [AddPlayerBanComponent],
+      imports: [ReactiveFormsModule, RouterTestingModule],
+      providers: [
+        provideMockStore({ initialState }),
+        { provide: Actions, useValue: actions },
+        { provide: ActivatedRoute, useValue: { paramMap } },
+      ],
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     store = TestBed.inject(MockStore);

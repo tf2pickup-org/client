@@ -22,18 +22,16 @@ describe('FooterComponent', () => {
     ]);
   });
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [FooterComponent],
-        imports: [RouterTestingModule],
-        providers: [
-          { provide: AuthService, useValue: authService },
-          provideMockStore(),
-        ],
-      }).compileComponents();
-    }),
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [FooterComponent],
+      imports: [RouterTestingModule],
+      providers: [
+        { provide: AuthService, useValue: authService },
+        provideMockStore(),
+      ],
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     store = TestBed.inject(MockStore);

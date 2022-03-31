@@ -14,23 +14,21 @@ describe('QueueContainerComponent', () => {
   let fixture: ComponentFixture<QueueContainerComponent>;
   let setTitleSpy: jasmine.Spy;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [QueueContainerComponent],
-        imports: [RouterTestingModule],
-        providers: [
-          provideMockStore({
-            selectors: [
-              { selector: queueRequiredPlayerCount, value: 12 },
-              { selector: queueCurrentPlayerCount, value: 5 },
-            ],
-          }),
-        ],
-        schemas: [NO_ERRORS_SCHEMA],
-      }).compileComponents();
-    }),
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [QueueContainerComponent],
+      imports: [RouterTestingModule],
+      providers: [
+        provideMockStore({
+          selectors: [
+            { selector: queueRequiredPlayerCount, value: 12 },
+            { selector: queueCurrentPlayerCount, value: 5 },
+          ],
+        }),
+      ],
+      schemas: [NO_ERRORS_SCHEMA],
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     setTitleSpy = spyOn(TestBed.get(Title), 'setTitle');

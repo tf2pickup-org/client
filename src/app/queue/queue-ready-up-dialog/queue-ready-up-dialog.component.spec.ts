@@ -11,14 +11,12 @@ describe('QueueReadyUpDialogComponent', () => {
   let fixture: ComponentFixture<QueueReadyUpDialogComponent>;
   let store: MockStore<any>;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [QueueReadyUpDialogComponent],
-        providers: [provideMockStore()],
-      }).compileComponents();
-    }),
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [QueueReadyUpDialogComponent],
+      providers: [provideMockStore()],
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     store = TestBed.inject(MockStore);

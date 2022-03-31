@@ -9,14 +9,12 @@ describe('PlayerAvatarComponent', () => {
   let fixture: ComponentFixture<PlayerAvatarComponent>;
   let store: MockStore<any>;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [PlayerAvatarComponent],
-        providers: [provideMockStore()],
-      }).compileComponents();
-    }),
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [PlayerAvatarComponent],
+      providers: [provideMockStore()],
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     store = TestBed.get(Store);

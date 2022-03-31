@@ -14,15 +14,13 @@ describe('PlayerListComponent', () => {
   let store: MockStore<AppState>;
   let allPlayersSelector: MemoizedSelector<AppState, any[]>;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [PlayerListComponent, IsAdminPipe],
-        imports: [RouterTestingModule],
-        providers: [provideMockStore()],
-      }).compileComponents();
-    }),
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [PlayerListComponent, IsAdminPipe],
+      imports: [RouterTestingModule],
+      providers: [provideMockStore()],
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     store = TestBed.inject(MockStore);

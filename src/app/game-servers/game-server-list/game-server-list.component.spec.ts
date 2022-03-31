@@ -16,19 +16,16 @@ describe('GameServerListComponent', () => {
   let allGameServersSelector: MemoizedSelector<AppState, any[]>;
   let isSuperUserSelector: MemoizedSelector<AppState, boolean>;
 
-  beforeEach(
-    waitForAsync(() =>
-      TestBed.configureTestingModule({
-        declarations: [GameServerListComponent],
-        providers: [provideMockStore()],
+  beforeEach(waitForAsync(() =>
+    TestBed.configureTestingModule({
+      declarations: [GameServerListComponent],
+      providers: [provideMockStore()],
+    })
+      // https://github.com/angular/angular/issues/12313
+      .overrideComponent(GameServerListComponent, {
+        set: { changeDetection: ChangeDetectionStrategy.Default },
       })
-        // https://github.com/angular/angular/issues/12313
-        .overrideComponent(GameServerListComponent, {
-          set: { changeDetection: ChangeDetectionStrategy.Default },
-        })
-        .compileComponents(),
-    ),
-  );
+      .compileComponents()));
 
   beforeEach(() => {
     store = TestBed.inject(MockStore);

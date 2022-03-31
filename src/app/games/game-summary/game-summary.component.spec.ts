@@ -10,19 +10,17 @@ describe('GameSummaryComponent', () => {
   let component: GameSummaryComponent;
   let fixture: ComponentFixture<GameSummaryComponent>;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [GameSummaryComponent, MockComponent(FeatherComponent)],
-        imports: [NoopAnimationsModule],
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [GameSummaryComponent, MockComponent(FeatherComponent)],
+      imports: [NoopAnimationsModule],
+    })
+      // https://github.com/angular/angular/issues/12313
+      .overrideComponent(GameSummaryComponent, {
+        set: { changeDetection: ChangeDetectionStrategy.Default },
       })
-        // https://github.com/angular/angular/issues/12313
-        .overrideComponent(GameSummaryComponent, {
-          set: { changeDetection: ChangeDetectionStrategy.Default },
-        })
-        .compileComponents();
-    }),
-  );
+      .compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(GameSummaryComponent);

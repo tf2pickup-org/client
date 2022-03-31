@@ -10,18 +10,16 @@ describe(PlayerDetailsBadgesComponent.name, () => {
   let component: PlayerDetailsBadgesComponent;
   let fixture: ComponentFixture<PlayerDetailsBadgesComponent>;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [PlayerDetailsBadgesComponent, HasBadgePipe, IsAdminPipe],
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [PlayerDetailsBadgesComponent, HasBadgePipe, IsAdminPipe],
+    })
+      // https://github.com/angular/angular/issues/12313
+      .overrideComponent(PlayerDetailsBadgesComponent, {
+        set: { changeDetection: ChangeDetectionStrategy.Default },
       })
-        // https://github.com/angular/angular/issues/12313
-        .overrideComponent(PlayerDetailsBadgesComponent, {
-          set: { changeDetection: ChangeDetectionStrategy.Default },
-        })
-        .compileComponents();
-    }),
-  );
+      .compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PlayerDetailsBadgesComponent);

@@ -11,22 +11,20 @@ describe('QueueSlotItemComponent', () => {
   let component: QueueSlotItemComponent;
   let fixture: ComponentFixture<QueueSlotItemComponent>;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [
-          QueueSlotItemComponent,
-          MockComponent(PlayerAvatarComponent),
-          MockComponent(PlayerNameComponent),
-        ],
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [
+        QueueSlotItemComponent,
+        MockComponent(PlayerAvatarComponent),
+        MockComponent(PlayerNameComponent),
+      ],
+    })
+      // https://github.com/angular/angular/issues/12313
+      .overrideComponent(QueueSlotItemComponent, {
+        set: { changeDetection: ChangeDetectionStrategy.Default },
       })
-        // https://github.com/angular/angular/issues/12313
-        .overrideComponent(QueueSlotItemComponent, {
-          set: { changeDetection: ChangeDetectionStrategy.Default },
-        })
-        .compileComponents();
-    }),
-  );
+      .compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(QueueSlotItemComponent);

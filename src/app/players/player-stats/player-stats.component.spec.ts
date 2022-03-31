@@ -9,21 +9,19 @@ describe('PlayerStatsComponent', () => {
   let component: PlayerStatsComponent;
   let fixture: ComponentFixture<PlayerStatsComponent>;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [
-          PlayerStatsComponent,
-          MockComponent(GameClassIconComponent),
-        ],
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [
+        PlayerStatsComponent,
+        MockComponent(GameClassIconComponent),
+      ],
+    })
+      // https://github.com/angular/angular/issues/12313
+      .overrideComponent(PlayerStatsComponent, {
+        set: { changeDetection: ChangeDetectionStrategy.Default },
       })
-        // https://github.com/angular/angular/issues/12313
-        .overrideComponent(PlayerStatsComponent, {
-          set: { changeDetection: ChangeDetectionStrategy.Default },
-        })
-        .compileComponents();
-    }),
-  );
+      .compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PlayerStatsComponent);

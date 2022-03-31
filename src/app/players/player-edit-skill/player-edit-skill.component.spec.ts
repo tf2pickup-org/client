@@ -11,22 +11,20 @@ describe('PlayerEditSkillComponent', () => {
   let fixture: ComponentFixture<PlayerEditSkillComponent>;
   const formGroup = new FormGroup({ soldier: new FormControl(5) });
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [
-          PlayerEditSkillComponent,
-          MockComponent(GameClassIconComponent),
-        ],
-        imports: [ReactiveFormsModule],
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [
+        PlayerEditSkillComponent,
+        MockComponent(GameClassIconComponent),
+      ],
+      imports: [ReactiveFormsModule],
+    })
+      // https://github.com/angular/angular/issues/12313
+      .overrideComponent(PlayerEditSkillComponent, {
+        set: { changeDetection: ChangeDetectionStrategy.Default },
       })
-        // https://github.com/angular/angular/issues/12313
-        .overrideComponent(PlayerEditSkillComponent, {
-          set: { changeDetection: ChangeDetectionStrategy.Default },
-        })
-        .compileComponents();
-    }),
-  );
+      .compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PlayerEditSkillComponent);

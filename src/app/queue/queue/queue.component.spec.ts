@@ -39,18 +39,16 @@ describe('QueueComponent', () => {
   let fixture: ComponentFixture<QueueComponent>;
   let store: MockStore;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [
-          QueueComponent,
-          MockComponent(QueueClassSlotListComponent),
-          MockComponent(GameClassIconComponent),
-        ],
-        providers: [provideMockStore()],
-      }).compileComponents();
-    }),
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [
+        QueueComponent,
+        MockComponent(QueueClassSlotListComponent),
+        MockComponent(GameClassIconComponent),
+      ],
+      providers: [provideMockStore()],
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     store = TestBed.inject(MockStore);

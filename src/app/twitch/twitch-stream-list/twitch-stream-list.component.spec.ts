@@ -15,17 +15,15 @@ describe('TwitchStreamListComponent', () => {
   let store: MockStore;
   let twitchStreamsSelector: MemoizedSelector<AppState, TwitchStream[]>;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [
-          TwitchStreamListComponent,
-          MockComponent(TwitchStreamListItemComponent),
-        ],
-        providers: [provideMockStore()],
-      }).compileComponents();
-    }),
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [
+        TwitchStreamListComponent,
+        MockComponent(TwitchStreamListItemComponent),
+      ],
+      providers: [provideMockStore()],
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     store = TestBed.inject(MockStore);

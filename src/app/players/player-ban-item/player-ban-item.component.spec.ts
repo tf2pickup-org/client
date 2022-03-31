@@ -7,18 +7,16 @@ describe('PlayerBanItemComponent', () => {
   let component: PlayerBanItemComponent;
   let fixture: ComponentFixture<PlayerBanItemComponent>;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [PlayerBanItemComponent],
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [PlayerBanItemComponent],
+    })
+      // https://github.com/angular/angular/issues/12313
+      .overrideComponent(PlayerBanItemComponent, {
+        set: { changeDetection: ChangeDetectionStrategy.Default },
       })
-        // https://github.com/angular/angular/issues/12313
-        .overrideComponent(PlayerBanItemComponent, {
-          set: { changeDetection: ChangeDetectionStrategy.Default },
-        })
-        .compileComponents();
-    }),
-  );
+      .compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PlayerBanItemComponent);

@@ -5,13 +5,11 @@ describe('PlayerConnectionStatusComponent', () => {
   let component: PlayerConnectionStatusComponent;
   let fixture: ComponentFixture<PlayerConnectionStatusComponent>;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [PlayerConnectionStatusComponent],
-      }).compileComponents();
-    }),
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [PlayerConnectionStatusComponent],
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PlayerConnectionStatusComponent);
