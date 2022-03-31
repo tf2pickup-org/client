@@ -3432,10 +3432,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/marked@npm:^2.0.0":
-  version: 2.0.5
-  resolution: "@types/marked@npm:2.0.5"
-  checksum: 7a0b9d18402a0e20c106ec79ec9d4bd2266a4db409cc8b4ec322b68b40afd0bc67497e9b391bfbe953b934ad0810d90a1b88f7e18404ddf8cd6b085b74ba6893
+"@types/marked@npm:^4.0.2":
+  version: 4.0.3
+  resolution: "@types/marked@npm:4.0.3"
+  checksum: 2fc409a6291cb770688731a444f54e7eab6257c9b565dea4e9d2f3b6654b606e9dd8ea4a924e306b2d2f581dedcb7a27f10f2ca7aed828b11642ab85955341f1
   languageName: node
   linkType: hard
 
@@ -10055,12 +10055,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"marked@npm:^2.0.0":
-  version: 2.1.3
-  resolution: "marked@npm:2.1.3"
+"marked@npm:^4.0.10":
+  version: 4.0.12
+  resolution: "marked@npm:4.0.12"
   bin:
-    marked: bin/marked
-  checksum: 21a5ecd4941bc760aba21dfd97185853ec3b464cf707ad971e3ddb3aeb2f44d0deeb36b0889932afdb6f734975a994d92f18815dd0fabadbd902bdaff997cc5b
+    marked: bin/marked.js
+  checksum: 7575117f85a8986652f3ac8b8a7b95056c4c5fce01a1fc76dc4c7960412cb4c9bd9da8133487159b6b3ff84f52b543dfe9a36f826a5f358892b5ec4b6824f192
   languageName: node
   linkType: hard
 
@@ -10579,23 +10579,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ngx-markdown@npm:13.0.0":
-  version: 13.0.0
-  resolution: "ngx-markdown@npm:13.0.0"
+"ngx-markdown@npm:13.1.0":
+  version: 13.1.0
+  resolution: "ngx-markdown@npm:13.1.0"
   dependencies:
-    "@types/marked": ^2.0.0
+    "@types/marked": ^4.0.2
     emoji-toolkit: ^6.6.0
     katex: ^0.15.1
-    marked: ^2.0.0
+    marked: ^4.0.10
     prismjs: ^1.25.0
     tslib: ^2.3.0
   peerDependencies:
     "@angular/common": ^13.0.0
     "@angular/core": ^13.0.0
     "@angular/platform-browser": ^13.0.0
-    rxjs: ^7.4.0
+    rxjs: ^6.5.3 || ^7.4.0
     zone.js: ^0.11.4
-  checksum: 1d97bfa60fef45f25b1dc43736416fd6c8de106fb0d9e77f864eb152094b7314ea2d58046b863c05b208d035580ef3a5d6ac08d6bbcdea3f9e9907d3751fdfb4
+  checksum: b70e3aaa7c88ffdc4e2bd6721b95ceb2f4c05e50bc71d4a764fa13bb044ae963993db17a97e9fb15ac5770ea65b49c6af02645b3bb510ffb42187581d71cf1a1
   languageName: node
   linkType: hard
 
@@ -14286,7 +14286,7 @@ __metadata:
     ng-inline-svg: 13.1.1
     ng-mocks: 13.3.0
     ngx-bootstrap: 8.0.0
-    ngx-markdown: 13.0.0
+    ngx-markdown: 13.1.0
     ngx-pagination: 5.1.1
     ngx-webstorage-service: 5.0.0
     npm-run-all: 4.1.5
