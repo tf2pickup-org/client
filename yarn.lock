@@ -4512,6 +4512,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"array.prototype.map@npm:^1.0.4":
+  version: 1.0.4
+  resolution: "array.prototype.map@npm:1.0.4"
+  dependencies:
+    call-bind: ^1.0.2
+    define-properties: ^1.1.3
+    es-abstract: ^1.19.0
+    es-array-method-boxes-properly: ^1.0.0
+    is-string: ^1.0.7
+  checksum: 08c8065ae9e60585c1262e54556da2340cd140dc799d790843c1f4ad3a3f458e9866d147c8ff0308741e8316904313f682803ca15c179f65cb2f5b993fa71a82
+  languageName: node
+  linkType: hard
+
 "arrify@npm:^1.0.0, arrify@npm:^1.0.1":
   version: 1.0.1
   resolution: "arrify@npm:1.0.1"
@@ -6717,6 +6730,29 @@ __metadata:
   languageName: node
   linkType: hard
 
+"es-array-method-boxes-properly@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "es-array-method-boxes-properly@npm:1.0.0"
+  checksum: 2537fcd1cecf187083890bc6f5236d3a26bf39237433587e5bf63392e88faae929dbba78ff0120681a3f6f81c23fe3816122982c160d63b38c95c830b633b826
+  languageName: node
+  linkType: hard
+
+"es-get-iterator@npm:^1.0.2":
+  version: 1.1.2
+  resolution: "es-get-iterator@npm:1.1.2"
+  dependencies:
+    call-bind: ^1.0.2
+    get-intrinsic: ^1.1.0
+    has-symbols: ^1.0.1
+    is-arguments: ^1.1.0
+    is-map: ^2.0.2
+    is-set: ^2.0.2
+    is-string: ^1.0.5
+    isarray: ^2.0.5
+  checksum: f75e66acb6a45686fa08b3ade9c9421a70d36a0c43ed4363e67f4d7aab2226cb73dd977cb48abbaf75721b946d3cd810682fcf310c7ad0867802fbf929b17dcf
+  languageName: node
+  linkType: hard
+
 "es-module-lexer@npm:^0.9.0":
   version: 0.9.3
   resolution: "es-module-lexer@npm:0.9.3"
@@ -8743,28 +8779,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"inquirer@npm:8.2.2":
-  version: 8.2.2
-  resolution: "inquirer@npm:8.2.2"
-  dependencies:
-    ansi-escapes: ^4.2.1
-    chalk: ^4.1.1
-    cli-cursor: ^3.1.0
-    cli-width: ^3.0.0
-    external-editor: ^3.0.3
-    figures: ^3.0.0
-    lodash: ^4.17.21
-    mute-stream: 0.0.8
-    ora: ^5.4.1
-    run-async: ^2.4.0
-    rxjs: ^7.5.5
-    string-width: ^4.1.0
-    strip-ansi: ^6.0.0
-    through: ^2.3.6
-  checksum: 69a2cf32f51af0e94dd66c597fdca42b890ff521b537dbfe1fd532c19a751d54893b7896523691ec30357f6212a80a2417fec7bf34411f369bbf151bdbc95ae9
-  languageName: node
-  linkType: hard
-
 "internal-slot@npm:^1.0.3":
   version: 1.0.3
   resolution: "internal-slot@npm:1.0.3"
@@ -8804,7 +8818,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"is-arguments@npm:^1.0.4":
+"is-arguments@npm:^1.0.4, is-arguments@npm:^1.1.0":
   version: 1.1.1
   resolution: "is-arguments@npm:1.1.1"
   dependencies:
@@ -8970,6 +8984,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"is-map@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "is-map@npm:2.0.2"
+  checksum: ace3d0ecd667bbdefdb1852de601268f67f2db725624b1958f279316e13fecb8fa7df91fd60f690d7417b4ec180712f5a7ee967008e27c65cfd475cc84337728
+  languageName: node
+  linkType: hard
+
 "is-negative-zero@npm:^2.0.1":
   version: 2.0.1
   resolution: "is-negative-zero@npm:2.0.1"
@@ -9093,6 +9114,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"is-set@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "is-set@npm:2.0.2"
+  checksum: b64343faf45e9387b97a6fd32be632ee7b269bd8183701f3b3f5b71a7cf00d04450ed8669d0bd08753e08b968beda96fca73a10fd0ff56a32603f64deba55a57
+  languageName: node
+  linkType: hard
+
 "is-shared-array-buffer@npm:^1.0.1":
   version: 1.0.1
   resolution: "is-shared-array-buffer@npm:1.0.1"
@@ -9189,6 +9217,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"isarray@npm:^2.0.5":
+  version: 2.0.5
+  resolution: "isarray@npm:2.0.5"
+  checksum: bd5bbe4104438c4196ba58a54650116007fa0262eccef13a4c55b2e09a5b36b59f1e75b9fcc49883dd9d4953892e6fc007eef9e9155648ceea036e184b0f930a
+  languageName: node
+  linkType: hard
+
 "isarray@npm:~1.0.0":
   version: 1.0.0
   resolution: "isarray@npm:1.0.0"
@@ -9273,6 +9308,23 @@ __metadata:
     html-escaper: ^2.0.0
     istanbul-lib-report: ^3.0.0
   checksum: a9940767ee960fd21d4c9b24c417c15d38725be2f3517a72070e962e088fdf7b813f50985f660cd48436690237fdc5640bab10a1a91e0e94b0e400c212c85f3c
+  languageName: node
+  linkType: hard
+
+"iterate-iterator@npm:^1.0.1":
+  version: 1.0.2
+  resolution: "iterate-iterator@npm:1.0.2"
+  checksum: 97b3ed4f2bebe038be57d03277879e406b2c537ceeeab7f82d4167f9a3cff872cc2cc5da3dc9920ff544ca247329d2a4d44121bb8ef8d0807a72176bdbc17c84
+  languageName: node
+  linkType: hard
+
+"iterate-value@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "iterate-value@npm:1.0.2"
+  dependencies:
+    es-get-iterator: ^1.0.2
+    iterate-iterator: ^1.0.1
+  checksum: 446a4181657df1872e5020713206806757157db6ab375dee05eb4565b66e1244d7a99cd36ce06862261ad4bd059e66ba8192f62b5d1ff41d788c3b61953af6c3
   languageName: node
   linkType: hard
 
@@ -12180,6 +12232,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"promise.allsettled@npm:1.0.5":
+  version: 1.0.5
+  resolution: "promise.allsettled@npm:1.0.5"
+  dependencies:
+    array.prototype.map: ^1.0.4
+    call-bind: ^1.0.2
+    define-properties: ^1.1.3
+    es-abstract: ^1.19.1
+    get-intrinsic: ^1.1.1
+    iterate-value: ^1.0.2
+  checksum: 92775552d3a3487ed924852e5de00a217a202cefc833e8cc169283fe4f7dbe09953505b0c7471b2681e09aa7d064bdbd07b978d44ff536f712e4dcd7c9faba35
+  languageName: node
+  linkType: hard
+
 "prompts@npm:~2.4.2":
   version: 2.4.2
   resolution: "prompts@npm:2.4.2"
@@ -12663,9 +12729,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"release-it@npm:14.14.0":
-  version: 14.14.0
-  resolution: "release-it@npm:14.14.0"
+"release-it@npm:14.14.1":
+  version: 14.14.1
+  resolution: "release-it@npm:14.14.1"
   dependencies:
     "@iarna/toml": 2.2.5
     "@octokit/rest": 18.12.0
@@ -12679,7 +12745,7 @@ __metadata:
     globby: 11.0.4
     got: 11.8.3
     import-cwd: 3.0.0
-    inquirer: 8.2.2
+    inquirer: 8.2.0
     is-ci: 3.0.1
     lodash: 4.17.21
     mime-types: 2.1.35
@@ -12688,7 +12754,8 @@ __metadata:
     ora: 5.4.1
     os-name: 4.0.1
     parse-json: 5.2.0
-    semver: 7.3.5
+    promise.allsettled: 1.0.5
+    semver: 7.3.6
     shelljs: 0.8.5
     update-notifier: 5.1.0
     url-join: 4.0.1
@@ -12698,7 +12765,7 @@ __metadata:
     yargs-parser: 20.2.9
   bin:
     release-it: bin/release-it.js
-  checksum: 0fafde8389d72555f66e34015e27f35fce8b76fd1da0fd03b475b04cd195f89c3b07d7ccb1cc293289c9e29fb4ae0318285d35c22b41e28d7b9062cb0028b6f4
+  checksum: 1cee5b21f33816c92c850433a7d937351575fdc4ec3424ada0474e7da0b5f93aaf420bb145966800f167537e8e27aad121971e205420db2b71f89a8c8e77927d
   languageName: node
   linkType: hard
 
@@ -12974,7 +13041,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rxjs@npm:7.5.5, rxjs@npm:^7.5.5":
+"rxjs@npm:7.5.5":
   version: 7.5.5
   resolution: "rxjs@npm:7.5.5"
   dependencies:
@@ -13175,16 +13242,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"semver@npm:^6.0.0, semver@npm:^6.1.1, semver@npm:^6.1.2, semver@npm:^6.2.0, semver@npm:^6.3.0":
-  version: 6.3.0
-  resolution: "semver@npm:6.3.0"
-  bin:
-    semver: ./bin/semver.js
-  checksum: 1b26ecf6db9e8292dd90df4e781d91875c0dcc1b1909e70f5d12959a23c7eebb8f01ea581c00783bbee72ceeaad9505797c381756326073850dc36ed284b21b9
-  languageName: node
-  linkType: hard
-
-"semver@npm:^7.3.6":
+"semver@npm:7.3.6, semver@npm:^7.3.6":
   version: 7.3.6
   resolution: "semver@npm:7.3.6"
   dependencies:
@@ -13192,6 +13250,15 @@ __metadata:
   bin:
     semver: bin/semver.js
   checksum: 9845f96b22268190b30025e02feca391451f2bd49b2c51920c27cc56744f64cbe397df089018fdb347d4b4fd800eabbd85661870eb63eb28055d2b72e457f759
+  languageName: node
+  linkType: hard
+
+"semver@npm:^6.0.0, semver@npm:^6.1.1, semver@npm:^6.1.2, semver@npm:^6.2.0, semver@npm:^6.3.0":
+  version: 6.3.0
+  resolution: "semver@npm:6.3.0"
+  bin:
+    semver: ./bin/semver.js
+  checksum: 1b26ecf6db9e8292dd90df4e781d91875c0dcc1b1909e70f5d12959a23c7eebb8f01ea581c00783bbee72ceeaad9505797c381756326073850dc36ed284b21b9
   languageName: node
   linkType: hard
 
@@ -14350,7 +14417,7 @@ __metadata:
     postcss: 8.4.12
     prettier: 2.6.2
     protractor: 7.0.0
-    release-it: 14.14.0
+    release-it: 14.14.1
     rxjs: 7.5.5
     socket.io-client: 4.4.1
     stylelint: 14.6.1
