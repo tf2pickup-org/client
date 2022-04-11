@@ -38,11 +38,11 @@ import {
   requestSubstitute,
 } from '../games.actions';
 import { keyBy } from 'lodash-es';
-import { loadGameServer } from '@app/game-servers/game-servers.actions';
 import { Player } from '@app/players/models/player';
 import { GamesService } from '../games.service';
 import { SoundPlayerService } from '@app/shared/sound-player.service';
 import { ConnectInfo } from '../models/connect-info';
+import { GameServersService } from '@app/game-servers/game-servers.service';
 
 const gameInProgress: Game = {
   id: 'FAKE_GAME_ID',
@@ -104,15 +104,6 @@ const endedGame: Game = {
   connectInfoVersion: 1,
 };
 
-const mockGameServer: GameServer = {
-  id: 'FAKE_GAME_SERVER_ID',
-  name: 'FAKE_GAME_SERVER',
-  address: 'FAKE_ADDRESS',
-  port: '12345',
-  isOnline: true,
-  priority: 1,
-};
-
 const mockPlayers = [
   {
     id: 'FAKE_PLAYER_1_ID',
@@ -142,18 +133,10 @@ const mockPlayers = [
   },
 ];
 
-const makeState = (
-  games: Game[],
-  gameServers: GameServer[] = [mockGameServer],
-  players: Player[] = mockPlayers,
-) => ({
+const makeState = (games: Game[], players: Player[] = mockPlayers) => ({
   games: {
     ids: games.map(g => g.id),
     entities: keyBy(games, 'id'),
-  },
-  gameServers: {
-    ids: gameServers.map(gs => gs.id),
-    entities: keyBy(gameServers, 'id'),
   },
   players: {
     players: {
@@ -172,10 +155,12 @@ describe('GameDetailsComponent', () => {
   let store: MockStore<any>;
   let routeParams: Subject<any>;
   let connectInfo: Subject<ConnectInfo>;
+  let gameServer: Subject<GameServer>;
 
   beforeEach(() => {
     routeParams = new Subject();
     connectInfo = new Subject();
+    gameServer = new Subject();
   });
 
   beforeEach(() =>
@@ -188,6 +173,11 @@ describe('GameDetailsComponent', () => {
         fetchConnectInfo: jasmine
           .createSpy('fetchConnectInfo')
           .and.returnValue(connectInfo.asObservable()),
+      })
+      .mock(GameServersService, {
+        fetchGameServer: jasmine
+          .createSpy('fetchGameServer')
+          .and.returnValue(gameServer.asObservable()),
       })
       .mock(Title)
       .mock(GameAdminButtonsComponent)
@@ -240,24 +230,11 @@ describe('GameDetailsComponent', () => {
       );
     });
 
-    describe('without game server', () => {
-      beforeEach(() => {
-        store.setState(makeState([gameInProgress], []));
-        fixture.detectChanges();
-      });
-
-      it('should attempt to load the game server', () => {
-        expect(store.dispatch).toHaveBeenCalledWith(
-          loadGameServer({ gameServerId: 'FAKE_GAME_SERVER_ID' }),
-        );
-      });
-    });
-
     describe('without players', () => {
       beforeEach(() => {
         // @ts-ignore
         store.dispatch.calls.reset();
-        store.setState(makeState([gameInProgress], [mockGameServer], []));
+        store.setState(makeState([gameInProgress], []));
         fixture.detectChanges();
       });
 
@@ -269,6 +246,10 @@ describe('GameDetailsComponent', () => {
     describe('and with the game loaded', () => {
       beforeEach(() => {
         store.setState(makeState([gameInProgress]));
+        gameServer.next({
+          id: 'FAKE_GAME_SERVER_ID',
+          name: 'FAKE_GAME_SERVER',
+        } as GameServer);
         fixture.detectChanges();
       });
 
@@ -276,6 +257,13 @@ describe('GameDetailsComponent', () => {
         const title = TestBed.inject(Title);
         expect(title.setTitle).toHaveBeenCalledWith(
           jasmine.stringMatching(/Pickup #3/),
+        );
+      });
+
+      it('should attempt to load the game server', () => {
+        const gameServersService = TestBed.inject(GameServersService);
+        expect(gameServersService.fetchGameServer).toHaveBeenCalledWith(
+          'FAKE_GAME_SERVER_ID',
         );
       });
 

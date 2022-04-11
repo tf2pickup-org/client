@@ -16,7 +16,6 @@ import { WS_URL } from './ws-url';
 import { CoreModule } from './core/core.module';
 import { GamesModule } from './games/games.module';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
-import { GameServersModule } from './game-servers/game-servers.module';
 import { MarkdownModule } from 'ngx-markdown';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { InlineSVGModule } from 'ng-inline-svg';
@@ -54,7 +53,6 @@ import { DocumentsModule } from './documents/documents.module';
     SharedModule,
     ProfileModule,
     GamesModule,
-    GameServersModule,
     HallOfFameModule,
     NotificationsModule,
     DocumentsModule,
