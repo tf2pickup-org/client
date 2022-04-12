@@ -122,7 +122,7 @@
     "karma-coverage": "2.2.0",
     "karma-jasmine": "4.0.2",
     "karma-jasmine-html-reporter": "1.7.0",
-    "karma-spec-reporter": "0.0.33",
+    "karma-spec-reporter": "0.0.34",
     "ng-mocks": "13.4.2",
     "postcss": "8.4.12",
     "prettier": "2.6.2",
