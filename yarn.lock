@@ -9553,14 +9553,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"karma-spec-reporter@npm:0.0.33":
-  version: 0.0.33
-  resolution: "karma-spec-reporter@npm:0.0.33"
+"karma-spec-reporter@npm:0.0.34":
+  version: 0.0.34
+  resolution: "karma-spec-reporter@npm:0.0.34"
   dependencies:
     colors: 1.4.0
   peerDependencies:
     karma: ">=0.9"
-  checksum: 6218d49ca471f3a12dc4399a5245a76cd3a5d4b2c35a6196a674e27294c2fb09c2abb5177f3f2a1c73ec8ffe6e42f36910faa404421890c0c13bbda5f7b3df16
+  checksum: eaada610a3ecd13fd80bf358e72543e4407f3db22988dc472628e91652b75e97b6b7ad848014875f770fd3536f48777452c5bc9dece052b8030985f29527b459
   languageName: node
   linkType: hard
 
@@ -14250,7 +14250,7 @@ __metadata:
     karma-coverage: 2.2.0
     karma-jasmine: 4.0.2
     karma-jasmine-html-reporter: 1.7.0
-    karma-spec-reporter: 0.0.33
+    karma-spec-reporter: 0.0.34
     lodash-es: 4.17.21
     ng-inline-svg: 13.1.1
     ng-mocks: 13.4.2
