@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { loadGameServer } from '@app/game-servers/game-servers.actions';
-import { gameServerById } from '@app/game-servers/game-servers.selectors';
+import { GameServersService } from '@app/game-servers/game-servers.service';
 import { GameServer } from '@app/game-servers/models/game-server';
 import { loadPlayer } from '@app/players/actions';
 import { Player } from '@app/players/models/player';
@@ -146,16 +145,8 @@ export class GameDetailsStore extends ComponentStore<GameDetailsState> {
   private readonly setGameServerId = this.effect(
     (gameServerId: Observable<string>) =>
       gameServerId.pipe(
-        switchMap(id =>
-          this.store.select(gameServerById(id)).pipe(
-            tap(server => {
-              if (!server) {
-                this.store.dispatch(loadGameServer({ gameServerId: id }));
-              }
-            }),
-          ),
-        ),
-        tap((server: GameServer) => this.setServer(server)),
+        switchMap(id => this.gameServersService.fetchGameServer(id)),
+        tap((server: GameServer) => this.setGameServer(server)),
       ),
   );
 
@@ -202,7 +193,7 @@ export class GameDetailsStore extends ComponentStore<GameDetailsState> {
     }),
   );
 
-  private readonly setServer = this.updater(
+  private readonly setGameServer = this.updater(
     (state, server: GameServer): GameDetailsState => ({
       ...state,
       server,
@@ -230,7 +221,11 @@ export class GameDetailsStore extends ComponentStore<GameDetailsState> {
     }),
   );
 
-  constructor(private store: Store, private gamesService: GamesService) {
+  constructor(
+    private store: Store,
+    private gamesService: GamesService,
+    private gameServersService: GameServersService,
+  ) {
     super({
       game: null,
       server: null,
