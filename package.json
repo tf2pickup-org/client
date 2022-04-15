@@ -97,7 +97,7 @@
     "@angular/compiler-cli": "13.3.3",
     "@angular/language-service": "13.3.3",
     "@ngrx/schematics": "12.5.1",
-    "@release-it/conventional-changelog": "4.2.2",
+    "@release-it/conventional-changelog": "4.3.0",
     "@types/howler": "2.2.7",
     "@types/jasmine": "4.0.3",
     "@types/jasminewd2": "2.0.10",
