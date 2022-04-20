@@ -18,6 +18,7 @@ import { EditPageWrapperComponent } from './edit-page-wrapper.component';
 class TestWrapperComponent {
   title: string;
   saveDisabled = false;
+  submitButton = true;
 }
 
 describe(EditPageWrapperComponent.name, () => {

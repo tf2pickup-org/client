@@ -15,6 +15,7 @@
     </div>
 
     <button saveButton
+      *ngIf="submitButton"
       type="submit"
       class="mdc-button mdc-button--raised mdc-button--secondary mx-2 submit-button"
       [disabled]="saveDisabled">

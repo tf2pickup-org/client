@@ -21,6 +21,10 @@
 <div class="container py-3">
   <ng-template *ngTemplateOutlet="header; context: { $implicit: 'Configuration' }"></ng-template>
 
+  <ng-template *ngTemplateOutlet="item; context: { $implicit: {
+    link: 'game-servers',
+    title: 'Game servers'
+  } }"></ng-template>
   <ng-template *ngTemplateOutlet="item; context: { $implicit: { link: 'map-pool', title: 'Map pool' } }"></ng-template>
   <ng-template *ngTemplateOutlet="item; context: { $implicit: { link: 'whitelist', title: 'Whitelist' } }"></ng-template>
   <ng-template *ngTemplateOutlet="item; context: { $implicit: {
