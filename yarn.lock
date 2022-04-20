@@ -2184,14 +2184,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@es-joy/jsdoccomment@npm:~0.25.0":
-  version: 0.25.0
-  resolution: "@es-joy/jsdoccomment@npm:0.25.0"
+"@es-joy/jsdoccomment@npm:~0.28.0":
+  version: 0.28.0
+  resolution: "@es-joy/jsdoccomment@npm:0.28.0"
   dependencies:
     comment-parser: 1.3.1
     esquery: ^1.4.0
-    jsdoc-type-pratt-parser: ~2.2.5
-  checksum: 31e423412ecefda9875cbd504727e16e8a7a0a11e55e68de4a7bc7455fa210141a179d9b987336c9c792f361e300be933d95a7f86af25614e7cd70c7bb9489c6
+    jsdoc-type-pratt-parser: ~3.0.1
+  checksum: 41756afb28035fb323b03a5f0ce78fa4ae1741dbd602ef89e912ddbdd6d08f2a7060ce46860a738558c680b6e5b26fce6fcd7f3edaa382c7dff13af60203733e
   languageName: node
   linkType: hard
 
@@ -7042,11 +7042,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-jsdoc@npm:39.2.3":
-  version: 39.2.3
-  resolution: "eslint-plugin-jsdoc@npm:39.2.3"
+"eslint-plugin-jsdoc@npm:39.2.5":
+  version: 39.2.5
+  resolution: "eslint-plugin-jsdoc@npm:39.2.5"
   dependencies:
-    "@es-joy/jsdoccomment": ~0.25.0
+    "@es-joy/jsdoccomment": ~0.28.0
     comment-parser: 1.3.1
     debug: ^4.3.4
     escape-string-regexp: ^4.0.0
@@ -7055,7 +7055,7 @@ __metadata:
     spdx-expression-parse: ^3.0.1
   peerDependencies:
     eslint: ^7.0.0 || ^8.0.0
-  checksum: db18c27759edbb09fed7d7a4d61b28b834e563c3aaf007378ceec24e591e816688274b7ef0a209e19579a20527276392eebdc45e455bcd863e34e11d03722bbe
+  checksum: 8a28010e4f73a479d577b8dcd04f7e6fc461b9c00b5069a1fcf62d946765aae4aa9beb5f39f726aaeae056036b0364bf332dc65adb01ddc83c6d38a995354bfe
   languageName: node
   linkType: hard
 
@@ -9353,10 +9353,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jsdoc-type-pratt-parser@npm:~2.2.5":
-  version: 2.2.5
-  resolution: "jsdoc-type-pratt-parser@npm:2.2.5"
-  checksum: 47d68147fae7fe4343e0c1d47cbf55d2d963696e0583a1d398846be06df2df8e149e34a6304e04b6c148839600234e99a860bc712af829fac557fe7e5cd82141
+"jsdoc-type-pratt-parser@npm:~3.0.1":
+  version: 3.0.1
+  resolution: "jsdoc-type-pratt-parser@npm:3.0.1"
+  checksum: 452b3cb843cc31296a608f6bfebf19c7d52e2b872debfaa63ffda3d288915e06a4a1bd0212a0c0a8d6d3f70633c72bc3abfc8ef4755c8453063650f8c0f56694
   languageName: node
   linkType: hard
 
@@ -14239,7 +14239,7 @@ __metadata:
     eslint: 8.13.0
     eslint-config-prettier: 8.5.0
     eslint-plugin-import: 2.26.0
-    eslint-plugin-jsdoc: 39.2.3
+    eslint-plugin-jsdoc: 39.2.5
     eslint-plugin-ngrx: 2.1.2
     eslint-plugin-prefer-arrow: 1.2.3
     eslint-plugin-prettier: 4.0.0
