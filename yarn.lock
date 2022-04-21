@@ -7042,9 +7042,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-jsdoc@npm:39.2.5":
-  version: 39.2.5
-  resolution: "eslint-plugin-jsdoc@npm:39.2.5"
+"eslint-plugin-jsdoc@npm:39.2.6":
+  version: 39.2.6
+  resolution: "eslint-plugin-jsdoc@npm:39.2.6"
   dependencies:
     "@es-joy/jsdoccomment": ~0.28.0
     comment-parser: 1.3.1
@@ -7055,7 +7055,7 @@ __metadata:
     spdx-expression-parse: ^3.0.1
   peerDependencies:
     eslint: ^7.0.0 || ^8.0.0
-  checksum: 8a28010e4f73a479d577b8dcd04f7e6fc461b9c00b5069a1fcf62d946765aae4aa9beb5f39f726aaeae056036b0364bf332dc65adb01ddc83c6d38a995354bfe
+  checksum: a52299da05abca9597ae2f5192180fbd43bfa6ae00c9d4f43bd1163bef192ae73549e2c96d703a0050babd0198f5f13e68824747aac195bac28bee653887eaae
   languageName: node
   linkType: hard
 
@@ -14239,7 +14239,7 @@ __metadata:
     eslint: 8.13.0
     eslint-config-prettier: 8.5.0
     eslint-plugin-import: 2.26.0
-    eslint-plugin-jsdoc: 39.2.5
+    eslint-plugin-jsdoc: 39.2.6
     eslint-plugin-ngrx: 2.1.2
     eslint-plugin-prefer-arrow: 1.2.3
     eslint-plugin-prettier: 4.0.0
