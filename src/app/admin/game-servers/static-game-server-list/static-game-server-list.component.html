@@ -1,0 +1,12 @@
+<div class="mdc-deprecated-list">
+  <a *ngFor="let gameServer of gameServers | async"
+    [routerLink]="['/admin', 'game-servers', gameServer.id]"
+    class="mdc-deprecated-list-item game-server-item">
+    <span class="mdc-deprecated-list-item__ripple"></span>
+    <div class="mdc-deprecated-list-item__text flex-grow-1">
+      <span class="mdc-deprecated-list-item__text">
+        {{ gameServer.name }}
+      </span>
+    </div>
+  </a>
+</div>

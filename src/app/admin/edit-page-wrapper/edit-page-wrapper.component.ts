@@ -12,4 +12,7 @@ export class EditPageWrapperComponent {
 
   @Input()
   saveDisabled = true;
+
+  @Input()
+  submitButton = true;
 }

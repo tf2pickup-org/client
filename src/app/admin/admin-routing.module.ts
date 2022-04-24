@@ -14,6 +14,9 @@ import { WhitelistEditComponent } from './whitelist-edit/whitelist-edit.componen
 import { GameServerResolver } from '@app/game-servers/game-server.resolver';
 import { PlayerRestrictionsComponent } from './player-restrictions/player-restrictions.component';
 import { VoiceServerEditComponent } from './voice-server-edit/voice-server-edit.component';
+import { GameServersComponent } from './game-servers/game-servers.component';
+import { StaticGameServerComponent } from './game-servers/static-game-server/static-game-server.component';
+import { StaticGameServerResolver } from './game-servers/static-game-server.resolver';
 
 const routes: Routes = [
   {
@@ -110,7 +113,25 @@ const routes: Routes = [
         component: PlayerRestrictionsComponent,
         data: {
           title: 'edit player restrictions',
-          Animation: 'PlayerRestrictionsPage',
+          animation: 'PlayerRestrictionsPage',
+        },
+      },
+      {
+        path: 'game-servers',
+        component: GameServersComponent,
+        data: {
+          title: 'manage game servers',
+          animation: 'GameServersPage',
+        },
+      },
+      {
+        path: 'game-servers/:gameServerId',
+        component: StaticGameServerComponent,
+        data: {
+          animation: 'StaticGameServerComponent',
+        },
+        resolve: {
+          gameServer: StaticGameServerResolver,
         },
       },
     ],
