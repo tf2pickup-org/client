@@ -18,7 +18,7 @@ describe(ServemeTfConfigurationComponent.name, () => {
   let component: ServemeTfConfigurationComponent;
   let fixture: MockedComponentFixture<ServemeTfConfigurationComponent>;
   let configuration: Subject<ServemeTfConfiguration>;
-  let mockServers = [
+  const mockServers = [
     {
       flag: 'fr',
     },
