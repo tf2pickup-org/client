@@ -17,6 +17,7 @@ import { VoiceServerEditComponent } from './voice-server-edit/voice-server-edit.
 import { GameServersComponent } from './game-servers/game-servers.component';
 import { StaticGameServerComponent } from './game-servers/static-game-server/static-game-server.component';
 import { StaticGameServerResolver } from './game-servers/static-game-server.resolver';
+import { ServemeTfConfigurationComponent } from './game-servers/serveme-tf-configuration/serveme-tf-configuration.component';
 
 const routes: Routes = [
   {
@@ -125,10 +126,17 @@ const routes: Routes = [
         },
       },
       {
+        path: 'game-servers/serveme-tf',
+        component: ServemeTfConfigurationComponent,
+        data: {
+          animation: 'ServemeTfConfigurationPage',
+        },
+      },
+      {
         path: 'game-servers/:gameServerId',
         component: StaticGameServerComponent,
         data: {
-          animation: 'StaticGameServerComponent',
+          animation: 'StaticGameServerPage',
         },
         resolve: {
           gameServer: StaticGameServerResolver,

@@ -1,11 +1,22 @@
 import { MockBuilder, MockedComponentFixture, MockRender } from 'ng-mocks';
+import { Subject } from 'rxjs';
 import { GameServersComponent } from './game-servers.component';
+import { ServemeTfService } from './serveme-tf.service';
 
 describe(GameServersComponent.name, () => {
   let component: GameServersComponent;
   let fixture: MockedComponentFixture<GameServersComponent>;
+  let servemeTfEnabled: Subject<boolean>;
 
-  beforeEach(() => MockBuilder(GameServersComponent));
+  beforeEach(() => {
+    servemeTfEnabled = new Subject();
+  });
+
+  beforeEach(() =>
+    MockBuilder(GameServersComponent).mock(ServemeTfService, {
+      isEnabled: servemeTfEnabled.asObservable(),
+    }),
+  );
 
   beforeEach(() => {
     fixture = MockRender(GameServersComponent);
