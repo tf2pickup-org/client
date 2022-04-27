@@ -6,6 +6,7 @@ import { QueueSlot } from '../models/queue-slot';
 import { MockComponent } from 'ng-mocks';
 import { PlayerAvatarComponent } from '@app/players/player-avatar/player-avatar.component';
 import { PlayerNameComponent } from '@app/players/player-name/player-name.component';
+import { Tf2ClassName } from '@app/shared/models/tf2-class-name';
 
 describe('QueueSlotItemComponent', () => {
   let component: QueueSlotItemComponent;
@@ -37,7 +38,11 @@ describe('QueueSlotItemComponent', () => {
   });
 
   describe('with an empty slot', () => {
-    const slot: QueueSlot = { id: 0, gameClass: 'soldier', ready: false };
+    const slot: QueueSlot = {
+      id: 0,
+      gameClass: Tf2ClassName.soldier,
+      ready: false,
+    };
     let slotDiv: HTMLElement;
 
     beforeEach(() => {
@@ -88,7 +93,7 @@ describe('QueueSlotItemComponent', () => {
   describe('with an occupied slot', () => {
     const slot: QueueSlot = {
       id: 0,
-      gameClass: 'soldier',
+      gameClass: Tf2ClassName.soldier,
       ready: false,
       playerId: 'FAKE_PLAYER_ID',
     };

@@ -1,5 +1,6 @@
 import { QueueSlot } from './queue/models/queue-slot';
 import { canJoinQueue, awaitsReadyUp } from './selectors';
+import { Tf2ClassName } from './shared/models/tf2-class-name';
 
 describe('canJoinQueue', () => {
   describe('when the user is offline', () => {
@@ -34,7 +35,7 @@ describe('awaitsReadyUp', () => {
     beforeEach(() => {
       mySlot = {
         id: 0,
-        gameClass: 'soldier',
+        gameClass: Tf2ClassName.soldier,
         playerId: 'FAKE_PLAYER_ID',
         ready: false,
       };

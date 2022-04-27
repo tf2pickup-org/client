@@ -46,14 +46,14 @@ const queue: Queue = {
   slots: [
     {
       id: 0,
-      gameClass: 'soldier',
+      gameClass: Tf2ClassName.soldier,
       ready: false,
       playerId: 'FAKE_ID',
       player: { id: 'FAKE_ID' } as Player,
     },
     {
       id: 1,
-      gameClass: 'soldier',
+      gameClass: Tf2ClassName.soldier,
       ready: false,
     },
   ],
@@ -132,14 +132,14 @@ describe('QueueEffects', () => {
       const slots: QueueSlot[] = [
         {
           id: 0,
-          gameClass: 'soldier',
+          gameClass: Tf2ClassName.soldier,
           playerId: 'FAKE_ID_1',
           ready: false,
           player: { id: 'FAKE_ID_1' } as Player,
         },
         {
           id: 1,
-          gameClass: 'medic',
+          gameClass: Tf2ClassName.medic,
           playerId: 'FAKE_ID_2',
           ready: true,
           player: { id: 'FAKE_ID_2' } as Player,
@@ -188,7 +188,7 @@ describe('QueueEffects', () => {
         {
           gameId: 'FAKE_GAME_ID',
           gameNumber: 515,
-          gameClass: 'soldier',
+          gameClass: Tf2ClassName.soldier,
           team: 'BLU',
         },
       ];
@@ -252,7 +252,7 @@ describe('QueueEffects', () => {
     it('should attempt to join the queue', done => {
       const slot: QueueSlot = {
         id: 1,
-        gameClass: 'soldier',
+        gameClass: Tf2ClassName.soldier,
         playerId: 'FAKE_ID_2',
         ready: false,
       };
