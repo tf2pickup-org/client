@@ -6,3 +6,13 @@
     <app-static-game-server-list></app-static-game-server-list>
   </div>
 </app-edit-page-wrapper>
+
+<div class="container">
+  <a *ngIf="isServemeTfEnabled | async"
+    [routerLink]="['serveme-tf']"
+    type="button"
+    class="mdc-button mdc-button--raised mdc-button--secondary mx-2 mt-2">
+    <span class="mdc-button__ripple"></span>
+    <span class="mdc-button__label">Configure serveme.tf integration</span>
+  </a>
+</div>

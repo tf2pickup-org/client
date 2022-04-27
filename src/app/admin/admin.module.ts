@@ -25,6 +25,7 @@ import { VoiceServerEditComponent } from './voice-server-edit/voice-server-edit.
 import { GameServersComponent } from './game-servers/game-servers.component';
 import { StaticGameServerListComponent } from './game-servers/static-game-server-list/static-game-server-list.component';
 import { StaticGameServerComponent } from './game-servers/static-game-server/static-game-server.component';
+import { ServemeTfConfigurationComponent } from './game-servers/serveme-tf-configuration/serveme-tf-configuration.component';
 
 @NgModule({
   imports: [
@@ -58,6 +59,7 @@ import { StaticGameServerComponent } from './game-servers/static-game-server/sta
     GameServersComponent,
     StaticGameServerListComponent,
     StaticGameServerComponent,
+    ServemeTfConfigurationComponent,
   ],
 })
 export class AdminModule {}

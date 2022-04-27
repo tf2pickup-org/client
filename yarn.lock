@@ -5825,6 +5825,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"country-flag-icons@npm:1.4.26":
+  version: 1.4.26
+  resolution: "country-flag-icons@npm:1.4.26"
+  checksum: bf2a8bdb07f4f6b6a6805a7ae9e0bfd12642508ef7c4ca63280a4bc803e212bd0d97c5943db48609766a725984eff42f7285dd9d39aa51fb11f06e820a2604a5
+  languageName: node
+  linkType: hard
+
 "create-require@npm:^1.1.0":
   version: 1.1.1
   resolution: "create-require@npm:1.1.1"
@@ -14186,6 +14193,7 @@ __metadata:
     "@typescript-eslint/parser": 5.21.0
     angular-feather: 6.3.0
     bootstrap: 5.1.3
+    country-flag-icons: 1.4.26
     eslint: 8.14.0
     eslint-config-prettier: 8.5.0
     eslint-plugin-import: 2.26.0

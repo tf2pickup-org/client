@@ -7,6 +7,7 @@ import { GameClassIconComponent } from './game-class-icon/game-class-icon.compon
 import { MapThumbnailPipe } from './map-thumbnail.pipe';
 import { NavigateBackDirective } from './navigate-back.directive';
 import { AsFormGroupPipe } from './as-form-group.pipe';
+import { CountryFlagPipe } from './country-flag.pipe';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { AsFormGroupPipe } from './as-form-group.pipe';
     MapThumbnailPipe,
     NavigateBackDirective,
     AsFormGroupPipe,
+    CountryFlagPipe,
   ],
   imports: [CommonModule],
   exports: [
@@ -27,6 +29,7 @@ import { AsFormGroupPipe } from './as-form-group.pipe';
     MapThumbnailPipe,
     NavigateBackDirective,
     AsFormGroupPipe,
+    CountryFlagPipe,
   ],
 })
 export class SharedModule {}
