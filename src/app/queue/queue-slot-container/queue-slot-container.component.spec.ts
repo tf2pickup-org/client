@@ -10,6 +10,7 @@ import { canJoinQueue } from '@app/selectors';
 import { By } from '@angular/platform-browser';
 import { merge, cloneDeep } from 'lodash-es';
 import { ChangeDetectionStrategy } from '@angular/core';
+import { Tf2ClassName } from '@app/shared/models/tf2-class-name';
 
 const initialState = {
   players: {
@@ -36,13 +37,13 @@ const initialState = {
     slots: [
       {
         id: 0,
-        gameClass: 'soldier',
+        gameClass: Tf2ClassName.soldier,
         playerId: 'FAKE_SOLDIER_ID',
         ready: false,
       },
       {
         id: 1,
-        gameClass: 'soldier',
+        gameClass: Tf2ClassName.soldier,
         playerId: null,
         ready: false,
       },
@@ -51,12 +52,14 @@ const initialState = {
         gameClass: 'medic',
         playerId: 'FAKE_MEDIC_1_ID',
         ready: false,
+        canMakeFriendsWith: [Tf2ClassName.soldier],
       },
       {
         id: 3,
         gameClass: 'medic',
         playerId: 'FAKE_MEDIC_2_ID',
         ready: false,
+        canMakeFriendsWith: [Tf2ClassName.soldier],
       },
     ],
     friendships: [],
@@ -112,9 +115,10 @@ describe('QueueSlotContainerComponent', () => {
     component.slot.subscribe(slot =>
       expect(slot).toEqual({
         id: 2,
-        gameClass: 'medic',
+        gameClass: Tf2ClassName.medic,
         playerId: 'FAKE_MEDIC_1_ID',
         ready: false,
+        canMakeFriendsWith: [Tf2ClassName.soldier],
       }),
     );
   });
@@ -230,7 +234,11 @@ describe('QueueSlotContainerComponent', () => {
   describe('#joinQueue()', () => {
     it('should dispatch the joinQueue action', () => {
       const spy = spyOn(store, 'dispatch');
-      component.joinQueue({ id: 0, gameClass: 'soldier', ready: false });
+      component.joinQueue({
+        id: 0,
+        gameClass: Tf2ClassName.soldier,
+        ready: false,
+      });
       expect(spy).toHaveBeenCalledWith(joinQueue({ slotId: 0 }));
     });
   });

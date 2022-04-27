@@ -2,12 +2,12 @@
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 import { ReplaySubject, combineLatest, of, Observable } from 'rxjs';
 import { QueueSlot } from '../models/queue-slot';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { slotById, mySlot, queueFriendships } from '../queue.selectors';
 import { canJoinQueue } from '@app/selectors';
 import { joinQueue, leaveQueue, markFriend } from '../queue.actions';
 import { switchMap, map, shareReplay } from 'rxjs/operators';
-import { currentPlayer, profile } from '@app/profile/profile.selectors';
+import { currentPlayer } from '@app/profile/profile.selectors';
 import { playerById } from '@app/players/selectors';
 import { FriendFlags } from '../friend-flags';
 
@@ -31,9 +31,8 @@ export class QueueSlotContainerComponent {
   );
 
   canMarkAsFriend = combineLatest([this.store.select(mySlot), this.slot]).pipe(
-    map(
-      ([_mySlot, thisSlot]) =>
-        _mySlot?.gameClass === 'medic' && thisSlot.gameClass !== 'medic',
+    map(([_mySlot, thisSlot]) =>
+      _mySlot?.canMakeFriendsWith?.includes(thisSlot.gameClass),
     ),
   );
 
@@ -54,9 +53,11 @@ export class QueueSlotContainerComponent {
       if (friendship?.sourcePlayerId === player?.id) {
         return of({ canMarkAsFriend: true, markedByMe: true });
       } else if (friendship?.sourcePlayerId) {
-        return this.store.pipe(
-          select(playerById(friendship.sourcePlayerId)),
-          map(markedBy => ({ canMarkAsFriend: true, markedBy })),
+        return (
+          this.store
+            .select(playerById(friendship.sourcePlayerId))
+            // eslint-disable-next-line ngrx/avoid-mapping-selectors
+            .pipe(map(markedBy => ({ canMarkAsFriend: true, markedBy })))
         );
       } else {
         return of({ canMarkAsFriend: true });
@@ -64,10 +65,8 @@ export class QueueSlotContainerComponent {
     }),
   );
 
-  locked = this.store.pipe(
-    select(canJoinQueue),
-    map(r => !r),
-  );
+  // eslint-disable-next-line ngrx/avoid-mapping-selectors
+  locked = this.store.select(canJoinQueue).pipe(map(r => !r));
 
   @Input()
   set slotId(slotId: number) {

@@ -7,6 +7,7 @@ import { MockComponent } from 'ng-mocks';
 import { QueueSlotContainerComponent } from '../queue-slot-container/queue-slot-container.component';
 import { By } from '@angular/platform-browser';
 import { ChangeDetectionStrategy } from '@angular/core';
+import { Tf2ClassName } from '@app/shared/models/tf2-class-name';
 
 describe('QueueClassSlotListComponent', () => {
   let component: QueueClassSlotListComponent;
@@ -71,7 +72,7 @@ describe('QueueClassSlotListComponent', () => {
         expect(slots).toEqual([
           {
             id: 8,
-            gameClass: 'demoman',
+            gameClass: Tf2ClassName.demoman,
             playerId: 'FAKE_PLAYER_ID',
             ready: false,
           },
