@@ -37,6 +37,14 @@
       </a>
     </li>
 
+    <li>
+      <a routerLink="/statistics" routerLinkActive="active"
+        tooltip="Statistics"
+        class="navbar__link navbar__link--icon">
+        <img src="/assets/ui_icon_stats.png">
+      </a>
+    </li>
+
     <ng-container *ngFor="let link of links">
       <li>
         <a [href]="link.target"
