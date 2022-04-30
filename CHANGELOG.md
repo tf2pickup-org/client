@@ -1,3 +1,11 @@
+## [3.22.1](https://github.com/tf2pickup-org/client/compare/3.22.0...3.22.1) (2022-04-30)
+
+
+### Bug Fixes
+
+* **build:** add docker image 'stable' tag ([#1688](https://github.com/tf2pickup-org/client/issues/1688)) ([5ff5a0c](https://github.com/tf2pickup-org/client/commit/5ff5a0c9b738f20e81c861e72bdb8530995783da))
+* **core:** update copyright year ([#1616](https://github.com/tf2pickup-org/client/issues/1616)) ([3896f8e](https://github.com/tf2pickup-org/client/commit/3896f8e4675701f61dcae27283ff3436370ceeb5))
+
 # [3.22.0](https://github.com/tf2pickup-org/client/compare/3.21.1...3.22.0) (2022-02-10)
 
 
