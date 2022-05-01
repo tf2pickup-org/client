@@ -6273,13 +6273,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"echarts@npm:5.2.2":
-  version: 5.2.2
-  resolution: "echarts@npm:5.2.2"
+"echarts@npm:5.3.2":
+  version: 5.3.2
+  resolution: "echarts@npm:5.3.2"
   dependencies:
     tslib: 2.3.0
-    zrender: 5.2.1
-  checksum: ab08a52895ce8e49acccb81673f78400aa5c5a4ae7c0b0bdaeae22036e6e34f94da9d43166718e3b1e1fb1e29e02f419702e21b8b84371747201e7ab01744fca
+    zrender: 5.3.1
+  checksum: a7c2007982809e03b18719d2bf2302d619937b4ada95b1a9a57b5b80383f5f96cf8284313679cc489c9093e9c0d37f21fa08fd555ff7d320611653ce0433b8d3
   languageName: node
   linkType: hard
 
@@ -14371,7 +14371,7 @@ __metadata:
     chart.js: 3.7.1
     chartjs-plugin-datalabels: 2.0.0
     country-flag-icons: 1.4.26
-    echarts: 5.2.2
+    echarts: 5.3.2
     eslint: 8.14.0
     eslint-config-prettier: 8.5.0
     eslint-plugin-import: 2.26.0
@@ -15698,11 +15698,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"zrender@npm:5.2.1":
-  version: 5.2.1
-  resolution: "zrender@npm:5.2.1"
+"zrender@npm:5.3.1":
+  version: 5.3.1
+  resolution: "zrender@npm:5.3.1"
   dependencies:
     tslib: 2.3.0
-  checksum: 4252ca7bd638d23cfef115b9d6a42c6eb893af3e37f25416afc65214139298817d2d3221022b3b2359d36fe7dacc887c8d21cbea454e3d6105f8263d579919e1
+  checksum: 4dccd7cca6ff946f8e2e73d5563b9f7bfe419733e828d72e7fe8b40125ca0201ce9292d528f0df8c9d1896708ffa61f75276adde33c933c125ca1b7b1355bfc5
   languageName: node
   linkType: hard
