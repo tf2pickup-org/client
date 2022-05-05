@@ -15,6 +15,6 @@ export class StaticGameServerListComponent implements OnInit {
   constructor(private gameServersService: GameServersService) {}
 
   ngOnInit() {
-    this.gameServers = this.gameServersService.fetchGameServers();
+    this.gameServers = this.gameServersService.fetchStaticGameServers();
   }
 }

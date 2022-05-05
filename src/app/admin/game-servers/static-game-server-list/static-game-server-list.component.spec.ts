@@ -12,17 +12,17 @@ import { StaticGameServerListComponent } from './static-game-server-list.compone
 describe(StaticGameServerListComponent.name, () => {
   let component: StaticGameServerListComponent;
   let fixture: MockedComponentFixture<StaticGameServerListComponent>;
-  let gameServers: Subject<GameServer[]>;
+  let staticGameServers: Subject<GameServer[]>;
 
   beforeEach(() => {
-    gameServers = new Subject();
+    staticGameServers = new Subject();
   });
 
   beforeEach(() =>
     MockBuilder(StaticGameServerListComponent).mock(GameServersService, {
-      fetchGameServers: jasmine
-        .createSpy('fetchGameServers')
-        .and.returnValue(gameServers.pipe(take(1))),
+      fetchStaticGameServers: jasmine
+        .createSpy('fetchStaticGameServers')
+        .and.returnValue(staticGameServers.pipe(take(1))),
     }),
   );
 
@@ -38,7 +38,7 @@ describe(StaticGameServerListComponent.name, () => {
 
   describe('when the game servers are fetched', () => {
     beforeEach(() => {
-      gameServers.next([
+      staticGameServers.next([
         {
           address: '127.0.0.1',
           port: '27015',
