@@ -1,3 +1,10 @@
+# [3.23.0-beta.1](https://github.com/tf2pickup-org/client/compare/3.23.0-beta.0...3.23.0-beta.1) (2022-05-05)
+
+
+### Bug Fixes
+
+* **game-servers:** fix static game servers endpoint url ([#1704](https://github.com/tf2pickup-org/client/issues/1704)) ([f321e0e](https://github.com/tf2pickup-org/client/commit/f321e0ea87d7533d41c67a19511d10ec5e608fef))
+
 # [3.23.0-beta.0](https://github.com/tf2pickup-org/client/compare/3.22.0...3.23.0-beta.0) (2022-05-05)
 
 
