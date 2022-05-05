@@ -21,8 +21,8 @@ export class GameServersService {
     @Inject(API_URL) private apiUrl: string,
   ) {}
 
-  fetchGameServers(): Observable<GameServer[]> {
-    return this.http.get<GameServer[]>(`${this.apiUrl}/game-servers`);
+  fetchStaticGameServers(): Observable<GameServer[]> {
+    return this.http.get<GameServer[]>(`${this.apiUrl}/static-game-servers`);
   }
 
   fetchGameServer(gameServerId: string): Observable<GameServer> {
@@ -34,7 +34,7 @@ export class GameServersService {
   runDiagnostics(gameServerId: string): Observable<GameServerDiagnosticRun> {
     return this.http
       .post<RunDiagnosticsResponse>(
-        `${this.apiUrl}/game-servers/${gameServerId}/diagnostics`,
+        `${this.apiUrl}/static-game-servers/${gameServerId}/diagnostics`,
         {},
       )
       .pipe(
