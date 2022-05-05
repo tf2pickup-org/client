@@ -1,3 +1,52 @@
+# [3.23.0-beta.0](https://github.com/tf2pickup-org/client/compare/3.22.0...3.23.0-beta.0) (2022-05-05)
+
+
+### Bug Fixes
+
+* **admin:** add static game server list ([#1660](https://github.com/tf2pickup-org/client/issues/1660)) ([f7644b9](https://github.com/tf2pickup-org/client/commit/f7644b9a5462254d159b47c04201a0a64cc1c5d6))
+* **build:** add docker image 'stable' tag ([#1688](https://github.com/tf2pickup-org/client/issues/1688)) ([25c0da5](https://github.com/tf2pickup-org/client/commit/25c0da5ab733bbaf979a00633d35c46ceca2e7fb))
+* **core:** get rid of game-servers page ([#1637](https://github.com/tf2pickup-org/client/issues/1637)) ([59d8995](https://github.com/tf2pickup-org/client/commit/59d89954d3165596ca51ef026d12f5278c4e0a4c))
+* **core:** update copyright year ([#1616](https://github.com/tf2pickup-org/client/issues/1616)) ([db3413e](https://github.com/tf2pickup-org/client/commit/db3413e8a124a93ede5debac33c371665627d5a3))
+* **deps:** update angular monorepo to v13.2.3 ([#1527](https://github.com/tf2pickup-org/client/issues/1527)) ([9811792](https://github.com/tf2pickup-org/client/commit/9811792daf08aa9aca93936f0be88507c3299fe5))
+* **deps:** update angular monorepo to v13.2.4 ([#1542](https://github.com/tf2pickup-org/client/issues/1542)) ([f9a8be2](https://github.com/tf2pickup-org/client/commit/f9a8be2c27a801d095ae1ec0361bfe628502b982))
+* **deps:** update angular monorepo to v13.2.5 ([#1556](https://github.com/tf2pickup-org/client/issues/1556)) ([4752412](https://github.com/tf2pickup-org/client/commit/47524122c32ebb5ba6b68519ddaea9f705bd5243))
+* **deps:** update angular monorepo to v13.2.6 ([#1568](https://github.com/tf2pickup-org/client/issues/1568)) ([3ee5019](https://github.com/tf2pickup-org/client/commit/3ee501957a7fa824416137e53a62ca0379dd69f9))
+* **deps:** update angular monorepo to v13.3.0 ([#1587](https://github.com/tf2pickup-org/client/issues/1587)) ([ebd3fc2](https://github.com/tf2pickup-org/client/commit/ebd3fc29cf359d324d1d62fbd7290ec7dc295424))
+* **deps:** update angular monorepo to v13.3.1 ([#1615](https://github.com/tf2pickup-org/client/issues/1615)) ([e16ed49](https://github.com/tf2pickup-org/client/commit/e16ed4973eb6c049d4d062eba8c4c60301dc4068))
+* **deps:** update angular monorepo to v13.3.2 ([#1627](https://github.com/tf2pickup-org/client/issues/1627)) ([40a0337](https://github.com/tf2pickup-org/client/commit/40a03378015669e92962fa8fe9cef2ebc1eece01))
+* **deps:** update angular monorepo to v13.3.3 ([#1646](https://github.com/tf2pickup-org/client/issues/1646)) ([54dd3c4](https://github.com/tf2pickup-org/client/commit/54dd3c4de00c8b251a14ecbc9786e2221733c069))
+* **deps:** update angular monorepo to v13.3.4 ([#1663](https://github.com/tf2pickup-org/client/issues/1663)) ([024a2bd](https://github.com/tf2pickup-org/client/commit/024a2bd4573fedad725c8afb8bdb357a93e84f54))
+* **deps:** update angular monorepo to v13.3.5 ([#1676](https://github.com/tf2pickup-org/client/issues/1676)) ([9cf6ee0](https://github.com/tf2pickup-org/client/commit/9cf6ee0b2d1a4581466faa112c923af053e0e83c))
+* **deps:** update angular monorepo to v13.3.6 ([#1697](https://github.com/tf2pickup-org/client/issues/1697)) ([bd1608f](https://github.com/tf2pickup-org/client/commit/bd1608f780984167a595cac97e11982c1f2374ee))
+* **deps:** update dependency @angular/cdk to v13.2.3 ([#1525](https://github.com/tf2pickup-org/client/issues/1525)) ([5dcf178](https://github.com/tf2pickup-org/client/commit/5dcf1784c83e265737f0b3bd5c85c6753ff251cd))
+* **deps:** update dependency @angular/cdk to v13.2.4 ([#1541](https://github.com/tf2pickup-org/client/issues/1541)) ([8d3758e](https://github.com/tf2pickup-org/client/commit/8d3758e0506c3420a17eb2c94877bbb7b612a7af))
+* **deps:** update dependency @angular/cdk to v13.2.5 ([#1558](https://github.com/tf2pickup-org/client/issues/1558)) ([dc8b1d6](https://github.com/tf2pickup-org/client/commit/dc8b1d68df3d2f655d325a0df2335d2903521538))
+* **deps:** update dependency @angular/cdk to v13.2.6 ([#1573](https://github.com/tf2pickup-org/client/issues/1573)) ([e1dc97c](https://github.com/tf2pickup-org/client/commit/e1dc97c618b33dbbe09efbd060403b8fcb6d327c))
+* **deps:** update dependency @angular/cdk to v13.3.0 ([#1589](https://github.com/tf2pickup-org/client/issues/1589)) ([4410e07](https://github.com/tf2pickup-org/client/commit/4410e070d34d69e7b9adc65cf5600b617493b9ec))
+* **deps:** update dependency @angular/cdk to v13.3.1 ([#1596](https://github.com/tf2pickup-org/client/issues/1596)) ([8f33ef8](https://github.com/tf2pickup-org/client/commit/8f33ef8d265bcbf51a35a1977d0bac0f05193ad0))
+* **deps:** update dependency @angular/cdk to v13.3.2 ([#1613](https://github.com/tf2pickup-org/client/issues/1613)) ([d7d190e](https://github.com/tf2pickup-org/client/commit/d7d190e6c29be43fb0ab3522f81ffcc668ef1bb1))
+* **deps:** update dependency @angular/cdk to v13.3.3 ([#1648](https://github.com/tf2pickup-org/client/issues/1648)) ([7daa8be](https://github.com/tf2pickup-org/client/commit/7daa8beceb4078672609f77958c0bfe6ddc36f60))
+* **deps:** update dependency @angular/cdk to v13.3.4 ([#1661](https://github.com/tf2pickup-org/client/issues/1661)) ([e2e21e8](https://github.com/tf2pickup-org/client/commit/e2e21e8c54220603b9ccf47e0758a92222628fc1))
+* **deps:** update dependency @angular/cdk to v13.3.5 ([#1679](https://github.com/tf2pickup-org/client/issues/1679)) ([f2bbbad](https://github.com/tf2pickup-org/client/commit/f2bbbadc1d1ecb22055c82297999bb380d77e318))
+* **deps:** update dependency @angular/cdk to v13.3.6 ([#1698](https://github.com/tf2pickup-org/client/issues/1698)) ([d82e73a](https://github.com/tf2pickup-org/client/commit/d82e73a590e21b6dbdb5534b277f1924508bb5d3))
+* **deps:** update dependency chart.js to v3.7.1 ([#1690](https://github.com/tf2pickup-org/client/issues/1690)) ([63f79c0](https://github.com/tf2pickup-org/client/commit/63f79c00244bfc4fe728a5c5c1ca5356983cdeb0))
+* **deps:** update dependency echarts to v5.3.2 ([#1691](https://github.com/tf2pickup-org/client/issues/1691)) ([a391e1f](https://github.com/tf2pickup-org/client/commit/a391e1f0d114d439be2016fe8667e8a424accadc))
+* **deps:** update dependency feather-icons to v4.29.0 ([#1611](https://github.com/tf2pickup-org/client/issues/1611)) ([8fe6bc5](https://github.com/tf2pickup-org/client/commit/8fe6bc5521b72198061f68dd6cd203adaa7349b0))
+* **deps:** update dependency ngx-echarts to v8.0.1 ([#1689](https://github.com/tf2pickup-org/client/issues/1689)) ([6bbc82e](https://github.com/tf2pickup-org/client/commit/6bbc82ebdb79f9a2a0fe9f71c43a551f07471a77))
+* **deps:** update dependency ngx-markdown to v13.1.0 ([#1498](https://github.com/tf2pickup-org/client/issues/1498)) ([fa21fb1](https://github.com/tf2pickup-org/client/commit/fa21fb151a0360b25cdc38c12a0635b9c6623d56))
+* **deps:** update dependency rxjs to v7.5.5 ([#1566](https://github.com/tf2pickup-org/client/issues/1566)) ([c39541b](https://github.com/tf2pickup-org/client/commit/c39541b82880fd6d9a03f670471ce15505c250e7))
+* **deps:** update dependency socket.io-client to v4.5.0 ([#1667](https://github.com/tf2pickup-org/client/issues/1667)) ([63ce988](https://github.com/tf2pickup-org/client/commit/63ce988fe239d7f583bee660afb7253a84035c47))
+* **deps:** update dependency tslib to v2.4.0 ([#1665](https://github.com/tf2pickup-org/client/issues/1665)) ([90fa00c](https://github.com/tf2pickup-org/client/commit/90fa00c1a22f672b5d91b82b73bd1a350e9dd246))
+* **deps:** update dependency zone.js to v0.11.5 ([#1560](https://github.com/tf2pickup-org/client/issues/1560)) ([8e4faca](https://github.com/tf2pickup-org/client/commit/8e4faca0829c05888588cf29d7695bfa9b8d1181))
+* **deps:** update material-components-web monorepo to v14 ([#1680](https://github.com/tf2pickup-org/client/issues/1680)) ([6390426](https://github.com/tf2pickup-org/client/commit/6390426b47f2c351b1370499b5d727378b6f981c))
+* **queue:** handle canMakeFriendsWith flag ([#1677](https://github.com/tf2pickup-org/client/issues/1677)) ([4937c0e](https://github.com/tf2pickup-org/client/commit/4937c0ea5210e7c5312c5e02c6723e972d2020ee))
+
+
+### Features
+
+* **admin:** add serveme.tf configuration module ([#1675](https://github.com/tf2pickup-org/client/issues/1675)) ([89a5281](https://github.com/tf2pickup-org/client/commit/89a52815ee86de2ad9e3d7b8e7b97449f1b6a04a))
+* **statistics:** stats page ([#1360](https://github.com/tf2pickup-org/client/issues/1360)) ([0a445ad](https://github.com/tf2pickup-org/client/commit/0a445ad17d8e8f06bcae812063395f7f3cdb6d8a))
+
 ## [3.22.1](https://github.com/tf2pickup-org/client/compare/3.22.0...3.22.1) (2022-04-30)
 
 
