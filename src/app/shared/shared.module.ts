@@ -8,6 +8,7 @@ import { MapThumbnailPipe } from './map-thumbnail.pipe';
 import { NavigateBackDirective } from './navigate-back.directive';
 import { AsFormGroupPipe } from './as-form-group.pipe';
 import { CountryFlagPipe } from './country-flag.pipe';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { CountryFlagPipe } from './country-flag.pipe';
     NavigateBackDirective,
     AsFormGroupPipe,
     CountryFlagPipe,
+    ConfirmDialogComponent,
   ],
   imports: [CommonModule],
   exports: [
@@ -30,6 +32,7 @@ import { CountryFlagPipe } from './country-flag.pipe';
     NavigateBackDirective,
     AsFormGroupPipe,
     CountryFlagPipe,
+    ConfirmDialogComponent,
   ],
 })
 export class SharedModule {}

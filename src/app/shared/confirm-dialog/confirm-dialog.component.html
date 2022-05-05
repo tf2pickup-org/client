@@ -1,0 +1,33 @@
+<div class="mdc-dialog mdc-dialog--open">
+  <div class="mdc-dialog__container">
+    <div class="mdc-dialog__surface"
+      role="alertdialog"
+      aria-modal="true"
+      aria-labelledby="dialog-title">
+      <!-- Title cannot contain leading whitespace due to mdc-typography-baseline-top() -->
+      <h2 class="mdc-dialog__title" id="dialog-title"><!--
+      -->{{ title }}<!--
+    --></h2>
+      <div class="mdc-dialog__content">
+        {{ supportingText }}
+      </div>
+      <div class="mdc-dialog__actions">
+        <button cancelButton
+          type="button"
+          class="mdc-button mdc-dialog__button"
+          (click)="cancel.emit()">
+          <div class="mdc-button__ripple"></div>
+          <span class="mdc-button__label">{{ cancelText }}</span>
+        </button>
+        <button acceptButton
+          type="button"
+          class="mdc-button mdc-dialog__button"
+          (click)="accept.emit()">
+          <div class="mdc-button__ripple"></div>
+          <span class="mdc-button__label">{{ acceptText }}</span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="mdc-dialog__scrim"></div>
+</div>
