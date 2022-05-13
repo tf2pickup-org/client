@@ -108,7 +108,7 @@
     "@types/jasminewd2": "2.0.10",
     "@types/jwt-decode": "2.2.1",
     "@types/lodash-es": "4.17.6",
-    "@types/node": "16.11.34",
+    "@types/node": "16.11.35",
     "@typescript-eslint/eslint-plugin": "5.23.0",
     "@typescript-eslint/parser": "5.23.0",
     "eslint": "8.15.0",
