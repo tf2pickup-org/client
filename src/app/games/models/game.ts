@@ -17,5 +17,5 @@ export interface Game {
   gameServer?: string;
   stvConnectString?: string;
   score?: Record<Tf2Team, number>;
-  connectInfoVersion: number;
+  connectInfoVersion?: number;
 }

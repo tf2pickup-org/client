@@ -5,7 +5,6 @@ export interface QueueSlot {
   id: number;
   gameClass: Tf2ClassName;
   ready: boolean;
-  playerId?: string;
   player?: Player;
   canMakeFriendsWith?: Tf2ClassName[];
 }

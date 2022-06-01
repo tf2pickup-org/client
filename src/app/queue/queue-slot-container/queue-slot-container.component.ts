@@ -48,7 +48,7 @@ export class QueueSlotContainerComponent {
       }
 
       const friendship = allFriendships.find(
-        f => f.targetPlayerId === theSlot.playerId,
+        f => f.targetPlayerId === theSlot.player?.id,
       );
       if (friendship?.sourcePlayerId === player?.id) {
         return of({ canMarkAsFriend: true, markedByMe: true });

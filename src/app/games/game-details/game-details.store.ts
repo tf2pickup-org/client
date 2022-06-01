@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { GameServersService } from '@app/game-servers/game-servers.service';
 import { GameServer } from '@app/game-servers/models/game-server';
-import { loadPlayer } from '@app/players/actions';
 import { Player } from '@app/players/models/player';
 import { playerById } from '@app/players/selectors';
 import {
@@ -63,7 +62,7 @@ export class GameDetailsStore extends ComponentStore<GameDetailsState> {
     // eslint-disable-next-line no-shadow
     (player, game) =>
       !!game?.slots
-        .find(s => s.player === player?.id)
+        .find(s => s.player?.id === player?.id)
         ?.status.match(/active|waiting for substitute/),
   );
 
@@ -84,8 +83,8 @@ export class GameDetailsStore extends ComponentStore<GameDetailsState> {
       .filter(slot => slot.status.match(/active|waiting for substitute/))
       .map(slot => ({
         ...slot,
-        ...state.players?.[slot.player],
-        classSkill: state.skills?.[slot.player],
+        ...state.players?.[slot.player?.id],
+        classSkill: state.skills?.[slot.player?.id],
       })),
   );
 
@@ -156,12 +155,7 @@ export class GameDetailsStore extends ComponentStore<GameDetailsState> {
         switchMap(_slots => from(_slots)),
         filter(slot => /active|waiting for substitute/.test(slot.status)),
         mergeMap(slot =>
-          this.store.select(playerById(slot.player)).pipe(
-            tap(player => {
-              if (!player) {
-                this.store.dispatch(loadPlayer({ playerId: slot.player }));
-              }
-            }),
+          this.store.select(playerById(slot.player.id)).pipe(
             filter(player => !!player),
             tap(player => this.addPlayer(player)),
           ),
