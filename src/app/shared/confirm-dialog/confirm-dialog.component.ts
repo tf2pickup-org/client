@@ -26,8 +26,8 @@ export class ConfirmDialogComponent {
   cancelText = 'Cancel';
 
   @Output()
-  accept = new EventEmitter<void>();
+  readonly accept = new EventEmitter<void>();
 
   @Output()
-  cancel = new EventEmitter<void>();
+  readonly cancel = new EventEmitter<void>();
 }
