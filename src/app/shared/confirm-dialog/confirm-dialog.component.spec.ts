@@ -6,7 +6,7 @@ import {
 } from 'ng-mocks';
 import { ConfirmDialogComponent } from './confirm-dialog.component';
 
-fdescribe('ConfirmDialogComponent', () => {
+describe('ConfirmDialogComponent', () => {
   let component: ConfirmDialogComponent;
   let fixture: MockedComponentFixture<ConfirmDialogComponent>;
 
