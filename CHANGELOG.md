@@ -1,3 +1,26 @@
+
+
+# [3.23.0-beta.2](https://github.com/tf2pickup-org/client/compare/3.23.0-beta.1...3.23.0-beta.2) (2022-06-02)
+
+
+### Bug Fixes
+
+* **admin:** force end & reinitialize confirm dialog ([#1702](https://github.com/tf2pickup-org/client/issues/1702)) ([c8c7942](https://github.com/tf2pickup-org/client/commit/c8c794278fa8b8cc872137803afaa88f3c0313d6))
+* **deps:** update angular monorepo to v13.3.10 ([#1738](https://github.com/tf2pickup-org/client/issues/1738)) ([7f350fb](https://github.com/tf2pickup-org/client/commit/7f350fbe3161bbda5cdc099beb32e2e117533ae3))
+* **deps:** update angular monorepo to v13.3.11 ([#1746](https://github.com/tf2pickup-org/client/issues/1746)) ([bc37957](https://github.com/tf2pickup-org/client/commit/bc37957596ac477efbeb276c49b1011b29a76480))
+* **deps:** update angular monorepo to v13.3.7 ([#1710](https://github.com/tf2pickup-org/client/issues/1710)) ([2066f83](https://github.com/tf2pickup-org/client/commit/2066f831f049b7c9bfcc7a38c1fb5a3e7696a599))
+* **deps:** update angular monorepo to v13.3.8 ([#1713](https://github.com/tf2pickup-org/client/issues/1713)) ([eb87863](https://github.com/tf2pickup-org/client/commit/eb87863074233e4d39fcb9134f4d886c3030243a))
+* **deps:** update angular monorepo to v13.3.9 ([#1722](https://github.com/tf2pickup-org/client/issues/1722)) ([27fb40e](https://github.com/tf2pickup-org/client/commit/27fb40ed19e11b1b45f997a38903776ed10e5c94))
+* **deps:** update dependency @angular/cdk to v13.3.7 ([#1711](https://github.com/tf2pickup-org/client/issues/1711)) ([bc4cbde](https://github.com/tf2pickup-org/client/commit/bc4cbde690adb657e06645a90ab53fefb6484a64))
+* **deps:** update dependency @angular/cdk to v13.3.8 ([#1739](https://github.com/tf2pickup-org/client/issues/1739)) ([3f74c8f](https://github.com/tf2pickup-org/client/commit/3f74c8f6553f0010d329d379d0c40e69229cf3ca))
+* **deps:** update dependency chart.js to v3.8.0 ([#1736](https://github.com/tf2pickup-org/client/issues/1736)) ([f72fc72](https://github.com/tf2pickup-org/client/commit/f72fc72adb1bb5133e57daea5d9be232a02d9359))
+* **deps:** update dependency country-flag-icons to v1.5.2 ([#1727](https://github.com/tf2pickup-org/client/issues/1727)) ([f2aa826](https://github.com/tf2pickup-org/client/commit/f2aa826f5a7cf49e1acf9e9b3b7f9382c8582b3d))
+* **deps:** update dependency country-flag-icons to v1.5.3 ([#1729](https://github.com/tf2pickup-org/client/issues/1729)) ([078641b](https://github.com/tf2pickup-org/client/commit/078641b79f3fcef2b98cf60801be03a030f89a98))
+* **deps:** update dependency country-flag-icons to v1.5.4 ([#1731](https://github.com/tf2pickup-org/client/issues/1731)) ([b3fce28](https://github.com/tf2pickup-org/client/commit/b3fce28fc528b97a14dd4f88c5f86dd83ba8429a))
+* **deps:** update dependency country-flag-icons to v1.5.5 ([#1744](https://github.com/tf2pickup-org/client/issues/1744)) ([872b32b](https://github.com/tf2pickup-org/client/commit/872b32bd56f7a750b6634a4ae4f99de5455cad22))
+* **deps:** update dependency ngx-pagination to v6 ([#1740](https://github.com/tf2pickup-org/client/issues/1740)) ([8ee2b26](https://github.com/tf2pickup-org/client/commit/8ee2b26d6552e703027d4da680bdbfd2f3841343))
+* **deps:** update dependency socket.io-client to v4.5.1 ([#1720](https://github.com/tf2pickup-org/client/issues/1720)) ([0a13ac5](https://github.com/tf2pickup-org/client/commit/0a13ac5802b01e43ad32c190d02da6554b7aa94d))
+
 # [3.23.0-beta.1](https://github.com/tf2pickup-org/client/compare/3.23.0-beta.0...3.23.0-beta.1) (2022-05-05)
 
 
