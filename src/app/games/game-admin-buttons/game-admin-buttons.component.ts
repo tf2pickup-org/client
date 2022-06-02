@@ -4,10 +4,11 @@ import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
+  OnDestroy,
   Output,
 } from '@angular/core';
 import { ConfirmDialogComponent } from '@app/shared/confirm-dialog/confirm-dialog.component';
-import { race } from 'rxjs';
+import { race, Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-game-admin-buttons',
@@ -15,7 +16,9 @@ import { race } from 'rxjs';
   styleUrls: ['./game-admin-buttons.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GameAdminButtonsComponent {
+export class GameAdminButtonsComponent implements OnDestroy {
+  private destroyed = new Subject<void>();
+
   @Output()
   reinitializeServer = new EventEmitter<void>();
 
@@ -23,6 +26,10 @@ export class GameAdminButtonsComponent {
   forceEnd = new EventEmitter<void>();
 
   constructor(private overlay: Overlay) {}
+
+  ngOnDestroy() {
+    this.destroyed.next();
+  }
 
   confirmReinitializeServer() {
     const overlay = this.overlay.create();
@@ -32,7 +39,7 @@ export class GameAdminButtonsComponent {
     component.instance.title = 'Reinitialize server?';
     component.instance.supportingText =
       'This will kick everyone and re-execute all the configs.';
-    component.instance.accept.subscribe(() => {
+    component.instance.accept.pipe(takeUntil(this.destroyed)).subscribe(() => {
       this.reinitializeServer.emit();
     });
 
@@ -47,7 +54,7 @@ export class GameAdminButtonsComponent {
     const component = overlay.attach(portal);
 
     component.instance.title = 'Force end the game?';
-    component.instance.accept.subscribe(() => {
+    component.instance.accept.pipe(takeUntil(this.destroyed)).subscribe(() => {
       this.forceEnd.emit();
     });
 
