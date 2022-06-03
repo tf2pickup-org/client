@@ -5,7 +5,8 @@ import {
   Output,
   EventEmitter,
 } from '@angular/core';
-import { ResolvedGameSlot } from '../models/resolved-game-slot';
+import { Player } from '@app/players/models/player';
+import { GameSlot } from '../models/game-slot';
 
 @Component({
   selector: 'app-game-team-player-list',
@@ -15,7 +16,7 @@ import { ResolvedGameSlot } from '../models/resolved-game-slot';
 })
 export class GameTeamPlayerListComponent {
   @Input()
-  players: ResolvedGameSlot[];
+  slots: GameSlot[];
 
   @Input()
   showPlayerConnectionStatus = false;
@@ -32,13 +33,13 @@ export class GameTeamPlayerListComponent {
   @Output()
   replacePlayer = new EventEmitter<string>();
 
-  emitRequestSubstitute(event: Event, player: ResolvedGameSlot) {
+  emitRequestSubstitute(event: Event, player: Player) {
     event.preventDefault();
     event.stopPropagation();
     this.requestSubstitute.emit(player.id);
   }
 
-  emitReplacePlayer(player: ResolvedGameSlot) {
+  emitReplacePlayer(player: Player) {
     this.replacePlayer.emit(player.id);
   }
 }

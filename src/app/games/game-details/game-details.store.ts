@@ -1,8 +1,4 @@
 import { Injectable } from '@angular/core';
-import { GameServersService } from '@app/game-servers/game-servers.service';
-import { GameServer } from '@app/game-servers/models/game-server';
-import { Player } from '@app/players/models/player';
-import { playerById } from '@app/players/selectors';
 import {
   activeGameId,
   currentPlayer,
@@ -12,13 +8,12 @@ import {
 } from '@app/profile/profile.selectors';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { Store } from '@ngrx/store';
-import { from, Observable, zip } from 'rxjs';
+import { Observable, zip } from 'rxjs';
 import {
   distinctUntilChanged,
   filter,
   first,
   map,
-  mergeMap,
   switchMap,
   tap,
   withLatestFrom,
@@ -35,13 +30,10 @@ import { GamesService } from '../games.service';
 import { ConnectInfo } from '../models/connect-info';
 import { Game } from '../models/game';
 import { GameSlot } from '../models/game-slot';
-import { ResolvedGameSlot } from '../models/resolved-game-slot';
 import { Tf2Team } from '../models/tf2-team';
 
 interface GameDetailsState {
   game: Game;
-  server: GameServer;
-  players: Record<string, Player>;
   skills: Record<string, number>;
   connectInfo?: ConnectInfo;
 }
@@ -54,7 +46,7 @@ export class GameDetailsStore extends ComponentStore<GameDetailsState> {
     /launching|started/.test(game?.state),
   );
   readonly score = this.select(this.game, game => game?.score);
-  readonly serverName = this.select(state => state.server?.name);
+  readonly serverName = this.select(state => state.game?.gameServer?.name);
 
   readonly isMyGame = this.select(
     this.store.select(currentPlayer),
@@ -78,20 +70,15 @@ export class GameDetailsStore extends ComponentStore<GameDetailsState> {
       /launching|started/.test(game?.state),
   );
 
-  readonly players: Observable<ResolvedGameSlot[]> = this.select(state =>
-    state.game?.slots
-      .filter(slot => slot.status.match(/active|waiting for substitute/))
-      .map(slot => ({
-        ...slot,
-        ...state.players?.[slot.player?.id],
-        classSkill: state.skills?.[slot.player?.id],
-      })),
+  readonly players: Observable<GameSlot[]> = this.select(state =>
+    state.game?.slots.filter(slot =>
+      slot.status.match(/active|waiting for substitute/),
+    ),
   );
 
   readonly showAdminTools = this.select(
     this.store.select(isAdmin),
     this.isRunning,
-    // eslint-disable-next-line no-shadow
     (isAdmin, isRunning) => isAdmin && isRunning,
   );
 
@@ -124,8 +111,6 @@ export class GameDetailsStore extends ComponentStore<GameDetailsState> {
       filter(game => !!game),
       tap(game => this.fetchGameSkills(game.id)),
       tap(game => this.setGame(game)),
-      tap(game => this.setGameServerId(game.gameServer)),
-      tap(game => this.resolvePlayers(game.slots)),
       tap((game: Game) => this.fetchConnectInfo(game)),
     ),
   );
@@ -133,34 +118,10 @@ export class GameDetailsStore extends ComponentStore<GameDetailsState> {
   private readonly fetchGameSkills = this.effect((gameId: Observable<string>) =>
     gameId.pipe(
       withLatestFrom(this.store.select(isAdmin)),
-      // eslint-disable-next-line no-shadow
       filter(([, isAdmin]) => isAdmin),
-      // eslint-disable-next-line no-shadow
       map(([gameId]) => this.gamesService.fetchGameSkills(gameId)),
       map(result => this.setSkills(result)),
     ),
-  );
-
-  private readonly setGameServerId = this.effect(
-    (gameServerId: Observable<string>) =>
-      gameServerId.pipe(
-        switchMap(id => this.gameServersService.fetchGameServer(id)),
-        tap((server: GameServer) => this.setGameServer(server)),
-      ),
-  );
-
-  private readonly resolvePlayers = this.effect(
-    (slots: Observable<GameSlot[]>) =>
-      slots.pipe(
-        switchMap(_slots => from(_slots)),
-        filter(slot => /active|waiting for substitute/.test(slot.status)),
-        mergeMap(slot =>
-          this.store.select(playerById(slot.player.id)).pipe(
-            filter(player => !!player),
-            tap(player => this.addPlayer(player)),
-          ),
-        ),
-      ),
   );
 
   private readonly fetchConnectInfo = this.effect((game: Observable<Game>) =>
@@ -187,20 +148,6 @@ export class GameDetailsStore extends ComponentStore<GameDetailsState> {
     }),
   );
 
-  private readonly setGameServer = this.updater(
-    (state, server: GameServer): GameDetailsState => ({
-      ...state,
-      server,
-    }),
-  );
-
-  private readonly addPlayer = this.updater(
-    (state, player: Player): GameDetailsState => ({
-      ...state,
-      players: { ...state.players, [player.id]: { ...player } },
-    }),
-  );
-
   private readonly setSkills = this.updater(
     (state, skills: Record<string, number>): GameDetailsState => ({
       ...state,
@@ -215,15 +162,9 @@ export class GameDetailsStore extends ComponentStore<GameDetailsState> {
     }),
   );
 
-  constructor(
-    private store: Store,
-    private gamesService: GamesService,
-    private gameServersService: GameServersService,
-  ) {
+  constructor(private store: Store, private gamesService: GamesService) {
     super({
       game: null,
-      server: null,
-      players: null,
       skills: null,
     });
   }

@@ -9,4 +9,8 @@ export interface GameSlot {
   gameClass: string;
   connectionStatus: PlayerConnectionStatus;
   status: SlotStatus;
+
+  // The classSkill field is not a part of the API, but we're
+  // resolving it for admins.
+  classSkill?: number;
 }
