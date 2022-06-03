@@ -118,7 +118,7 @@ export class VoiceServerEditComponent
   }
 
   get type(): VoiceServer['type'] {
-    return this.form.get('type').value;
+    return this.form.get('type').value as SelectedVoiceServer;
   }
 
   save() {

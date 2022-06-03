@@ -46,6 +46,7 @@ export class PlayerEditComponent implements OnInit, AfterViewInit, OnDestroy {
 
   player = this.formBuilder.group({
     name: ['', Validators.required],
+    skill: this.formBuilder.group({}),
   });
   gameClasses = new BehaviorSubject<string[]>([]);
 

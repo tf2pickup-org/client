@@ -6,7 +6,13 @@ import {
   ViewChildren,
   QueryList,
 } from '@angular/core';
-import { FormArray, FormBuilder, Validators } from '@angular/forms';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { filter, skip, take } from 'rxjs/operators';
 import { MapEditComponent } from '../map-edit/map-edit.component';
 import { MapPoolStore } from './map-pool.store';
@@ -20,7 +26,12 @@ import { MapPoolStore } from './map-pool.store';
 })
 export class MapPoolEditComponent implements OnInit {
   form = this.formBuilder.group({
-    maps: this.formBuilder.array([]),
+    maps: this.formBuilder.array<
+      FormGroup<{
+        name: FormControl<string>;
+        execConfig: FormControl<string>;
+      }>
+    >([]),
   });
 
   @ViewChildren(MapEditComponent)
