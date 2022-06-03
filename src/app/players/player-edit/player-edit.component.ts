@@ -46,7 +46,9 @@ export class PlayerEditComponent implements OnInit, AfterViewInit, OnDestroy {
 
   player = this.formBuilder.group({
     name: ['', Validators.required],
-    skill: this.formBuilder.group({}),
+    skill: this.formBuilder.group<{ [className: string]: FormControl<number> }>(
+      {},
+    ),
   });
   gameClasses = new BehaviorSubject<string[]>([]);
 
@@ -89,7 +91,7 @@ export class PlayerEditComponent implements OnInit, AfterViewInit, OnDestroy {
         takeUntil(this.destroyed),
       )
       .subscribe(skill => {
-        this.player.addControl('skill', toFormGroup(skill));
+        this.player.setControl('skill', toFormGroup(skill));
         this.gameClasses.next(Object.keys(skill));
         this.changeDetector.markForCheck();
       });
