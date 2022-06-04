@@ -1,5 +1,14 @@
 
 
+# [3.23.0-beta.3](https://github.com/tf2pickup-org/client/compare/3.23.0-beta.2...3.23.0-beta.3) (2022-06-04)
+
+
+### Bug Fixes
+
+* **deps:** update angular monorepo to v14 (major) ([#1750](https://github.com/tf2pickup-org/client/issues/1750)) ([9702976](https://github.com/tf2pickup-org/client/commit/9702976726e56c48be1b147bea0a0c618b5b9672))
+* **deps:** update dependency @angular/cdk to v13.3.9 ([#1748](https://github.com/tf2pickup-org/client/issues/1748)) ([64ad066](https://github.com/tf2pickup-org/client/commit/64ad066e70282002782a7841b75fe263b74ea61a))
+* update models to server v9 ([#1747](https://github.com/tf2pickup-org/client/issues/1747)) ([54a4073](https://github.com/tf2pickup-org/client/commit/54a407385beb78e319ae9212070561227577aa19))
+
 # [3.23.0-beta.2](https://github.com/tf2pickup-org/client/compare/3.23.0-beta.1...3.23.0-beta.2) (2022-06-02)
 
 
