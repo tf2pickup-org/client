@@ -1,5 +1,12 @@
 
 
+## [3.22.2](https://github.com/tf2pickup-org/client/compare/3.22.1...3.22.2) (2022-06-04)
+
+
+### Bug Fixes
+
+* update steam avatar urls ([#1756](https://github.com/tf2pickup-org/client/issues/1756)) ([3eb9a95](https://github.com/tf2pickup-org/client/commit/3eb9a95ca8ed3215fdc29894b6e04a48d55aece7))
+
 # [3.23.0-beta.4](https://github.com/tf2pickup-org/client/compare/3.23.0-beta.3...3.23.0-beta.4) (2022-06-04)
 
 
