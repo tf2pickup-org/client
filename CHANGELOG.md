@@ -1,5 +1,12 @@
 
 
+# [3.23.0-beta.4](https://github.com/tf2pickup-org/client/compare/3.23.0-beta.3...3.23.0-beta.4) (2022-06-04)
+
+
+### Bug Fixes
+
+* **build:** fix build scripts ([#1754](https://github.com/tf2pickup-org/client/issues/1754)) ([c659c90](https://github.com/tf2pickup-org/client/commit/c659c90586b06938999b9667443d7628e36e0859))
+
 # [3.23.0-beta.3](https://github.com/tf2pickup-org/client/compare/3.23.0-beta.2...3.23.0-beta.3) (2022-06-04)
 
 
