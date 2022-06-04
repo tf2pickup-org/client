@@ -29,7 +29,7 @@ export const queueSlots = createSelector(
   feature => feature.slots,
 );
 export const queueCurrentPlayerCount = createSelector(queueSlots, slots =>
-  slots?.reduce((prev, curr) => (curr.playerId ? prev + 1 : prev), 0),
+  slots?.reduce((prev, curr) => (curr.player ? prev + 1 : prev), 0),
 );
 
 export const queueSlotsForClass = (gameClass: string) =>
@@ -43,7 +43,7 @@ export const slotById = (slotId: number) =>
 export const mySlot = createSelector(
   currentPlayer,
   queueSlots,
-  (player, slots) => player && slots.find(s => s.playerId === player.id),
+  (player, slots) => player && slots.find(s => s.player?.id === player.id),
 );
 
 export const isInQueue = createSelector(mySlot, theSlot => !!theSlot);

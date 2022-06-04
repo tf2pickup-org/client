@@ -64,7 +64,7 @@ export class GamesEffects {
       withLatestFrom(this.store.select(currentPlayer)),
       filter(
         ([{ game }, player]) =>
-          player && !!game.slots.find(s => s.player === player.id),
+          player && !!game.slots.find(s => s.player.id === player.id),
       ),
       map(([{ game }]) => game.id),
       map(gameId => ownGameAdded({ gameId })),

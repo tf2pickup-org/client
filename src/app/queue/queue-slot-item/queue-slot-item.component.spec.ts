@@ -7,6 +7,7 @@ import { MockComponent } from 'ng-mocks';
 import { PlayerAvatarComponent } from '@app/players/player-avatar/player-avatar.component';
 import { PlayerNameComponent } from '@app/players/player-name/player-name.component';
 import { Tf2ClassName } from '@app/shared/models/tf2-class-name';
+import { Player } from '@app/players/models/player';
 
 describe('QueueSlotItemComponent', () => {
   let component: QueueSlotItemComponent;
@@ -95,7 +96,7 @@ describe('QueueSlotItemComponent', () => {
       id: 0,
       gameClass: Tf2ClassName.soldier,
       ready: false,
-      playerId: 'FAKE_PLAYER_ID',
+      player: { id: 'FAKE_PLAYER_ID' } as Player,
     };
     let slotDiv: HTMLElement;
 

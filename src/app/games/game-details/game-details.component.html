@@ -40,7 +40,7 @@
         [team]="team"
         [score]="store.scoreOf(team) | async"></app-game-team-header>
       <app-game-team-player-list
-        [players]="store.playersOf(team) | async"
+        [slots]="store.playersOf(team) | async"
         [showPlayerConnectionStatus]="store.isRunning | async"
         [showAdminActionButtons]="(store.showAdminTools | async)"
         (requestSubstitute)="requestSubstitute($event)"

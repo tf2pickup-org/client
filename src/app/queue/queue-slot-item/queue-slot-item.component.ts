@@ -37,7 +37,7 @@ export class QueueSlotItemComponent {
   markFriend = new EventEmitter<string>();
 
   maybeTakeSlot() {
-    if (!this.locked && !this.slot?.playerId && !this.takenByMe) {
+    if (!this.locked && !this.slot?.player && !this.takenByMe) {
       this.takeSlot.emit(this.slot);
     }
   }

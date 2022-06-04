@@ -8,7 +8,6 @@ import { canJoinQueue } from '@app/selectors';
 import { joinQueue, leaveQueue, markFriend } from '../queue.actions';
 import { switchMap, map, shareReplay } from 'rxjs/operators';
 import { currentPlayer } from '@app/profile/profile.selectors';
-import { playerById } from '@app/players/selectors';
 import { FriendFlags } from '../friend-flags';
 
 @Component({
@@ -48,17 +47,15 @@ export class QueueSlotContainerComponent {
       }
 
       const friendship = allFriendships.find(
-        f => f.targetPlayerId === theSlot.playerId,
+        f => f.targetPlayerId === theSlot.player?.id,
       );
       if (friendship?.sourcePlayerId === player?.id) {
         return of({ canMarkAsFriend: true, markedByMe: true });
       } else if (friendship?.sourcePlayerId) {
-        return (
-          this.store
-            .select(playerById(friendship.sourcePlayerId))
-            // eslint-disable-next-line ngrx/avoid-mapping-selectors
-            .pipe(map(markedBy => ({ canMarkAsFriend: true, markedBy })))
-        );
+        return of({
+          canMarkAsFriend: true,
+          markedBy: friendship.sourcePlayerId,
+        });
       } else {
         return of({ canMarkAsFriend: true });
       }

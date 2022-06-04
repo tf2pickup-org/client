@@ -4,60 +4,39 @@ import { QueueSlotContainerComponent } from './queue-slot-container.component';
 import { MockComponent } from 'ng-mocks';
 import { QueueSlotItemComponent } from '../queue-slot-item/queue-slot-item.component';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
-import { Store } from '@ngrx/store';
 import { joinQueue, markFriend } from '../queue.actions';
 import { canJoinQueue } from '@app/selectors';
 import { By } from '@angular/platform-browser';
 import { merge, cloneDeep } from 'lodash-es';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { Tf2ClassName } from '@app/shared/models/tf2-class-name';
+import { Player } from '@app/players/models/player';
 
 const initialState = {
-  players: {
-    players: {
-      ids: ['FAKE_SOLDIER_ID', 'FAKE_MEDIC_1_ID', 'FAKE_MEDIC_2_ID'],
-      entities: {
-        FAKE_SOLDIER_ID: {
-          name: 'majiwem171',
-          id: 'FAKE_SOLDIER_ID',
-        },
-        FAKE_MEDIC_1_ID: {
-          name: 'maly',
-          id: 'FAKE_MEDIC_1_ID',
-        },
-        FAKE_MEDIC_2_ID: {
-          name: 'niewielki',
-          id: 'FAKE_MEDIC_2_ID',
-        },
-      },
-      locked: false,
-    },
-  },
   queue: {
     slots: [
       {
         id: 0,
         gameClass: Tf2ClassName.soldier,
-        playerId: 'FAKE_SOLDIER_ID',
+        player: { id: 'FAKE_SOLDIER_ID' },
         ready: false,
       },
       {
         id: 1,
         gameClass: Tf2ClassName.soldier,
-        playerId: null,
         ready: false,
       },
       {
         id: 2,
         gameClass: 'medic',
-        playerId: 'FAKE_MEDIC_1_ID',
+        player: { id: 'FAKE_MEDIC_1_ID' },
         ready: false,
         canMakeFriendsWith: [Tf2ClassName.soldier],
       },
       {
         id: 3,
         gameClass: 'medic',
-        playerId: 'FAKE_MEDIC_2_ID',
+        player: { id: 'FAKE_MEDIC_2_ID' },
         ready: false,
         canMakeFriendsWith: [Tf2ClassName.soldier],
       },
@@ -100,7 +79,7 @@ describe('QueueSlotContainerComponent', () => {
   }));
 
   beforeEach(() => {
-    store = TestBed.get(Store);
+    store = TestBed.inject(MockStore);
     fixture = TestBed.createComponent(QueueSlotContainerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -116,7 +95,7 @@ describe('QueueSlotContainerComponent', () => {
       expect(slot).toEqual({
         id: 2,
         gameClass: Tf2ClassName.medic,
-        playerId: 'FAKE_MEDIC_1_ID',
+        player: { id: 'FAKE_MEDIC_1_ID' } as Player,
         ready: false,
         canMakeFriendsWith: [Tf2ClassName.soldier],
       }),
@@ -215,10 +194,7 @@ describe('QueueSlotContainerComponent', () => {
       component.friendFlags.subscribe(value =>
         expect(value).toEqual({
           canMarkAsFriend: true,
-          markedBy: {
-            name: 'niewielki',
-            id: 'FAKE_MEDIC_2_ID',
-          },
+          markedBy: 'FAKE_MEDIC_2_ID',
         } as any),
       );
     });

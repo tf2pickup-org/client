@@ -61,7 +61,7 @@ export class PlayerDetailsGameListComponent implements OnDestroy {
                 this.games.next(
                   response.results.map(game => ({
                     ...game,
-                    classPlayed: game.slots.find(s => s.player === playerId)
+                    classPlayed: game.slots.find(s => s.player.id === playerId)
                       ?.gameClass,
                   })),
                 );

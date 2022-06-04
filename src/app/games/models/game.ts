@@ -1,3 +1,4 @@
+import { GameServer } from '@app/game-servers/models/game-server';
 import { GameSlot } from './game-slot';
 import { GameState } from './game-state';
 import { Tf2Team } from './tf2-team';
@@ -14,8 +15,8 @@ export interface Game {
   state: GameState;
   mumbleUrl?: string;
   error?: string;
-  gameServer?: string;
+  gameServer?: GameServer;
   stvConnectString?: string;
   score?: Record<Tf2Team, number>;
-  connectInfoVersion: number;
+  connectInfoVersion?: number;
 }

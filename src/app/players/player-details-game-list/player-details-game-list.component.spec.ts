@@ -14,6 +14,7 @@ import { GameClassIconComponent } from '@app/shared/game-class-icon/game-class-i
 import { MockComponent } from 'ng-mocks';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { Subject } from 'rxjs';
+import { Player } from '../models/player';
 import { PlayersService } from '../players.service';
 import { PlayerDetailsGameListComponent } from './player-details-game-list.component';
 
@@ -96,14 +97,14 @@ describe('PlayerDetailsGameListComponent', () => {
               state: 'ended',
               slots: [
                 {
-                  player: 'FAKE_PLAYER_ID',
+                  player: { id: 'FAKE_PLAYER_ID' } as Player,
                   gameClass: 'soldier',
                   team: 'blu',
                   connectionStatus: 'offline',
                   status: 'active',
                 },
                 {
-                  player: 'FAKE_PLAYER_ID_2',
+                  player: { id: 'FAKE_PLAYER_ID_2' } as Player,
                   gameClass: 'medic',
                   team: 'red',
                   connectionStatus: 'offline',

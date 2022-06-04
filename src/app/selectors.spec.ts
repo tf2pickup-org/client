@@ -1,3 +1,4 @@
+import { Player } from './players/models/player';
 import { QueueSlot } from './queue/models/queue-slot';
 import { canJoinQueue, awaitsReadyUp } from './selectors';
 import { Tf2ClassName } from './shared/models/tf2-class-name';
@@ -36,7 +37,9 @@ describe('awaitsReadyUp', () => {
       mySlot = {
         id: 0,
         gameClass: Tf2ClassName.soldier,
-        playerId: 'FAKE_PLAYER_ID',
+        player: {
+          id: 'FAKE_PLAYER_ID',
+        } as Player,
         ready: false,
       };
     });

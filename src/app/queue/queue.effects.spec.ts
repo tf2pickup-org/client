@@ -48,7 +48,6 @@ const queue: Queue = {
       id: 0,
       gameClass: Tf2ClassName.soldier,
       ready: false,
-      playerId: 'FAKE_ID',
       player: { id: 'FAKE_ID' } as Player,
     },
     {
@@ -133,14 +132,12 @@ describe('QueueEffects', () => {
         {
           id: 0,
           gameClass: Tf2ClassName.soldier,
-          playerId: 'FAKE_ID_1',
           ready: false,
           player: { id: 'FAKE_ID_1' } as Player,
         },
         {
           id: 1,
           gameClass: Tf2ClassName.medic,
-          playerId: 'FAKE_ID_2',
           ready: true,
           player: { id: 'FAKE_ID_2' } as Player,
         },
@@ -253,7 +250,7 @@ describe('QueueEffects', () => {
       const slot: QueueSlot = {
         id: 1,
         gameClass: Tf2ClassName.soldier,
-        playerId: 'FAKE_ID_2',
+        player: { id: 'FAKE_ID_2' } as Player,
         ready: false,
       };
       queueServiceStub.joinQueue.and.returnValue(of([slot]));
