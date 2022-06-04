@@ -14,10 +14,10 @@ describe('OrderTf2ClassesPipe', () => {
 
   it('should order TF2 classes', () => {
     const slots = [
-      { gameClass: 'soldier' },
-      { gameClass: 'demoman' },
-      { gameClass: 'scout' },
-    ] as GameSlot[];
+      { gameClass: 'soldier' } as GameSlot,
+      { gameClass: 'demoman' } as GameSlot,
+      { gameClass: 'scout' } as GameSlot,
+    ];
 
     expect(pipe.transform(slots)).toEqual([
       { gameClass: 'scout' },

@@ -72,7 +72,7 @@ export class GameDetailsStore extends ComponentStore<GameDetailsState> {
 
   readonly players: Observable<GameSlot[]> = this.select(state =>
     state.game?.slots.filter(slot =>
-      slot.status.match(/active|waiting for substitute/),
+      /active|waiting for substitute/.test(slot.status),
     ),
   );
 
