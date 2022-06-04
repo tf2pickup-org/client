@@ -6,15 +6,15 @@ import {
   ngMocks,
 } from 'ng-mocks';
 import { PlayerConnectionStatusComponent } from '../player-connection-status/player-connection-status.component';
-import { ResolvedGameSlot } from '../models/resolved-game-slot';
 import { OrderTf2ClassesPipe } from '../order-tf2-classes.pipe';
 import { Subject } from 'rxjs';
+import { GameSlot } from '../models/game-slot';
 
 describe('GameTeamPlayerListComponent', () => {
   let component: GameTeamPlayerListComponent;
   let fixture: MockedComponentFixture;
   let inputs: {
-    players: Subject<ResolvedGameSlot[]>;
+    slots: Subject<GameSlot[]>;
     showPlayerConnectionStatus: Subject<boolean>;
     showAdminActionButtons: Subject<boolean>;
     locked: Subject<boolean>;
@@ -22,7 +22,7 @@ describe('GameTeamPlayerListComponent', () => {
 
   beforeEach(() => {
     inputs = {
-      players: new Subject(),
+      slots: new Subject(),
       showPlayerConnectionStatus: new Subject(),
       showAdminActionButtons: new Subject(),
       locked: new Subject(),
@@ -39,14 +39,14 @@ describe('GameTeamPlayerListComponent', () => {
     fixture = MockRender(
       `
       <app-game-team-player-list
-        [players]="players | async"
+        [slots]="slots | async"
         [showPlayerConnectionStatus]="showPlayerConnectionStatus | async"
         [showAdminActionButtons]="showAdminActionButtons | async"
         [locked]="locked | async"
       ></app-game-team-player-list>
     `,
       {
-        players: inputs.players.asObservable(),
+        slots: inputs.slots.asObservable(),
         showPlayerConnectionStatus:
           inputs.showPlayerConnectionStatus.asObservable(),
         showAdminActionButtons: inputs.showAdminActionButtons.asObservable(),
@@ -62,27 +62,28 @@ describe('GameTeamPlayerListComponent', () => {
   });
 
   describe('with players', () => {
-    const mockPlayer: ResolvedGameSlot = {
-      id: 'PLAYER_ID',
-      name: 'FAKE_PLAYER',
-      joinedAt: new Date(),
-      steamId: 'FAKE_STEAM_ID',
-      roles: [],
-      avatar: {
-        small: 'FAKE_SMALL_AVATAR_URL',
-        medium: 'FAKE_MEDIUM_AVATAR_URL',
-        large: 'FAKE_LARGE_AVATAR_URL',
+    const mockPlayer: GameSlot = {
+      player: {
+        id: 'PLAYER_ID',
+        name: 'FAKE_PLAYER',
+        joinedAt: new Date(),
+        steamId: 'FAKE_STEAM_ID',
+        roles: [],
+        avatar: {
+          small: 'FAKE_SMALL_AVATAR_URL',
+          medium: 'FAKE_MEDIUM_AVATAR_URL',
+          large: 'FAKE_LARGE_AVATAR_URL',
+        },
+        _links: [],
       },
-      player: 'FAKE_PLAYER_ID',
       team: 'blu',
       gameClass: 'scout',
       connectionStatus: 'offline',
       status: 'active',
-      _links: [],
     };
 
     beforeEach(() => {
-      inputs.players.next([mockPlayer]);
+      inputs.slots.next([mockPlayer]);
       fixture.detectChanges();
     });
 
@@ -107,7 +108,7 @@ describe('GameTeamPlayerListComponent', () => {
 
       describe('when the player is joining', () => {
         beforeEach(() => {
-          inputs.players.next([{ ...mockPlayer, connectionStatus: 'joining' }]);
+          inputs.slots.next([{ ...mockPlayer, connectionStatus: 'joining' }]);
           fixture.detectChanges();
         });
 
@@ -121,9 +122,7 @@ describe('GameTeamPlayerListComponent', () => {
 
       describe('when the player is connected', () => {
         beforeEach(() => {
-          inputs.players.next([
-            { ...mockPlayer, connectionStatus: 'connected' },
-          ]);
+          inputs.slots.next([{ ...mockPlayer, connectionStatus: 'connected' }]);
           fixture.detectChanges();
         });
 
@@ -159,7 +158,7 @@ describe('GameTeamPlayerListComponent', () => {
 
     describe('when looking for substitute', () => {
       beforeEach(() => {
-        inputs.players.next([
+        inputs.slots.next([
           { ...mockPlayer, status: 'waiting for substitute' },
         ]);
         fixture.detectChanges();
@@ -194,7 +193,7 @@ describe('GameTeamPlayerListComponent', () => {
 
     describe('when skill is defined', () => {
       beforeEach(() => {
-        inputs.players.next([{ ...mockPlayer, classSkill: 0 }]);
+        inputs.slots.next([{ ...mockPlayer, classSkill: 0 }]);
         fixture.detectChanges();
       });
 

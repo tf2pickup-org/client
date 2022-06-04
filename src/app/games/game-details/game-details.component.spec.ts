@@ -1,5 +1,3 @@
-/* eslint-disable id-blacklist */
-/* eslint-disable @typescript-eslint/naming-convention */
 import { TestBed } from '@angular/core/testing';
 import { GameDetailsComponent } from './game-details.component';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
@@ -42,7 +40,34 @@ import { Player } from '@app/players/models/player';
 import { GamesService } from '../games.service';
 import { SoundPlayerService } from '@app/shared/sound-player.service';
 import { ConnectInfo } from '../models/connect-info';
-import { GameServersService } from '@app/game-servers/game-servers.service';
+
+const mockPlayer1 = {
+  id: 'FAKE_PLAYER_1_ID',
+  name: 'FAKE_PLAYER_1',
+  joinedAt: new Date('2019-08-01T13:42:55.121Z'),
+  steamId: 'FAKE_PLAYER_1_STEAM_ID',
+  roles: [],
+  avatar: {
+    small: 'FAKE_PLAYER_1_SMALL_AVATAR_URL',
+    medium: 'FAKE_PLAYER_1_MEDIUM_AVATAR_URL',
+    large: 'FAKE_PLAYER_1_LARGE_AVATAR_URL',
+  },
+  _links: [],
+};
+
+const mockPlayer2 = {
+  id: 'FAKE_PLAYER_2_ID',
+  name: 'FAKE_PLAYER_2',
+  joinedAt: new Date('2019-08-01T13:42:55.121Z'),
+  steamId: 'FAKE_PLAYER_2_STEAM_ID',
+  roles: [],
+  avatar: {
+    small: 'FAKE_PLAYER_2_SMALL_AVATAR_URL',
+    medium: 'FAKE_PLAYER_2_MEDIUM_AVATAR_URL',
+    large: 'FAKE_PLAYER_2_LARGE_AVATAR_URL',
+  },
+  _links: [],
+};
 
 const gameInProgress: Game = {
   id: 'FAKE_GAME_ID',
@@ -50,19 +75,22 @@ const gameInProgress: Game = {
   state: 'launching',
   launchedAt: new Date('2019-07-25T11:42:55.121Z'),
   number: 3,
-  gameServer: 'FAKE_GAME_SERVER_ID',
+  gameServer: {
+    id: 'FAKE_GAME_SERVER_ID',
+    name: 'FAKE_GAME_SERVER',
+  } as GameServer,
   stvConnectString: 'FAKE_STV_CONNECT_STRING',
   mumbleUrl: 'mumble://melkor.tf/tf2pickup/5',
   slots: [
     {
-      player: 'FAKE_PLAYER_1_ID',
+      player: mockPlayer1,
       gameClass: 'soldier',
       team: 'red',
       connectionStatus: 'offline',
       status: 'active',
     },
     {
-      player: 'FAKE_PLAYER_2_ID',
+      player: mockPlayer2,
       gameClass: 'soldier',
       team: 'blu',
       connectionStatus: 'offline',
@@ -78,17 +106,20 @@ const endedGame: Game = {
   state: 'ended',
   launchedAt: new Date('2019-07-25T11:42:55.121Z'),
   number: 3,
-  gameServer: 'FAKE_GAME_SERVER_ID',
+  gameServer: {
+    id: 'FAKE_GAME_SERVER_ID',
+    name: 'FAKE_GAME_SERVER',
+  } as GameServer,
   slots: [
     {
-      player: 'FAKE_PLAYER_1_ID',
+      player: mockPlayer1,
       gameClass: 'soldier',
       team: 'red',
       connectionStatus: 'offline',
       status: 'active',
     },
     {
-      player: 'FAKE_PLAYER_2_ID',
+      player: mockPlayer2,
       gameClass: 'soldier',
       team: 'blu',
       connectionStatus: 'offline',
@@ -104,45 +135,10 @@ const endedGame: Game = {
   connectInfoVersion: 1,
 };
 
-const mockPlayers = [
-  {
-    id: 'FAKE_PLAYER_1_ID',
-    name: 'FAKE_PLAYER_1',
-    joinedAt: new Date('2019-08-01T13:42:55.121Z'),
-    steamId: 'FAKE_PLAYER_1_STEAM_ID',
-    roles: [],
-    avatar: {
-      small: 'FAKE_PLAYER_1_SMALL_AVATAR_URL',
-      medium: 'FAKE_PLAYER_1_MEDIUM_AVATAR_URL',
-      large: 'FAKE_PLAYER_1_LARGE_AVATAR_URL',
-    },
-    _links: [],
-  },
-  {
-    id: 'FAKE_PLAYER_2_ID',
-    name: 'FAKE_PLAYER_2',
-    joinedAt: new Date('2019-08-01T13:42:55.121Z'),
-    steamId: 'FAKE_PLAYER_2_STEAM_ID',
-    roles: [],
-    avatar: {
-      small: 'FAKE_PLAYER_2_SMALL_AVATAR_URL',
-      medium: 'FAKE_PLAYER_2_MEDIUM_AVATAR_URL',
-      large: 'FAKE_PLAYER_2_LARGE_AVATAR_URL',
-    },
-    _links: [],
-  },
-];
-
-const makeState = (games: Game[], players: Player[] = mockPlayers) => ({
+const makeState = (games: Game[]) => ({
   games: {
     ids: games.map(g => g.id),
     entities: keyBy(games, 'id'),
-  },
-  players: {
-    players: {
-      ids: players.map(p => p.id),
-      entities: keyBy(players, 'id'),
-    },
   },
   profile: {
     authenticated: 'unknown',
@@ -155,12 +151,10 @@ describe('GameDetailsComponent', () => {
   let store: MockStore<any>;
   let routeParams: Subject<any>;
   let connectInfo: Subject<ConnectInfo>;
-  let gameServer: Subject<GameServer>;
 
   beforeEach(() => {
     routeParams = new Subject();
     connectInfo = new Subject();
-    gameServer = new Subject();
   });
 
   beforeEach(() =>
@@ -173,11 +167,6 @@ describe('GameDetailsComponent', () => {
         fetchConnectInfo: jasmine
           .createSpy('fetchConnectInfo')
           .and.returnValue(connectInfo.asObservable()),
-      })
-      .mock(GameServersService, {
-        fetchGameServer: jasmine
-          .createSpy('fetchGameServer')
-          .and.returnValue(gameServer.asObservable()),
       })
       .mock(Title)
       .mock(GameAdminButtonsComponent)
@@ -230,26 +219,9 @@ describe('GameDetailsComponent', () => {
       );
     });
 
-    describe('without players', () => {
-      beforeEach(() => {
-        // @ts-ignore
-        store.dispatch.calls.reset();
-        store.setState(makeState([gameInProgress], []));
-        fixture.detectChanges();
-      });
-
-      it('should attempt to load players', () => {
-        expect(store.dispatch).toHaveBeenCalledTimes(2);
-      });
-    });
-
     describe('and with the game loaded', () => {
       beforeEach(() => {
         store.setState(makeState([gameInProgress]));
-        gameServer.next({
-          id: 'FAKE_GAME_SERVER_ID',
-          name: 'FAKE_GAME_SERVER',
-        } as GameServer);
         fixture.detectChanges();
       });
 
@@ -257,13 +229,6 @@ describe('GameDetailsComponent', () => {
         const title = TestBed.inject(Title);
         expect(title.setTitle).toHaveBeenCalledWith(
           jasmine.stringMatching(/Pickup #3/),
-        );
-      });
-
-      it('should attempt to load the game server', () => {
-        const gameServersService = TestBed.inject(GameServersService);
-        expect(gameServersService.fetchGameServer).toHaveBeenCalledWith(
-          'FAKE_GAME_SERVER_ID',
         );
       });
 
@@ -442,14 +407,14 @@ describe('GameDetailsComponent', () => {
                       ...gameInProgress,
                       slots: [
                         {
-                          player: 'FAKE_PLAYER_1_ID',
+                          player: mockPlayer1,
                           gameClass: 'soldier',
                           team: 'red',
                           connectionStatus: 'offline',
                           status: 'waiting for substitute',
                         },
                         {
-                          player: 'FAKE_PLAYER_2_ID',
+                          player: mockPlayer2,
                           gameClass: 'soldier',
                           team: 'blu',
                           connectionStatus: 'offline',
@@ -479,14 +444,14 @@ describe('GameDetailsComponent', () => {
                   ...gameInProgress,
                   slots: [
                     {
-                      player: 'FAKE_PLAYER_1_ID',
+                      player: mockPlayer1,
                       gameClass: 'soldier',
                       team: 'red',
                       connectionStatus: 'offline',
                       status: 'active',
                     },
                     {
-                      player: 'FAKE_PLAYER_2_ID',
+                      player: mockPlayer2,
                       gameClass: 'soldier',
                       team: 'blu',
                       connectionStatus: 'offline',
@@ -502,9 +467,9 @@ describe('GameDetailsComponent', () => {
           it('should not list this player', () => {
             const players = ngMocks
               .findAll(GameTeamPlayerListComponent)
-              .reduce((acc, m) => acc.concat(m.componentInstance.players), []);
+              .reduce((acc, m) => acc.concat(m.componentInstance.slots), []);
             expect(players.length).toEqual(1);
-            expect(players[0].id).toEqual('FAKE_PLAYER_1_ID');
+            expect(players[0].player).toEqual(mockPlayer1);
           });
         });
 
@@ -516,14 +481,14 @@ describe('GameDetailsComponent', () => {
                   ...gameInProgress,
                   slots: [
                     {
-                      player: 'FAKE_PLAYER_1_ID',
+                      player: mockPlayer1,
                       gameClass: 'soldier',
                       team: 'red',
                       connectionStatus: 'offline',
                       status: 'active',
                     },
                     {
-                      player: 'FAKE_PLAYER_2_ID',
+                      player: mockPlayer2,
                       gameClass: 'soldier',
                       team: 'blu',
                       connectionStatus: 'offline',
@@ -539,7 +504,7 @@ describe('GameDetailsComponent', () => {
           it('should list this player', () => {
             const players = ngMocks
               .findAll(GameTeamPlayerListComponent)
-              .reduce((acc, m) => acc.concat(m.componentInstance.players), []);
+              .reduce((acc, m) => acc.concat(m.componentInstance.slots), []);
             expect(players.length).toEqual(2);
           });
         });

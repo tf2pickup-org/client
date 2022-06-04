@@ -12,6 +12,7 @@ import {
   queueFriendships,
 } from './queue.selectors';
 import { QueueSlot } from './models/queue-slot';
+import { Player } from '@app/players/models/player';
 
 describe('queue selectors', () => {
   describe('queueRequiredPlayerCount', () => {
@@ -27,7 +28,7 @@ describe('queue selectors', () => {
   describe('queueCurrentPlayerCount', () => {
     it('returns the correct amount', () => {
       expect(
-        queueCurrentPlayerCount.projector([{ playerId: 'FAKE_ID' }, {}]),
+        queueCurrentPlayerCount.projector([{ player: { id: 'FAKE_ID' } }, {}]),
       ).toBe(1);
     });
   });
@@ -59,12 +60,15 @@ describe('queue selectors', () => {
     it('should return the right slot', () => {
       expect(
         mySlot.projector({ id: 'FAKE_ID' }, [
-          { gameClass: 'soldier', playerId: 'FAKE_ID' },
-          { gameClass: 'scout', playerId: 'FAKE_ID_2' },
+          { gameClass: 'soldier', player: { id: 'FAKE_ID' } },
+          { gameClass: 'scout', player: { id: 'FAKE_ID_2' } },
           { gameClass: 'scout' },
           {},
         ]),
-      ).toEqual({ gameClass: 'soldier', playerId: 'FAKE_ID' } as QueueSlot);
+      ).toEqual({
+        gameClass: 'soldier',
+        player: { id: 'FAKE_ID' },
+      } as QueueSlot);
     });
   });
 

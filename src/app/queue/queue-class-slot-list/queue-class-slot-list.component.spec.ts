@@ -8,6 +8,7 @@ import { QueueSlotContainerComponent } from '../queue-slot-container/queue-slot-
 import { By } from '@angular/platform-browser';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { Tf2ClassName } from '@app/shared/models/tf2-class-name';
+import { Player } from '@app/players/models/player';
 
 describe('QueueClassSlotListComponent', () => {
   let component: QueueClassSlotListComponent;
@@ -21,13 +22,14 @@ describe('QueueClassSlotListComponent', () => {
         {
           id: 0,
           gameClass: 'scout',
-          playerId: null,
           ready: false,
         },
         {
           id: 8,
           gameClass: 'demoman',
-          playerId: 'FAKE_PLAYER_ID',
+          player: {
+            id: 'FAKE_PLAYER_ID',
+          },
           ready: false,
         },
       ],
@@ -73,7 +75,7 @@ describe('QueueClassSlotListComponent', () => {
           {
             id: 8,
             gameClass: Tf2ClassName.demoman,
-            playerId: 'FAKE_PLAYER_ID',
+            player: { id: 'FAKE_PLAYER_ID' } as Player,
             ready: false,
           },
         ]),

@@ -22,6 +22,8 @@ import { NavigationEnd } from '@angular/router';
 import { Socket } from '@app/io/socket';
 import { EventEmitter } from 'eventemitter3';
 import { Game } from './models/game';
+import { Player } from '@app/players/models/player';
+import { GameServer } from '@app/game-servers/models/game-server';
 
 const fakeGame: Game = {
   state: 'launching',
@@ -31,20 +33,22 @@ const fakeGame: Game = {
     {
       status: 'waiting for substitute',
       connectionStatus: 'offline',
-      player: 'PLAYER_ID_1',
+      player: { id: 'PLAYER_ID_1' } as Player,
       gameClass: 'soldier',
       team: 'red',
     },
     {
       status: 'active',
       connectionStatus: 'offline',
-      player: 'PLAYER_ID_2',
+      player: { id: 'PLAYER_ID_2' } as Player,
       gameClass: 'soldier',
       team: 'blu',
     },
   ],
   launchedAt: new Date('2020-01-02T21:54:23.036Z'),
-  gameServer: '5e0145b90ea72823a3059ced',
+  gameServer: {
+    id: '5e0145b90ea72823a3059ced',
+  } as GameServer,
   mumbleUrl: 'mumble://melkor.tf/tf2pickup/1',
   id: 'FAKE_GAME_ID',
   connectInfoVersion: 1,
@@ -160,7 +164,7 @@ describe('GamesEffects', () => {
         number: 1,
         slots: [
           {
-            player: 'FAKE_PLAYER_ID',
+            player: { id: 'FAKE_PLAYER_ID' } as Player,
             gameClass: 'soldier',
             team: 'red',
             connectionStatus: 'connected',
