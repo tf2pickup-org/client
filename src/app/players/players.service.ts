@@ -38,9 +38,13 @@ export class PlayersService {
     offset: number,
     limit: number = 10,
   ): Observable<PaginatedList<Game>> {
-    return this.http.get<PaginatedList<Game>>(
-      `${this.apiUrl}/players/${playerId}/games?offset=${offset}&limit=${limit}`,
-    );
+    return this.http.get<PaginatedList<Game>>(`${this.apiUrl}/games`, {
+      params: {
+        playerId,
+        offset,
+        limit,
+      },
+    });
   }
 
   setPlayerName(playerId: string, name: string): Observable<Player> {
