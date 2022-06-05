@@ -1,5 +1,13 @@
 
 
+# [3.23.0-rc.0](https://github.com/tf2pickup-org/client/compare/3.23.0-beta.4...3.23.0-rc.0) (2022-06-05)
+
+
+### Bug Fixes
+
+* **players:** fix fetchPlayerGames() endpoint ([#1755](https://github.com/tf2pickup-org/client/issues/1755)) ([614e837](https://github.com/tf2pickup-org/client/commit/614e837c5e7c023d21ba889111177992d0424efa))
+* update steam avatar urls ([#1756](https://github.com/tf2pickup-org/client/issues/1756)) ([e55345f](https://github.com/tf2pickup-org/client/commit/e55345f969e5a7aeeb983eef73ed6b674bb5a13a))
+
 ## [3.22.2](https://github.com/tf2pickup-org/client/compare/3.22.1...3.22.2) (2022-06-04)
 
 
