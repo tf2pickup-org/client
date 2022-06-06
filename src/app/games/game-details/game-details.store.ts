@@ -71,9 +71,12 @@ export class GameDetailsStore extends ComponentStore<GameDetailsState> {
   );
 
   readonly players: Observable<GameSlot[]> = this.select(state =>
-    state.game?.slots.filter(slot =>
-      /active|waiting for substitute/.test(slot.status),
-    ),
+    state.game?.slots
+      .filter(slot => /active|waiting for substitute/.test(slot.status))
+      .map(slot => ({
+        ...slot,
+        classSkill: state.skills?.[slot.player.id],
+      })),
   );
 
   readonly showAdminTools = this.select(
