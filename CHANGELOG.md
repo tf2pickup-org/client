@@ -1,5 +1,23 @@
 
 
+# [3.23.0-rc.1](https://github.com/tf2pickup-org/client/compare/3.23.0-rc.0...3.23.0-rc.1) (2022-06-07)
+
+
+### Bug Fixes
+
+* **build:** support release candidate versions ([#1761](https://github.com/tf2pickup-org/client/issues/1761)) ([a7d1627](https://github.com/tf2pickup-org/client/commit/a7d1627feaf39dbfa71cc73e338788128517be9f))
+* **games:** resolve assigned class skill ([#1758](https://github.com/tf2pickup-org/client/issues/1758)) ([36e71e8](https://github.com/tf2pickup-org/client/commit/36e71e8e2869314a15bab02e5ab4768608e7e3b0))
+
+
+### Features
+
+* drop support for NodeJS 14 ([#1760](https://github.com/tf2pickup-org/client/issues/1760)) ([b00b992](https://github.com/tf2pickup-org/client/commit/b00b992eb0ad402054cfc37b90d2bd674333fa7c))
+
+
+### BREAKING CHANGES
+
+* Support for NodeJS v14 has been removed
+
 # [3.23.0-rc.0](https://github.com/tf2pickup-org/client/compare/3.23.0-beta.4...3.23.0-rc.0) (2022-06-05)
 
 
