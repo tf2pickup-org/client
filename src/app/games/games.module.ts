@@ -22,6 +22,7 @@ import { IconsModule } from '@app/icons/icons.module';
 import { GameAdminButtonsComponent } from './game-admin-buttons/game-admin-buttons.component';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { OrderTf2ClassesPipe } from './order-tf2-classes.pipe';
+import { PlayersInTeamPipe } from './game-details/players-in-team.pipe';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { OrderTf2ClassesPipe } from './order-tf2-classes.pipe';
     GameTeamHeaderComponent,
     GameAdminButtonsComponent,
     OrderTf2ClassesPipe,
+    PlayersInTeamPipe,
   ],
   imports: [
     CommonModule,

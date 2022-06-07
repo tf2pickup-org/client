@@ -172,12 +172,6 @@ export class GameDetailsStore extends ComponentStore<GameDetailsState> {
     });
   }
 
-  playersOf(team: Tf2Team) {
-    return this.select(this.players, players =>
-      players.filter(p => p.team === team),
-    );
-  }
-
   scoreOf(team: Tf2Team) {
     return this.select(this.score, score => score?.[team]);
   }

@@ -40,6 +40,7 @@ import { Player } from '@app/players/models/player';
 import { GamesService } from '../games.service';
 import { SoundPlayerService } from '@app/shared/sound-player.service';
 import { ConnectInfo } from '../models/connect-info';
+import { PlayersInTeamPipe } from './players-in-team.pipe';
 
 const mockPlayer1 = {
   id: 'FAKE_PLAYER_1_ID',
@@ -176,7 +177,8 @@ describe('GameDetailsComponent', () => {
       .mock(JoinVoiceButtonComponent)
       .mock(GameTeamHeaderComponent)
       .mock(GameTeamPlayerListComponent)
-      .mock(SoundPlayerService),
+      .mock(SoundPlayerService)
+      .keep(PlayersInTeamPipe),
   );
 
   beforeEach(() => {
@@ -257,6 +259,9 @@ describe('GameDetailsComponent', () => {
             `.team-${team} app-game-team-player-list`,
           )?.componentInstance as GameTeamPlayerListComponent;
           expect(gameTeamPlayerList).toBeTruthy();
+          expect(
+            gameTeamPlayerList.slots.every(slot => slot.team === team),
+          ).toBe(true);
           expect(gameTeamPlayerList.showAdminActionButtons).toBe(false);
           expect(gameTeamPlayerList.locked).toBe(true);
         }),
