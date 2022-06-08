@@ -30,12 +30,9 @@
       <dd class="col-9">{{ _gameServer.name }}</dd>
     </dl>
     <dl class="row">
-      <dt class="col-3">Custom voice channel name:</dt>
+      <dt class="col-3">Address:</dt>
       <dd class="col-9">
-        <ng-container *ngIf="_gameServer.customVoiceChannelName === ''">
-          <i>not set</i>
-        </ng-container>
-        {{ _gameServer.customVoiceChannelName }}
+        {{ _gameServer.address }}:{{ _gameServer.port }}
       </dd>
     </dl>
   </div>
