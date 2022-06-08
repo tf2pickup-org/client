@@ -42,12 +42,8 @@ describe(StaticGameServerListComponent.name, () => {
         {
           address: '127.0.0.1',
           port: '27015',
-          provider: 'static',
           createdAt: new Date('2022-04-11T15:44:28.823Z'),
-          customVoiceChannelName: '',
-          lastHeartbeatAt: new Date(),
           name: 'A Team Fortress 2 server',
-          priority: 1,
           id: '62544cdc4c2be3455df94cb4',
         },
       ]);

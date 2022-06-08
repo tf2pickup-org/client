@@ -40,8 +40,6 @@ describe('StaticGameServerResolver', () => {
         name: 'FAKE_GAMESERVER',
         address: '127.0.0.1',
         port: '27015',
-        priority: 1,
-        provider: 'static',
       };
     });
 
