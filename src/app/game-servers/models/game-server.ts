@@ -3,9 +3,5 @@ export interface GameServer {
   name: string;
   address: string;
   port: string;
-  priority: number;
-  customVoiceChannelName?: string;
-  provider: string;
   createdAt?: Date;
-  lastHeartbeatAt?: Date;
 }
