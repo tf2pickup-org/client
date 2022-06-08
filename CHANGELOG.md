@@ -1,5 +1,13 @@
 
 
+# [3.23.0](https://github.com/tf2pickup-org/client/compare/3.23.0-rc.1...3.23.0) (2022-06-08)
+
+
+### Bug Fixes
+
+* **admin:** fix game server details page ([#1764](https://github.com/tf2pickup-org/client/issues/1764)) ([264dd0c](https://github.com/tf2pickup-org/client/commit/264dd0c15c3487b2f3f077a138ed5d8c490c55fa))
+* **deps:** update dependency @angular/cdk to v14.0.1 ([#1762](https://github.com/tf2pickup-org/client/issues/1762)) ([2cb93f0](https://github.com/tf2pickup-org/client/commit/2cb93f093ba11b596d393467bdf20b439824c683))
+
 # [3.23.0-rc.1](https://github.com/tf2pickup-org/client/compare/3.23.0-rc.0...3.23.0-rc.1) (2022-06-07)
 
 
