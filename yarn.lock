@@ -9822,9 +9822,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"karma@npm:6.3.20":
-  version: 6.3.20
-  resolution: "karma@npm:6.3.20"
+"karma@npm:6.4.0":
+  version: 6.4.0
+  resolution: "karma@npm:6.4.0"
   dependencies:
     "@colors/colors": 1.5.0
     body-parser: ^1.19.0
@@ -9852,7 +9852,7 @@ __metadata:
     yargs: ^16.1.1
   bin:
     karma: bin/karma
-  checksum: 7060afc367c49b2ce2e145f6555c428eadfd72bd68a5d4ae392ec51c8d1c0484706fdd52cfd06d69a811c25517fd5129689a69173be850814dc68c3b7eafa6c8
+  checksum: c449df10aebea344ec8771b7cc35e571c783e452a1e4659a90849d0695488bebca8bf27d5ee9165de6dc3c5f4ba04ee5d67789c2b6ed45f1400268fa27f6682e
   languageName: node
   linkType: hard
 
@@ -14659,7 +14659,7 @@ __metadata:
     jasmine-core: 4.2.0
     jasmine-spec-reporter: 7.0.0
     jwt-decode: 3.1.2
-    karma: 6.3.20
+    karma: 6.4.0
     karma-chrome-launcher: 3.1.1
     karma-coverage: 2.2.0
     karma-jasmine: 4.0.2
