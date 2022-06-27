@@ -52,6 +52,8 @@ jobs:
             apiUrl: api.hl.br.tf2pickup.org
           - branding: tf2pickup.asia
             apiUrl: api.tf2pickup.asia
+          - branding: ultiduo.tf2pickup.eu
+            apiUrl: ultiduo.tf2pickup.eu
 
     steps:
       - name: Docker meta
