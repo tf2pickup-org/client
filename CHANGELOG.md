@@ -1,5 +1,24 @@
 
 
+# [3.24.0](https://github.com/tf2pickup-org/client/compare/3.23.0...3.24.0) (2022-06-27)
+
+
+### Bug Fixes
+
+* **deps:** update angular monorepo ([#1780](https://github.com/tf2pickup-org/client/issues/1780)) ([2b38599](https://github.com/tf2pickup-org/client/commit/2b3859974a1fecb2b074546733ab57095134f726))
+* **deps:** update angular monorepo to v14.0.1 ([#1767](https://github.com/tf2pickup-org/client/issues/1767)) ([7caf25a](https://github.com/tf2pickup-org/client/commit/7caf25a65e7bf1caba01cb325a7fb753937dcda7))
+* **deps:** update angular monorepo to v14.0.3 ([#1791](https://github.com/tf2pickup-org/client/issues/1791)) ([373a49a](https://github.com/tf2pickup-org/client/commit/373a49a2129eda5866c543f848e2f95749d1838b))
+* **deps:** update dependency @angular/cdk to v14.0.2 ([#1783](https://github.com/tf2pickup-org/client/issues/1783)) ([719eb0f](https://github.com/tf2pickup-org/client/commit/719eb0f79cb2181440afc7db7b9c3e85b1cffd41))
+* **deps:** update dependency @angular/cdk to v14.0.3 ([#1793](https://github.com/tf2pickup-org/client/issues/1793)) ([8d703e6](https://github.com/tf2pickup-org/client/commit/8d703e68df0f6e3a4123eacdb0840f4b44d73438))
+* **deps:** update dependency echarts to v5.3.3 ([#1774](https://github.com/tf2pickup-org/client/issues/1774)) ([474e0b9](https://github.com/tf2pickup-org/client/commit/474e0b9017a28d25045c902050a1cc7585fd7edf))
+* **deps:** update dependency ngx-echarts to v14 ([#1789](https://github.com/tf2pickup-org/client/issues/1789)) ([8c51d1d](https://github.com/tf2pickup-org/client/commit/8c51d1d3a899f605ea0ac07511d47feb5bbdeab8))
+* **deps:** update dependency ngx-markdown to v14 ([#1781](https://github.com/tf2pickup-org/client/issues/1781)) ([25bc13e](https://github.com/tf2pickup-org/client/commit/25bc13eb8bc5fbe0093041163dcb7105a21a2761))
+
+
+### Features
+
+* **ultiduo.tf2pickup.eu:** add ultiduo.tf2pickup.eu branding ([#1798](https://github.com/tf2pickup-org/client/issues/1798)) ([7083d3f](https://github.com/tf2pickup-org/client/commit/7083d3f23c7a6b455faa9846929cd389455ef63d))
+
 # [3.23.0](https://github.com/tf2pickup-org/client/compare/3.23.0-rc.1...3.23.0) (2022-06-08)
 
 
