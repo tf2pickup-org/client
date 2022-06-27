@@ -82,7 +82,7 @@
     "lodash-es": "4.17.21",
     "ng-inline-svg": "13.1.1",
     "ngx-bootstrap": "8.0.0",
-    "ngx-echarts": "8.0.1",
+    "ngx-echarts": "14.0.0",
     "ngx-markdown": "13.1.0",
     "ngx-pagination": "6.0.1",
     "ngx-webstorage-service": "5.0.0",
