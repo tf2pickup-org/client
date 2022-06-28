@@ -1,6 +1,7 @@
 import { defaultEnvironment } from './default-environment';
 import { defaultFooterLinks } from './default-footer-links';
 import { defaultHeaderLinks } from './default-header-links';
+import { entryQueueBball } from './entry-queues/entry-queue-bball';
 
 const discordInvitation = 'https://discord.gg/bG4WKUqx';
 
@@ -22,4 +23,5 @@ export const environment = {
     { name: 'discord', target: discordInvitation },
   ],
   titleSuffix: 'bball.tf2pickup.eu • TF2 bball pick-up games',
+  entryQueue: entryQueueBball,
 };

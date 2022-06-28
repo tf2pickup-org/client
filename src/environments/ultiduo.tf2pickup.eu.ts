@@ -1,6 +1,7 @@
 import { defaultEnvironment } from './default-environment';
 import { defaultFooterLinks } from './default-footer-links';
 import { defaultHeaderLinks } from './default-header-links';
+import { entryQueueUltiduo } from './entry-queues/entry-queue-ultiduo';
 
 const discordInvitation = 'https://discord.gg/bG4WKUqx';
 
@@ -22,4 +23,5 @@ export const environment = {
     { name: 'discord', target: discordInvitation },
   ],
   titleSuffix: 'ultiduo.tf2pickup.eu • TF2 ultiduo pick-up games',
+  entryQueue: entryQueueUltiduo,
 };
