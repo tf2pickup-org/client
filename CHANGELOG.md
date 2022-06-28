@@ -1,5 +1,12 @@
 
 
+## [3.24.1](https://github.com/tf2pickup-org/client/compare/3.24.0...3.24.1) (2022-06-28)
+
+
+### Bug Fixes
+
+* **build:** fix ultiduo.tf2pickup.eu apiUrl ([#1799](https://github.com/tf2pickup-org/client/issues/1799)) ([9726e5d](https://github.com/tf2pickup-org/client/commit/9726e5dd3473427bbd56250ab60cc38c3fb3878f))
+
 # [3.24.0](https://github.com/tf2pickup-org/client/compare/3.23.0...3.24.0) (2022-06-27)
 
 
