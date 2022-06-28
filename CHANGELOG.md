@@ -1,5 +1,15 @@
 
 
+## [3.24.2](https://github.com/tf2pickup-org/client/compare/3.24.1...3.24.2) (2022-06-28)
+
+
+### Bug Fixes
+
+* **deps:** update dependency ngx-pagination to v6.0.2 ([#1800](https://github.com/tf2pickup-org/client/issues/1800)) ([dbffdf5](https://github.com/tf2pickup-org/client/commit/dbffdf540db321f3abae81aa7ecc40d529c7d3e1))
+* **queue:** add ultiduo & bball entry queues ([#1804](https://github.com/tf2pickup-org/client/issues/1804)) ([1a3755a](https://github.com/tf2pickup-org/client/commit/1a3755a3843b18d35ed82b526b69eb570e426546))
+* **queue:** add ultiduo maps thumbnails ([#1803](https://github.com/tf2pickup-org/client/issues/1803)) ([45b4637](https://github.com/tf2pickup-org/client/commit/45b4637e539a532a91c1fcc617a6cb1a2bfad142))
+* **queue:** handle 2x1 queue layout ([#1802](https://github.com/tf2pickup-org/client/issues/1802)) ([2db2e67](https://github.com/tf2pickup-org/client/commit/2db2e67826ea77db29165faf1bd0d4036a218b82))
+
 ## [3.24.1](https://github.com/tf2pickup-org/client/compare/3.24.0...3.24.1) (2022-06-28)
 
 
