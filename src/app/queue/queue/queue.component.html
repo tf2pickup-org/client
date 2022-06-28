@@ -2,6 +2,7 @@
   class="queue"
   [ngClass]="{
     '1': 'queue--1x1',
+    '2': 'queue--2x1',
     '4': 'queue--4x1',
     '9': 'queue--3x3'
   }[(queueConfig | async)?.classes.length]">

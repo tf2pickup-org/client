@@ -15,6 +15,15 @@
     }
   }
 
+  &--2x1 {
+    .game-class-column {
+      @extend %column;
+      @include grid.column(6);
+
+      margin: 1rem 0;
+    }
+  }
+
   &--4x1 {
     .game-class-column {
       @extend %column;
