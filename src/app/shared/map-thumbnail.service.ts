@@ -41,6 +41,14 @@ export class MapThumbnailService {
     { regex: /ctf_bball_sweethills/, thumbnailName: 'bball_sweethills' },
     { regex: /koth_cascade/, thumbnailName: 'cascade' },
     { regex: /koth_ramjam/, thumbnailName: 'ramjam' },
+    { regex: /ultiduo_badlands/, thumbnailName: 'badlands' },
+    { regex: /ultiduo_baloo/, thumbnailName: 'baloo' },
+    { regex: /ultiduo_canal/, thumbnailName: 'canal' },
+    { regex: /ultiduo_grove/, thumbnailName: 'grove' },
+    { regex: /ultiduo_gullywash/, thumbnailName: 'gullywash' },
+    { regex: /ultiduo_lookout/, thumbnailName: 'lookout' },
+    { regex: /koth_ultiduo/, thumbnailName: 'ultiduo' },
+    { regex: /ultiduo_seclusion/, thumbnailName: 'seclusion' },
   ];
 
   getMapThumbnail(map: string) {

@@ -52,6 +52,14 @@ describe('MapThumbnailService', () => {
       'koth_proplant_v3',
       'koth_cascade_v2_b6',
       'koth_ramjam_b9',
+      'ultiduo_badlands_b1',
+      'ultiduo_baloo_v2',
+      'ultiduo_canal_rc3a2',
+      'ultiduo_grove_b4',
+      'ultiduo_gullywash_b2',
+      'ultiduo_lookout_b1',
+      'koth_ultiduo_r_b7',
+      'ultiduo_seclusion_b3',
     ].forEach(map =>
       it(`should return valid thumbnail for ${map}`, inject(
         [MapThumbnailService],
