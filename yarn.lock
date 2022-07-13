@@ -4064,15 +4064,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"angular-feather@npm:6.4.0":
-  version: 6.4.0
-  resolution: "angular-feather@npm:6.4.0"
+"angular-feather@npm:6.4.1":
+  version: 6.4.1
+  resolution: "angular-feather@npm:6.4.1"
   dependencies:
     tslib: ^2.0.0
   peerDependencies:
-    "@angular/common": ~13.1.1
-    "@angular/core": ~13.1.1
-  checksum: 82cda2a2d6a12b2186f751382f602cda8c6bf8fc188b2d6b1d22875cfbad06b84fd128bb2546a43bfb365585af1347498ba5b6803a95414f0bc1abde15fb967e
+    "@angular/common": ^14.0.4
+    "@angular/core": ^14.0.4
+  checksum: 3afb193f76cc3a018cbba2a4c914b0d4f73e9b8bcfb8fe1401c715672750b028052354a4260ac534b967535b85f21abbf994e5abe33275ffec5002bd23abe799
   languageName: node
   linkType: hard
 
@@ -15162,7 +15162,7 @@ __metadata:
     "@types/node": 16.11.43
     "@typescript-eslint/eslint-plugin": 5.30.6
     "@typescript-eslint/parser": 5.30.6
-    angular-feather: 6.4.0
+    angular-feather: 6.4.1
     bootstrap: 5.1.3
     chart.js: 3.8.0
     chartjs-plugin-datalabels: 2.0.0
