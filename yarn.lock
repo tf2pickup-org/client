@@ -15016,9 +15016,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stylelint@npm:14.12.1":
-  version: 14.12.1
-  resolution: "stylelint@npm:14.12.1"
+"stylelint@npm:14.13.0":
+  version: 14.13.0
+  resolution: "stylelint@npm:14.13.0"
   dependencies:
     "@csstools/selector-specificity": ^2.0.2
     balanced-match: ^2.0.0
@@ -15060,7 +15060,7 @@ __metadata:
     write-file-atomic: ^4.0.2
   bin:
     stylelint: bin/stylelint.js
-  checksum: f44ca63482edd6339ee3d57b273e55f14b47c8e9d4239b31c47404bc146d56d516abbb375630c86496bcb2b6c8ba5977ba1c170cef0a5e63fd2eaf737e817422
+  checksum: 81efcb2ea015fe490651f0976a927c51efa493a32b2b8e681d68aba8a275a1d8d0ebf8eaf50ef3233e3dc367077db63792e7e69bf6abb18940d63fd6c9f772df
   languageName: node
   linkType: hard
 
@@ -15367,7 +15367,7 @@ __metadata:
     release-it: 15.4.2
     rxjs: 7.5.7
     socket.io-client: 4.5.2
-    stylelint: 14.12.1
+    stylelint: 14.13.0
     stylelint-config-sass-guidelines: 9.0.1
     stylelint-config-standard-scss: 5.0.0
     stylelint-order: 5.0.0
