@@ -1,0 +1,24 @@
+<div class="mdc-dialog mdc-dialog--open">
+  <div class="mdc-dialog__container">
+    <div class="mdc-dialog__surface"
+      role="alertdialog"
+      aria-modal="true"
+      aria-labelledby="game-server-option-list-dialog-title"
+      aria-describedby="game-server-option-list-dialog-content">
+      <!-- Title cannot contain leading whitespace due to mdc-typography-baseline-top() -->
+      <h2 class="mdc-dialog__title" id="game-server-option-list-dialog-title"><!--
+     -->Choose game server<!--
+   --></h2>
+      <div class="mdc-dialog__content" id="game-server-option-list-dialog-content">
+        <ul class="mdc-list">
+          <li *ngFor="let option of options | async"
+            (click)="optionSelect.emit(option)"
+            class="mdc-list-item">
+            <span class="mdc-list-item__text">{{ option.name }}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="mdc-dialog__scrim"></div>
+</div>
