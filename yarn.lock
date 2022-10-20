@@ -3214,17 +3214,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@swimlane/ngx-datatable@npm:20.0.0":
-  version: 20.0.0
-  resolution: "@swimlane/ngx-datatable@npm:20.0.0"
+"@swimlane/ngx-datatable@npm:20.1.0":
+  version: 20.1.0
+  resolution: "@swimlane/ngx-datatable@npm:20.1.0"
   dependencies:
     tslib: ^2.0.0
   peerDependencies:
     "@angular/common": ">=11.0.2"
     "@angular/core": ">=11.0.2"
     "@angular/platform-browser": ">=11.0.2"
-    rxjs: ^6.6.3
-  checksum: b4d4d077128c624cc1b825cbbdc6024981a5514b407c9ba7bba774bab2a0fce0d258750fe1351405440c59e35780ea6495b11c8e3d311738ffbfc43db3658e9d
+    rxjs: ^6.6.3 || ^7.4.0
+  checksum: ecc6ddab9e68ca07a100183357a6c8d1335d066d1676e0156202ca33f7008b6c7debe1b31bc4404cf3f25fe874a04a7ae39c6430c2340c6831dfafc282a38e66
   languageName: node
   linkType: hard
 
@@ -15373,7 +15373,7 @@ __metadata:
     "@ngrx/store": 12.5.1
     "@ngrx/store-devtools": 12.5.1
     "@release-it/conventional-changelog": 5.1.1
-    "@swimlane/ngx-datatable": 20.0.0
+    "@swimlane/ngx-datatable": 20.1.0
     "@types/howler": 2.2.7
     "@types/jasmine": 4.3.0
     "@types/jasminewd2": 2.0.10
