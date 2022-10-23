@@ -11552,18 +11552,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ngx-bootstrap@npm:8.0.0":
-  version: 8.0.0
-  resolution: "ngx-bootstrap@npm:8.0.0"
+"ngx-bootstrap@npm:9.0.0":
+  version: 9.0.0
+  resolution: "ngx-bootstrap@npm:9.0.0"
   dependencies:
-    tslib: ^2.0.0
+    tslib: ^2.3.0
   peerDependencies:
-    "@angular/animations": ^13.0.0
-    "@angular/common": ^13.0.0
-    "@angular/core": ^13.0.0
-    "@angular/forms": ^13.0.0
+    "@angular/animations": ^14.0.0
+    "@angular/common": ^14.0.0
+    "@angular/core": ^14.0.0
+    "@angular/forms": ^14.0.0
     rxjs: ^6.5.3 || ^7.4.0
-  checksum: 2336403a593339b87e9d026fd87bb1e261485d638101020c1bc4c46ec4a1861a98c73afd895494ac7f65a4cbe663df7e05da36d4d416903b7074006bf2a3f47c
+  checksum: 1e3641841a896cf84e5ae8024b453bfd5efdd4157b529349b2f2640ddf8bbedb397ba8d78e1da2347b02ac5e6a6012b9af9dbec83dd6aefe2a25b8265f0797c1
   languageName: node
   linkType: hard
 
@@ -15412,7 +15412,7 @@ __metadata:
     lodash-es: 4.17.21
     ng-inline-svg: 13.1.1
     ng-mocks: 14.3.1
-    ngx-bootstrap: 8.0.0
+    ngx-bootstrap: 9.0.0
     ngx-echarts: 14.0.0
     ngx-markdown: 14.0.1
     ngx-pagination: 6.0.2
