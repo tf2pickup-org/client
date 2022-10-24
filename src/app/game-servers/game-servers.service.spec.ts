@@ -78,4 +78,15 @@ describe('GameServersService', () => {
       }),
     ));
   });
+
+  describe('#fetchGameServerOptions()', () => {
+    it('should call the endpoint', inject(
+      [GameServersService],
+      (service: GameServersService) => {
+        service.fetchGameServerOptions().subscribe();
+        httpController.expectOne('FAKE_URL/game-servers/options');
+        expect().nothing();
+      },
+    ));
+  });
 });

@@ -14,7 +14,7 @@ class SocketStub {
   }
 }
 
-describe('GamesService', () => {
+fdescribe('GamesService', () => {
   let httpController: HttpTestingController;
 
   beforeEach(() =>
@@ -86,6 +86,28 @@ describe('GamesService', () => {
           'FAKE_URL/games/FAKE_ID?reinitialize_server',
         );
         expect(req.request.method).toBe('POST');
+      },
+    ));
+  });
+
+  describe('#reassign()', () => {
+    it('should call api endpoint', inject(
+      [GamesService],
+      (service: GamesService) => {
+        service
+          .reassign('FAKE_GAME_ID', {
+            id: 'FAKE_GAMESERVER_ID',
+            provider: 'test',
+          })
+          .subscribe();
+        const req = httpController.expectOne(
+          'FAKE_URL/games/FAKE_GAME_ID?assign_gameserver',
+        );
+        expect(req.request.method).toBe('POST');
+        expect(req.request.body).toEqual({
+          id: 'FAKE_GAMESERVER_ID',
+          provider: 'test',
+        });
       },
     ));
   });
