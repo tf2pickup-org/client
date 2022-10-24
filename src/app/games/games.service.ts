@@ -6,6 +6,7 @@ import { Game } from './models/game';
 import { PaginatedList } from '@app/core/models/paginated-list';
 import { Socket } from '@app/io/socket';
 import { ConnectInfo } from './models/connect-info';
+import { GameServerIdentifier } from '@app/game-servers/models/game-server-identifier';
 
 @Injectable({
   providedIn: 'root',
@@ -38,6 +39,15 @@ export class GamesService {
     return this.http.post<void>(
       `${this.apiUrl}/games/${gameId}?reinitialize_server`,
       {},
+    );
+  }
+
+  reassign(gameId: string, gameServerId: GameServerIdentifier) {
+    return this.http.post<void>(
+      `${this.apiUrl}/games/${gameId}?assign_gameserver`,
+      {
+        ...gameServerId,
+      },
     );
   }
 

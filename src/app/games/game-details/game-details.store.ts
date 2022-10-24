@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { GameServerOption } from '@app/game-servers/models/game-server-option';
 import {
   activeGameId,
   currentPlayer,
@@ -194,6 +195,22 @@ export class GameDetailsStore extends ComponentStore<GameDetailsState> {
       )
       // eslint-disable-next-line ngrx/no-store-subscription
       .subscribe(gameId => this.store.dispatch(forceEndGame({ gameId })));
+  }
+
+  reassign(gameServer: GameServerOption) {
+    this.game
+      .pipe(
+        first(game => !!game),
+        map(game => game.id),
+      )
+      .subscribe(gameId =>
+        this.gamesService
+          .reassign(gameId, {
+            id: gameServer.id,
+            provider: gameServer.provider,
+          })
+          .subscribe(),
+      );
   }
 
   requestSubstitute(playerId: string) {

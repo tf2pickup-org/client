@@ -5,7 +5,8 @@
 
     <app-game-admin-buttons *ngIf="store.showAdminTools | async"
       (reinitializeServer)="reinitializeServer()"
-      (forceEnd)="forceEnd()"></app-game-admin-buttons>
+      (forceEnd)="forceEnd()"
+      (reassign)="reassign($event)"></app-game-admin-buttons>
 
     <app-game-summary *ngIf="_game.state === 'ended'"
       [logsUrl]="_game.logsUrl"

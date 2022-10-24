@@ -12,6 +12,7 @@ import { environment } from '@environment';
 import { GameDetailsStore } from './game-details.store';
 import { SoundPlayerService } from '@app/shared/sound-player.service';
 import { Tf2Team } from '../models/tf2-team';
+import { GameServerOption } from '@app/game-servers/models/game-server-option';
 
 @Component({
   selector: 'app-game-details',
@@ -79,6 +80,10 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
 
   forceEnd() {
     this.store.forceEnd();
+  }
+
+  reassign(gameServer: GameServerOption) {
+    this.store.reassign(gameServer);
   }
 
   requestSubstitute(playerId: string) {
