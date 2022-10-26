@@ -9,14 +9,21 @@
       <h2 class="mdc-dialog__title" id="game-server-option-list-dialog-title"><!--
      -->Choose game server<!--
    --></h2>
-      <div class="mdc-dialog__content" id="game-server-option-list-dialog-content">
-        <ul class="mdc-list">
-          <li *ngFor="let option of options | async"
-            (click)="optionSelect.emit(option)"
-            class="mdc-list-item">
-            <span class="mdc-list-item__text">{{ option.name }}</span>
-          </li>
-        </ul>
+      <div
+        *ngIf="options | withLoading | async as _options"
+        class="mdc-dialog__content"
+        id="game-server-option-list-dialog-content">
+
+        <app-game-server-option-list
+          *ngIf="_options.value"
+          [gameServerOptions]="_options.value"
+          (optionSelect)="optionSelect.emit($event)">
+        </app-game-server-option-list>
+
+        <div *ngIf="_options.loading"
+          class="loading-wrapper">
+          <img src="/assets/loading-medium.gif">
+        </div>
       </div>
     </div>
   </div>

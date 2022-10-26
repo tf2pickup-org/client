@@ -14,7 +14,7 @@ class SocketStub {
   }
 }
 
-fdescribe('GamesService', () => {
+describe('GamesService', () => {
   let httpController: HttpTestingController;
 
   beforeEach(() =>

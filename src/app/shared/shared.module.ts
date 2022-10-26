@@ -9,6 +9,7 @@ import { NavigateBackDirective } from './navigate-back.directive';
 import { AsFormGroupPipe } from './as-form-group.pipe';
 import { CountryFlagPipe } from './country-flag.pipe';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { WithLoadingPipe } from './with-loading.pipe';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     AsFormGroupPipe,
     CountryFlagPipe,
     ConfirmDialogComponent,
+    WithLoadingPipe,
   ],
   imports: [CommonModule],
   exports: [
@@ -33,6 +35,7 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     AsFormGroupPipe,
     CountryFlagPipe,
     ConfirmDialogComponent,
+    WithLoadingPipe,
   ],
 })
 export class SharedModule {}
