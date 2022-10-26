@@ -11,9 +11,7 @@ interface ObservableWithStatus<T> {
   name: 'withLoading',
 })
 export class WithLoadingPipe implements PipeTransform {
-  transform<T = any>(
-    value: Observable<T>,
-  ): Observable<ObservableWithStatus<T>> {
+  transform<T>(value: Observable<T>): Observable<ObservableWithStatus<T>> {
     return value.pipe(
       map(value => ({ loading: false, value })),
       startWith({ loading: true }),

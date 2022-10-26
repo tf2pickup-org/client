@@ -42,10 +42,7 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
       .subscribe(gameId => this.store.setGameId(gameId));
 
     this.store.game
-      .pipe(
-        filter(game => !!game),
-        takeUntil(this.destroyed),
-      )
+      .pipe(filter(Boolean), takeUntil(this.destroyed))
       .subscribe(game =>
         this.title.setTitle(
           `Pickup #${game.number} • ${environment.titleSuffix}`,
@@ -58,7 +55,7 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
         pairwise(),
         // undefined means we didn't fetch the connect info yet
         // null means the connect info isn't available yet
-        filter(([a, b]) => a !== undefined && !!b),
+        filter(([a, b]) => a !== undefined && Boolean(b)),
         takeUntil(this.destroyed),
         mergeMap(() =>
           this.soundPlayerService.playSound(

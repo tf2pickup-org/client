@@ -22,13 +22,13 @@ export class GameAdminButtonsComponent implements OnDestroy {
   private destroyed = new Subject<void>();
 
   @Output()
-  reinitializeServer = new EventEmitter<void>();
+  readonly reinitializeServer = new EventEmitter<void>();
 
   @Output()
-  forceEnd = new EventEmitter<void>();
+  readonly forceEnd = new EventEmitter<void>();
 
   @Output()
-  reassign = new EventEmitter<GameServerOption>();
+  readonly reassign = new EventEmitter<GameServerOption>();
 
   constructor(private overlay: Overlay) {}
 
