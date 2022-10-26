@@ -90,6 +90,28 @@ describe('GamesService', () => {
     ));
   });
 
+  describe('#reassign()', () => {
+    it('should call api endpoint', inject(
+      [GamesService],
+      (service: GamesService) => {
+        service
+          .reassign('FAKE_GAME_ID', {
+            id: 'FAKE_GAMESERVER_ID',
+            provider: 'test',
+          })
+          .subscribe();
+        const req = httpController.expectOne(
+          'FAKE_URL/games/FAKE_GAME_ID?assign_gameserver',
+        );
+        expect(req.request.method).toBe('POST');
+        expect(req.request.body).toEqual({
+          id: 'FAKE_GAMESERVER_ID',
+          provider: 'test',
+        });
+      },
+    ));
+  });
+
   describe('#fetchGameSkills()', () => {
     it('should call api endpoint', inject(
       [GamesService],

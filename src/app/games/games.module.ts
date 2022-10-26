@@ -23,6 +23,8 @@ import { GameAdminButtonsComponent } from './game-admin-buttons/game-admin-butto
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { OrderTf2ClassesPipe } from './order-tf2-classes.pipe';
 import { PlayersInTeamPipe } from './game-details/players-in-team.pipe';
+import { GameServerOptionListDialogComponent } from './game-server-option-list-dialog/game-server-option-list-dialog.component';
+import { GameServerOptionListComponent } from './game-server-option-list/game-server-option-list.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,8 @@ import { PlayersInTeamPipe } from './game-details/players-in-team.pipe';
     GameAdminButtonsComponent,
     OrderTf2ClassesPipe,
     PlayersInTeamPipe,
+    GameServerOptionListDialogComponent,
+    GameServerOptionListComponent,
   ],
   imports: [
     CommonModule,

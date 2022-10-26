@@ -1,0 +1,12 @@
+<ul class="mdc-list">
+  <li *ngFor="let option of gameServerOptions"
+    (click)="optionSelect.emit(option)"
+    class="mdc-list-item">
+    <span class="mdc-list-item__text">
+      <ng-container *ngIf="option.flag">
+        {{ option.flag | countryFlag }}
+      </ng-container>
+      {{ option.name }}
+    </span>
+  </li>
+</ul>

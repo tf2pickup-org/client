@@ -12,6 +12,7 @@ import { environment } from '@environment';
 import { GameDetailsStore } from './game-details.store';
 import { SoundPlayerService } from '@app/shared/sound-player.service';
 import { Tf2Team } from '../models/tf2-team';
+import { GameServerOption } from '@app/game-servers/models/game-server-option';
 
 @Component({
   selector: 'app-game-details',
@@ -41,10 +42,7 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
       .subscribe(gameId => this.store.setGameId(gameId));
 
     this.store.game
-      .pipe(
-        filter(game => !!game),
-        takeUntil(this.destroyed),
-      )
+      .pipe(filter(Boolean), takeUntil(this.destroyed))
       .subscribe(game =>
         this.title.setTitle(
           `Pickup #${game.number} • ${environment.titleSuffix}`,
@@ -57,7 +55,7 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
         pairwise(),
         // undefined means we didn't fetch the connect info yet
         // null means the connect info isn't available yet
-        filter(([a, b]) => a !== undefined && !!b),
+        filter(([a, b]) => a !== undefined && Boolean(b)),
         takeUntil(this.destroyed),
         mergeMap(() =>
           this.soundPlayerService.playSound(
@@ -79,6 +77,10 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
 
   forceEnd() {
     this.store.forceEnd();
+  }
+
+  reassign(gameServer: GameServerOption) {
+    this.store.reassign(gameServer);
   }
 
   requestSubstitute(playerId: string) {

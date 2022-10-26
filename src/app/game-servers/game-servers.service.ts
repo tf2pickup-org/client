@@ -5,6 +5,7 @@ import { Observable, timer } from 'rxjs';
 import { GameServer } from './models/game-server';
 import { GameServerDiagnosticRun } from './models/game-server-diagnostic-run';
 import { map, mergeMap, switchMap, takeWhile } from 'rxjs/operators';
+import { GameServerOption } from './models/game-server-option';
 
 interface RunDiagnosticsResponse {
   tracking: {
@@ -46,5 +47,11 @@ export class GameServersService {
           ),
         ),
       );
+  }
+
+  fetchGameServerOptions(): Observable<GameServerOption[]> {
+    return this.http.get<GameServerOption[]>(
+      `${this.apiUrl}/game-servers/options`,
+    );
   }
 }

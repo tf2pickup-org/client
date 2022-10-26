@@ -7,8 +7,10 @@ import {
   OnDestroy,
   Output,
 } from '@angular/core';
+import { GameServerOption } from '@app/game-servers/models/game-server-option';
 import { ConfirmDialogComponent } from '@app/shared/confirm-dialog/confirm-dialog.component';
 import { race, Subject, takeUntil } from 'rxjs';
+import { GameServerOptionListDialogComponent } from '../game-server-option-list-dialog/game-server-option-list-dialog.component';
 
 @Component({
   selector: 'app-game-admin-buttons',
@@ -20,10 +22,13 @@ export class GameAdminButtonsComponent implements OnDestroy {
   private destroyed = new Subject<void>();
 
   @Output()
-  reinitializeServer = new EventEmitter<void>();
+  readonly reinitializeServer = new EventEmitter<void>();
 
   @Output()
-  forceEnd = new EventEmitter<void>();
+  readonly forceEnd = new EventEmitter<void>();
+
+  @Output()
+  readonly reassign = new EventEmitter<GameServerOption>();
 
   constructor(private overlay: Overlay) {}
 
@@ -61,5 +66,21 @@ export class GameAdminButtonsComponent implements OnDestroy {
     race(component.instance.accept, component.instance.cancel).subscribe(() =>
       overlay.dispose(),
     );
+  }
+
+  reassignGameServer() {
+    const overlay = this.overlay.create({
+      hasBackdrop: true,
+      disposeOnNavigation: true,
+    });
+    const portal = new ComponentPortal(GameServerOptionListDialogComponent);
+    const component = overlay.attach(portal);
+
+    component.instance.optionSelect
+      .pipe(takeUntil(this.destroyed))
+      .subscribe(option => {
+        this.reassign.emit(option);
+        overlay.dispose();
+      });
   }
 }

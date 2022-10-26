@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { GameServerOption } from '@app/game-servers/models/game-server-option';
 import {
   activeGameId,
   currentPlayer,
@@ -53,9 +54,9 @@ export class GameDetailsStore extends ComponentStore<GameDetailsState> {
     this.game,
     // eslint-disable-next-line no-shadow
     (player, game) =>
-      !!game?.slots
-        .find(s => s.player?.id === player?.id)
-        ?.status.match(/active|waiting for substitute/),
+      ['active', 'waiting for substitute'].includes(
+        game?.slots.find(s => s.player?.id === player?.id)?.status,
+      ),
   );
 
   readonly canSubstitute = this.select(
@@ -111,7 +112,7 @@ export class GameDetailsStore extends ComponentStore<GameDetailsState> {
           }),
         ),
       ),
-      filter(game => !!game),
+      filter(Boolean),
       tap(game => this.fetchGameSkills(game.id)),
       tap(game => this.setGame(game)),
       tap((game: Game) => this.fetchConnectInfo(game)),
@@ -179,7 +180,7 @@ export class GameDetailsStore extends ComponentStore<GameDetailsState> {
   reinitializeServer() {
     this.game
       .pipe(
-        first(game => !!game),
+        first(Boolean),
         map(game => game.id),
       )
       // eslint-disable-next-line ngrx/no-store-subscription
@@ -189,17 +190,33 @@ export class GameDetailsStore extends ComponentStore<GameDetailsState> {
   forceEnd() {
     this.game
       .pipe(
-        first(game => !!game),
+        first(Boolean),
         map(game => game.id),
       )
       // eslint-disable-next-line ngrx/no-store-subscription
       .subscribe(gameId => this.store.dispatch(forceEndGame({ gameId })));
   }
 
+  reassign(gameServer: GameServerOption) {
+    this.game
+      .pipe(
+        first(Boolean),
+        map(game => game.id),
+      )
+      .subscribe(gameId =>
+        this.gamesService
+          .reassign(gameId, {
+            id: gameServer.id,
+            provider: gameServer.provider,
+          })
+          .subscribe(),
+      );
+  }
+
   requestSubstitute(playerId: string) {
     this.game
       .pipe(
-        first(game => !!game),
+        first(Boolean),
         map(game => game.id),
       )
       // eslint-disable-next-line ngrx/no-store-subscription
@@ -211,7 +228,7 @@ export class GameDetailsStore extends ComponentStore<GameDetailsState> {
   replacePlayer(replaceeId: string) {
     this.game
       .pipe(
-        first(game => !!game),
+        first(Boolean),
         map(game => game.id),
       )
       // eslint-disable-next-line ngrx/no-store-subscription

@@ -52,12 +52,12 @@ describe('GameServersService', () => {
       [GameServersService],
       fakeAsync((service: GameServersService) => {
         service.runDiagnostics('FAKE_GAME_SERVER_ID').subscribe();
-        const r = httpController.expectOne(
+        const req = httpController.expectOne(
           'FAKE_URL/static-game-servers/FAKE_GAME_SERVER_ID/diagnostics',
         );
-        expect(r.request.method).toBe('POST');
+        expect(req.request.method).toBe('POST');
 
-        r.flush({
+        req.flush({
           tracking: { url: 'FAKE_URL/diagnostics/FAKE_DIAGNOSTICS_ID' },
         });
         tick();
@@ -76,6 +76,17 @@ describe('GameServersService', () => {
           .expectOne('FAKE_URL/diagnostics/FAKE_DIAGNOSTICS_ID')
           .flush({ status: 'completed' });
       }),
+    ));
+  });
+
+  describe('#fetchGameServerOptions()', () => {
+    it('should call the endpoint', inject(
+      [GameServersService],
+      (service: GameServersService) => {
+        service.fetchGameServerOptions().subscribe();
+        httpController.expectOne('FAKE_URL/game-servers/options');
+        expect().nothing();
+      },
     ));
   });
 });
