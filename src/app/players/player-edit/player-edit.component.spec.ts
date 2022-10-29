@@ -10,7 +10,7 @@ import {
   ngMocks,
 } from 'ng-mocks';
 import { PlayersService } from '../players.service';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { ReactiveFormsModule } from '@angular/forms';
 import { loadPlayer, playerEdited } from '../actions';
 import { Title } from '@angular/platform-browser';
@@ -31,12 +31,14 @@ describe(PlayerEditComponent.name, () => {
   let fetchPlayerSkill: Subject<{ [gameClass in Tf2ClassName]?: number }>;
   let setPlayerName: Subject<Player>;
   let setPlayerSkill: Subject<any>;
+  let defaultSkill: Subject<{ [gameClass in Tf2ClassName]?: number }>;
 
   beforeEach(() => {
     routeParams = new Subject();
     fetchPlayerSkill = new Subject();
     setPlayerName = new Subject();
     setPlayerSkill = new Subject();
+    defaultSkill = new Subject();
   });
 
   beforeEach(() =>
@@ -81,6 +83,7 @@ describe(PlayerEditComponent.name, () => {
     playersService.setPlayerSkill.and.returnValue(
       setPlayerSkill.asObservable(),
     );
+    playersService.defaultSkill.and.returnValue(defaultSkill.pipe(take(1)));
 
     fixture.detectChanges();
     saveButton = ngMocks.find('button[type=submit]').nativeElement;
@@ -138,6 +141,22 @@ describe(PlayerEditComponent.name, () => {
 
       it("should set the player's name", () => {
         expect(nameInput.value).toEqual('maly');
+      });
+
+      describe('when the skill not set', () => {
+        beforeEach(() => {
+          fetchPlayerSkill.next({});
+          fetchPlayerSkill.complete();
+          defaultSkill.next({ scout: -1, soldier: -1 });
+          fixture.detectChanges();
+        });
+
+        it('should render default skill', () => {
+          const playerEditSkillComponents = ngMocks.findInstances(
+            PlayerEditSkillComponent,
+          );
+          expect(playerEditSkillComponents.length).toBe(2); // scout and soldier
+        });
       });
 
       describe('when the skill is fetched', () => {

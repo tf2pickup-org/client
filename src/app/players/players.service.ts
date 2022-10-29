@@ -8,16 +8,12 @@ import { map, first } from 'rxjs/operators';
 import { PlayerStats } from './models/player-stats';
 import { PlayerBan } from './models/player-ban';
 import { PaginatedList } from '@app/core/models/paginated-list';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { queueConfig } from '@app/queue/queue.selectors';
 import { PlayerRole } from './models/player-role';
 import { Tf2ClassName } from '@app/shared/models/tf2-class-name';
 import { LinkedProfiles } from './models/linked-profiles';
-
-type AllPlayerSkillsResponse = {
-  player: string;
-  skill: { [gameClass in Tf2ClassName]?: number };
-}[];
+import { PlayerSkill } from './models/player-skill';
 
 @Injectable({
   providedIn: 'root',
@@ -69,10 +65,8 @@ export class PlayersService {
     );
   }
 
-  fetchAllPlayerSkills(): Observable<AllPlayerSkillsResponse> {
-    return this.http.get<AllPlayerSkillsResponse>(
-      `${this.apiUrl}/players/all/skill`,
-    );
+  fetchAllPlayerSkills(): Observable<PlayerSkill[]> {
+    return this.http.get<PlayerSkill[]>(`${this.apiUrl}/players/all/skill`);
   }
 
   fetchPlayerSkill(
@@ -114,10 +108,10 @@ export class PlayersService {
   }
 
   defaultSkill(
-    playerId: string,
+    _playerId: string,
   ): Observable<{ [gameClass in Tf2ClassName]?: number }> {
     return this.store.select(queueConfig).pipe(
-      first(config => !!config),
+      first(config => Boolean(config)),
       // eslint-disable-next-line ngrx/avoid-mapping-selectors
       map(config =>
         config.classes.reduce((_skill, curr) => {

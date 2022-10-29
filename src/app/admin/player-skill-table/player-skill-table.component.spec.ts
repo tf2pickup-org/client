@@ -36,7 +36,7 @@ const config: QueueConfig = {
   ],
 };
 
-const allPlayers = [
+const allPlayerSkills = [
   {
     id: 'FAKE_PLAYER_ID',
     name: 'FAKE_PLAYER_NAME',
@@ -49,12 +49,6 @@ const allPlayers = [
       large: 'FAKE_LARGE_AVATAR_URL',
     },
     _links: [],
-  },
-];
-
-const allPlayerSkills = [
-  {
-    player: 'FAKE_PLAYER_ID',
     skill: {
       scout: 1,
       soldier: 2,
@@ -121,7 +115,6 @@ describe(PlayerSkillTableComponent.name, () => {
   });
 
   beforeEach(() => {
-    allPlayersResponse.next(allPlayers);
     allPlayerSkillResponse.next(allPlayerSkills);
     fixture.detectChanges();
   });
