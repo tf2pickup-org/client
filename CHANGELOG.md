@@ -1,5 +1,17 @@
 
 
+# [3.25.0-beta.0](https://github.com/tf2pickup-org/client/compare/3.25.0-alpha.0...3.25.0-beta.0) (2022-10-29)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @angular/cdk to v14.2.6 ([#1983](https://github.com/tf2pickup-org/client/issues/1983)) ([041e933](https://github.com/tf2pickup-org/client/commit/041e933f45fd451800b192182647a388c59f4559))
+
+
+### Features
+
+* **hl.tf2pickup.eu:** add hl.tf2pickup.eu branding ([#1984](https://github.com/tf2pickup-org/client/issues/1984)) ([7831db1](https://github.com/tf2pickup-org/client/commit/7831db18f21d272e686647b0468067f04f7b5386))
+
 # [3.25.0-alpha.0](https://github.com/tf2pickup-org/client/compare/3.24.2...3.25.0-alpha.0) (2022-10-26)
 
 
