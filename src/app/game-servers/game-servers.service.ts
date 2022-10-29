@@ -28,7 +28,7 @@ export class GameServersService {
 
   fetchGameServer(gameServerId: string): Observable<GameServer> {
     return this.http.get<GameServer>(
-      `${this.apiUrl}/game-servers/${gameServerId}`,
+      `${this.apiUrl}/static-game-servers/${gameServerId}`,
     );
   }
 
