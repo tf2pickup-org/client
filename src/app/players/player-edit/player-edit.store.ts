@@ -1,12 +1,10 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Tf2ClassName } from '@app/shared/models/tf2-class-name';
 import { ComponentStore } from '@ngrx/component-store';
 import { Store } from '@ngrx/store';
 import { isEmpty } from 'lodash-es';
-import { Observable, of, throwError, zip } from 'rxjs';
+import { Observable, of, zip } from 'rxjs';
 import {
-  catchError,
   filter,
   mergeMap,
   switchMap,
@@ -36,7 +34,7 @@ export class PlayerEditStore extends ComponentStore<PlayerEditState> {
   readonly skill = this.select(state => state.skill);
   readonly saving = this.select(state => state.saving);
   readonly isReady = this.select(
-    state => !!state.player && !!state.skill && !state.saving,
+    state => Boolean(state.player) && Boolean(state.skill) && !state.saving,
   );
 
   readonly setPlayerId = this.effect((playerId: Observable<string>) =>
@@ -78,7 +76,7 @@ export class PlayerEditStore extends ComponentStore<PlayerEditState> {
           }),
         ),
       ),
-      filter(player => !!player),
+      filter(player => Boolean(player)),
       tap((player: Player) => this.setPlayer(player)),
     ),
   );
