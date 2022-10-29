@@ -1,0 +1,14 @@
+<app-edit-page-wrapper
+  title="Import player skill"
+  [submitButton]="false">
+
+  <div class="surface surface--white py-4">
+    <input #fileUpload
+      type="file"
+      class="file-input d-none">
+
+    <div class="file-upload">
+      {{fileName ?? "No file uploaded yet."}}
+    </div>
+  </div>
+</app-edit-page-wrapper>
