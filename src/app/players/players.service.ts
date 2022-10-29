@@ -13,11 +13,7 @@ import { queueConfig } from '@app/queue/queue.selectors';
 import { PlayerRole } from './models/player-role';
 import { Tf2ClassName } from '@app/shared/models/tf2-class-name';
 import { LinkedProfiles } from './models/linked-profiles';
-
-type AllPlayerSkillsResponse = {
-  player: string;
-  skill: { [gameClass in Tf2ClassName]?: number };
-}[];
+import { PlayerSkill } from './models/player-skill';
 
 @Injectable({
   providedIn: 'root',
@@ -69,10 +65,8 @@ export class PlayersService {
     );
   }
 
-  fetchAllPlayerSkills(): Observable<AllPlayerSkillsResponse> {
-    return this.http.get<AllPlayerSkillsResponse>(
-      `${this.apiUrl}/players/all/skill`,
-    );
+  fetchAllPlayerSkills(): Observable<PlayerSkill[]> {
+    return this.http.get<PlayerSkill[]>(`${this.apiUrl}/players/all/skill`);
   }
 
   fetchPlayerSkill(

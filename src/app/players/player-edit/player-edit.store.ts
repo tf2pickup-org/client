@@ -3,7 +3,8 @@ import { Injectable } from '@angular/core';
 import { Tf2ClassName } from '@app/shared/models/tf2-class-name';
 import { ComponentStore } from '@ngrx/component-store';
 import { Store } from '@ngrx/store';
-import { Observable, throwError, zip } from 'rxjs';
+import { isEmpty } from 'lodash-es';
+import { Observable, of, throwError, zip } from 'rxjs';
 import {
   catchError,
   filter,
@@ -87,13 +88,12 @@ export class PlayerEditStore extends ComponentStore<PlayerEditState> {
       playerId.pipe(
         switchMap(id =>
           this.playersService.fetchPlayerSkill(id).pipe(
-            catchError((error: unknown) => {
-              if (error instanceof HttpErrorResponse) {
-                if (error.status === 404) {
-                  return this.playersService.defaultSkill(id);
-                }
+            switchMap(skill => {
+              if (isEmpty(skill)) {
+                return this.playersService.defaultSkill(id);
+              } else {
+                return of(skill);
               }
-              return throwError(error);
             }),
             tap(skill => this.setSkill(skill)),
           ),

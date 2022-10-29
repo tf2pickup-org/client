@@ -1,66 +1,40 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import { PlayersService } from '@app/players/players.service';
-import { Player } from '@app/players/models/player';
 import { PlayerSkill } from '@app/players/models/player-skill';
 import { map, tap } from 'rxjs/operators';
-import { forkJoin, Observable } from 'rxjs';
-import { keyBy } from 'lodash-es';
+import { Observable } from 'rxjs';
 import { PlayerRow } from './player-row';
-import { select, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { queueConfig } from '@app/queue/queue.selectors';
 
-interface SkillTableState {
-  players: Record<string, Player>;
-  skills: PlayerSkill[];
-}
-
-const initialState: SkillTableState = {
-  players: {},
-  skills: [],
-};
+type SkillTableState = PlayerSkill[];
+const initialState: SkillTableState = [];
 
 @Injectable()
 export class PlayerSkillTableStore extends ComponentStore<SkillTableState> {
   players: Observable<PlayerRow[]> = this.select(state =>
-    state.skills.map(s => ({
+    state.map(s => ({
       ...s.skill,
-      id: s.player,
-      name: state.players[s.player].name,
+      id: s.id,
+      name: s.name,
     })),
   );
 
-  columns: Observable<{ prop: string }[]> = this.store.pipe(
-    select(queueConfig),
+  columns: Observable<{ prop: string }[]> = this.store.select(queueConfig).pipe(
     map(config => config.classes.map(cls => cls.name)),
     map(value => ['name', ...value]),
     map(props => props.map(prop => ({ prop }))),
   );
 
   loadAll = this.effect(() =>
-    forkJoin({
-      players: this.playersService.fetchAllPlayers(),
-      skills: this.playersService.fetchAllPlayerSkills(),
-    }).pipe(
-      tap(({ players, skills }) => {
-        this.setPlayers(players);
-        this.setPlayerSkills(skills);
-      }),
-    ),
-  );
-
-  private setPlayers = this.updater(
-    (state, players: Player[]): SkillTableState => ({
-      ...state,
-      players: keyBy(players, 'id'),
-    }),
+    this.playersService
+      .fetchAllPlayerSkills()
+      .pipe(tap((skills: PlayerSkill[]) => this.setPlayerSkills(skills))),
   );
 
   private setPlayerSkills = this.updater(
-    (state, skills: PlayerSkill[]): SkillTableState => ({
-      ...state,
-      skills,
-    }),
+    (state, skills: PlayerSkill[]): SkillTableState => [...skills],
   );
 
   constructor(private playersService: PlayersService, private store: Store) {
