@@ -45,6 +45,11 @@
   } }"></ng-template>
 
   <ng-template *ngTemplateOutlet="item; context: { $implicit: {
+    link: 'player-skill-import-export',
+    title: 'Import player skill'
+  } }"></ng-template>
+
+  <ng-template *ngTemplateOutlet="item; context: { $implicit: {
     link: 'player-skill-table',
     title: 'Player skill table'
   } }"></ng-template>

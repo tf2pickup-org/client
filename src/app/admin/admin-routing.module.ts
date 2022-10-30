@@ -18,6 +18,7 @@ import { GameServersComponent } from './game-servers/game-servers.component';
 import { StaticGameServerComponent } from './game-servers/static-game-server/static-game-server.component';
 import { StaticGameServerResolver } from './game-servers/static-game-server.resolver';
 import { ServemeTfConfigurationComponent } from './game-servers/serveme-tf-configuration/serveme-tf-configuration.component';
+import { ImportExportPlayerSkillComponent } from './import-export-player-skill/import-export-player-skill.component';
 
 const routes: Routes = [
   {
@@ -71,6 +72,14 @@ const routes: Routes = [
         data: {
           title: 'player skill table',
           animation: 'PlayerSkillTablePage',
+        },
+      },
+      {
+        path: 'player-skill-import-export',
+        component: ImportExportPlayerSkillComponent,
+        data: {
+          title: 'import player skill',
+          animation: 'PlayerSkillImportExportPage',
         },
       },
       {
