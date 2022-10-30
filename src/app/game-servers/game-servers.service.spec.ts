@@ -41,7 +41,9 @@ describe('GameServersService', () => {
       [GameServersService],
       (service: GameServersService) => {
         service.fetchGameServer('FAKE_ID').subscribe();
-        const req = httpController.expectOne('FAKE_URL/game-servers/FAKE_ID');
+        const req = httpController.expectOne(
+          'FAKE_URL/static-game-servers/FAKE_ID',
+        );
         expect(req.request.method).toBe('GET');
       },
     ));
