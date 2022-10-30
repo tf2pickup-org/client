@@ -1,23 +1,24 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { PlayersService } from '@app/players/players.service';
+import { MockBuilder, MockedComponentFixture, MockRender } from 'ng-mocks';
 import { ImportExportPlayerSkillComponent } from './import-export-player-skill.component';
 
 describe('ImportExportPlayerSkillComponent', () => {
   let component: ImportExportPlayerSkillComponent;
-  let fixture: ComponentFixture<ImportExportPlayerSkillComponent>;
+  let fixture: MockedComponentFixture<ImportExportPlayerSkillComponent>;
+
+  beforeEach(() =>
+    MockBuilder(ImportExportPlayerSkillComponent).mock(PlayersService),
+  );
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ ImportExportPlayerSkillComponent ]
-    })
-    .compileComponents();
-
-    fixture = TestBed.createComponent(ImportExportPlayerSkillComponent);
-    component = fixture.componentInstance;
+    fixture = MockRender(ImportExportPlayerSkillComponent);
+    component = fixture.point.componentInstance;
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  // TODO write tests
 });

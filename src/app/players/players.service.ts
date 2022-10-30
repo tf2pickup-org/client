@@ -14,6 +14,7 @@ import { PlayerRole } from './models/player-role';
 import { Tf2ClassName } from '@app/shared/models/tf2-class-name';
 import { LinkedProfiles } from './models/linked-profiles';
 import { PlayerSkill } from './models/player-skill';
+import { ImportPlayerSkillResponse } from './models/import-player-skill-response';
 
 @Injectable({
   providedIn: 'root',
@@ -134,5 +135,14 @@ export class PlayersService {
 
   fetchOnlinePlayers(): Observable<Player[]> {
     return this.http.get<Player[]>(`${this.apiUrl}/online-players`);
+  }
+
+  importPlayerSkill(csvSkillFile: File): Observable<ImportPlayerSkillResponse> {
+    const formData = new FormData();
+    formData.append('skills', csvSkillFile, csvSkillFile.name);
+    return this.http.post<ImportPlayerSkillResponse>(
+      `${this.apiUrl}/players/import-skills`,
+      formData,
+    );
   }
 }

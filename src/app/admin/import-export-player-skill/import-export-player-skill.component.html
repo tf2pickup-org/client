@@ -3,12 +3,29 @@
   [submitButton]="false">
 
   <div class="surface surface--white py-4">
-    <input #fileUpload
+    <label for="file" class="me-2">
+      Choose CSV-formatted file containing skills to import:
+    </label>
+    <div class="mx-auto"></div>
+    <input *ngIf="(store.noImported | async) === undefined"
       type="file"
-      class="file-input d-none">
-
-    <div class="file-upload">
-      {{fileName ?? "No file uploaded yet."}}
+      id="file"
+      (change)="onFileSelected($event)">
+    <span *ngIf="(store.noImported | async) as _noImported">
+      Successfully imported {{ _noImported }} records!
+    </span>
+    <div *ngIf="store.error | async as _error">
+      {{ _error }}
     </div>
+    <div class="mx-auto"></div>
+    <button
+      type="button"
+      class="mdc-button mdc-button--raised mx-2 mt-2 upload-button"
+      (click)="store.importSkills()"
+      [disabled]="(store.file | async) === undefined || (store.isUploading | async)">
+      <span class="mdc-button__ripple"></span>
+      <i-feather name="plus" class="mdc-button__icon" aria-hidden="true"></i-feather>
+      <span class="mdc-button__label">Upload</span>
+    </button>
   </div>
 </app-edit-page-wrapper>
