@@ -1,5 +1,19 @@
 
 
+# [3.25.0-beta.1](https://github.com/tf2pickup-org/client/compare/3.25.0-beta.0...3.25.0-beta.1) (2022-10-30)
+
+
+### Bug Fixes
+
+* **admin:** fix static game servers endpoint address ([#1987](https://github.com/tf2pickup-org/client/issues/1987)) ([3089401](https://github.com/tf2pickup-org/client/commit/3089401e5106d6de98fcb6201891093e68623045))
+* **deps:** update dependency ngx-bootstrap to v9 ([#1845](https://github.com/tf2pickup-org/client/issues/1845)) ([8b47ca3](https://github.com/tf2pickup-org/client/commit/8b47ca34f574f87fb67731be4ecadaa0abb94ec4))
+* **players:** handle new player skill api ([#1985](https://github.com/tf2pickup-org/client/issues/1985)) ([f7e1576](https://github.com/tf2pickup-org/client/commit/f7e1576463c57e86986ff859959c7fbcac7eebfc))
+
+
+### Features
+
+* **admin:** import player skills ([#1988](https://github.com/tf2pickup-org/client/issues/1988)) ([54e86ca](https://github.com/tf2pickup-org/client/commit/54e86cafc02ae9de49f6f47107f0caf28b6d2e1b))
+
 # [3.25.0-beta.0](https://github.com/tf2pickup-org/client/compare/3.25.0-alpha.0...3.25.0-beta.0) (2022-10-29)
 
 
