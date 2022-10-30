@@ -10,7 +10,7 @@ describe('ImportExportPlayerSkillComponent', () => {
     MockBuilder(ImportExportPlayerSkillComponent).mock(PlayersService),
   );
 
-  beforeEach(async () => {
+  beforeEach(() => {
     fixture = MockRender(ImportExportPlayerSkillComponent);
     component = fixture.point.componentInstance;
     fixture.detectChanges();

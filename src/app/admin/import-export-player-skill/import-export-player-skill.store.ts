@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import { PlayersService } from '@app/players/players.service';
-import { catchError, first, switchMap } from 'rxjs';
+import { first, switchMap } from 'rxjs';
 
 interface ImportExportPlayerSkillState {
   file?: File;
@@ -14,7 +14,7 @@ const initialState: ImportExportPlayerSkillState = {
   isUploading: false,
 };
 
-@Injectable()
+@Injectable({ providedIn: null })
 export class ImportExportPlayerSkillStore extends ComponentStore<ImportExportPlayerSkillState> {
   readonly file = this.select(state => state.file);
   readonly noImported = this.select(state => state.noImported);

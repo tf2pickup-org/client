@@ -288,5 +288,4 @@ describe('PlayersService', () => {
   });
 
   // TODO Write tests for importing player skills
-  xdescribe('#importPlayerSkill()', () => {});
 });
