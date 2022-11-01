@@ -6,15 +6,7 @@ import {
 } from '@angular/core';
 import { Subject } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import {
-  map,
-  filter,
-  takeUntil,
-  mergeMap,
-  pairwise,
-  tap,
-  skip,
-} from 'rxjs/operators';
+import { map, filter, takeUntil, mergeMap, pairwise } from 'rxjs/operators';
 import { Title } from '@angular/platform-browser';
 import { environment } from '@environment';
 import { GameDetailsStore } from './game-details.store';

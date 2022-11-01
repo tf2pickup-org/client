@@ -15,7 +15,6 @@ import {
   filter,
   first,
   map,
-  startWith,
   switchMap,
   tap,
   withLatestFrom,
