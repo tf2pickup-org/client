@@ -50,12 +50,15 @@ export class GameDetailsComponent implements OnInit, OnDestroy {
       );
 
     // play sound when the connect is available
-    this.store.connectString
+    this.store.connectInfo
       .pipe(
         pairwise(),
-        // undefined means we didn't fetch the connect info yet
-        // null means the connect info isn't available yet
-        filter(([a, b]) => a !== undefined && Boolean(b)),
+        filter(
+          ([a, b]) =>
+            a !== undefined && // undefined means we didn't fetch the connect info yet
+            !a.connectString &&
+            Boolean(b?.connectString),
+        ),
         takeUntil(this.destroyed),
         mergeMap(() =>
           this.soundPlayerService.playSound(

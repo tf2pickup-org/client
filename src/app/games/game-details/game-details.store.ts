@@ -95,6 +95,7 @@ export class GameDetailsStore extends ComponentStore<GameDetailsState> {
     this.connectInfo,
     connectInfo => connectInfo?.connectString,
   );
+
   readonly voiceChannelUrl = this.select(
     this.connectInfo,
     connectInfo => connectInfo?.voiceChannelUrl,
