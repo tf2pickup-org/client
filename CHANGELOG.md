@@ -1,5 +1,13 @@
 
 
+# [3.25.0-beta.2](https://github.com/tf2pickup-pl/client/compare/3.25.0-beta.1...3.25.0-beta.2) (2022-11-01)
+
+
+### Bug Fixes
+
+* **deps:** update dependency tslib to v2.4.1 ([#1992](https://github.com/tf2pickup-pl/client/issues/1992)) ([1cb5c7f](https://github.com/tf2pickup-pl/client/commit/1cb5c7f9718404281f08e32f9909a318dfcc59b9))
+* **games:** bring back connect info announcement ([#1995](https://github.com/tf2pickup-pl/client/issues/1995)) ([c01ad60](https://github.com/tf2pickup-pl/client/commit/c01ad6086aa94a58add42b4a2ccecd2b98aa504d))
+
 # [3.25.0-beta.1](https://github.com/tf2pickup-org/client/compare/3.25.0-beta.0...3.25.0-beta.1) (2022-10-30)
 
 
