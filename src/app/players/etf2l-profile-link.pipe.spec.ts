@@ -11,7 +11,7 @@ describe('Etf2lProfileLinkPipe', () => {
 
   it('should create a correct ETF2L profile link', () => {
     expect(pipe.transform('123456')).toEqual(
-      'http://etf2l.org/forum/user/123456',
+      'https://etf2l.org/forum/user/123456',
     );
   });
 });

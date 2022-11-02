@@ -11,7 +11,7 @@ describe('SteamProfileLinkPipe', () => {
 
   it('should create a steam link with the given profile', () => {
     expect(pipe.transform('FAKE_PROFILE')).toEqual(
-      'http://steamcommunity.com/profiles/FAKE_PROFILE',
+      'https://steamcommunity.com/profiles/FAKE_PROFILE',
     );
   });
 });

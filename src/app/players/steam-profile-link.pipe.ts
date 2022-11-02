@@ -5,6 +5,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class SteamProfileLinkPipe implements PipeTransform {
   transform(steamId: string): string {
-    return `http://steamcommunity.com/profiles/${steamId}`;
+    return `https://steamcommunity.com/profiles/${steamId}`;
   }
 }
