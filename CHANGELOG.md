@@ -1,5 +1,13 @@
 
 
+# [3.25.0-beta.3](https://github.com/tf2pickup-org/client/compare/3.25.0-beta.2...3.25.0-beta.3) (2022-11-03)
+
+
+### Bug Fixes
+
+* add cp_steel thumbnail ([#1997](https://github.com/tf2pickup-org/client/issues/1997)) ([ed107c0](https://github.com/tf2pickup-org/client/commit/ed107c0aa1cb442b6b899d1a578c2ccd01643e96))
+* **players:** use https schema in external profile links ([#1998](https://github.com/tf2pickup-org/client/issues/1998)) ([f201abc](https://github.com/tf2pickup-org/client/commit/f201abc5901f58ca97500652139b42729074d4aa))
+
 # [3.25.0-beta.2](https://github.com/tf2pickup-pl/client/compare/3.25.0-beta.1...3.25.0-beta.2) (2022-11-01)
 
 
