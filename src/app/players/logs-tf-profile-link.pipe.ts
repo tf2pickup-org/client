@@ -5,6 +5,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class LogsTfProfileLinkPipe implements PipeTransform {
   transform(steamId: string): string {
-    return `http://logs.tf/profile/${steamId}`;
+    return `https://logs.tf/profile/${steamId}`;
   }
 }

@@ -11,7 +11,7 @@ describe('LogsTfProfileLinkPipe', () => {
 
   it('should create correct logs.tf profile link', () => {
     expect(pipe.transform('FAKE_STEAM_ID')).toEqual(
-      'http://logs.tf/profile/FAKE_STEAM_ID',
+      'https://logs.tf/profile/FAKE_STEAM_ID',
     );
   });
 });
