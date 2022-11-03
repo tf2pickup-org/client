@@ -54,6 +54,45 @@
             <span class="mdc-deprecated-list-item__secondary-text">{{ this.form.get('minimumTf2InGameHours').value }} hours</span>
           </span>
         </li>
+
+        <li class="mdc-deprecated-list-item" tabindex="0">
+          <span class="mdc-deprecated-list-item__ripple"></span>
+          <div class="mdc-deprecated-list-item__text flex-grow-1">
+            <label class="mdc-deprecated-list-item__primary-text" for="deny-players-with-no-skill-assigned-switch">Deny players with no skill assigned</label>
+            <span class="mdc-deprecated-list-item__secondary-text"
+              [ngSwitch]="this.form.get('denyPlayersWithNoSkillAssigned').value">
+              <ng-container *ngSwitchCase="true">Players with no skill assigned won't be allowed to join the queue</ng-container>
+              <ng-container *ngSwitchCase="false">Players will be able to join the queue</ng-container>
+            </span>
+          </div>
+
+          <span class="mdc-deprecated-list-item__graphic">
+            <button type="button"
+              class="mdc-switch"
+              role="switch"
+              (click)="updateDenyPlayersWithNoSkillAssigned()"
+              #denyPlayersWithNoSkillAssignedSwitch
+              id="deny-players-with-no-skill-assigned-switch">
+              <div class="mdc-switch__track"></div>
+              <div class="mdc-switch__handle-track">
+                <div class="mdc-switch__handle">
+                  <div class="mdc-switch__shadow">
+                    <div class="mdc-elevation-overlay"></div>
+                  </div>
+                  <div class="mdc-switch__ripple"></div>
+                  <div class="mdc-switch__icons">
+                    <svg class="mdc-switch__icon mdc-switch__icon--on" viewBox="0 0 24 24">
+                      <path d="M19.69,5.23L8.96,15.96l-4.23-4.23L2.96,13.5l6,6L21.46,7L19.69,5.23z" />
+                    </svg>
+                    <svg class="mdc-switch__icon mdc-switch__icon--off" viewBox="0 0 24 24">
+                      <path d="M20 13H4v-2h16v2z" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </button>
+          </span>
+        </li>
       </ul>
     </div>
 

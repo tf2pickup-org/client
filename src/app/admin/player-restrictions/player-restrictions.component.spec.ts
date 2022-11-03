@@ -5,6 +5,7 @@ import { TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ConfigurationEntryKey } from '@app/configuration/configuration-entry-key';
 import { ConfigurationService } from '@app/configuration/configuration.service';
+import { DenyPlayersWithNoSkillAssigned } from '@app/configuration/models/deny-players-with-no-skill-assigned';
 import { Etf2lAccountRequired } from '@app/configuration/models/etf2l-account-required';
 import { MinimumTf2InGameHours } from '@app/configuration/models/minimum-tf2-in-game-hours';
 import { FeatherComponent } from 'angular-feather';
@@ -26,12 +27,14 @@ describe(PlayerRestrictionsComponent.name, () => {
   let fixture: MockedComponentFixture<PlayerRestrictionsComponent>;
   let etf2lAccountRequired: Subject<Etf2lAccountRequired>;
   let minimumTf2InGameHours: Subject<MinimumTf2InGameHours>;
+  let denyPlayersWithNoSkillAssigned: Subject<DenyPlayersWithNoSkillAssigned>;
   let overlay: jasmine.SpyObj<Overlay>;
   let configurationService: jasmine.SpyObj<ConfigurationService>;
 
   beforeEach(() => {
     etf2lAccountRequired = new Subject();
     minimumTf2InGameHours = new Subject();
+    denyPlayersWithNoSkillAssigned = new Subject();
   });
 
   beforeEach(() =>
@@ -45,6 +48,8 @@ describe(PlayerRestrictionsComponent.name, () => {
                 etf2lAccountRequired.pipe(take(1)),
               [ConfigurationEntryKey.minimumTf2InGameHours]:
                 minimumTf2InGameHours.pipe(take(1)),
+              [ConfigurationEntryKey.denyPlayersWithNoSkillAssigned]:
+                denyPlayersWithNoSkillAssigned.pipe(take(1)),
             }[key]),
         ),
         storeValue: jasmine.createSpy('storeValue').and.callFake(
@@ -54,6 +59,8 @@ describe(PlayerRestrictionsComponent.name, () => {
                 etf2lAccountRequired.pipe(take(1)),
               [ConfigurationEntryKey.minimumTf2InGameHours]:
                 minimumTf2InGameHours.pipe(take(1)),
+              [ConfigurationEntryKey.denyPlayersWithNoSkillAssigned]:
+                denyPlayersWithNoSkillAssigned.pipe(take(1)),
             }[entry.key]),
         ),
       })
@@ -89,6 +96,10 @@ describe(PlayerRestrictionsComponent.name, () => {
         key: ConfigurationEntryKey.minimumTf2InGameHours,
         value: 500,
       });
+      denyPlayersWithNoSkillAssigned.next({
+        key: ConfigurationEntryKey.denyPlayersWithNoSkillAssigned,
+        value: false,
+      });
       fixture.detectChanges();
     });
 
@@ -104,6 +115,13 @@ describe(PlayerRestrictionsComponent.name, () => {
         '#minimum-tf2-in-game-hours-field',
       ).nativeElement as HTMLInputElement;
       expect(minimumTf2InGameHoursField.value).toEqual('500');
+
+      const denyPlayersWithNoSkillAssigned = ngMocks.find(
+        '#deny-players-with-no-skill-assigned-switch',
+      ).nativeElement as HTMLButtonElement;
+      expect(denyPlayersWithNoSkillAssigned.getAttribute('aria-checked')).toBe(
+        'false',
+      );
     });
 
     describe('when the minimum tf2 in-game hours item is clicked', () => {
@@ -161,6 +179,10 @@ describe(PlayerRestrictionsComponent.name, () => {
               minimumTf2InGameHours.next({
                 key: ConfigurationEntryKey.minimumTf2InGameHours,
                 value: 600,
+              });
+              denyPlayersWithNoSkillAssigned.next({
+                key: ConfigurationEntryKey.denyPlayersWithNoSkillAssigned,
+                value: true,
               });
             });
 
