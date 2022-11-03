@@ -11,6 +11,13 @@ const routes: Routes = [
     loadChildren: () =>
       import('./statistics/statistics.module').then(m => m.StatisticsModule),
   },
+  {
+    path: 'player-action-logs',
+    loadChildren: () =>
+      import('./player-action-logs/player-action-logs.module').then(
+        m => m.PlayerActionLogsModule,
+      ),
+  },
 ];
 
 @NgModule({
