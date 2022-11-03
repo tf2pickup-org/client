@@ -1,5 +1,12 @@
 
 
+# [3.25.0-beta.4](https://github.com/tf2pickup-org/client/compare/3.25.0-beta.3...3.25.0-beta.4) (2022-11-03)
+
+
+### Bug Fixes
+
+* fix cp_steel thumbnail ([655275f](https://github.com/tf2pickup-org/client/commit/655275fb6d8374e1dfc51e16d1c3e9808618b0f5))
+
 # [3.25.0-beta.3](https://github.com/tf2pickup-org/client/compare/3.25.0-beta.2...3.25.0-beta.3) (2022-11-03)
 
 
