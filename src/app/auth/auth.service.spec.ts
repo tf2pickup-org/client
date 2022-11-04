@@ -13,7 +13,7 @@ class TokenStoreServiceStub {
 }
 
 describe('AuthService', () => {
-  let httpContoller: HttpTestingController;
+  let httpController: HttpTestingController;
 
   beforeEach(() =>
     TestBed.configureTestingModule({
@@ -26,7 +26,7 @@ describe('AuthService', () => {
   );
 
   beforeEach(() => {
-    httpContoller = TestBed.inject(HttpTestingController);
+    httpController = TestBed.inject(HttpTestingController);
   });
 
   it('should be created', () => {
@@ -44,7 +44,7 @@ describe('AuthService', () => {
   describe('#reauth()', () => {
     it('should call endpoint', inject([AuthService], (service: AuthService) => {
       service.reauth().subscribe();
-      const req = httpContoller.expectOne(
+      const req = httpController.expectOne(
         'FAKE_URL/auth?refresh_token=FAKE_REFRESH_TOKEN',
       );
       expect(req.request.method).toBe('POST');
@@ -59,7 +59,7 @@ describe('AuthService', () => {
           .subscribe(authToken =>
             expect(authToken).toEqual('FAKE_NEW_AUTH_TOKEN'),
           );
-        const req = httpContoller.expectOne(
+        const req = httpController.expectOne(
           'FAKE_URL/auth?refresh_token=FAKE_REFRESH_TOKEN',
         );
         req.flush({
@@ -76,7 +76,7 @@ describe('AuthService', () => {
       (service: AuthService) => {
         const spy = spyOn(service, 'login');
         service.reauth().subscribe(fail, fail);
-        const req = httpContoller.expectOne(
+        const req = httpController.expectOne(
           'FAKE_URL/auth?refresh_token=FAKE_REFRESH_TOKEN',
         );
         req.error(null, { status: 400 });
@@ -86,11 +86,14 @@ describe('AuthService', () => {
 
     it('should rethrow server other server errors', done =>
       inject([AuthService], (service: AuthService) => {
-        service.reauth().subscribe(fail, done);
-        const req = httpContoller.expectOne(
+        service.reauth().subscribe({ error: () => done() });
+        const req = httpController.expectOne(
           'FAKE_URL/auth?refresh_token=FAKE_REFRESH_TOKEN',
         );
-        req.error(null, { status: 500 });
+        req.flush(new ErrorEvent('server error'), {
+          status: 500,
+          statusText: 'server error',
+        });
         expect().nothing();
       })());
   });
