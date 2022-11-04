@@ -3,7 +3,7 @@ import { QueueSlot } from './queue/models/queue-slot';
 import { canJoinQueue, awaitsReadyUp } from './selectors';
 import { Tf2ClassName } from './shared/models/tf2-class-name';
 
-fdescribe('canJoinQueue()', () => {
+describe('canJoinQueue()', () => {
   describe('when the user is offline', () => {
     it('should return false', () => {
       expect(
