@@ -3,7 +3,7 @@ import { QueueSlot } from './queue/models/queue-slot';
 import { canJoinQueue, awaitsReadyUp } from './selectors';
 import { Tf2ClassName } from './shared/models/tf2-class-name';
 
-describe('canJoinQueue', () => {
+fdescribe('canJoinQueue()', () => {
   describe('when the user is offline', () => {
     it('should return false', () => {
       expect(
@@ -58,7 +58,10 @@ describe('canJoinQueue', () => {
     it('should return false', () => {
       expect(
         canJoinQueue(Tf2ClassName.soldier).projector(true, true, null, false, [
-          Tf2ClassName.soldier,
+          {
+            reason: 'test',
+            gameClasses: [Tf2ClassName.soldier],
+          },
         ]),
       ).toBe(false);
     });
