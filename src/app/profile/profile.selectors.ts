@@ -39,6 +39,10 @@ export const linkedProfiles = createSelector(profile, profile =>
   profile.authenticated === 'authenticated' ? profile.linkedProfiles : [],
 );
 
+export const restrictions = createSelector(profile, profile =>
+  profile.authenticated === 'authenticated' ? profile.restrictions : [],
+);
+
 export const twitchTvProfile = createSelector(linkedProfiles, linkedProfiles =>
   linkedProfiles?.find(p => p.provider === 'twitch.tv'),
 );

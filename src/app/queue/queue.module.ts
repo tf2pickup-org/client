@@ -31,6 +31,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { SubstituteRequestBannerComponent } from './substitute-request-banner/substitute-request-banner.component';
 import { BanBannerComponent } from './ban-banner/ban-banner.component';
 import { QueueNotificationsHandlerComponent } from './queue-notifications-handler/queue-notifications-handler.component';
+import { RestrictionBannerComponent } from './restriction-banner/restriction-banner.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { QueueNotificationsHandlerComponent } from './queue-notifications-handle
     SubstituteRequestBannerComponent,
     BanBannerComponent,
     QueueNotificationsHandlerComponent,
+    RestrictionBannerComponent,
   ],
   imports: [
     CommonModule,

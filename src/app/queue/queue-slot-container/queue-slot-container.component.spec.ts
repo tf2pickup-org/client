@@ -5,7 +5,6 @@ import { MockComponent } from 'ng-mocks';
 import { QueueSlotItemComponent } from '../queue-slot-item/queue-slot-item.component';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { joinQueue, markFriend } from '../queue.actions';
-import { canJoinQueue } from '@app/selectors';
 import { By } from '@angular/platform-browser';
 import { merge, cloneDeep } from 'lodash-es';
 import { ChangeDetectionStrategy } from '@angular/core';
@@ -50,6 +49,11 @@ const initialState = {
       id: 'FAKE_MEDIC_1_ID',
       activeGameId: null,
     },
+    bans: [],
+    restrictions: [],
+  },
+  io: {
+    connected: true,
   },
 };
 
@@ -64,12 +68,7 @@ describe('QueueSlotContainerComponent', () => {
         QueueSlotContainerComponent,
         MockComponent(QueueSlotItemComponent),
       ],
-      providers: [
-        provideMockStore({
-          initialState,
-          selectors: [{ selector: canJoinQueue, value: true }],
-        }),
-      ],
+      providers: [provideMockStore({ initialState })],
     })
       // https://github.com/angular/angular/issues/12313
       .overrideComponent(QueueSlotContainerComponent, {
@@ -89,17 +88,30 @@ describe('QueueSlotContainerComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should fetch a slot', () => {
-    component.slotId = 2;
-    component.slot.subscribe(slot =>
-      expect(slot).toEqual({
-        id: 2,
-        gameClass: Tf2ClassName.medic,
-        player: { id: 'FAKE_MEDIC_1_ID' } as Player,
-        ready: false,
-        canMakeFriendsWith: [Tf2ClassName.soldier],
-      }),
-    );
+  describe('when slotId is specified', () => {
+    beforeEach(() => {
+      component.slotId = 2;
+      fixture.detectChanges();
+    });
+
+    it('should fetch a slot', () => {
+      component.slot.subscribe(slot =>
+        expect(slot).toEqual({
+          id: 2,
+          gameClass: Tf2ClassName.medic,
+          player: { id: 'FAKE_MEDIC_1_ID' } as Player,
+          ready: false,
+          canMakeFriendsWith: [Tf2ClassName.soldier],
+        }),
+      );
+    });
+
+    it('should pass the correct locked value', () => {
+      const queueSlotItem = fixture.debugElement.query(
+        By.css('app-queue-slot-item'),
+      ).componentInstance as QueueSlotItemComponent;
+      expect(queueSlotItem.locked).toBe(false);
+    });
   });
 
   it('should render the slot item', () => {
@@ -198,13 +210,6 @@ describe('QueueSlotContainerComponent', () => {
         } as any),
       );
     });
-  });
-
-  it('should pass the correct locked value', () => {
-    const queueSlotItem = fixture.debugElement.query(
-      By.css('app-queue-slot-item'),
-    ).componentInstance as QueueSlotItemComponent;
-    expect(queueSlotItem.locked).toBe(false);
   });
 
   describe('#joinQueue()', () => {

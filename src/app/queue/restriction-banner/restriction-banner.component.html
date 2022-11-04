@@ -1,0 +1,7 @@
+<div *ngIf="restriction" class="restriction-banner">
+  <ng-container [ngSwitch]="restriction.reason">
+    <span *ngSwitchCase="'account needs review'">
+      Your account needs to be reviewed by an admin before you can join the queue. We will get to it as soon as possible. Please stay patient.
+    </span>
+  </ng-container>
+</div>

@@ -1,6 +1,10 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { activeGameId, bans } from '@app/profile/profile.selectors';
+import {
+  activeGameId,
+  bans,
+  restrictions,
+} from '@app/profile/profile.selectors';
 import { substituteRequests } from '../queue.selectors';
 
 @Component({
@@ -13,6 +17,7 @@ export class QueueAlertsComponent {
   activeGameId = this.store.select(activeGameId);
   bans = this.store.select(bans);
   substituteRequests = this.store.select(substituteRequests);
+  restrictions = this.store.select(restrictions);
 
-  constructor(private store: Store) {}
+  constructor(private readonly store: Store) {}
 }

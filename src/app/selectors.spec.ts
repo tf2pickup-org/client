@@ -6,25 +6,61 @@ import { Tf2ClassName } from './shared/models/tf2-class-name';
 describe('canJoinQueue', () => {
   describe('when the user is offline', () => {
     it('should return false', () => {
-      expect(canJoinQueue.projector(false, true, null, false)).toBe(false);
+      expect(
+        canJoinQueue(Tf2ClassName.soldier).projector(
+          false,
+          true,
+          null,
+          false,
+          [],
+        ),
+      ).toBe(false);
     });
   });
 
   describe('when the user is not logged in', () => {
     it('should return false', () => {
-      expect(canJoinQueue.projector(true, false, null, false)).toBe(false);
+      expect(
+        canJoinQueue(Tf2ClassName.soldier).projector(
+          true,
+          false,
+          null,
+          false,
+          [],
+        ),
+      ).toBe(false);
     });
   });
 
   describe('when the user has an active game', () => {
     it('should return false', () => {
-      expect(canJoinQueue.projector(true, true, {}, false)).toBe(false);
+      expect(
+        canJoinQueue(Tf2ClassName.soldier).projector(true, true, {}, false, []),
+      ).toBe(false);
     });
   });
 
   describe('when the user has active bans', () => {
     it('should return false', () => {
-      expect(canJoinQueue.projector(true, true, null, true)).toBe(false);
+      expect(
+        canJoinQueue(Tf2ClassName.soldier).projector(
+          true,
+          true,
+          null,
+          true,
+          [],
+        ),
+      ).toBe(false);
+    });
+  });
+
+  describe('when the user has restrictions', () => {
+    it('should return false', () => {
+      expect(
+        canJoinQueue(Tf2ClassName.soldier).projector(true, true, null, false, [
+          Tf2ClassName.soldier,
+        ]),
+      ).toBe(false);
     });
   });
 });

@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 import { slotById, mySlot, queueFriendships } from '../queue.selectors';
 import { canJoinQueue } from '@app/selectors';
 import { joinQueue, leaveQueue, markFriend } from '../queue.actions';
-import { switchMap, map, shareReplay } from 'rxjs/operators';
+import { switchMap, map, shareReplay, filter } from 'rxjs/operators';
 import { currentPlayer } from '@app/profile/profile.selectors';
 import { FriendFlags } from '../friend-flags';
 
@@ -62,8 +62,12 @@ export class QueueSlotContainerComponent {
     }),
   );
 
-  // eslint-disable-next-line ngrx/avoid-mapping-selectors
-  locked = this.store.select(canJoinQueue).pipe(map(r => !r));
+  locked = this.slot.pipe(
+    filter(slot => Boolean(slot)),
+    map(slot => slot.gameClass),
+    switchMap(gameClass => this.store.select(canJoinQueue(gameClass))),
+    map(canJoin => !canJoin),
+  );
 
   @Input()
   set slotId(slotId: number) {
