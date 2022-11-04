@@ -15035,15 +15035,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stylelint-config-standard-scss@npm:6.0.0":
-  version: 6.0.0
-  resolution: "stylelint-config-standard-scss@npm:6.0.0"
+"stylelint-config-standard-scss@npm:6.1.0":
+  version: 6.1.0
+  resolution: "stylelint-config-standard-scss@npm:6.1.0"
   dependencies:
     stylelint-config-recommended-scss: ^8.0.0
     stylelint-config-standard: ^29.0.0
   peerDependencies:
+    postcss: ^8.3.3
     stylelint: ^14.14.0
-  checksum: 4a48e72cae770c48e3535a3556b7340d9e71290471812257aadaf7f67adb53b0faf23e0ec23f8956859a46559bbcadbe48b4592780baad3e0a88e0cfcee8cb70
+  peerDependenciesMeta:
+    postcss:
+      optional: true
+  checksum: eac8cc4e5f1b4ec8bba6a7bd84fe1010765f46357483bbe63f74c1ffdb01a2dd650d3751072b35869933facaacbf4adb0dcd7f141d01c5adbf72eaf720d54653
   languageName: node
   linkType: hard
 
@@ -15438,7 +15442,7 @@ __metadata:
     socket.io-client: 4.5.3
     stylelint: 14.14.1
     stylelint-config-sass-guidelines: 9.0.1
-    stylelint-config-standard-scss: 6.0.0
+    stylelint-config-standard-scss: 6.1.0
     stylelint-order: 5.0.0
     ts-node: 10.9.1
     tslib: 2.4.1
