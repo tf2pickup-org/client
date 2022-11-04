@@ -29,5 +29,6 @@ export const canJoinQueue = (gameClass: Tf2ClassName) =>
 export const awaitsReadyUp = createSelector(
   queueState,
   mySlot,
-  (queueState, mySlot) => queueState === 'ready' && !!mySlot && !mySlot.ready,
+  (queueState, mySlot) =>
+    queueState === 'ready' && Boolean(mySlot) && !mySlot.ready,
 );

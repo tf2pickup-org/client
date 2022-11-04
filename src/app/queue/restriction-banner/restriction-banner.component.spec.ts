@@ -7,7 +7,7 @@ describe('RestrictionBannerComponent', () => {
 
   beforeEach(() => MockBuilder(RestrictionBannerComponent));
 
-  beforeEach(async () => {
+  beforeEach(() => {
     fixture = MockRender(RestrictionBannerComponent);
     component = fixture.point.componentInstance;
     fixture.detectChanges();

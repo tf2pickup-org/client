@@ -56,9 +56,9 @@ export class QueueSlotContainerComponent {
           canMarkAsFriend: true,
           markedBy: friendship.sourcePlayerId,
         });
-      } else {
-        return of({ canMarkAsFriend: true });
       }
+
+      return of({ canMarkAsFriend: true });
     }),
   );
 
@@ -69,6 +69,7 @@ export class QueueSlotContainerComponent {
     map(canJoin => !canJoin),
   );
 
+  // skipcq: JS-0041
   @Input()
   set slotId(slotId: number) {
     this._slotId.next(slotId);
