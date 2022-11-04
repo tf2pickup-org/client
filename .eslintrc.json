@@ -54,7 +54,13 @@
           }
         ],
         "ngrx/on-function-explicit-return-type": "off",
-        "ngrx/prefix-selectors-with-select": "off"
+        "ngrx/prefix-selectors-with-select": "off",
+        "prettier/prettier": [
+          "error",
+          {
+            "endOfLine": "auto"
+          }
+        ]
       }
     },
     {

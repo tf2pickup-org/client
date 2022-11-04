@@ -9,7 +9,7 @@
       </div>
 
       <div formGroupName="gameClasses" class="d-flex mt-4">
-        <div *ngFor="let group of gameClasses.controls | keyvalue" class="d-flex flex-column align-items-center">
+        <div *ngFor="let group of gameClasses.controls | keyvalue: orderGameClasses" class="d-flex flex-column align-items-center">
           <div class="mdc-typography--body1">
             <app-game-class-icon [gameClass]="group.key"></app-game-class-icon>
             {{ group.key }}
