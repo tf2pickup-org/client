@@ -4,7 +4,12 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
 } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { ConfigurationService } from '@app/configuration/configuration.service';
 import { queueConfig } from '@app/queue/queue.selectors';
 import { Store } from '@ngrx/store';
@@ -12,6 +17,9 @@ import { BehaviorSubject, zip } from 'rxjs';
 import { map, take, tap } from 'rxjs/operators';
 import { ConfigurationEntryKey } from '@app/configuration/configuration-entry-key';
 import { DefaultPlayerSkill } from '@app/configuration/models/default-player-skill';
+import { tf2ClassOrder } from '@app/shared/tf2-class-order';
+import { KeyValue } from '@angular/common';
+import { Tf2ClassName } from '@app/shared/models/tf2-class-name';
 
 @Component({
   selector: 'app-default-player-skill-edit',
@@ -84,4 +92,9 @@ export class DefaultPlayerSkillEditComponent implements OnInit {
   get gameClasses(): FormGroup {
     return this.form.get('gameClasses') as FormGroup;
   }
+
+  orderGameClasses = (
+    a: KeyValue<Tf2ClassName, FormControl>,
+    b: KeyValue<Tf2ClassName, FormControl>,
+  ): number => tf2ClassOrder[b.key] - tf2ClassOrder[a.key];
 }
