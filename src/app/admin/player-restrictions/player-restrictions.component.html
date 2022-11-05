@@ -20,6 +20,7 @@
           <span class="mdc-deprecated-list-item__graphic">
             <button type="button"
               class="mdc-switch"
+              [class.mdc-switch--selected]="etf2lAccountRequired"
               role="switch"
               (click)="updateEtf2lAccountRequired()"
               #etf2lAccountRequiredSwitch
@@ -62,13 +63,14 @@
             <span class="mdc-deprecated-list-item__secondary-text"
               [ngSwitch]="this.form.get('denyPlayersWithNoSkillAssigned').value">
               <ng-container *ngSwitchCase="true">Players with no skill assigned won't be allowed to join the queue</ng-container>
-              <ng-container *ngSwitchCase="false">Players will be able to join the queue</ng-container>
+              <ng-container *ngSwitchCase="false">Players that have no skill assigned will be able to join the queue and the default skill will be used for them when launching a game</ng-container>
             </span>
           </div>
 
           <span class="mdc-deprecated-list-item__graphic">
             <button type="button"
               class="mdc-switch"
+              [class.mdc-switch--selected]="denyPlayersWithNoSkillAssigned"
               role="switch"
               (click)="updateDenyPlayersWithNoSkillAssigned()"
               #denyPlayersWithNoSkillAssignedSwitch

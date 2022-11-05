@@ -11,7 +11,7 @@ import {
 import { FormBuilder } from '@angular/forms';
 import { ConfigurationEntryKey } from '@app/configuration/configuration-entry-key';
 import { ConfigurationService } from '@app/configuration/configuration.service';
-import { race, zip } from 'rxjs';
+import { race, Subject, zip } from 'rxjs';
 import { MDCSwitch } from '@material/switch';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { Overlay } from '@angular/cdk/overlay';
@@ -19,8 +19,10 @@ import { MinimumTf2InGameHoursDialogComponent } from './minimum-tf2-in-game-hour
 import { Location } from '@angular/common';
 import { Etf2lAccountRequired } from '@app/configuration/models/etf2l-account-required';
 import { MinimumTf2InGameHours } from '@app/configuration/models/minimum-tf2-in-game-hours';
-import { map } from 'rxjs/operators';
+import { map, takeUntil } from 'rxjs/operators';
 import { DenyPlayersWithNoSkillAssigned } from '@app/configuration/models/deny-players-with-no-skill-assigned';
+import { ActivatedRoute, Data } from '@angular/router';
+import { PlayerRestrictions } from './player-restrictions';
 
 @Component({
   selector: 'app-player-restrictions',
@@ -45,6 +47,7 @@ export class PlayerRestrictionsComponent
 
   private etf2lAccountRequiredSwitch: MDCSwitch;
   private denyPlayersWithNoSkillAssignedSwitch: MDCSwitch;
+  private destroyed = new Subject<void>();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -52,40 +55,29 @@ export class PlayerRestrictionsComponent
     private changeDetector: ChangeDetectorRef,
     private overlay: Overlay,
     private location: Location,
+    private route: ActivatedRoute,
   ) {}
 
   ngOnInit() {
-    zip(
-      this.configurationService
-        .fetchValue<Etf2lAccountRequired>(
-          ConfigurationEntryKey.etf2lAccountRequired,
-        )
-        .pipe(map(entry => entry.value)),
-      this.configurationService
-        .fetchValue<MinimumTf2InGameHours>(
-          ConfigurationEntryKey.minimumTf2InGameHours,
-        )
-        .pipe(map(entry => entry.value)),
-      this.configurationService
-        .fetchValue<DenyPlayersWithNoSkillAssigned>(
-          ConfigurationEntryKey.denyPlayersWithNoSkillAssigned,
-        )
-        .pipe(map(entry => entry.value)),
-    ).subscribe(
-      ([
-        etf2lAccountRequired,
-        minimumTf2InGameHours,
-        denyPlayersWithNoSkillAssigned,
-      ]) => {
-        this.form.patchValue({
+    this.route.data
+      .pipe(
+        map<Data, PlayerRestrictions>(data => data.playerRestrictions),
+        takeUntil(this.destroyed),
+      )
+      .subscribe(
+        ({
           etf2lAccountRequired,
           minimumTf2InGameHours,
           denyPlayersWithNoSkillAssigned,
-        });
-        this.etf2lAccountRequiredSwitch.selected = etf2lAccountRequired;
-        this.changeDetector.markForCheck();
-      },
-    );
+        }) => {
+          this.form.patchValue({
+            etf2lAccountRequired,
+            minimumTf2InGameHours,
+            denyPlayersWithNoSkillAssigned,
+          });
+          this.changeDetector.markForCheck();
+        },
+      );
   }
 
   ngAfterViewInit() {
@@ -100,6 +92,8 @@ export class PlayerRestrictionsComponent
   ngOnDestroy() {
     this.etf2lAccountRequiredSwitch.destroy();
     this.denyPlayersWithNoSkillAssignedSwitch.destroy();
+    this.destroyed.next();
+    this.destroyed.complete();
   }
 
   save() {

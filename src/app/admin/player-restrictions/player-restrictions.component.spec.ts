@@ -3,6 +3,7 @@ import { Location } from '@angular/common';
 import { ChangeDetectorRef } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { ConfigurationEntryKey } from '@app/configuration/configuration-entry-key';
 import { ConfigurationService } from '@app/configuration/configuration.service';
 import { DenyPlayersWithNoSkillAssigned } from '@app/configuration/models/deny-players-with-no-skill-assigned';
@@ -30,11 +31,13 @@ describe(PlayerRestrictionsComponent.name, () => {
   let denyPlayersWithNoSkillAssigned: Subject<DenyPlayersWithNoSkillAssigned>;
   let overlay: jasmine.SpyObj<Overlay>;
   let configurationService: jasmine.SpyObj<ConfigurationService>;
+  let routeData: Subject<any>;
 
   beforeEach(() => {
     etf2lAccountRequired = new Subject();
     minimumTf2InGameHours = new Subject();
     denyPlayersWithNoSkillAssigned = new Subject();
+    routeData = new Subject();
   });
 
   beforeEach(() =>
@@ -68,7 +71,10 @@ describe(PlayerRestrictionsComponent.name, () => {
       .keep(ChangeDetectorRef)
       .keep(EditPageWrapperComponent)
       .mock(FeatherComponent)
-      .mock(Location),
+      .mock(Location)
+      .mock(ActivatedRoute, {
+        data: routeData.asObservable(),
+      }),
   );
 
   beforeEach(() => {
@@ -88,19 +94,15 @@ describe(PlayerRestrictionsComponent.name, () => {
 
   describe('when configuration is fetched', () => {
     beforeEach(() => {
-      etf2lAccountRequired.next({
-        key: ConfigurationEntryKey.etf2lAccountRequired,
-        value: true,
-      });
-      minimumTf2InGameHours.next({
-        key: ConfigurationEntryKey.minimumTf2InGameHours,
-        value: 500,
-      });
-      denyPlayersWithNoSkillAssigned.next({
-        key: ConfigurationEntryKey.denyPlayersWithNoSkillAssigned,
-        value: false,
+      routeData.next({
+        playerRestrictions: {
+          etf2lAccountRequired: true,
+          minimumTf2InGameHours: 500,
+          denyPlayersWithNoSkillAssigned: false,
+        },
       });
       fixture.detectChanges();
+      fixture.componentInstance.ngAfterViewInit();
     });
 
     it('should set values on inputs', () => {
