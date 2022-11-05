@@ -19,6 +19,7 @@ import { StaticGameServerComponent } from './game-servers/static-game-server/sta
 import { StaticGameServerResolver } from './game-servers/static-game-server.resolver';
 import { ServemeTfConfigurationComponent } from './game-servers/serveme-tf-configuration/serveme-tf-configuration.component';
 import { ImportExportPlayerSkillComponent } from './import-export-player-skill/import-export-player-skill.component';
+import { PlayerRestrictionsResolver } from './player-restrictions/player-restrictions.resolver';
 
 const routes: Routes = [
   {
@@ -124,6 +125,9 @@ const routes: Routes = [
         data: {
           title: 'edit player restrictions',
           animation: 'PlayerRestrictionsPage',
+        },
+        resolve: {
+          playerRestrictions: PlayerRestrictionsResolver,
         },
       },
       {
