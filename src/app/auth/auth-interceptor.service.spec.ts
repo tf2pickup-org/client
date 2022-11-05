@@ -76,8 +76,13 @@ describe('AuthInterceptorService', () => {
     });
 
     it('should throw an error on any other server error', done => {
-      http.get('FAKE_URL').subscribe(noop, done);
-      httpController.expectOne('FAKE_URL').error(null, { status: 500 });
+      http.get('FAKE_URL').subscribe({ error: () => done() });
+      httpController
+        .expectOne('FAKE_URL')
+        .flush(new ErrorEvent('server errror'), {
+          status: 500,
+          statusText: 'server error',
+        });
       expect(authServiceStub.reauth).not.toHaveBeenCalled();
     });
   });

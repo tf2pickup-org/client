@@ -10367,17 +10367,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jasmine-core@npm:4.5.0":
+"jasmine-core@npm:4.5.0, jasmine-core@npm:^4.1.0":
   version: 4.5.0
   resolution: "jasmine-core@npm:4.5.0"
   checksum: e7adda527d544097ddb8aeec7bbbed19c59ca70ef57e1b740189eecf5cde3e0e20fba74d15c511b169105cface4fa2a775a6088c2220bf97f482b51b3c5d1fa1
-  languageName: node
-  linkType: hard
-
-"jasmine-core@npm:^3.6.0":
-  version: 3.99.1
-  resolution: "jasmine-core@npm:3.99.1"
-  checksum: 4e4a89739d99e471b86c7ccc4c5c244a77cc6d1e17b2b0d87d81266b8415697354d8873f7e764790a10661744f73a753a6e9bcd9b3e48c66a0c9b8a092b071b7
   languageName: node
   linkType: hard
 
@@ -10684,14 +10677,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"karma-jasmine@npm:4.0.2":
-  version: 4.0.2
-  resolution: "karma-jasmine@npm:4.0.2"
+"karma-jasmine@npm:5.1.0":
+  version: 5.1.0
+  resolution: "karma-jasmine@npm:5.1.0"
   dependencies:
-    jasmine-core: ^3.6.0
+    jasmine-core: ^4.1.0
   peerDependencies:
-    karma: "*"
-  checksum: bf884704af1fd19816d9f4e96b25e286ff1a57adcabe1f15e3d2b3e9c1da873c1c843b9eab4274c27e63a99f1c3dea864f1f5eca1a10dc065e6e9d5796c207b4
+    karma: ^6.0.0
+  checksum: ebefd1094e7c2b4c854027621d854908166c79cccaabb5a6ba0ace42cd785a9da0a9aad1aa41937956bd4848287eac04886eebfd7c851b927d2132d3563b7739
   languageName: node
   linkType: hard
 
@@ -15633,7 +15626,7 @@ __metadata:
     karma: 6.4.1
     karma-chrome-launcher: 3.1.1
     karma-coverage: 2.2.0
-    karma-jasmine: 4.0.2
+    karma-jasmine: 5.1.0
     karma-jasmine-html-reporter: 2.0.0
     karma-spec-reporter: 0.0.34
     lodash-es: 4.17.21
