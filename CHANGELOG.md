@@ -1,5 +1,13 @@
 
 
+# [3.25.0-beta.6](https://github.com/tf2pickup-org/client/compare/3.25.0-beta.5...3.25.0-beta.6) (2022-11-05)
+
+
+### Bug Fixes
+
+* **admin:** resolve player restrictions configuration ([#2008](https://github.com/tf2pickup-org/client/issues/2008)) ([66be7bc](https://github.com/tf2pickup-org/client/commit/66be7bc72aaf3dce41d97d7e8acbb1663de7cac8))
+* **css:** workaround for bootstrap 5.2 tooltips ([#2007](https://github.com/tf2pickup-org/client/issues/2007)) ([a8d8a3e](https://github.com/tf2pickup-org/client/commit/a8d8a3e80a9a6a36a8fddbb1a5d417c0b0a49b94))
+
 # [3.25.0-beta.5](https://github.com/tf2pickup-org/client/compare/3.25.0-beta.4...3.25.0-beta.5) (2022-11-05)
 
 
