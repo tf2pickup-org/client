@@ -1,5 +1,20 @@
 
 
+# [3.25.0-beta.5](https://github.com/tf2pickup-org/client/compare/3.25.0-beta.4...3.25.0-beta.5) (2022-11-05)
+
+
+### Bug Fixes
+
+* **admin:** order default player skill edit inputs correctly ([#2004](https://github.com/tf2pickup-org/client/issues/2004)) ([23f97c2](https://github.com/tf2pickup-org/client/commit/23f97c2d44367f3fa6c34df92390dcb6b68a5693))
+* **deps:** update angular monorepo to v14.2.9 ([#2003](https://github.com/tf2pickup-org/client/issues/2003)) ([97ff969](https://github.com/tf2pickup-org/client/commit/97ff96905171c968aa050cc54bba038269d151a3))
+* **deps:** update dependency bootstrap to v5.2.2 ([#1835](https://github.com/tf2pickup-org/client/issues/1835)) ([9c6375c](https://github.com/tf2pickup-org/client/commit/9c6375c9b7191b56d033ece58dbf3ad321ae5e48))
+
+
+### Features
+
+* **admin:** configure deny players with no skill assigned ([#2002](https://github.com/tf2pickup-org/client/issues/2002)) ([2a2e114](https://github.com/tf2pickup-org/client/commit/2a2e1144703f66fccbbe7ead2eb62726f2b8a3da))
+* **profile:** player restrictions notification ([#2006](https://github.com/tf2pickup-org/client/issues/2006)) ([512ecd6](https://github.com/tf2pickup-org/client/commit/512ecd6f91fa623a7c27995c9f951fdd16c749db))
+
 # [3.25.0-beta.4](https://github.com/tf2pickup-org/client/compare/3.25.0-beta.3...3.25.0-beta.4) (2022-11-03)
 
 
