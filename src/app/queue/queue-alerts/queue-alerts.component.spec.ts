@@ -6,13 +6,19 @@ import { MemoizedSelector } from '@ngrx/store';
 import { By } from '@angular/platform-browser';
 import { AppState } from '@app/app.state';
 import { PlayerBan } from '@app/players/models/player-ban';
-import { activeGameId, bans } from '@app/profile/profile.selectors';
+import {
+  activeGameId,
+  bans,
+  restrictions,
+} from '@app/profile/profile.selectors';
 import { SubstituteRequest } from '../models/substitute-request';
 import { substituteRequests } from '../queue.selectors';
 import { MockComponent } from 'ng-mocks';
 import { ActiveGameSnackbarComponent } from '../active-game-snackbar/active-game-snackbar.component';
 import { SubstituteRequestBannerComponent } from '../substitute-request-banner/substitute-request-banner.component';
 import { BanBannerComponent } from '../ban-banner/ban-banner.component';
+import { Restriction } from '@app/profile/models/restriction';
+import { RestrictionBannerComponent } from '../restriction-banner/restriction-banner.component';
 
 describe('QueueAlertsComponent', () => {
   let component: QueueAlertsComponent;
@@ -24,6 +30,7 @@ describe('QueueAlertsComponent', () => {
     AppState,
     SubstituteRequest[]
   >;
+  let restrictionsSelector: MemoizedSelector<AppState, Restriction[]>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
@@ -32,6 +39,7 @@ describe('QueueAlertsComponent', () => {
         MockComponent(ActiveGameSnackbarComponent),
         MockComponent(SubstituteRequestBannerComponent),
         MockComponent(BanBannerComponent),
+        MockComponent(RestrictionBannerComponent),
       ],
       imports: [RouterTestingModule],
       providers: [provideMockStore()],
@@ -43,6 +51,7 @@ describe('QueueAlertsComponent', () => {
     activeGameIdSelector = store.overrideSelector(activeGameId, null);
     bansSelector = store.overrideSelector(bans, []);
     substituteRequestsSelector = store.overrideSelector(substituteRequests, []);
+    restrictionsSelector = store.overrideSelector(restrictions, []);
 
     fixture = TestBed.createComponent(QueueAlertsComponent);
     component = fixture.componentInstance;

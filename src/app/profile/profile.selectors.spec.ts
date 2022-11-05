@@ -1,5 +1,6 @@
 import { Player } from '@app/players/models/player';
 import { TwitchTvProfile } from '@app/players/models/twitch-tv-profile';
+import { Tf2ClassName } from '@app/shared/models/tf2-class-name';
 import {
   isAdmin,
   isSuperUser,
@@ -12,6 +13,7 @@ import {
   twitchTvProfile,
   activeGameId,
   isPlayingGame,
+  restrictions,
 } from './profile.selectors';
 
 describe('currentPlayer', () => {
@@ -126,6 +128,40 @@ describe('linkedProfiles', () => {
       expect(
         linkedProfiles.projector({
           authenticated: 'not authenticated',
+        }),
+      ).toEqual([]);
+    });
+  });
+});
+
+describe('restrictions', () => {
+  describe('when authenticated', () => {
+    it('should return linked profiles', () => {
+      expect(
+        restrictions.projector({
+          authenticated: 'authenticated',
+          restrictions: [
+            {
+              reason: 'account needs review',
+              gameClasses: [Tf2ClassName.soldier],
+            },
+          ],
+        }),
+      ).toEqual([
+        {
+          reason: 'account needs review',
+          gameClasses: [Tf2ClassName.soldier],
+        },
+      ]);
+    });
+  });
+
+  describe('when not authenticated', () => {
+    it('should return an empty array', () => {
+      expect(
+        restrictions.projector({
+          authenticated: 'authenticated',
+          restrictions: [],
         }),
       ).toEqual([]);
     });

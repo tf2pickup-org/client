@@ -1,6 +1,9 @@
 <app-ban-banner *ngFor="let ban of bans | async"
   [ban]="ban"></app-ban-banner>
 
+<app-restriction-banner *ngFor="let restriction of restrictions | async"
+  [restriction]="restriction"></app-restriction-banner>
+
 <app-active-game-snackbar *ngIf="activeGameId | async as _activeGameId"
   [gameId]="_activeGameId"></app-active-game-snackbar>
 
