@@ -31,7 +31,7 @@ describe('PlayerActionLogsComponent', () => {
     }),
   );
 
-  beforeEach(async () => {
+  beforeEach(() => {
     fixture = MockRender(PlayerActionLogsComponent);
     component = fixture.point.componentInstance;
 
