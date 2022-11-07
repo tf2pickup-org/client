@@ -19,4 +19,10 @@
       <a routerLink="/admin">admin panel</a>
     </span>
   </ng-container>
+
+  <ng-container *ngIf="isSuperUser | async">
+    <span class="footer__entry">
+      <a routerLink="/player-action-logs">player action logs</a>
+    </span>
+  </ng-container>
 </footer>
