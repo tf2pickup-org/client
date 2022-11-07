@@ -43,7 +43,7 @@ describe('PlayerActionLogsComponent', () => {
   });
 
   beforeEach(async () => {
-    await wait(500);
+    await wait(600);
     actionLogs.next([]);
   });
 
