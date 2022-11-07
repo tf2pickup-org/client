@@ -1,5 +1,12 @@
 
 
+# [3.25.0-beta.7](https://github.com/tf2pickup-org/client/compare/3.25.0-beta.6...3.25.0-beta.7) (2022-11-07)
+
+
+### Features
+
+* **admin:** browse player actions ([#2000](https://github.com/tf2pickup-org/client/issues/2000)) ([ca9e895](https://github.com/tf2pickup-org/client/commit/ca9e8952bbf4e31afc13512950990000c16f3156))
+
 # [3.25.0-beta.6](https://github.com/tf2pickup-org/client/compare/3.25.0-beta.5...3.25.0-beta.6) (2022-11-05)
 
 
