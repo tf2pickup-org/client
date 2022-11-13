@@ -24,6 +24,7 @@ export const environment = {
     },
   ],
   footerLinks: [
+    { name: 'privacy policy', target: '/privacy-policy' },
     { name: 'github', target: 'https://github.com/tf2pickup-pl' },
     { name: 'discord', target: discordInvitation },
     {
