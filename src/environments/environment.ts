@@ -1,4 +1,3 @@
-import { version } from './version';
 import { entryQueue6v6 } from './entry-queues/entry-queue-6v6';
 import { defaultEnvironment } from './default-environment';
 
@@ -24,6 +23,7 @@ export const environment = {
     },
   ],
   footerLinks: [
+    { name: 'privacy policy', target: '/privacy-policy' },
     { name: 'github', target: 'https://github.com/tf2pickup-pl' },
     { name: 'discord', target: discordInvitation },
     {

@@ -17,6 +17,18 @@ const routes: Routes = [
       document: DocumentResolver,
     },
   },
+  {
+    path: 'privacy-policy',
+    component: RulesComponent,
+    data: {
+      documentName: Documents.privacyPolicy,
+      animation: 'DocumentPage',
+      title: 'privacy policy',
+    },
+    resolve: {
+      document: DocumentResolver,
+    },
+  },
 ];
 
 @NgModule({
