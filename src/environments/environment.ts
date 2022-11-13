@@ -1,4 +1,3 @@
-import { version } from './version';
 import { entryQueue6v6 } from './entry-queues/entry-queue-6v6';
 import { defaultEnvironment } from './default-environment';
 
