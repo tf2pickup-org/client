@@ -47,6 +47,11 @@ $-even-item-background-color: rgb(6 15 30 / 52%);
     }
   }
 
+  &__list {
+    max-height: 550px;
+    overflow-y: auto;
+  }
+
   &__item {
     @include surface.ripple;
 

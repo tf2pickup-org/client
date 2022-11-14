@@ -10,7 +10,8 @@
     </div>
   </div>
 
-  <div [@onlinePlayerList]="(onlinePlayers | async)?.length">
+  <div [@onlinePlayerList]="(onlinePlayers | async)?.length"
+    class="online-player-list__list">
     <a *ngFor="let player of onlinePlayers | async; index as i"
       [routerLink]="['/player', player.id]"
       class="online-player-list__item"
