@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { Router, RoutesRecognized } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { filter, map } from 'rxjs/operators';
 import { environment } from '@environment';
@@ -16,11 +16,17 @@ export class TitleControllerComponent implements OnInit {
   ngOnInit() {
     this.router.events
       .pipe(
-        filter(event => event instanceof RoutesRecognized),
-        map(
-          (event: RoutesRecognized) => event.state.root.firstChild.data.title,
-        ),
-        filter(title => !!title),
+        filter(event => event instanceof NavigationEnd),
+        map(() => {
+          let route: ActivatedRoute = this.router.routerState.root;
+          while (route.firstChild) {
+            route = route.firstChild;
+          }
+
+          return route.snapshot;
+        }),
+        map(route => route.data.title),
+        filter(title => Boolean(title)),
       )
       .subscribe(title =>
         this.title.setTitle(`${title} • ${environment.titleSuffix}`),
