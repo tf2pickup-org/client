@@ -50,6 +50,7 @@ export class MapThumbnailService {
     { regex: /koth_ultiduo/, thumbnailName: 'ultiduo' },
     { regex: /ultiduo_seclusion/, thumbnailName: 'seclusion' },
     { regex: /cp_steel/, thumbnailName: 'steel' },
+    { regex: /koth_proot/, thumbnailName: 'proot' },
   ];
 
   getMapThumbnail(map: string) {
