@@ -25,7 +25,7 @@ class TitleStub {
   setTitle(title: string) {}
 }
 
-fdescribe('TitleControllerComponent', () => {
+describe('TitleControllerComponent', () => {
   let component: TitleControllerComponent;
   let fixture: ComponentFixture<TitleControllerComponent>;
 
