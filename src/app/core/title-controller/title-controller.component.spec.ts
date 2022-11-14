@@ -1,3 +1,4 @@
+// skipcq: JS-0108
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { TitleControllerComponent } from './title-controller.component';
 import { ReplaySubject } from 'rxjs';
