@@ -19,6 +19,9 @@ import { PlayerEditSkillComponent } from '../player-edit-skill/player-edit-skill
 import { FeatherComponent } from 'angular-feather';
 import { Location } from '@angular/common';
 import { Player } from '../models/player';
+import { ConfigurationService } from '@app/configuration/configuration.service';
+import { DefaultPlayerSkill } from '@app/configuration/models/default-player-skill';
+import { ConfigurationEntryKey } from '@app/configuration/configuration-entry-key';
 
 describe(PlayerEditComponent.name, () => {
   let fixture: MockedComponentFixture;
@@ -31,14 +34,14 @@ describe(PlayerEditComponent.name, () => {
   let fetchPlayerSkill: Subject<{ [gameClass in Tf2ClassName]?: number }>;
   let setPlayerName: Subject<Player>;
   let setPlayerSkill: Subject<any>;
-  let defaultSkill: Subject<{ [gameClass in Tf2ClassName]?: number }>;
+  let defaultPlayerSkill: Subject<DefaultPlayerSkill>;
 
   beforeEach(() => {
     routeParams = new Subject();
     fetchPlayerSkill = new Subject();
     setPlayerName = new Subject();
     setPlayerSkill = new Subject();
-    defaultSkill = new Subject();
+    defaultPlayerSkill = new Subject();
   });
 
   beforeEach(() =>
@@ -63,7 +66,12 @@ describe(PlayerEditComponent.name, () => {
       .mock(Title)
       .mock(Location)
       .mock(PlayerEditSkillComponent)
-      .mock(FeatherComponent),
+      .mock(FeatherComponent)
+      .mock(ConfigurationService, {
+        fetchValue: jasmine
+          .createSpy('fetchValue')
+          .and.returnValue(defaultPlayerSkill.pipe(take(1))),
+      }),
   );
 
   beforeEach(() => {
@@ -83,12 +91,13 @@ describe(PlayerEditComponent.name, () => {
     playersService.setPlayerSkill.and.returnValue(
       setPlayerSkill.asObservable(),
     );
-    playersService.defaultSkill.and.returnValue(defaultSkill.pipe(take(1)));
 
     fixture.detectChanges();
     saveButton = ngMocks.find('button[type=submit]').nativeElement;
     nameInput = ngMocks.find('input[type=text]').nativeElement;
   });
+
+  afterEach(() => defaultPlayerSkill.complete());
 
   it('should create', () => {
     expect(component).toBeTruthy();
@@ -147,7 +156,10 @@ describe(PlayerEditComponent.name, () => {
         beforeEach(() => {
           fetchPlayerSkill.next({});
           fetchPlayerSkill.complete();
-          defaultSkill.next({ scout: -1, soldier: -1 });
+          defaultPlayerSkill.next({
+            key: ConfigurationEntryKey.defaultPlayerSkill,
+            value: { scout: -1, soldier: -1 },
+          });
           fixture.detectChanges();
         });
 

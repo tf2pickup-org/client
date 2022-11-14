@@ -4,12 +4,10 @@ import { Player } from './models/player';
 import { API_URL } from '@app/api-url';
 import { HttpClient } from '@angular/common/http';
 import { Game } from '@app/games/models/game';
-import { map, first } from 'rxjs/operators';
 import { PlayerStats } from './models/player-stats';
 import { PlayerBan } from './models/player-ban';
 import { PaginatedList } from '@app/core/models/paginated-list';
 import { Store } from '@ngrx/store';
-import { queueConfig } from '@app/queue/queue.selectors';
 import { PlayerRole } from './models/player-role';
 import { Tf2ClassName } from '@app/shared/models/tf2-class-name';
 import { LinkedProfiles } from './models/linked-profiles';
@@ -105,21 +103,6 @@ export class PlayersService {
     return this.http.post<PlayerBan>(
       `${this.apiUrl}/players/${playerBan.player}/bans/${playerBan.id}?revoke`,
       {},
-    );
-  }
-
-  defaultSkill(
-    _playerId: string,
-  ): Observable<{ [gameClass in Tf2ClassName]?: number }> {
-    return this.store.select(queueConfig).pipe(
-      first(config => Boolean(config)),
-      // eslint-disable-next-line ngrx/avoid-mapping-selectors
-      map(config =>
-        config.classes.reduce((_skill, curr) => {
-          _skill[curr.name] = 1;
-          return _skill;
-        }, {} as Record<Tf2ClassName, number>),
-      ),
     );
   }
 
