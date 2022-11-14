@@ -108,21 +108,6 @@ export class PlayersService {
     );
   }
 
-  defaultSkill(
-    _playerId: string,
-  ): Observable<{ [gameClass in Tf2ClassName]?: number }> {
-    return this.store.select(queueConfig).pipe(
-      first(config => Boolean(config)),
-      // eslint-disable-next-line ngrx/avoid-mapping-selectors
-      map(config =>
-        config.classes.reduce((_skill, curr) => {
-          _skill[curr.name] = 1;
-          return _skill;
-        }, {} as Record<Tf2ClassName, number>),
-      ),
-    );
-  }
-
   forceCreatePlayer(player: Partial<Player>) {
     return this.http.post<Player>(`${this.apiUrl}/players`, player);
   }

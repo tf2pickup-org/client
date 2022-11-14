@@ -227,22 +227,6 @@ describe('PlayersService', () => {
     ));
   });
 
-  describe('#defaultSkill()', () => {
-    it('should init default config', inject(
-      [PlayersService],
-      (service: PlayersService) => {
-        service.defaultSkill('FAKE_PLAYER_ID').subscribe(playerSkill => {
-          expect(playerSkill).toEqual({
-            scout: 1,
-            soldier: 1,
-            demoman: 1,
-            medic: 1,
-          });
-        });
-      },
-    ));
-  });
-
   describe('#forceCreatePlayer()', () => {
     it('should post the new player', inject(
       [PlayersService],
