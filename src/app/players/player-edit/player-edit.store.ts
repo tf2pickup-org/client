@@ -97,9 +97,9 @@ export class PlayerEditStore extends ComponentStore<PlayerEditState> {
                     ConfigurationEntryKey.defaultPlayerSkill,
                   )
                   .pipe(map(value => value.value));
-              } else {
-                return of(skill);
               }
+
+              return of(skill);
             }),
             tap(skill => this.setSkill(skill)),
           ),

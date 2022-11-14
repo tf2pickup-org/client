@@ -86,7 +86,7 @@ export class PlayerEditComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.store.skill
       .pipe(
-        filter(skill => !!skill),
+        filter(skill => Boolean(skill)),
         take(1),
         takeUntil(this.destroyed),
       )
