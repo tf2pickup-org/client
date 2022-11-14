@@ -1,5 +1,14 @@
 
 
+# [3.25.0-rc.0](https://github.com/tf2pickup-org/client/compare/3.25.0-beta.8...3.25.0-rc.0) (2022-11-14)
+
+
+### Bug Fixes
+
+* **core:** set title for dynamic modules ([#2023](https://github.com/tf2pickup-org/client/issues/2023)) ([235dbe0](https://github.com/tf2pickup-org/client/commit/235dbe00fab4622eb7985758c1a5b9e5cb32465e))
+* **queue:** scroll online player list independently ([#2021](https://github.com/tf2pickup-org/client/issues/2021)) ([c356f90](https://github.com/tf2pickup-org/client/commit/c356f907871e7eb40dab4dcf74172b242157e8af))
+* **thumbnails:** add koth_proot thumbnail ([#2020](https://github.com/tf2pickup-org/client/issues/2020)) ([abf17e2](https://github.com/tf2pickup-org/client/commit/abf17e2b2eeb87b004e56984f72889b0d76337cc))
+
 # [3.25.0-beta.8](https://github.com/tf2pickup-org/client/compare/3.25.0-beta.7...3.25.0-beta.8) (2022-11-14)
 
 
