@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class MapThumbnailService {
   private mapMatchers: { regex: RegExp; thumbnailName: string }[] = [
-    { regex: /cp_(bad|pro)lands/, thumbnailName: 'badlands' },
+    { regex: /cp_(?<prefix>bad|pro)lands/, thumbnailName: 'badlands' },
     { regex: /cp_granary/, thumbnailName: 'granary' },
     { regex: /cp_gullywash/, thumbnailName: 'gullywash' },
     { regex: /cp_process/, thumbnailName: 'process' },
@@ -17,7 +17,7 @@ export class MapThumbnailService {
     { regex: /koth_coalplant/, thumbnailName: 'coalplant' },
     { regex: /koth_product/, thumbnailName: 'product' },
     { regex: /cp_propaganda/, thumbnailName: 'propaganda' },
-    { regex: /pl_(bad|pro)water/, thumbnailName: 'prowater' },
+    { regex: /pl_(?<prefix>bad|pro)water/, thumbnailName: 'prowater' },
     { regex: /pl_swiftwater/, thumbnailName: 'swiftwater' },
     { regex: /pl_upward/, thumbnailName: 'upward' },
     { regex: /pl_vigil/, thumbnailName: 'vigil' },
@@ -50,6 +50,7 @@ export class MapThumbnailService {
     { regex: /koth_ultiduo/, thumbnailName: 'ultiduo' },
     { regex: /ultiduo_seclusion/, thumbnailName: 'seclusion' },
     { regex: /cp_steel/, thumbnailName: 'steel' },
+    { regex: /koth_proot/, thumbnailName: 'proot' },
   ];
 
   getMapThumbnail(map: string) {
