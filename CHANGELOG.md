@@ -1,5 +1,20 @@
 
 
+# [3.25.0-beta.8](https://github.com/tf2pickup-org/client/compare/3.25.0-beta.7...3.25.0-beta.8) (2022-11-14)
+
+
+### Bug Fixes
+
+* **admin:** respect default player skill in player skill edit ([#2019](https://github.com/tf2pickup-org/client/issues/2019)) ([7614cf6](https://github.com/tf2pickup-org/client/commit/7614cf6bab6b7114613b5f746abb63b9f96c68f4))
+* **deps:** update angular monorepo to v14.2.10 ([#2013](https://github.com/tf2pickup-org/client/issues/2013)) ([a5f7f2f](https://github.com/tf2pickup-org/client/commit/a5f7f2fd1b60cca40e4a2c663948a54fc2f8d6db))
+* **deps:** update dependency @angular/cdk to v14.2.7 ([#2014](https://github.com/tf2pickup-org/client/issues/2014)) ([0679e2c](https://github.com/tf2pickup-org/client/commit/0679e2c832e15d914738f710926165527aaf4d3f))
+* **deps:** update dependency zone.js to v0.12.0 ([#2011](https://github.com/tf2pickup-org/client/issues/2011)) ([28864ca](https://github.com/tf2pickup-org/client/commit/28864caab8b0e6795e24c10a4d1907aca5818ad9))
+
+
+### Features
+
+* **documents:** add privacy policy ([#2018](https://github.com/tf2pickup-org/client/issues/2018)) ([f4ddb7e](https://github.com/tf2pickup-org/client/commit/f4ddb7e8bf5d5c7aa8e4fa6f6da2ffb60d814a4b))
+
 # [3.25.0-beta.7](https://github.com/tf2pickup-org/client/compare/3.25.0-beta.6...3.25.0-beta.7) (2022-11-07)
 
 
