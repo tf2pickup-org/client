@@ -1,4 +1,7 @@
 import { Injectable } from '@angular/core';
+import { ConfigurationEntryKey } from '@app/configuration/configuration-entry-key';
+import { ConfigurationService } from '@app/configuration/configuration.service';
+import { DefaultPlayerSkill } from '@app/configuration/models/default-player-skill';
 import { Tf2ClassName } from '@app/shared/models/tf2-class-name';
 import { ComponentStore } from '@ngrx/component-store';
 import { Store } from '@ngrx/store';
@@ -6,6 +9,7 @@ import { isEmpty } from 'lodash-es';
 import { Observable, of, zip } from 'rxjs';
 import {
   filter,
+  map,
   mergeMap,
   switchMap,
   tap,
@@ -88,7 +92,11 @@ export class PlayerEditStore extends ComponentStore<PlayerEditState> {
           this.playersService.fetchPlayerSkill(id).pipe(
             switchMap(skill => {
               if (isEmpty(skill)) {
-                return this.playersService.defaultSkill(id);
+                return this.configurationService
+                  .fetchValue<DefaultPlayerSkill>(
+                    ConfigurationEntryKey.defaultPlayerSkill,
+                  )
+                  .pipe(map(value => value.value));
               } else {
                 return of(skill);
               }
@@ -120,7 +128,11 @@ export class PlayerEditStore extends ComponentStore<PlayerEditState> {
     }),
   );
 
-  constructor(private store: Store, private playersService: PlayersService) {
+  constructor(
+    private readonly store: Store,
+    private readonly playersService: PlayersService,
+    private readonly configurationService: ConfigurationService,
+  ) {
     super(initialState);
   }
 }

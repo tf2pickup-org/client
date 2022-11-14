@@ -72,7 +72,7 @@ export class PlayerEditComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit() {
     this.store.player
       .pipe(
-        filter(player => !!player),
+        filter(player => Boolean(player)),
         take(1),
         takeUntil(this.destroyed),
       )
