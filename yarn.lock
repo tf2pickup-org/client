@@ -11623,15 +11623,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ngx-pagination@npm:6.0.2":
-  version: 6.0.2
-  resolution: "ngx-pagination@npm:6.0.2"
+"ngx-pagination@npm:6.0.3":
+  version: 6.0.3
+  resolution: "ngx-pagination@npm:6.0.3"
   dependencies:
     tslib: ^2.3.0
   peerDependencies:
     "@angular/common": ">=13.0.0"
     "@angular/core": ">=13.0.0"
-  checksum: 634dd91c85566f7bc85f0b5772134d747ab567ed2ae893bd90514f171a6939d5d50faed955cd2c4e5d196edcaa786221d60b822c3ea7b889f2d3eba056c1600c
+  checksum: 058b0feb63b54153ad124de33477ef35b6195316d1897facf91c38a49a88d6938cacd956713aa1ca8e6b645647bbca950d0fe07262b318e34813fb9c092abca6
   languageName: node
   linkType: hard
 
@@ -15071,7 +15071,7 @@ __metadata:
     ngx-bootstrap: 9.0.0
     ngx-echarts: 14.0.0
     ngx-markdown: 14.0.1
-    ngx-pagination: 6.0.2
+    ngx-pagination: 6.0.3
     ngx-webstorage-service: 5.0.0
     npm-run-all: 4.1.5
     postcss: 8.4.19
