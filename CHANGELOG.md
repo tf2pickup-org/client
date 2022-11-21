@@ -1,5 +1,15 @@
 
 
+# [3.25.0-rc.1](https://github.com/tf2pickup-org/client/compare/3.25.0-rc.0...3.25.0-rc.1) (2022-11-21)
+
+
+### Bug Fixes
+
+* **deps:** update angular monorepo to v14.2.11 ([#2028](https://github.com/tf2pickup-org/client/issues/2028)) ([8067ab1](https://github.com/tf2pickup-org/client/commit/8067ab1e68025666633691c0a464ca06807bb3cc))
+* **deps:** update dependency @angular/cdk to v15 ([#2031](https://github.com/tf2pickup-org/client/issues/2031)) ([6a0cd71](https://github.com/tf2pickup-org/client/commit/6a0cd714a8a7795c9dda9b2b5cd08da0d7913596))
+* **deps:** update ngrx to v14 ([#2038](https://github.com/tf2pickup-org/client/issues/2038)) ([daddcfe](https://github.com/tf2pickup-org/client/commit/daddcfe9b8648791c64930d5108b231c6e417466))
+* **deps:** upgrade angular to v15 ([#2039](https://github.com/tf2pickup-org/client/issues/2039)) ([7fa3912](https://github.com/tf2pickup-org/client/commit/7fa39120a03ff5ceb34c083f23cbe80ad0950572))
+
 # [3.25.0-rc.0](https://github.com/tf2pickup-org/client/compare/3.25.0-beta.8...3.25.0-rc.0) (2022-11-14)
 
 
