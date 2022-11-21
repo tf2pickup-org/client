@@ -232,11 +232,11 @@ describe('PlayerDetailsComponent', () => {
       });
 
       it('should pass the linked profiles to PlayerDetailsExternalProfileLinksComponent', () => {
-        const c = ngMocks.findInstance(
+        const component = ngMocks.findInstance(
           PlayerDetailsExternalProfileLinksComponent,
         );
 
-        expect(c.linkedProfiles).toBeTruthy();
+        expect(component.linkedProfiles).toBeTruthy();
       });
     });
   });
