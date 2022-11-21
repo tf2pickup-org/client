@@ -11,8 +11,8 @@ import { NEVER } from 'rxjs';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 
 class WsTokenServiceStub {
+  // skipcq: JS-0105
   getWsToken() {
-    // skipcq: JS-0105
     return NEVER;
   }
 }
