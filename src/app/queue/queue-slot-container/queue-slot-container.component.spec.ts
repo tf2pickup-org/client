@@ -84,6 +84,8 @@ describe('QueueSlotContainerComponent', () => {
     fixture.detectChanges();
   });
 
+  afterEach(() => TestBed.inject(MockStore)?.resetSelectors());
+
   it('should create', () => {
     expect(component).toBeTruthy();
   });

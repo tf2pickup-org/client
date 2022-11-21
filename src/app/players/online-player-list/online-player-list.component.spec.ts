@@ -42,6 +42,8 @@ describe(OnlinePlayerListComponent.name, () => {
     spyOn(store, 'dispatch');
   });
 
+  afterEach(() => TestBed.inject(MockStore)?.resetSelectors());
+
   describe('when the online players are not loaded', () => {
     beforeEach(() => {
       onlinePlayersLoaded.setResult(false);

@@ -113,6 +113,7 @@ describe('GamesEffects', () => {
   });
 
   afterEach(() => actions.complete());
+  afterEach(() => TestBed.inject(MockStore)?.resetSelectors());
 
   it('should handle game events', () => {
     const socket = TestBed.inject(Socket);

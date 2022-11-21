@@ -30,6 +30,8 @@ describe(OfflineStateBannerComponent.name, () => {
     store = TestBed.inject(MockStore);
   });
 
+  afterEach(() => TestBed.inject(MockStore)?.resetSelectors());
+
   it('should create', () => {
     expect(component).toBeTruthy();
   });

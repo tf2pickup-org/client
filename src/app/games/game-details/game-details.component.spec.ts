@@ -204,6 +204,7 @@ describe('GameDetailsComponent', () => {
 
   afterEach(() => {
     routeParams.unsubscribe();
+    TestBed.inject(MockStore)?.resetSelectors();
   });
 
   it('should create', () => {

@@ -75,6 +75,7 @@ describe('AddPlayerBanComponent', () => {
   });
 
   afterEach(() => actions.complete());
+  afterEach(() => TestBed.inject(MockStore)?.resetSelectors());
 
   it('should create', () => {
     expect(component).toBeTruthy();

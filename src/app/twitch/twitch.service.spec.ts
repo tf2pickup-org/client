@@ -5,7 +5,7 @@ import {
   HttpClientTestingModule,
 } from '@angular/common/http/testing';
 import { API_URL } from '@app/api-url';
-import { provideMockStore } from '@ngrx/store/testing';
+import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { WindowHelperService } from '@app/shared/window-helper.service';
 import { Socket } from '@app/io/socket';
 import EventEmitter from 'eventemitter3';
@@ -35,6 +35,7 @@ describe('TwitchService', () => {
   });
 
   afterEach(() => httpController.verify());
+  afterEach(() => TestBed.inject(MockStore)?.resetSelectors());
 
   it('should be created', () => {
     expect(service).toBeTruthy();

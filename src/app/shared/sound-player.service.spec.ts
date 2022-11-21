@@ -28,6 +28,8 @@ describe(SoundPlayerService.name, () => {
     spyOn(Howl.prototype, 'stop');
   });
 
+  afterEach(() => TestBed.inject(MockStore)?.resetSelectors());
+
   it('should be created', () => {
     expect(service).toBeTruthy();
   });

@@ -6,7 +6,7 @@ import { DefaultPlayerSkill } from '@app/configuration/models/default-player-ski
 import { queueConfig } from '@app/queue/queue.selectors';
 import { GameClassIconComponent } from '@app/shared/game-class-icon/game-class-icon.component';
 import { Tf2ClassName } from '@app/shared/models/tf2-class-name';
-import { provideMockStore } from '@ngrx/store/testing';
+import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { FeatherComponent } from 'angular-feather';
 import {
   MockBuilder,
@@ -76,6 +76,7 @@ describe(DefaultPlayerSkillEditComponent.name, () => {
   });
 
   afterEach(() => defaultPlayerSkill.complete());
+  afterEach(() => TestBed.inject(MockStore)?.resetSelectors());
 
   it('should create', () => {
     expect(component).toBeTruthy();

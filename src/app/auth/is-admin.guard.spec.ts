@@ -22,6 +22,8 @@ describe('IsAdminGuard', () => {
     });
   });
 
+  afterEach(() => TestBed.inject(MockStore)?.resetSelectors());
+
   it('should be created', inject([IsAdminGuard], (guard: IsAdminGuard) => {
     expect(guard).toBeTruthy();
   }));

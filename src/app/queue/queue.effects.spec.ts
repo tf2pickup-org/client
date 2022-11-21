@@ -108,6 +108,7 @@ describe('QueueEffects', () => {
   });
 
   afterEach(() => actions.complete());
+  afterEach(() => TestBed.inject(MockStore)?.resetSelectors());
 
   it('should load the queue', () => {
     queueServiceStub.fetchQueue.and.returnValue(of(queue));
@@ -119,8 +120,8 @@ describe('QueueEffects', () => {
   });
 
   describe('when event happens', () => {
-    const _ = () => new EventEmitter();
-    let socket: ReturnType<typeof _>;
+    const event = () => new EventEmitter();
+    let socket: ReturnType<typeof event>;
 
     beforeEach(() => {
       socket = TestBed.inject(Socket) as unknown as typeof socket;
