@@ -8,7 +8,7 @@ import {
 import { WS_URL } from '@app/ws-url';
 import { WsTokenService } from './ws-token.service';
 import { NEVER } from 'rxjs';
-import { provideMockStore } from '@ngrx/store/testing';
+import { MockStore, provideMockStore } from '@ngrx/store/testing';
 
 class WsTokenServiceStub {
   getWsToken() {
@@ -35,6 +35,8 @@ describe('SocketFactoryService', () => {
     httpController = TestBed.inject(HttpTestingController);
     tokenStore = TestBed.inject(TokenStoreService);
   });
+
+  afterEach(() => TestBed.inject(MockStore)?.resetSelectors());
 
   it('should be created', () => {
     expect(service).toBeTruthy();

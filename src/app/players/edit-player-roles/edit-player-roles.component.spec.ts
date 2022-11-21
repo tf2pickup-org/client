@@ -75,6 +75,8 @@ describe(EditPlayerRolesComponent.name, () => {
     submitButton = ngMocks.find('button[type=submit]').nativeElement;
   });
 
+  afterEach(() => TestBed.inject(MockStore)?.resetSelectors());
+
   it('should create', () => {
     expect(component).toBeTruthy();
   });

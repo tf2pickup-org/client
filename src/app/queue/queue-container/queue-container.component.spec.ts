@@ -6,7 +6,7 @@ import {
   queueCurrentPlayerCount,
 } from '../queue.selectors';
 import { Title } from '@angular/platform-browser';
-import { provideMockStore } from '@ngrx/store/testing';
+import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
 describe('QueueContainerComponent', () => {
@@ -39,6 +39,8 @@ describe('QueueContainerComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
+
+  afterEach(() => TestBed.inject(MockStore)?.resetSelectors());
 
   it('should create', () => {
     expect(component).toBeTruthy();

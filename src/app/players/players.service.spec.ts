@@ -57,6 +57,7 @@ describe('PlayersService', () => {
     );
   });
   afterEach(() => httpContoller.verify());
+  afterEach(() => TestBed.inject(MockStore)?.resetSelectors());
 
   it('should be created', () => {
     const service: PlayersService = TestBed.get(PlayersService);

@@ -22,6 +22,8 @@ describe('PreReadyService', () => {
     isPreReadiedSelector = store.overrideSelector(isPreReadied, false);
   });
 
+  afterEach(() => TestBed.inject(MockStore)?.resetSelectors());
+
   it('should be created', () => {
     const service: PreReadyService = TestBed.get(PreReadyService);
     expect(service).toBeTruthy();

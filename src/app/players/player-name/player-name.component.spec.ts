@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { PlayerNameComponent } from './player-name.component';
-import { provideMockStore } from '@ngrx/store/testing';
+import { MockStore, provideMockStore } from '@ngrx/store/testing';
 
 describe('PlayerNameComponent', () => {
   let component: PlayerNameComponent;
@@ -18,6 +18,8 @@ describe('PlayerNameComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
+
+  afterEach(() => TestBed.inject(MockStore)?.resetSelectors());
 
   it('should create', () => {
     expect(component).toBeTruthy();

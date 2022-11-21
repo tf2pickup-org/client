@@ -98,6 +98,7 @@ describe(PlayerEditComponent.name, () => {
   });
 
   afterEach(() => defaultPlayerSkill.complete());
+  afterEach(() => TestBed.inject(MockStore)?.resetSelectors());
 
   it('should create', () => {
     expect(component).toBeTruthy();

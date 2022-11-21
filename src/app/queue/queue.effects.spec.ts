@@ -108,6 +108,7 @@ describe('QueueEffects', () => {
   });
 
   afterEach(() => actions.complete());
+  afterEach(() => TestBed.inject(MockStore)?.resetSelectors());
 
   it('should load the queue', () => {
     queueServiceStub.fetchQueue.and.returnValue(of(queue));

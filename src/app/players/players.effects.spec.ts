@@ -120,6 +120,7 @@ describe('PlayerEffects', () => {
   });
 
   afterEach(() => actions.complete());
+  afterEach(() => TestBed.inject(MockStore)?.resetSelectors());
 
   it('should be created', () => {
     expect(effects).toBeTruthy();

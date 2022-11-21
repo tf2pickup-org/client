@@ -49,6 +49,8 @@ describe(PlayerPreferencesComponent.name, () => {
     spyOn(store, 'dispatch');
   });
 
+  afterEach(() => TestBed.inject(MockStore)?.resetSelectors());
+
   it('should create', () => {
     expect(component).toBeTruthy();
   });
