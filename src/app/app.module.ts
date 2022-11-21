@@ -18,7 +18,6 @@ import { GamesModule } from './games/games.module';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { MarkdownModule } from 'ngx-markdown';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { InlineSVGModule } from 'ng-inline-svg';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { HallOfFameModule } from './hall-of-fame/hall-of-fame.module';
 import { NotificationsModule } from './notifications/notifications.module';
@@ -42,7 +41,6 @@ import { DocumentsModule } from './documents/documents.module';
 
     TooltipModule.forRoot(),
     MarkdownModule.forRoot({ loader: HttpClient }),
-    InlineSVGModule.forRoot(),
     NgxPaginationModule,
 
     AuthModule,

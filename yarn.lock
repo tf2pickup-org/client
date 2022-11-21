@@ -11779,17 +11779,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ng-inline-svg@npm:13.1.1":
-  version: 13.1.1
-  resolution: "ng-inline-svg@npm:13.1.1"
-  peerDependencies:
-    "@angular/common": ^12.0.0
-    "@angular/core": ^12.0.0
-    rxjs: ^6.6.0 || ^7.4.0
-  checksum: 836d4e50457e0c9a103891a3bc37feda6dbf986d12838aa7c1d9defdd198861722d70fbb19a3cba348d069da1d91ab31a854ed17d8a4d87ab07a9e9201cb83b7
-  languageName: node
-  linkType: hard
-
 "ng-mocks@npm:14.3.3":
   version: 14.3.3
   resolution: "ng-mocks@npm:14.3.3"
@@ -15706,7 +15695,6 @@ __metadata:
     karma-jasmine-html-reporter: 2.0.0
     karma-spec-reporter: 0.0.34
     lodash-es: 4.17.21
-    ng-inline-svg: 13.1.1
     ng-mocks: 14.3.3
     ngx-bootstrap: 9.0.0
     ngx-echarts: 14.0.0
