@@ -14,7 +14,6 @@ import { PlayerEditSkillComponent } from './player-edit-skill/player-edit-skill.
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { PlayerListComponent } from './player-list/player-list.component';
 import { PlayerStatsComponent } from './player-stats/player-stats.component';
-import { InlineSVGModule } from 'ng-inline-svg';
 import { PlayerBansComponent } from './player-bans/player-bans.component';
 import { PlayerBanItemComponent } from './player-ban-item/player-ban-item.component';
 import { AddPlayerBanComponent } from './add-player-ban/add-player-ban.component';
@@ -72,7 +71,6 @@ import { OnlinePlayerListComponent } from './online-player-list/online-player-li
     StoreModule.forFeature('players', reducer),
     EffectsModule.forFeature([PlayerEffects]),
     TooltipModule,
-    InlineSVGModule,
     NgxPaginationModule,
 
     GamesModule,

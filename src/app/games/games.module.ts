@@ -8,7 +8,6 @@ import { EffectsModule } from '@ngrx/effects';
 import { GamesEffects } from './games.effects';
 import { GameDetailsComponent } from './game-details/game-details.component';
 import { SharedModule } from '@app/shared/shared.module';
-import { InlineSVGModule } from 'ng-inline-svg';
 import { JoinVoiceButtonComponent } from './join-voice-button/join-voice-button.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { PlayerConnectionStatusComponent } from './player-connection-status/player-connection-status.component';
@@ -47,7 +46,6 @@ import { GameServerOptionListComponent } from './game-server-option-list/game-se
     CommonModule,
     StoreModule.forFeature('games', reducer),
     EffectsModule.forFeature([GamesEffects]),
-    InlineSVGModule,
     NgxPaginationModule,
     TooltipModule,
     ClipboardModule,
