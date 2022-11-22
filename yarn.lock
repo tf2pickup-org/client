@@ -4933,12 +4933,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bootstrap@npm:5.2.2":
-  version: 5.2.2
-  resolution: "bootstrap@npm:5.2.2"
+"bootstrap@npm:5.2.3":
+  version: 5.2.3
+  resolution: "bootstrap@npm:5.2.3"
   peerDependencies:
     "@popperjs/core": ^2.11.6
-  checksum: 14e6df28feb975dc10702cac0a6c2a21132a6e4e5562e31cdae1db3970e287ed29001020066b61d96b2cea2a45ecf44c08c8c26bc84a31cdeabec0a9be6b9389
+  checksum: 0211805dec6a190c0911d142966df30fdb4b4139a04cc6c23dd83c6045ea3cb0a966b360ab2e701e7b3ad96ff01e05fdc0914be97b41bd876b11e457a8bdc6a3
   languageName: node
   linkType: hard
 
@@ -15121,7 +15121,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": 5.44.0
     "@typescript-eslint/parser": 5.44.0
     angular-feather: 6.5.0
-    bootstrap: 5.2.2
+    bootstrap: 5.2.3
     chart.js: 3.9.1
     chartjs-plugin-datalabels: 2.1.0
     country-flag-icons: 1.5.5
