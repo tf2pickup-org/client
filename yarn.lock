@@ -11562,15 +11562,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ng-mocks@npm:14.3.4":
-  version: 14.3.4
-  resolution: "ng-mocks@npm:14.3.4"
+"ng-mocks@npm:14.4.0":
+  version: 14.4.0
+  resolution: "ng-mocks@npm:14.4.0"
   peerDependencies:
     "@angular/common": 5.0.0-alpha - 5 || 6.0.0-alpha - 6 || 7.0.0-alpha - 7 || 8.0.0-alpha - 8 || 9.0.0-alpha - 9 || 10.0.0-alpha - 10 || 11.0.0-alpha - 11 || 12.0.0-alpha - 12 || 13.0.0-alpha - 13 || 14.0.0-alpha - 14 || 15.0.0-alpha - 15
     "@angular/core": 5.0.0-alpha - 5 || 6.0.0-alpha - 6 || 7.0.0-alpha - 7 || 8.0.0-alpha - 8 || 9.0.0-alpha - 9 || 10.0.0-alpha - 10 || 11.0.0-alpha - 11 || 12.0.0-alpha - 12 || 13.0.0-alpha - 13 || 14.0.0-alpha - 14 || 15.0.0-alpha - 15
     "@angular/forms": 5.0.0-alpha - 5 || 6.0.0-alpha - 6 || 7.0.0-alpha - 7 || 8.0.0-alpha - 8 || 9.0.0-alpha - 9 || 10.0.0-alpha - 10 || 11.0.0-alpha - 11 || 12.0.0-alpha - 12 || 13.0.0-alpha - 13 || 14.0.0-alpha - 14 || 15.0.0-alpha - 15
     "@angular/platform-browser": 5.0.0-alpha - 5 || 6.0.0-alpha - 6 || 7.0.0-alpha - 7 || 8.0.0-alpha - 8 || 9.0.0-alpha - 9 || 10.0.0-alpha - 10 || 11.0.0-alpha - 11 || 12.0.0-alpha - 12 || 13.0.0-alpha - 13 || 14.0.0-alpha - 14 || 15.0.0-alpha - 15
-  checksum: 7fc019ec208bdcad3b5e48cf624ec6483627bb8a0a8c2678c2104ea9d3b58cc8199671b13f5790b15142fadd1bd0d1ca4a40129202cbea88e609a702e41d8b46
+  checksum: 16a68ba73f461458635d7be008633aa739063eb5ea31ae47b9664925daf5b8d579dc5ccdfd567cd68a623a0c724e332c92ecf5fbc6f72780bffcadb1c45658c9
   languageName: node
   linkType: hard
 
@@ -15059,7 +15059,7 @@ __metadata:
     karma-jasmine-html-reporter: 2.0.0
     karma-spec-reporter: 0.0.34
     lodash-es: 4.17.21
-    ng-mocks: 14.3.4
+    ng-mocks: 14.4.0
     ngx-bootstrap: 9.0.0
     ngx-echarts: 14.0.0
     ngx-markdown: 14.0.1
