@@ -105,7 +105,7 @@
     "@ngrx/schematics": "14.3.2",
     "@release-it/conventional-changelog": "5.1.1",
     "@types/howler": "2.2.7",
-    "@types/jasmine": "4.3.0",
+    "@types/jasmine": "4.3.1",
     "@types/jasminewd2": "2.0.10",
     "@types/jwt-decode": "2.2.1",
     "@types/lodash-es": "4.17.6",
