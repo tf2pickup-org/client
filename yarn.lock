@@ -5273,10 +5273,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chart.js@npm:3.9.1":
-  version: 3.9.1
-  resolution: "chart.js@npm:3.9.1"
-  checksum: 9ab0c0ac01215af0b3f020f2e313030fd6e347b48ed17d5484ee9c4e8ead45e78ae71bea16c397621c386b409ce0b14bf17f9f6c2492cd15b56c0f433efdfff6
+"chart.js@npm:4.0.1":
+  version: 4.0.1
+  resolution: "chart.js@npm:4.0.1"
+  checksum: 013dabf3cd4ad2d71574e1d616906ae6f5b3f5914efb7f8ac7407bfe9b621e997f30966350bbdf31e3a1322c8c602715ef4dd6d0b6072590bb48db03861ac401
   languageName: node
   linkType: hard
 
@@ -15241,7 +15241,7 @@ __metadata:
     "@typescript-eslint/parser": 5.46.0
     angular-feather: 6.5.0
     bootstrap: 5.2.3
-    chart.js: 3.9.1
+    chart.js: 4.0.1
     chartjs-plugin-datalabels: 2.2.0
     country-flag-icons: 1.5.5
     echarts: 5.4.1
