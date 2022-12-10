@@ -5280,12 +5280,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chartjs-plugin-datalabels@npm:2.1.0":
-  version: 2.1.0
-  resolution: "chartjs-plugin-datalabels@npm:2.1.0"
+"chartjs-plugin-datalabels@npm:2.2.0":
+  version: 2.2.0
+  resolution: "chartjs-plugin-datalabels@npm:2.2.0"
   peerDependencies:
-    chart.js: ^3.0.0
-  checksum: 7232749bb5ff2313e1a0b20080b40aea099f16fe3e46e0833e122598ee425c1acdf4ef2882896cac34fed0b11c2d707abaeff8d58c0f8c290f3c269c82b9755c
+    chart.js: ">=3.0.0"
+  checksum: 26086a908a8e88507959b7aaf798b2d9794ea95f7a5889b8bb9f6b9f3437a7e2fdf18952d3ba403b2ff78e5b70452439fb323bd0dfe76e9d7d1dae1328dacb99
   languageName: node
   linkType: hard
 
@@ -15242,7 +15242,7 @@ __metadata:
     angular-feather: 6.5.0
     bootstrap: 5.2.3
     chart.js: 3.9.1
-    chartjs-plugin-datalabels: 2.1.0
+    chartjs-plugin-datalabels: 2.2.0
     country-flag-icons: 1.5.5
     echarts: 5.4.1
     eslint: 8.29.0
