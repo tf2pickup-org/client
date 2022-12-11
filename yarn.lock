@@ -3544,6 +3544,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/marked@npm:4.0.8":
+  version: 4.0.8
+  resolution: "@types/marked@npm:4.0.8"
+  checksum: 68278fa7acaa5d920cdc239d675b5daf842e0ad4779e4848cd617d9baf2ac1afccb5a264c331e37d80031d647e1640cb983cd31e73d45b28552670b4853fad8e
+  languageName: node
+  linkType: hard
+
 "@types/mime@npm:^1":
   version: 1.3.2
   resolution: "@types/mime@npm:1.3.2"
@@ -11196,6 +11203,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"marked@npm:4.2.4":
+  version: 4.2.4
+  resolution: "marked@npm:4.2.4"
+  bin:
+    marked: bin/marked.js
+  checksum: 5eb5bfa6ee4cf85712a3ccbe2a549c397e8886f5d18312a02696c7e3817625a6b91a8ad27a6ed43b06ddbdfb812f471b1270517c4b8fb068a6a9e5b4d555a5aa
+  languageName: node
+  linkType: hard
+
 "mathml-tag-names@npm:^2.1.3":
   version: 2.1.3
   resolution: "mathml-tag-names@npm:2.1.3"
@@ -15242,6 +15258,7 @@ __metadata:
     "@types/jasminewd2": 2.0.10
     "@types/jwt-decode": 2.2.1
     "@types/lodash-es": 4.17.6
+    "@types/marked": 4.0.8
     "@types/node": 18.11.13
     "@typescript-eslint/eslint-plugin": 5.46.0
     "@typescript-eslint/parser": 5.46.0
@@ -15272,6 +15289,7 @@ __metadata:
     karma-jasmine-html-reporter: 2.0.0
     karma-spec-reporter: 0.0.35
     lodash-es: 4.17.21
+    marked: 4.2.4
     ng-mocks: 14.5.0
     ngx-bootstrap: 9.0.0
     ngx-echarts: 15.0.1
