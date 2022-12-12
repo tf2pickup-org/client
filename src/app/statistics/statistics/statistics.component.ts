@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { StatisticsService } from '@app/statistics/statistics.service';
-import { concat, dropRight, takeRight } from 'lodash';
+import { concat, dropRight, takeRight } from 'lodash-es';
 import { filter, map } from 'rxjs/operators';
 import { BarSeriesOption, EChartsOption } from 'echarts';
 import { Observable } from 'rxjs';
