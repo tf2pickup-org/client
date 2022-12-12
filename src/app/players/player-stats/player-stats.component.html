@@ -4,7 +4,7 @@
   </div>
 
   <div class="d-flex flex-row flex-wrap justify-content-center my-2 px-3">
-    <div *ngFor="let classPlayed of playerStats.classesPlayed | keyvalue">
+    <div *ngFor="let classPlayed of playerStats.classesPlayed | keyvalue: orderGameClasses">
       <div class="mx-3 my-1">
         <app-game-class-icon
           [gameClass]="classPlayed.key"
