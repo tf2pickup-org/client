@@ -21,5 +21,5 @@ export const environment = {
     ...defaultFooterLinks,
     { name: 'discord', target: discordInvitation },
   ],
-  titleSuffix: 'sib.tf2pickup.ru • Русские пикапы',
+  titleSuffix: 'sib.tf2pickup.ru • Сибирские пикапы',
 };
