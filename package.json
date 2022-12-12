@@ -23,6 +23,7 @@
     "build:bball.tf2pickup.eu": "ng build --subresource-integrity --configuration=production,bball.tf2pickup.eu --output-path=dist/bball.tf2pickup.eu",
     "build:tf2pickup.dk": "ng build --subresource-integrity --configuration=production,tf2pickup.dk --output-path=dist/tf2pickup.dk",
     "build:tf2pickup.ru": "ng build --subresource-integrity --configuration=production,tf2pickup.ru --output-path=dist/tf2pickup.ru",
+    "build:sib.tf2pickup.ru": "ng build --subresource-integrity --configuration=production,sib.tf2pickup.ru --output-path=dist/sib.tf2pickup.ru",
     "build:tf2pickup.co.il": "ng build --subresource-integrity --configuration=production,tf2pickup.co.il --output-path=dist/tf2pickup.co.il",
     "build:tf2pickup.us": "ng build --subresource-integrity --configuration=production,tf2pickup.us --output-path=dist/tf2pickup.us",
     "build:tf2pickup.nl": "ng build --subresource-integrity --configuration=production,tf2pickup.nl --output-path=dist/tf2pickup.nl",

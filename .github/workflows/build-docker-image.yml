@@ -36,6 +36,8 @@ jobs:
             apiUrl: api.tf2pickup.dk
           - branding: tf2pickup.ru
             apiUrl: api.tf2pickup.ru
+          - branding: sib.tf2pickup.ru
+            apiUrl: api.sib.tf2pickup.ru
           - branding: tf2pickup.co.il
             apiUrl: api.tf2pickup.co.il
           - branding: tf2pickup.us
