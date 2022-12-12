@@ -3544,10 +3544,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/marked@npm:^4.0.3":
-  version: 4.0.3
-  resolution: "@types/marked@npm:4.0.3"
-  checksum: 2fc409a6291cb770688731a444f54e7eab6257c9b565dea4e9d2f3b6654b606e9dd8ea4a924e306b2d2f581dedcb7a27f10f2ca7aed828b11642ab85955341f1
+"@types/marked@npm:4.0.8":
+  version: 4.0.8
+  resolution: "@types/marked@npm:4.0.8"
+  checksum: 68278fa7acaa5d920cdc239d675b5daf842e0ad4779e4848cd617d9baf2ac1afccb5a264c331e37d80031d647e1640cb983cd31e73d45b28552670b4853fad8e
   languageName: node
   linkType: hard
 
@@ -7307,10 +7307,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"emoji-toolkit@npm:^6.6.0":
-  version: 6.6.0
-  resolution: "emoji-toolkit@npm:6.6.0"
-  checksum: 8f7a7216626d5d5cdb0505906dfd44cbe65cee76c8a9a15a3dfc20736fe98f457db23874376ec6e643da93fcb83a6c9dbc58cae76d24fb77e76dd87f06991ce2
+"emoji-toolkit@npm:^7.0.0":
+  version: 7.0.0
+  resolution: "emoji-toolkit@npm:7.0.0"
+  checksum: 0e1ad04dbbbd1ab6d0c735ed2ab24deb8ba2b9d9901367c5a7b12cf7c1f35803cd6082af26e96f7a2bd7371d8af7493aa24664e54df365729fdf6785f28860e3
   languageName: node
   linkType: hard
 
@@ -11203,12 +11203,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"marked@npm:^4.0.17":
-  version: 4.0.17
-  resolution: "marked@npm:4.0.17"
+"marked@npm:4.2.4":
+  version: 4.2.4
+  resolution: "marked@npm:4.2.4"
   bin:
     marked: bin/marked.js
-  checksum: 33a3c43a20b47bddaf045a59bfc7c3d41cc321931cc663ed231ca3b5b3b195fb2ac2973e687c2afd65b79539c14619baa07d19793f70130160f0af80c06d9b3a
+  checksum: 5eb5bfa6ee4cf85712a3ccbe2a549c397e8886f5d18312a02696c7e3817625a6b91a8ad27a6ed43b06ddbdfb812f471b1270517c4b8fb068a6a9e5b4d555a5aa
   languageName: node
   linkType: hard
 
@@ -11755,25 +11755,36 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ngx-markdown@npm:14.0.1":
-  version: 14.0.1
-  resolution: "ngx-markdown@npm:14.0.1"
+"ngx-markdown@npm:15.0.0":
+  version: 15.0.0
+  resolution: "ngx-markdown@npm:15.0.0"
   dependencies:
-    "@types/marked": ^4.0.3
     clipboard: ^2.0.11
-    emoji-toolkit: ^6.6.0
+    emoji-toolkit: ^7.0.0
     katex: ^0.16.0
-    marked: ^4.0.17
     mermaid: ^9.1.2
     prismjs: ^1.28.0
     tslib: ^2.3.0
   peerDependencies:
-    "@angular/common": ^14.0.0
-    "@angular/core": ^14.0.0
-    "@angular/platform-browser": ^14.0.0
+    "@angular/common": ^15.0.0
+    "@angular/core": ^15.0.0
+    "@angular/platform-browser": ^15.0.0
+    "@types/marked": ^4.0.3
+    marked: ^4.0.17
     rxjs: ^6.5.3 || ^7.4.0
-    zone.js: ^0.11.4
-  checksum: 81534d920d7bd908e90c2ab8dd65ed5785861e064b3e5517d1a008e95a7a3adc8c4071539456e64842e38f10857a30b5decb747b35f5571eb380845044b07124
+    zone.js: ~0.11.4 || ~0.12.0
+  dependenciesMeta:
+    clipboard:
+      optional: true
+    emoji-toolkit:
+      optional: true
+    katex:
+      optional: true
+    mermaid:
+      optional: true
+    prismjs:
+      optional: true
+  checksum: cad59f91c54260312b340bc52418be50ce8c01ae727aae9104bb97b12808300cd6a2306b151afeb75c4ee44859fd93f604c47c15d533baf3156391db84b8d07f
   languageName: node
   linkType: hard
 
@@ -15247,6 +15258,7 @@ __metadata:
     "@types/jasminewd2": 2.0.10
     "@types/jwt-decode": 2.2.1
     "@types/lodash-es": 4.17.6
+    "@types/marked": 4.0.8
     "@types/node": 18.11.13
     "@typescript-eslint/eslint-plugin": 5.46.0
     "@typescript-eslint/parser": 5.46.0
@@ -15277,10 +15289,11 @@ __metadata:
     karma-jasmine-html-reporter: 2.0.0
     karma-spec-reporter: 0.0.35
     lodash-es: 4.17.21
+    marked: 4.2.4
     ng-mocks: 14.5.0
     ngx-bootstrap: 9.0.0
     ngx-echarts: 15.0.1
-    ngx-markdown: 14.0.1
+    ngx-markdown: 15.0.0
     ngx-pagination: 6.0.3
     ngx-webstorage-service: 5.0.0
     npm-run-all: 4.1.5
