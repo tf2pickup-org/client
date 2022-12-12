@@ -106,7 +106,7 @@ export class StatisticsComponent {
   gameLaunchesPerDay: Observable<EChartsOption> = this.statisticsService
     .fetchGameLaunchesPerDay()
     .pipe(
-      filter(data => !!data),
+      filter(data => Boolean(data)),
       map(data => {
         const end = new Date();
         const date = new Date(end);
@@ -119,10 +119,9 @@ export class StatisticsComponent {
             day: 'numeric',
           });
 
-          const lookupDay = `${date.getFullYear()}-${(
-            '0' +
-            (date.getMonth() + 1)
-          ).slice(-2)}-${('0' + date.getDate()).slice(-2)}`;
+          const monthNumeric = `0${date.getMonth() + 1}`.slice(-2);
+          const dateNumeric = `0${date.getDate()}`.slice(-2);
+          const lookupDay = `${date.getFullYear()}-${monthNumeric}-${dateNumeric}`;
 
           result.push({
             day,
@@ -158,5 +157,7 @@ export class StatisticsComponent {
       })),
     );
 
-  constructor(private statisticsService: StatisticsService) {}
+  constructor(private statisticsService: StatisticsService) {
+    /* empty */
+  }
 }
