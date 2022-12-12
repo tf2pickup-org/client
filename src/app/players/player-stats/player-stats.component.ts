@@ -14,6 +14,7 @@ export class PlayerStatsComponent {
   @Input()
   playerStats: PlayerStats;
 
+  // skipcq: JS-0105
   orderGameClasses = (
     a: KeyValue<Tf2ClassName, number>,
     b: KeyValue<Tf2ClassName, number>,
