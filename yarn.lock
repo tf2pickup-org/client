@@ -296,9 +296,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@angular/cdk@npm:15.0.2":
-  version: 15.0.2
-  resolution: "@angular/cdk@npm:15.0.2"
+"@angular/cdk@npm:15.0.3":
+  version: 15.0.3
+  resolution: "@angular/cdk@npm:15.0.3"
   dependencies:
     parse5: ^7.1.2
     tslib: ^2.3.0
@@ -309,7 +309,7 @@ __metadata:
   dependenciesMeta:
     parse5:
       optional: true
-  checksum: b171fbb8863ebd5822072c8a7d6b0979f3fc1d162c12fafe68d5d599a79a2339e07aacc72c0ea2bbc027c80cc88422f0e25408d522bf917ca1a55bab6f43b856
+  checksum: 134b4077deaf094c47ca422a196130a79501200fee6932c1ed1cf5283c9589f3b18fbd93ebb925bc8fe0d2575c949581089236787ab8e5e8448a62a2dfacb0dc
   languageName: node
   linkType: hard
 
@@ -15209,7 +15209,7 @@ __metadata:
     "@angular-eslint/schematics": 15.1.0
     "@angular-eslint/template-parser": 15.1.0
     "@angular/animations": 15.0.4
-    "@angular/cdk": 15.0.2
+    "@angular/cdk": 15.0.3
     "@angular/cli": 15.0.4
     "@angular/common": 15.0.4
     "@angular/compiler": 15.0.4
