@@ -5515,7 +5515,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"colors@npm:1.4.0, colors@npm:^1.4.0":
+"colors@npm:1.4.0":
   version: 1.4.0
   resolution: "colors@npm:1.4.0"
   checksum: 98aa2c2418ad87dedf25d781be69dc5fc5908e279d9d30c34d8b702e586a0474605b3a189511482b9d5ed0d20c867515d22749537f7bc546256c6014f3ebdcec
@@ -10672,14 +10672,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"karma-spec-reporter@npm:0.0.35":
-  version: 0.0.35
-  resolution: "karma-spec-reporter@npm:0.0.35"
+"karma-spec-reporter@npm:0.0.36":
+  version: 0.0.36
+  resolution: "karma-spec-reporter@npm:0.0.36"
   dependencies:
-    colors: ^1.4.0
+    colors: 1.4.0
   peerDependencies:
     karma: ">=0.9"
-  checksum: 70d6945dd7060f9cf433e569a0ea4e59b3c6992b4e5a326807463089bfee2757a05aebd6b594ebcefc8333de0204508175bff1df8b882ffc2423ed885adac864
+  checksum: e9bf5f4d0e16226048f4e1311821a00adfd9277a65694462ed91a47f5f0989e5ca47ccb7cb98b56a8646aaaaf377105bdfed3dd74805e29987a036f1a39f524f
   languageName: node
   linkType: hard
 
@@ -15276,7 +15276,7 @@ __metadata:
     karma-coverage: 2.2.0
     karma-jasmine: 5.1.0
     karma-jasmine-html-reporter: 2.0.0
-    karma-spec-reporter: 0.0.35
+    karma-spec-reporter: 0.0.36
     lodash-es: 4.17.21
     marked: 4.2.4
     ng-mocks: 14.5.0
