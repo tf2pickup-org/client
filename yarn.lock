@@ -2417,6 +2417,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@kurkle/color@npm:^0.3.0":
+  version: 0.3.1
+  resolution: "@kurkle/color@npm:0.3.1"
+  checksum: e6be5c081bf5acfd4a1803dcd5a0733caf450e73148d5f02dc536b1ff0c60c959c23472a26c9c3c6c78ada04fb6a53c9202db9b2de8ea56f6eeec381f9cc3a1a
+  languageName: node
+  linkType: hard
+
 "@leichtgewicht/ip-codec@npm:^2.0.1":
   version: 2.0.4
   resolution: "@leichtgewicht/ip-codec@npm:2.0.4"
@@ -5273,10 +5280,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chart.js@npm:4.0.1":
-  version: 4.0.1
-  resolution: "chart.js@npm:4.0.1"
-  checksum: 013dabf3cd4ad2d71574e1d616906ae6f5b3f5914efb7f8ac7407bfe9b621e997f30966350bbdf31e3a1322c8c602715ef4dd6d0b6072590bb48db03861ac401
+"chart.js@npm:4.1.0":
+  version: 4.1.0
+  resolution: "chart.js@npm:4.1.0"
+  dependencies:
+    "@kurkle/color": ^0.3.0
+  checksum: deb2ce0ec76d090e4d03af7b1ced84a8a0ab49898f5a30fa4c52ba2475c06a91e49c4edeedbab04a55dd4cea7615d7405128fec2554f450b3240c2475e3298f9
   languageName: node
   linkType: hard
 
@@ -15253,7 +15262,7 @@ __metadata:
     "@typescript-eslint/parser": 5.46.1
     angular-feather: 6.5.0
     bootstrap: 5.2.3
-    chart.js: 4.0.1
+    chart.js: 4.1.0
     chartjs-plugin-datalabels: 2.2.0
     country-flag-icons: 1.5.5
     echarts: 5.4.1
