@@ -77,6 +77,7 @@
     "chart.js": "4.1.1",
     "chartjs-plugin-datalabels": "2.2.0",
     "country-flag-icons": "1.5.5",
+    "date-fns": "2.29.3",
     "echarts": "5.4.1",
     "feather-icons": "4.29.0",
     "howler": "2.2.3",

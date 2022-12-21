@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { PlayedMapCount } from './models/played-map-count';
 import { GameLaunchTimeSpan } from './models/game-launch-time-span';
 import { GameLaunchesPerDay } from './models/game-launches-per-day';
+import { format } from 'date-fns';
 
 @Injectable({
   providedIn: 'root',
@@ -27,9 +28,14 @@ export class StatisticsService {
     );
   }
 
-  fetchGameLaunchesPerDay(): Observable<GameLaunchesPerDay[]> {
+  fetchGameLaunchesPerDay(since: Date): Observable<GameLaunchesPerDay[]> {
     return this.http.get<GameLaunchesPerDay[]>(
       `${this.apiUrl}/statistics/game-launches-per-day`,
+      {
+        params: {
+          since: format(since, 'yyyy-MM-dd'),
+        },
+      },
     );
   }
 }
