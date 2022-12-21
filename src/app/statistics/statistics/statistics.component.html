@@ -1,8 +1,26 @@
 <div class="container py-3">
   <div class="surface">
     <div class="surface__content">
+      <div class="text-center">
+        <h5>Most played maps</h5>
+      </div>
       <div echarts [options]="playedMapCount | async" class="my-2"></div>
+
+      <div class="text-center">
+        <h5>Game launch times</h5>
+      </div>
       <div echarts [options]="gameLaunchTimes | async" class="my-2"></div>
+
+      <div class="text-center">
+        <h5>Played games per day</h5>
+        <div>
+          <select
+            #selectedSince
+            (change)="onSinceChanged(selectedSince.value)">
+            <option *ngFor="let option of since" [value]="option.value.toJSON()">{{ option.key }}</option>
+          </select>
+        </div>
+      </div>
       <div echarts [options]="gameLaunchesPerDay | async" class="my-2"></div>
     </div>
   </div>

@@ -1,9 +1,10 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { StatisticsService } from '@app/statistics/statistics.service';
 import { concat, dropRight, takeRight } from 'lodash-es';
-import { filter, map } from 'rxjs/operators';
+import { filter, map, switchMap } from 'rxjs/operators';
 import { BarSeriesOption, EChartsOption } from 'echarts';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of, zip } from 'rxjs';
+import { sub } from 'date-fns';
 
 @Component({
   selector: 'app-statistics',
@@ -12,6 +13,25 @@ import { Observable } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StatisticsComponent {
+  readonly since = [
+    {
+      key: 'last year',
+      value: sub(new Date(), { years: 1 }),
+    },
+    {
+      key: 'last 6 months',
+      value: sub(new Date(), { months: 6 }),
+    },
+    {
+      key: 'last month',
+      value: sub(new Date(), { months: 1 }),
+    },
+    {
+      key: 'last 2 weeks',
+      value: sub(new Date(), { weeks: 2 }),
+    },
+  ];
+
   playedMapCount: Observable<EChartsOption> = this.statisticsService
     .fetchPlayedMapsCount()
     .pipe(
@@ -25,10 +45,6 @@ export class StatisticsComponent {
         return concat(dropRight(data, Math.max(0, data.length - 8)), other);
       }),
       map(data => ({
-        title: {
-          text: 'Most played maps',
-          x: 'center',
-        },
         calculable: true,
         series: [
           {
@@ -71,10 +87,6 @@ export class StatisticsComponent {
           })) as BarSeriesOption[],
       ),
       map(series => ({
-        title: {
-          text: 'Game launch times',
-          x: 'center',
-        },
         legend: {
           top: 28,
         },
@@ -103,14 +115,19 @@ export class StatisticsComponent {
       })),
     );
 
-  gameLaunchesPerDay: Observable<EChartsOption> = this.statisticsService
-    .fetchGameLaunchesPerDay()
-    .pipe(
-      filter(data => Boolean(data)),
-      map(data => {
+  readonly gameLaunchesPerDaySince = new BehaviorSubject<Date>(
+    this.since[0].value,
+  );
+
+  gameLaunchesPerDay: Observable<EChartsOption> =
+    this.gameLaunchesPerDaySince.pipe(
+      switchMap(since =>
+        zip(of(since), this.statisticsService.fetchGameLaunchesPerDay(since)),
+      ),
+      filter(([, data]) => Boolean(data)),
+      map(([since, data]) => {
         const end = new Date();
-        const date = new Date(end);
-        date.setFullYear(date.getFullYear() - 1);
+        const date = new Date(since);
         const result = [];
         while (date < end) {
           const day = date.toLocaleDateString(undefined, {
@@ -134,10 +151,6 @@ export class StatisticsComponent {
         return result;
       }),
       map(data => ({
-        title: {
-          text: 'Played games per day in the last year',
-          x: 'center',
-        },
         xAxis: {
           data: data.map(d => d.day),
         },
@@ -159,5 +172,9 @@ export class StatisticsComponent {
 
   constructor(private statisticsService: StatisticsService) {
     /* empty */
+  }
+
+  onSinceChanged(since: string) {
+    this.gameLaunchesPerDaySince.next(new Date(Date.parse(since)));
   }
 }
