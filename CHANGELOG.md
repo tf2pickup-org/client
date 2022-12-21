@@ -1,5 +1,22 @@
 
 
+# [3.26.0](https://github.com/tf2pickup-org/client/compare/3.25.0...3.26.0) (2022-12-21)
+
+
+### Bug Fixes
+
+* **deps:** update angular monorepo to v15.0.4 ([#2086](https://github.com/tf2pickup-org/client/issues/2086)) ([20dc6d5](https://github.com/tf2pickup-org/client/commit/20dc6d5be239d98abf96d41223057b51b27393d4))
+* **deps:** update dependency @angular/cdk to v15.0.3 ([#2087](https://github.com/tf2pickup-org/client/issues/2087)) ([64b874c](https://github.com/tf2pickup-org/client/commit/64b874c73a0002e71972f4553ec146926f9373c9))
+* **deps:** update dependency chart.js to v4.1.0 ([#2090](https://github.com/tf2pickup-org/client/issues/2090)) ([0a02dc4](https://github.com/tf2pickup-org/client/commit/0a02dc40b519aedf563658f07678b05696e6b82c))
+* **deps:** update dependency chart.js to v4.1.1 ([#2093](https://github.com/tf2pickup-org/client/issues/2093)) ([ba44ec3](https://github.com/tf2pickup-org/client/commit/ba44ec3a047726b10067e59629b64adb5e64c7d0))
+* **deps:** update dependency ngx-bootstrap to v10 ([#2097](https://github.com/tf2pickup-org/client/issues/2097)) ([8c2a7e1](https://github.com/tf2pickup-org/client/commit/8c2a7e160e662f59c13004b3a6902dae8efc2a87))
+* **deps:** update dependency rxjs to v7.8.0 ([#2089](https://github.com/tf2pickup-org/client/issues/2089)) ([02c6b63](https://github.com/tf2pickup-org/client/commit/02c6b63cc0648f2e90b6d066e123a3c365be4b57))
+
+
+### Features
+
+* **statistics:** select time span ([#2098](https://github.com/tf2pickup-org/client/issues/2098)) ([9a8eecf](https://github.com/tf2pickup-org/client/commit/9a8eecf9f8185954bde48a3d44f81b3a46e50056))
+
 # [3.25.0](https://github.com/tf2pickup-org/client/compare/3.25.0-rc.1...3.25.0) (2022-12-12)
 
 
