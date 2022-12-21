@@ -39,8 +39,10 @@ describe(StatisticsService.name, () => {
 
   describe('#fetchGameLaunchesPerDay()', () => {
     it('should call the endpoint', () => {
-      service.fetchGameLaunchesPerDay().subscribe();
-      httpController.expectOne('FAKE_URL/statistics/game-launches-per-day');
+      service.fetchGameLaunchesPerDay(new Date(2021, 11, 21)).subscribe();
+      httpController.expectOne(
+        'FAKE_URL/statistics/game-launches-per-day?since=2021-12-21',
+      );
     });
   });
 });
