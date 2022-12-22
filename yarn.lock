@@ -11745,9 +11745,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ngx-bootstrap@npm:10.1.0":
-  version: 10.1.0
-  resolution: "ngx-bootstrap@npm:10.1.0"
+"ngx-bootstrap@npm:10.2.0":
+  version: 10.2.0
+  resolution: "ngx-bootstrap@npm:10.2.0"
   dependencies:
     tslib: ^2.3.0
   peerDependencies:
@@ -11756,7 +11756,7 @@ __metadata:
     "@angular/core": ^15.0.0
     "@angular/forms": ^15.0.0
     rxjs: ^6.5.3 || ^7.6.0
-  checksum: 26262a4490491391e510b195ec09e99cd126b9a67923ec9fbc4c9e6ff461d88c01911818e3470d44ff76967a40dd378ac61c07b74a5270903fcb2f7b3c3969c2
+  checksum: e42477fa2478a07a8199c959fd0e0ecc039b08d2c9ad20aaec867ea9d750e92e11f2b43659de89be165bff43f3b9bf8577d7b42f27d386c57bd6a9e0256db389
   languageName: node
   linkType: hard
 
@@ -15297,7 +15297,7 @@ __metadata:
     lodash-es: 4.17.21
     marked: 4.2.4
     ng-mocks: 14.5.0
-    ngx-bootstrap: 10.1.0
+    ngx-bootstrap: 10.2.0
     ngx-echarts: 15.0.1
     ngx-markdown: 15.0.0
     ngx-pagination: 6.0.3
