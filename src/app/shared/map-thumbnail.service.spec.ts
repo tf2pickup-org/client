@@ -62,6 +62,8 @@ describe('MapThumbnailService', () => {
       'ultiduo_seclusion_b3',
       'cp_steel_f12',
       'koth_proot_b4b',
+      'pl_problitz_rc2',
+      'pl_divulgence_b4b',
     ].forEach(map =>
       it(`should return valid thumbnail for ${map}`, inject(
         [MapThumbnailService],
