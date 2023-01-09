@@ -25,6 +25,9 @@ export class GameTeamPlayerListComponent {
   showAdminActionButtons = false;
 
   @Input()
+  showAssignedSkills = false;
+
+  @Input()
   locked = false;
 
   @Output()

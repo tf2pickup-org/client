@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { GameServerOption } from '@app/game-servers/models/game-server-option';
 import {
   activeGameId,
@@ -9,6 +9,7 @@ import {
 } from '@app/profile/profile.selectors';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { Store } from '@ngrx/store';
+import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
 import { Observable, zip } from 'rxjs';
 import {
   distinctUntilChanged,
@@ -37,6 +38,7 @@ interface GameDetailsState {
   game: Game;
   skills: Record<string, number>;
   connectInfo?: ConnectInfo;
+  skillsVisible: boolean;
 }
 
 @Injectable()
@@ -85,6 +87,9 @@ export class GameDetailsStore extends ComponentStore<GameDetailsState> {
     this.isRunning,
     (isAdmin, isRunning) => isAdmin && isRunning,
   );
+
+  readonly isAdmin = this.store.select(isAdmin);
+  readonly skillsVisible = this.select(state => state.skillsVisible);
 
   readonly connectInfoVersion = this.select(
     this.game,
@@ -146,6 +151,16 @@ export class GameDetailsStore extends ComponentStore<GameDetailsState> {
   );
 
   // updaters
+  readonly setSkillsVisible = this.updater(
+    (state, skillsVisible: boolean): GameDetailsState => {
+      this.storage.set('skills_visible', skillsVisible);
+      return {
+        ...state,
+        skillsVisible,
+      };
+    },
+  );
+
   private readonly setGame = this.updater(
     (state, game: Game): GameDetailsState => ({
       ...state,
@@ -167,10 +182,15 @@ export class GameDetailsStore extends ComponentStore<GameDetailsState> {
     }),
   );
 
-  constructor(private store: Store, private gamesService: GamesService) {
+  constructor(
+    private readonly store: Store,
+    private readonly gamesService: GamesService,
+    @Inject(LOCAL_STORAGE) private readonly storage: StorageService,
+  ) {
     super({
       game: null,
       skills: null,
+      skillsVisible: storage.get('skills_visible') ?? false,
     });
   }
 
