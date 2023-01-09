@@ -17,7 +17,9 @@ import { ShowSkillsSwitchComponent } from './show-skills-switch.component';
 class TestWrapperComponent {
   showSkills = false;
   showSkillsToggle = new EventEmitter<boolean>();
-  toggle() {}
+  toggle() {
+    // do nothing.
+  }
 }
 
 describe('ShowSkillsSwitchComponent', () => {

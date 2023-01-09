@@ -66,11 +66,11 @@ export class GameDetailsStore extends ComponentStore<GameDetailsState> {
     this.store.select(isBanned),
     this.store.select(activeGameId),
     this.game,
-    (isLoggedIn, isBanned, activeGameId, game) =>
-      isLoggedIn &&
-      !isBanned &&
-      (!activeGameId || activeGameId === game.id) &&
-      /launching|started/.test(game?.state),
+    (loggedIn, banned, activeGameIdValue, gameValue) =>
+      loggedIn &&
+      !banned &&
+      (!activeGameIdValue || activeGameIdValue === gameValue.id) &&
+      /launching|started/.test(gameValue?.state),
   );
 
   readonly players: Observable<GameSlot[]> = this.select(state =>
@@ -85,7 +85,7 @@ export class GameDetailsStore extends ComponentStore<GameDetailsState> {
   readonly showAdminTools = this.select(
     this.store.select(isAdmin),
     this.isRunning,
-    (isAdmin, isRunning) => isAdmin && isRunning,
+    (isAdminValue, isRunningValue) => isAdminValue && isRunningValue,
   );
 
   readonly isAdmin = this.store.select(isAdmin);

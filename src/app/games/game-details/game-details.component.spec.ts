@@ -656,6 +656,7 @@ describe('GameDetailsComponent', () => {
             ),
           ).toBe(true);
           const storage = TestBed.inject(LOCAL_STORAGE);
+          // skicq: JS-0296
           expect(storage.set as Function).toHaveBeenCalledWith(
             'skills_visible',
             true,

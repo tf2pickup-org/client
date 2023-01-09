@@ -17,7 +17,7 @@ export class ShowSkillsSwitchComponent {
   showSkills: boolean;
 
   @Output()
-  showSkillsToggle = new EventEmitter<boolean>();
+  readonly showSkillsToggle = new EventEmitter<boolean>();
 
   toggle() {
     this.showSkills = !this.showSkills;
