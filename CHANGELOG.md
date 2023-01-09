@@ -1,5 +1,21 @@
 
 
+# [3.27.0](https://github.com/tf2pickup-org/client/compare/3.26.0...3.27.0) (2023-01-09)
+
+
+### Bug Fixes
+
+* add map thumbnails for pl_divulgence and pl_problitz ([#2117](https://github.com/tf2pickup-org/client/issues/2117)) ([c81fbec](https://github.com/tf2pickup-org/client/commit/c81fbec08862567d68ab0522f5024fc220e24c36))
+* **deps:** update dependency @angular/cdk to v15.0.4 ([#2109](https://github.com/tf2pickup-org/client/issues/2109)) ([e79f38c](https://github.com/tf2pickup-org/client/commit/e79f38ca5b46dbe8c0348717816dbb6b504c7f15))
+* **deps:** update dependency chart.js to v4.1.2 ([#2110](https://github.com/tf2pickup-org/client/issues/2110)) ([94a6816](https://github.com/tf2pickup-org/client/commit/94a6816c74bc6e72ca9a23d148e045986f87a91f))
+* **deps:** update dependency marked to v4.2.5 ([#2100](https://github.com/tf2pickup-org/client/issues/2100)) ([c55fe9f](https://github.com/tf2pickup-org/client/commit/c55fe9f35e281fb4d28d0ddd4c690a01170a475a))
+* **deps:** update dependency ngx-bootstrap to v10.2.0 ([#2099](https://github.com/tf2pickup-org/client/issues/2099)) ([9035231](https://github.com/tf2pickup-org/client/commit/903523103dae8c7619363e288ba8132933a7a043))
+
+
+### Features
+
+* **games:** toggle assigned skills visibility ([#2118](https://github.com/tf2pickup-org/client/issues/2118)) ([cdf49b8](https://github.com/tf2pickup-org/client/commit/cdf49b8d2f6ce0d747bdec67e2b3ac53148b36ba))
+
 # [3.26.0](https://github.com/tf2pickup-org/client/compare/3.25.0...3.26.0) (2022-12-21)
 
 
