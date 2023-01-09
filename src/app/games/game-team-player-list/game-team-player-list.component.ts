@@ -25,13 +25,16 @@ export class GameTeamPlayerListComponent {
   showAdminActionButtons = false;
 
   @Input()
+  showAssignedSkills = false;
+
+  @Input()
   locked = false;
 
   @Output()
-  requestSubstitute = new EventEmitter<string>();
+  readonly requestSubstitute = new EventEmitter<string>();
 
   @Output()
-  replacePlayer = new EventEmitter<string>();
+  readonly replacePlayer = new EventEmitter<string>();
 
   emitRequestSubstitute(event: Event, player: Player) {
     event.preventDefault();

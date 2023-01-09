@@ -41,6 +41,9 @@ import { GamesService } from '../games.service';
 import { SoundPlayerService } from '@app/shared/sound-player.service';
 import { ConnectInfo } from '../models/connect-info';
 import { PlayersInTeamPipe } from './players-in-team.pipe';
+import { ShowSkillsSwitchComponent } from '../show-skills-switch/show-skills-switch.component';
+import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
+import { InjectionToken } from '@angular/core';
 
 const mockPlayer1 = {
   id: 'FAKE_PLAYER_1_ID',
@@ -169,6 +172,10 @@ describe('GameDetailsComponent', () => {
           .createSpy('fetchConnectInfo')
           .and.returnValue(connectInfo.asObservable()),
       })
+      .mock(LOCAL_STORAGE, {
+        set: jasmine.createSpy('StorageService.set'),
+        get: jasmine.createSpy('StorageService.get').and.returnValue(false),
+      } as unknown as InjectionToken<StorageService<any>>)
       .mock(Title)
       .mock(GameAdminButtonsComponent)
       .mock(GameSummaryComponent)
@@ -178,6 +185,7 @@ describe('GameDetailsComponent', () => {
       .mock(GameTeamHeaderComponent)
       .mock(GameTeamPlayerListComponent)
       .mock(SoundPlayerService)
+      .mock(ShowSkillsSwitchComponent)
       .keep(PlayersInTeamPipe),
   );
 
@@ -564,6 +572,7 @@ describe('GameDetailsComponent', () => {
     describe('when the current user is admin', () => {
       let gameAdminButtons: GameAdminButtonsComponent;
       let gameTeamPlayerLists: GameTeamPlayerListComponent[];
+      let showSkillsSwitch: ShowSkillsSwitchComponent;
 
       beforeEach(() => {
         isAdmin.setResult(true);
@@ -577,6 +586,9 @@ describe('GameDetailsComponent', () => {
         gameTeamPlayerLists = ngMocks
           .findAll(GameTeamPlayerListComponent)
           .map(m => m.componentInstance);
+        showSkillsSwitch = ngMocks.find(
+          ShowSkillsSwitchComponent,
+        ).componentInstance;
       });
 
       it('should render admin buttons', () => {
@@ -620,6 +632,36 @@ describe('GameDetailsComponent', () => {
         expect(gamesService.fetchGameSkills).toHaveBeenCalledWith(
           'FAKE_GAME_ID',
         );
+      });
+
+      it('should render ShowSkillsSwitch', () => {
+        expect(showSkillsSwitch).toBeTruthy();
+        expect(
+          gameTeamPlayerLists.every(
+            playerList => playerList.showAssignedSkills,
+          ),
+        ).toBe(false);
+      });
+
+      describe('and when the ShowSkillsSwitch is toggled', () => {
+        beforeEach(() => {
+          showSkillsSwitch.showSkillsToggle.emit(true);
+          fixture.detectChanges();
+        });
+
+        it('should toggle', () => {
+          expect(
+            gameTeamPlayerLists.every(
+              playerList => playerList.showAssignedSkills,
+            ),
+          ).toBe(true);
+          const storage = TestBed.inject(LOCAL_STORAGE);
+          // skicq: JS-0296
+          expect(storage.set as Function).toHaveBeenCalledWith(
+            'skills_visible',
+            true,
+          );
+        });
       });
     });
   });

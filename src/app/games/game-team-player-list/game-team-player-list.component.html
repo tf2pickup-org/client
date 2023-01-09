@@ -13,7 +13,7 @@
             {{ slot.player.name }}
           </span>
 
-          <span *ngIf="slot.classSkill !== undefined"
+          <span *ngIf="showAssignedSkills && slot.classSkill !== undefined"
             class="player-list-item__skill">
             {{ slot.classSkill }}
           </span>

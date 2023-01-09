@@ -17,6 +17,7 @@ describe('GameTeamPlayerListComponent', () => {
     slots: Subject<GameSlot[]>;
     showPlayerConnectionStatus: Subject<boolean>;
     showAdminActionButtons: Subject<boolean>;
+    showAssignedSkills: Subject<boolean>;
     locked: Subject<boolean>;
   };
 
@@ -25,6 +26,7 @@ describe('GameTeamPlayerListComponent', () => {
       slots: new Subject(),
       showPlayerConnectionStatus: new Subject(),
       showAdminActionButtons: new Subject(),
+      showAssignedSkills: new Subject(),
       locked: new Subject(),
     };
   });
@@ -42,6 +44,7 @@ describe('GameTeamPlayerListComponent', () => {
         [slots]="slots | async"
         [showPlayerConnectionStatus]="showPlayerConnectionStatus | async"
         [showAdminActionButtons]="showAdminActionButtons | async"
+        [showAssignedSkills]="showAssignedSkills | async"
         [locked]="locked | async"
       ></app-game-team-player-list>
     `,
@@ -50,6 +53,7 @@ describe('GameTeamPlayerListComponent', () => {
         showPlayerConnectionStatus:
           inputs.showPlayerConnectionStatus.asObservable(),
         showAdminActionButtons: inputs.showAdminActionButtons.asObservable(),
+        showAssignedSkills: inputs.showAssignedSkills.asObservable(),
         locked: inputs.locked.asObservable(),
       },
     );
@@ -197,10 +201,17 @@ describe('GameTeamPlayerListComponent', () => {
         fixture.detectChanges();
       });
 
-      it('should render skill', () => {
-        const span = ngMocks.find('.player-list-item__skill')
-          .nativeElement as HTMLElement;
-        expect(span.innerText).toEqual('0');
+      describe('and showAssignedSkills is set to true', () => {
+        beforeEach(() => {
+          inputs.showAssignedSkills.next(true);
+          fixture.detectChanges();
+        });
+
+        it('should render skill', () => {
+          const span = ngMocks.find('.player-list-item__skill')
+            .nativeElement as HTMLElement;
+          expect(span.innerText).toEqual('0');
+        });
       });
     });
   });

@@ -24,6 +24,7 @@ import { OrderTf2ClassesPipe } from './order-tf2-classes.pipe';
 import { PlayersInTeamPipe } from './game-details/players-in-team.pipe';
 import { GameServerOptionListDialogComponent } from './game-server-option-list-dialog/game-server-option-list-dialog.component';
 import { GameServerOptionListComponent } from './game-server-option-list/game-server-option-list.component';
+import { ShowSkillsSwitchComponent } from './show-skills-switch/show-skills-switch.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { GameServerOptionListComponent } from './game-server-option-list/game-se
     PlayersInTeamPipe,
     GameServerOptionListDialogComponent,
     GameServerOptionListComponent,
+    ShowSkillsSwitchComponent,
   ],
   imports: [
     CommonModule,

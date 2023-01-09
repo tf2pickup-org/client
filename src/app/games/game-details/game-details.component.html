@@ -10,7 +10,13 @@
 
     <app-game-summary *ngIf="_game.state === 'ended'"
       [logsUrl]="_game.logsUrl"
-      [demoUrl]="_game.demoUrl"></app-game-summary>
+      [demoUrl]="_game.demoUrl"
+      class="flex-grow-1"></app-game-summary>
+
+    <app-show-skills-switch
+      *ngIf="store.isAdmin | async"
+      [showSkills]="(store.skillsVisible | async)"
+      (showSkillsToggle)="store.setSkillsVisible($event)"></app-show-skills-switch>
   </div>
 
   <app-game-basic-info
@@ -44,6 +50,7 @@
         [slots]="store.players | async | playersInTeam:team"
         [showPlayerConnectionStatus]="store.isRunning | async"
         [showAdminActionButtons]="(store.showAdminTools | async)"
+        [showAssignedSkills]="(store.skillsVisible | async)"
         (requestSubstitute)="requestSubstitute($event)"
         (replacePlayer)="replacePlayer($event)"
         [locked]="(store.canSubstitute | async) !== true"
