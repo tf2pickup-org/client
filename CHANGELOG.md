@@ -1,5 +1,18 @@
 
 
+## [3.27.1](https://github.com/tf2pickup-org/client/compare/3.27.0...3.27.1) (2023-01-19)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @angular/cdk to v15.1.0 ([#2122](https://github.com/tf2pickup-org/client/issues/2122)) ([fe67c78](https://github.com/tf2pickup-org/client/commit/fe67c7884678db1c17b8113bf9d1e9faba67dd9c))
+* **deps:** update dependency @angular/cdk to v15.1.1 ([#2137](https://github.com/tf2pickup-org/client/issues/2137)) ([adcaa93](https://github.com/tf2pickup-org/client/commit/adcaa931f6644862cb17ee453fe04d61227ac134))
+* **deps:** update dependency chart.js to v4.2.0 ([#2134](https://github.com/tf2pickup-org/client/issues/2134)) ([b468a08](https://github.com/tf2pickup-org/client/commit/b468a084a18b9c151f19e1a6a2313dd8feb5e7fa))
+* **deps:** update dependency marked to v4.2.12 ([#2126](https://github.com/tf2pickup-org/client/issues/2126)) ([cbab659](https://github.com/tf2pickup-org/client/commit/cbab6595628401f22894c44215e45a59fb7c18c6))
+* **deps:** update dependency ngx-markdown to v15.1.0 ([#2129](https://github.com/tf2pickup-org/client/issues/2129)) ([9b32a18](https://github.com/tf2pickup-org/client/commit/9b32a189fc7c9cf945d5acb11c22be5fb9db842e))
+* **deps:** update ngrx monorepo to v14.3.3 ([#2133](https://github.com/tf2pickup-org/client/issues/2133)) ([9e97a0b](https://github.com/tf2pickup-org/client/commit/9e97a0bb0f0fc2ebdad75d9b61d1d82cc1fa628f))
+* **sib.tf2pickup.ru:** update logo ([#2138](https://github.com/tf2pickup-org/client/issues/2138)) ([e202658](https://github.com/tf2pickup-org/client/commit/e202658a935592bc7cad2e0605ca4240b9752a67))
+
 # [3.27.0](https://github.com/tf2pickup-org/client/compare/3.26.0...3.27.0) (2023-01-09)
 
 
