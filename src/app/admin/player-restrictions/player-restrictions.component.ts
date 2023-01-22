@@ -97,20 +97,22 @@ export class PlayerRestrictionsComponent
   }
 
   save() {
-    zip(
-      this.configurationService.storeValue<Etf2lAccountRequired>({
-        key: ConfigurationEntryKey.etf2lAccountRequired,
-        value: this.etf2lAccountRequired,
-      }),
-      this.configurationService.storeValue<MinimumTf2InGameHours>({
-        key: ConfigurationEntryKey.minimumTf2InGameHours,
-        value: this.minimumTf2InGameHours,
-      }),
-      this.configurationService.storeValue<DenyPlayersWithNoSkillAssigned>({
-        key: ConfigurationEntryKey.denyPlayersWithNoSkillAssigned,
-        value: this.denyPlayersWithNoSkillAssigned,
-      }),
-    ).subscribe(() => this.location.back());
+    this.configurationService
+      .storeValues(
+        {
+          key: 'players.etf2l_account_required',
+          value: this.etf2lAccountRequired,
+        },
+        {
+          key: 'players.minimum_in_game_hours',
+          value: this.minimumTf2InGameHours,
+        },
+        {
+          key: 'queue.deny_players_with_no_skill_assigned',
+          value: this.denyPlayersWithNoSkillAssigned,
+        },
+      )
+      .subscribe(() => this.location.back());
   }
 
   updateEtf2lAccountRequired() {

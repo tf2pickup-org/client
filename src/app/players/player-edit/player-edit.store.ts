@@ -93,10 +93,14 @@ export class PlayerEditStore extends ComponentStore<PlayerEditState> {
             switchMap(skill => {
               if (isEmpty(skill)) {
                 return this.configurationService
-                  .fetchValue<DefaultPlayerSkill>(
-                    ConfigurationEntryKey.defaultPlayerSkill,
-                  )
-                  .pipe(map(value => value.value));
+                  .fetchValues<
+                    [
+                      {
+                        [gameClass in Tf2ClassName]?: number;
+                      },
+                    ]
+                  >('games.default_player_skill')
+                  .pipe(map(value => value[0].value));
               }
 
               return of(skill);

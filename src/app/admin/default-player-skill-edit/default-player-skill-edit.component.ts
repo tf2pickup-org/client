@@ -15,11 +15,13 @@ import { queueConfig } from '@app/queue/queue.selectors';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, zip } from 'rxjs';
 import { map, take, tap } from 'rxjs/operators';
-import { ConfigurationEntryKey } from '@app/configuration/configuration-entry-key';
-import { DefaultPlayerSkill } from '@app/configuration/models/default-player-skill';
 import { tf2ClassOrder } from '@app/shared/tf2-class-order';
 import { KeyValue } from '@angular/common';
 import { Tf2ClassName } from '@app/shared/models/tf2-class-name';
+
+type DefaultPlayerSkill = {
+  [gameClass in Tf2ClassName]?: number;
+};
 
 @Component({
   selector: 'app-default-player-skill-edit',
@@ -46,10 +48,8 @@ export class DefaultPlayerSkillEditComponent implements OnInit {
   ngOnInit() {
     zip(
       this.configurationService
-        .fetchValue<DefaultPlayerSkill>(
-          ConfigurationEntryKey.defaultPlayerSkill,
-        )
-        .pipe(map(s => s.value)),
+        .fetchValues<[DefaultPlayerSkill]>('games.default_player_skill')
+        .pipe(map(s => s[0].value)),
       this.queueConfig.pipe(
         take(1),
         map(queueConfig => queueConfig.classes),
@@ -74,12 +74,12 @@ export class DefaultPlayerSkillEditComponent implements OnInit {
   save() {
     this.isSaving.next(true);
     this.configurationService
-      .storeValue<DefaultPlayerSkill>({
-        key: ConfigurationEntryKey.defaultPlayerSkill,
+      .storeValues<[DefaultPlayerSkill]>({
+        key: 'games.default_player_skill',
         value: this.gameClasses.value,
       })
       .pipe(
-        map(entry => entry.value),
+        map(entry => entry[0].value),
         tap(defaultPlayerSkill =>
           this.form.reset({ gameClasses: defaultPlayerSkill }),
         ),

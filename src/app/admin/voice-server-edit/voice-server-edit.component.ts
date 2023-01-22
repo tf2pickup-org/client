@@ -8,17 +8,18 @@ import {
   OnInit,
   ChangeDetectorRef,
 } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { ConfigurationEntryKey } from '@app/configuration/configuration-entry-key';
+import { FormBuilder } from '@angular/forms';
 import { ConfigurationService } from '@app/configuration/configuration.service';
 import { MDCTextField } from '@material/textfield';
-import {
-  SelectedVoiceServer,
-  VoiceServer,
-} from '@app/configuration/models/voice-server';
 import { Location } from '@angular/common';
 import { Subject } from 'rxjs';
-import { MumbleOptions } from '@app/configuration/models/mumble-options';
+
+interface MumbleOptions {
+  url: string;
+  port: number;
+  password?: string;
+  channelName?: string;
+}
 
 @Component({
   selector: 'app-voice-server-edit',
@@ -69,33 +70,60 @@ export class VoiceServerEditComponent
 
   ngOnInit() {
     this.configurationService
-      .fetchValue<VoiceServer>(ConfigurationEntryKey.voiceServer)
-      .subscribe(voiceServer => {
-        this.form.patchValue({
-          type: voiceServer.type,
-          staticLink: voiceServer.staticLink,
-          mumble: voiceServer.mumble,
-        });
+      .fetchValues<[string, string, string, number, string, string]>(
+        'games.voice_server_type',
+        'games.voice_server.static_link',
+        'games.voice_server.mumble.url',
+        'games.voice_server.mumble.port',
+        'games.voice_server.mumble.channel_name',
+        'games.voice_server.mumble.password',
+      )
+      .subscribe(
+        ([
+          voiceServerType,
+          staticLink,
+          mumbleUrl,
+          mumblePort,
+          mumbleChannelName,
+          mumblePassword,
+        ]) => {
+          this.form.patchValue({
+            type: voiceServerType.value,
+            staticLink: staticLink.value,
+            mumble: {
+              url: mumbleUrl.value,
+              port: mumblePort.value,
+              password: mumblePassword.value,
+              channelName: mumbleChannelName.value,
+            },
+          });
 
-        this.initialStaticLink.next(voiceServer.staticLink);
-        this.initialMumbleOptions.next(voiceServer.mumble);
-        this.changeDetector.markForCheck();
-        this.textFields.forEach(field => field?.layout());
-      });
+          this.initialStaticLink.next(staticLink.value);
+          this.initialMumbleOptions.next({
+            url: mumbleUrl.value,
+            port: mumblePort.value,
+            password: mumblePassword.value,
+            channelName: mumbleChannelName.value,
+          });
+          this.changeDetector.markForCheck();
+          this.textFields.forEach(field => field?.layout());
+        },
+      );
 
     this.form.get('type').valueChanges.subscribe(type => {
+      console.log(type);
       switch (type) {
-        case SelectedVoiceServer.none:
+        case 'none':
           this.form.get('staticLink').disable();
           this.form.get('mumble').disable();
           break;
 
-        case SelectedVoiceServer.staticLink:
+        case 'static link':
           this.form.get('staticLink').enable();
           this.form.get('mumble').disable();
           break;
 
-        case SelectedVoiceServer.mumble:
+        case 'mumble':
           this.form.get('staticLink').disable();
           this.form.get('mumble').enable();
           break;
@@ -117,46 +145,39 @@ export class VoiceServerEditComponent
     this.textFields.forEach(field => field.destroy());
   }
 
-  get type(): VoiceServer['type'] {
-    return this.form.get('type').value as SelectedVoiceServer;
+  get type(): string {
+    return this.form.get('type').value;
   }
 
   save() {
-    let voiceServer: VoiceServer;
-
-    switch (this.type) {
-      case SelectedVoiceServer.none:
-        voiceServer = {
-          key: ConfigurationEntryKey.voiceServer,
-          type: SelectedVoiceServer.none,
-        };
-        break;
-
-      case SelectedVoiceServer.staticLink:
-        voiceServer = {
-          key: ConfigurationEntryKey.voiceServer,
-          type: SelectedVoiceServer.staticLink,
-          staticLink: this.form.value.staticLink,
-        };
-        break;
-
-      case SelectedVoiceServer.mumble:
-        const { url, port, password, channelName } = this.form.value.mumble;
-        voiceServer = {
-          key: ConfigurationEntryKey.voiceServer,
-          type: SelectedVoiceServer.mumble,
-          mumble: {
-            url,
-            port,
-            password,
-            channelName,
-          },
-        };
-        break;
-    }
-
+    const { url, port, password, channelName } = this.form.value.mumble;
     this.configurationService
-      .storeValue(voiceServer)
+      .storeValues(
+        {
+          key: 'games.voice_server_type',
+          value: this.form.value.type,
+        },
+        {
+          key: 'games.voice_server.static_link',
+          value: this.form.value.staticLink,
+        },
+        {
+          key: 'games.voice_server.mumble.url',
+          value: url,
+        },
+        {
+          key: 'games.voice_server.mumble.port',
+          value: port,
+        },
+        {
+          key: 'games.voice_server.mumble.channel_name',
+          value: channelName,
+        },
+        {
+          key: 'games.voice_server.mumble.password',
+          value: password,
+        },
+      )
       .subscribe(() => this.location.back());
   }
 }

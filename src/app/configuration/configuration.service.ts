@@ -4,8 +4,16 @@ import { API_URL } from '@app/api-url';
 import { Observable } from 'rxjs';
 import { ConfigurationEntryKey } from './configuration-entry-key';
 
-interface ConfigurationEntry {
-  key: ConfigurationEntryKey;
+interface GetConfigurationEntry<T> {
+  key: string;
+  schema: unknown;
+  value?: T;
+  defaultValue?: T;
+}
+
+interface SetConfigurationEntry<T> {
+  key: string;
+  value: T;
 }
 
 @Injectable({
@@ -17,16 +25,23 @@ export class ConfigurationService {
     @Inject(API_URL) private apiUrl: string,
   ) {}
 
-  fetchValue<T extends ConfigurationEntry>(key: string): Observable<T> {
-    return this.http.get<T>(
-      `${this.apiUrl}/configuration/${key.split(' ').join('-')}`,
-    );
+  fetchValues<T extends readonly unknown[]>(
+    ...keys: string[]
+  ): Observable<{ -readonly [P in keyof T]: GetConfigurationEntry<T[P]> }> {
+    return this.http.get<{
+      -readonly [P in keyof T]: GetConfigurationEntry<T[P]>;
+    }>(`${this.apiUrl}/configuration`, {
+      params: {
+        keys: keys.join(','),
+      },
+    });
   }
 
-  storeValue<T extends ConfigurationEntry>(entry: T): Observable<T> {
-    return this.http.put<T>(
-      `${this.apiUrl}/configuration/${entry.key.split(' ').join('-')}`,
-      entry,
-    );
+  storeValues<T extends readonly unknown[]>(
+    ...entries: SetConfigurationEntry<T[number]>[]
+  ): Observable<{ -readonly [P in keyof T]: GetConfigurationEntry<T[P]> }> {
+    return this.http.put<{
+      -readonly [P in keyof T]: GetConfigurationEntry<T[P]>;
+    }>(`${this.apiUrl}/configuration`, entries);
   }
 }
