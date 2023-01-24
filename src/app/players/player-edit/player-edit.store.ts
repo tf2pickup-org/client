@@ -30,6 +30,7 @@ const initialState: PlayerEditState = {
   saving: false,
 };
 
+// skipcq: JS-0579
 @Injectable()
 export class PlayerEditStore extends ComponentStore<PlayerEditState> {
   readonly player = this.select(state => state.player);

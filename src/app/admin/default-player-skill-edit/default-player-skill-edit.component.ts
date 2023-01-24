@@ -93,6 +93,7 @@ export class DefaultPlayerSkillEditComponent implements OnInit {
     return this.form.get('gameClasses') as FormGroup;
   }
 
+  // skipcq: JS-0105
   orderGameClasses = (
     a: KeyValue<Tf2ClassName, FormControl>,
     b: KeyValue<Tf2ClassName, FormControl>,

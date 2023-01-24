@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ConfigurationService } from '@app/configuration/configuration.service';
-import { race, Subject, zip } from 'rxjs';
+import { race, Subject } from 'rxjs';
 import { MDCSwitch } from '@material/switch';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { Overlay } from '@angular/cdk/overlay';

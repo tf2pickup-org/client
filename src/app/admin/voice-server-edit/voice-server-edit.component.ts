@@ -102,7 +102,7 @@ export class VoiceServerEditComponent
       .subscribe(({ voiceServerType, staticLink, mumble }) => {
         this.form.patchValue({
           type: voiceServerType,
-          staticLink: staticLink,
+          staticLink,
           mumble,
         });
 
@@ -128,6 +128,8 @@ export class VoiceServerEditComponent
           this.form.get('staticLink').disable();
           this.form.get('mumble').enable();
           break;
+
+        // no default
       }
     });
   }
