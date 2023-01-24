@@ -9,7 +9,6 @@ import {
   OnDestroy,
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { ConfigurationEntryKey } from '@app/configuration/configuration-entry-key';
 import { ConfigurationService } from '@app/configuration/configuration.service';
 import { race, Subject, zip } from 'rxjs';
 import { MDCSwitch } from '@material/switch';
@@ -17,10 +16,7 @@ import { ComponentPortal } from '@angular/cdk/portal';
 import { Overlay } from '@angular/cdk/overlay';
 import { MinimumTf2InGameHoursDialogComponent } from './minimum-tf2-in-game-hours-dialog/minimum-tf2-in-game-hours-dialog.component';
 import { Location } from '@angular/common';
-import { Etf2lAccountRequired } from '@app/configuration/models/etf2l-account-required';
-import { MinimumTf2InGameHours } from '@app/configuration/models/minimum-tf2-in-game-hours';
 import { map, takeUntil } from 'rxjs/operators';
-import { DenyPlayersWithNoSkillAssigned } from '@app/configuration/models/deny-players-with-no-skill-assigned';
 import { ActivatedRoute, Data } from '@angular/router';
 import { PlayerRestrictions } from './player-restrictions';
 

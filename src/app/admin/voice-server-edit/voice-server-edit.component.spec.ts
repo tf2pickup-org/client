@@ -1,12 +1,7 @@
 import { Location } from '@angular/common';
 import { TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ConfigurationEntryKey } from '@app/configuration/configuration-entry-key';
 import { ConfigurationService } from '@app/configuration/configuration.service';
-import {
-  SelectedVoiceServer,
-  VoiceServer,
-} from '@app/configuration/models/voice-server';
 import { FeatherComponent } from 'angular-feather';
 import {
   MockBuilder,
@@ -15,19 +10,19 @@ import {
   ngMocks,
 } from 'ng-mocks';
 import { Subject } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { filter, map, take } from 'rxjs/operators';
 import { EditPageWrapperComponent } from '../edit-page-wrapper/edit-page-wrapper.component';
 import { VoiceServerEditComponent } from './voice-server-edit.component';
 
 describe(VoiceServerEditComponent.name, () => {
   let component: VoiceServerEditComponent;
   let fixture: MockedComponentFixture<VoiceServerEditComponent>;
-  let voiceServer: Subject<VoiceServer>;
+  let configuration: Subject<Record<string, any>>;
   let submitButton: HTMLButtonElement;
   let configurationService: jasmine.SpyObj<ConfigurationService>;
 
   beforeEach(() => {
-    voiceServer = new Subject();
+    configuration = new Subject();
   });
 
   beforeEach(() =>
@@ -35,18 +30,30 @@ describe(VoiceServerEditComponent.name, () => {
       .keep(ReactiveFormsModule)
       .mock(Location)
       .mock(ConfigurationService, {
-        fetchValue: jasmine.createSpy('fetchValue').and.callFake(
-          key =>
-            ({
-              [ConfigurationEntryKey.voiceServer]: voiceServer.pipe(take(1)),
-            }[key]),
+        fetchValues: jasmine.createSpy('fetchValue').and.callFake((...keys) =>
+          configuration.pipe(
+            filter(configuration => keys.every(key => key in configuration)),
+            map(configuration =>
+              keys.map(key => ({
+                value: configuration[key],
+              })),
+            ),
+            take(1),
+          ),
         ),
-        storeValue: jasmine.createSpy('storeValue').and.callFake(
-          entry =>
-            ({
-              [ConfigurationEntryKey.voiceServer]: voiceServer.pipe(take(1)),
-            }[entry.key]),
-        ),
+        storeValues: jasmine
+          .createSpy('storeValue')
+          .and.callFake((...entries) =>
+            configuration.pipe(
+              filter(configuration =>
+                entries.every(entry => entry.key in configuration),
+              ),
+              map(configuration =>
+                entries.map(entry => configuration[entry.key]),
+              ),
+              take(1),
+            ),
+          ),
       })
       .keep(EditPageWrapperComponent)
       .mock(FeatherComponent),
@@ -75,13 +82,13 @@ describe(VoiceServerEditComponent.name, () => {
 
   describe('when the configuration is mumble', () => {
     beforeEach(() => {
-      voiceServer.next({
-        key: ConfigurationEntryKey.voiceServer,
-        type: SelectedVoiceServer.mumble,
-        mumble: {
-          url: 'mumble.melkor.tf',
-          port: 64738,
-        },
+      configuration.next({
+        'games.voice_server_type': 'mumble',
+        'games.voice_server.static_link': undefined,
+        'games.voice_server.mumble.url': 'mumble.melkor.tf',
+        'games.voice_server.mumble.port': 64738,
+        'games.voice_server.mumble.channel_name': '',
+        'games.voice_server.mumble.password': undefined,
       });
       fixture.detectChanges();
     });
@@ -121,29 +128,30 @@ describe(VoiceServerEditComponent.name, () => {
         });
 
         it('should attempt to update the value', () => {
-          expect(configurationService.storeValue).toHaveBeenCalledOnceWith({
-            key: ConfigurationEntryKey.voiceServer,
-            type: SelectedVoiceServer.mumble,
-            mumble: {
-              url: 'mumble.melkor.tf',
-              port: 64738,
-              password: 'FAKE_PASSWORD',
-              channelName: '',
+          expect(configurationService.storeValues).toHaveBeenCalledOnceWith(
+            { key: 'games.voice_server_type', value: 'mumble' },
+            { key: 'games.voice_server.static_link', value: undefined },
+            { key: 'games.voice_server.mumble.url', value: 'mumble.melkor.tf' },
+            { key: 'games.voice_server.mumble.port', value: 64738 },
+            { key: 'games.voice_server.mumble.channel_name', value: '' },
+            {
+              key: 'games.voice_server.mumble.password',
+              value: 'FAKE_PASSWORD',
             },
-          } as VoiceServer);
+          );
         });
 
         describe('when the values are saved on the server', () => {
           beforeEach(() => {
-            voiceServer.next({
-              key: ConfigurationEntryKey.voiceServer,
-              type: SelectedVoiceServer.mumble,
-              mumble: {
-                url: 'mumble.melkor.tf',
-                port: 64738,
-                password: 'FAKE_PASSWORD',
-              },
+            configuration.next({
+              'games.voice_server_type': 'mumble',
+              'games.voice_server.static_link': undefined,
+              'games.voice_server.mumble.url': 'mumble.melkor.tf',
+              'games.voice_server.mumble.port': 64738,
+              'games.voice_server.mumble.channel_name': '',
+              'games.voice_server.mumble.password': 'FAKE_PASSWORD',
             });
+            fixture.detectChanges();
           });
 
           it('should navigate back', () => {
@@ -166,19 +174,30 @@ describe(VoiceServerEditComponent.name, () => {
       });
 
       it('should attempt to update the value', () => {
-        expect(configurationService.storeValue).toHaveBeenCalledOnceWith({
-          key: ConfigurationEntryKey.voiceServer,
-          type: SelectedVoiceServer.none,
-        } as VoiceServer);
+        expect(configurationService.storeValues).toHaveBeenCalledOnceWith(
+          {
+            key: 'games.voice_server_type',
+            value: 'none',
+          },
+          jasmine.any(Object),
+          jasmine.any(Object),
+          jasmine.any(Object),
+          jasmine.any(Object),
+          jasmine.any(Object),
+        );
       });
     });
   });
 
   describe('when the configuration is null', () => {
     beforeEach(() => {
-      voiceServer.next({
-        key: ConfigurationEntryKey.voiceServer,
-        type: SelectedVoiceServer.none,
+      configuration.next({
+        'games.voice_server_type': 'none',
+        'games.voice_server.static_link': undefined,
+        'games.voice_server.mumble.url': 'mumble.melkor.tf',
+        'games.voice_server.mumble.port': 64738,
+        'games.voice_server.mumble.channel_name': '',
+        'games.voice_server.mumble.password': undefined,
       });
       fixture.detectChanges();
     });
@@ -192,10 +211,13 @@ describe(VoiceServerEditComponent.name, () => {
 
   describe('when the configuration is static link', () => {
     beforeEach(() => {
-      voiceServer.next({
-        key: ConfigurationEntryKey.voiceServer,
-        type: SelectedVoiceServer.staticLink,
-        staticLink: 'FAKE_STATIC_LINK',
+      configuration.next({
+        'games.voice_server_type': 'static link',
+        'games.voice_server.static_link': 'FAKE_LINK',
+        'games.voice_server.mumble.url': 'mumble.melkor.tf',
+        'games.voice_server.mumble.port': 64738,
+        'games.voice_server.mumble.channel_name': '',
+        'games.voice_server.mumble.password': undefined,
       });
       fixture.detectChanges();
     });
@@ -225,20 +247,30 @@ describe(VoiceServerEditComponent.name, () => {
         });
 
         it('should attempt to update the value', () => {
-          expect(configurationService.storeValue).toHaveBeenCalledOnceWith({
-            key: ConfigurationEntryKey.voiceServer,
-            type: SelectedVoiceServer.staticLink,
-            staticLink: 'ANOTHER_FAKE_LINK',
-          } as VoiceServer);
+          expect(configurationService.storeValues).toHaveBeenCalledOnceWith(
+            { key: 'games.voice_server_type', value: 'static link' },
+            {
+              key: 'games.voice_server.static_link',
+              value: 'ANOTHER_FAKE_LINK',
+            },
+            jasmine.any(Object),
+            jasmine.any(Object),
+            jasmine.any(Object),
+            jasmine.any(Object),
+          );
         });
 
         describe('when the values are saved on the server', () => {
           beforeEach(() => {
-            voiceServer.next({
-              key: ConfigurationEntryKey.voiceServer,
-              type: SelectedVoiceServer.staticLink,
-              staticLink: 'ANOTHER_FAKE_LINK',
+            configuration.next({
+              'games.voice_server_type': 'static link',
+              'games.voice_server.static_link': 'ANOTHER_FAKE_LINK',
+              'games.voice_server.mumble.url': 'mumble.melkor.tf',
+              'games.voice_server.mumble.port': 64738,
+              'games.voice_server.mumble.channel_name': '',
+              'games.voice_server.mumble.password': undefined,
             });
+            fixture.detectChanges();
           });
 
           it('should navigate back', () => {

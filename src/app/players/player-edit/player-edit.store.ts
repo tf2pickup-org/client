@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ConfigurationEntryKey } from '@app/configuration/configuration-entry-key';
 import { ConfigurationService } from '@app/configuration/configuration.service';
-import { DefaultPlayerSkill } from '@app/configuration/models/default-player-skill';
 import { Tf2ClassName } from '@app/shared/models/tf2-class-name';
 import { ComponentStore } from '@ngrx/component-store';
 import { Store } from '@ngrx/store';

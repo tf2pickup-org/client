@@ -1,11 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ConfigurationEntryKey } from '@app/configuration/configuration-entry-key';
 import { ConfigurationService } from '@app/configuration/configuration.service';
-import { DefaultPlayerSkill } from '@app/configuration/models/default-player-skill';
 import { queueConfig } from '@app/queue/queue.selectors';
 import { GameClassIconComponent } from '@app/shared/game-class-icon/game-class-icon.component';
-import { Tf2ClassName } from '@app/shared/models/tf2-class-name';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { FeatherComponent } from 'angular-feather';
 import {
@@ -15,30 +12,48 @@ import {
   ngMocks,
 } from 'ng-mocks';
 import { Subject } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { filter, map, take } from 'rxjs/operators';
 import { EditPageWrapperComponent } from '../edit-page-wrapper/edit-page-wrapper.component';
 import { DefaultPlayerSkillEditComponent } from './default-player-skill-edit.component';
 
 describe(DefaultPlayerSkillEditComponent.name, () => {
   let component: DefaultPlayerSkillEditComponent;
   let fixture: MockedComponentFixture<DefaultPlayerSkillEditComponent>;
-  let defaultPlayerSkill: Subject<DefaultPlayerSkill>;
+  let configuration: Subject<Record<string, any>>;
   let submitButton: HTMLButtonElement;
 
   beforeEach(() => {
-    defaultPlayerSkill = new Subject();
+    configuration = new Subject();
   });
 
   beforeEach(() =>
     MockBuilder(DefaultPlayerSkillEditComponent)
       .keep(ReactiveFormsModule)
       .mock(ConfigurationService, {
-        fetchValue: jasmine
-          .createSpy('fetchValue')
-          .and.returnValue(defaultPlayerSkill.asObservable().pipe(take(1))),
-        storeValue: jasmine
+        fetchValues: jasmine.createSpy('fetchValue').and.callFake((...keys) =>
+          configuration.pipe(
+            filter(configuration => keys.every(key => key in configuration)),
+            map(configuration =>
+              keys.map(key => ({
+                value: configuration[key],
+              })),
+            ),
+            take(1),
+          ),
+        ),
+        storeValues: jasmine
           .createSpy('storeValue')
-          .and.returnValue(defaultPlayerSkill.asObservable().pipe(take(1))),
+          .and.callFake((...entries) =>
+            configuration.pipe(
+              filter(configuration =>
+                entries.every(entry => entry.key in configuration),
+              ),
+              map(configuration =>
+                entries.map(entry => configuration[entry.key]),
+              ),
+              take(1),
+            ),
+          ),
       })
       .provide(
         provideMockStore({
@@ -68,14 +83,13 @@ describe(DefaultPlayerSkillEditComponent.name, () => {
 
     submitButton = ngMocks.find('button[type=submit]').nativeElement;
 
-    defaultPlayerSkill.next({
-      key: ConfigurationEntryKey.defaultPlayerSkill,
-      value: { scout: 1, soldier: 2 },
+    configuration.next({
+      'games.default_player_skill': { scout: 1, soldier: 2 },
     });
     fixture.detectChanges();
   });
 
-  afterEach(() => defaultPlayerSkill.complete());
+  afterEach(() => configuration.complete());
   afterEach(() => TestBed.inject(MockStore)?.resetSelectors());
 
   it('should create', () => {
@@ -116,9 +130,8 @@ describe(DefaultPlayerSkillEditComponent.name, () => {
       beforeEach(() => {
         submitButton.click();
         fixture.detectChanges();
-        defaultPlayerSkill.next({
-          key: ConfigurationEntryKey.defaultPlayerSkill,
-          value: { scout: 1, soldier: 2 },
+        configuration.next({
+          'games.default_player_skill': { scout: 1, soldier: 2 },
         });
       });
 
@@ -128,20 +141,19 @@ describe(DefaultPlayerSkillEditComponent.name, () => {
 
       it('should call the api', () => {
         const configurationService = TestBed.inject(ConfigurationService);
-        expect(configurationService.storeValue).toHaveBeenCalledWith({
-          key: ConfigurationEntryKey.defaultPlayerSkill,
+        expect(configurationService.storeValues).toHaveBeenCalledWith({
+          key: 'games.default_player_skill',
           value: {
             scout: 1,
             soldier: 4,
           },
-        } as DefaultPlayerSkill);
+        });
       });
 
       describe('when accepted by the server', () => {
         beforeEach(() => {
-          defaultPlayerSkill.next({
-            key: ConfigurationEntryKey.defaultPlayerSkill,
-            value: { scout: 1, soldier: 4 },
+          configuration.next({
+            'games.default_player_skill': { scout: 1, soldier: 4 },
           });
           fixture.detectChanges();
         });

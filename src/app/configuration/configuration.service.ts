@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { API_URL } from '@app/api-url';
 import { Observable } from 'rxjs';
-import { ConfigurationEntryKey } from './configuration-entry-key';
 
 interface GetConfigurationEntry<T> {
   key: string;

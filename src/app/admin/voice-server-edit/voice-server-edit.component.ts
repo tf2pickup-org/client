@@ -12,7 +12,7 @@ import { FormBuilder } from '@angular/forms';
 import { ConfigurationService } from '@app/configuration/configuration.service';
 import { MDCTextField } from '@material/textfield';
 import { Location } from '@angular/common';
-import { Subject } from 'rxjs';
+import { map, Subject } from 'rxjs';
 
 interface MumbleOptions {
   url: string;
@@ -78,17 +78,17 @@ export class VoiceServerEditComponent
         'games.voice_server.mumble.channel_name',
         'games.voice_server.mumble.password',
       )
-      .subscribe(
-        ([
-          voiceServerType,
-          staticLink,
-          mumbleUrl,
-          mumblePort,
-          mumbleChannelName,
-          mumblePassword,
-        ]) => {
-          this.form.patchValue({
-            type: voiceServerType.value,
+      .pipe(
+        map(
+          ([
+            voiceServerType,
+            staticLink,
+            mumbleUrl,
+            mumblePort,
+            mumbleChannelName,
+            mumblePassword,
+          ]) => ({
+            voiceServerType: voiceServerType.value,
             staticLink: staticLink.value,
             mumble: {
               url: mumbleUrl.value,
@@ -96,22 +96,23 @@ export class VoiceServerEditComponent
               password: mumblePassword.value,
               channelName: mumbleChannelName.value,
             },
-          });
+          }),
+        ),
+      )
+      .subscribe(({ voiceServerType, staticLink, mumble }) => {
+        this.form.patchValue({
+          type: voiceServerType,
+          staticLink: staticLink,
+          mumble,
+        });
 
-          this.initialStaticLink.next(staticLink.value);
-          this.initialMumbleOptions.next({
-            url: mumbleUrl.value,
-            port: mumblePort.value,
-            password: mumblePassword.value,
-            channelName: mumbleChannelName.value,
-          });
-          this.changeDetector.markForCheck();
-          this.textFields.forEach(field => field?.layout());
-        },
-      );
+        this.initialStaticLink.next(staticLink);
+        this.initialMumbleOptions.next(mumble);
+        this.changeDetector.markForCheck();
+        this.textFields.forEach(field => field?.layout());
+      });
 
     this.form.get('type').valueChanges.subscribe(type => {
-      console.log(type);
       switch (type) {
         case 'none':
           this.form.get('staticLink').disable();
@@ -150,7 +151,7 @@ export class VoiceServerEditComponent
   }
 
   save() {
-    const { url, port, password, channelName } = this.form.value.mumble;
+    const { url, port, password, channelName } = this.form.get('mumble').value;
     this.configurationService
       .storeValues(
         {
@@ -159,7 +160,7 @@ export class VoiceServerEditComponent
         },
         {
           key: 'games.voice_server.static_link',
-          value: this.form.value.staticLink,
+          value: this.form.get('staticLink').value,
         },
         {
           key: 'games.voice_server.mumble.url',
