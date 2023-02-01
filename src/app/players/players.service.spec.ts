@@ -81,12 +81,12 @@ describe('PlayersService', () => {
       (service: PlayersService) => {
         service.fetchPlayerGames('FAKE_ID', 0).subscribe();
         httpContoller.expectOne(
-          'FAKE_URL/games?playerId=FAKE_ID&offset=0&limit=10',
+          'FAKE_URL/games?player=FAKE_ID&offset=0&limit=10',
         );
 
         service.fetchPlayerGames('FAKE_ID', 28, 53).subscribe();
         httpContoller.expectOne(
-          'FAKE_URL/games?playerId=FAKE_ID&offset=28&limit=53',
+          'FAKE_URL/games?player=FAKE_ID&offset=28&limit=53',
         );
 
         expect().nothing();
