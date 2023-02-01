@@ -4,9 +4,7 @@ import {
 } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { API_URL } from '@app/api-url';
-import { ConfigurationEntryKey } from './configuration-entry-key';
 import { ConfigurationService } from './configuration.service';
-import { WhitelistId } from './models/whihtelist-id';
 
 describe('ConfigurationService', () => {
   let service: ConfigurationService;
@@ -25,35 +23,63 @@ describe('ConfigurationService', () => {
     expect(service).toBeTruthy();
   });
 
-  describe('#fetchValue()', () => {
+  describe('#fetchValues()', () => {
     it('should query the api', () => {
-      let result: string;
+      let result: any;
       service
-        .fetchValue<WhitelistId>('whitelist id')
-        .subscribe(r => (result = r.value));
+        .fetchValues<[string]>('games.whitelist_id')
+        .subscribe(r => (result = r));
       const request = httpController.expectOne(
-        'FAKE_URL/configuration/whitelist-id',
+        'FAKE_URL/configuration?keys=games.whitelist_id',
       );
-      request.flush({ key: 'whitelist id', value: 'etf2l_9v9' });
-      expect(result).toEqual('etf2l_9v9');
+      request.flush([
+        {
+          key: 'games.whitelist_id',
+          value: 'etf2l_9v9',
+          schema: { type: 'string' },
+        },
+      ]);
+      expect(result).toEqual([
+        {
+          key: 'games.whitelist_id',
+          value: 'etf2l_9v9',
+          schema: { type: 'string' },
+        },
+      ]);
     });
   });
 
-  describe('#storeValue()', () => {
+  describe('#storeValues()', () => {
     it('should query the api', () => {
-      let result: string;
+      let result: any;
       service
-        .storeValue<WhitelistId>({
-          key: ConfigurationEntryKey.whitelistId,
+        .storeValues<[string]>({
+          key: 'games.whitelist_id',
           value: 'etf2l_6v6',
         })
-        .subscribe(r => (result = r.value));
-      const request = httpController.expectOne(
-        'FAKE_URL/configuration/whitelist-id',
-      );
+        .subscribe(r => (result = r));
+      const request = httpController.expectOne('FAKE_URL/configuration');
       expect(request.request.method).toBe('PUT');
-      request.flush({ key: 'whitelist id', value: 'etf2l_6v6' });
-      expect(result).toEqual('etf2l_6v6');
+      expect(request.request.body).toEqual([
+        {
+          key: 'games.whitelist_id',
+          value: 'etf2l_6v6',
+        },
+      ]);
+      request.flush([
+        {
+          key: 'games.whitelist_id',
+          value: 'etf2l_6v6',
+          schema: { type: 'string' },
+        },
+      ]);
+      expect(result).toEqual([
+        {
+          key: 'games.whitelist_id',
+          value: 'etf2l_6v6',
+          schema: { type: 'string' },
+        },
+      ]);
     });
   });
 });

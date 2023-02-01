@@ -10,7 +10,7 @@ import {
   ngMocks,
 } from 'ng-mocks';
 import { PlayersService } from '../players.service';
-import { map, take } from 'rxjs/operators';
+import { filter, map, take } from 'rxjs/operators';
 import { ReactiveFormsModule } from '@angular/forms';
 import { loadPlayer, playerEdited } from '../actions';
 import { Title } from '@angular/platform-browser';
@@ -20,8 +20,6 @@ import { FeatherComponent } from 'angular-feather';
 import { Location } from '@angular/common';
 import { Player } from '../models/player';
 import { ConfigurationService } from '@app/configuration/configuration.service';
-import { DefaultPlayerSkill } from '@app/configuration/models/default-player-skill';
-import { ConfigurationEntryKey } from '@app/configuration/configuration-entry-key';
 
 describe(PlayerEditComponent.name, () => {
   let fixture: MockedComponentFixture;
@@ -34,14 +32,14 @@ describe(PlayerEditComponent.name, () => {
   let fetchPlayerSkill: Subject<{ [gameClass in Tf2ClassName]?: number }>;
   let setPlayerName: Subject<Player>;
   let setPlayerSkill: Subject<any>;
-  let defaultPlayerSkill: Subject<DefaultPlayerSkill>;
+  let configuration: Subject<Record<string, any>>;
 
   beforeEach(() => {
     routeParams = new Subject();
     fetchPlayerSkill = new Subject();
     setPlayerName = new Subject();
     setPlayerSkill = new Subject();
-    defaultPlayerSkill = new Subject();
+    configuration = new Subject();
   });
 
   beforeEach(() =>
@@ -68,9 +66,30 @@ describe(PlayerEditComponent.name, () => {
       .mock(PlayerEditSkillComponent)
       .mock(FeatherComponent)
       .mock(ConfigurationService, {
-        fetchValue: jasmine
-          .createSpy('fetchValue')
-          .and.returnValue(defaultPlayerSkill.pipe(take(1))),
+        fetchValues: jasmine.createSpy('fetchValue').and.callFake((...keys) =>
+          configuration.pipe(
+            filter(configuration => keys.every(key => key in configuration)),
+            map(configuration =>
+              keys.map(key => ({
+                value: configuration[key],
+              })),
+            ),
+            take(1),
+          ),
+        ),
+        storeValues: jasmine
+          .createSpy('storeValue')
+          .and.callFake((...entries) =>
+            configuration.pipe(
+              filter(configuration =>
+                entries.every(entry => entry.key in configuration),
+              ),
+              map(configuration =>
+                entries.map(entry => configuration[entry.key]),
+              ),
+              take(1),
+            ),
+          ),
       }),
   );
 
@@ -97,7 +116,7 @@ describe(PlayerEditComponent.name, () => {
     nameInput = ngMocks.find('input[type=text]').nativeElement;
   });
 
-  afterEach(() => defaultPlayerSkill.complete());
+  afterEach(() => configuration.complete());
   afterEach(() => TestBed.inject(MockStore)?.resetSelectors());
 
   it('should create', () => {
@@ -157,9 +176,8 @@ describe(PlayerEditComponent.name, () => {
         beforeEach(() => {
           fetchPlayerSkill.next({});
           fetchPlayerSkill.complete();
-          defaultPlayerSkill.next({
-            key: ConfigurationEntryKey.defaultPlayerSkill,
-            value: { scout: -1, soldier: -1 },
+          configuration.next({
+            'games.default_player_skill': { scout: -1, soldier: -1 },
           });
           fixture.detectChanges();
         });

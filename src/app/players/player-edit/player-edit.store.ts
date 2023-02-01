@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ConfigurationEntryKey } from '@app/configuration/configuration-entry-key';
 import { ConfigurationService } from '@app/configuration/configuration.service';
-import { DefaultPlayerSkill } from '@app/configuration/models/default-player-skill';
 import { Tf2ClassName } from '@app/shared/models/tf2-class-name';
 import { ComponentStore } from '@ngrx/component-store';
 import { Store } from '@ngrx/store';
@@ -32,6 +30,7 @@ const initialState: PlayerEditState = {
   saving: false,
 };
 
+// skipcq: JS-0579
 @Injectable()
 export class PlayerEditStore extends ComponentStore<PlayerEditState> {
   readonly player = this.select(state => state.player);
@@ -93,10 +92,14 @@ export class PlayerEditStore extends ComponentStore<PlayerEditState> {
             switchMap(skill => {
               if (isEmpty(skill)) {
                 return this.configurationService
-                  .fetchValue<DefaultPlayerSkill>(
-                    ConfigurationEntryKey.defaultPlayerSkill,
-                  )
-                  .pipe(map(value => value.value));
+                  .fetchValues<
+                    [
+                      {
+                        [gameClass in Tf2ClassName]?: number;
+                      },
+                    ]
+                  >('games.default_player_skill')
+                  .pipe(map(value => value[0].value));
               }
 
               return of(skill);

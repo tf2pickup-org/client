@@ -9,12 +9,10 @@ import {
   ChangeDetectorRef,
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { ConfigurationEntryKey } from '@app/configuration/configuration-entry-key';
 import { ConfigurationService } from '@app/configuration/configuration.service';
 import { MDCTextField } from '@material/textfield';
 import { BehaviorSubject } from 'rxjs';
 import { finalize, map, tap } from 'rxjs/operators';
-import { WhitelistId } from '@app/configuration/models/whihtelist-id';
 
 @Component({
   selector: 'app-whitelist-edit',
@@ -44,8 +42,8 @@ export class WhitelistEditComponent
 
   ngOnInit() {
     this.configurationService
-      .fetchValue<WhitelistId>(ConfigurationEntryKey.whitelistId)
-      .pipe(map(entry => entry.value))
+      .fetchValues<[string]>('games.whitelist_id')
+      .pipe(map(entries => entries[0].value))
       .subscribe(whitelistId => {
         this.form.patchValue({ whitelistId });
         this.changeDetector.markForCheck();
@@ -65,12 +63,12 @@ export class WhitelistEditComponent
   save() {
     this.isSaving.next(true);
     this.configurationService
-      .storeValue<WhitelistId>({
-        key: ConfigurationEntryKey.whitelistId,
+      .storeValues<[string]>({
+        key: 'games.whitelist_id',
         value: `${this.whitelistId}`,
       })
       .pipe(
-        map(entry => entry.value),
+        map(entries => entries[0].value),
         tap(whitelistId => this.form.reset({ whitelistId })),
         finalize(() => this.isSaving.next(false)),
       )

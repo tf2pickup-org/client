@@ -9,18 +9,14 @@ import {
   OnDestroy,
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { ConfigurationEntryKey } from '@app/configuration/configuration-entry-key';
 import { ConfigurationService } from '@app/configuration/configuration.service';
-import { race, Subject, zip } from 'rxjs';
+import { race, Subject } from 'rxjs';
 import { MDCSwitch } from '@material/switch';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { Overlay } from '@angular/cdk/overlay';
 import { MinimumTf2InGameHoursDialogComponent } from './minimum-tf2-in-game-hours-dialog/minimum-tf2-in-game-hours-dialog.component';
 import { Location } from '@angular/common';
-import { Etf2lAccountRequired } from '@app/configuration/models/etf2l-account-required';
-import { MinimumTf2InGameHours } from '@app/configuration/models/minimum-tf2-in-game-hours';
 import { map, takeUntil } from 'rxjs/operators';
-import { DenyPlayersWithNoSkillAssigned } from '@app/configuration/models/deny-players-with-no-skill-assigned';
 import { ActivatedRoute, Data } from '@angular/router';
 import { PlayerRestrictions } from './player-restrictions';
 
@@ -97,20 +93,22 @@ export class PlayerRestrictionsComponent
   }
 
   save() {
-    zip(
-      this.configurationService.storeValue<Etf2lAccountRequired>({
-        key: ConfigurationEntryKey.etf2lAccountRequired,
-        value: this.etf2lAccountRequired,
-      }),
-      this.configurationService.storeValue<MinimumTf2InGameHours>({
-        key: ConfigurationEntryKey.minimumTf2InGameHours,
-        value: this.minimumTf2InGameHours,
-      }),
-      this.configurationService.storeValue<DenyPlayersWithNoSkillAssigned>({
-        key: ConfigurationEntryKey.denyPlayersWithNoSkillAssigned,
-        value: this.denyPlayersWithNoSkillAssigned,
-      }),
-    ).subscribe(() => this.location.back());
+    this.configurationService
+      .storeValues(
+        {
+          key: 'players.etf2l_account_required',
+          value: this.etf2lAccountRequired,
+        },
+        {
+          key: 'players.minimum_in_game_hours',
+          value: this.minimumTf2InGameHours,
+        },
+        {
+          key: 'queue.deny_players_with_no_skill_assigned',
+          value: this.denyPlayersWithNoSkillAssigned,
+        },
+      )
+      .subscribe(() => this.location.back());
   }
 
   updateEtf2lAccountRequired() {

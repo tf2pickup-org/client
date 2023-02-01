@@ -1,40 +1,45 @@
 import { TestBed } from '@angular/core/testing';
-import { ConfigurationEntryKey } from '@app/configuration/configuration-entry-key';
 import { ConfigurationService } from '@app/configuration/configuration.service';
-import { DenyPlayersWithNoSkillAssigned } from '@app/configuration/models/deny-players-with-no-skill-assigned';
-import { Etf2lAccountRequired } from '@app/configuration/models/etf2l-account-required';
-import { MinimumTf2InGameHours } from '@app/configuration/models/minimum-tf2-in-game-hours';
 import { MockProvider } from 'ng-mocks';
-import { Subject, take } from 'rxjs';
+import { filter, map, Subject, take } from 'rxjs';
 import { PlayerRestrictionsResolver } from './player-restrictions.resolver';
 
 describe('PlayerRestrictionsResolver', () => {
   let resolver: PlayerRestrictionsResolver;
-  let etf2lAccountRequired: Subject<Etf2lAccountRequired>;
-  let minimumTf2InGameHours: Subject<MinimumTf2InGameHours>;
-  let denyPlayersWithNoSkillAssigned: Subject<DenyPlayersWithNoSkillAssigned>;
+  let configuration: Subject<Record<string, any>>;
 
   beforeEach(() => {
-    etf2lAccountRequired = new Subject();
-    minimumTf2InGameHours = new Subject();
-    denyPlayersWithNoSkillAssigned = new Subject();
+    configuration = new Subject();
   });
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
         MockProvider(ConfigurationService, {
-          fetchValue: jasmine.createSpy('fetchValue').and.callFake(
-            key =>
-              ({
-                [ConfigurationEntryKey.etf2lAccountRequired]:
-                  etf2lAccountRequired.pipe(take(1)),
-                [ConfigurationEntryKey.minimumTf2InGameHours]:
-                  minimumTf2InGameHours.pipe(take(1)),
-                [ConfigurationEntryKey.denyPlayersWithNoSkillAssigned]:
-                  denyPlayersWithNoSkillAssigned.pipe(take(1)),
-              }[key]),
+          fetchValues: jasmine.createSpy('fetchValue').and.callFake((...keys) =>
+            configuration.pipe(
+              filter(configuration => keys.every(key => key in configuration)),
+              map(configuration =>
+                keys.map(key => ({
+                  value: configuration[key],
+                })),
+              ),
+              take(1),
+            ),
           ),
+          storeValues: jasmine
+            .createSpy('storeValue')
+            .and.callFake((...entries) =>
+              configuration.pipe(
+                filter(configuration =>
+                  entries.every(entry => entry.key in configuration),
+                ),
+                map(configuration =>
+                  entries.map(entry => configuration[entry.key]),
+                ),
+                take(1),
+              ),
+            ),
         }),
       ],
     });
@@ -56,17 +61,10 @@ describe('PlayerRestrictionsResolver', () => {
         done();
       });
 
-      etf2lAccountRequired.next({
-        key: ConfigurationEntryKey.etf2lAccountRequired,
-        value: true,
-      });
-      minimumTf2InGameHours.next({
-        key: ConfigurationEntryKey.minimumTf2InGameHours,
-        value: 450,
-      });
-      denyPlayersWithNoSkillAssigned.next({
-        key: ConfigurationEntryKey.denyPlayersWithNoSkillAssigned,
-        value: false,
+      configuration.next({
+        'players.etf2l_account_required': true,
+        'players.minimum_in_game_hours': 450,
+        'queue.deny_players_with_no_skill_assigned': false,
       });
     });
   });
