@@ -29,13 +29,13 @@ export class PlayersService {
   }
 
   fetchPlayerGames(
-    playerId: string,
+    player: string,
     offset: number,
     limit: number = 10,
   ): Observable<PaginatedList<Game>> {
     return this.http.get<PaginatedList<Game>>(`${this.apiUrl}/games`, {
       params: {
-        playerId,
+        player,
         offset,
         limit,
       },
