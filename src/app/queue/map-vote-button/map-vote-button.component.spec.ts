@@ -3,14 +3,29 @@ import { MapVoteButtonComponent } from './map-vote-button.component';
 import { By } from '@angular/platform-browser';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MapThumbnailPipe } from '@app/shared/map-thumbnail.pipe';
+import { MapThumbnailService } from '@app/shared/map-thumbnail.service';
+import { of } from 'rxjs';
 
 describe('MapVoteButtonComponent', () => {
   let component: MapVoteButtonComponent;
   let fixture: ComponentFixture<MapVoteButtonComponent>;
+  let mapThumbnailService: jasmine.SpyObj<MapThumbnailService>;
+
+  beforeEach(() => {
+    mapThumbnailService = jasmine.createSpyObj<MapThumbnailService>(
+      MapThumbnailService.name,
+      ['getMapThumbnail'],
+    );
+    mapThumbnailService.getMapThumbnail.and.callFake(map => of(`${map}.png`));
+  });
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [MapVoteButtonComponent],
+      declarations: [MapVoteButtonComponent, MapThumbnailPipe],
+      providers: [
+        { provide: MapThumbnailService, useValue: mapThumbnailService },
+      ],
       imports: [NoopAnimationsModule],
     })
       // https://github.com/angular/angular/issues/12313
