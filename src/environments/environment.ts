@@ -35,6 +35,8 @@ export const environment = {
 
   // Initial queue config for ghost loading
   entryQueue: entryQueue6v6,
+
+  mapThumbnailServiceUrl: '/map-thumbnails',
 };
 
 /*

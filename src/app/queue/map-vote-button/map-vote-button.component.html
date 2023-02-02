@@ -7,7 +7,7 @@
 
   <div class="thumbnail"
     [ngStyle]="{
-      'background-image': map && 'url(' + mapThumbnailImage + ')'
+      'background-image': map && 'url(' + mapThumbnailImage + '), url(\'/assets/unknown-map.png\')'
     }">
     <div class="thumbnail__overlay"
       [@.disabled]="isSmallScreen">

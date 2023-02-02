@@ -13,9 +13,9 @@ describe('MapVoteButtonComponent', () => {
   beforeEach(() => {
     mapThumbnailService = jasmine.createSpyObj<MapThumbnailService>(
       MapThumbnailService.name,
-      ['getMapThumbnailPath'],
+      ['getMapThumbnailUrl'],
     );
-    mapThumbnailService.getMapThumbnailPath.and.callFake(map => `${map}.png`);
+    mapThumbnailService.getMapThumbnailUrl.and.callFake(map => `${map}.png`);
   });
 
   beforeEach(waitForAsync(() => {

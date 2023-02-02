@@ -12,5 +12,12 @@
     "target": "http://localhost:3000/socket.io/",
     "ws": true,
     "logLevel": "debug"
+  },
+  "/map-thumbnails": {
+    "target": "https://mapthumbnails.tf2pickup.org",
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/map-thumbnails": ""
+    }
   }
 }

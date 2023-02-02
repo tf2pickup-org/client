@@ -59,7 +59,7 @@ export class MapVoteButtonComponent {
   isSmallScreen = this.breakpointObserver.isMatched('(max-width: 599px)');
 
   get mapThumbnailImage() {
-    return this.mapThumbnailService.getMapThumbnailPath(this.map);
+    return this.mapThumbnailService.getMapThumbnailUrl(this.map);
   }
 
   constructor(

@@ -1,3 +1,4 @@
+import { first, of } from 'rxjs';
 import { MapThumbnailPipe } from './map-thumbnail.pipe';
 import { MapThumbnailService } from './map-thumbnail.service';
 
@@ -7,10 +8,10 @@ describe('MapThumbnailPipe', () => {
 
   beforeEach(() => {
     mapThumbnailService = jasmine.createSpyObj<MapThumbnailService>([
-      'getMapThumbnailPath',
+      'getMapThumbnail',
     ]);
-    mapThumbnailService.getMapThumbnailPath.and.returnValue(
-      'FAKE_THUMBNAIL_PATH',
+    mapThumbnailService.getMapThumbnail.and.returnValue(
+      of('FAKE_THUMBNAIL_URL'),
     );
     pipe = new MapThumbnailPipe(mapThumbnailService);
   });
@@ -20,8 +21,11 @@ describe('MapThumbnailPipe', () => {
   });
 
   describe('#transform()', () => {
-    it('should return the thumbnail path', () => {
-      expect(pipe.transform('FAKE_MAP')).toEqual('FAKE_THUMBNAIL_PATH');
+    it('should return the thumbnail', () => {
+      pipe
+        .transform('FAKE_MAP')
+        .pipe(first())
+        .subscribe(value => expect(value).toEqual('FAKE_THUMBNAIL_URL'));
     });
   });
 });

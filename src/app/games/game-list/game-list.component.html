@@ -16,7 +16,10 @@
         class="game-list-item__live-indicator"
         [tooltip]="game.state"></div>
     </div>
-    <img [src]="game.map | mapThumbnail"
+    <img
+      [src]="game.map | mapThumbnail:143:80 | async"
+      width="143"
+      height="80"
       class="game-list-item__map-thumbnail">
   </a>
 </div>
