@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Map } from '@app/queue/models/map';
 import { QueueService } from '@app/queue/queue.service';
 import { AsFormGroupPipe } from '@app/shared/as-form-group.pipe';
@@ -29,6 +29,7 @@ describe(MapPoolEditComponent.name, () => {
   beforeEach(() =>
     MockBuilder(MapPoolEditComponent)
       .keep(ReactiveFormsModule)
+      .keep(FormBuilder)
       .mock(QueueService, {
         fetchMaps: () => maps.asObservable(),
         setMaps: jasmine

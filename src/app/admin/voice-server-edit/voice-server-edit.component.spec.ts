@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { TestBed } from '@angular/core/testing';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { ConfigurationService } from '@app/configuration/configuration.service';
 import { FeatherComponent } from 'angular-feather';
 import {
@@ -28,6 +28,7 @@ describe(VoiceServerEditComponent.name, () => {
   beforeEach(() =>
     MockBuilder(VoiceServerEditComponent)
       .keep(ReactiveFormsModule)
+      .keep(FormBuilder)
       .mock(Location)
       .mock(ConfigurationService, {
         fetchValues: jasmine.createSpy('fetchValue').and.callFake((...keys) =>

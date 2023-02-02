@@ -11,7 +11,7 @@ import {
 } from 'ng-mocks';
 import { PlayersService } from '../players.service';
 import { filter, map, take } from 'rxjs/operators';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { loadPlayer, playerEdited } from '../actions';
 import { Title } from '@angular/platform-browser';
 import { Tf2ClassName } from '@app/shared/models/tf2-class-name';
@@ -57,6 +57,7 @@ describe(PlayerEditComponent.name, () => {
         }),
       )
       .keep(ReactiveFormsModule)
+      .keep(FormBuilder)
       .mock(ActivatedRoute, {
         paramMap: routeParams.pipe(map(convertToParamMap)),
       })

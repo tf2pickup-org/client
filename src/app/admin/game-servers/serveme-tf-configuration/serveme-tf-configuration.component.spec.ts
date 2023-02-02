@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { TestBed } from '@angular/core/testing';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { EditPageWrapperComponent } from '@app/admin/edit-page-wrapper/edit-page-wrapper.component';
 import { CountryFlagPipe } from '@app/shared/country-flag.pipe';
 import {
@@ -50,6 +50,7 @@ describe(ServemeTfConfigurationComponent.name, () => {
       })
       .keep(EditPageWrapperComponent)
       .keep(ReactiveFormsModule)
+      .keep(FormBuilder)
       .keep(CountryFlagPipe)
       .mock(Location),
   );
