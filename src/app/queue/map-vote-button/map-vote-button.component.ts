@@ -58,14 +58,7 @@ export class MapVoteButtonComponent {
 
   isSmallScreen = this.breakpointObserver.isMatched('(max-width: 599px)');
 
-  get mapThumbnailImage() {
-    return this.mapThumbnailService.getMapThumbnailUrl(this.map);
-  }
-
-  constructor(
-    private mapThumbnailService: MapThumbnailService,
-    private breakpointObserver: BreakpointObserver,
-  ) {}
+  constructor(private breakpointObserver: BreakpointObserver) {}
 
   toggleVote() {
     this.voteToggle.emit(!this.selected);

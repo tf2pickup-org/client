@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { MapVoteButtonComponent } from './map-vote-button.component';
-import { MapThumbnailService } from '../../shared/map-thumbnail.service';
 import { By } from '@angular/platform-browser';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -8,22 +7,10 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 describe('MapVoteButtonComponent', () => {
   let component: MapVoteButtonComponent;
   let fixture: ComponentFixture<MapVoteButtonComponent>;
-  let mapThumbnailService: jasmine.SpyObj<MapThumbnailService>;
-
-  beforeEach(() => {
-    mapThumbnailService = jasmine.createSpyObj<MapThumbnailService>(
-      MapThumbnailService.name,
-      ['getMapThumbnailUrl'],
-    );
-    mapThumbnailService.getMapThumbnailUrl.and.callFake(map => `${map}.png`);
-  });
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [MapVoteButtonComponent],
-      providers: [
-        { provide: MapThumbnailService, useValue: mapThumbnailService },
-      ],
       imports: [NoopAnimationsModule],
     })
       // https://github.com/angular/angular/issues/12313
@@ -56,14 +43,6 @@ describe('MapVoteButtonComponent', () => {
 
     it('should render the button', () => {
       expect(button).toBeTruthy();
-    });
-
-    it('should set proper background-image', () => {
-      const div = fixture.debugElement.query(By.css('.thumbnail'))
-        .nativeElement as HTMLDivElement;
-      expect(div.style.backgroundImage).toMatch(
-        /url\(['"]cp_fake_rc1\.png["']\)/,
-      );
     });
 
     it('should render the map name', () => {
