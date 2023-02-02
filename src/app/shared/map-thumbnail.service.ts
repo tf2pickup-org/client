@@ -18,6 +18,7 @@ export class MapThumbnailService {
     private readonly sanitizer: DomSanitizer,
   ) {}
 
+  // skipcq: JS-0105
   getMapThumbnailUrl(
     map: string,
     { width, height }: MapThumbnailUrlParams = { width: 300, height: 169 },

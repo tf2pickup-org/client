@@ -54,7 +54,7 @@ export class MapVoteButtonComponent {
   disabled = true;
 
   @Output()
-  voteToggle = new EventEmitter<boolean>();
+  readonly voteToggle = new EventEmitter<boolean>();
 
   isSmallScreen = this.breakpointObserver.isMatched('(max-width: 599px)');
 
