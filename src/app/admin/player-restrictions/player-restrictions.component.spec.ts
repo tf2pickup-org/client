@@ -2,7 +2,7 @@ import { Overlay } from '@angular/cdk/overlay';
 import { Location } from '@angular/common';
 import { ChangeDetectorRef } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ConfigurationService } from '@app/configuration/configuration.service';
 import { FeatherComponent } from 'angular-feather';
@@ -35,6 +35,7 @@ describe(PlayerRestrictionsComponent.name, () => {
   beforeEach(() =>
     MockBuilder(PlayerRestrictionsComponent)
       .keep(ReactiveFormsModule)
+      .keep(FormBuilder)
       .mock(ConfigurationService, {
         fetchValues: jasmine.createSpy('fetchValue').and.callFake((...keys) =>
           configuration.pipe(

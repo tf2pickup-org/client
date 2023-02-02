@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { FeatherComponent } from 'angular-feather';
@@ -29,6 +29,7 @@ describe(PlayerPreferencesComponent.name, () => {
   beforeEach(() =>
     MockBuilder(PlayerPreferencesComponent)
       .keep(ReactiveFormsModule)
+      .keep(FormBuilder)
       .provide(
         provideMockStore({
           selectors: [{ selector: preferences, value: { soundVolume: '0.5' } }],

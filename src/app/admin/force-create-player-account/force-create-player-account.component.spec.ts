@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { TestBed } from '@angular/core/testing';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Player } from '@app/players/models/player';
 import { PlayersService } from '@app/players/players.service';
 import { FeatherComponent } from 'angular-feather';
@@ -26,6 +26,7 @@ describe(ForceCreatePlayerAccountComponent.name, () => {
   beforeEach(() =>
     MockBuilder(ForceCreatePlayerAccountComponent)
       .keep(ReactiveFormsModule)
+      .keep(FormBuilder)
       .mock(PlayersService)
       .mock(Location)
       .mock(FeatherComponent)

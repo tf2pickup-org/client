@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { ConfigurationService } from '@app/configuration/configuration.service';
 import { FeatherComponent } from 'angular-feather';
 import {
@@ -27,6 +27,7 @@ describe(WhitelistEditComponent.name, () => {
   beforeEach(() =>
     MockBuilder(WhitelistEditComponent)
       .keep(ReactiveFormsModule)
+      .keep(FormBuilder)
       .mock(ConfigurationService, {
         fetchValues: jasmine.createSpy('fetchValue').and.callFake((...keys) =>
           configuration.pipe(

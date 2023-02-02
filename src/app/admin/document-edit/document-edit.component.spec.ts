@@ -1,4 +1,4 @@
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, convertToParamMap } from '@angular/router';
 import { DocumentsService } from '@app/documents/documents.service';
 import {
@@ -31,6 +31,7 @@ describe(DocumentEditComponent.name, () => {
   beforeEach(() =>
     MockBuilder(DocumentEditComponent)
       .keep(ReactiveFormsModule)
+      .keep(FormBuilder)
       .mock(ActivatedRoute, {
         data: routeData.asObservable(),
       })

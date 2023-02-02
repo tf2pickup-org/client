@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { TestBed } from '@angular/core/testing';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, convertToParamMap } from '@angular/router';
 import { NavigateBackDirective } from '@app/shared/navigate-back.directive';
@@ -48,6 +48,7 @@ describe(EditPlayerRolesComponent.name, () => {
         }),
       )
       .keep(ReactiveFormsModule)
+      .keep(FormBuilder)
       .mock(ActivatedRoute, {
         paramMap: routeParams.pipe(map(convertToParamMap)),
       })

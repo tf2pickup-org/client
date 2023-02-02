@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { ConfigurationService } from '@app/configuration/configuration.service';
 import { queueConfig } from '@app/queue/queue.selectors';
 import { GameClassIconComponent } from '@app/shared/game-class-icon/game-class-icon.component';
@@ -29,6 +29,7 @@ describe(DefaultPlayerSkillEditComponent.name, () => {
   beforeEach(() =>
     MockBuilder(DefaultPlayerSkillEditComponent)
       .keep(ReactiveFormsModule)
+      .keep(FormBuilder)
       .mock(ConfigurationService, {
         fetchValues: jasmine.createSpy('fetchValue').and.callFake((...keys) =>
           configuration.pipe(
