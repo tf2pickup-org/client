@@ -851,7 +851,8 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
             "browserTarget": "tf2pickuppl:build",
-            "proxyConfig": "proxy.conf.json"
+            "proxyConfig": "proxy.conf.json",
+            "hmr": true
           },
           "configurations": {
             "production": {
@@ -913,9 +914,7 @@
       }
     }
   },
-  "defaultProject": "tf2pickuppl",
   "cli": {
-    "defaultCollection": "@ngrx/schematics",
     "analytics": "8a092075-4fff-4660-a469-14cb4418eca0"
   }
 }
