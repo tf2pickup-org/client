@@ -12,7 +12,6 @@ import {
   Output,
   EventEmitter,
 } from '@angular/core';
-import { MapThumbnailService } from '../../shared/map-thumbnail.service';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { pulsate } from '@app/animations';
 
