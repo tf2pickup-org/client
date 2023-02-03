@@ -7,4 +7,5 @@ export const defaultEnvironment = {
   version,
   footerLinks: defaultFooterLinks,
   entryQueue: entryQueue6v6,
+  mapThumbnailServiceUrl: 'https://mapthumbnails.tf2pickup.org',
 };
