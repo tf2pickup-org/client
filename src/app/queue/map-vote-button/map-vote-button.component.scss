@@ -71,7 +71,7 @@ $-display-small-buttons-threshold: huge;
     right: 0;
     z-index: 2;
 
-    > img {
+    ::ng-deep img {
       border-radius: $-thumbnail-border-radius;
       height: $-thumbnail-height-large;
       object-fit: cover;
