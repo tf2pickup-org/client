@@ -1,5 +1,24 @@
 
 
+# [3.28.0-alpha.0](https://github.com/tf2pickup-org/client/compare/3.27.1...3.28.0-alpha.0) (2023-02-03)
+
+
+### Bug Fixes
+
+* **admin:** handle new configuration API ([#2143](https://github.com/tf2pickup-org/client/issues/2143)) ([d5ff248](https://github.com/tf2pickup-org/client/commit/d5ff248b1de8ba0847f7ffa1f2da759d5dfe8c6f))
+* **deps:** update angular monorepo to v15.1.2 ([#2121](https://github.com/tf2pickup-org/client/issues/2121)) ([d3efbfe](https://github.com/tf2pickup-org/client/commit/d3efbfecb226d7b5ac36787f2968200ed528e7d5))
+* **deps:** update angular monorepo to v15.1.3 ([#2161](https://github.com/tf2pickup-org/client/issues/2161)) ([538d042](https://github.com/tf2pickup-org/client/commit/538d042ad69fb5a2c66024c23929daff730e55c7))
+* **deps:** update dependency @angular/cdk to v15.1.2 ([#2145](https://github.com/tf2pickup-org/client/issues/2145)) ([21a584e](https://github.com/tf2pickup-org/client/commit/21a584e9e251b55b19cb61c2ca59774808bc8ed8))
+* **deps:** update dependency @angular/cdk to v15.1.3 ([#2160](https://github.com/tf2pickup-org/client/issues/2160)) ([7fab1cd](https://github.com/tf2pickup-org/client/commit/7fab1cd721ac5fef12a0e00452209f9b42c9468f))
+* **deps:** update dependency tslib to v2.5.0 ([#2146](https://github.com/tf2pickup-org/client/issues/2146)) ([46eb74d](https://github.com/tf2pickup-org/client/commit/46eb74d9ec3fa2747685d5b63af1a572c87e45ef))
+* **dev:** enable hmr ([#2159](https://github.com/tf2pickup-org/client/issues/2159)) ([db0dd27](https://github.com/tf2pickup-org/client/commit/db0dd27ac2d1179fbd2853ddb18cfb4e484586bc))
+* **players:** handle new player games API ([#2157](https://github.com/tf2pickup-org/client/issues/2157)) ([a4ef08b](https://github.com/tf2pickup-org/client/commit/a4ef08bfe22018e121fa1400a6e72538d1826c6c))
+
+
+### Features
+
+* use map thumbnail service ([#2158](https://github.com/tf2pickup-org/client/issues/2158)) ([f8ef2de](https://github.com/tf2pickup-org/client/commit/f8ef2deb2e6799301f612ca793fb53f8f4a3e6e5))
+
 ## [3.27.1](https://github.com/tf2pickup-org/client/compare/3.27.0...3.27.1) (2023-01-19)
 
 
