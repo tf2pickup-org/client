@@ -1,5 +1,12 @@
 
 
+# [3.28.0-alpha.1](https://github.com/tf2pickup-org/client/compare/3.28.0-alpha.0...3.28.0-alpha.1) (2023-02-03)
+
+
+### Bug Fixes
+
+* **build:** add missing thumbnail service URL ([#2163](https://github.com/tf2pickup-org/client/issues/2163)) ([6a6ac35](https://github.com/tf2pickup-org/client/commit/6a6ac3582c8251dd487cfe0bb7439c8f974a80d2))
+
 # [3.28.0-alpha.0](https://github.com/tf2pickup-org/client/compare/3.27.1...3.28.0-alpha.0) (2023-02-03)
 
 
