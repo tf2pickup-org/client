@@ -1,9 +1,11 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { MapVoteButtonComponent } from './map-vote-button.component';
-import { MapThumbnailService } from '../../shared/map-thumbnail.service';
 import { By } from '@angular/platform-browser';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MapThumbnailPipe } from '@app/shared/map-thumbnail.pipe';
+import { MapThumbnailService } from '@app/shared/map-thumbnail.service';
+import { of } from 'rxjs';
 
 describe('MapVoteButtonComponent', () => {
   let component: MapVoteButtonComponent;
@@ -13,14 +15,14 @@ describe('MapVoteButtonComponent', () => {
   beforeEach(() => {
     mapThumbnailService = jasmine.createSpyObj<MapThumbnailService>(
       MapThumbnailService.name,
-      ['getMapThumbnailPath'],
+      ['getMapThumbnail'],
     );
-    mapThumbnailService.getMapThumbnailPath.and.callFake(map => `${map}.png`);
+    mapThumbnailService.getMapThumbnail.and.callFake(map => of(`${map}.png`));
   });
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [MapVoteButtonComponent],
+      declarations: [MapVoteButtonComponent, MapThumbnailPipe],
       providers: [
         { provide: MapThumbnailService, useValue: mapThumbnailService },
       ],
@@ -56,14 +58,6 @@ describe('MapVoteButtonComponent', () => {
 
     it('should render the button', () => {
       expect(button).toBeTruthy();
-    });
-
-    it('should set proper background-image', () => {
-      const div = fixture.debugElement.query(By.css('.thumbnail'))
-        .nativeElement as HTMLDivElement;
-      expect(div.style.backgroundImage).toMatch(
-        /url\(['"]cp_fake_rc1\.png["']\)/,
-      );
     });
 
     it('should render the map name', () => {

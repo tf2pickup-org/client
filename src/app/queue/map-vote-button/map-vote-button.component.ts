@@ -12,7 +12,6 @@ import {
   Output,
   EventEmitter,
 } from '@angular/core';
-import { MapThumbnailService } from '../../shared/map-thumbnail.service';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { pulsate } from '@app/animations';
 
@@ -54,18 +53,11 @@ export class MapVoteButtonComponent {
   disabled = true;
 
   @Output()
-  voteToggle = new EventEmitter<boolean>();
+  readonly voteToggle = new EventEmitter<boolean>();
 
   isSmallScreen = this.breakpointObserver.isMatched('(max-width: 599px)');
 
-  get mapThumbnailImage() {
-    return this.mapThumbnailService.getMapThumbnailPath(this.map);
-  }
-
-  constructor(
-    private mapThumbnailService: MapThumbnailService,
-    private breakpointObserver: BreakpointObserver,
-  ) {}
+  constructor(private breakpointObserver: BreakpointObserver) {}
 
   toggleVote() {
     this.voteToggle.emit(!this.selected);

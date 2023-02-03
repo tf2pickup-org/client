@@ -47,7 +47,7 @@ describe('GameListComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         GameListComponent,
-        MockPipe(MapThumbnailPipe, value => ''),
+        MockPipe(MapThumbnailPipe, value => new Subject()),
       ],
       imports: [RouterTestingModule, NgxPaginationModule, NoopAnimationsModule],
       providers: [
