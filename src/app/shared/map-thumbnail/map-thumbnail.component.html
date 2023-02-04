@@ -1,0 +1,13 @@
+<div [style.width.px]="width" [style.height.px]="height">
+  <img
+    [src]="src"
+    [width]="width"
+    [height]="height"
+    loading="lazy"
+    alt="{{ map }} thumbnail"
+    (error)="handleError()"
+    (load)="loaded = true"
+    [ngStyle]="{ opacity: loaded ? 1 : 0 }"
+    crossorigin="anonymous"
+  />
+</div>

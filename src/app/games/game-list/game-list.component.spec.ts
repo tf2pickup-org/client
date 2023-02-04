@@ -12,8 +12,6 @@ import { ActivatedRoute, convertToParamMap, Router } from '@angular/router';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { first } from 'rxjs/operators';
 import { ChangeDetectionStrategy } from '@angular/core';
-import { MockPipe } from 'ng-mocks';
-import { MapThumbnailPipe } from '@app/shared/map-thumbnail.pipe';
 
 const mockGameListResponse = {
   results: [
@@ -45,10 +43,7 @@ describe('GameListComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        GameListComponent,
-        MockPipe(MapThumbnailPipe, value => new Subject()),
-      ],
+      declarations: [GameListComponent],
       imports: [RouterTestingModule, NgxPaginationModule, NoopAnimationsModule],
       providers: [
         {

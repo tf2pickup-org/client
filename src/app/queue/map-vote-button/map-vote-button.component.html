@@ -7,11 +7,7 @@
 >
   <div class="thumbnail">
     <div class="thumbnail__image" *ngIf="map">
-      <img
-        [src]="map | mapThumbnail : 300 : 160 | async"
-        width="300"
-        height="160"
-      />
+      <app-map-thumbnail [map]="map" [width]="300" [height]="160" />
     </div>
     <div class="thumbnail__overlay" [@.disabled]="isSmallScreen">
       <div *ngIf="map" @unroll class="thumbnail__overlay__name">

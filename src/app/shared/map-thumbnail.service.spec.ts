@@ -1,13 +1,8 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed, inject } from '@angular/core/testing';
 import { MapThumbnailService } from './map-thumbnail.service';
 
 describe('MapThumbnailService', () => {
-  beforeEach(() =>
-    TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-    }),
-  );
+  beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
     const service: MapThumbnailService = TestBed.inject(MapThumbnailService);

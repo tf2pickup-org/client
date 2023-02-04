@@ -6,6 +6,12 @@
     "selector-class-pattern": "^[a-z0-9-_]+$",
     "no-empty-source": null,
     "scss/dollar-variable-pattern": "^[a-z0-9-]+$",
-    "scss/percent-placeholder-pattern": "^[a-z0-9-]+$"
+    "scss/percent-placeholder-pattern": "^[a-z0-9-]+$",
+    "selector-pseudo-element-no-unknown": [
+      true,
+      {
+        "ignorePseudoElements": ["ng-deep"]
+      }
+    ]
   }
 }

@@ -3,28 +3,18 @@ import { MapVoteButtonComponent } from './map-vote-button.component';
 import { By } from '@angular/platform-browser';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { MapThumbnailPipe } from '@app/shared/map-thumbnail.pipe';
-import { MapThumbnailService } from '@app/shared/map-thumbnail.service';
-import { of } from 'rxjs';
+import { MockComponent } from 'ng-mocks';
+import { MapThumbnailComponent } from '@app/shared/map-thumbnail/map-thumbnail.component';
 
 describe('MapVoteButtonComponent', () => {
   let component: MapVoteButtonComponent;
   let fixture: ComponentFixture<MapVoteButtonComponent>;
-  let mapThumbnailService: jasmine.SpyObj<MapThumbnailService>;
-
-  beforeEach(() => {
-    mapThumbnailService = jasmine.createSpyObj<MapThumbnailService>(
-      MapThumbnailService.name,
-      ['getMapThumbnail'],
-    );
-    mapThumbnailService.getMapThumbnail.and.callFake(map => of(`${map}.png`));
-  });
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [MapVoteButtonComponent, MapThumbnailPipe],
-      providers: [
-        { provide: MapThumbnailService, useValue: mapThumbnailService },
+      declarations: [
+        MapVoteButtonComponent,
+        MockComponent(MapThumbnailComponent),
       ],
       imports: [NoopAnimationsModule],
     })
@@ -58,6 +48,13 @@ describe('MapVoteButtonComponent', () => {
 
     it('should render the button', () => {
       expect(button).toBeTruthy();
+    });
+
+    it('should render map thumbnail', () => {
+      const mapThumbnailComponent = fixture.debugElement.query(
+        By.directive(MapThumbnailComponent),
+      ).componentInstance as MapThumbnailComponent;
+      expect(mapThumbnailComponent.map).toEqual('cp_fake_rc1');
     });
 
     it('should render the map name', () => {
