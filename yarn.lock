@@ -12022,9 +12022,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ngx-markdown@npm:15.1.0":
-  version: 15.1.0
-  resolution: "ngx-markdown@npm:15.1.0"
+"ngx-markdown@npm:15.1.1":
+  version: 15.1.1
+  resolution: "ngx-markdown@npm:15.1.1"
   dependencies:
     clipboard: ^2.0.11
     emoji-toolkit: ^7.0.0
@@ -12051,7 +12051,7 @@ __metadata:
       optional: true
     prismjs:
       optional: true
-  checksum: 7e3a1f01115c20d9697c8d12eb473c842eb5fc08db7bb4a0bb63a7a063e039a1ad8dbbbcbf05d5983bc268d38291dc16a11f409c2b5f279f441826d7c14c46a1
+  checksum: 1dc542984c2c3b35f51cde2dfa0b177734d04821878f259b802fbe672708a45f974ab668e3c34cbb386cbc50c0044416cee2a8efa239ef7c0ac08ef1d236c71e
   languageName: node
   linkType: hard
 
@@ -15574,7 +15574,7 @@ __metadata:
     ng-mocks: 14.6.0
     ngx-bootstrap: 10.2.0
     ngx-echarts: 15.0.1
-    ngx-markdown: 15.1.0
+    ngx-markdown: 15.1.1
     ngx-pagination: 6.0.3
     ngx-webstorage-service: 5.0.0
     npm-run-all: 4.1.5
