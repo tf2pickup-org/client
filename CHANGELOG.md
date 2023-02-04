@@ -1,5 +1,12 @@
 
 
+# [3.28.0-alpha.2](https://github.com/tf2pickup-org/client/compare/3.28.0-alpha.1...3.28.0-alpha.2) (2023-02-04)
+
+
+### Bug Fixes
+
+* **queue, games:** add MapThumbnailComponent ([#2164](https://github.com/tf2pickup-org/client/issues/2164)) ([d8e7d8e](https://github.com/tf2pickup-org/client/commit/d8e7d8e63880ede3cf7a3257a0a928137d756e0b))
+
 # [3.28.0-alpha.1](https://github.com/tf2pickup-org/client/compare/3.28.0-alpha.0...3.28.0-alpha.1) (2023-02-03)
 
 
