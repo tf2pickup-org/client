@@ -113,7 +113,7 @@
     "@types/jwt-decode": "2.2.1",
     "@types/lodash-es": "4.17.6",
     "@types/marked": "4.0.8",
-    "@types/node": "18.11.19",
+    "@types/node": "18.13.0",
     "@typescript-eslint/eslint-plugin": "5.51.0",
     "@typescript-eslint/parser": "5.51.0",
     "eslint": "8.33.0",
