@@ -35,3 +35,10 @@
 .mdc-button--radius-none {
   @include button.shape-radius(0);
 }
+
+.connect-timeout {
+  display: inline-block;
+  min-width: 60px;
+  text-align: center;
+  font-size: 1rem;
+}

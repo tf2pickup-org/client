@@ -3,4 +3,5 @@ export interface ConnectInfo {
   connectInfoVersion: number;
   connectString: string;
   voiceChannelUrl: string;
+  joinGameServerTimeout?: string;
 }

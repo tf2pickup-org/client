@@ -46,7 +46,7 @@ export class GameDetailsStore extends ComponentStore<GameDetailsState> {
   // selectors
   readonly game = this.select(state => state.game);
   readonly isRunning = this.select(this.game, game =>
-    /launching|started/.test(game?.state),
+    ['created', 'configuring', 'launching', 'started'].includes(game?.state),
   );
   readonly score = this.select(this.game, game => game?.score);
   readonly serverName = this.select(state => state.game?.gameServer?.name);
@@ -70,7 +70,9 @@ export class GameDetailsStore extends ComponentStore<GameDetailsState> {
       loggedIn &&
       !banned &&
       (!activeGameIdValue || activeGameIdValue === gameValue.id) &&
-      /launching|started/.test(gameValue?.state),
+      ['created', 'configuring', 'launching', 'started'].includes(
+        gameValue?.state,
+      ),
   );
 
   readonly players: Observable<GameSlot[]> = this.select(state =>
@@ -104,6 +106,12 @@ export class GameDetailsStore extends ComponentStore<GameDetailsState> {
   readonly voiceChannelUrl = this.select(
     this.connectInfo,
     connectInfo => connectInfo?.voiceChannelUrl,
+  );
+
+  readonly joinGameServerTimeout = this.select(this.connectInfo, connectInfo =>
+    connectInfo?.joinGameServerTimeout
+      ? new Date(connectInfo.joinGameServerTimeout)
+      : undefined,
   );
 
   // effects
