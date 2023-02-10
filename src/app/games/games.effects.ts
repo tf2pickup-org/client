@@ -22,7 +22,7 @@ import { Socket } from '@app/io/socket';
 import { fromEvent } from 'rxjs';
 import { Game } from './models/game';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class GamesEffects {
   loadGame = createEffect(() => {
     return this.actions.pipe(
@@ -40,7 +40,8 @@ export class GamesEffects {
     return this.actions.pipe(
       ofType(profileLoaded),
       filter(
-        ({ profile: theProfile }) => !!theProfile && !!theProfile.activeGameId,
+        ({ profile: theProfile }) =>
+          Boolean(theProfile) && Boolean(theProfile.activeGameId),
       ),
       map(({ profile: theProfile }) =>
         loadGame({ gameId: theProfile.activeGameId }),
@@ -63,7 +64,7 @@ export class GamesEffects {
       concatLatestFrom(() => this.store.select(currentPlayer)),
       filter(
         ([{ game }, player]) =>
-          player && !!game.slots.find(s => s.player.id === player.id),
+          player && Boolean(game.slots.find(s => s.player.id === player.id)),
       ),
       map(([{ game }]) => game.id),
       map(gameId => ownGameAdded({ gameId })),
