@@ -32,7 +32,6 @@ import {
   forceEndGame,
   loadGame,
   reinitializeServer,
-  replacePlayer,
   requestSubstitute,
 } from '../games.actions';
 import { keyBy } from 'lodash-es';
@@ -171,6 +170,9 @@ describe('GameDetailsComponent', () => {
         fetchConnectInfo: jasmine
           .createSpy('fetchConnectInfo')
           .and.returnValue(connectInfo.asObservable()),
+        replacePlayer: jasmine
+          .createSpy('replacePlayer')
+          .and.returnValue(of(gameInProgress)),
       })
       .mock(LOCAL_STORAGE, {
         set: jasmine.createSpy('StorageService.set'),
@@ -309,11 +311,10 @@ describe('GameDetailsComponent', () => {
             expect(gameTeamPlayerList.locked).toBe(false);
 
             gameTeamPlayerList.replacePlayer.emit('FAKE_PLAYER_1_ID');
-            expect(store.dispatch).toHaveBeenCalledWith(
-              replacePlayer({
-                gameId: 'FAKE_GAME_ID',
-                replaceeId: 'FAKE_PLAYER_1_ID',
-              }),
+            const gamesService = TestBed.inject(GamesService);
+            expect(gamesService.replacePlayer).toHaveBeenCalledWith(
+              'FAKE_GAME_ID',
+              'FAKE_PLAYER_1_ID',
             );
           });
 

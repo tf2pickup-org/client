@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { createEffect, Actions, ofType } from '@ngrx/effects';
+import { createEffect, Actions, ofType, concatLatestFrom } from '@ngrx/effects';
 import { GamesService } from './games.service';
 import {
   gameAdded,
@@ -11,11 +11,10 @@ import {
   ownGameAdded,
   requestSubstitute,
   cancelSubstitutionRequest,
-  replacePlayer,
 } from './games.actions';
-import { mergeMap, map, filter, withLatestFrom } from 'rxjs/operators';
+import { mergeMap, map, filter } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
-import { currentPlayer, profile } from '@app/profile/profile.selectors';
+import { currentPlayer } from '@app/profile/profile.selectors';
 import { profileLoaded } from '@app/profile/profile.actions';
 import { Router } from '@angular/router';
 import { routerNavigatedAction } from '@ngrx/router-store';
@@ -61,7 +60,7 @@ export class GamesEffects {
   ownGameStarted = createEffect(() => {
     return this.actions.pipe(
       ofType(gameCreated),
-      withLatestFrom(this.store.select(currentPlayer)),
+      concatLatestFrom(() => this.store.select(currentPlayer)),
       filter(
         ([{ game }, player]) =>
           player && !!game.slots.find(s => s.player.id === player.id),
@@ -125,17 +124,6 @@ export class GamesEffects {
     },
     { dispatch: false },
   );
-
-  replacePlayer = createEffect(() => {
-    return this.actions.pipe(
-      ofType(replacePlayer),
-      mergeMap(({ gameId, replaceeId }) =>
-        this.gamesService
-          .replacePlayer(gameId, replaceeId)
-          .pipe(map(game => gameUpdated({ game }))),
-      ),
-    );
-  });
 
   constructor(
     private actions: Actions,
