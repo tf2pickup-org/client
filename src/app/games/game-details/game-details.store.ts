@@ -12,7 +12,6 @@ import { Store } from '@ngrx/store';
 import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
 import { Observable, zip } from 'rxjs';
 import {
-  distinctUntilChanged,
   filter,
   first,
   map,
@@ -24,7 +23,6 @@ import {
   forceEndGame,
   loadGame,
   reinitializeServer,
-  replacePlayer,
   requestSubstitute,
 } from '../games.actions';
 import { gameById } from '../games.selectors';
@@ -146,9 +144,6 @@ export class GameDetailsStore extends ComponentStore<GameDetailsState> {
     zip(this.isMyGame, this.isRunning).pipe(
       filter(([isMyGame, isRunning]) => isMyGame && isRunning),
       switchMap(() => game),
-      distinctUntilChanged(
-        (game1, game2) => game1.connectInfoVersion === game2.connectInfoVersion,
-      ),
       map(game => game.id),
       switchMap(gameId => this.gamesService.fetchConnectInfo(gameId)),
       tapResponse(
@@ -259,10 +254,12 @@ export class GameDetailsStore extends ComponentStore<GameDetailsState> {
       .pipe(
         first(Boolean),
         map(game => game.id),
+        switchMap(gameId =>
+          this.gamesService.replacePlayer(gameId, replaceeId),
+        ),
+        tap(game => this.setGame(game)),
+        tap(game => this.fetchConnectInfo(game)),
       )
-      // eslint-disable-next-line ngrx/no-store-subscription
-      .subscribe(gameId =>
-        this.store.dispatch(replacePlayer({ gameId, replaceeId })),
-      );
+      .subscribe();
   }
 }

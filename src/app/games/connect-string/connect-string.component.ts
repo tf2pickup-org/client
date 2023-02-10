@@ -3,6 +3,7 @@ import {
   ChangeDetectionStrategy,
   Input,
   OnDestroy,
+  OnInit,
 } from '@angular/core';
 import {
   formatDistanceToNowStrict,
@@ -18,7 +19,7 @@ import { BehaviorSubject, filter, map, Subject, takeUntil, timer } from 'rxjs';
   styleUrls: ['./connect-string.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ConnectStringComponent implements OnDestroy {
+export class ConnectStringComponent implements OnInit, OnDestroy {
   private destroyed = new Subject<void>();
 
   connectSecondsLeft = new BehaviorSubject<string>(null);
@@ -30,30 +31,30 @@ export class ConnectStringComponent implements OnDestroy {
   stvConnectString: string;
 
   @Input()
-  set connectTimeout(connectTimeout: Date) {
-    if (connectTimeout) {
-      timer(0, 1000)
-        .pipe(
-          takeUntil(this.destroyed),
-          map(() => connectTimeout),
-          map(timeout =>
-            timeout && isAfter(timeout, new Date())
-              ? intervalToDuration({ start: timeout, end: new Date() })
-              : null,
-          ),
-          map(duration =>
-            duration
-              ? [
-                  duration.minutes,
-                  duration.seconds.toLocaleString('en-US', {
-                    minimumIntegerDigits: 2,
-                  }),
-                ].join(':')
-              : null,
-          ),
-        )
-        .subscribe(text => this.connectSecondsLeft.next(text));
-    }
+  connectTimeout: Date;
+
+  ngOnInit() {
+    timer(0, 1000)
+      .pipe(
+        takeUntil(this.destroyed),
+        map(() => this.connectTimeout),
+        map(timeout =>
+          timeout && isAfter(timeout, new Date())
+            ? intervalToDuration({ start: timeout, end: new Date() })
+            : null,
+        ),
+        map(duration =>
+          duration
+            ? [
+                duration.minutes,
+                duration.seconds.toLocaleString('en-US', {
+                  minimumIntegerDigits: 2,
+                }),
+              ].join(':')
+            : null,
+        ),
+      )
+      .subscribe(text => this.connectSecondsLeft.next(text));
   }
 
   ngOnDestroy() {
