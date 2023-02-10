@@ -32,19 +32,19 @@ export class GamesService {
   }
 
   forceEndGame(gameId: string): Observable<void> {
-    return this.http.post<void>(`${this.apiUrl}/games/${gameId}?force_end`, {});
+    return this.http.put<void>(`${this.apiUrl}/games/${gameId}/force-end`, {});
   }
 
   reinitializeServer(gameId: string): Observable<void> {
-    return this.http.post<void>(
-      `${this.apiUrl}/games/${gameId}?reinitialize_server`,
+    return this.http.put<void>(
+      `${this.apiUrl}/games/${gameId}/reinitialize-gameserver`,
       {},
     );
   }
 
   reassign(gameId: string, gameServerId: GameServerIdentifier) {
-    return this.http.post<void>(
-      `${this.apiUrl}/games/${gameId}?assign_gameserver`,
+    return this.http.put<void>(
+      `${this.apiUrl}/games/${gameId}/assign-gameserver`,
       {
         ...gameServerId,
       },
@@ -58,9 +58,10 @@ export class GamesService {
   }
 
   requestSubstitute(gameId: string, playerId: string): Observable<void> {
-    return this.http.post<void>(
-      `${this.apiUrl}/games/${gameId}?substitute_player=${playerId}`,
+    return this.http.put<void>(
+      `${this.apiUrl}/games/${gameId}/substitute-player`,
       {},
+      { params: { player: playerId } },
     );
   }
 
@@ -68,9 +69,10 @@ export class GamesService {
     gameId: string,
     playerId: string,
   ): Observable<void> {
-    return this.http.post<void>(
-      `${this.apiUrl}/games/${gameId}?substitute_player_cancel=${playerId}`,
+    return this.http.put<void>(
+      `${this.apiUrl}/games/${gameId}/cancel-player-substitute`,
       {},
+      { params: { player: playerId } },
     );
   }
 

@@ -70,9 +70,9 @@ describe('GamesService', () => {
       (service: GamesService) => {
         service.forceEndGame('FAKE_ID').subscribe();
         const req = httpController.expectOne(
-          'FAKE_URL/games/FAKE_ID?force_end',
+          'FAKE_URL/games/FAKE_ID/force-end',
         );
-        expect(req.request.method).toBe('POST');
+        expect(req.request.method).toBe('PUT');
       },
     ));
   });
@@ -83,9 +83,9 @@ describe('GamesService', () => {
       (service: GamesService) => {
         service.reinitializeServer('FAKE_ID').subscribe();
         const req = httpController.expectOne(
-          'FAKE_URL/games/FAKE_ID?reinitialize_server',
+          'FAKE_URL/games/FAKE_ID/reinitialize-gameserver',
         );
-        expect(req.request.method).toBe('POST');
+        expect(req.request.method).toBe('PUT');
       },
     ));
   });
@@ -101,9 +101,9 @@ describe('GamesService', () => {
           })
           .subscribe();
         const req = httpController.expectOne(
-          'FAKE_URL/games/FAKE_GAME_ID?assign_gameserver',
+          'FAKE_URL/games/FAKE_GAME_ID/assign-gameserver',
         );
-        expect(req.request.method).toBe('POST');
+        expect(req.request.method).toBe('PUT');
         expect(req.request.body).toEqual({
           id: 'FAKE_GAMESERVER_ID',
           provider: 'test',
@@ -129,9 +129,9 @@ describe('GamesService', () => {
       (service: GamesService) => {
         service.requestSubstitute('FAKE_GAME_ID', 'FAKE_PLAYER_ID').subscribe();
         const req = httpController.expectOne(
-          'FAKE_URL/games/FAKE_GAME_ID?substitute_player=FAKE_PLAYER_ID',
+          'FAKE_URL/games/FAKE_GAME_ID/substitute-player?player=FAKE_PLAYER_ID',
         );
-        expect(req.request.method).toBe('POST');
+        expect(req.request.method).toBe('PUT');
       },
     ));
   });
@@ -144,9 +144,9 @@ describe('GamesService', () => {
           .cancelSubstitutionRequest('FAKE_GAME_ID', 'FAKE_PLAYER_ID')
           .subscribe();
         const req = httpController.expectOne(
-          'FAKE_URL/games/FAKE_GAME_ID?substitute_player_cancel=FAKE_PLAYER_ID',
+          'FAKE_URL/games/FAKE_GAME_ID/cancel-player-substitute?player=FAKE_PLAYER_ID',
         );
-        expect(req.request.method).toBe('POST');
+        expect(req.request.method).toBe('PUT');
       },
     ));
   });
