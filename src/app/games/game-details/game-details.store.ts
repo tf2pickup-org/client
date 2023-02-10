@@ -12,7 +12,6 @@ import { Store } from '@ngrx/store';
 import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
 import { Observable, zip } from 'rxjs';
 import {
-  distinctUntilChanged,
   filter,
   first,
   map,
@@ -24,7 +23,6 @@ import {
   forceEndGame,
   loadGame,
   reinitializeServer,
-  replacePlayer,
   requestSubstitute,
 } from '../games.actions';
 import { gameById } from '../games.selectors';
@@ -46,7 +44,7 @@ export class GameDetailsStore extends ComponentStore<GameDetailsState> {
   // selectors
   readonly game = this.select(state => state.game);
   readonly isRunning = this.select(this.game, game =>
-    /launching|started/.test(game?.state),
+    ['created', 'configuring', 'launching', 'started'].includes(game?.state),
   );
   readonly score = this.select(this.game, game => game?.score);
   readonly serverName = this.select(state => state.game?.gameServer?.name);
@@ -70,7 +68,9 @@ export class GameDetailsStore extends ComponentStore<GameDetailsState> {
       loggedIn &&
       !banned &&
       (!activeGameIdValue || activeGameIdValue === gameValue.id) &&
-      /launching|started/.test(gameValue?.state),
+      ['created', 'configuring', 'launching', 'started'].includes(
+        gameValue?.state,
+      ),
   );
 
   readonly players: Observable<GameSlot[]> = this.select(state =>
@@ -106,6 +106,12 @@ export class GameDetailsStore extends ComponentStore<GameDetailsState> {
     connectInfo => connectInfo?.voiceChannelUrl,
   );
 
+  readonly joinGameServerTimeout = this.select(this.connectInfo, connectInfo =>
+    connectInfo?.joinGameServerTimeout
+      ? new Date(connectInfo.joinGameServerTimeout)
+      : undefined,
+  );
+
   // effects
   readonly setGameId = this.effect((gameId: Observable<string>) =>
     gameId.pipe(
@@ -138,9 +144,6 @@ export class GameDetailsStore extends ComponentStore<GameDetailsState> {
     zip(this.isMyGame, this.isRunning).pipe(
       filter(([isMyGame, isRunning]) => isMyGame && isRunning),
       switchMap(() => game),
-      distinctUntilChanged(
-        (game1, game2) => game1.connectInfoVersion === game2.connectInfoVersion,
-      ),
       map(game => game.id),
       switchMap(gameId => this.gamesService.fetchConnectInfo(gameId)),
       tapResponse(
@@ -251,10 +254,12 @@ export class GameDetailsStore extends ComponentStore<GameDetailsState> {
       .pipe(
         first(Boolean),
         map(game => game.id),
+        switchMap(gameId =>
+          this.gamesService.replacePlayer(gameId, replaceeId),
+        ),
+        tap(game => this.setGame(game)),
+        tap(game => this.fetchConnectInfo(game)),
       )
-      // eslint-disable-next-line ngrx/no-store-subscription
-      .subscribe(gameId =>
-        this.store.dispatch(replacePlayer({ gameId, replaceeId })),
-      );
+      .subscribe();
   }
 }

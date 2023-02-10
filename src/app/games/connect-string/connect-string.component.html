@@ -27,6 +27,9 @@
     <i-feather name="play" class="mdc-button__icon" aria-hidden="true"></i-feather>
     <span class="mdc-button__label">
       connect
+      <span *ngIf="connectSecondsLeft | async as c" class="connect-timeout">
+        {{ c }}
+      </span>
     </span>
   </a>
 

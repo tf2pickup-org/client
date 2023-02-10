@@ -45,8 +45,3 @@ export const cancelSubstitutionRequest = createAction(
   '[Admin] Cancel substitution request',
   props<{ gameId: string; playerId: string }>(),
 );
-
-export const replacePlayer = createAction(
-  '[Games] Replace player',
-  props<{ gameId: string; replaceeId: string }>(),
-);

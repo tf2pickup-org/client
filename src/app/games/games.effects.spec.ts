@@ -11,7 +11,6 @@ import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import {
   requestSubstitute,
   cancelSubstitutionRequest,
-  replacePlayer,
   gameUpdated,
   loadGame,
   gameCreated,
@@ -216,21 +215,6 @@ describe('GamesEffects', () => {
         'FAKE_GAME_ID',
         'FAKE_PLAYER_ID',
       );
-    });
-  });
-
-  describe('replacePlayer', () => {
-    it('should replace the player', () => {
-      effects.replacePlayer.subscribe(game =>
-        expect(game).toEqual(gameUpdated({ game: fakeGame as any })),
-      );
-      actions.next(
-        replacePlayer({
-          gameId: 'FAKE_GAME_ID',
-          replaceeId: 'FAKE_REPLACEE_PLAYER_ID',
-        }),
-      );
-      expect(gamesService.replacePlayer).toHaveBeenCalled();
     });
   });
 });
