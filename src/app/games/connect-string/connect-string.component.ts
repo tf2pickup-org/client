@@ -5,14 +5,9 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import {
-  formatDistanceToNowStrict,
-  formatDuration,
-  intervalToDuration,
-  isAfter,
-  isBefore,
-} from 'date-fns';
-import { BehaviorSubject, filter, map, Subject, takeUntil, timer } from 'rxjs';
+import { intervalToDuration, isAfter } from 'date-fns';
+import { BehaviorSubject, map, Subject, takeUntil, timer } from 'rxjs';
+
 @Component({
   selector: 'app-connect-string',
   templateUrl: './connect-string.component.html',
