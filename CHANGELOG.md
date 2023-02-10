@@ -1,5 +1,21 @@
 
 
+# [3.28.0-alpha.3](https://github.com/tf2pickup-org/client/compare/3.28.0-alpha.2...3.28.0-alpha.3) (2023-02-10)
+
+
+### Bug Fixes
+
+* **deps:** update angular monorepo to v15.1.4 ([#2172](https://github.com/tf2pickup-org/client/issues/2172)) ([b495f96](https://github.com/tf2pickup-org/client/commit/b495f96ed437f4fa7f307c8ed69931b0f563bf11))
+* **deps:** update dependency @angular/cdk to v15.1.4 ([#2173](https://github.com/tf2pickup-org/client/issues/2173)) ([a1fa08e](https://github.com/tf2pickup-org/client/commit/a1fa08e70225649ac117e82bce5f5d926a4360fc))
+* **deps:** update dependency chart.js to v4.2.1 ([#2177](https://github.com/tf2pickup-org/client/issues/2177)) ([bab4891](https://github.com/tf2pickup-org/client/commit/bab48919f28082281d7ad83f663f4ffac31c76fc))
+* **deps:** update dependency ngx-markdown to v15.1.1 ([#2165](https://github.com/tf2pickup-org/client/issues/2165)) ([e540059](https://github.com/tf2pickup-org/client/commit/e540059bb9f32835f07f749e089661e141f29beb))
+* **deps:** update dependency socket.io-client to v4.6.0 ([#2168](https://github.com/tf2pickup-org/client/issues/2168)) ([94e305c](https://github.com/tf2pickup-org/client/commit/94e305cef26bea824d87708546d60cc0f027136a))
+
+
+### Features
+
+* **games:** show join gameserver timeout ([#2175](https://github.com/tf2pickup-org/client/issues/2175)) ([ed72b87](https://github.com/tf2pickup-org/client/commit/ed72b8728954d2143cfb4e570b8681a39c2badb0))
+
 # [3.28.0-alpha.2](https://github.com/tf2pickup-org/client/compare/3.28.0-alpha.1...3.28.0-alpha.2) (2023-02-04)
 
 
