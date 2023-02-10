@@ -16,44 +16,26 @@ jobs:
             apiUrl: api.tf2pickup.cz
           - branding: tf2pickup.de
             apiUrl: api.tf2pickup.de
-          - branding: yu.tf2pickup.eu
-            apiUrl: api.yu.tf2pickup.eu
           - branding: tf2pickup.fi
             apiUrl: api.tf2pickup.fi
           - branding: tf2pickup.pt
             apiUrl: api.tf2pickup.pt
           - branding: tf2pickup.se
             apiUrl: api.tf2pickup.se
-          - branding: tf2pickup.ro
-            apiUrl: api.tf2pickup.ro
           - branding: tf2pickup.it
             apiUrl: api.tf2pickup.it
-          - branding: tf2pickup.web.tr
-            apiUrl: api.tf2pickup.web.tr
           - branding: bball.tf2pickup.eu
             apiUrl: api.bball.tf2pickup.eu
-          - branding: tf2pickup.dk
-            apiUrl: api.tf2pickup.dk
           - branding: tf2pickup.ru
             apiUrl: api.tf2pickup.ru
           - branding: sib.tf2pickup.ru
             apiUrl: api.sib.tf2pickup.ru
           - branding: tf2pickup.co.il
             apiUrl: api.tf2pickup.co.il
-          - branding: tf2pickup.us
-            apiUrl: api.tf2pickup.us
-          - branding: tf2pickup.nl
-            apiUrl: api.tf2pickup.nl
-          - branding: hl.tf2pickup.ru
-            apiUrl: api.hl.tf2pickup.ru
           - branding: br.tf2pickup.org
             apiUrl: api.br.tf2pickup.org
-          - branding: au.tf2pickup.org
-            apiUrl: api.au.tf2pickup.org
           - branding: hl.br.tf2pickup.org
             apiUrl: api.hl.br.tf2pickup.org
-          - branding: tf2pickup.asia
-            apiUrl: api.tf2pickup.asia
           - branding: ultiduo.tf2pickup.eu
             apiUrl: api.ultiduo.tf2pickup.eu
           - branding: hl.tf2pickup.eu
