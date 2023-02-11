@@ -1,5 +1,13 @@
 
 
+# [3.28.0-alpha.4](https://github.com/tf2pickup-org/client/compare/3.28.0-alpha.3...3.28.0-alpha.4) (2023-02-11)
+
+
+### Bug Fixes
+
+* **build:** remove discontinued projects ([#2178](https://github.com/tf2pickup-org/client/issues/2178)) ([5e54e88](https://github.com/tf2pickup-org/client/commit/5e54e88d2d9b35135180f30fd21f66b87940f425))
+* **games:** adapt the new game admin API ([#2180](https://github.com/tf2pickup-org/client/issues/2180)) ([cac55be](https://github.com/tf2pickup-org/client/commit/cac55be087b600896521a7205430476d1784f9ff))
+
 # [3.28.0-alpha.3](https://github.com/tf2pickup-org/client/compare/3.28.0-alpha.2...3.28.0-alpha.3) (2023-02-10)
 
 
