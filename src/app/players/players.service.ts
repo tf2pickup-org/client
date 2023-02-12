@@ -76,6 +76,10 @@ export class PlayersService {
     );
   }
 
+  resetPlayerSkill(playerId: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/players/${playerId}/skill`);
+  }
+
   fetchAllPlayers(): Observable<Player[]> {
     return this.http.get<Player[]>(`${this.apiUrl}/players`);
   }

@@ -10,6 +10,7 @@ import {
   map,
   mergeMap,
   switchMap,
+  take,
   tap,
   withLatestFrom,
 } from 'rxjs/operators';
@@ -39,6 +40,7 @@ export class PlayerEditStore extends ComponentStore<PlayerEditState> {
   readonly isReady = this.select(
     state => Boolean(state.player) && Boolean(state.skill) && !state.saving,
   );
+  readonly playerId = this.select(state => state.player?.id);
 
   readonly setPlayerId = this.effect((playerId: Observable<string>) =>
     playerId.pipe(
@@ -137,5 +139,14 @@ export class PlayerEditStore extends ComponentStore<PlayerEditState> {
     private readonly configurationService: ConfigurationService,
   ) {
     super(initialState);
+  }
+
+  resetPlayerSkill(): Observable<void> {
+    this.setSaving(true);
+    return this.playerId.pipe(
+      filter(Boolean),
+      take(1),
+      switchMap(playerId => this.playersService.resetPlayerSkill(playerId)),
+    );
   }
 }

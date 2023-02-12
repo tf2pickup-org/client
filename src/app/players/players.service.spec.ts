@@ -154,6 +154,17 @@ describe('PlayersService', () => {
     ));
   });
 
+  describe('#resetPlayerSkill()', () => {
+    it('should call the endpoint', inject(
+      [PlayersService],
+      (service: PlayersService) => {
+        service.resetPlayerSkill('FAKE_ID').subscribe();
+        const req = httpContoller.expectOne('FAKE_URL/players/FAKE_ID/skill');
+        expect(req.request.method).toBe('DELETE');
+      },
+    ));
+  });
+
   describe('#fetchAllPlayers', () => {
     it('should call the endpoint', inject(
       [PlayersService],
