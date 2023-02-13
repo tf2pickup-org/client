@@ -10,7 +10,6 @@ import { GameServerDiagnosticsComponent } from './game-server-diagnostics/game-s
 import { MapPoolEditComponent } from './map-pool-edit/map-pool-edit.component';
 import { PlayerSkillTableComponent } from './player-skill-table/player-skill-table.component';
 import { ScrambleMapsComponent } from './scramble-maps/scramble-maps.component';
-import { WhitelistEditComponent } from './whitelist-edit/whitelist-edit.component';
 import { GameServerResolver } from '@app/game-servers/game-server.resolver';
 import { PlayerRestrictionsComponent } from './player-restrictions/player-restrictions.component';
 import { VoiceServerEditComponent } from './voice-server-edit/voice-server-edit.component';
@@ -20,6 +19,8 @@ import { StaticGameServerResolver } from './game-servers/static-game-server.reso
 import { ServemeTfConfigurationComponent } from './game-servers/serveme-tf-configuration/serveme-tf-configuration.component';
 import { ImportExportPlayerSkillComponent } from './import-export-player-skill/import-export-player-skill.component';
 import { PlayerRestrictionsResolver } from './player-restrictions/player-restrictions.resolver';
+import { GameConfigurationComponent } from './game-configuration/game-configuration.component';
+import { GameConfigurationResolver } from './game-configuration/game-configuration.resolver';
 
 const routes: Routes = [
   {
@@ -44,11 +45,14 @@ const routes: Routes = [
         },
       },
       {
-        path: 'whitelist',
-        component: WhitelistEditComponent,
+        path: 'game',
+        component: GameConfigurationComponent,
         data: {
-          title: 'whitelist configuration',
-          animation: 'WhitelistEditPage',
+          title: 'game configuration',
+          animation: 'GameConfigurationPage',
+        },
+        resolve: {
+          gameConfiguration: GameConfigurationResolver,
         },
       },
       {

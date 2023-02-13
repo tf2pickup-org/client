@@ -26,6 +26,7 @@ import { StaticGameServerListComponent } from './game-servers/static-game-server
 import { StaticGameServerComponent } from './game-servers/static-game-server/static-game-server.component';
 import { ServemeTfConfigurationComponent } from './game-servers/serveme-tf-configuration/serveme-tf-configuration.component';
 import { ImportExportPlayerSkillComponent } from './import-export-player-skill/import-export-player-skill.component';
+import { GameConfigurationComponent } from './game-configuration/game-configuration.component';
 
 @NgModule({
   imports: [
@@ -60,6 +61,7 @@ import { ImportExportPlayerSkillComponent } from './import-export-player-skill/i
     StaticGameServerComponent,
     ServemeTfConfigurationComponent,
     ImportExportPlayerSkillComponent,
+    GameConfigurationComponent,
   ],
 })
 export class AdminModule {}
