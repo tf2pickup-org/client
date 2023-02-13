@@ -138,7 +138,7 @@
     "prettier": "2.8.4",
     "protractor": "7.0.0",
     "release-it": "15.6.0",
-    "stylelint": "15.0.0",
+    "stylelint": "15.1.0",
     "stylelint-config-sass-guidelines": "9.0.1",
     "stylelint-config-standard-scss": "6.1.0",
     "stylelint-order": "6.0.2",
