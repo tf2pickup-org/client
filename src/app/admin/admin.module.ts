@@ -10,7 +10,6 @@ import { AdminItemListComponent } from './admin-item-list/admin-item-list.compon
 import { PlayerSkillTableComponent } from './player-skill-table/player-skill-table.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { ForceCreatePlayerAccountComponent } from './force-create-player-account/force-create-player-account.component';
-import { WhitelistEditComponent } from './whitelist-edit/whitelist-edit.component';
 import { DefaultPlayerSkillEditComponent } from './default-player-skill-edit/default-player-skill-edit.component';
 import { DocumentEditComponent } from './document-edit/document-edit.component';
 import { MarkdownModule } from 'ngx-markdown';
@@ -46,7 +45,6 @@ import { GameConfigurationComponent } from './game-configuration/game-configurat
     AdminItemListComponent,
     PlayerSkillTableComponent,
     ForceCreatePlayerAccountComponent,
-    WhitelistEditComponent,
     DefaultPlayerSkillEditComponent,
     DocumentEditComponent,
     EditPageWrapperComponent,
