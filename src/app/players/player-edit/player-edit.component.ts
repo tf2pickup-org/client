@@ -136,6 +136,10 @@ export class PlayerEditComponent implements OnInit, AfterViewInit, OnDestroy {
     this.location.back();
   }
 
+  resetPlayerSkill() {
+    this.store.resetPlayerSkill().subscribe(() => this.location.back());
+  }
+
   get skill() {
     return this.player.get('skill') as FormGroup;
   }
