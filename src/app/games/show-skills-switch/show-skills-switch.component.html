@@ -1,8 +1,3 @@
-<button
-  (click)="toggle()"
-  class="mdc-button mdc-button--inverted"
-  [tooltip]="'Player assigned skills are ' + (showSkills ? '' : 'not ') + 'shown'"
-  placement="top"
-  container="body">
+<button (click)="toggle()" class="mdc-button mdc-button--inverted">
   <i-feather [name]="showSkills ? 'eye' : 'eye-off'"></i-feather>
 </button>

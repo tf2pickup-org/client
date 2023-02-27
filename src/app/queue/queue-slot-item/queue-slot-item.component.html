@@ -8,16 +8,20 @@
     'is-ready': slot.ready,
     'is-locked': locked
   }"
-  (click)="maybeTakeSlot()">
-
+  (click)="maybeTakeSlot()"
+>
   <div class="avatar">
-    <app-player-avatar *ngIf="slot.player"
-      [playerId]="slot.player.id"></app-player-avatar>
+    <app-player-avatar
+      *ngIf="slot.player"
+      [playerId]="slot.player.id"
+    ></app-player-avatar>
   </div>
 
-  <a *ngIf="slot.player; else addPrompt"
+  <a
+    *ngIf="slot.player; else addPrompt"
     [routerLink]="['/player', slot.player.id]"
-    class="player-name">
+    class="player-name"
+  >
     <app-player-name [playerId]="slot.player.id"></app-player-name>
   </a>
 
@@ -26,23 +30,25 @@
   </ng-template>
 
   <div class="slot-action">
-    <button *ngIf="!locked && takenByMe && !slot.ready"
+    <button
+      *ngIf="!locked && takenByMe && !slot.ready"
       type="button"
       class="slot-action-btn free-slot-btn"
       (click)="emitFreeSlot($event)"
       tooltip="Free this slot"
-      container="body">
+      container="body"
+    >
       <i-feather name="minus"></i-feather>
     </button>
 
-    <button *ngIf="friendFlags.canMarkAsFriend && slot.player && !takenByMe"
+    <button
+      *ngIf="friendFlags.canMarkAsFriend && slot.player && !takenByMe"
       type="button"
       class="slot-action-btn mark-as-friend-btn"
       [class.is-marked-by-me]="friendFlags.markedByMe"
-      [tooltip]="friendFlags.markedByMe ? 'Marked as friend' : 'Mark as a friend'"
-      container="body"
       [disabled]="!!friendFlags.markedBy"
-      (click)="emitMarkFriend(slot.player.id, $event)">
+      (click)="emitMarkFriend(slot.player.id, $event)"
+    >
       <i-feather name="heart"></i-feather>
     </button>
   </div>

@@ -14,7 +14,6 @@ import { PlayerConnectionStatusComponent } from './player-connection-status/play
 import { GameBasicInfoComponent } from './game-basic-info/game-basic-info.component';
 import { GameSummaryComponent } from './game-summary/game-summary.component';
 import { GameTeamPlayerListComponent } from './game-team-player-list/game-team-player-list.component';
-import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ConnectStringComponent } from './connect-string/connect-string.component';
 import { GameTeamHeaderComponent } from './game-team-header/game-team-header.component';
 import { IconsModule } from '@app/icons/icons.module';
@@ -49,7 +48,6 @@ import { ShowSkillsSwitchComponent } from './show-skills-switch/show-skills-swit
     StoreModule.forFeature('games', reducer),
     EffectsModule.forFeature([GamesEffects]),
     NgxPaginationModule,
-    TooltipModule,
     ClipboardModule,
 
     SharedModule,

@@ -15,7 +15,6 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { WS_URL } from './ws-url';
 import { CoreModule } from './core/core.module';
 import { GamesModule } from './games/games.module';
-import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { MarkdownModule } from 'ngx-markdown';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -39,7 +38,6 @@ import { DocumentsModule } from './documents/documents.module';
     EffectsModule.forRoot([]),
     environment.production ? [] : StoreDevtoolsModule.instrument(),
 
-    TooltipModule.forRoot(),
     MarkdownModule.forRoot({ loader: HttpClient }),
     NgxPaginationModule,
 

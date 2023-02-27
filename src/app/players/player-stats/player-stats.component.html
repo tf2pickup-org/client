@@ -7,8 +7,7 @@
     <div *ngFor="let classPlayed of playerStats.classesPlayed | keyvalue: orderGameClasses">
       <div class="mx-3 my-1">
         <app-game-class-icon
-          [gameClass]="classPlayed.key"
-          [tooltip]="classPlayed.key"></app-game-class-icon>
+          [gameClass]="classPlayed.key"></app-game-class-icon>
         <span class="player-stats-games-played-class ms-2">{{ classPlayed.value }}</span>
       </div>
     </div>

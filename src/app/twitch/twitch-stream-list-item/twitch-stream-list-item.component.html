@@ -1,22 +1,29 @@
-<a *ngIf="stream"
+<a
+  *ngIf="stream"
   [href]="'https://www.twitch.tv/' + stream.userName"
   target="_blank"
   class="twitch-stream-list-item"
-  [tooltip]="stream.title">
+>
   <img
-    [src]="stream.thumbnailUrl.replace('{width}', '100').replace('{height}', '50')"
+    [src]="
+      stream.thumbnailUrl.replace('{width}', '100').replace('{height}', '50')
+    "
     class="stream-thumbnail"
     width="100"
     height="50"
-    crossorigin>
-    <div class="content">
-      <app-player-name
-        *ngIf="stream.playerId; else streamDisplayName"
-        [playerId]="stream.playerId"
-      ></app-player-name>
-      <ng-template #streamDisplayName>
-        {{stream.userName}}
-      </ng-template>
-      <span><i-feather name="eye" class="mx-2"></i-feather>{{ stream.viewerCount }}</span>
-    </div>
+    crossorigin
+  />
+  <div class="content">
+    <app-player-name
+      *ngIf="stream.playerId; else streamDisplayName"
+      [playerId]="stream.playerId"
+    ></app-player-name>
+    <ng-template #streamDisplayName>
+      {{ stream.userName }}
+    </ng-template>
+    <span
+      ><i-feather name="eye" class="mx-2"></i-feather
+      >{{ stream.viewerCount }}</span
+    >
+  </div>
 </a>

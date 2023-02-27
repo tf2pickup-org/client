@@ -31,7 +31,6 @@
 
     <li>
       <a routerLink="/hall-of-fame" routerLinkActive="active"
-        tooltip="Hall of fame"
         class="navbar__link navbar__link--icon">
         <img src="/assets/ui_icon_crown.png">
       </a>
@@ -39,7 +38,6 @@
 
     <li>
       <a routerLink="/statistics" routerLinkActive="active"
-        tooltip="Statistics"
         class="navbar__link navbar__link--icon">
         <img src="/assets/ui_icon_stats.png">
       </a>
@@ -49,7 +47,6 @@
       <li>
         <a [href]="link.target"
           target="_blank"
-          [tooltip]="link.tooltip"
           class="navbar__link"
           [class.navbar__link--icon]="!!link.icon">
           <img *ngIf="link.icon; else text"
@@ -61,12 +58,11 @@
     </ng-container>
   </ul>
 
-  <div class="flex-xl-fill"></div>
+  <div class="xl:grow"></div>
 
   <ng-container *ngIf="isLoggedIn | async; else notAuthenticated">
     <a routerLink="/settings"
       routerLinkActive="active"
-      tooltip="Settings"
       class="navbar__link navbar__link--settings">
       <img src="/assets/ui_settings.png">
     </a>

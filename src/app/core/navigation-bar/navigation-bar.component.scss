@@ -1,8 +1,8 @@
-@use "sass:color";
-@use "theme";
-@use "utils/border-radius";
-@use "utils/outline";
-@use "utils/respond";
+@use 'sass:color';
+@use 'theme';
+@use 'utils/border-radius';
+@use 'utils/outline';
+@use 'utils/respond';
 
 // navigation bar itself
 $-navigation-bar-background-color: color.change(theme.$primary, $alpha: 0.8);
@@ -54,7 +54,8 @@ $-link-icon-size: 30px;
   &__link {
     @include outline.disable;
 
-    display: block;
+    display: flex;
+    align-items: center;
     height: $-link-height;
     line-height: $-link-height;
     padding: 0 32px;
