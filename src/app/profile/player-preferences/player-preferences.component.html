@@ -1,29 +1,35 @@
 <div class="mdc-card player-preferences">
-  <form
-    [formGroup]="form"
-    (submit)="save()">
+  <form [formGroup]="form" (submit)="save()">
     <div class="player-preferences__content">
       <h6 class="mdc-typography--headline6">Preferences</h6>
       <span class="mdc-typography--body2">Notification sound volume</span>
-      <div class="d-flex flex-row align-items-center">
+      <div class="flex flex-row items-center">
         <i-feather name="volume-x" class="mb-1"></i-feather>
-        <input type="range"
+        <input
+          type="range"
           formControlName="soundVolume"
           min="0"
           max="1"
           step="0.01"
           class="mx-2"
-          aria-label="Notification sound volume">
+          aria-label="Notification sound volume"
+        />
         <i-feather name="volume-2" class="mb-1"></i-feather>
       </div>
     </div>
 
     <div class="mdc-card__actions">
-      <button type="submit"
+      <button
+        type="submit"
         class="mdc-button mdc-card__action mdc-card__action--button"
-        [disabled]="(isSaving | async) || !form.valid || form.pristine">
+        [disabled]="(isSaving | async) || !form.valid || form.pristine"
+      >
         <div class="mdc-button__ripple"></div>
-        <i-feather name="check" class="mdc-button__icon" aria-hidden="true"></i-feather>
+        <i-feather
+          name="check"
+          class="mdc-button__icon"
+          aria-hidden="true"
+        ></i-feather>
         <span class="mdc-button__label">save</span>
       </button>
     </div>
