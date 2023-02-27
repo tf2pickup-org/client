@@ -12,7 +12,6 @@ $-even-item-background-color: rgb(6 15 30 / 52%);
   @include surface.make;
   @include surface.shadow;
 
-  margin: 2rem 0;
   padding: 0;
   border-radius: $-border-radius;
   max-width: 240px;

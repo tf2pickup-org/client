@@ -1,9 +1,9 @@
-<div class="queue-container">
-  <div class="column-sidebar">
+<div class="flex w-full h-full flex-row flex-nowrap justify-center my-4 gap-2 px-2">
+  <div class="hidden 2xl:flex flex-1 justify-center">
     <app-twitch-stream-list></app-twitch-stream-list>
   </div>
 
-  <div class="column-queue">
+  <div class="flex-auto flex flex-col gap-2">
     <app-request-notification-permissions></app-request-notification-permissions>
     <app-queue-alerts></app-queue-alerts>
     <app-queue-status></app-queue-status>
@@ -11,7 +11,7 @@
     <app-queue></app-queue>
   </div>
 
-  <div class="column-sidebar">
+  <div class="hidden xl:flex flex-1 justify-center">
     <app-online-player-list></app-online-player-list>
   </div>
 </div>
