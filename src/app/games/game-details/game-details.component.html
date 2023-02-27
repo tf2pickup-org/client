@@ -1,6 +1,8 @@
-<div *ngIf="store.game | async as _game" class="container py-3">
-  <div class="d-flex flex-row align-items-center">
-    <div class="mdc-typography--headline4 me-3">Pickup #{{ _game.number }}</div>
+<div *ngIf="store.game | async as _game" class="container mx-auto my-6">
+  <div class="flex flex-row items-center gap-4">
+    <div class="mdc-typography--headline4 text-white">
+      Pickup #{{ _game.number }}
+    </div>
 
     <app-game-admin-buttons
       *ngIf="store.showAdminTools | async"
@@ -35,12 +37,12 @@
   <div *ngIf="store.isRunning | async" class="game-runtime-info">
     <div
       *ngIf="store.isMyGame | async; else watchGameInfo"
-      class="d-flex align-items-center"
+      class="flex items-center"
     >
       <app-connect-string
         [connectString]="store.connectString | async"
         [connectTimeout]="store.joinGameServerTimeout | async"
-        class="flex-grow-1 me-3"
+        class="grow mr-3"
       ></app-connect-string>
       <app-join-voice-button
         [mumbleUrl]="store.voiceChannelUrl | async"
@@ -54,8 +56,12 @@
     </ng-template>
   </div>
 
-  <div class="row mt-4">
-    <div *ngFor="let team of teams" class="col" [ngClass]="'team-' + team">
+  <div class="flex xl:flex-row gap-4">
+    <div
+      *ngFor="let team of teams"
+      class="flex-1 flex flex-col gap-2"
+      [ngClass]="'team-' + team"
+    >
       <app-game-team-header
         [team]="team"
         [score]="store.scoreOf(team) | async"
@@ -68,7 +74,6 @@
         (requestSubstitute)="requestSubstitute($event)"
         (replacePlayer)="replacePlayer($event)"
         [locked]="(store.canSubstitute | async) !== true"
-        class="d-block mt-4"
       ></app-game-team-player-list>
     </div>
   </div>

@@ -1,7 +1,10 @@
-<div class="d-flex flex-nowrap">
+<div class="flex flex-row">
   <div *ngIf="logsUrl" class="detail--value mx-3" @fadeIn>
-    <a [href]="logsUrl"
-      target="_blank">
+    <a
+      [href]="logsUrl"
+      target="_blank"
+      class="flex flex-row items-center align-middle gap-2"
+    >
       <i-feather name="file-text" class="icon"></i-feather>
       logs
       <i-feather name="external-link" class="external-link-icon"></i-feather>
@@ -9,8 +12,11 @@
   </div>
 
   <div *ngIf="demoUrl" class="detail--value mx-3" @fadeIn>
-    <a [href]="demoUrl"
-      target="_blank">
+    <a
+      [href]="demoUrl"
+      target="_blank"
+      class="flex flex-row items-center align-middle gap-2"
+    >
       <i-feather name="film" class="icon"></i-feather>
       demo
       <i-feather name="external-link" class="external-link-icon"></i-feather>

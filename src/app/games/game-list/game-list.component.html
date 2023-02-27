@@ -38,9 +38,14 @@
         class="pagination__item"
         [class.pagination__item--disabled]="p.isFirstPage()"
       >
-        <a [routerLink]="" (click)="p.previous()" aria-label="Previous">
+        <a
+          [routerLink]=""
+          (click)="p.previous()"
+          aria-label="Previous"
+          class="cursor-pointer"
+        >
           <span aria-hidden="true">&laquo;</span>
-          <span class="visually-hidden">Previous</span>
+          <span class="sr-only">Previous</span>
         </a>
       </li>
 
@@ -49,7 +54,11 @@
         class="pagination__item"
         [class.pagination__item--active]="p.getCurrent() === page.value"
       >
-        <a [routerLink]="" (click)="p.setCurrent(page.value)">
+        <a
+          [routerLink]=""
+          (click)="p.setCurrent(page.value)"
+          class="cursor-pointer"
+        >
           {{ page.label }}
         </a>
       </li>
@@ -58,9 +67,14 @@
         class="pagination__item"
         [class.pagination__item--disabled]="p.isLastPage()"
       >
-        <a [routerLink]="" (click)="p.next()" aria-label="Next">
+        <a
+          [routerLink]=""
+          (click)="p.next()"
+          aria-label="Next"
+          class="cursor-pointer"
+        >
           <span aria-hidden="true">&raquo;</span>
-          <span class="visually-hidden">Next</span>
+          <span class="sr-only">Next</span>
         </a>
       </li>
     </ul>
