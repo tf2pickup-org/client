@@ -1,10 +1,10 @@
-<div *ngIf="hallOfFame | async as _hallOfFame" class="container py-3">
+<div *ngIf="hallOfFame | async as _hallOfFame" class="container mx-auto my-4">
   <p class="mdc-typography--subtitle2">
     <span class="font-weight-bold">Hall of Fame</span> is a selection of the most active players.
   </p>
 
-  <div class="d-flex flex-row">
-    <div class="flex-grow-1 surface">
+  <div class="flex flex-row gap-4">
+    <div class="flex-1 surface">
       <h4 class="mdc-typography--subtitle4">All classes</h4>
 
       <ul class="mdc-list">
@@ -24,7 +24,7 @@
       </ul>
     </div>
 
-    <div class="flex-grow-1 surface">
+    <div class="flex-1 surface">
       <h4 class="mdc-typography--subtitle4">Medics</h4>
 
       <ul class="mdc-list">
