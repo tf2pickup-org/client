@@ -1,22 +1,29 @@
-<div class="container">
-  <div class="player-details">
+<div class="container mx-auto my-6">
+  <div class="flex flex-col xl:flex-row gap-6">
     <app-player-details-external-profile-links
       [player]="player | async"
       [linkedProfiles]="linkedProfiles | async"
-      class="external-profile-links"></app-player-details-external-profile-links>
+    ></app-player-details-external-profile-links>
 
-    <div class="profile-details">
-      <app-player-details-badges [player]="player | async"></app-player-details-badges>
-      <app-player-details-header [player]="player | async"></app-player-details-header>
+    <div class="xl:flex-1">
+      <app-player-details-badges
+        [player]="player | async"
+      ></app-player-details-badges>
+      <app-player-details-header
+        [player]="player | async"
+      ></app-player-details-header>
       <app-player-stats [playerStats]="stats | async"></app-player-stats>
       <app-player-details-admin-buttons
         *ngIf="isAdmin | async"
         [playerId]="(player | async)?.id"
-        [isSuperUser]="isSuperUser | async"></app-player-details-admin-buttons>
+        [isSuperUser]="isSuperUser | async"
+      ></app-player-details-admin-buttons>
     </div>
 
-    <div class="player-games">
-      <app-player-details-game-list [playerId]="(player | async)?.id"></app-player-details-game-list>
+    <div class="xl:flex-1">
+      <app-player-details-game-list
+        [playerId]="(player | async)?.id"
+      ></app-player-details-game-list>
     </div>
   </div>
 </div>

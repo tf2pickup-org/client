@@ -1,15 +1,15 @@
-<div class="d-flex flex-row">
+<div class="flex flex-row">
   <ng-container *ngIf="player; else ghost">
     <img [src]="player.avatar.large" class="avatar" crossorigin="anonymous">
-    <div class="d-flex flex-column py-1">
-      <h1>{{ player?.name }}</h1>
+    <div class="flex flex-col text-white gap-2">
+      <div class="text-4xl">{{ player?.name }}</div>
       <span><strong>joined:</strong> {{ player?.joinedAt | date:'medium' }}</span>
     </div>
   </ng-container>
 
   <ng-template #ghost>
     <div class="avatar avatar--ghost"></div>
-    <div class="d-flex flex-column py-1">
+    <div class="flex flex-col py-1">
       <div class="ghost__player-name"></div>
       <div class="ghost__joined"></div>
     </div>
