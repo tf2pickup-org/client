@@ -105,6 +105,7 @@
     "@angular/language-service": "15.2.2",
     "@ngrx/schematics": "14.3.3",
     "@release-it/conventional-changelog": "5.1.1",
+    "@tailwindcss/typography": "0.5.9",
     "@types/howler": "2.2.7",
     "@types/jasmine": "4.3.1",
     "@types/jasminewd2": "2.0.10",
