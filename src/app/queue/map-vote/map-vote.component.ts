@@ -39,6 +39,7 @@ export class MapVoteComponent {
     this.store.dispatch(voteForMap({ map: aMap }));
   }
 
+  // skipcq: JS-0105
   trackByFn(index: number) {
     return index;
   }

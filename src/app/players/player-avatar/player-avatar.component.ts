@@ -16,13 +16,19 @@ export class PlayerAvatarComponent {
   size: keyof PlayerAvatar = 'small';
 
   url: Observable<string>;
+  private _playerId: string;
 
   @Input()
   set playerId(playerId: string) {
+    this._playerId = playerId;
     this.url = this.store.select(playerById(playerId)).pipe(
-      filter(player => !!player),
+      filter(player => Boolean(player)),
       map(player => player.avatar[this.size]),
     );
+  }
+
+  get playerId() {
+    return this._playerId;
   }
 
   constructor(private store: Store) {}

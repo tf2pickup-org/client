@@ -13,9 +13,11 @@ import { loadPlayer } from '../actions';
 })
 export class PlayerNameComponent {
   name: Observable<string>;
+  private _playerId: string;
 
   @Input()
   set playerId(playerId: string) {
+    this._playerId = playerId;
     if (!playerId) {
       return;
     }
@@ -26,9 +28,13 @@ export class PlayerNameComponent {
           this.store.dispatch(loadPlayer({ playerId }));
         }
       }),
-      filter(player => !!player),
+      filter(player => Boolean(player)),
       map(player => player.name),
     );
+  }
+
+  get playerId() {
+    return this._playerId;
   }
 
   constructor(private store: Store) {}

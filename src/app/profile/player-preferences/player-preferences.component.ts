@@ -3,7 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject } from 'rxjs';
-import { filter, map, take, tap } from 'rxjs/operators';
+import { filter, map, take } from 'rxjs/operators';
 import { preferencesUpdated, savePreferences } from '../profile.actions';
 import { preferences } from '../profile.selectors';
 
@@ -32,7 +32,7 @@ export class PlayerPreferencesComponent implements OnInit {
     this.store
       .select(preferences)
       .pipe(
-        filter(preferences => !!preferences),
+        filter(preferences => Boolean(preferences)),
         take(1),
         map(preferences => ({ ...defaultValues, ...preferences })),
       )
