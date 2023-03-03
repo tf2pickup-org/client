@@ -74,9 +74,9 @@ describe('QueueComponent', () => {
 
   describe('for 6v6', () => {
     it('should apply 4x1 grid', () => {
-      const div = fixture.debugElement.query(By.css('.queue'))
+      const div = fixture.debugElement.query(By.css('div.grid'))
         .nativeElement as HTMLElement;
-      expect(div.classList.contains('queue--4x1')).toBe(true);
+      expect(div.classList.contains('lg:grid-cols-4')).toBe(true);
     });
   });
 
@@ -88,9 +88,9 @@ describe('QueueComponent', () => {
     });
 
     it('should apply 3x3 grid', () => {
-      const div = fixture.debugElement.query(By.css('.queue'))
+      const div = fixture.debugElement.query(By.css('div.grid'))
         .nativeElement as HTMLElement;
-      expect(div.classList.contains('queue--3x3')).toBe(true);
+      expect(div.classList.contains('lg:grid-cols-3')).toBe(true);
     });
   });
 });
