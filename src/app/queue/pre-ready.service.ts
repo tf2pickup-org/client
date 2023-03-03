@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { BehaviorSubject } from 'rxjs';
 import { stopPreReady } from './queue.actions';
 import { isPreReadied } from './queue.selectors';
@@ -17,7 +17,7 @@ export class PreReadyService {
   }
 
   constructor(private store: Store) {
-    this.store.pipe(select(isPreReadied)).subscribe(preReadied => {
+    this.store.select(isPreReadied).subscribe(preReadied => {
       if (preReadied) {
         this.start();
       } else {

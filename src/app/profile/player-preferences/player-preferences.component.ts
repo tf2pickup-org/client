@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Actions, ofType } from '@ngrx/effects';
-import { select, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { BehaviorSubject } from 'rxjs';
 import { filter, map, take, tap } from 'rxjs/operators';
 import { preferencesUpdated, savePreferences } from '../profile.actions';
@@ -30,8 +30,8 @@ export class PlayerPreferencesComponent implements OnInit {
     const defaultValues = this.form.value;
 
     this.store
+      .select(preferences)
       .pipe(
-        select(preferences),
         filter(preferences => !!preferences),
         take(1),
         map(preferences => ({ ...defaultValues, ...preferences })),

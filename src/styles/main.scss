@@ -31,10 +31,12 @@
 @use "components/pagination";
 @use "components/surface";
 
+/* stylelint-disable scss/at-rule-no-unknown */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* stylelint-disable at-rule-empty-line-before */
 @include card.core-styles;
 @include checkbox.core-styles;
 @include dialog.core-styles;

@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import {
   mapVoteResults,
   mapVoteTotalCount,
@@ -31,10 +31,7 @@ export class MapVoteComponent {
 
   mapVote = this.store.select(mapVote);
 
-  disabled = this.store.pipe(
-    select(isInQueue),
-    map(value => !value),
-  );
+  disabled = this.store.select(isInQueue).pipe(map(value => !value));
 
   constructor(private store: Store) {}
 

@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { playerById } from '../selectors';
 import { tap, map, filter } from 'rxjs/operators';
@@ -20,8 +20,7 @@ export class PlayerNameComponent {
       return;
     }
 
-    this.name = this.store.pipe(
-      select(playerById(playerId)),
+    this.name = this.store.select(playerById(playerId)).pipe(
       tap(player => {
         if (!player) {
           this.store.dispatch(loadPlayer({ playerId }));
