@@ -1,24 +1,32 @@
 <form [formGroup]="form" (submit)="save()">
   <app-edit-page-wrapper
     title="Map pool"
-    [saveDisabled]="(store.enabled | async) === false || !form.valid || form.pristine">
-
-    <div class="surface surface--white py-4">
+    [saveDisabled]="
+      (store.enabled | async) === false || !form.valid || form.pristine
+    "
+  >
+    <div class="surface surface--white py-4 my-4">
       <ng-container formArrayName="maps">
         <div *ngFor="let map of maps.controls; index as i">
           <app-map-edit
             [mapControl]="map | asFormGroup"
-            (remove)="remove(i)"></app-map-edit>
+            (remove)="remove(i)"
+          ></app-map-edit>
         </div>
       </ng-container>
 
       <button
         type="button"
-        class="mdc-button mdc-button--raised mx-2 mt-2 add-map-button"
+        class="mdc-button mdc-button--raised mx-2 my-4 add-map-button"
         (click)="add()"
-        [disabled]="(store.enabled | async) === false">
+        [disabled]="(store.enabled | async) === false"
+      >
         <span class="mdc-button__ripple"></span>
-        <i-feather name="plus" class="mdc-button__icon" aria-hidden="true"></i-feather>
+        <i-feather
+          name="plus"
+          class="mdc-button__icon"
+          aria-hidden="true"
+        ></i-feather>
         <span class="mdc-button__label">Add map</span>
       </button>
     </div>

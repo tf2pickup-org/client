@@ -38,6 +38,10 @@ export class DefaultPlayerSkillEditComponent implements OnInit {
 
   private queueConfig = this.store.select(queueConfig);
 
+  classCount = this.queueConfig.pipe(
+    map(queueConfig => queueConfig.classes.length),
+  );
+
   constructor(
     private formBuilder: FormBuilder,
     private configurationService: ConfigurationService,

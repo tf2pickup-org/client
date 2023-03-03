@@ -1,28 +1,51 @@
 <form [formGroup]="form" (submit)="save()">
   <app-edit-page-wrapper
     title="Default player skill"
-    [saveDisabled]="(isSaving | async) === true || !form.valid || form.pristine">
-
-    <div class="surface surface--white py-4">
+    [saveDisabled]="(isSaving | async) === true || !form.valid || form.pristine"
+  >
+    <div class="surface surface--white py-4 my-4">
       <div class="mdc-typography--body1 mx-2">
-        Default skill is used whenever a match starts and a given player's skill is not set.
+        Default skill is used whenever a match starts and a given player's skill
+        is not set.
       </div>
 
-      <div formGroupName="gameClasses" class="d-flex mt-4">
-        <div *ngFor="let group of gameClasses.controls | keyvalue: orderGameClasses" class="d-flex flex-column align-items-center">
-          <div class="mdc-typography--body1">
+      <div
+        formGroupName="gameClasses"
+        class="grid gap-4 my-4"
+        [ngClass]="
+          {
+            '1': ['grid-cols-1'],
+            '2': ['grid-cols-1', 'md:grid-cols-2'],
+            '4': ['grid-cols-1', 'md:grid-cols-2', 'lg:grid-cols-4'],
+            '9': ['grid-cols-1', 'lg:grid-cols-3']
+          }[classCount | async]
+        "
+      >
+        <div
+          *ngFor="
+            let group of gameClasses.controls | keyvalue : orderGameClasses
+          "
+          class="flex flex-col"
+        >
+          <div
+            class="mdc-typography--body1 flex flex-row gap-2 items-center justify-center"
+          >
             <app-game-class-icon [gameClass]="group.key"></app-game-class-icon>
             {{ group.key }}
           </div>
-          <label class="mdc-text-field mdc-text-field--outlined mdc-text-field--no-label mdc-text-field--dense mx-2 my-2">
+          <label
+            class="mdc-text-field mdc-text-field--outlined mdc-text-field--no-label mdc-text-field--dense mx-2 my-2"
+          >
             <span class="mdc-notched-outline">
               <span class="mdc-notched-outline__leading"></span>
               <span class="mdc-notched-outline__trailing"></span>
             </span>
-            <input type="number"
+            <input
+              type="number"
               class="mdc-text-field__input input-game-class-default-skill"
               [attr.name]="group.key"
-              [formControlName]="group.key">
+              [formControlName]="group.key"
+            />
           </label>
         </div>
       </div>

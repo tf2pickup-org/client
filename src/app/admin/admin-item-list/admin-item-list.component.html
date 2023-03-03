@@ -1,6 +1,6 @@
 <ng-template #header let-title>
-  <div class="d-flex align-items-center">
-    <div class="flex-grow-1 mdc-typography--headline5">
+  <div class="flex items-center">
+    <div class="grow mdc-typography--headline5 text-white">
       {{ title }}
     </div>
   </div>
@@ -18,7 +18,7 @@
   </a>
 </ng-template>
 
-<div class="container py-3">
+<div class="container mx-auto my-4">
   <ng-template *ngTemplateOutlet="header; context: { $implicit: 'Configuration' }"></ng-template>
 
   <ng-template *ngTemplateOutlet="item; context: { $implicit: {
