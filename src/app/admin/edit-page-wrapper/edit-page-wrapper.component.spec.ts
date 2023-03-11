@@ -70,7 +70,7 @@ describe(EditPageWrapperComponent.name, () => {
     });
 
     describe('when disabled', () => {
-      beforeEach(async () => {
+      beforeEach(() => {
         component.saveDisabled = true;
         fixture.detectChanges();
       });
