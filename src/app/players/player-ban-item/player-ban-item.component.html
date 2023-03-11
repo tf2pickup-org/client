@@ -3,7 +3,7 @@
   class="player-ban-item"
   [class.player-ban-item--expired]="isExpired()"
 >
-  <div class="d-flex flex-row justify-content-between">
+  <div class="flex flex-row justify-between">
     <div>
       <h6 class="mdc-typography--headline5">
         {{ playerBan.reason }}
@@ -20,7 +20,7 @@
     >
       <div class="mdc-button__ripple"></div>
       <i-tabler
-        name="trash2"
+        name="trash"
         class="mdc-button__icon"
         aria-hidden="true"
       ></i-tabler>
