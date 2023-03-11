@@ -2,44 +2,52 @@
   <div *ngFor="let slot of slots | orderTf2Classes" class="player-list-item">
     <app-game-class-icon
       [gameClass]="slot.gameClass"
-      class="player-list-item__icon"></app-game-class-icon>
+      class="player-list-item__icon"
+    ></app-game-class-icon>
 
     <ng-container [ngSwitch]="slot.status">
       <ng-container *ngSwitchCase="'active'">
-        <a [routerLink]="['/player', slot.player.id]"
-          class="player-list-item__link">
-
+        <a
+          [routerLink]="['/player', slot.player.id]"
+          class="player-list-item__link"
+        >
           <span class="player-list-item__player-name">
             {{ slot.player.name }}
           </span>
 
-          <span *ngIf="showAssignedSkills && slot.classSkill !== undefined"
-            class="player-list-item__skill">
+          <span
+            *ngIf="showAssignedSkills && slot.classSkill !== undefined"
+            class="player-list-item__skill"
+          >
             {{ slot.classSkill }}
           </span>
         </a>
 
-        <button *ngIf="showAdminActionButtons"
+        <button
+          *ngIf="showAdminActionButtons"
           type="button"
           class="request-substitute-button"
           tooltip="Request substitute"
-          (click)="emitRequestSubstitute($event, slot.player)">
+          (click)="emitRequestSubstitute($event, slot.player)"
+        >
           <i-feather name="user-x"></i-feather>
         </button>
 
         <app-player-connection-status
           *ngIf="showPlayerConnectionStatus"
           [connectionStatus]="slot.connectionStatus"
-          [tooltip]="slot.connectionStatus"
-          class="player-list-item__connection-status"></app-player-connection-status>
+          class="player-list-item__connection-status"
+        ></app-player-connection-status>
       </ng-container>
 
       <ng-container *ngSwitchCase="'waiting for substitute'">
-        <button type="button"
+        <button
+          type="button"
           class="replace-player-button"
           (click)="emitReplacePlayer(slot.player)"
           tooltip="Take this spot"
-          [disabled]="locked">
+          [disabled]="locked"
+        >
           <div class="flex-grow-1">
             <i-feather name="plus"></i-feather>
           </div>

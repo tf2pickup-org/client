@@ -1,39 +1,40 @@
-<div *ngIf="gameServer | async as _gameServer"
-  class="container py-3">
-  <div class="d-flex align-items-center">
-    <button goBackButton
+<div *ngIf="gameServer | async as _gameServer" class="container mx-auto my-4">
+  <div class="flex items-center text-white">
+    <button
+      goBackButton
       type="button"
       class="mdc-icon-button focus-none"
-      tooltip="Go back"
-      placement="top"
-      container="body"
-      appNavigateBack>
+      appNavigateBack
+    >
       <i-feather name="arrow-left" aria-hidden="true"></i-feather>
     </button>
 
-    <div class="flex-grow-1 mdc-typography--headline5" title>
+    <div class="grow mdc-typography--headline5" title>
       {{ _gameServer.name }}
     </div>
 
     <a
       [routerLink]="['/admin', 'game-server-diagnostics', _gameServer.id]"
-      class="mdc-button mdc-button--raised mdc-button--secondary mx-2 submit-button">
+      class="mdc-button mdc-button--raised mdc-button--secondary mx-2 submit-button"
+    >
       <div class="mdc-button__ripple"></div>
-      <i-feather name="check" class="mdc-button__icon" aria-hidden="true"></i-feather>
+      <i-feather
+        name="check"
+        class="mdc-button__icon"
+        aria-hidden="true"
+      ></i-feather>
       <span class="mdc-button__label">run diagnostics</span>
     </a>
   </div>
 
   <div class="surface surface--white">
-    <dl class="row">
-      <dt class="col-3">Name:</dt>
-      <dd class="col-9">{{ _gameServer.name }}</dd>
+    <dl class="flex flex-row gap-2">
+      <dt class="font-bold">Name:</dt>
+      <dd>{{ _gameServer.name }}</dd>
     </dl>
-    <dl class="row">
-      <dt class="col-3">Address:</dt>
-      <dd class="col-9">
-        {{ _gameServer.address }}:{{ _gameServer.port }}
-      </dd>
+    <dl class="flex flex-row gap-2">
+      <dt class="font-bold">Address:</dt>
+      <dd>{{ _gameServer.address }}:{{ _gameServer.port }}</dd>
     </dl>
   </div>
 </div>

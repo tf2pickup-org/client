@@ -1,17 +1,27 @@
-<div *ngIf="queueClasses | async as _queueClasses"
-  class="queue"
-  [ngClass]="{
-    '1': 'queue--1x1',
-    '2': 'queue--2x1',
-    '4': 'queue--4x1',
-    '9': 'queue--3x3'
-  }[(queueConfig | async)?.classes.length]">
-  <div *ngFor="let class of _queueClasses"
-    class="game-class-column">
-    <h4 class="game-class-name">
-      <app-game-class-icon [gameClass]="class.name" [size]="30"></app-game-class-icon>
+<div
+  *ngIf="queueClasses | async as _queueClasses"
+  class="grid gap-4"
+  [ngClass]="
+    {
+      '1': ['grid-cols-1'],
+      '2': ['grid-cols-1', 'md:grid-cols-2'],
+      '4': ['grid-cols-1', 'md:grid-cols-2', 'lg:grid-cols-4'],
+      '9': ['grid-cols-1', 'lg:grid-cols-3']
+    }[(queueConfig | async)?.classes.length]
+  "
+>
+  <div *ngFor="let class of _queueClasses">
+    <h4
+      class="text-2xl font-bold text-white flex flex-row justify-center items-center gap-2"
+    >
+      <app-game-class-icon
+        [gameClass]="class.name"
+        [size]="30"
+      ></app-game-class-icon>
       {{ class.name }}
     </h4>
-    <app-queue-class-slot-list [gameClass]="class.name"></app-queue-class-slot-list>
+    <app-queue-class-slot-list
+      [gameClass]="class.name"
+    ></app-queue-class-slot-list>
   </div>
 </div>

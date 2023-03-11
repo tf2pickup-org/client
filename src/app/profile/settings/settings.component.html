@@ -1,18 +1,16 @@
-<div class="container py-3">
-  <div class="d-flex align-items-baseline">
+<div class="container mx-auto my-4 flex flex-col gap-4">
+  <div class="flex items-center text-white">
     <button
       type="button"
       class="mdc-icon-button cancel-button"
-      tooltip="Cancel"
-      placement="top"
-      container="body"
-      (click)="cancel()">
+      (click)="cancel()"
+    >
       <i-feather name="x"></i-feather>
     </button>
 
-    <h5 class="flex-grow-1 mdc-typography--headline5">Settings</h5>
+    <h5 class="grow mdc-typography--headline5">Settings</h5>
   </div>
 
-  <app-player-preferences class="m-1"></app-player-preferences>
-  <app-twitch-tv-integration class="m-1"></app-twitch-tv-integration>
+  <app-player-preferences></app-player-preferences>
+  <app-twitch-tv-integration></app-twitch-tv-integration>
 </div>

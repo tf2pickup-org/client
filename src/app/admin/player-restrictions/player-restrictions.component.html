@@ -4,11 +4,11 @@
     [saveDisabled]="!form.valid || form.pristine"
     (save)="save()">
 
-    <div class="surface surface--white">
+    <div class="surface surface--white my-4">
       <ul class="mdc-deprecated-list mdc-deprecated-list--two-line">
         <li class="mdc-deprecated-list-item" tabindex="0">
           <span class="mdc-deprecated-list-item__ripple"></span>
-          <div class="mdc-deprecated-list-item__text flex-grow-1">
+          <div class="mdc-deprecated-list-item__text grow">
             <label class="mdc-deprecated-list-item__primary-text" for="etf2l-account-required-switch">Require ETF2L account</label>
             <span class="mdc-deprecated-list-item__secondary-text"
               [ngSwitch]="this.form.get('etf2lAccountRequired').value">
@@ -58,7 +58,7 @@
 
         <li class="mdc-deprecated-list-item" tabindex="0">
           <span class="mdc-deprecated-list-item__ripple"></span>
-          <div class="mdc-deprecated-list-item__text flex-grow-1">
+          <div class="mdc-deprecated-list-item__text grow">
             <label class="mdc-deprecated-list-item__primary-text" for="deny-players-with-no-skill-assigned-switch">Deny players with no skill assigned</label>
             <span class="mdc-deprecated-list-item__secondary-text"
               [ngSwitch]="this.form.get('denyPlayersWithNoSkillAssigned').value">

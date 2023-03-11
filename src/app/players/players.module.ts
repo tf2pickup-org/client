@@ -11,7 +11,6 @@ import { PlayersRoutingModule } from './players-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PlayerEditComponent } from './player-edit/player-edit.component';
 import { PlayerEditSkillComponent } from './player-edit-skill/player-edit-skill.component';
-import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { PlayerListComponent } from './player-list/player-list.component';
 import { PlayerStatsComponent } from './player-stats/player-stats.component';
 import { PlayerBansComponent } from './player-bans/player-bans.component';
@@ -70,7 +69,6 @@ import { OnlinePlayerListComponent } from './online-player-list/online-player-li
 
     StoreModule.forFeature('players', reducer),
     EffectsModule.forFeature([PlayerEffects]),
-    TooltipModule,
     NgxPaginationModule,
 
     GamesModule,

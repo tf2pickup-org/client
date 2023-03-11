@@ -4,7 +4,6 @@ import { NavigationBarComponent } from './navigation-bar/navigation-bar.componen
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '@app/shared/shared.module';
 import { FooterComponent } from './footer/footer.component';
-import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { TitleControllerComponent } from './title-controller/title-controller.component';
 import { OfflineStateBannerComponent } from './offline-state-banner/offline-state-banner.component';
 
@@ -15,7 +14,7 @@ import { OfflineStateBannerComponent } from './offline-state-banner/offline-stat
     TitleControllerComponent,
     OfflineStateBannerComponent,
   ],
-  imports: [CommonModule, RouterModule, SharedModule, TooltipModule],
+  imports: [CommonModule, RouterModule, SharedModule],
   exports: [
     NavigationBarComponent,
     FooterComponent,

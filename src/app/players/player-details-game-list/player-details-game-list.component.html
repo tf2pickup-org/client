@@ -1,19 +1,39 @@
-<div *ngIf="(gameCount | async) > 0; else noGames"
-  class="games-caption">games</div>
+<div
+  *ngIf="(gameCount | async) > 0; else noGames"
+  class="text-white text-center"
+>
+  games
+</div>
 
-<ul *ngIf="gameCount | async"
-  class="game-list">
-  <li *ngFor="let game of games | async | paginate: { itemsPerPage: gamesPerPage, currentPage: (page | async), totalItems: (gameCount | async) }"
-    class="game-list-item">
-    <a [routerLink]="['/game', game.id]">
-      <app-game-class-icon [gameClass]="game.classPlayed" [size]="20"></app-game-class-icon>
-      #{{ game.number }} - {{ game.launchedAt | date:'mediumDate'}} - {{ game.map }}
+<ul *ngIf="gameCount | async" class="game-list">
+  <li
+    *ngFor="
+      let game of games
+        | async
+        | paginate
+          : {
+              itemsPerPage: gamesPerPage,
+              currentPage: (page | async),
+              totalItems: (gameCount | async)
+            }
+    "
+    class="game-list-item"
+  >
+    <a [routerLink]="['/game', game.id]" class="flex flex-row flex-nowrap gap-2">
+      <app-game-class-icon
+        [gameClass]="game.classPlayed"
+        [size]="20"
+      ></app-game-class-icon>
+      <span
+        >#{{ game.number }} - {{ game.launchedAt | date : 'mediumDate' }} -
+        {{ game.map }}
+      </span>
     </a>
   </li>
 
   <ng-container *ngIf="isLoading | async">
     <div class="loading-wrapper">
-      <img src="/assets/loading-medium.gif">
+      <img src="/assets/loading-medium.gif" />
     </div>
   </ng-container>
 </ul>
@@ -27,16 +47,19 @@
     <ul class="pagination">
       <li
         [class.pagination__item--disabled]="p.isFirstPage()"
-        class="pagination__item">
+        class="pagination__item"
+      >
         <a aria-label="Previous" [routerLink]="" (click)="p.previous()">
           <span aria-hidden="true">&laquo;</span>
-          <span class="visually-hidden">Previous</span>
+          <span class="sr-only">Previous</span>
         </a>
       </li>
 
-      <li *ngFor="let page of p.pages"
+      <li
+        *ngFor="let page of p.pages"
         [class.pagination__item--active]="p.getCurrent() === page.value"
-        class="pagination__item">
+        class="pagination__item"
+      >
         <a [routerLink]="" (click)="p.setCurrent(page.value)">
           {{ page.label }}
         </a>
@@ -44,10 +67,11 @@
 
       <li
         [class.pagination__item--disabled]="p.isLastPage()"
-        class="pagination__item">
+        class="pagination__item"
+      >
         <a aria-label="Next" [routerLink]="" (click)="p.next()">
           <span aria-hidden="true">&raquo;</span>
-          <span class="visually-hidden">Next</span>
+          <span class="sr-only">Next</span>
         </a>
       </li>
     </ul>

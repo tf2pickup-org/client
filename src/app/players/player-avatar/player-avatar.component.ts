@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 import { Observable } from 'rxjs';
-import { select, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { playerById } from '../selectors';
 import { filter, map } from 'rxjs/operators';
 import { PlayerAvatar } from '../models/player-avatar';
@@ -16,14 +16,19 @@ export class PlayerAvatarComponent {
   size: keyof PlayerAvatar = 'small';
 
   url: Observable<string>;
+  private _playerId: string;
 
   @Input()
   set playerId(playerId: string) {
-    this.url = this.store.pipe(
-      select(playerById(playerId)),
-      filter(player => !!player),
+    this._playerId = playerId;
+    this.url = this.store.select(playerById(playerId)).pipe(
+      filter(player => Boolean(player)),
       map(player => player.avatar[this.size]),
     );
+  }
+
+  get playerId() {
+    return this._playerId;
   }
 
   constructor(private store: Store) {}

@@ -1,40 +1,51 @@
-<div class="container-fluid pt-3">
+<div class="container-fluid my-4">
   <form [formGroup]="form" (submit)="save()">
-    <div class="d-flex align-items-center">
+    <div class="flex flex-row items-center text-white">
       <button
         type="button"
         class="mdc-icon-button cancel-button focus-none"
-        tooltip="Cancel"
-        placement="top"
-        container="body"
-        appNavigateBack>
+        appNavigateBack
+      >
         <i-feather name="arrow-left" aria-hidden="true"></i-feather>
       </button>
 
-      <div class="flex-grow-1 mdc-typography--headline5">
+      <div class="grow mdc-typography--headline5">
         Edit document: {{ name.value }}
       </div>
 
-      <button type="submit"
+      <button
+        type="submit"
         class="mdc-button mdc-button--raised mdc-button--secondary mx-2 submit-button"
-        [disabled]="(isSaving | async) === true || !form.valid || form.pristine">
+        [disabled]="(isSaving | async) === true || !form.valid || form.pristine"
+      >
         <div class="mdc-button__ripple"></div>
-        <i-feather name="check" class="mdc-button__icon" aria-hidden="true"></i-feather>
+        <i-feather
+          name="check"
+          class="mdc-button__icon"
+          aria-hidden="true"
+        ></i-feather>
         <span class="mdc-button__label">save</span>
       </button>
     </div>
 
-    <div class="row my-0">
-      <div class="col-6">
-        <label class="mdc-text-field mdc-text-field--filled mdc-text-field--textarea mdc-text-field--no-label mx-2 my-4 w-100 document-edit" #documentEdit>
+    <div class="flex flex-row gap-4">
+      <div class="flex-1">
+        <label
+          class="mdc-text-field mdc-text-field--filled mdc-text-field--textarea mdc-text-field--no-label mx-2 my-4 document-edit"
+          #documentEdit
+        >
           <span class="mdc-text-field__ripple"></span>
-          <textarea class="mdc-text-field__input" aria-label="Edit document" formControlName="body"></textarea>
+          <textarea
+            class="mdc-text-field__input"
+            aria-label="Edit document"
+            formControlName="body"
+          ></textarea>
           <span class="mdc-line-ripple"></span>
         </label>
       </div>
-      <div class="col-6">
+      <div class="flex-1">
         <div class="surface">
-          <div class="surface__content">
+          <div class="surface__content prose max-w-none">
             <markdown [data]="body.value" ngPreserveWhitespace></markdown>
           </div>
         </div>

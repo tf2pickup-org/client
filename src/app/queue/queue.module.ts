@@ -13,9 +13,7 @@ import { QueueClassSlotListComponent } from './queue-class-slot-list/queue-class
 import { QueueSlotItemComponent } from './queue-slot-item/queue-slot-item.component';
 import { PlayersModule } from '@app/players/players.module';
 import { QueueReadyUpDialogComponent } from './queue-ready-up-dialog/queue-ready-up-dialog.component';
-import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { FormsModule } from '@angular/forms';
-import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { QueueAlertsComponent } from './queue-alerts/queue-alerts.component';
 import { PreReadyUpButtonComponent } from './pre-ready-up-button/pre-ready-up-button.component';
 import { SecondsPipe } from './seconds.pipe';
@@ -59,8 +57,6 @@ import { RestrictionBannerComponent } from './restriction-banner/restriction-ban
     HttpClientModule,
     StoreModule.forFeature('queue', reducer),
     EffectsModule.forFeature([QueueEffects]),
-    TooltipModule,
-    ButtonsModule,
     LayoutModule,
 
     PlayersModule,

@@ -30,6 +30,13 @@
 @use "components/indicator";
 @use "components/pagination";
 @use "components/surface";
+
+/* stylelint-disable scss/at-rule-no-unknown */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* stylelint-disable at-rule-empty-line-before */
 @include card.core-styles;
 @include checkbox.core-styles;
 @include dialog.core-styles;
@@ -51,23 +58,6 @@ $link-color: theme.$on-surface;
 $link-decoration: none;
 $link-hover-color: color.adjust($link-color, $lightness: -15%);
 $link-hover-decoration: underline;
-
-/* stylelint-disable no-invalid-position-at-import-rule */
-@import "bootstrap/scss/functions";
-@import "bootstrap/scss/variables";
-@import "bootstrap/scss/mixins";
-@import "bootstrap/scss/maps";
-@import "bootstrap/scss/utilities";
-@import "bootstrap/scss/root";
-@import "bootstrap/scss/reboot";
-@import "bootstrap/scss/tables";
-@import "bootstrap/scss/type";
-@import "bootstrap/scss/containers";
-@import "bootstrap/scss/grid";
-@import "bootstrap/scss/tooltip";
-@import "bootstrap/scss/utilities/api";
-@import "bootstrap/scss/helpers";
-/* stylelint-enable no-invalid-position-at-import-rule */
 
 .mdc-button {
   @include button.height(36px);
@@ -153,24 +143,4 @@ $link-hover-decoration: underline;
 
 .ngx-datatable.bootstrap .datatable-body .datatable-body-cell {
   padding: 0.3rem !important;
-}
-
-// workaround for bootstrap 5.2
-// https://github.com/valor-software/ngx-bootstrap/issues/6490
-.popover {
-  position: absolute;
-  top: 0;
-  left: 0 #{"/* rtl:ignore */"};
-}
-
-.popover-arrow {
-  position: absolute;
-}
-
-.tooltip {
-  position: absolute;
-}
-
-.tooltip-arrow {
-  position: absolute;
 }

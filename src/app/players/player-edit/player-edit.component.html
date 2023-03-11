@@ -1,23 +1,20 @@
-<div class="container py-3">
+<div class="container mx-auto my-4">
   <form [formGroup]="player" (ngSubmit)="save()">
-    <div class="d-flex align-items-center gap-2">
+    <div class="flex items-center gap-2 text-white">
       <button
         type="button"
         class="mdc-icon-button cancel-button"
-        tooltip="Cancel"
-        placement="top"
-        container="body"
         (click)="cancel()"
       >
         <i-feather name="x"></i-feather>
       </button>
 
-      <div class="flex-grow-1 mdc-typography--headline5">Edit player</div>
+      <div class="grow mdc-typography--headline5">Edit player</div>
 
       <button
         class="mdc-button mdc-button--inverted"
         [disabled]="(store.isReady | async) === false"
-        (click)="resetPlayerSkill(); $event.preventDefault();"
+        (click)="resetPlayerSkill(); $event.preventDefault()"
       >
         <div class="mdc-button__ripple"></div>
         <i-feather
@@ -77,8 +74,17 @@
       <div *ngIf="skill" formArrayName="skill" class="mt-3">
         <h6 class="mdc-typography--headline6">Skill</h6>
 
-        <div class="row">
-          <div *ngFor="let gameClass of gameClasses | async" class="col-3">
+        <div
+          *ngIf="gameClasses | async as $gameClasses"
+          class="grid gap-4"
+          [ngClass]="{
+            '1': ['grid-cols-1'],
+            '2': ['grid-cols-2'],
+            '4': ['grid-cols-4'],
+            '9': ['grid-cols-3']
+          }[$gameClasses?.length]"
+        >
+          <div *ngFor="let gameClass of $gameClasses" class="col-3">
             <app-player-edit-skill
               [gameClass]="gameClass"
               [form]="skill"

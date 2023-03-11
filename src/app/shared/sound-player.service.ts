@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { preferences } from '@app/profile/profile.selectors';
-import { select, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { Howl } from 'howler';
 import { Observable } from 'rxjs';
 import { map, switchMap, take } from 'rxjs/operators';
@@ -28,8 +28,7 @@ export class SoundPlayerService {
         };
       });
 
-    return this.store.pipe(
-      select(preferences),
+    return this.store.select(preferences).pipe(
       take(1),
       map(preferences => preferences?.soundVolume ?? this.defaultVolume),
       map(volume => parseFloat(volume)),

@@ -1,54 +1,62 @@
 <div class="external-profile-links">
   <ng-container *ngIf="player; else ghost">
-    <a class="external-profile-link"
+    <a
+      class="external-profile-link"
       [href]="player.steamId | steamProfileLink"
       target="_blank"
-      tooltip="Steam profile"
-      placement="left"
-      container="body">
-      <img srcset="/assets/ui_icon_steam_blue_48x48.png,
-                   /assets/ui_icon_steam_blue_96x96.png 2x"
+    >
+      <img
+        srcset="
+          /assets/ui_icon_steam_blue_48x48.png,
+          /assets/ui_icon_steam_blue_96x96.png 2x
+        "
         src="/assets/ui_icon_steam_blue_96x96.png"
-        width="48">
-      <span class="visually-hidden">Steam profile</span>
+        width="48"
+      />
+      <span class="sr-only">Steam profile</span>
     </a>
 
-    <a *ngIf="player.etf2lProfileId"
+    <a
+      *ngIf="player.etf2lProfileId"
       class="external-profile-link"
       [href]="player.etf2lProfileId | etf2lProfileLink"
       target="_blank"
-      tooltip="ETF2L profile"
-      placement="left"
-      container="body">
-      <img srcset="/assets/ui_icon_etf2l_blue_64x64.png,
-                   /assets/ui_icon_etf2l_blue_128x128.png 2x"
+    >
+      <img
+        srcset="
+          /assets/ui_icon_etf2l_blue_64x64.png,
+          /assets/ui_icon_etf2l_blue_128x128.png 2x
+        "
         src="/assets/ui_icon_etf2l_blue_128x128.png"
-        width="64">
-      <span class="visually-hidden">ETF2L profile</span>
+        width="64"
+      />
+      <span class="sr-only">ETF2L profile</span>
     </a>
 
-    <a class="external-profile-link"
+    <a
+      class="external-profile-link"
       [href]="player.steamId | logsTfProfileLink"
       target="_blank"
-      tooltip="logs.tf profile"
-      placement="left"
-      container="body">
-      <img srcset="/assets/ui_icon_logs_blue_64x64.png,
-                   /assets/ui_icon_logs_blue_128x128.png 2x"
+    >
+      <img
+        srcset="
+          /assets/ui_icon_logs_blue_64x64.png,
+          /assets/ui_icon_logs_blue_128x128.png 2x
+        "
         src="/assets/ui_icon_logs_blue_128x128.png"
-        width="64">
-      <span class="visually-hidden">logs.tf profile</span>
+        width="64"
+      />
+      <span class="sr-only">logs.tf profile</span>
     </a>
 
-    <a *ngIf="linkedProfiles | selectTwitchTvProfile as twitchTvProfile"
+    <a
+      *ngIf="linkedProfiles | selectTwitchTvProfile as twitchTvProfile"
       class="external-profile-link"
       [href]="twitchTvProfile.login | twitchTvProfileLink"
       target="_blank"
-      tooltip="twitch.tv profile"
-      placement="left"
-      container="body">
-      <span class="visually-hidden">twitch.tv profile</span>
-      <img src="/assets/TwitchGlitchPurple.svg" width="48" height="48">
+    >
+      <span class="sr-only">twitch.tv profile</span>
+      <img src="/assets/TwitchGlitchPurple.svg" width="48" height="48" />
     </a>
   </ng-container>
 

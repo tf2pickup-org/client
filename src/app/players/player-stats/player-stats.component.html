@@ -1,15 +1,14 @@
-<div *ngIf="playerStats; else ghost">
+<div *ngIf="playerStats; else ghost" class="flex flex-col gap-2">
   <div class="games-player-total">
     games played total: {{ playerStats.gamesPlayed }}
   </div>
 
-  <div class="d-flex flex-row flex-wrap justify-content-center my-2 px-3">
+  <div class="flex flex-row flex-wrap justify-center gap-6">
     <div *ngFor="let classPlayed of playerStats.classesPlayed | keyvalue: orderGameClasses">
-      <div class="mx-3 my-1">
+      <div class="flex flex-row gap-2">
         <app-game-class-icon
-          [gameClass]="classPlayed.key"
-          [tooltip]="classPlayed.key"></app-game-class-icon>
-        <span class="player-stats-games-played-class ms-2">{{ classPlayed.value }}</span>
+          [gameClass]="classPlayed.key"></app-game-class-icon>
+        <span class="text-white text-xl font-bold">{{ classPlayed.value }}</span>
       </div>
     </div>
   </div>
