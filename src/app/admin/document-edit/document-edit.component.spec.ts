@@ -11,7 +11,7 @@ import { Subject } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { DocumentEditComponent } from './document-edit.component';
 import { Document } from '@app/documents/models/document';
-import { FeatherComponent } from 'angular-feather';
+import { TablerIconComponent } from 'angular-tabler-icons';
 import { MarkdownComponent } from 'ngx-markdown';
 import { TestBed } from '@angular/core/testing';
 
@@ -40,7 +40,7 @@ describe(DocumentEditComponent.name, () => {
           .createSpy('saveDocument')
           .and.returnValue(saveDocument.pipe(take(1))),
       })
-      .mock(FeatherComponent)
+      .mock(TablerIconComponent)
       .mock(MarkdownComponent),
   );
 

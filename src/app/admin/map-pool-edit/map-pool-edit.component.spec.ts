@@ -3,7 +3,7 @@ import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Map } from '@app/queue/models/map';
 import { QueueService } from '@app/queue/queue.service';
 import { AsFormGroupPipe } from '@app/shared/as-form-group.pipe';
-import { FeatherComponent } from 'angular-feather';
+import { TablerIconComponent } from 'angular-tabler-icons';
 import {
   MockBuilder,
   MockedComponentFixture,
@@ -39,7 +39,7 @@ describe(MapPoolEditComponent.name, () => {
       .keep(EditPageWrapperComponent)
       .keep(MapEditComponent)
       .keep(AsFormGroupPipe)
-      .mock(FeatherComponent),
+      .mock(TablerIconComponent),
   );
 
   beforeEach(() => {

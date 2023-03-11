@@ -4783,14 +4783,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"angular-feather@npm:6.5.0":
-  version: 6.5.0
-  resolution: "angular-feather@npm:6.5.0"
+"angular-tabler-icons@npm:2.8.0":
+  version: 2.8.0
+  resolution: "angular-tabler-icons@npm:2.8.0"
   dependencies:
     tslib: ^2.0.0
   peerDependencies:
-    "@angular/core": ">=12"
-  checksum: 8543b6b1ef97cebb222940f73410370e137dc99d55060c3ea698b74796c2218eb679b99c6be1a9d80a391a1a60c9f521544ab2dae953b0455411ffc355a72a4c
+    "@angular/common": 11 - 15
+    "@angular/core": 11 - 15
+  checksum: 6891cc38117249614a58be2d87f89999c46693ad7bb0975140ece338c48892a32e4d22ce17cc8685c4a4c0dbe69699986f32687947e2038b43d21990335708fe
   languageName: node
   linkType: hard
 
@@ -15832,7 +15833,7 @@ __metadata:
     "@types/node": 18.15.0
     "@typescript-eslint/eslint-plugin": 5.54.1
     "@typescript-eslint/parser": 5.54.1
-    angular-feather: 6.5.0
+    angular-tabler-icons: 2.8.0
     autoprefixer: 10.4.13
     chart.js: 4.2.1
     chartjs-plugin-datalabels: 2.2.0

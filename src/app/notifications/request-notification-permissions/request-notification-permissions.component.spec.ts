@@ -5,7 +5,7 @@ import { NotificationsService } from '../notifications.service';
 import { RequestNotificationPermissionsComponent } from './request-notification-permissions.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MockComponent } from 'ng-mocks';
-import { FeatherComponent } from 'angular-feather';
+import { TablerIconComponent } from 'angular-tabler-icons';
 
 describe('RequestNotificationPermissionsComponent', () => {
   let component: RequestNotificationPermissionsComponent;
@@ -21,7 +21,7 @@ describe('RequestNotificationPermissionsComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [
         RequestNotificationPermissionsComponent,
-        MockComponent(FeatherComponent),
+        MockComponent(TablerIconComponent),
       ],
       imports: [NoopAnimationsModule],
       providers: [

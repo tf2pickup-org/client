@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { GameServersService } from '@app/game-servers/game-servers.service';
-import { FeatherComponent } from 'angular-feather';
+import { TablerIconComponent } from 'angular-tabler-icons';
 import {
   MockBuilder,
   MockedComponentFixture,
@@ -27,7 +27,7 @@ describe(GameServerDiagnosticsComponent.name, () => {
   beforeEach(() =>
     MockBuilder(GameServerDiagnosticsComponent)
       .mock(DiagnosticCheckInfoComponent)
-      .mock(FeatherComponent)
+      .mock(TablerIconComponent)
       .mock(ActivatedRoute, {
         data: routeData.asObservable(),
       })

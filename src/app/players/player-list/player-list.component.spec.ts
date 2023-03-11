@@ -62,7 +62,7 @@ describe('PlayerListComponent', () => {
     store.refreshState();
     fixture.detectChanges();
 
-    const badge = fixture.debugElement.query(By.css('i-feather[name=star]'))
+    const badge = fixture.debugElement.query(By.css('i-tabler[name=star]'))
       .nativeElement as HTMLElement;
     expect(badge).toBeTruthy();
   });

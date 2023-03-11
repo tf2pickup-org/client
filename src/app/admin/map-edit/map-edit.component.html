@@ -1,5 +1,8 @@
 <div class="d-flex flex-row align-items-center" [formGroup]="mapControl">
-  <label class="mdc-text-field mdc-text-field--outlined mdc-text-field--no-label mdc-text-field--dense mx-2" #mapName>
+  <label
+    class="mdc-text-field mdc-text-field--outlined mdc-text-field--no-label mdc-text-field--dense mx-2"
+    #mapName
+  >
     <span class="mdc-notched-outline">
       <span class="mdc-notched-outline__leading"></span>
       <span class="mdc-notched-outline__trailing"></span>
@@ -10,10 +13,14 @@
       aria-label="Map name"
       formControlName="name"
       placeholder="Map name"
-      #mapNameInput>
+      #mapNameInput
+    />
   </label>
 
-  <label class="mdc-text-field mdc-text-field--outlined mdc-text-field--no-labels mdc-text-field--dense mx-2" #execConfig>
+  <label
+    class="mdc-text-field mdc-text-field--outlined mdc-text-field--no-labels mdc-text-field--dense mx-2"
+    #execConfig
+  >
     <span class="mdc-notched-outline">
       <span class="mdc-notched-outline__leading"></span>
       <span class="mdc-notched-outline__trailing"></span>
@@ -23,7 +30,8 @@
       type="text"
       aria-label="Config to execute"
       formControlName="execConfig"
-      placeholder="Config to execute">
+      placeholder="Config to execute"
+    />
   </label>
 
   <button
@@ -32,7 +40,8 @@
     tooltip="Remove map"
     placement="top"
     container="body"
-    (click)="remove.next()">
-    <i-feather name="x"></i-feather>
+    (click)="remove.next()"
+  >
+    <i-tabler name="x"></i-tabler>
   </button>
 </div>

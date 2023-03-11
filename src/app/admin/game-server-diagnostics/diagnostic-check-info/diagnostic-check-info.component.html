@@ -2,19 +2,19 @@
   class="my-2">
   <div class="mdc-typography--body1"
     [ngClass]="{'completed': 'status-completed', 'failed': 'status-failed' }[check.status]">
-    <i-feather [name]="{'completed': 'check-square', 'failed': 'x-square', 'pending': 'square', 'running': 'square'}[check.status]"></i-feather>
+    <i-tabler [name]="{'completed': 'square-check', 'failed': 'square-x', 'pending': 'square', 'running': 'square'}[check.status]"></i-tabler>
     {{ check.name }}: {{ check.status }}
   </div>
 
   <div *ngFor="let error of check.reportedErrors"
     class="mdc-typography--body2 reported-error ms-4 mt-1">
-    <i-feather name="x-octagon" class="icon-smaller"></i-feather>
+    <i-tabler name="square-x" class="icon-smaller"></i-tabler>
     {{ error }}
   </div>
 
   <div *ngFor="let warning of check.reportedWarnings"
     class="mdc-typography--body2 reported-warning ms-4 mt-1">
-    <i-feather name="alert-octagon" class="icon-smaller"></i-feather>
+    <i-tabler name="alert-octagon" class="icon-smaller"></i-tabler>
     {{ warning }}
   </div>
 </div>

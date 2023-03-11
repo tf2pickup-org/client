@@ -2,29 +2,42 @@
   <input
     type="text"
     class="connect-string"
-    [value]="connectString || stvConnectString || 'the server is being configured...'"
+    [value]="
+      connectString || stvConnectString || 'the server is being configured...'
+    "
     [class.connect-unavailable]="!connectString && !stvConnectString"
-    readonly>
+    readonly
+  />
 
-  <button *ngIf="connectString || stvConnectString"
+  <button
+    *ngIf="connectString || stvConnectString"
     class="mdc-button mdc-button--large mdc-button--radius-none"
     type="button"
     tooltip="Copy the connect string to the clipboard"
-    [cdkCopyToClipboard]="connectString || stvConnectString">
+    [cdkCopyToClipboard]="connectString || stvConnectString"
+  >
     <div class="mdc-button__ripple"></div>
-    <i-feather name="clipboard" class="mdc-button__icon" aria-hidden="true"></i-feather>
-    <span class="mdc-button__label">
-      copy
-    </span>
+    <i-tabler
+      name="clipboard"
+      class="mdc-button__icon"
+      aria-hidden="true"
+    ></i-tabler>
+    <span class="mdc-button__label"> copy </span>
   </button>
 
-  <a *ngIf="connectString"
+  <a
+    *ngIf="connectString"
     [href]="connectString | connectStringToLink"
     class="mdc-button mdc-button--secondary mdc-button--large mdc-button--radius-right"
     type="button"
-    tooltip="Join the game right away">
+    tooltip="Join the game right away"
+  >
     <div class="mdc-button__ripple"></div>
-    <i-feather name="play" class="mdc-button__icon" aria-hidden="true"></i-feather>
+    <i-tabler
+      name="player-play"
+      class="mdc-button__icon"
+      aria-hidden="true"
+    ></i-tabler>
     <span class="mdc-button__label">
       connect
       <span *ngIf="connectSecondsLeft | async as c" class="connect-timeout">
@@ -33,15 +46,15 @@
     </span>
   </a>
 
-  <a *ngIf="stvConnectString"
+  <a
+    *ngIf="stvConnectString"
     [href]="stvConnectString | connectStringToLink"
     class="mdc-button mdc-button--secondary mdc-button--large mdc-button--radius-right"
     type="button"
-    tooltip="Watch the game">
+    tooltip="Watch the game"
+  >
     <div class="mdc-button__ripple"></div>
-    <i-feather name="eye" class="mdc-button__icon" aria-hidden="true"></i-feather>
-    <span class="mdc-button__label">
-      watch
-    </span>
+    <i-tabler name="eye" class="mdc-button__icon" aria-hidden="true"></i-tabler>
+    <span class="mdc-button__label"> watch </span>
   </a>
 </div>

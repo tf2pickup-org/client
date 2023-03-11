@@ -26,7 +26,7 @@
   </a>
 
   <ng-template #addPrompt>
-    <i-feather name="plus" class="add-prompt"></i-feather>
+    <i-tabler name="plus" class="add-prompt"></i-tabler>
   </ng-template>
 
   <div class="slot-action">
@@ -38,7 +38,7 @@
       tooltip="Free this slot"
       container="body"
     >
-      <i-feather name="minus"></i-feather>
+      <i-tabler name="minus"></i-tabler>
     </button>
 
     <button
@@ -49,7 +49,7 @@
       [disabled]="!!friendFlags.markedBy"
       (click)="emitMarkFriend(slot.player.id, $event)"
     >
-      <i-feather name="heart"></i-feather>
+      <i-tabler name="heart"></i-tabler>
     </button>
   </div>
 </div>

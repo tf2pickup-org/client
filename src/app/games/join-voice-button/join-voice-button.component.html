@@ -1,11 +1,11 @@
-<a *ngIf="mumbleUrl"
+<a
+  *ngIf="mumbleUrl"
   class="mdc-button mdc-button--raised mdc-button--large mdc-button--white"
   [href]="mumbleUrl | safeMumbleUrl"
   role="button"
-  tooltip="Join voice channel">
+  tooltip="Join voice channel"
+>
   <div class="mdc-button__ripple"></div>
-  <i-feather name="headphones" class="mdc-button__icon"></i-feather>
-  <span class="mdc-button__label">
-    join voice
-  </span>
+  <i-tabler name="headphones" class="mdc-button__icon"></i-tabler>
+  <span class="mdc-button__label"> join voice </span>
 </a>

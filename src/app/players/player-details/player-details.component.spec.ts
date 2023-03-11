@@ -18,7 +18,7 @@ import { Player } from '../models/player';
 import { MemoizedSelector } from '@ngrx/store';
 import { PlayerDetailsAdminButtonsComponent } from '../player-details-admin-buttons/player-details-admin-buttons.component';
 import { isAdmin } from '@app/profile/profile.selectors';
-import { FeatherComponent } from 'angular-feather';
+import { TablerIconComponent } from 'angular-tabler-icons';
 
 const paramMap = of(convertToParamMap({ id: 'FAKE_ID' }));
 
@@ -60,7 +60,7 @@ describe('PlayerDetailsComponent', () => {
         MockComponent(PlayerStatsComponent),
         MockComponent(PlayerDetailsGameListComponent),
         MockComponent(PlayerDetailsAdminButtonsComponent),
-        MockComponent(FeatherComponent),
+        MockComponent(TablerIconComponent),
       ],
       imports: [RouterTestingModule],
       providers: [

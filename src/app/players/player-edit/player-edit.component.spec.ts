@@ -16,7 +16,7 @@ import { loadPlayer, playerEdited } from '../actions';
 import { Title } from '@angular/platform-browser';
 import { Tf2ClassName } from '@app/shared/models/tf2-class-name';
 import { PlayerEditSkillComponent } from '../player-edit-skill/player-edit-skill.component';
-import { FeatherComponent } from 'angular-feather';
+import { TablerIconComponent } from 'angular-tabler-icons';
 import { Location } from '@angular/common';
 import { Player } from '../models/player';
 import { ConfigurationService } from '@app/configuration/configuration.service';
@@ -65,7 +65,7 @@ describe(PlayerEditComponent.name, () => {
       .mock(Title)
       .mock(Location)
       .mock(PlayerEditSkillComponent)
-      .mock(FeatherComponent)
+      .mock(TablerIconComponent)
       .mock(ConfigurationService, {
         fetchValues: jasmine.createSpy('fetchValue').and.callFake((...keys) =>
           configuration.pipe(
