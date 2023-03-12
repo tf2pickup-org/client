@@ -53,6 +53,10 @@ export class MapThumbnailService {
     { regex: /koth_proot/, thumbnailName: 'proot' },
     { regex: /pl_problitz/, thumbnailName: 'problitz' },
     { regex: /pl_divulgence/, thumbnailName: 'divulgence' },
+    { regex: /cp_caldera/, thumbnailName: 'caldera' },
+    { regex: /cp_croissant/, thumbnailName: 'croissant' },
+    { regex: /pl_cornwater/, thumbnailName: 'cornwater' },
+    { regex: /pl_eruption/, thumbnailName: 'eruption' },
   ];
 
   getMapThumbnail(map: string) {

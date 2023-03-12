@@ -64,6 +64,10 @@ describe('MapThumbnailService', () => {
       'koth_proot_b4b',
       'pl_problitz_rc2',
       'pl_divulgence_b4b',
+      'cp_caldera_rc1',
+      'pl_cornwater_b8b',
+      'cp_croissant_final',
+      'pl_eruption_b10_test2',
     ].forEach(map =>
       it(`should return valid thumbnail for ${map}`, inject(
         [MapThumbnailService],
