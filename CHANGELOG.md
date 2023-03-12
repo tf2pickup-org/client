@@ -1,5 +1,12 @@
 
 
+## [3.27.2](https://github.com/tf2pickup-org/client/compare/3.27.1...3.27.2) (2023-03-12)
+
+
+### Bug Fixes
+
+* add missing map thumbnails ([#2212](https://github.com/tf2pickup-org/client/issues/2212)) ([4ca063c](https://github.com/tf2pickup-org/client/commit/4ca063c98661fa5bfdc2e77e072c1d48352cc6eb))
+
 ## [3.27.1](https://github.com/tf2pickup-org/client/compare/3.27.0...3.27.1) (2023-01-19)
 
 
