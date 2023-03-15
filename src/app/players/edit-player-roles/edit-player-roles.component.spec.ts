@@ -5,7 +5,7 @@ import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, convertToParamMap } from '@angular/router';
 import { NavigateBackDirective } from '@app/shared/navigate-back.directive';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
-import { FeatherComponent } from 'angular-feather';
+import { TablerIconComponent } from 'angular-tabler-icons';
 import {
   MockBuilder,
   MockedComponentFixture,
@@ -55,7 +55,7 @@ describe(EditPlayerRolesComponent.name, () => {
       .mock(PlayersService)
       .mock(Title)
       .mock(Location)
-      .mock(FeatherComponent)
+      .mock(TablerIconComponent)
       .keep(NavigateBackDirective),
   );
 

@@ -6,7 +6,7 @@
         class="mdc-icon-button cancel-button"
         (click)="cancel()"
       >
-        <i-feather name="x"></i-feather>
+        <i-tabler name="x"></i-tabler>
       </button>
 
       <div class="grow mdc-typography--headline5">Edit player</div>
@@ -17,11 +17,11 @@
         (click)="resetPlayerSkill(); $event.preventDefault()"
       >
         <div class="mdc-button__ripple"></div>
-        <i-feather
-          name="delete"
+        <i-tabler
+          name="backspace"
           class="mdc-button__icon"
           aria-hidden="true"
-        ></i-feather>
+        ></i-tabler>
         <span class="mdc-button__label">reset player skill</span>
       </button>
 
@@ -33,11 +33,11 @@
         "
       >
         <div class="mdc-button__ripple"></div>
-        <i-feather
+        <i-tabler
           name="check"
           class="mdc-button__icon"
           aria-hidden="true"
-        ></i-feather>
+        ></i-tabler>
         <span class="mdc-button__label">save</span>
       </button>
     </div>
@@ -77,12 +77,14 @@
         <div
           *ngIf="gameClasses | async as $gameClasses"
           class="grid gap-4"
-          [ngClass]="{
-            '1': ['grid-cols-1'],
-            '2': ['grid-cols-2'],
-            '4': ['grid-cols-4'],
-            '9': ['grid-cols-3']
-          }[$gameClasses?.length]"
+          [ngClass]="
+            {
+              '1': ['grid-cols-1'],
+              '2': ['grid-cols-2'],
+              '4': ['grid-cols-4'],
+              '9': ['grid-cols-3']
+            }[$gameClasses?.length]
+          "
         >
           <div *ngFor="let gameClass of $gameClasses" class="col-3">
             <app-player-edit-skill

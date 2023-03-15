@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
-import { FeatherComponent } from 'angular-feather';
+import { TablerIconComponent } from 'angular-tabler-icons';
 import {
   MockBuilder,
   MockedComponentFixture,
@@ -36,7 +36,7 @@ describe(PlayerPreferencesComponent.name, () => {
         }),
       )
       .provide(provideMockActions(() => actions.asObservable()))
-      .mock(FeatherComponent),
+      .mock(TablerIconComponent),
   );
 
   beforeEach(() => {

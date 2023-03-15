@@ -1,22 +1,33 @@
 <ng-container [ngSwitch]="permission | async">
-  <div *ngSwitchCase="'default'"
+  <div
+    *ngSwitchCase="'default'"
     @fadeOut
     class="request-notification-permissions default"
-    role="alert">
-    <i-feather name="message-square" class="me-2 message-icon"></i-feather>
-    <span class="message">To be notified when the match is about to start, we need your permission to show browser notifications.</span>
+    role="alert"
+  >
+    <i-tabler name="notification" class="me-2 message-icon"></i-tabler>
+    <span class="message"
+      >To be notified when the match is about to start, we need your permission
+      to show browser notifications.</span
+    >
     <button
       (click)="requestPermission()"
       type="button"
-      class="mdc-button allow-notifications-button">
+      class="mdc-button allow-notifications-button"
+    >
       <div class="mdc-button__ripple"></div>
       <span class="mdc-button__label">Allow notifications</span>
     </button>
   </div>
 
-  <div *ngSwitchCase="'denied'"
+  <div
+    *ngSwitchCase="'denied'"
     class="request-notification-permissions denied"
-    role="alert">
-    <span>You have disabled browser notifications. You will not be warned when the match is about to start.</span>
+    role="alert"
+  >
+    <span
+      >You have disabled browser notifications. You will not be warned when the
+      match is about to start.</span
+    >
   </div>
 </ng-container>

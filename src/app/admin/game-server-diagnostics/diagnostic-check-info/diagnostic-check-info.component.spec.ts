@@ -1,4 +1,4 @@
-import { FeatherComponent } from 'angular-feather';
+import { TablerIconComponent } from 'angular-tabler-icons';
 import { MockBuilder, MockedComponentFixture, MockRender } from 'ng-mocks';
 import { DiagnosticCheckInfoComponent } from './diagnostic-check-info.component';
 
@@ -7,7 +7,7 @@ describe(DiagnosticCheckInfoComponent.name, () => {
   let fixture: MockedComponentFixture<DiagnosticCheckInfoComponent>;
 
   beforeEach(() =>
-    MockBuilder(DiagnosticCheckInfoComponent).mock(FeatherComponent),
+    MockBuilder(DiagnosticCheckInfoComponent).mock(TablerIconComponent),
   );
 
   beforeEach(() => {

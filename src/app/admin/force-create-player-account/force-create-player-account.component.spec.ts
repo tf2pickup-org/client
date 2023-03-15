@@ -3,7 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Player } from '@app/players/models/player';
 import { PlayersService } from '@app/players/players.service';
-import { FeatherComponent } from 'angular-feather';
+import { TablerIconComponent } from 'angular-tabler-icons';
 import {
   MockBuilder,
   MockedComponentFixture,
@@ -29,7 +29,7 @@ describe(ForceCreatePlayerAccountComponent.name, () => {
       .keep(FormBuilder)
       .mock(PlayersService)
       .mock(Location)
-      .mock(FeatherComponent)
+      .mock(TablerIconComponent)
       .keep(EditPageWrapperComponent),
   );
 

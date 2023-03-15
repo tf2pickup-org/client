@@ -6,7 +6,7 @@
         class="mdc-icon-button cancel-button focus-none"
         appNavigateBack
       >
-        <i-feather name="arrow-left" aria-hidden="true"></i-feather>
+        <i-tabler name="arrow-left" aria-hidden="true"></i-tabler>
       </button>
 
       <div class="grow mdc-typography--headline5">
@@ -19,11 +19,11 @@
         [disabled]="(isSaving | async) === true || !form.valid || form.pristine"
       >
         <div class="mdc-button__ripple"></div>
-        <i-feather
+        <i-tabler
           name="check"
           class="mdc-button__icon"
           aria-hidden="true"
-        ></i-feather>
+        ></i-tabler>
         <span class="mdc-button__label">save</span>
       </button>
     </div>

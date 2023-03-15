@@ -4,7 +4,7 @@ import { ConfigurationService } from '@app/configuration/configuration.service';
 import { queueConfig } from '@app/queue/queue.selectors';
 import { GameClassIconComponent } from '@app/shared/game-class-icon/game-class-icon.component';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
-import { FeatherComponent } from 'angular-feather';
+import { TablerIconComponent } from 'angular-tabler-icons';
 import {
   MockBuilder,
   MockedComponentFixture,
@@ -73,7 +73,7 @@ describe(DefaultPlayerSkillEditComponent.name, () => {
         }),
       )
       .keep(EditPageWrapperComponent)
-      .mock(FeatherComponent)
+      .mock(TablerIconComponent)
       .mock(GameClassIconComponent),
   );
 

@@ -7,7 +7,7 @@ import { MemoizedSelector } from '@ngrx/store';
 import { togglePreReady } from '../queue.actions';
 import { By } from '@angular/platform-browser';
 import { ChangeDetectionStrategy } from '@angular/core';
-import { FeatherComponent } from 'angular-feather';
+import { TablerIconComponent } from 'angular-tabler-icons';
 import { MockComponent } from 'ng-mocks';
 
 describe('PreReadyUpButtonComponent', () => {
@@ -21,7 +21,7 @@ describe('PreReadyUpButtonComponent', () => {
       declarations: [
         PreReadyUpButtonComponent,
         SecondsPipe,
-        MockComponent(FeatherComponent),
+        MockComponent(TablerIconComponent),
       ],
       providers: [provideMockStore()],
     })

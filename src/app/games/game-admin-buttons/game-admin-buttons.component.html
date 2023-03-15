@@ -1,22 +1,36 @@
 <div class="admin-buttons-container">
-  <button class="mdc-button mdc-button--inverted mx-2 reinitialize-server-button"
-    (click)="confirmReinitializeServer()">
+  <button
+    class="mdc-button mdc-button--inverted mx-2 reinitialize-server-button"
+    (click)="confirmReinitializeServer()"
+  >
     <div class="mdc-button__ripple"></div>
-    <i-feather name="refresh-ccw" class="mdc-button__icon" aria-hidden="true"></i-feather>
+    <i-tabler
+      name="refresh"
+      class="mdc-button__icon"
+      aria-hidden="true"
+    ></i-tabler>
     <span class="mdc-button__label">reinitialize server</span>
   </button>
 
-  <button class="mdc-button mdc-button--inverted mx-2"
-    (click)="reassignGameServer()">
+  <button
+    class="mdc-button mdc-button--inverted mx-2"
+    (click)="reassignGameServer()"
+  >
     <div class="mdc-button__ripple"></div>
-    <i-feather name="list" class="mdc-button__icon" aria-hidden="true"></i-feather>
+    <i-tabler
+      name="list"
+      class="mdc-button__icon"
+      aria-hidden="true"
+    ></i-tabler>
     <span class="mdc-button__label">reassign...</span>
   </button>
 
-  <button class="mdc-button mdc-button--inverted mx-2 force-end-button"
-    (click)="confirmForceEnd()">
+  <button
+    class="mdc-button mdc-button--inverted mx-2 force-end-button"
+    (click)="confirmForceEnd()"
+  >
     <div class="mdc-button__ripple"></div>
-    <i-feather name="x" class="mdc-button__icon" aria-hidden="true"></i-feather>
+    <i-tabler name="x" class="mdc-button__icon" aria-hidden="true"></i-tabler>
     <span class="mdc-button__label">force end</span>
   </button>
 </div>

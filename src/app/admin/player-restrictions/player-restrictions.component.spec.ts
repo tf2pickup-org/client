@@ -5,7 +5,7 @@ import { TestBed } from '@angular/core/testing';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ConfigurationService } from '@app/configuration/configuration.service';
-import { FeatherComponent } from 'angular-feather';
+import { TablerIconComponent } from 'angular-tabler-icons';
 import {
   MockBuilder,
   MockComponent,
@@ -65,7 +65,7 @@ describe(PlayerRestrictionsComponent.name, () => {
       .mock(Overlay)
       .keep(ChangeDetectorRef)
       .keep(EditPageWrapperComponent)
-      .mock(FeatherComponent)
+      .mock(TablerIconComponent)
       .mock(Location)
       .mock(ActivatedRoute, {
         data: routeData.asObservable(),

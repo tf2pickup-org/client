@@ -4,7 +4,7 @@
       <h6 class="mdc-typography--headline6">Preferences</h6>
       <span class="mdc-typography--body2">Notification sound volume</span>
       <div class="flex flex-row items-center">
-        <i-feather name="volume-x" class="mb-1"></i-feather>
+        <i-tabler name="volume-off" class="mb-1"></i-tabler>
         <input
           type="range"
           formControlName="soundVolume"
@@ -14,7 +14,7 @@
           class="mx-2"
           aria-label="Notification sound volume"
         />
-        <i-feather name="volume-2" class="mb-1"></i-feather>
+        <i-tabler name="volume" class="mb-1"></i-tabler>
       </div>
     </div>
 
@@ -25,11 +25,11 @@
         [disabled]="(isSaving | async) || !form.valid || form.pristine"
       >
         <div class="mdc-button__ripple"></div>
-        <i-feather
+        <i-tabler
           name="check"
           class="mdc-button__icon"
           aria-hidden="true"
-        ></i-feather>
+        ></i-tabler>
         <span class="mdc-button__label">save</span>
       </button>
     </div>

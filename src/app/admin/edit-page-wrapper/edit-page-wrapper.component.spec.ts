@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavigateBackDirective } from '@app/shared/navigate-back.directive';
-import { FeatherComponent } from 'angular-feather';
+import { TablerIconComponent } from 'angular-tabler-icons';
 import {
   MockBuilder,
   MockedComponentFixture,
@@ -28,7 +28,7 @@ describe(EditPageWrapperComponent.name, () => {
   beforeEach(() =>
     MockBuilder(TestWrapperComponent)
       .keep(EditPageWrapperComponent)
-      .mock(FeatherComponent)
+      .mock(TablerIconComponent)
       .mock(NavigateBackDirective),
   );
 
@@ -70,7 +70,7 @@ describe(EditPageWrapperComponent.name, () => {
     });
 
     describe('when disabled', () => {
-      beforeEach(async () => {
+      beforeEach(() => {
         component.saveDisabled = true;
         fixture.detectChanges();
       });

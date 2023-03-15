@@ -1,5 +1,5 @@
 import { Component, EventEmitter } from '@angular/core';
-import { FeatherComponent } from 'angular-feather';
+import { TablerIconComponent } from 'angular-tabler-icons';
 import {
   MockBuilder,
   MockedComponentFixture,
@@ -29,7 +29,7 @@ describe('ShowSkillsSwitchComponent', () => {
   beforeEach(() =>
     MockBuilder(TestWrapperComponent)
       .keep(ShowSkillsSwitchComponent)
-      .mock(FeatherComponent),
+      .mock(TablerIconComponent),
   );
 
   beforeEach(() => {
@@ -48,7 +48,7 @@ describe('ShowSkillsSwitchComponent', () => {
     });
 
     it('should set eye icon', () => {
-      const icon = ngMocks.find(FeatherComponent).componentInstance;
+      const icon = ngMocks.find(TablerIconComponent).componentInstance;
       expect(icon.name).toEqual('eye');
     });
 
@@ -73,7 +73,7 @@ describe('ShowSkillsSwitchComponent', () => {
     });
 
     it('should set eye-off icon', () => {
-      const icon = ngMocks.find(FeatherComponent).componentInstance;
+      const icon = ngMocks.find(TablerIconComponent).componentInstance;
       expect(icon.name).toEqual('eye-off');
     });
 

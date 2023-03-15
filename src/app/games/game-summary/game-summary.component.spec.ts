@@ -4,7 +4,7 @@ import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MockComponent } from 'ng-mocks';
 import { GameSummaryComponent } from './game-summary.component';
-import { FeatherComponent } from 'angular-feather';
+import { TablerIconComponent } from 'angular-tabler-icons';
 
 describe('GameSummaryComponent', () => {
   let component: GameSummaryComponent;
@@ -12,7 +12,7 @@ describe('GameSummaryComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [GameSummaryComponent, MockComponent(FeatherComponent)],
+      declarations: [GameSummaryComponent, MockComponent(TablerIconComponent)],
       imports: [NoopAnimationsModule],
     })
       // https://github.com/angular/angular/issues/12313

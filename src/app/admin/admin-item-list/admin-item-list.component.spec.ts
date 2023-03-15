@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FeatherComponent } from 'angular-feather';
+import { TablerIconComponent } from 'angular-tabler-icons';
 import { MockComponent } from 'ng-mocks';
 import { AdminItemListComponent } from './admin-item-list.component';
 
@@ -9,7 +9,10 @@ describe('AdminItemListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [AdminItemListComponent, MockComponent(FeatherComponent)],
+      declarations: [
+        AdminItemListComponent,
+        MockComponent(TablerIconComponent),
+      ],
     }).compileComponents();
   });
 

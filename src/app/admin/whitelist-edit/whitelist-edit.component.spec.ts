@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { ConfigurationService } from '@app/configuration/configuration.service';
-import { FeatherComponent } from 'angular-feather';
+import { TablerIconComponent } from 'angular-tabler-icons';
 import {
   MockBuilder,
   MockedComponentFixture,
@@ -54,7 +54,7 @@ describe(WhitelistEditComponent.name, () => {
             ),
           ),
       })
-      .mock(FeatherComponent)
+      .mock(TablerIconComponent)
       .keep(EditPageWrapperComponent),
   );
 
