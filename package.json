@@ -83,7 +83,7 @@
     "jwt-decode": "3.1.2",
     "lodash-es": "4.17.21",
     "marked": "4.2.12",
-    "ngx-echarts": "15.0.1",
+    "ngx-echarts": "15.0.2",
     "ngx-markdown": "15.1.2",
     "ngx-pagination": "6.0.3",
     "ngx-webstorage-service": "5.0.0",

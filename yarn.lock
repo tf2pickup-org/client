@@ -12265,14 +12265,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ngx-echarts@npm:15.0.1":
-  version: 15.0.1
-  resolution: "ngx-echarts@npm:15.0.1"
+"ngx-echarts@npm:15.0.2":
+  version: 15.0.2
+  resolution: "ngx-echarts@npm:15.0.2"
   dependencies:
     tslib: ^2.3.0
   peerDependencies:
     echarts: ">=5.0.0"
-  checksum: 4e408d9cec41546b83587f9a281d979437e98266e17dc0a866fd27f045ce1ac66c47f5336bee417817e53c41f6333d6babc678cb60d8b66e8527876cdc5ab08c
+  checksum: ea59d2693915fabb1a9463b4f83d0b6166ab6b40f89be7952e256a0f5b75c651325f60b3843645536bfdf1391749f96081c69bc535dddbb1dd21c72ec8c391b3
   languageName: node
   linkType: hard
 
@@ -15923,7 +15923,7 @@ __metadata:
     lodash-es: 4.17.21
     marked: 4.2.12
     ng-mocks: 14.7.1
-    ngx-echarts: 15.0.1
+    ngx-echarts: 15.0.2
     ngx-markdown: 15.1.2
     ngx-pagination: 6.0.3
     ngx-webstorage-service: 5.0.0
