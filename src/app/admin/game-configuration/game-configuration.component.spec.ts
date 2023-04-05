@@ -4,6 +4,7 @@ import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ConfigurationService } from '@app/configuration/configuration.service';
 import { MockBuilder, MockedComponentFixture, MockRender } from 'ng-mocks';
+import { Subject } from 'rxjs';
 import { GameConfigurationComponent } from './game-configuration.component';
 
 describe('GameConfigurationComponent', () => {
@@ -17,7 +18,9 @@ describe('GameConfigurationComponent', () => {
       .mock(ConfigurationService)
       .keep(ChangeDetectorRef)
       .mock(Location)
-      .mock(ActivatedRoute),
+      .mock(ActivatedRoute, {
+        data: new Subject(),
+      }),
   );
 
   beforeEach(() => {
