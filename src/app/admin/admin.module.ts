@@ -10,7 +10,6 @@ import { AdminItemListComponent } from './admin-item-list/admin-item-list.compon
 import { PlayerSkillTableComponent } from './player-skill-table/player-skill-table.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { ForceCreatePlayerAccountComponent } from './force-create-player-account/force-create-player-account.component';
-import { WhitelistEditComponent } from './whitelist-edit/whitelist-edit.component';
 import { DefaultPlayerSkillEditComponent } from './default-player-skill-edit/default-player-skill-edit.component';
 import { DocumentEditComponent } from './document-edit/document-edit.component';
 import { MarkdownModule } from 'ngx-markdown';
@@ -26,6 +25,7 @@ import { StaticGameServerListComponent } from './game-servers/static-game-server
 import { StaticGameServerComponent } from './game-servers/static-game-server/static-game-server.component';
 import { ServemeTfConfigurationComponent } from './game-servers/serveme-tf-configuration/serveme-tf-configuration.component';
 import { ImportExportPlayerSkillComponent } from './import-export-player-skill/import-export-player-skill.component';
+import { GameConfigurationComponent } from './game-configuration/game-configuration.component';
 
 @NgModule({
   imports: [
@@ -45,7 +45,6 @@ import { ImportExportPlayerSkillComponent } from './import-export-player-skill/i
     AdminItemListComponent,
     PlayerSkillTableComponent,
     ForceCreatePlayerAccountComponent,
-    WhitelistEditComponent,
     DefaultPlayerSkillEditComponent,
     DocumentEditComponent,
     EditPageWrapperComponent,
@@ -60,6 +59,7 @@ import { ImportExportPlayerSkillComponent } from './import-export-player-skill/i
     StaticGameServerComponent,
     ServemeTfConfigurationComponent,
     ImportExportPlayerSkillComponent,
+    GameConfigurationComponent,
   ],
 })
 export class AdminModule {}

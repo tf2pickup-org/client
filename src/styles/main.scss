@@ -58,6 +58,9 @@ $link-color: theme.$on-surface;
 $link-decoration: none;
 $link-hover-color: color.adjust($link-color, $lightness: -15%);
 $link-hover-decoration: underline;
+$input-group-addon-color: theme.$primary;
+$input-bg: #fff;
+$input-color: theme.$on-surface;
 
 .mdc-button {
   @include button.height(36px);

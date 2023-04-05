@@ -1,0 +1,126 @@
+<form [formGroup]="form" (submit)="save()">
+  <app-edit-page-wrapper
+    title="Game configuration"
+    [saveDisabled]="!form.valid || form.pristine"
+  >
+    <div class="surface surface--white my-4">
+      <table
+        class="table-auto border-separate border-spacing-x-4 border-spacing-y-2"
+      >
+        <tbody>
+          <tr class="hover:bg-slate-200">
+            <td>
+              <label for="whitelistIdInput">Whitelist ID</label>
+            </td>
+            <td>
+              <input
+                type="text"
+                class="rounded-md w-full"
+                id="whitelistIdInput"
+                formControlName="whitelistId"
+              />
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <label for="joinGameServerTimeoutInput"
+                >Join gameserver timeout</label
+              >
+            </td>
+
+            <td>
+              <div class="flex flex-row gap-2 items-center">
+                <input
+                  type="number"
+                  class="rounded-md grow"
+                  aria-label="Join gameserver timeout"
+                  aria-describedby="join-gameserver-timeout-addon"
+                  id="joinGameServerTimeoutInput"
+                  formControlName="joinGameServerTimeout"
+                  min="0"
+                  step="30"
+                />
+                <div class="flex flex-col">
+                  <span id="join-gameserver-timeout-addon">seconds</span>
+                  <span class="text-sm text-slate-600">0 to disable</span>
+                </div>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <label for="rejoinGameServerTimeoutInput"
+                >Rejoin gameserver timeout</label
+              >
+            </td>
+
+            <td>
+              <div class="flex flex-row gap-2 items-center">
+                <input
+                  type="number"
+                  class="rounded-md grow"
+                  aria-label="Rejoin gameserver timeout"
+                  aria-describedby="rejoin-gameserver-timeout-addon"
+                  id="rejoinGameServerTimeoutInput"
+                  formControlName="rejoinGameServerTimeout"
+                  min="0"
+                  step="30"
+                />
+                <div class="flex flex-col">
+                  <span id="rejoin-gameserver-timeout-addon">seconds</span>
+                  <span class="text-sm text-slate-600">0 to disable</span>
+                </div>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <label for="executeExtraCommandsInput"
+                >Execute extra commands</label
+              >
+            </td>
+            <td>
+              <textarea
+                class="rounded-md grow w-full"
+                id="executeExtraCommandsInput"
+                formControlName="executeExtraCommands"
+                rows="3"
+              ></textarea>
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <label for="logsTfUploadMethodInput" class="col-3 col-form-label"
+                >logs.tf upload method</label
+              >
+            </td>
+
+            <td>
+              <select
+                class="rounded-md"
+                aria-label="logs.tf upload method"
+                formControlName="logsTfUploadMethod"
+              >
+                <option value="off">
+                  Off - no logs will be uploaded to logs.tf
+                </option>
+                <option value="backend">
+                  Backend - logs will be uploaded by the tf2pickup.org server
+                  only
+                </option>
+                <option value="gameserver">
+                  Gameserver - logs will be uploaded by the logs.tf sourcemod
+                  plugin
+                </option>
+              </select>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </app-edit-page-wrapper>
+</form>
