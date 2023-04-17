@@ -9,22 +9,37 @@ import {
   profileUpdated,
   savePreferences,
   preferencesUpdated,
+  signedOut,
 } from './profile.actions';
 import { AuthService } from '@app/auth/auth.service';
-import { filter, mergeMap, map, switchMap, mapTo } from 'rxjs/operators';
-import { fromEvent } from 'rxjs';
+import {
+  filter,
+  mergeMap,
+  map,
+  switchMap,
+  mapTo,
+  catchError,
+} from 'rxjs/operators';
+import { fromEvent, of, throwError } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { Socket } from '@app/io/socket';
 import { AcceptRulesDialogService } from './accept-rules-dialog.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable()
 export class ProfileEffects implements OnInitEffects {
   loadProfile = createEffect(() => {
     return this.actions.pipe(
       ofType(loadProfile),
-      filter(() => this.authService.authenticated),
       mergeMap(() => this.profileService.fetchProfile()),
       map(profile => profileLoaded({ profile })),
+      catchError((error: unknown) => {
+        if (error instanceof HttpErrorResponse && error.status === 401) {
+          return of(signedOut());
+        } else {
+          return throwError(() => error);
+        }
+      }),
     );
   });
 
