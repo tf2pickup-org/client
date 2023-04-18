@@ -8417,9 +8417,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-jsdoc@npm:41.1.2":
-  version: 41.1.2
-  resolution: "eslint-plugin-jsdoc@npm:41.1.2"
+"eslint-plugin-jsdoc@npm:43.0.3":
+  version: 43.0.3
+  resolution: "eslint-plugin-jsdoc@npm:43.0.3"
   dependencies:
     "@es-joy/jsdoccomment": ~0.37.0
     are-docs-informative: ^0.0.2
@@ -8427,11 +8427,11 @@ __metadata:
     debug: ^4.3.4
     escape-string-regexp: ^4.0.0
     esquery: ^1.5.0
-    semver: ^7.3.8
+    semver: ^7.5.0
     spdx-expression-parse: ^3.0.1
   peerDependencies:
     eslint: ^7.0.0 || ^8.0.0
-  checksum: 9105e5235c2163f5c7217a4b8555cb899ef4387a9bb29d21234d7135c4bd801ddf1bf4aee1ca41e383015fb94a3d373051568d4647edd762aca6e1134bb81afe
+  checksum: 432a3f6b8303f1b624240255231bc473efb82d9edd1314ad0a4fc2ee28ef635061c8c921b258e7303b132ac0480a369371b1ec51f4a1e0f42232a2bad4f4c58e
   languageName: node
   linkType: hard
 
@@ -14941,6 +14941,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"semver@npm:^7.5.0":
+  version: 7.5.0
+  resolution: "semver@npm:7.5.0"
+  dependencies:
+    lru-cache: ^6.0.0
+  bin:
+    semver: bin/semver.js
+  checksum: 2d266937756689a76f124ffb4c1ea3e1bbb2b263219f90ada8a11aebebe1280b13bb76cca2ca96bdee3dbc554cbc0b24752eb895b2a51577aa644427e9229f2b
+  languageName: node
+  linkType: hard
+
 "send@npm:0.18.0":
   version: 0.18.0
   resolution: "send@npm:0.18.0"
@@ -16128,7 +16139,7 @@ __metadata:
     eslint: 8.38.0
     eslint-config-prettier: 8.8.0
     eslint-plugin-import: 2.27.5
-    eslint-plugin-jsdoc: 41.1.2
+    eslint-plugin-jsdoc: 43.0.3
     eslint-plugin-ngrx: 2.1.4
     eslint-plugin-prefer-arrow: 1.2.3
     eslint-plugin-prettier: 4.2.1
