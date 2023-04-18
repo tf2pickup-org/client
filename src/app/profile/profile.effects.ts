@@ -87,6 +87,7 @@ export class ProfileEffects implements OnInitEffects {
     );
   }
 
+  // skipcq: JS-0105
   ngrxOnInitEffects() {
     return loadProfile();
   }

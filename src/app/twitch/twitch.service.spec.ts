@@ -9,7 +9,6 @@ import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { WindowHelperService } from '@app/shared/window-helper.service';
 import { Socket } from '@app/io/socket';
 import EventEmitter from 'eventemitter3';
-import { TokenStoreService } from '@app/auth/token-store.service';
 import { MockProvider } from 'ng-mocks';
 
 describe('TwitchService', () => {
@@ -24,7 +23,6 @@ describe('TwitchService', () => {
         { provide: API_URL, useValue: 'FAKE_URL' },
         provideMockStore(),
         { provide: Socket, useClass: EventEmitter },
-        MockProvider(TokenStoreService, { authToken: 'FAKE_AUTH_TOKEN' }),
         MockProvider(WindowHelperService),
       ],
     });

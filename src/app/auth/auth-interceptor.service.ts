@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class AuthInterceptorService implements HttpInterceptor {
+  // skipcq: JS-0105
   intercept(
     request: HttpRequest<any>,
     next: HttpHandler,
