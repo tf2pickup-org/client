@@ -26,18 +26,22 @@ describe('WsTokenService', () => {
 
   describe('#getWsToken()', () => {
     describe('when not authenticated', () => {
-      beforeEach(() => {
-        // authService.authenticated = false;
-      });
-
       it('should return null', () => {
         service.getWsToken().subscribe(token => expect(token).toEqual(null));
+        httpController
+          .expectOne('FAKE_URL/auth/wstoken')
+          .flush('Unauthorized', { status: 401, statusText: 'Unauthorized' });
       });
     });
 
     describe('when authenticated', () => {
-      beforeEach(() => {
-        // authService.authenticated = true;
+      it('should return the token', () => {
+        service
+          .getWsToken()
+          .subscribe(token => expect(token).toEqual('FAKE_TOKEN'));
+        httpController
+          .expectOne('FAKE_URL/auth/wstoken')
+          .flush({ wsToken: 'FAKE_TOKEN' });
       });
     });
   });
