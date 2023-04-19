@@ -2426,14 +2426,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@es-joy/jsdoccomment@npm:~0.37.0":
-  version: 0.37.0
-  resolution: "@es-joy/jsdoccomment@npm:0.37.0"
+"@es-joy/jsdoccomment@npm:~0.37.1":
+  version: 0.37.1
+  resolution: "@es-joy/jsdoccomment@npm:0.37.1"
   dependencies:
     comment-parser: 1.3.1
-    esquery: ^1.4.0
+    esquery: ^1.5.0
     jsdoc-type-pratt-parser: ~4.0.0
-  checksum: 949c0d164573f189998a7ad7ace936639535e1cacf495d7daa893142dbe9e947f146602615732eaa3174b7ca08af9eea5d9fa97a68fdfe0aa14213ab0f319b13
+  checksum: 28dc5b305660a0d24ef765e92bd0d7b45cb8aac8f722bc059dd96b571c1718bbaff3d5e4d27e447a0963997a1c0eb884bdb56fa49c5634b8785c8f256f7fa72d
   languageName: node
   linkType: hard
 
@@ -8417,11 +8417,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-jsdoc@npm:43.0.3":
-  version: 43.0.3
-  resolution: "eslint-plugin-jsdoc@npm:43.0.3"
+"eslint-plugin-jsdoc@npm:43.0.6":
+  version: 43.0.6
+  resolution: "eslint-plugin-jsdoc@npm:43.0.6"
   dependencies:
-    "@es-joy/jsdoccomment": ~0.37.0
+    "@es-joy/jsdoccomment": ~0.37.1
     are-docs-informative: ^0.0.2
     comment-parser: 1.3.1
     debug: ^4.3.4
@@ -8431,7 +8431,7 @@ __metadata:
     spdx-expression-parse: ^3.0.1
   peerDependencies:
     eslint: ^7.0.0 || ^8.0.0
-  checksum: 432a3f6b8303f1b624240255231bc473efb82d9edd1314ad0a4fc2ee28ef635061c8c921b258e7303b132ac0480a369371b1ec51f4a1e0f42232a2bad4f4c58e
+  checksum: 5d02b6b1e851598da2b4d4957cfc8a319f5e92ce46a515276cd7c5f6329e209a6ee172654669b85e61ce6e2d1912433d704d06c42ee23fa0009a6ed1a63b27dd
   languageName: node
   linkType: hard
 
@@ -8615,15 +8615,6 @@ __metadata:
     esparse: ./bin/esparse.js
     esvalidate: ./bin/esvalidate.js
   checksum: b45bc805a613dbea2835278c306b91aff6173c8d034223fa81498c77dcbce3b2931bf6006db816f62eacd9fd4ea975dfd85a5b7f3c6402cfd050d4ca3c13a628
-  languageName: node
-  linkType: hard
-
-"esquery@npm:^1.4.0":
-  version: 1.4.0
-  resolution: "esquery@npm:1.4.0"
-  dependencies:
-    estraverse: ^5.1.0
-  checksum: a0807e17abd7fbe5fbd4fab673038d6d8a50675cdae6b04fbaa520c34581be0c5fa24582990e8acd8854f671dd291c78bb2efb9e0ed5b62f33bac4f9cf820210
   languageName: node
   linkType: hard
 
@@ -16139,7 +16130,7 @@ __metadata:
     eslint: 8.38.0
     eslint-config-prettier: 8.8.0
     eslint-plugin-import: 2.27.5
-    eslint-plugin-jsdoc: 43.0.3
+    eslint-plugin-jsdoc: 43.0.6
     eslint-plugin-ngrx: 2.1.4
     eslint-plugin-prefer-arrow: 1.2.3
     eslint-plugin-prettier: 4.2.1
