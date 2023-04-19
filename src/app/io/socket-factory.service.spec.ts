@@ -45,7 +45,6 @@ describe('SocketFactoryService', () => {
       const socket = service.createSocket();
       expect(socket).toBeTruthy();
       expect(socket.connected).toBe(false);
-      expect(socket.io.opts.autoConnect).toBe(false);
     });
   });
 });

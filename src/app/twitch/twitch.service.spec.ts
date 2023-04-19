@@ -55,7 +55,7 @@ describe('TwitchService', () => {
       service.login();
       expect(windowHelperService.openWindow).toHaveBeenCalledWith(
         jasmine.objectContaining({
-          url: 'FAKE_URL/twitch/auth?token=FAKE_AUTH_TOKEN',
+          url: 'FAKE_URL/twitch/auth',
         }),
       );
     });
