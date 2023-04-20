@@ -1,6 +1,5 @@
 import { TestBed } from '@angular/core/testing';
 import { SocketFactoryService } from './socket-factory.service';
-import { TokenStoreService } from '@app/auth/token-store.service';
 import {
   HttpClientTestingModule,
   HttpTestingController,
@@ -20,7 +19,6 @@ class WsTokenServiceStub {
 describe('SocketFactoryService', () => {
   let service: SocketFactoryService;
   let httpController: HttpTestingController;
-  let tokenStore: TokenStoreService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -34,7 +32,6 @@ describe('SocketFactoryService', () => {
 
     service = TestBed.inject(SocketFactoryService);
     httpController = TestBed.inject(HttpTestingController);
-    tokenStore = TestBed.inject(TokenStoreService);
   });
 
   afterEach(() => TestBed.inject(MockStore)?.resetSelectors());
@@ -48,7 +45,6 @@ describe('SocketFactoryService', () => {
       const socket = service.createSocket();
       expect(socket).toBeTruthy();
       expect(socket.connected).toBe(false);
-      expect(socket.io.opts.autoConnect).toBe(false);
     });
   });
 });

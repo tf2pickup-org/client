@@ -5,9 +5,9 @@ import {
   rulesAccepted,
   profileUpdated,
   preferencesUpdated,
+  signedOut,
 } from './profile.actions';
 
-// export type State = Profile;
 interface AuthenticatedState extends Profile {
   authenticated: 'authenticated';
 }
@@ -32,6 +32,10 @@ const profileReducer = createReducer<State>(
     ...profile,
     authenticated: 'authenticated',
   })),
+  on(
+    signedOut,
+    () => ({ authenticated: 'not authenticated' } as NotAuthenticatedState),
+  ),
   on(rulesAccepted, state => ({ ...state, hasAcceptedRules: true })),
   on(profileUpdated, (state, { profileChanges }) => ({
     ...state,

@@ -4,7 +4,7 @@ import { WsTokenService } from './ws-token.service';
 import { WS_URL } from '@app/ws-url';
 import { Store } from '@ngrx/store';
 import { ioConnected, ioDisconnected } from './io.actions';
-import { noop } from 'rxjs';
+import { map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -18,28 +18,14 @@ export class SocketFactoryService {
 
   createSocket(): Socket {
     const socket = io(this.wsUrl, {
-      autoConnect: false,
       secure: true,
       reconnection: true,
       rejectUnauthorized: false,
-    });
-
-    socket.on('connect_error', error => {
-      switch (error.message) {
-        case 'invalid signature':
-        case 'jwt expired':
-          this.wsTokenService.getWsToken({ force: true }).subscribe(
-            wsToken => {
-              socket.auth = { token: `Bearer ${wsToken}` };
-            },
-            noop,
-            () => socket.connect(),
-          );
-          break;
-
-        default:
-          console.error(error);
-      }
+      auth: cb =>
+        this.wsTokenService
+          .getWsToken()
+          .pipe(map(token => (token ? { token: `Bearer ${token}` } : {})))
+          .subscribe(cb),
     });
 
     socket.on('exception', ({ message }) => {
@@ -48,17 +34,6 @@ export class SocketFactoryService {
 
     socket.on('connect', () => this.store.dispatch(ioConnected()));
     socket.on('disconnect', () => this.store.dispatch(ioDisconnected()));
-
-    this.wsTokenService.getWsToken().subscribe(
-      wsToken => {
-        if (wsToken) {
-          socket.auth = { token: `Bearer ${wsToken}` };
-        }
-      },
-      noop,
-      () => socket.connect(),
-    );
-
     return socket;
   }
 }

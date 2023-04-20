@@ -1,4 +1,3 @@
-import { LinkedProfile } from '@app/players/models/linked-profile';
 import { createAction, props } from '@ngrx/store';
 import { Profile } from './models/profile';
 
@@ -8,6 +7,8 @@ export const profileLoaded = createAction(
   '[API] Profile loaded',
   props<{ profile: Profile }>(),
 );
+
+export const signedOut = createAction('[API] Player is not logged in');
 
 export const acceptRules = createAction('[Profile] Accept rules');
 export const rulesAccepted = createAction('[Profile API] Rules accepted');

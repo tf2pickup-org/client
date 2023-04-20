@@ -8,7 +8,6 @@ import { twitchStreamsUpdated } from './twitch.actions';
 import { WindowHelperService } from '@app/shared/window-helper.service';
 import { Socket } from '@app/io/socket';
 import { Player } from '@app/players/models/player';
-import { TokenStoreService } from '@app/auth/token-store.service';
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +19,6 @@ export class TwitchService {
     private store: Store,
     private windowHelperService: WindowHelperService,
     socket: Socket,
-    private tokenStore: TokenStoreService,
   ) {
     fromEvent<TwitchStream[]>(socket, 'twitch streams update').subscribe(
       twitchStreams =>
@@ -31,8 +29,7 @@ export class TwitchService {
   login() {
     const width = 550;
     const height = 850;
-    const authToken = this.tokenStore.authToken;
-    const url = `${this.apiUrl}/twitch/auth?token=${authToken}`;
+    const url = `${this.apiUrl}/twitch/auth`;
     this.windowHelperService.openWindow({ width, height, url });
   }
 
