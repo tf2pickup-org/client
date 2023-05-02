@@ -17,9 +17,12 @@ export class NotificationsService {
     }
   }
 
-  requestPermission() {
-    Notification.requestPermission().then(permission =>
-      this._permission.next(permission),
-    );
+  async requestPermission() {
+    try {
+      const permission = await Notification.requestPermission();
+      this._permission.next(permission);
+    } catch (error) {
+      console.error(error);
+    }
   }
 }
