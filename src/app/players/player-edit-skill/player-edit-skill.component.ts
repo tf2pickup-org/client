@@ -1,13 +1,5 @@
-import {
-  Component,
-  ChangeDetectionStrategy,
-  Input,
-  ViewChild,
-  ElementRef,
-  OnDestroy,
-} from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { MDCTextField } from '@material/textfield/component';
 
 @Component({
   selector: 'app-player-edit-skill',
@@ -15,29 +7,10 @@ import { MDCTextField } from '@material/textfield/component';
   styleUrls: ['./player-edit-skill.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PlayerEditSkillComponent implements OnDestroy {
+export class PlayerEditSkillComponent {
   @Input()
   gameClass: string;
 
   @Input()
   form: FormGroup;
-
-  @ViewChild('skill')
-  set skillInput(skillInput: ElementRef) {
-    if (this.field) {
-      this.field.destroy();
-    }
-
-    if (skillInput) {
-      this.field = new MDCTextField(skillInput.nativeElement);
-    }
-  }
-
-  private field: MDCTextField;
-
-  ngOnDestroy() {
-    if (this.field) {
-      this.field.destroy();
-    }
-  }
 }

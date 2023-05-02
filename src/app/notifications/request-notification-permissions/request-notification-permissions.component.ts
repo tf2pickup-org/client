@@ -28,9 +28,9 @@ import { NotificationsService } from '../notifications.service';
 export class RequestNotificationPermissionsComponent {
   permission = this.notificationsService.permission;
 
-  constructor(private notificationsService: NotificationsService) {}
+  constructor(private readonly notificationsService: NotificationsService) {}
 
-  requestPermission() {
-    this.notificationsService.requestPermission();
+  async requestPermission() {
+    await this.notificationsService.requestPermission();
   }
 }
