@@ -5,7 +5,7 @@ import { ReplaySubject } from 'rxjs';
   providedIn: 'root',
 })
 export class NotificationsService {
-  private _permission = new ReplaySubject<NotificationPermission>(1);
+  private readonly _permission = new ReplaySubject<NotificationPermission>(1);
 
   get permission() {
     return this._permission.asObservable();
