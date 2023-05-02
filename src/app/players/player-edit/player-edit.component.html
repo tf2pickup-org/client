@@ -12,6 +12,7 @@
       <div class="grow mdc-typography--headline5">Edit player</div>
 
       <button
+        type="button"
         class="mdc-button mdc-button--inverted"
         [disabled]="(store.isReady | async) === false"
         (click)="resetPlayerSkill(); $event.preventDefault()"
@@ -43,32 +44,15 @@
     </div>
 
     <div class="player-edit-container">
-      <div>
-        <label
-          class="mdc-text-field mdc-text-field--outlined mdc-text-field--label-floating name-field"
-          #name
-        >
-          <input
-            type="text"
-            class="mdc-text-field__input"
-            aria-labelledby="player-name-label"
-            formControlName="name"
-            required
-          />
-          <span
-            class="mdc-notched-outline mdc-notched-outline--upgraded mdc-notched-outline--notched"
-          >
-            <span class="mdc-notched-outline__leading"></span>
-            <span class="mdc-notched-outline__notch">
-              <span
-                class="mdc-floating-label mdc-floating-label--float-above"
-                id="player-name-label"
-                >Name</span
-              >
-            </span>
-            <span class="mdc-notched-outline__trailing"></span>
-          </span>
-        </label>
+      <div class="flex flex-row gap-4 items-center">
+        <span>Name:</span>
+        <input
+          type="text"
+          class="rounded"
+          aria-labelledby="player-name-label"
+          formControlName="name"
+          required
+        />
       </div>
 
       <div *ngIf="skill" formArrayName="skill" class="mt-3">

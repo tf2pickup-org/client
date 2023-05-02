@@ -5,9 +5,6 @@ import {
   OnDestroy,
   ChangeDetectorRef,
   HostListener,
-  ViewChild,
-  ElementRef,
-  AfterViewInit,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { map, takeUntil, pairwise, filter, take } from 'rxjs/operators';
@@ -21,7 +18,6 @@ import { Subject, BehaviorSubject } from 'rxjs';
 import { Title } from '@angular/platform-browser';
 import { environment } from '@environment';
 import { Location } from '@angular/common';
-import { MDCTextField } from '@material/textfield/component';
 import { PlayerSkill } from '../models/player-skill';
 import { PlayerEditStore } from './player-edit.store';
 
@@ -40,10 +36,7 @@ const toFormGroup = (skill: PlayerSkill['skill']): FormGroup => {
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [PlayerEditStore],
 })
-export class PlayerEditComponent implements OnInit, AfterViewInit, OnDestroy {
-  @ViewChild('name')
-  nameInput: ElementRef;
-
+export class PlayerEditComponent implements OnInit, OnDestroy {
   player = this.formBuilder.group({
     name: ['', Validators.required],
     skill: this.formBuilder.group<{ [className: string]: FormControl<number> }>(
@@ -53,7 +46,6 @@ export class PlayerEditComponent implements OnInit, AfterViewInit, OnDestroy {
   gameClasses = new BehaviorSubject<string[]>([]);
 
   private destroyed = new Subject<void>();
-  private fields: MDCTextField[];
 
   constructor(
     private route: ActivatedRoute,
@@ -105,14 +97,7 @@ export class PlayerEditComponent implements OnInit, AfterViewInit, OnDestroy {
       .subscribe(playerId => this.store.setPlayerId(playerId));
   }
 
-  ngAfterViewInit() {
-    this.fields = [this.nameInput].map(
-      input => new MDCTextField(input.nativeElement),
-    );
-  }
-
   ngOnDestroy() {
-    this.fields.forEach(field => field.destroy());
     this.destroyed.next();
     this.destroyed.complete();
   }

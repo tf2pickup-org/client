@@ -1,32 +1,18 @@
-<div *ngIf="form && gameClass" [formGroup]="form" class="flex flex-row items-center gap-1">
+<div
+  *ngIf="form && gameClass"
+  [formGroup]="form"
+  class="flex flex-row items-center gap-1"
+>
   <app-game-class-icon
     [gameClass]="gameClass"
     [size]="24"
     class="me-2"
   ></app-game-class-icon>
-  <label
-    class="mdc-text-field mdc-text-field--outlined mdc-text-field--dense mdc-text-field--label-floating skill-field"
-    #skill
-  >
-    <input
-      type="number"
-      class="mdc-text-field__input"
-      [attr.aria-labelledby]="'player-skill-' + gameClass"
-      [formControlName]="gameClass"
-      required
-    />
-    <span
-      class="mdc-notched-outline mdc-notched-outline--upgraded mdc-notched-outline--notched"
-    >
-      <span class="mdc-notched-outline__leading"></span>
-      <span class="mdc-notched-outline__notch">
-        <span
-          class="mdc-floating-label mdc-floating-label--float-above"
-          [attr.id]="'player-skill-' + gameClass"
-          >{{ gameClass }}</span
-        >
-      </span>
-      <span class="mdc-notched-outline__trailing"></span>
-    </span>
-  </label>
+  <input
+    type="number"
+    class="rounded"
+    [attr.aria-labelledby]="'player-skill-' + gameClass"
+    [formControlName]="gameClass"
+    required
+  />
 </div>
