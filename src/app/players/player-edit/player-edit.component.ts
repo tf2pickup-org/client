@@ -45,14 +45,14 @@ export class PlayerEditComponent implements OnInit, OnDestroy {
   });
   gameClasses = new BehaviorSubject<string[]>([]);
 
-  private destroyed = new Subject<void>();
+  private readonly destroyed = new Subject<void>();
 
   constructor(
-    private route: ActivatedRoute,
-    private formBuilder: FormBuilder,
-    private changeDetector: ChangeDetectorRef,
-    private title: Title,
-    private location: Location,
+    private readonly route: ActivatedRoute,
+    private readonly formBuilder: FormBuilder,
+    private readonly changeDetector: ChangeDetectorRef,
+    private readonly title: Title,
+    private readonly location: Location,
     public readonly store: PlayerEditStore,
   ) {}
 
