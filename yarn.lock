@@ -3977,10 +3977,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/marked@npm:4.3.0":
-  version: 4.3.0
-  resolution: "@types/marked@npm:4.3.0"
-  checksum: 953e19c20a917f40386ea835536ca722439fbd004dfacd8db768c8151dbadc125c464b0c221a990ffea43524475864fafe1568101c4a6d05c54fbfd81029f58f
+"@types/marked@npm:5.0.0":
+  version: 5.0.0
+  resolution: "@types/marked@npm:5.0.0"
+  checksum: 4828a51186074ac18bd04e2f84aff17e97ec72b227f9f4be0cedff6de6fe0fec016250bc22b2ae5d40d7cf0e6de1853df5d437f2dfe983cd96928763c75e6e47
   languageName: node
   linkType: hard
 
@@ -11873,12 +11873,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"marked@npm:4.3.0":
-  version: 4.3.0
-  resolution: "marked@npm:4.3.0"
+"marked@npm:5.0.2":
+  version: 5.0.2
+  resolution: "marked@npm:5.0.2"
   bin:
     marked: bin/marked.js
-  checksum: 0db6817893952c3ec710eb9ceafb8468bf5ae38cb0f92b7b083baa13d70b19774674be04db5b817681fa7c5c6a088f61300815e4dd75a59696f4716ad69f6260
+  checksum: 9d66c998a91d33c422f6242fe08c3b451e4e7863a37e990617179f96786f613e49176859dacc9557d3f6944b2afe44feaaa6a1187550a68746f070c250462213
   languageName: node
   linkType: hard
 
@@ -16193,7 +16193,7 @@ __metadata:
     "@types/jasminewd2": 2.0.10
     "@types/jwt-decode": 2.2.1
     "@types/lodash-es": 4.17.7
-    "@types/marked": 4.3.0
+    "@types/marked": 5.0.0
     "@types/node": 18.16.3
     "@typescript-eslint/eslint-plugin": 5.59.2
     "@typescript-eslint/parser": 5.59.2
@@ -16225,7 +16225,7 @@ __metadata:
     karma-jasmine-html-reporter: 2.0.0
     karma-spec-reporter: 0.0.36
     lodash-es: 4.17.21
-    marked: 4.3.0
+    marked: 5.0.2
     ng-mocks: 14.10.0
     ngx-echarts: 15.0.3
     ngx-markdown: 15.1.2
