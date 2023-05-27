@@ -11873,12 +11873,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"marked@npm:5.0.2":
-  version: 5.0.2
-  resolution: "marked@npm:5.0.2"
+"marked@npm:5.0.3":
+  version: 5.0.3
+  resolution: "marked@npm:5.0.3"
   bin:
     marked: bin/marked.js
-  checksum: 9d66c998a91d33c422f6242fe08c3b451e4e7863a37e990617179f96786f613e49176859dacc9557d3f6944b2afe44feaaa6a1187550a68746f070c250462213
+  checksum: 5eeb6379b1e2a340b7c024d7cf22e0a1ffc08e05618072428327262a4d6df0228aca7eb281319d1b17722eb723f2c25e5b0ffc17e2bf957e315068b9ede56117
   languageName: node
   linkType: hard
 
@@ -16225,7 +16225,7 @@ __metadata:
     karma-jasmine-html-reporter: 2.0.0
     karma-spec-reporter: 0.0.36
     lodash-es: 4.17.21
-    marked: 5.0.2
+    marked: 5.0.3
     ng-mocks: 14.10.1
     ngx-echarts: 15.0.3
     ngx-markdown: 15.1.2
