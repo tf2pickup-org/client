@@ -1,3 +1,11 @@
+## [3.27.4](https://github.com/tf2pickup-org/client/compare/3.27.3...3.27.4) (2023-06-18)
+
+
+### Bug Fixes
+
+* **build:** add avatars.steamstatic.com CSP domain ([#2339](https://github.com/tf2pickup-org/client/issues/2339)) ([6368a8b](https://github.com/tf2pickup-org/client/commit/6368a8b1148815932af0aa39616f79e10ee7dd74))
+* **core:** bump copyright year ([#2340](https://github.com/tf2pickup-org/client/issues/2340)) ([5d10631](https://github.com/tf2pickup-org/client/commit/5d106317f32a234bd63ef98df03a24a8b1575899))
+
 
 
 # [3.28.0-alpha.5](https://github.com/tf2pickup-org/client/compare/3.28.0-alpha.4...3.28.0-alpha.5) (2023-04-20)
