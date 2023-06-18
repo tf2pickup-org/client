@@ -1,9 +1,9 @@
-<div *ngIf="player | async as _player" class="container py-3">
+<div *ngIf="player | async as _player" class="container mx-auto my-4">
   <form [formGroup]="banForm" (ngSubmit)="submit()">
-    <div class="d-flex align-items-center">
+    <div class="flex items-center text-white">
       <button
         type="button"
-        class="mdc-icon-button cancel-button"
+        class="mdc-icon-button focus-none cancel-button"
         tooltip="Cancel"
         placement="top"
         container="body"
@@ -12,9 +12,7 @@
         <i-tabler name="x"></i-tabler>
       </button>
 
-      <div class="flex-grow-1 mdc-typography--headline5">
-        Ban {{ _player.name }}
-      </div>
+      <div class="grow mdc-typography--headline5">Ban {{ _player.name }}</div>
 
       <button
         type="submit"
@@ -32,7 +30,7 @@
     </div>
 
     <div class="add-ban-container">
-      <div class="d-flex flex-row">
+      <div class="flex flex-row">
         <input
           type="range"
           id="length"
@@ -47,32 +45,15 @@
         </label>
       </div>
 
-      <div class="d-flex flex-row mt-3">
-        <label
-          class="mdc-text-field mdc-text-field--outlined mdc-text-field--label-floating name-field"
-          #reason
-        >
-          <input
-            type="text"
-            class="mdc-text-field__input reason-input"
-            aria-labelledby="ban-reason-label"
-            formControlName="reason"
-            required
-          />
-          <span
-            class="mdc-notched-outline mdc-notched-outline--upgraded mdc-notched-outline--notched"
-          >
-            <span class="mdc-notched-outline__leading"></span>
-            <span class="mdc-notched-outline__notch">
-              <span
-                class="mdc-floating-label mdc-floating-label--float-above"
-                id="ban-reason-label"
-                >Reason</span
-              >
-            </span>
-            <span class="mdc-notched-outline__trailing"></span>
-          </span>
-        </label>
+      <div class="flex flex-row mt-3 gap-4 items-center">
+        <span>Reason:</span>
+        <input
+          type="text"
+          class="rounded"
+          aria-labelledby="ban-reason-label"
+          formControlName="reason"
+          required
+        />
       </div>
     </div>
   </form>
