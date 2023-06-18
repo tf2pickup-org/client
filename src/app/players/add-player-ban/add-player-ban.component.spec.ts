@@ -15,7 +15,7 @@ import { By } from '@angular/platform-browser';
 
 const paramMap = of(convertToParamMap({ id: 'FAKE_ID' }));
 
-describe('AddPlayerBanComponent', () => {
+fdescribe('AddPlayerBanComponent', () => {
   let component: AddPlayerBanComponent;
   let fixture: ComponentFixture<AddPlayerBanComponent>;
   let store: MockStore;

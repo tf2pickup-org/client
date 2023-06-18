@@ -3,8 +3,6 @@ import {
   OnInit,
   ChangeDetectionStrategy,
   OnDestroy,
-  ViewChild,
-  ElementRef,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
@@ -25,7 +23,6 @@ import { Player } from '../models/player';
 import { Actions, ofType } from '@ngrx/effects';
 import { Location } from '@angular/common';
 import { currentPlayer } from '@app/profile/profile.selectors';
-import { MDCTextField } from '@material/textfield';
 
 interface BanLengthValue {
   label: string;
@@ -39,17 +36,6 @@ interface BanLengthValue {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddPlayerBanComponent implements OnInit, OnDestroy {
-  @ViewChild('reason')
-  set reasonInput(reasonElement: ElementRef) {
-    if (this._reason) {
-      this._reason.destroy();
-    }
-
-    if (reasonElement) {
-      this._reason = new MDCTextField(reasonElement.nativeElement);
-    }
-  }
-
   readonly lengthValues: BanLengthValue[] = [
     {
       label: '1 hour',
@@ -151,16 +137,15 @@ export class AddPlayerBanComponent implements OnInit, OnDestroy {
     reason: ['', Validators.required],
   });
 
-  private destroyed = new Subject<void>();
-  private _reason: MDCTextField;
+  private readonly destroyed = new Subject<void>();
 
   constructor(
-    private route: ActivatedRoute,
-    private store: Store,
-    private formBuilder: FormBuilder,
-    private router: Router,
-    private actions: Actions,
-    private location: Location,
+    private readonly route: ActivatedRoute,
+    private readonly store: Store,
+    private readonly formBuilder: FormBuilder,
+    private readonly router: Router,
+    private readonly actions: Actions,
+    private readonly location: Location,
   ) {
     this.banForm.get('length').valueChanges.subscribe(value => {
       this.lengthLabel.next(this.lengthValues[value].label);
@@ -198,10 +183,6 @@ export class AddPlayerBanComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.destroyed.next();
     this.destroyed.unsubscribe();
-
-    if (this._reason) {
-      this._reason.destroy();
-    }
   }
 
   submit() {
