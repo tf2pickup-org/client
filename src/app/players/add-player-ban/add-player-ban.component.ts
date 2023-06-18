@@ -137,15 +137,15 @@ export class AddPlayerBanComponent implements OnInit, OnDestroy {
     reason: ['', Validators.required],
   });
 
-  private destroyed = new Subject<void>();
+  private readonly destroyed = new Subject<void>();
 
   constructor(
-    private route: ActivatedRoute,
-    private store: Store,
-    private formBuilder: FormBuilder,
-    private router: Router,
-    private actions: Actions,
-    private location: Location,
+    private readonly route: ActivatedRoute,
+    private readonly store: Store,
+    private readonly formBuilder: FormBuilder,
+    private readonly router: Router,
+    private readonly actions: Actions,
+    private readonly location: Location,
   ) {
     this.banForm.get('length').valueChanges.subscribe(value => {
       this.lengthLabel.next(this.lengthValues[value].label);
