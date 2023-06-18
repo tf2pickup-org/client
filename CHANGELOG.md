@@ -1,3 +1,27 @@
+
+
+# [3.28.0-alpha.6](https://github.com/tf2pickup-org/client/compare/3.28.0-alpha.5...3.28.0-alpha.6) (2023-06-18)
+
+
+### Bug Fixes
+
+* **admin:** add player ban component fixes ([#2338](https://github.com/tf2pickup-org/client/issues/2338)) ([434e16f](https://github.com/tf2pickup-org/client/commit/434e16f2408d66602e024ad0facc3ed7e860070e))
+* **admin:** edit player fixes ([#2316](https://github.com/tf2pickup-org/client/issues/2316)) ([eba4dc2](https://github.com/tf2pickup-org/client/commit/eba4dc260250913701c0b736d80e5f2dc206ecce))
+* **build:** add avatars.steamstatic.com CSP domain ([#2339](https://github.com/tf2pickup-org/client/issues/2339)) ([e096f47](https://github.com/tf2pickup-org/client/commit/e096f473455e6f027fc2e7c4ff1b586cf8575ac6))
+* **core:** bump copyright year ([#2340](https://github.com/tf2pickup-org/client/issues/2340)) ([d08d719](https://github.com/tf2pickup-org/client/commit/d08d71904d3fd114509e493e6983ef7bc4dcd80a))
+* **deps:** update angular monorepo to v15.2.9 ([#2319](https://github.com/tf2pickup-org/client/issues/2319)) ([dcacdc8](https://github.com/tf2pickup-org/client/commit/dcacdc839d2a55d12ab8d8c30dd213e06d56d40f))
+* **deps:** update dependency @angular/cdk to v15.2.8 ([#2291](https://github.com/tf2pickup-org/client/issues/2291)) ([5d09f1b](https://github.com/tf2pickup-org/client/commit/5d09f1b7968dbff8dd59a94d5ff1ee6c4985f04b))
+* **deps:** update dependency @angular/cdk to v15.2.9 ([#2320](https://github.com/tf2pickup-org/client/issues/2320)) ([1eb9248](https://github.com/tf2pickup-org/client/commit/1eb9248a06acd73fad89d6ca9948cc375fb95ced))
+* **deps:** update dependency angular-tabler-icons to v2.17.0 ([#2297](https://github.com/tf2pickup-org/client/issues/2297)) ([82fa566](https://github.com/tf2pickup-org/client/commit/82fa5666907bca7f59a2d17e797b6182cc5364f0))
+* **deps:** update dependency angular-tabler-icons to v2.20.0 ([#2333](https://github.com/tf2pickup-org/client/issues/2333)) ([8147fa7](https://github.com/tf2pickup-org/client/commit/8147fa7636a721fd80b64821ee7e55839f62c45d))
+* **deps:** update dependency chart.js to v4.3.0 ([#2308](https://github.com/tf2pickup-org/client/issues/2308)) ([0adf535](https://github.com/tf2pickup-org/client/commit/0adf535c936a236bd8d58f7d64d2a248ecc672e0))
+* **deps:** update dependency date-fns to v2.30.0 ([#2310](https://github.com/tf2pickup-org/client/issues/2310)) ([52a0655](https://github.com/tf2pickup-org/client/commit/52a0655a1884419fda2c961ada06a8981af3e071))
+* **deps:** update dependency marked to v5 ([#2317](https://github.com/tf2pickup-org/client/issues/2317)) ([e7905c8](https://github.com/tf2pickup-org/client/commit/e7905c89ecf5627c9873e7a59c770d5dff9add73))
+* **deps:** update dependency marked to v5.0.3 ([#2329](https://github.com/tf2pickup-org/client/issues/2329)) ([dea1752](https://github.com/tf2pickup-org/client/commit/dea175262d6dfa909dcc11a3bb3618c2ef430326))
+* **deps:** update dependency rxjs to v7.8.1 ([#2306](https://github.com/tf2pickup-org/client/issues/2306)) ([07b9529](https://github.com/tf2pickup-org/client/commit/07b95295c5b4af65b936f36e4bf031b8997c1ada))
+* **deps:** update dependency tslib to v2.5.2 ([#2330](https://github.com/tf2pickup-org/client/issues/2330)) ([3976127](https://github.com/tf2pickup-org/client/commit/3976127905721cb7ddd76f302c23a8584308832e))
+* **hall-of-fame:** hall of fame layout fixes ([#2337](https://github.com/tf2pickup-org/client/issues/2337)) ([62783fe](https://github.com/tf2pickup-org/client/commit/62783fef0f6ea111665ea2886989bf803c66a20a))
+
 ## [3.27.4](https://github.com/tf2pickup-org/client/compare/3.27.3...3.27.4) (2023-06-18)
 
 
