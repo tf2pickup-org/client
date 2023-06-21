@@ -1,5 +1,17 @@
 
 
+# [3.28.0-alpha.7](https://github.com/tf2pickup-org/client/compare/3.28.0-alpha.6...3.28.0-alpha.7) (2023-06-21)
+
+
+### Bug Fixes
+
+* **test:** remove fdescribe ([#2341](https://github.com/tf2pickup-org/client/issues/2341)) ([50510b8](https://github.com/tf2pickup-org/client/commit/50510b810a0b87a8fa358bf6acadfec18fa6b2bf))
+
+
+### Features
+
+* **build:** export build info ([#2342](https://github.com/tf2pickup-org/client/issues/2342)) ([3adc705](https://github.com/tf2pickup-org/client/commit/3adc705f596001d6d708bed14a28011dc9ae67ed))
+
 # [3.28.0-alpha.6](https://github.com/tf2pickup-org/client/compare/3.28.0-alpha.5...3.28.0-alpha.6) (2023-06-18)
 
 
