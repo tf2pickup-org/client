@@ -22,6 +22,7 @@ export class ConfigurationEditComponent implements OnInit {
       );
   }
 
+  // skipcq: JS-0105
   hasDefaultValue<T>(entry: { value?: T; defaultValue?: T }) {
     return JSON.stringify(entry.value) === JSON.stringify(entry.defaultValue);
   }

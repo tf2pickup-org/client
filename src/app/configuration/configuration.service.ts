@@ -12,8 +12,8 @@ type SetConfigurationEntry<T> = Pick<ConfigurationEntry<T>, 'key' | 'value'>;
 })
 export class ConfigurationService {
   constructor(
-    private http: HttpClient,
-    @Inject(API_URL) private apiUrl: string,
+    private readonly http: HttpClient,
+    @Inject(API_URL) private readonly apiUrl: string,
   ) {}
 
   fetchValues<T extends readonly unknown[]>(
