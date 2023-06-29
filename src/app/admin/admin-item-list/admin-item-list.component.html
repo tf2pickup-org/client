@@ -14,60 +14,154 @@
       </div>
     </div>
 
-    <i-tabler name="chevron-right" aria-hidden="true" class="list-item__chevron"></i-tabler>
+    <i-tabler
+      name="chevron-right"
+      aria-hidden="true"
+      class="list-item__chevron"
+    ></i-tabler>
   </a>
 </ng-template>
 
 <div class="container mx-auto my-4">
-  <ng-template *ngTemplateOutlet="header; context: { $implicit: 'Configuration' }"></ng-template>
+  <ng-template
+    *ngTemplateOutlet="header; context: { $implicit: 'Configuration' }"
+  ></ng-template>
 
-  <ng-template *ngTemplateOutlet="item; context: { $implicit: {
-    link: 'game-servers',
-    title: 'Game servers'
-  } }"></ng-template>
-  <ng-template *ngTemplateOutlet="item; context: { $implicit: { link: 'map-pool', title: 'Map pool' } }"></ng-template>
-  <ng-template *ngTemplateOutlet="item; context: { $implicit: { link: 'game', title: 'Games' } }"></ng-template>
-  <ng-template *ngTemplateOutlet="item; context: { $implicit: {
-    link: 'default-player-skill',
-    title: 'Default player skill'
-  } }"></ng-template>
-  <ng-template *ngTemplateOutlet="item; context: { $implicit: {
-    link: 'player-restrictions',
-    title: 'Player restrictions'
-  } }"></ng-template>
-  <ng-template *ngTemplateOutlet="item; context: { $implicit: { link: 'voice-server', title: 'Voice server' } }"></ng-template>
+  <ng-template
+    *ngTemplateOutlet="
+      item;
+      context: {
+        $implicit: {
+          link: 'game-servers',
+          title: 'Game servers'
+        }
+      }
+    "
+  ></ng-template>
+  <ng-template
+    *ngTemplateOutlet="
+      item;
+      context: { $implicit: { link: 'map-pool', title: 'Map pool' } }
+    "
+  ></ng-template>
+  <ng-template
+    *ngTemplateOutlet="
+      item;
+      context: { $implicit: { link: 'game', title: 'Games' } }
+    "
+  ></ng-template>
+  <ng-template
+    *ngTemplateOutlet="
+      item;
+      context: {
+        $implicit: {
+          link: 'default-player-skill',
+          title: 'Default player skill'
+        }
+      }
+    "
+  ></ng-template>
+  <ng-template
+    *ngTemplateOutlet="
+      item;
+      context: {
+        $implicit: {
+          link: 'player-restrictions',
+          title: 'Player restrictions'
+        }
+      }
+    "
+  ></ng-template>
+  <ng-template
+    *ngTemplateOutlet="
+      item;
+      context: { $implicit: { link: 'voice-server', title: 'Voice server' } }
+    "
+  ></ng-template>
+  <ng-template
+    *ngTemplateOutlet="
+      item;
+      context: { $implicit: { link: 'configuration', title: 'Configuration' } }
+    "
+  ></ng-template>
 
-  <ng-template *ngTemplateOutlet="header; context: { $implicit: 'Actions' }"></ng-template>
+  <ng-template
+    *ngTemplateOutlet="header; context: { $implicit: 'Actions' }"
+  ></ng-template>
 
-  <ng-template *ngTemplateOutlet="item; context: { $implicit: {
-    link: 'force-create-player-account',
-    title: 'Force create player account'
-  } }"></ng-template>
+  <ng-template
+    *ngTemplateOutlet="
+      item;
+      context: {
+        $implicit: {
+          link: 'force-create-player-account',
+          title: 'Force create player account'
+        }
+      }
+    "
+  ></ng-template>
 
-  <ng-template *ngTemplateOutlet="item; context: { $implicit: {
-    link: 'player-skill-import-export',
-    title: 'Import player skill'
-  } }"></ng-template>
+  <ng-template
+    *ngTemplateOutlet="
+      item;
+      context: {
+        $implicit: {
+          link: 'player-skill-import-export',
+          title: 'Import player skill'
+        }
+      }
+    "
+  ></ng-template>
 
-  <ng-template *ngTemplateOutlet="item; context: { $implicit: {
-    link: 'player-skill-table',
-    title: 'Player skill table'
-  } }"></ng-template>
+  <ng-template
+    *ngTemplateOutlet="
+      item;
+      context: {
+        $implicit: {
+          link: 'player-skill-table',
+          title: 'Player skill table'
+        }
+      }
+    "
+  ></ng-template>
 
-  <ng-template *ngTemplateOutlet="item; context: { $implicit: {
-    link: 'scramble-maps',
-    title: 'Scramble maps'
-  } }"></ng-template>
+  <ng-template
+    *ngTemplateOutlet="
+      item;
+      context: {
+        $implicit: {
+          link: 'scramble-maps',
+          title: 'Scramble maps'
+        }
+      }
+    "
+  ></ng-template>
 
-  <ng-template *ngTemplateOutlet="header; context: { $implicit: 'Documents' }"></ng-template>
+  <ng-template
+    *ngTemplateOutlet="header; context: { $implicit: 'Documents' }"
+  ></ng-template>
 
-  <ng-template *ngTemplateOutlet="item; context: { $implicit: {
-    link: 'document-edit/rules',
-    title: 'Rules'
-  } }"></ng-template>
+  <ng-template
+    *ngTemplateOutlet="
+      item;
+      context: {
+        $implicit: {
+          link: 'document-edit/rules',
+          title: 'Rules'
+        }
+      }
+    "
+  ></ng-template>
 
-  <ng-template *ngTemplateOutlet="item; context: { $implicit: {
-    link: 'document-edit/privacy policy',
-    title: 'Privacy policy'
-  } }"></ng-template>
+  <ng-template
+    *ngTemplateOutlet="
+      item;
+      context: {
+        $implicit: {
+          link: 'document-edit/privacy policy',
+          title: 'Privacy policy'
+        }
+      }
+    "
+  ></ng-template>
 </div>

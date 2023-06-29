@@ -85,6 +85,7 @@
     "lodash-es": "4.17.21",
     "marked": "5.0.3",
     "ngx-echarts": "15.0.3",
+    "ngx-edit-inline": "15.0.0",
     "ngx-markdown": "15.1.2",
     "ngx-pagination": "6.0.3",
     "ngx-webstorage-service": "5.0.0",

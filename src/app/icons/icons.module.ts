@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import {
+  IconArrowBackUp,
   IconArrowLeft,
   IconBackspace,
   IconCheck,
@@ -38,6 +39,7 @@ import {
 // https://tabler-icons.io/
 const icons = {
   /* eslint-disable @typescript-eslint/naming-convention */
+  IconArrowBackUp,
   IconArrowLeft,
   IconBackspace,
   IconCheck,

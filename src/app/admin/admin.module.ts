@@ -26,6 +26,8 @@ import { StaticGameServerComponent } from './game-servers/static-game-server/sta
 import { ServemeTfConfigurationComponent } from './game-servers/serveme-tf-configuration/serveme-tf-configuration.component';
 import { ImportExportPlayerSkillComponent } from './import-export-player-skill/import-export-player-skill.component';
 import { GameConfigurationComponent } from './game-configuration/game-configuration.component';
+import { ConfigurationEditComponent } from './configuration-edit/configuration-edit.component';
+import { NgxEditInlineModule } from 'ngx-edit-inline';
 
 @NgModule({
   imports: [
@@ -33,6 +35,7 @@ import { GameConfigurationComponent } from './game-configuration/game-configurat
     ReactiveFormsModule,
     NgxDatatableModule,
     MarkdownModule,
+    NgxEditInlineModule,
 
     IconsModule,
     SharedModule,
@@ -60,6 +63,7 @@ import { GameConfigurationComponent } from './game-configuration/game-configurat
     ServemeTfConfigurationComponent,
     ImportExportPlayerSkillComponent,
     GameConfigurationComponent,
+    ConfigurationEditComponent,
   ],
 })
 export class AdminModule {}

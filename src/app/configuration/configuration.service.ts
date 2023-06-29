@@ -2,26 +2,18 @@ import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { API_URL } from '@app/api-url';
 import { Observable } from 'rxjs';
+import { ConfigurationEntry } from './models/configuration-entry';
 
-interface GetConfigurationEntry<T> {
-  key: string;
-  schema: unknown;
-  value?: T;
-  defaultValue?: T;
-}
-
-interface SetConfigurationEntry<T> {
-  key: string;
-  value: T;
-}
+type GetConfigurationEntry<T> = ConfigurationEntry<T>;
+type SetConfigurationEntry<T> = Pick<ConfigurationEntry<T>, 'key' | 'value'>;
 
 @Injectable({
   providedIn: 'root',
 })
 export class ConfigurationService {
   constructor(
-    private http: HttpClient,
-    @Inject(API_URL) private apiUrl: string,
+    private readonly http: HttpClient,
+    @Inject(API_URL) private readonly apiUrl: string,
   ) {}
 
   fetchValues<T extends readonly unknown[]>(
@@ -31,7 +23,11 @@ export class ConfigurationService {
       -readonly [P in keyof T]: GetConfigurationEntry<T[P]>;
     }>(`${this.apiUrl}/configuration`, {
       params: {
-        keys: keys.join(','),
+        ...(keys?.length
+          ? {
+              keys: keys.join(','),
+            }
+          : {}),
       },
     });
   }
