@@ -1,36 +1,40 @@
 <form [formGroup]="form" (submit)="save()">
   <app-edit-page-wrapper
     title="Force create player account"
-    [saveDisabled]="!form.valid || form.pristine">
+    [saveDisabled]="!form.valid || form.pristine"
+  >
+    <div class="surface surface--white my-4">
+      <table
+        class="table-auto border-separate border-spacing-x-4 border-spacing-y-2"
+      >
+        <tbody>
+          <tr>
+            <td>
+              <label id="name">Player name:</label>
+            </td>
+            <td>
+              <input
+                type="text"
+                class="rounded input-name"
+                aria-labelledby="name"
+                formControlName="name"
+              />
+            </td>
+          </tr>
 
-    <div class="surface surface--white py-4">
-      <label class="mdc-text-field mdc-text-field--outlined mx-2" #name>
-        <span class="mdc-notched-outline">
-          <span class="mdc-notched-outline__leading"></span>
-          <span class="mdc-notched-outline__notch">
-            <span class="mdc-floating-label" id="name">Player name</span>
-          </span>
-          <span class="mdc-notched-outline__trailing"></span>
-        </span>
-        <input type="text"
-          class="mdc-text-field__input input-name"
-          aria-labelledby="name"
-          formControlName="name">
-      </label>
-
-      <label class="mdc-text-field mdc-text-field--outlined mx-2" #steamId>
-        <span class="mdc-notched-outline">
-          <span class="mdc-notched-outline__leading"></span>
-          <span class="mdc-notched-outline__notch">
-            <span class="mdc-floating-label" id="steam-id">SteamID64</span>
-          </span>
-          <span class="mdc-notched-outline__trailing"></span>
-        </span>
-        <input type="text"
-          class="mdc-text-field__input input-steam-id"
-          aria-labelledby="steam-id"
-          formControlName="steamId">
-      </label>
+          <tr>
+            <td><label id="steam-id">SteamID64:</label></td>
+            <td>
+              <input
+                type="text"
+                class="rounded input-steam-id"
+                aria-labelledby="steam-id"
+                formControlName="steamId"
+              />
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </app-edit-page-wrapper>
 </form>
