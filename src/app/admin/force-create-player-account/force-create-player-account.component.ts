@@ -16,9 +16,9 @@ export class ForceCreatePlayerAccountComponent {
   });
 
   constructor(
-    private formBuilder: FormBuilder,
-    private playersService: PlayersService,
-    private location: Location,
+    private readonly formBuilder: FormBuilder,
+    private readonly playersService: PlayersService,
+    private readonly location: Location,
   ) {}
 
   save() {
