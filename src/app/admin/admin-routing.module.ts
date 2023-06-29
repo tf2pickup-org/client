@@ -21,6 +21,7 @@ import { ImportExportPlayerSkillComponent } from './import-export-player-skill/i
 import { PlayerRestrictionsResolver } from './player-restrictions/player-restrictions.resolver';
 import { GameConfigurationComponent } from './game-configuration/game-configuration.component';
 import { GameConfigurationResolver } from './game-configuration/game-configuration.resolver';
+import { ConfigurationEditComponent } from './configuration-edit/configuration-edit.component';
 
 const routes: Routes = [
   {
@@ -157,6 +158,13 @@ const routes: Routes = [
         },
         resolve: {
           gameServer: StaticGameServerResolver,
+        },
+      },
+      {
+        path: 'configuration',
+        component: ConfigurationEditComponent,
+        data: {
+          animation: 'ConfigurationEditPage',
         },
       },
     ],

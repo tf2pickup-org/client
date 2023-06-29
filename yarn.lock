@@ -12470,6 +12470,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"ngx-edit-inline@npm:15.0.0":
+  version: 15.0.0
+  resolution: "ngx-edit-inline@npm:15.0.0"
+  dependencies:
+    tslib: ^2.3.0
+  checksum: 550ec7caa9690217f4ea7ef47e4a5c6d24648345d2c39ce9e26b42f8ed59b763c13f218894ab563c4c41206be78a99dbbd2382cfb4c20800094bd629d542e5fc
+  languageName: node
+  linkType: hard
+
 "ngx-markdown@npm:15.1.2":
   version: 15.1.2
   resolution: "ngx-markdown@npm:15.1.2"
@@ -16238,6 +16247,7 @@ __metadata:
     marked: 5.0.3
     ng-mocks: 14.10.1
     ngx-echarts: 15.0.3
+    ngx-edit-inline: 15.0.0
     ngx-markdown: 15.1.2
     ngx-pagination: 6.0.3
     ngx-webstorage-service: 5.0.0

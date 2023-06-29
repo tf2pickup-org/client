@@ -1,0 +1,41 @@
+<div class="flex flex-row items-center text-white">
+  <button
+    type="button"
+    class="mdc-icon-button cancel-button focus-none"
+    appNavigateBack
+  >
+    <i-tabler name="arrow-left" aria-hidden="true"></i-tabler>
+  </button>
+
+  <div class="grow mdc-typography--headline5">Edit configuration</div>
+</div>
+<div class="surface surface--white my-4 mx-8">
+  <table class="table-auto">
+    <thead>
+      <tr class="font-semibold">
+        <td>Key</td>
+        <td>Value</td>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr
+        *ngFor="let entry of entries | async"
+        class="hover:bg-slate-100 transition-colors duration-75"
+      >
+        <td class="px-2" [class.font-bold]="!hasDefaultValue(entry)">
+          {{ entry.key }}
+        </td>
+        <td class="py-1">
+          <ngx-edit-inline
+            [value]="entry.value | json"
+            type="text"
+            saveOption="focusout"
+            [placeholder]="entry.defaultValue | json"
+            (onValueChanged)="saveEntry(entry.key, $event)"
+          ></ngx-edit-inline>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
