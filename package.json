@@ -121,7 +121,7 @@
     "eslint": "8.44.0",
     "eslint-config-prettier": "8.8.0",
     "eslint-plugin-import": "2.27.5",
-    "eslint-plugin-jsdoc": "44.2.7",
+    "eslint-plugin-jsdoc": "46.4.3",
     "eslint-plugin-ngrx": "2.1.4",
     "eslint-plugin-prefer-arrow": "1.2.3",
     "eslint-plugin-prettier": "4.2.1",
