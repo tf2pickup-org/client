@@ -83,7 +83,7 @@
     "howler": "2.2.3",
     "jwt-decode": "3.1.2",
     "lodash-es": "4.17.21",
-    "marked": "5.0.3",
+    "marked": "5.1.0",
     "ngx-echarts": "15.0.3",
     "ngx-edit-inline": "15.0.0",
     "ngx-markdown": "15.1.2",
