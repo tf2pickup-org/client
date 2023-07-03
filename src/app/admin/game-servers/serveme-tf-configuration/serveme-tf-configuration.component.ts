@@ -30,7 +30,7 @@ export class ServemeTfConfigurationComponent implements OnInit, OnDestroy {
       map(flags => [...new Set(flags)]),
     );
 
-  private destroyed = new Subject<void>();
+  private readonly destroyed = new Subject<void>();
 
   constructor(
     private readonly formBuilder: FormBuilder,

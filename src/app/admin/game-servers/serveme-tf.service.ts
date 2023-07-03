@@ -16,11 +16,11 @@ import { ServemeTfServerOption } from './models/serveme-tf-server-option';
   providedIn: 'root',
 })
 export class ServemeTfService {
-  private _isEnabled = new ReplaySubject<boolean>(1);
+  private readonly _isEnabled = new ReplaySubject<boolean>(1);
 
   constructor(
-    private httpClient: HttpClient,
-    @Inject(API_URL) private apiUrl: string,
+    private readonly httpClient: HttpClient,
+    @Inject(API_URL) private readonly apiUrl: string,
   ) {
     this.checkEnabled();
   }
