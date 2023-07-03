@@ -22,6 +22,7 @@ import { PlayerRestrictionsResolver } from './player-restrictions/player-restric
 import { GameConfigurationComponent } from './game-configuration/game-configuration.component';
 import { GameConfigurationResolver } from './game-configuration/game-configuration.resolver';
 import { ConfigurationEditComponent } from './configuration-edit/configuration-edit.component';
+import { ServemeTfConfigurationResolver } from './game-servers/serveme-tf-configuration/serveme-tf-configuration.resolver';
 
 const routes: Routes = [
   {
@@ -148,6 +149,9 @@ const routes: Routes = [
         component: ServemeTfConfigurationComponent,
         data: {
           animation: 'ServemeTfConfigurationPage',
+        },
+        resolve: {
+          configuration: ServemeTfConfigurationResolver,
         },
       },
       {

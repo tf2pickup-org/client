@@ -10,14 +10,16 @@ import {
   ngMocks,
 } from 'ng-mocks';
 import { of, Subject, take } from 'rxjs';
-import { ServemeTfConfiguration } from '../models/serveme-tf-configuration';
 import { ServemeTfService } from '../serveme-tf.service';
 import { ServemeTfConfigurationComponent } from './serveme-tf-configuration.component';
+import { ConfigurationService } from '@app/configuration/configuration.service';
+import { ActivatedRoute } from '@angular/router';
+import { ConfigurationEntry } from '@app/configuration/models/configuration-entry';
 
 describe(ServemeTfConfigurationComponent.name, () => {
   let component: ServemeTfConfigurationComponent;
   let fixture: MockedComponentFixture<ServemeTfConfigurationComponent>;
-  let configuration: Subject<ServemeTfConfiguration>;
+  let configuration: Subject<ConfigurationEntry[]>;
   const mockServers = [
     {
       flag: 'fr',
@@ -38,15 +40,21 @@ describe(ServemeTfConfigurationComponent.name, () => {
   beforeEach(() =>
     MockBuilder(ServemeTfConfigurationComponent)
       .mock(ServemeTfService, {
-        fetchConfiguration: jasmine
-          .createSpy('fetchConfiguration')
-          .and.returnValue(configuration.pipe(take(1))),
-        storeConfiguration: jasmine
-          .createSpy('storeConfiguration')
-          .and.returnValue(configuration.pipe(take(1))),
         fetchAllServers: jasmine
           .createSpy('fetchAllServers')
           .and.returnValue(of(mockServers)),
+      })
+      .mock(ConfigurationService, {
+        storeValues: jasmine
+          .createSpy('storeValues')
+          .and.returnValue(configuration.pipe(take(1))),
+      })
+      .mock(ActivatedRoute, {
+        data: of({
+          configuration: {
+            preferredRegion: undefined,
+          },
+        }),
       })
       .keep(EditPageWrapperComponent)
       .keep(ReactiveFormsModule)
@@ -74,7 +82,6 @@ describe(ServemeTfConfigurationComponent.name, () => {
 
   describe('when the configuration is fetched', () => {
     beforeEach(() => {
-      configuration.next({ preferredRegion: null });
       fixture.detectChanges();
     });
 
@@ -102,15 +109,22 @@ describe(ServemeTfConfigurationComponent.name, () => {
         });
 
         it('should save the configuration', () => {
-          const servemeTfService = TestBed.inject(ServemeTfService);
-          expect(servemeTfService.storeConfiguration).toHaveBeenCalledWith({
-            preferredRegion: 'de',
+          const configurationService = TestBed.inject(ConfigurationService);
+          expect(configurationService.storeValues).toHaveBeenCalledWith({
+            key: 'serveme_tf.preferred_region',
+            value: 'de',
           });
         });
 
         describe('when the configuration is saved', () => {
           beforeEach(() => {
-            configuration.next({ preferredRegion: 'de' });
+            configuration.next([
+              {
+                key: 'serveme_tf.preferred_region',
+                value: 'de',
+                schema: { type: 'string' },
+              },
+            ]);
             fixture.detectChanges();
           });
 

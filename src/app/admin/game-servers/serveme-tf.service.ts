@@ -16,32 +16,17 @@ import { ServemeTfServerOption } from './models/serveme-tf-server-option';
   providedIn: 'root',
 })
 export class ServemeTfService {
-  private _isEnabled = new ReplaySubject<boolean>(1);
+  private readonly _isEnabled = new ReplaySubject<boolean>(1);
 
   constructor(
-    private httpClient: HttpClient,
-    @Inject(API_URL) private apiUrl: string,
+    private readonly httpClient: HttpClient,
+    @Inject(API_URL) private readonly apiUrl: string,
   ) {
     this.checkEnabled();
   }
 
   get isEnabled(): Observable<boolean> {
     return this._isEnabled.asObservable();
-  }
-
-  fetchConfiguration(): Observable<ServemeTfConfiguration> {
-    return this.httpClient.get<ServemeTfConfiguration>(
-      `${this.apiUrl}/serveme-tf/configuration`,
-    );
-  }
-
-  storeConfiguration(
-    configuration: ServemeTfConfiguration,
-  ): Observable<ServemeTfConfiguration> {
-    return this.httpClient.put<ServemeTfConfiguration>(
-      `${this.apiUrl}/serveme-tf/configuration`,
-      configuration,
-    );
   }
 
   fetchAllServers(): Observable<ServemeTfServerOption[]> {
@@ -52,7 +37,7 @@ export class ServemeTfService {
 
   private checkEnabled() {
     this.httpClient
-      .get<ServemeTfConfiguration>(`${this.apiUrl}/serveme-tf/configuration`)
+      .get<ServemeTfConfiguration>(`${this.apiUrl}/serveme-tf`)
       .pipe(
         tap(() => this._isEnabled.next(true)),
         catchError((error: unknown) => {
