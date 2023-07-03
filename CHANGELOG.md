@@ -1,5 +1,23 @@
 
 
+# [3.28.0-beta.0](https://github.com/tf2pickup-org/client/compare/3.28.0-alpha.7...3.28.0-beta.0) (2023-07-03)
+
+
+### Bug Fixes
+
+* **admin:** fix ForceCreatePlayerAccount page ([#2344](https://github.com/tf2pickup-org/client/issues/2344)) ([a14bca2](https://github.com/tf2pickup-org/client/commit/a14bca2d19b0b38890bf8b1616cc9e9a4d734f35))
+* **admin:** fix serveme.tf configuration ([#2366](https://github.com/tf2pickup-org/client/issues/2366)) ([74a8104](https://github.com/tf2pickup-org/client/commit/74a8104490ad5c0672733068d9a1c60c169c4ed0))
+* **deps:** update dependency angular-tabler-icons to v2.23.0 ([#2360](https://github.com/tf2pickup-org/client/issues/2360)) ([c7d865e](https://github.com/tf2pickup-org/client/commit/c7d865e74ebbfd41d93eb3a6b2d3682b9ac4adfb))
+* **deps:** update dependency marked to v5.1.0 ([#2361](https://github.com/tf2pickup-org/client/issues/2361)) ([8c85f1f](https://github.com/tf2pickup-org/client/commit/8c85f1f03ec4026d79ba6b0543f41e799f4d21b4))
+* **deps:** update dependency socket.io-client to v4.7.1 ([#2362](https://github.com/tf2pickup-org/client/issues/2362)) ([47826e8](https://github.com/tf2pickup-org/client/commit/47826e82e1fc7ce3d8d95e9a5e248b72696498e7))
+* **deps:** update dependency tslib to v2.6.0 ([#2363](https://github.com/tf2pickup-org/client/issues/2363)) ([78d4143](https://github.com/tf2pickup-org/client/commit/78d41435230eb4b8eba691d5136670578b47e601))
+* **deps:** update dependency zone.js to v0.13.1 ([#2350](https://github.com/tf2pickup-org/client/issues/2350)) ([35da3c8](https://github.com/tf2pickup-org/client/commit/35da3c8e570210a732fb1b50103808916ed274e5))
+
+
+### Features
+
+* **admin:** configuration edit page ([#2343](https://github.com/tf2pickup-org/client/issues/2343)) ([f0b205e](https://github.com/tf2pickup-org/client/commit/f0b205ecc616293fc75b958e27740d39d51be08f))
+
 # [3.28.0-alpha.7](https://github.com/tf2pickup-org/client/compare/3.28.0-alpha.6...3.28.0-alpha.7) (2023-06-21)
 
 
