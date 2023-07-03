@@ -25,8 +25,10 @@ describe(ServemeTfService.name, () => {
 
   describe('when the endpoint is enabled', () => {
     beforeEach(() => {
-      const request = http.expectOne('FAKE_URL/serveme-tf/configuration');
-      request.flush({});
+      const request = http.expectOne('FAKE_URL/serveme-tf');
+      request.flush({
+        isEnabled: true,
+      });
     });
 
     it('should mark as enabled', () => {
@@ -44,7 +46,7 @@ describe(ServemeTfService.name, () => {
 
   describe('when the endpoint is disabled', () => {
     beforeEach(() => {
-      const request = http.expectOne('FAKE_URL/serveme-tf/configuration');
+      const request = http.expectOne('FAKE_URL/serveme-tf');
       request.flush({}, { status: 404, statusText: 'Not Found' });
     });
 
