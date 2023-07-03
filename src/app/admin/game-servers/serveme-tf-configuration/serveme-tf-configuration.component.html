@@ -1,22 +1,20 @@
 <form [formGroup]="form" (submit)="save()">
   <app-edit-page-wrapper
     title="serveme.tf configuration"
-    [saveDisabled]="!form.valid || form.pristine">
-
+    [saveDisabled]="!form.valid || form.pristine"
+  >
     <div class="surface surface--white py-4">
       Preferred region for reserved servers:
-      <select
-        formControlName="preferredRegion"
-        class="ms-2">
-        <option [ngValue]="null" class="fst-italic">not set</option>
+      <select formControlName="preferredRegion" class="ms-2">
+        <option [ngValue]="undefined" class="fst-italic">not set</option>
         <option
           *ngFor="let region of availableRegions | async"
-          [ngValue]="region">
+          [ngValue]="region"
+        >
           {{ region | countryFlag }}
           {{ region }}
         </option>
       </select>
     </div>
-
   </app-edit-page-wrapper>
 </form>

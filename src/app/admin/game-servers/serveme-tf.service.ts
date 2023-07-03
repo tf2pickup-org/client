@@ -29,21 +29,6 @@ export class ServemeTfService {
     return this._isEnabled.asObservable();
   }
 
-  fetchConfiguration(): Observable<ServemeTfConfiguration> {
-    return this.httpClient.get<ServemeTfConfiguration>(
-      `${this.apiUrl}/serveme-tf/configuration`,
-    );
-  }
-
-  storeConfiguration(
-    configuration: ServemeTfConfiguration,
-  ): Observable<ServemeTfConfiguration> {
-    return this.httpClient.put<ServemeTfConfiguration>(
-      `${this.apiUrl}/serveme-tf/configuration`,
-      configuration,
-    );
-  }
-
   fetchAllServers(): Observable<ServemeTfServerOption[]> {
     return this.httpClient.get<ServemeTfServerOption[]>(
       `${this.apiUrl}/serveme-tf/servers`,
@@ -52,7 +37,7 @@ export class ServemeTfService {
 
   private checkEnabled() {
     this.httpClient
-      .get<ServemeTfConfiguration>(`${this.apiUrl}/serveme-tf/configuration`)
+      .get<ServemeTfConfiguration>(`${this.apiUrl}/serveme-tf`)
       .pipe(
         tap(() => this._isEnabled.next(true)),
         catchError((error: unknown) => {

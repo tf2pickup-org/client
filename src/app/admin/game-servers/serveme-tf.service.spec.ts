@@ -33,27 +33,6 @@ describe(ServemeTfService.name, () => {
       service.isEnabled.subscribe(enabled => expect(enabled).toBe(true));
     });
 
-    describe('#fetchConfiguration', () => {
-      it('should query the API', () => {
-        service.fetchConfiguration().subscribe();
-        const request = http.expectOne(
-          'FAKE_URL/serveme-tf/configuration',
-        ).request;
-        expect(request.method).toBe('GET');
-      });
-    });
-
-    describe('#storeConfiguration', () => {
-      it('should query the API', () => {
-        service.storeConfiguration({ preferredRegion: 'fr' }).subscribe();
-        const request = http.expectOne(
-          'FAKE_URL/serveme-tf/configuration',
-        ).request;
-        expect(request.method).toBe('PUT');
-        expect(request.body).toEqual({ preferredRegion: 'fr' });
-      });
-    });
-
     describe('#fetchAllServers', () => {
       it('should query the API', () => {
         service.fetchAllServers().subscribe();
