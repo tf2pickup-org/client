@@ -1,5 +1,12 @@
 
 
+# [3.28.0-beta.1](https://github.com/tf2pickup-org/client/compare/3.28.0-beta.0...3.28.0-beta.1) (2023-07-04)
+
+
+### Bug Fixes
+
+* bring back tooltips ([#2367](https://github.com/tf2pickup-org/client/issues/2367)) ([36e80c1](https://github.com/tf2pickup-org/client/commit/36e80c13636613aabcf1e682bb03409eaf8dbcea))
+
 # [3.28.0-beta.0](https://github.com/tf2pickup-org/client/compare/3.28.0-alpha.7...3.28.0-beta.0) (2023-07-03)
 
 
