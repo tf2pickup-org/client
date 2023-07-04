@@ -1,57 +1,71 @@
 <nav class="navbar" role="navigation">
   <a class="navbar__logo" routerLink="/">
-    <img src="/assets/tf2pickup_logo_white@2x.png"
-      srcset="/assets/tf2pickup_logo_white.png,
-              /assets/tf2pickup_logo_white@2x.png 2x"
+    <img
+      src="/assets/tf2pickup_logo_white@2x.png"
+      srcset="
+        /assets/tf2pickup_logo_white.png,
+        /assets/tf2pickup_logo_white@2x.png 2x
+      "
       height="60"
-      alt="Logo">
+      alt="Logo"
+    />
   </a>
 
   <ul class="navbar__links">
     <li>
-      <a routerLink="/games" routerLinkActive="active"
-        class="navbar__link">
+      <a routerLink="/games" routerLinkActive="active" class="navbar__link">
         games
       </a>
     </li>
 
     <li>
-      <a routerLink="/players" routerLinkActive="active"
-        class="navbar__link">
+      <a routerLink="/players" routerLinkActive="active" class="navbar__link">
         players
       </a>
     </li>
 
     <li>
-      <a routerLink="/rules" routerLinkActive="active"
-        class="navbar__link">
+      <a routerLink="/rules" routerLinkActive="active" class="navbar__link">
         rules
       </a>
     </li>
 
     <li>
-      <a routerLink="/hall-of-fame" routerLinkActive="active"
-        class="navbar__link navbar__link--icon">
-        <img src="/assets/ui_icon_crown.png">
+      <a
+        routerLink="/hall-of-fame"
+        routerLinkActive="active"
+        tooltip="Hall of fame"
+        class="navbar__link navbar__link--icon"
+      >
+        <img src="/assets/ui_icon_crown.png" />
       </a>
     </li>
 
     <li>
-      <a routerLink="/statistics" routerLinkActive="active"
-        class="navbar__link navbar__link--icon">
-        <img src="/assets/ui_icon_stats.png">
+      <a
+        routerLink="/statistics"
+        routerLinkActive="active"
+        tooltip="Statistics"
+        class="navbar__link navbar__link--icon"
+      >
+        <img src="/assets/ui_icon_stats.png" />
       </a>
     </li>
 
     <ng-container *ngFor="let link of links">
       <li>
-        <a [href]="link.target"
+        <a
+          [href]="link.target"
           target="_blank"
           class="navbar__link"
-          [class.navbar__link--icon]="!!link.icon">
-          <img *ngIf="link.icon; else text"
+          [tooltip]="link.tooltip"
+          [class.navbar__link--icon]="!!link.icon"
+        >
+          <img
+            *ngIf="link.icon; else text"
             [src]="link.icon"
-            [attr.alt]="link.name">
+            [attr.alt]="link.name"
+          />
           <ng-template #text>{{ link.name }}</ng-template>
         </a>
       </li>
@@ -61,18 +75,25 @@
   <div class="xl:grow"></div>
 
   <ng-container *ngIf="isLoggedIn | async; else notAuthenticated">
-    <a routerLink="/settings"
+    <a
+      routerLink="/settings"
       routerLinkActive="active"
-      class="navbar__link navbar__link--settings">
-      <img src="/assets/ui_settings.png">
+      tooltip="Settings"
+      class="navbar__link navbar__link--settings"
+    >
+      <img src="/assets/ui_settings.png" />
     </a>
 
-    <a *ngIf="currentPlayer | async as _currentPlayer"
+    <a
+      *ngIf="currentPlayer | async as _currentPlayer"
       [routerLink]="['/player', _currentPlayer.id]"
-      class="navbar__link navbar__link--profile">
-      <img [src]="_currentPlayer.avatar.medium"
+      class="navbar__link navbar__link--profile"
+    >
+      <img
+        [src]="_currentPlayer.avatar.medium"
         class="profile-avatar"
-        crossorigin="anonymous">
+        crossorigin="anonymous"
+      />
       {{ _currentPlayer.name }}
     </a>
   </ng-container>

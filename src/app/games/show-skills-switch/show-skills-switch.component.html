@@ -1,3 +1,9 @@
-<button (click)="toggle()" class="mdc-button mdc-button--inverted">
+<button
+  (click)="toggle()"
+  class="mdc-button mdc-button--inverted"
+  [tooltip]="
+    'Player assigned skills are ' + (showSkills ? '' : 'not ') + 'shown'
+  "
+>
   <i-tabler [name]="showSkills ? 'eye' : 'eye-off'"></i-tabler>
 </button>

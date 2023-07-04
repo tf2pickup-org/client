@@ -23,8 +23,13 @@
       {{ game.map }}
 
       <div
-        *ngIf="game.state === 'launching' || game.state === 'started'"
+        *ngIf="
+          ['created', 'configuring', 'launching', 'started'].includes(
+            game.state
+          )
+        "
         class="game-list-item__live-indicator"
+        [tooltip]="game.state"
       ></div>
     </div>
     <app-map-thumbnail [map]="game.map" [width]="143" [height]="80" />

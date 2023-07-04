@@ -37,6 +37,7 @@
           *ngIf="showPlayerConnectionStatus"
           [connectionStatus]="slot.connectionStatus"
           class="player-list-item__connection-status"
+          [tooltip]="slot.connectionStatus"
         ></app-player-connection-status>
       </ng-container>
 

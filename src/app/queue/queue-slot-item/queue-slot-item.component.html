@@ -46,6 +46,9 @@
       type="button"
       class="slot-action-btn mark-as-friend-btn"
       [class.is-marked-by-me]="friendFlags.markedByMe"
+      [tooltip]="
+        friendFlags.markedByMe ? 'Marked as friend' : 'Mark as a friend'
+      "
       [disabled]="!!friendFlags.markedBy"
       (click)="emitMarkFriend(slot.player.id, $event)"
     >
