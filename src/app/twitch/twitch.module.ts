@@ -8,6 +8,7 @@ import { PlayersModule } from '@app/players/players.module';
 import { EffectsModule } from '@ngrx/effects';
 import { TwitchEffects } from './twitch.effects';
 import { IconsModule } from '@app/icons/icons.module';
+import { SharedModule } from '@app/shared/shared.module';
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import { IconsModule } from '@app/icons/icons.module';
 
     PlayersModule,
     IconsModule,
+    SharedModule,
   ],
   declarations: [TwitchStreamListComponent, TwitchStreamListItemComponent],
   exports: [TwitchStreamListComponent],

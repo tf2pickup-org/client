@@ -14,6 +14,7 @@ import { IconsModule } from '@app/icons/icons.module';
 import { TwitchTvIntegrationComponent } from './twitch-tv-integration/twitch-tv-integration.component';
 import { PlayerPreferencesComponent } from './player-preferences/player-preferences.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from '@app/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     PortalModule,
     IconsModule,
     ReactiveFormsModule,
+
+    SharedModule,
 
     ProfileRoutingModule,
   ],

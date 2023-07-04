@@ -10,6 +10,8 @@ import { CountryFlagPipe } from './country-flag.pipe';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { WithLoadingPipe } from './with-loading.pipe';
 import { MapThumbnailComponent } from './map-thumbnail/map-thumbnail.component';
+import { TooltipDirective } from './tooltip.directive';
+import { TooltipComponent } from './tooltip/tooltip.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,8 @@ import { MapThumbnailComponent } from './map-thumbnail/map-thumbnail.component';
     ConfirmDialogComponent,
     WithLoadingPipe,
     MapThumbnailComponent,
+    TooltipDirective,
+    TooltipComponent,
   ],
   imports: [CommonModule],
   exports: [
@@ -36,6 +40,7 @@ import { MapThumbnailComponent } from './map-thumbnail/map-thumbnail.component';
     ConfirmDialogComponent,
     WithLoadingPipe,
     MapThumbnailComponent,
+    TooltipDirective,
   ],
 })
 export class SharedModule {}

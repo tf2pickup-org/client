@@ -3,6 +3,7 @@
     <a
       class="external-profile-link"
       [href]="player.steamId | steamProfileLink"
+      tooltip="Steam profile"
       target="_blank"
     >
       <img
@@ -20,6 +21,7 @@
       *ngIf="player.etf2lProfileId"
       class="external-profile-link"
       [href]="player.etf2lProfileId | etf2lProfileLink"
+      tooltip="ETF2L profile"
       target="_blank"
     >
       <img
@@ -36,6 +38,7 @@
     <a
       class="external-profile-link"
       [href]="player.steamId | logsTfProfileLink"
+      tooltip="logs.tf profile"
       target="_blank"
     >
       <img
@@ -53,6 +56,7 @@
       *ngIf="linkedProfiles | selectTwitchTvProfile as twitchTvProfile"
       class="external-profile-link"
       [href]="twitchTvProfile.login | twitchTvProfileLink"
+      tooltip="twitch.tv profile"
       target="_blank"
     >
       <span class="sr-only">twitch.tv profile</span>
