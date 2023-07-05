@@ -1,35 +1,35 @@
-@use "sass:color";
-@use "sass:string";
-@use "theme";
-@use "variables";
-@use "font";
-@use "@material/theme" as mdc-theme with (
+@use 'sass:color';
+@use 'sass:string';
+@use 'theme';
+@use 'variables';
+@use 'font';
+@use '@material/theme' as mdc-theme with (
   $primary: theme.$primary,
-  $secondary: theme.$secondary,
+  $secondary: theme.$secondary
 );
-@use "@material/typography" with (
-  $font-family: string.unquote("Montserrat, sans-serif"),
+@use '@material/typography' with (
+  $font-family: string.unquote('Montserrat, sans-serif')
 );
-@use "@material/button";
-@use "@material/button/mdc-button";
-@use "@material/card";
-@use "@material/checkbox";
-@use "@material/dialog";
-@use "@material/floating-label/mdc-floating-label";
-@use "@material/icon-button/mdc-icon-button";
-@use "@material/line-ripple/mdc-line-ripple";
-@use "@material/list";
-@use "@material/notched-outline/mdc-notched-outline";
-@use "@material/ripple";
-@use "@material/snackbar";
-@use "@material/textfield";
-@use "@material/radio/styles" as mdc-radio;
-@use "@material/form-field";
-@use "@material/switch/styles" as mdc-switch;
-@use "components/detail";
-@use "components/indicator";
-@use "components/pagination";
-@use "components/surface";
+@use '@material/button';
+@use '@material/button/mdc-button';
+@use '@material/card';
+@use '@material/checkbox';
+@use '@material/dialog';
+@use '@material/floating-label/mdc-floating-label';
+@use '@material/icon-button/mdc-icon-button';
+@use '@material/line-ripple/mdc-line-ripple';
+@use '@material/list';
+@use '@material/notched-outline/mdc-notched-outline';
+@use '@material/ripple';
+@use '@material/snackbar';
+@use '@material/textfield';
+@use '@material/radio/styles' as mdc-radio;
+@use '@material/form-field';
+@use '@material/switch/styles' as mdc-switch;
+@use 'components/detail';
+@use 'components/indicator';
+@use 'components/pagination';
+@use 'components/surface';
 
 /* stylelint-disable scss/at-rule-no-unknown */
 @tailwind base;
@@ -53,7 +53,7 @@
 
 $body-bg: #0d1d36;
 $body-color: #fff;
-$font-family-sans-serif: "Montserrat", sans-serif;
+$font-family-sans-serif: 'Montserrat', sans-serif;
 $link-color: theme.$on-surface;
 $link-decoration: none;
 $link-hover-color: color.adjust($link-color, $lightness: -15%);
@@ -89,8 +89,12 @@ $input-color: theme.$on-surface;
 .mdc-button--secondary {
   @include button.filled-accessible(theme.$secondary);
   @include button.ink-color(theme.$on-secondary);
-  @include button.disabled-container-fill-color(color.adjust(theme.$secondary, $lightness: -30%));
-  @include button.disabled-ink-color(color.adjust(theme.$on-secondary, $lightness: -73%));
+  @include button.disabled-container-fill-color(
+    color.adjust(theme.$secondary, $lightness: -30%)
+  );
+  @include button.disabled-ink-color(
+    color.adjust(theme.$on-secondary, $lightness: -73%)
+  );
 }
 
 .mdc-button--contained {
@@ -123,7 +127,9 @@ $input-color: theme.$on-surface;
 .mdc-text-field {
   @include textfield.outline-color(color.adjust(black, $lightness: 80%));
   @include textfield.hover-outline-color(color.adjust(black, $lightness: 70%));
-  @include textfield.focused-outline-color(color.adjust(theme.$primary, $lightness: 20%));
+  @include textfield.focused-outline-color(
+    color.adjust(theme.$primary, $lightness: 20%)
+  );
 }
 
 .mdc-text-field--dense {
@@ -141,7 +147,7 @@ $input-color: theme.$on-surface;
 }
 
 /* stylelint-disable no-invalid-position-at-import-rule */
-@import "global/body";
+@import 'global/body';
 /* stylelint-enable no-invalid-position-at-import-rule */
 
 .ngx-datatable.bootstrap .datatable-body .datatable-body-cell {
