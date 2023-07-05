@@ -1,5 +1,12 @@
 
 
+# [3.28.0-beta.2](https://github.com/tf2pickup-org/client/compare/3.28.0-beta.1...3.28.0-beta.2) (2023-07-05)
+
+
+### Bug Fixes
+
+* **admin:** fix player skill table component ([#2368](https://github.com/tf2pickup-org/client/issues/2368)) ([f95661e](https://github.com/tf2pickup-org/client/commit/f95661e977cbf5006344a13989b63a9009909614))
+
 # [3.28.0-beta.1](https://github.com/tf2pickup-org/client/compare/3.28.0-beta.0...3.28.0-beta.1) (2023-07-04)
 
 
