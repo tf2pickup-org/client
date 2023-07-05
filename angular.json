@@ -42,7 +42,7 @@
               "src/styles/main.scss",
               "node_modules/@angular/cdk/overlay-prebuilt.css",
               "node_modules/@swimlane/ngx-datatable/index.scss",
-              "node_modules/@swimlane/ngx-datatable/themes/bootstrap.scss",
+              "node_modules/@swimlane/ngx-datatable/themes/dark.scss",
               "node_modules/@swimlane/ngx-datatable/assets/icons.css"
             ],
             "stylePreprocessorOptions": {
