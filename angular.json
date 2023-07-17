@@ -844,6 +844,98 @@
                   "output": "/assets/"
                 }
               ]
+            },
+            "6v6.poland.tf": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/6v6.poland.tf.ts"
+                }
+              ],
+              "assets": [
+                {
+                  "glob": "**/*",
+                  "input": "src/assets/",
+                  "output": "/assets/",
+                  "ignore": [
+                    "custom/**/*"
+                  ]
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/assets/custom/6v6.poland.tf",
+                  "output": "/assets/"
+                }
+              ]
+            },
+            "hl.poland.tf": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/hl.poland.tf.ts"
+                }
+              ],
+              "assets": [
+                {
+                  "glob": "**/*",
+                  "input": "src/assets/",
+                  "output": "/assets/",
+                  "ignore": [
+                    "custom/**/*"
+                  ]
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/assets/custom/hl.poland.tf",
+                  "output": "/assets/"
+                }
+              ]
+            },
+            "bball.poland.tf": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/bball.poland.tf.ts"
+                }
+              ],
+              "assets": [
+                {
+                  "glob": "**/*",
+                  "input": "src/assets/",
+                  "output": "/assets/",
+                  "ignore": [
+                    "custom/**/*"
+                  ]
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/assets/custom/bball.poland.tf",
+                  "output": "/assets/"
+                }
+              ]
+            },
+            "ultiduo.poland.tf": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/ultiduo.poland.tf.ts"
+                }
+              ],
+              "assets": [
+                {
+                  "glob": "**/*",
+                  "input": "src/assets/",
+                  "output": "/assets/",
+                  "ignore": [
+                    "custom/**/*"
+                  ]
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/assets/custom/ultiduo.poland.tf",
+                  "output": "/assets/"
+                }
+              ]
             }
           }
         },
