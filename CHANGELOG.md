@@ -1,5 +1,12 @@
 
 
+# [3.28.0-beta.3](https://github.com/tf2pickup-org/client/compare/3.28.0-beta.2...3.28.0-beta.3) (2023-07-17)
+
+
+### Features
+
+* **poland.tf:** add poland.tf brandings ([#2370](https://github.com/tf2pickup-org/client/issues/2370)) ([b69a14d](https://github.com/tf2pickup-org/client/commit/b69a14d7336a77f3b0c81affafba72eb70f729f7))
+
 # [3.28.0-beta.2](https://github.com/tf2pickup-org/client/compare/3.28.0-beta.1...3.28.0-beta.2) (2023-07-05)
 
 
