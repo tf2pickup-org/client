@@ -2,7 +2,7 @@ name: build-docker-image
 
 on:
   release:
-    types: [ created, edited ]
+    types: [created, edited]
 
 env:
   REGISTRY: ghcr.io
@@ -42,6 +42,14 @@ jobs:
             apiUrl: api.ultiduo.tf2pickup.eu
           - branding: hl.tf2pickup.eu
             apiUrl: api.hl.tf2pickup.eu
+          - branding: 6v6.poland.tf
+            apiUrl: api.6v6.poland.tf
+          - branding: hl.poland.tf
+            apiUrl: api.hl.poland.tf
+          - branding: bball.poland.tf
+            apiUrl: api.bball.poland.tf
+          - branding: ultiduo.poland.tf
+            apiUrl: api.ultiduo.poland.tf
 
     steps:
       - name: Docker meta
