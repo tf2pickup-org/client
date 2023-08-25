@@ -5,7 +5,7 @@
       (store.enabled | async) === false || !form.valid || form.pristine
     "
   >
-    <div class="surface surface--white py-4 my-4">
+    <div class="surface surface--white py-4 my-4 flex flex-col gap-2">
       <ng-container formArrayName="maps">
         <div *ngFor="let map of maps.controls; index as i">
           <app-map-edit
@@ -15,20 +15,22 @@
         </div>
       </ng-container>
 
-      <button
-        type="button"
-        class="mdc-button mdc-button--raised mx-2 my-4 add-map-button"
-        (click)="add()"
-        [disabled]="(store.enabled | async) === false"
-      >
-        <span class="mdc-button__ripple"></span>
-        <i-tabler
-          name="plus"
-          class="mdc-button__icon"
-          aria-hidden="true"
-        ></i-tabler>
-        <span class="mdc-button__label">Add map</span>
-      </button>
+      <div>
+        <button
+          type="button"
+          class="mdc-button mdc-button--raised add-map-button"
+          (click)="add()"
+          [disabled]="(store.enabled | async) === false"
+        >
+          <span class="mdc-button__ripple"></span>
+          <i-tabler
+            name="plus"
+            class="mdc-button__icon"
+            aria-hidden="true"
+          ></i-tabler>
+          <span class="mdc-button__label">Add map</span>
+        </button>
+      </div>
     </div>
   </app-edit-page-wrapper>
 </form>

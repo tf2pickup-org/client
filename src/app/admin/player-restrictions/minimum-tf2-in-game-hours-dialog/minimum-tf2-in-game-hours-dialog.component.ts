@@ -5,11 +5,9 @@ import {
   AfterViewInit,
   ViewChild,
   ElementRef,
-  OnDestroy,
   Output,
   EventEmitter,
 } from '@angular/core';
-import { MDCTextField } from '@material/textfield';
 
 @Component({
   selector: 'app-minimum-tf2-in-game-hours-dialog',
@@ -17,9 +15,7 @@ import { MDCTextField } from '@material/textfield';
   styleUrls: ['./minimum-tf2-in-game-hours-dialog.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MinimumTf2InGameHoursDialogComponent
-  implements AfterViewInit, OnDestroy
-{
+export class MinimumTf2InGameHoursDialogComponent implements AfterViewInit {
   @ViewChild('input')
   inputControl: ElementRef;
 
@@ -32,18 +28,11 @@ export class MinimumTf2InGameHoursDialogComponent
   @Output()
   cancel = new EventEmitter<void>();
 
-  private field: MDCTextField;
-
   ngAfterViewInit() {
-    this.field = new MDCTextField(this.inputControl.nativeElement);
-    this.field.focus();
-  }
-
-  ngOnDestroy() {
-    this.field.destroy();
+    this.inputControl.nativeElement.focus();
   }
 
   doAccept() {
-    this.accept.next(parseInt(this.field.value, 10));
+    this.accept.next(parseInt(this.inputControl.nativeElement.value, 10));
   }
 }
