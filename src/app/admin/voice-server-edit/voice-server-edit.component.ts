@@ -8,7 +8,6 @@ import {
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ConfigurationService } from '@app/configuration/configuration.service';
-import { MDCTextField } from '@material/textfield';
 import { Location } from '@angular/common';
 import { map, Subject } from 'rxjs';
 
@@ -56,10 +55,10 @@ export class VoiceServerEditComponent implements OnInit {
   mumbleServerChannelName: ElementRef;
 
   constructor(
-    private formBuilder: FormBuilder,
-    private configurationService: ConfigurationService,
-    private changeDetector: ChangeDetectorRef,
-    private location: Location,
+    private readonly formBuilder: FormBuilder,
+    private readonly configurationService: ConfigurationService,
+    private readonly changeDetector: ChangeDetectorRef,
+    private readonly location: Location,
   ) {}
 
   ngOnInit() {
