@@ -3,8 +3,6 @@ import {
   ChangeDetectionStrategy,
   ViewChild,
   ElementRef,
-  AfterViewInit,
-  OnDestroy,
   OnInit,
   ChangeDetectorRef,
 } from '@angular/core';
@@ -27,9 +25,7 @@ interface MumbleOptions {
   styleUrls: ['./voice-server-edit.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class VoiceServerEditComponent
-  implements OnInit, AfterViewInit, OnDestroy
-{
+export class VoiceServerEditComponent implements OnInit {
   form = this.formBuilder.group({
     type: '',
     staticLink: '',
@@ -58,8 +54,6 @@ export class VoiceServerEditComponent
 
   @ViewChild('mumbleServerChannelName')
   mumbleServerChannelName: ElementRef;
-
-  private textFields: MDCTextField[];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -109,7 +103,6 @@ export class VoiceServerEditComponent
         this.initialStaticLink.next(staticLink);
         this.initialMumbleOptions.next(mumble);
         this.changeDetector.markForCheck();
-        this.textFields.forEach(field => field?.layout());
       });
 
     this.form.get('type').valueChanges.subscribe(type => {
@@ -132,20 +125,6 @@ export class VoiceServerEditComponent
         // no default
       }
     });
-  }
-
-  ngAfterViewInit() {
-    this.textFields = [
-      this.staticLinkInput,
-      this.mumbleServerUrlInput,
-      this.mumbleServerPortInput,
-      this.mumbleServerPassword,
-      this.mumbleServerChannelName,
-    ].map(input => new MDCTextField(input.nativeElement));
-  }
-
-  ngOnDestroy() {
-    this.textFields.forEach(field => field.destroy());
   }
 
   get type(): string {
