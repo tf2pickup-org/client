@@ -3,14 +3,11 @@ import {
   ChangeDetectionStrategy,
   ViewChild,
   ElementRef,
-  AfterViewInit,
-  OnDestroy,
   OnInit,
   ChangeDetectorRef,
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ConfigurationService } from '@app/configuration/configuration.service';
-import { MDCTextField } from '@material/textfield';
 import { Location } from '@angular/common';
 import { map, Subject } from 'rxjs';
 
@@ -27,9 +24,7 @@ interface MumbleOptions {
   styleUrls: ['./voice-server-edit.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class VoiceServerEditComponent
-  implements OnInit, AfterViewInit, OnDestroy
-{
+export class VoiceServerEditComponent implements OnInit {
   form = this.formBuilder.group({
     type: '',
     staticLink: '',
@@ -59,13 +54,11 @@ export class VoiceServerEditComponent
   @ViewChild('mumbleServerChannelName')
   mumbleServerChannelName: ElementRef;
 
-  private textFields: MDCTextField[];
-
   constructor(
-    private formBuilder: FormBuilder,
-    private configurationService: ConfigurationService,
-    private changeDetector: ChangeDetectorRef,
-    private location: Location,
+    private readonly formBuilder: FormBuilder,
+    private readonly configurationService: ConfigurationService,
+    private readonly changeDetector: ChangeDetectorRef,
+    private readonly location: Location,
   ) {}
 
   ngOnInit() {
@@ -109,7 +102,6 @@ export class VoiceServerEditComponent
         this.initialStaticLink.next(staticLink);
         this.initialMumbleOptions.next(mumble);
         this.changeDetector.markForCheck();
-        this.textFields.forEach(field => field?.layout());
       });
 
     this.form.get('type').valueChanges.subscribe(type => {
@@ -132,20 +124,6 @@ export class VoiceServerEditComponent
         // no default
       }
     });
-  }
-
-  ngAfterViewInit() {
-    this.textFields = [
-      this.staticLinkInput,
-      this.mumbleServerUrlInput,
-      this.mumbleServerPortInput,
-      this.mumbleServerPassword,
-      this.mumbleServerChannelName,
-    ].map(input => new MDCTextField(input.nativeElement));
-  }
-
-  ngOnDestroy() {
-    this.textFields.forEach(field => field.destroy());
   }
 
   get type(): string {

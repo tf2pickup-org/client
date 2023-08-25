@@ -1,45 +1,28 @@
-<div class="d-flex flex-row align-items-center" [formGroup]="mapControl">
-  <label
-    class="mdc-text-field mdc-text-field--outlined mdc-text-field--no-label mdc-text-field--dense mx-2"
-    #mapName
-  >
-    <span class="mdc-notched-outline">
-      <span class="mdc-notched-outline__leading"></span>
-      <span class="mdc-notched-outline__trailing"></span>
-    </span>
-    <input
-      class="mdc-text-field__input map-name-input"
-      type="text"
-      aria-label="Map name"
-      formControlName="name"
-      placeholder="Map name"
-      #mapNameInput
-    />
-  </label>
+<div
+  class="flex flex-row items-center gap-2 align-middle"
+  [formGroup]="mapControl"
+>
+  <input
+    class="rounded-md map-name-input"
+    type="text"
+    aria-label="Map name"
+    formControlName="name"
+    placeholder="Map name"
+    #mapNameInput
+  />
 
-  <label
-    class="mdc-text-field mdc-text-field--outlined mdc-text-field--no-labels mdc-text-field--dense mx-2"
-    #execConfig
-  >
-    <span class="mdc-notched-outline">
-      <span class="mdc-notched-outline__leading"></span>
-      <span class="mdc-notched-outline__trailing"></span>
-    </span>
-    <input
-      class="mdc-text-field__input"
-      type="text"
-      aria-label="Config to execute"
-      formControlName="execConfig"
-      placeholder="Config to execute"
-    />
-  </label>
+  <input
+    class="rounded-md"
+    type="text"
+    aria-label="Config to execute"
+    formControlName="execConfig"
+    placeholder="Config to execute"
+  />
 
   <button
     type="button"
-    class="mdc-icon-button remove-map-button"
+    class="remove-map-button"
     tooltip="Remove map"
-    placement="top"
-    container="body"
     (click)="remove.next()"
   >
     <i-tabler name="x"></i-tabler>

@@ -1,44 +1,48 @@
 <div class="mdc-dialog mdc-dialog--open">
   <div class="mdc-dialog__container">
-    <div class="mdc-dialog__surface"
+    <div
+      class="mdc-dialog__surface"
       role="alertdialog"
       aria-modal="true"
-      aria-labelledby="dialog-title">
+      aria-labelledby="dialog-title"
+    >
       <!-- Title cannot contain leading whitespace due to mdc-typography-baseline-top() -->
-      <h2 class="mdc-dialog__title" id="dialog-title"><!--
+      <h2 class="mdc-dialog__title" id="dialog-title">
+        <!--
      -->Minimum TF2 in-game time<!--
-   --></h2>
+   -->
+      </h2>
       <div class="mdc-dialog__content">
         <ul class="mdc-list">
           <li class="mdc-list-item" tabindex="0">
-            <label class="mdc-text-field mdc-text-field--outlined mdc-text-field--no-label mdc-text-field--dense" #input>
-              <span class="mdc-notched-outline">
-                <span class="mdc-notched-outline__leading"></span>
-                <span class="mdc-notched-outline__trailing"></span>
-              </span>
-              <input class="mdc-text-field__input"
-                type="number"
-                min="0"
-                step="100"
-                aria-labelledby="minimum-tf2-in-game-hours"
-                [value]="minimumTf2InGameHours">
-              <span class="mdc-text-field__affix mdc-text-field__affix--suffix">hours</span>
-            </label>
+            <input
+              class="rounded-md"
+              type="number"
+              min="0"
+              step="100"
+              aria-labelledby="minimum-tf2-in-game-hours"
+              [value]="minimumTf2InGameHours"
+              #input
+            />
           </li>
         </ul>
       </div>
       <div class="mdc-dialog__actions">
-        <button cancelButton
+        <button
+          cancelButton
           type="button"
           class="mdc-button mdc-dialog__button"
-          (click)="cancel.next()">
+          (click)="cancel.next()"
+        >
           <div class="mdc-button__ripple"></div>
           <span class="mdc-button__label">Cancel</span>
         </button>
-        <button okButton
+        <button
+          okButton
           type="button"
           class="mdc-button mdc-dialog__button"
-          (click)="doAccept()">
+          (click)="doAccept()"
+        >
           <div class="mdc-button__ripple"></div>
           <span class="mdc-button__label">OK</span>
         </button>
