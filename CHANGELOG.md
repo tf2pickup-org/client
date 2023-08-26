@@ -1,5 +1,13 @@
 
 
+# [3.28.0-rc.0](https://github.com/tf2pickup-org/client/compare/3.28.0-beta.3...3.28.0-rc.0) (2023-08-26)
+
+
+### Bug Fixes
+
+* **admin:** admin panel fixes ([#2371](https://github.com/tf2pickup-org/client/issues/2371)) ([1ee4e0d](https://github.com/tf2pickup-org/client/commit/1ee4e0dd2845c1d66c3ac9d9810307ab19029164))
+* **ci:** bump setup-chromedriver to the latest version ([#2373](https://github.com/tf2pickup-org/client/issues/2373)) ([27f9cf8](https://github.com/tf2pickup-org/client/commit/27f9cf8261acf47b569b75a4efb2a6e5c4807b73))
+
 # [3.28.0-beta.3](https://github.com/tf2pickup-org/client/compare/3.28.0-beta.2...3.28.0-beta.3) (2023-07-17)
 
 
