@@ -50,6 +50,8 @@ jobs:
             apiUrl: api.bball.poland.tf
           - branding: ultiduo.poland.tf
             apiUrl: api.ultiduo.poland.tf
+          - branding: tf2pickup.eu
+            apiUrl: api.tf2pickup.eu
 
     steps:
       - name: Docker meta
