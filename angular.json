@@ -959,6 +959,29 @@
                   "output": "/assets/"
                 }
               ]
+            },
+            "hl.tf2pickup.us": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/hl.tf2pickup.us.ts"
+                }
+              ],
+              "assets": [
+                {
+                  "glob": "**/*",
+                  "input": "src/assets/",
+                  "output": "/assets/",
+                  "ignore": [
+                    "custom/**/*"
+                  ]
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/assets/custom/hl.tf2pickup.us",
+                  "output": "/assets/"
+                }
+              ]
             }
           }
         },
