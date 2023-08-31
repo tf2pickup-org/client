@@ -1,5 +1,18 @@
 
 
+# [3.28.0-rc.1](https://github.com/tf2pickup-org/client/compare/3.28.0-rc.0...3.28.0-rc.1) (2023-08-31)
+
+
+### Bug Fixes
+
+* **build:** optimize images ([#2375](https://github.com/tf2pickup-org/client/issues/2375)) ([4865272](https://github.com/tf2pickup-org/client/commit/4865272097617b524a89f450a8767c28d0e396c2))
+
+
+### Features
+
+* **hl.tf2pickup.us:** add hl.tf2pickup.us branding ([#2376](https://github.com/tf2pickup-org/client/issues/2376)) ([d3f801e](https://github.com/tf2pickup-org/client/commit/d3f801ea500615e4b9c8f16d0fb8a2b9a3556aa2))
+* **tf2pickup.eu:** add tf2pickup.eu branding ([#2374](https://github.com/tf2pickup-org/client/issues/2374)) ([e428b0b](https://github.com/tf2pickup-org/client/commit/e428b0b6e3e46bbeca6cc546c7c995bade740bf9))
+
 # [3.28.0-rc.0](https://github.com/tf2pickup-org/client/compare/3.28.0-beta.3...3.28.0-rc.0) (2023-08-26)
 
 
