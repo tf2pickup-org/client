@@ -1,5 +1,12 @@
 
 
+# [3.28.0-rc.2](https://github.com/tf2pickup-org/client/compare/3.28.0-rc.1...3.28.0-rc.2) (2023-09-01)
+
+
+### Bug Fixes
+
+* **tf2pickup.eu:** assets fixes ([#2377](https://github.com/tf2pickup-org/client/issues/2377)) ([ac86d0b](https://github.com/tf2pickup-org/client/commit/ac86d0bf160f3fe06d77b9db488953d8c1b0149b))
+
 # [3.28.0-rc.1](https://github.com/tf2pickup-org/client/compare/3.28.0-rc.0...3.28.0-rc.1) (2023-08-31)
 
 
