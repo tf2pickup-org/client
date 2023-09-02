@@ -1,5 +1,12 @@
 
 
+# [3.28.0-rc.3](https://github.com/tf2pickup-org/client/compare/3.28.0-rc.2...3.28.0-rc.3) (2023-09-02)
+
+
+### Features
+
+* **arena.tf2pickup.eu:** add arena.tf2pickup.eu branding ([#2378](https://github.com/tf2pickup-org/client/issues/2378)) ([c5a4361](https://github.com/tf2pickup-org/client/commit/c5a436195dede70712634572e7b06afb545d2f05))
+
 # [3.28.0-rc.2](https://github.com/tf2pickup-org/client/compare/3.28.0-rc.1...3.28.0-rc.2) (2023-09-01)
 
 
