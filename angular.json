@@ -982,6 +982,29 @@
                   "output": "/assets/"
                 }
               ]
+            },
+            "arena.tf2pickup.eu": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/arena.tf2pickup.eu.ts"
+                }
+              ],
+              "assets": [
+                {
+                  "glob": "**/*",
+                  "input": "src/assets/",
+                  "output": "/assets/",
+                  "ignore": [
+                    "custom/**/*"
+                  ]
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/assets/custom/arena.tf2pickup.eu",
+                  "output": "/assets/"
+                }
+              ]
             }
           }
         },
