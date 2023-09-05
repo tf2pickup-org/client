@@ -6,7 +6,7 @@
           <tr>
             <th scope="col">Date</th>
             <th scope="col">Name</th>
-            <th scope="col">Steam ID</th>
+            <th scope="col">SteamID64</th>
             <th scope="col">IP</th>
             <th scope="col">User agent</th>
             <th scope="col">Action</th>
@@ -40,7 +40,7 @@
               <input
                 type="text"
                 #steamIdInput
-                placeholder="Steam ID"
+                placeholder="SteamID64"
                 (keyup)="updateFilter('player.steamId', steamIdInput.value)"
               />
             </th>
