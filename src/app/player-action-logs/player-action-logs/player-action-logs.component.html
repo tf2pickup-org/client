@@ -1,62 +1,76 @@
 <div class="container-fluid pt-3 px-5">
-  <table class="table table-light table-striped">
-    <thead>
-      <tr>
-        <th scope="col">Date</th>
-        <th scope="col">Name</th>
-        <th scope="col">Steam ID</th>
-        <th scope="col">IP</th>
-        <th scope="col">User agent</th>
-        <th scope="col">Action</th>
-      </tr>
-    </thead>
+  <div class="surface">
+    <div class="surface__content prose max-w-none">
+      <table class="table table-light table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Name</th>
+            <th scope="col">SteamID64</th>
+            <th scope="col">IP</th>
+            <th scope="col">User agent</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
 
-    <tbody *ngIf="store.actions | async as _actions">
-      <tr *ngFor="let action of _actions">
-        <td>{{ action.timestamp | date:'medium' }}</td>
-        <td>{{ action.player.name }}</td>
-        <td>{{ action.player.steamId }}</td>
-        <td>{{ action.ipAddress }}</td>
-        <td>{{ action.userAgent }}</td>
-        <td>{{ action.action }}</td>
-      </tr>
-    </tbody>
+        <tbody *ngIf="store.actions | async as _actions">
+          <tr *ngFor="let action of _actions">
+            <td>{{ action.timestamp | date : 'medium' }}</td>
+            <td>{{ action.player.name }}</td>
+            <td>{{ action.player.steamId }}</td>
+            <td>{{ action.ipAddress }}</td>
+            <td>{{ action.userAgent }}</td>
+            <td>{{ action.action }}</td>
+          </tr>
+        </tbody>
 
-    <tfoot>
-      <tr>
-        <th>Filters:</th>
-        <th>
-          <input type="text"
-            id="player-name-input"
-            #nameInput
-            placeholder="Name"
-            (keyup)="updateFilter('player.name', nameInput.value)" />
-        </th>
-        <th>
-          <input type="text"
-            #steamIdInput
-            placeholder="Steam ID"
-            (keyup)="updateFilter('player.steamId', steamIdInput.value)" />
-        </th>
-        <th>
-          <input type="text"
-            #ipAddressInput
-            placeholder="IP"
-            (keyup)="updateFilter('ipAddress', ipAddressInput.value)" />
-        </th>
-        <th>
-          <input type="text"
-            #userAgentInput
-            placeholder="User agent"
-            (keyup)="updateFilter('userAgent', userAgentInput.value)" />
-          </th>
-        <th>
-          <input type="text"
-            #actionInput
-            placeholder="Action"
-            (keyup)="updateFilter('action', actionInput.value)" />
-        </th>
-      </tr>
-    </tfoot>
-  </table>
+        <tfoot>
+          <tr>
+            <th>Filters:</th>
+            <th>
+              <input
+                type="text"
+                id="player-name-input"
+                #nameInput
+                placeholder="Name"
+                (keyup)="updateFilter('player.name', nameInput.value)"
+              />
+            </th>
+            <th>
+              <input
+                type="text"
+                #steamIdInput
+                placeholder="SteamID64"
+                (keyup)="updateFilter('player.steamId', steamIdInput.value)"
+              />
+            </th>
+            <th>
+              <input
+                type="text"
+                #ipAddressInput
+                placeholder="IP"
+                (keyup)="updateFilter('ipAddress', ipAddressInput.value)"
+              />
+            </th>
+            <th>
+              <input
+                type="text"
+                #userAgentInput
+                placeholder="User agent"
+                (keyup)="updateFilter('userAgent', userAgentInput.value)"
+              />
+            </th>
+            <th>
+              <input
+                type="text"
+                #actionInput
+                placeholder="Action"
+                (keyup)="updateFilter('action', actionInput.value)"
+              />
+            </th>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
 </div>
