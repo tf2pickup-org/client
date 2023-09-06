@@ -30,19 +30,67 @@
     </div>
 
     <div class="add-ban-container">
+      <select
+        class="rounded-md"
+        aria-label="Duration input type"
+        formControlName="durationInputType"
+      >
+        <option value="duration" selected>Duration</option>
+        <option value="endDate">End date</option>
+        <option value="forever">Forever</option>
+      </select>
+
       <div class="flex flex-row">
-        <input
-          type="range"
-          id="length"
-          formControlName="length"
-          class="form-control-range"
-          min="0"
-          [max]="lengthValues.length - 1"
-          tooltip="Ban length"
-        />
-        <label for="length" class="mx-2">
-          {{ lengthLabel | async }}
-        </label>
+        <div *ngIf="durationInputType.value === 'duration'">
+          <input
+            type="number"
+            id="durationValue"
+            class="rounded"
+            formControlName="durationValue"
+            min="1"
+            tooltip="Time value"
+          />
+          <select
+            class="rounded-md"
+            aria-label="Time unit"
+            formControlName="durationUnit"
+          >
+            <option value="seconds" selected>Seconds</option>
+            <option value="minutes">Minutes</option>
+            <option value="hours">Hours</option>
+            <option value="days">Days</option>
+            <option value="weeks">Weeks</option>
+            <option value="months">Months</option>
+            <option value="years">Years</option>
+          </select>
+          <div>
+            <span>Ban expires at: {{ banExpirationDate | async }}</span>
+          </div>
+        </div>
+
+        <div *ngIf="durationInputType.value === 'endDate'">
+          <input
+            type="date"
+            id="endDate"
+            class="rounded"
+            formControlName="endDate"
+            tooltip="End date"
+          />
+          <input
+            type="time"
+            id="endTime"
+            class="rounded"
+            formControlName="endTime"
+            tooltip="End time"
+          />
+          <div>
+            <span>Ban duration: {{ banDuration | async }}</span>
+          </div>
+        </div>
+
+        <div *ngIf="durationInputType.value === 'forever'">
+            <span>Ban expires at: {{ banExpirationDate | async }}</span>
+        </div>
       </div>
 
       <div class="flex flex-row mt-3 gap-4 items-center">
