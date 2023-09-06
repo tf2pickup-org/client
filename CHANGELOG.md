@@ -1,5 +1,18 @@
 
 
+# [3.28.0-rc.4](https://github.com/tf2pickup-org/client/compare/3.28.0-rc.3...3.28.0-rc.4) (2023-09-06)
+
+
+### Bug Fixes
+
+* **admin:** player action logs style fixes ([#2389](https://github.com/tf2pickup-org/client/issues/2389)) ([5fbc372](https://github.com/tf2pickup-org/client/commit/5fbc3726e7a28abb08accc5a0697cdc77f0e2066))
+* **deps:** update dependency @tailwindcss/forms to v0.5.6 ([#2386](https://github.com/tf2pickup-org/client/issues/2386)) ([2d6f37d](https://github.com/tf2pickup-org/client/commit/2d6f37d79bfa6eb350a0dbb0d589cb1ac4fc70b5))
+
+
+### Features
+
+* **admin:** add ban duration input ([#2388](https://github.com/tf2pickup-org/client/issues/2388)) ([aaeafa3](https://github.com/tf2pickup-org/client/commit/aaeafa3ffc4a402c67c1aa703016bdc87ae31367))
+
 # [3.28.0-rc.3](https://github.com/tf2pickup-org/client/compare/3.28.0-rc.2...3.28.0-rc.3) (2023-09-02)
 
 
