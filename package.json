@@ -114,7 +114,7 @@
     "@angular/language-service": "15.2.9",
     "@ngrx/schematics": "14.3.3",
     "@release-it/conventional-changelog": "5.1.1",
-    "@tailwindcss/typography": "0.5.9",
+    "@tailwindcss/typography": "0.5.10",
     "@types/howler": "2.2.8",
     "@types/jasmine": "4.3.5",
     "@types/jasminewd2": "2.0.10",
