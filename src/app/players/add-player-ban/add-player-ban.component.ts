@@ -15,19 +15,60 @@ import {
   withLatestFrom,
 } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
+import { format, add, intervalToDuration, formatDuration } from 'date-fns';
 import { playerById, playerBansLocked } from '../selectors';
 import { loadPlayer, addPlayerBan, playerBanAdded } from '../actions';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, ValidatorFn, Validators } from '@angular/forms';
 import { Observable, BehaviorSubject, Subject } from 'rxjs';
 import { Player } from '../models/player';
 import { Actions, ofType } from '@ngrx/effects';
 import { Location } from '@angular/common';
 import { currentPlayer } from '@app/profile/profile.selectors';
 
-interface BanLengthValue {
-  label: string;
-  toDate: () => Date;
-}
+type DurationUnit =
+  | 'seconds'
+  | 'minutes'
+  | 'hours'
+  | 'days'
+  | 'weeks'
+  | 'months'
+  | 'years';
+
+type BanDurationInputType = 'duration' | 'endDate' | 'forever';
+
+const getDurationToDate = (dateTimeString: string): string => {
+  const epochValue = Date.parse(dateTimeString);
+  if (Number.isNaN(epochValue)) {
+    return 'Invalid date';
+  }
+  if (epochValue <= Date.now()) {
+    return 'End date must be after current date';
+  }
+
+  const duration = intervalToDuration({
+    start: new Date(),
+    end: new Date(epochValue),
+  });
+  return formatDuration(duration);
+};
+
+const endDateTimeValidator: ValidatorFn = groupControl => {
+  if (groupControl.get('durationInputType').value !== 'endDate') {
+    return null;
+  }
+
+  const fullBanEndDate = `${groupControl.get('endDate').value} ${
+    groupControl.get('endTime').value
+  }`;
+  const endDateEpoch = Date.parse(fullBanEndDate);
+  if (Number.isNaN(endDateEpoch)) {
+    return { endDate: 'Date or time are invalid' };
+  }
+  if (endDateEpoch < Date.now()) {
+    return { endDate: 'End date must be after current date' };
+  }
+  return null;
+};
 
 @Component({
   selector: 'app-add-player-ban',
@@ -36,106 +77,24 @@ interface BanLengthValue {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddPlayerBanComponent implements OnInit, OnDestroy {
-  readonly lengthValues: BanLengthValue[] = [
-    {
-      label: '1 hour',
-      toDate: () => {
-        const date = new Date();
-        date.setHours(date.getHours() + 1);
-        return date;
-      },
-    },
-    {
-      label: '2 hours',
-      toDate: () => {
-        const date = new Date();
-        date.setHours(date.getHours() + 2);
-        return date;
-      },
-    },
-    {
-      label: '6 hours',
-      toDate: () => {
-        const date = new Date();
-        date.setHours(date.getHours() + 6);
-        return date;
-      },
-    },
-    {
-      label: '24 hours',
-      toDate: () => {
-        const date = new Date();
-        date.setHours(date.getHours() + 24);
-        return date;
-      },
-    },
-    {
-      label: '3 days',
-      toDate: () => {
-        const date = new Date();
-        date.setDate(date.getDate() + 3);
-        return date;
-      },
-    },
-    {
-      label: '7 days',
-      toDate: () => {
-        const date = new Date();
-        date.setDate(date.getDate() + 7);
-        return date;
-      },
-    },
-    {
-      label: '2 weeks',
-      toDate: () => {
-        const date = new Date();
-        date.setDate(date.getDate() + 14);
-        return date;
-      },
-    },
-    {
-      label: '4 weeks',
-      toDate: () => {
-        const date = new Date();
-        date.setDate(date.getDate() + 28);
-        return date;
-      },
-    },
-    {
-      label: '6 months',
-      toDate: () => {
-        const date = new Date();
-        date.setMonth(date.getMonth() + 6);
-        return date;
-      },
-    },
-    {
-      label: '1 year',
-      toDate: () => {
-        const date = new Date();
-        date.setFullYear(date.getFullYear() + 1);
-        return date;
-      },
-    },
-    {
-      label: 'forever',
-      toDate: () => {
-        const date = new Date();
-        date.setFullYear(date.getFullYear() + 100);
-        return date;
-      },
-    },
-  ];
-
   player: Observable<Player>;
-  lengthLabel = new BehaviorSubject<string>(this.lengthValues[0].label);
+  banExpirationDate = new BehaviorSubject<string>(new Date().toLocaleString());
+  banDuration = new BehaviorSubject<string>('0 seconds');
+  durationInputType = new BehaviorSubject<BanDurationInputType>('duration');
   isSubmitLocked = this.store.select(playerBansLocked);
   locked = this.store.select(playerBansLocked);
 
-  banForm = this.formBuilder.group({
-    length: [0],
-    reason: ['', Validators.required],
-  });
+  banForm = this.formBuilder.group(
+    {
+      durationInputType: ['duration' as BanDurationInputType],
+      durationUnit: ['seconds' as DurationUnit],
+      durationValue: [1],
+      endDate: [new Date().toLocaleString()],
+      endTime: [new Date().toLocaleTimeString()],
+      reason: ['', Validators.required],
+    },
+    { validators: endDateTimeValidator },
+  );
 
   private readonly destroyed = new Subject<void>();
 
@@ -147,8 +106,45 @@ export class AddPlayerBanComponent implements OnInit, OnDestroy {
     private readonly actions: Actions,
     private readonly location: Location,
   ) {
-    this.banForm.get('length').valueChanges.subscribe(value => {
-      this.lengthLabel.next(this.lengthValues[value].label);
+    const now = new Date();
+    this.banForm.get('endDate').setValue(format(now, 'yyyy-MM-dd'));
+    this.banForm.get('endTime').setValue(format(now, 'HH:mm'));
+
+    this.banForm
+      .get('durationInputType')
+      .valueChanges.subscribe(durationInputType => {
+        this.durationInputType.next(durationInputType);
+        if (durationInputType === 'forever') {
+          this.banExpirationDate.next(
+            add(new Date(), { years: 100 }).toLocaleString(),
+          );
+        } else {
+          this.banExpirationDate.next(new Date().toLocaleString());
+        }
+      });
+
+    this.banForm.get('durationUnit').valueChanges.subscribe(durationUnit => {
+      const duration = {
+        [durationUnit]: this.banForm.get('durationValue').value,
+      };
+      this.banExpirationDate.next(add(new Date(), duration).toLocaleString());
+    });
+
+    this.banForm.get('durationValue').valueChanges.subscribe(durationValue => {
+      const duration = {
+        [this.banForm.get('durationUnit').value]: durationValue,
+      };
+      this.banExpirationDate.next(add(new Date(), duration).toLocaleString());
+    });
+
+    this.banForm.get('endDate').valueChanges.subscribe(endDate => {
+      const dateTimeString = `${endDate} ${this.banForm.get('endTime').value}`;
+      this.banDuration.next(getDurationToDate(dateTimeString));
+    });
+
+    this.banForm.get('endTime').valueChanges.subscribe(endTime => {
+      const dateTimeString = `${this.banForm.get('endDate').value} ${endTime}`;
+      this.banDuration.next(getDurationToDate(dateTimeString));
     });
   }
 
@@ -185,6 +181,26 @@ export class AddPlayerBanComponent implements OnInit, OnDestroy {
     this.destroyed.unsubscribe();
   }
 
+  getEndDate() {
+    switch (this.banForm.get('durationInputType').value) {
+      case 'duration':
+        return add(new Date(), {
+          [this.banForm.get('durationUnit').value]:
+            this.banForm.get('durationValue').value,
+        });
+      case 'endDate':
+        return new Date(
+          `${this.banForm.get('endDate').value} ${
+            this.banForm.get('endTime').value
+          }`,
+        );
+      case 'forever':
+        return add(new Date(), { years: 100 });
+      default:
+        throw new Error('Unsupported ban duration input type');
+    }
+  }
+
   submit() {
     this.player
       .pipe(
@@ -193,7 +209,7 @@ export class AddPlayerBanComponent implements OnInit, OnDestroy {
         map(player => ({
           player,
           start: new Date(),
-          end: this.lengthValues[this.banForm.get('length').value].toDate(),
+          end: this.getEndDate(),
           reason: this.banForm.get('reason').value,
         })),
         withLatestFrom(this.store.select(currentPlayer)),
