@@ -49,6 +49,16 @@ export class AuthErrorComponent implements OnInit {
           this.errorLink =
             BASE_URL + '/#private-steam-profile-and-game-statistics';
           break;
+
+        case 'etf2l name taken':
+          this.errorMessage =
+            'Your ETF2L name is already used by another player. You must change it to register.';
+          break;
+
+        case 'steam name taken':
+          this.errorMessage =
+            'Your Steam nickname is already used by another player. You must change it to register.';
+          break;
       }
     }
   }

@@ -36,6 +36,16 @@ describe('AuthErrorComponent', () => {
       key: 'cannot verify in-game hours for TF2',
       message: 'Your in-game hours for TF2 could not be verified.',
     },
+    {
+      key: 'etf2l name taken',
+      message:
+        'Your ETF2L name is already used by another player. You must change it to register.',
+    },
+    {
+      key: 'steam name taken',
+      message:
+        'Your Steam nickname is already used by another player. You must change it to register.',
+    },
   ];
 
   let errorMessage: HTMLElement;
