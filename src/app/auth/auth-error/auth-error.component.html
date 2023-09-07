@@ -1,1 +1,5 @@
-<div class="p-3 mb-2 bg-danger text-white rounded">{{ errorMessage }}</div>
+<div class="p-3 bg-danger text-white rounded error">
+  <span class="warning-sign">⚠</span>
+  <span id="auth-error-message">{{ errorMessage }}</span>
+  <a class="text-white bold" *ngIf="errorLink" href="{{ errorLink }}">Click here for more info</a>
+</div>

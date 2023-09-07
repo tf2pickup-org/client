@@ -1,0 +1,22 @@
+.error {
+    font-size: 42px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.bold {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.warning-sign {
+    color: yellow;
+    font-size: 60px;
+}
+
+#auth-error-message {
+    text-align: center;
+}
