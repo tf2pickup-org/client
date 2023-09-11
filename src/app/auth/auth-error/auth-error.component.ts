@@ -7,6 +7,8 @@ import {
 import { HttpParams } from '@angular/common/http';
 import { HTTP_PARAMS } from '../http-params';
 
+const docsBaseUrl = 'https://docs.tf2pickup.org/player-registration-issues';
+
 @Component({
   selector: 'app-auth-error',
   templateUrl: './auth-error.component.html',
@@ -15,8 +17,9 @@ import { HTTP_PARAMS } from '../http-params';
 })
 export class AuthErrorComponent implements OnInit {
   errorMessage = 'Unknown error';
+  errorLink = null;
 
-  constructor(@Inject(HTTP_PARAMS) private httpParams: HttpParams) {}
+  constructor(@Inject(HTTP_PARAMS) private readonly httpParams: HttpParams) {}
 
   ngOnInit() {
     if (this.httpParams.has('error')) {
@@ -25,26 +28,38 @@ export class AuthErrorComponent implements OnInit {
         case 'no etf2l profile':
           this.errorMessage =
             'No valid ETF2L profile found for this Steam account.';
-          break;
-
-        case 'not enough steam hours':
-          this.errorMessage =
-            'You do not meet the required amount of hours in Team Fortress 2.';
+          this.errorLink = `${docsBaseUrl}/#etf2l-account-does-not-exist`;
           break;
 
         case 'etf2l banned':
           this.errorMessage = 'This account is banned.';
+          this.errorLink = `${docsBaseUrl}/#etf2l-account-is-banned-or-blacklisted`;
           break;
 
         case 'not enough tf2 hours':
           this.errorMessage =
             'You do not meet the minimum required hours in TF2.';
+          this.errorLink = `${docsBaseUrl}/#insufficient-tf2-in-game-hours`;
           break;
 
         case 'cannot verify in-game hours for TF2':
           this.errorMessage =
             'Your in-game hours for TF2 could not be verified.';
+          this.errorLink = `${docsBaseUrl}/#private-steam-profile-and-game-statistics`;
           break;
+
+        case 'etf2l name taken':
+          this.errorMessage =
+            'Your ETF2L name is already used by another player. You must change it to register.';
+          break;
+
+        case 'steam name taken':
+          this.errorMessage =
+            'Your Steam nickname is already used by another player. You must change it to register.';
+          break;
+
+        default:
+          this.errorMessage = 'Unknown error';
       }
     }
   }

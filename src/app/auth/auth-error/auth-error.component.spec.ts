@@ -12,7 +12,9 @@ const configureTestingModule = async (httpParams: HttpParams) => {
 
   const fixture = TestBed.createComponent(AuthErrorComponent);
   fixture.detectChanges();
-  const errorMessage = fixture.debugElement.query(By.css('div')).nativeElement;
+  const errorMessage = fixture.debugElement.query(
+    By.css('#auth-error-message'),
+  ).nativeElement;
   return { fixture, errorMessage };
 };
 
@@ -21,11 +23,6 @@ describe('AuthErrorComponent', () => {
     {
       key: 'no etf2l profile',
       message: 'No valid ETF2L profile found for this Steam account.',
-    },
-    {
-      key: 'not enough steam hours',
-      message:
-        'You do not meet the required amount of hours in Team Fortress 2.',
     },
     {
       key: 'etf2l banned',
@@ -38,6 +35,16 @@ describe('AuthErrorComponent', () => {
     {
       key: 'cannot verify in-game hours for TF2',
       message: 'Your in-game hours for TF2 could not be verified.',
+    },
+    {
+      key: 'etf2l name taken',
+      message:
+        'Your ETF2L name is already used by another player. You must change it to register.',
+    },
+    {
+      key: 'steam name taken',
+      message:
+        'Your Steam nickname is already used by another player. You must change it to register.',
     },
   ];
 
