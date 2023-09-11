@@ -7,7 +7,7 @@ import {
 import { HttpParams } from '@angular/common/http';
 import { HTTP_PARAMS } from '../http-params';
 
-const BASE_URL = 'https://docs.tf2pickup.org/player-registration-issues';
+const docsBaseUrl = 'https://docs.tf2pickup.org/player-registration-issues';
 
 @Component({
   selector: 'app-auth-error',
@@ -19,7 +19,7 @@ export class AuthErrorComponent implements OnInit {
   errorMessage = 'Unknown error';
   errorLink = null;
 
-  constructor(@Inject(HTTP_PARAMS) private httpParams: HttpParams) {}
+  constructor(@Inject(HTTP_PARAMS) private readonly httpParams: HttpParams) {}
 
   ngOnInit() {
     if (this.httpParams.has('error')) {
@@ -28,26 +28,24 @@ export class AuthErrorComponent implements OnInit {
         case 'no etf2l profile':
           this.errorMessage =
             'No valid ETF2L profile found for this Steam account.';
-          this.errorLink = BASE_URL + '/#etf2l-account-does-not-exist';
+          this.errorLink = `${docsBaseUrl}/#etf2l-account-does-not-exist`;
           break;
 
         case 'etf2l banned':
           this.errorMessage = 'This account is banned.';
-          this.errorLink =
-            BASE_URL + '/#etf2l-account-is-banned-or-blacklisted';
+          this.errorLink = `${docsBaseUrl}/#etf2l-account-is-banned-or-blacklisted`;
           break;
 
         case 'not enough tf2 hours':
           this.errorMessage =
             'You do not meet the minimum required hours in TF2.';
-          this.errorLink = BASE_URL + '/#insufficient-tf2-in-game-hours';
+          this.errorLink = `${docsBaseUrl}/#insufficient-tf2-in-game-hours`;
           break;
 
         case 'cannot verify in-game hours for TF2':
           this.errorMessage =
             'Your in-game hours for TF2 could not be verified.';
-          this.errorLink =
-            BASE_URL + '/#private-steam-profile-and-game-statistics';
+          this.errorLink = `${docsBaseUrl}/#private-steam-profile-and-game-statistics`;
           break;
 
         case 'etf2l name taken':
@@ -59,6 +57,9 @@ export class AuthErrorComponent implements OnInit {
           this.errorMessage =
             'Your Steam nickname is already used by another player. You must change it to register.';
           break;
+
+        default:
+          this.errorMessage = 'Unknown error';
       }
     }
   }
