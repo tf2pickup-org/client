@@ -1,5 +1,17 @@
 
 
+# [3.28.0-rc.5](https://github.com/tf2pickup-org/client/compare/3.28.0-rc.4...3.28.0-rc.5) (2023-09-14)
+
+
+### Bug Fixes
+
+* **br.tf2pickup.org:** update discord invitation ([#2397](https://github.com/tf2pickup-org/client/issues/2397)) ([4e7f057](https://github.com/tf2pickup-org/client/commit/4e7f0571e299e8a511d3d1be7492c863a42988ed))
+* **deps:** update dependency echarts to v5.4.3 ([#2391](https://github.com/tf2pickup-org/client/issues/2391)) ([dfd889f](https://github.com/tf2pickup-org/client/commit/dfd889f43bd85bfb613234d4c83a8681942ba6b2))
+* **deps:** update dependency feather-icons to v4.29.1 ([#2392](https://github.com/tf2pickup-org/client/issues/2392)) ([8bd6526](https://github.com/tf2pickup-org/client/commit/8bd6526b4509fa554760e320df857580aede20ba))
+* **deps:** update dependency marked to v5.1.2 ([#2393](https://github.com/tf2pickup-org/client/issues/2393)) ([52b9938](https://github.com/tf2pickup-org/client/commit/52b9938d3cfec72ec53be1f7fb646a7eca2e2b4d))
+* **deps:** update dependency socket.io-client to v4.7.2 ([#2394](https://github.com/tf2pickup-org/client/issues/2394)) ([127731f](https://github.com/tf2pickup-org/client/commit/127731fd8888c37c65a4be3ee92137e10f8a7bce))
+* fix error styling and add link to docs ([#2396](https://github.com/tf2pickup-org/client/issues/2396)) ([38e2d15](https://github.com/tf2pickup-org/client/commit/38e2d157434c0af9c650a0b0b0cf85c51b0f2b2d))
+
 # [3.28.0-rc.4](https://github.com/tf2pickup-org/client/compare/3.28.0-rc.3...3.28.0-rc.4) (2023-09-06)
 
 
