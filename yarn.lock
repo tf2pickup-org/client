@@ -4021,10 +4021,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:18.16.19":
-  version: 18.16.19
-  resolution: "@types/node@npm:18.16.19"
-  checksum: 63c31f09616508aa7135380a4c79470a897b75f9ff3a70eb069e534dfabdec3f32fb0f9df5939127f1086614d980ddea0fa5e8cc29a49103c4f74cd687618aaf
+"@types/node@npm:18.17.16":
+  version: 18.17.16
+  resolution: "@types/node@npm:18.17.16"
+  checksum: 8f9dbaf4a67a14110e2a0d805f9b57f3a5cda774dbcb7b1e7973efe31d5eeea358482dbe36a5bfadb0dde99f065f1ae0531f25a032f015871aa0b2896eb3c4ae
   languageName: node
   linkType: hard
 
@@ -16261,7 +16261,7 @@ __metadata:
     "@types/jwt-decode": 2.2.1
     "@types/lodash-es": 4.17.9
     "@types/marked": 5.0.1
-    "@types/node": 18.16.19
+    "@types/node": 18.17.16
     "@typescript-eslint/eslint-plugin": 5.60.1
     "@typescript-eslint/parser": 5.60.1
     angular-tabler-icons: 2.23.0
