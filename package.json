@@ -100,7 +100,7 @@
     "rxjs": "7.8.1",
     "socket.io-client": "4.7.2",
     "tslib": "2.6.2",
-    "zone.js": "0.13.1"
+    "zone.js": "0.13.3"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "15.1.6",
