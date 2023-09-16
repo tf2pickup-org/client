@@ -4840,15 +4840,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"angular-tabler-icons@npm:2.23.0":
-  version: 2.23.0
-  resolution: "angular-tabler-icons@npm:2.23.0"
+"angular-tabler-icons@npm:2.34.0":
+  version: 2.34.0
+  resolution: "angular-tabler-icons@npm:2.34.0"
   dependencies:
     tslib: ^2.0.0
   peerDependencies:
     "@angular/common": 14 - 16
     "@angular/core": 14 - 16
-  checksum: bd451027e40e5c7b3b30b2def4d5056fc6c2ad39afe893a86bf67943d68064d33c6bef7c64aaae8dc520c3facb30913bb862de03689c06edf094fc7e372fe15f
+  checksum: 2ba016b10aa38142c4fa95845e5a159efe4a4b19628d7a0ce5c92b59b0c020e3c6c2d11d9fe1ad9dbb43370df0e4d01b06e05d96555c016093d8a466922a88ad
   languageName: node
   linkType: hard
 
@@ -16597,7 +16597,7 @@ __metadata:
     "@types/node": 18.17.17
     "@typescript-eslint/eslint-plugin": 5.62.0
     "@typescript-eslint/parser": 5.62.0
-    angular-tabler-icons: 2.23.0
+    angular-tabler-icons: 2.34.0
     autoprefixer: 10.4.15
     chart.js: 4.3.0
     chartjs-plugin-datalabels: 2.2.0
