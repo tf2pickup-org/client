@@ -115,7 +115,7 @@
     "@ngrx/schematics": "14.3.3",
     "@release-it/conventional-changelog": "5.1.1",
     "@tailwindcss/typography": "0.5.10",
-    "@types/howler": "2.2.8",
+    "@types/howler": "2.2.9",
     "@types/jasmine": "4.3.6",
     "@types/jasminewd2": "2.0.11",
     "@types/jwt-decode": "2.2.1",

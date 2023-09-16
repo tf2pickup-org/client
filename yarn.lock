@@ -3901,10 +3901,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/howler@npm:2.2.8":
-  version: 2.2.8
-  resolution: "@types/howler@npm:2.2.8"
-  checksum: 4ecbd07f234e621db725f3813575749e6481bb059b9115bd5e3491d5d2e0ab515fcd86062270b77052ba7e900b7a8531d6444bbf2967cfe01c62adf3ef4ff5d8
+"@types/howler@npm:2.2.9":
+  version: 2.2.9
+  resolution: "@types/howler@npm:2.2.9"
+  checksum: 5d1637b107ec837a7faf9b3018f6197d370e8b22e59089dd80123be8d6c7083e93e7124cd6f6bd0d0319bfb506254a6338e46bbabf7ab5a723994926e2a6ae7d
   languageName: node
   linkType: hard
 
@@ -16595,7 +16595,7 @@ __metadata:
     "@swimlane/ngx-datatable": 20.1.0
     "@tailwindcss/forms": 0.5.6
     "@tailwindcss/typography": 0.5.10
-    "@types/howler": 2.2.8
+    "@types/howler": 2.2.9
     "@types/jasmine": 4.3.6
     "@types/jasminewd2": 2.0.11
     "@types/jwt-decode": 2.2.1
