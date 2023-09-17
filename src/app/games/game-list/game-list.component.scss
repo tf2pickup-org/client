@@ -54,7 +54,6 @@ $-games-per-page: 5;
     @include surface.fill-color(theme.$tem-blu);
   }
   }
-  }
 
   &__map-thumbnail {
     @include border-radius.right(variables.$default-border-radius);
