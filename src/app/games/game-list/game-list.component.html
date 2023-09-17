@@ -32,6 +32,10 @@
         [tooltip]="game.state"
       ></div>
     </div>
+    <div *ngIf="game.score !== undefined"  class="game-list-item__score_block">
+      <div class="red">{{ game.score.red }}</div>
+      <div class="blu">{{ game.score.blu }}</div>
+    </div>
     <app-map-thumbnail [map]="game.map" [width]="143" [height]="80" />
   </a>
 </div>

@@ -37,6 +37,27 @@ $-games-per-page: 5;
     align-items: center;
   }
 
+  &__score-block {
+  display: block;
+  width: 71.5px;
+  color: white;
+  .red, .blu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50%;
+  }
+  .red {
+    @include surface.fill-color(theme.$team-red);
+  }
+  .blu {
+    @include surface.fill-color(theme.$tem-blu);
+  }
+  }
+  }
+
+  }
+
   &__map-thumbnail {
     @include border-radius.right(variables.$default-border-radius);
 
