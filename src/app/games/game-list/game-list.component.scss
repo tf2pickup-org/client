@@ -1,9 +1,9 @@
-@use "sass:color";
-@use "components/surface";
-@use "components/indicator";
-@use "utils/border-radius";
-@use "theme";
-@use "variables";
+@use 'sass:color';
+@use 'components/surface';
+@use 'components/indicator';
+@use 'utils/border-radius';
+@use 'theme';
+@use 'variables';
 
 $-item-height: 80px;
 $-item-margin: 24px;
@@ -38,24 +38,26 @@ $-games-per-page: 5;
   }
 
   &__score-block {
-  display: block;
-  width: 71.5px;
-  color: white;
-
-  .red, .blu {
+    width: 71.5px;
+    color: white;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 50%;
-  }
+    flex-flow: column nowrap;
 
-  .red {
-    @include surface.fill-color(theme.$team-red);
-  }
-  
-  .blu {
-    @include surface.fill-color(theme.$tem-blu);
-  }
+    .red,
+    .blu {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-grow: 1;
+    }
+
+    .red {
+      @include surface.fill-color(theme.$team-red);
+    }
+
+    .blu {
+      @include surface.fill-color(theme.$tem-blu);
+    }
   }
 
   &__map-thumbnail {
