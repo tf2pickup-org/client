@@ -1,5 +1,20 @@
 
 
+# [3.28.0-rc.6](https://github.com/tf2pickup-org/client/compare/3.28.0-rc.5...3.28.0-rc.6) (2023-09-18)
+
+
+### Bug Fixes
+
+* **deps:** update dependency angular-tabler-icons to v2.34.0 ([#2411](https://github.com/tf2pickup-org/client/issues/2411)) ([dd6105d](https://github.com/tf2pickup-org/client/commit/dd6105d1d37735d3280b0fb5bd93dd5b233caa72))
+* **deps:** update dependency chart.js to v4.4.0 ([#2412](https://github.com/tf2pickup-org/client/issues/2412)) ([2cab617](https://github.com/tf2pickup-org/client/commit/2cab617ad5d584b2fa313ebf4b1991220c808ab1))
+* **deps:** update dependency tslib to v2.6.2 ([#2395](https://github.com/tf2pickup-org/client/issues/2395)) ([c41406a](https://github.com/tf2pickup-org/client/commit/c41406ae62a6498923e2f7aa456208eff99c28e2))
+* **deps:** update dependency zone.js to v0.13.3 ([#2398](https://github.com/tf2pickup-org/client/issues/2398)) ([0f2ac02](https://github.com/tf2pickup-org/client/commit/0f2ac02fae26852a8ef1de94e219b7eb1c921f4e))
+
+
+### Features
+
+* **games:** add game list score ([#2415](https://github.com/tf2pickup-org/client/issues/2415)) ([8c78106](https://github.com/tf2pickup-org/client/commit/8c7810662b326f0f5a7e74edde6ad8727d7273f5))
+
 # [3.28.0-rc.5](https://github.com/tf2pickup-org/client/compare/3.28.0-rc.4...3.28.0-rc.5) (2023-09-14)
 
 
