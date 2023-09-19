@@ -1,5 +1,12 @@
 
 
+## [3.28.1](https://github.com/tf2pickup-org/client/compare/3.28.0...3.28.1) (2023-09-19)
+
+
+### Bug Fixes
+
+* **au.tf2pickup.org:** enable docker build ([#2416](https://github.com/tf2pickup-org/client/issues/2416)) ([5addd31](https://github.com/tf2pickup-org/client/commit/5addd31c0b32cff6fa0856bdbbe299220b44ad2e))
+
 # [3.28.0](https://github.com/tf2pickup-org/client/compare/3.28.0-rc.6...3.28.0) (2023-09-19)
 
 # [3.28.0-rc.6](https://github.com/tf2pickup-org/client/compare/3.28.0-rc.5...3.28.0-rc.6) (2023-09-18)
