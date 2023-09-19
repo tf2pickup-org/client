@@ -1,5 +1,7 @@
 
 
+# [3.28.0](https://github.com/tf2pickup-org/client/compare/3.28.0-rc.6...3.28.0) (2023-09-19)
+
 # [3.28.0-rc.6](https://github.com/tf2pickup-org/client/compare/3.28.0-rc.5...3.28.0-rc.6) (2023-09-18)
 
 
