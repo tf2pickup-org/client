@@ -7,7 +7,8 @@ import {
 import { HttpParams } from '@angular/common/http';
 import { HTTP_PARAMS } from '../http-params';
 
-const docsBaseUrl = 'https://docs.tf2pickup.org/docs/player-registration-issues';
+const docsBaseUrl =
+  'https://docs.tf2pickup.org/docs/player-registration-issues';
 
 @Component({
   selector: 'app-auth-error',
