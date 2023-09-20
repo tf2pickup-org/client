@@ -1,5 +1,12 @@
 
 
+## [3.28.2](https://github.com/tf2pickup-org/client/compare/3.28.1...3.28.2) (2023-09-20)
+
+
+### Bug Fixes
+
+* **auth:** fix docs base url ([#2417](https://github.com/tf2pickup-org/client/issues/2417)) ([8451241](https://github.com/tf2pickup-org/client/commit/845124116862874828c3636190d93b67e7ffc7fc))
+
 ## [3.28.1](https://github.com/tf2pickup-org/client/compare/3.28.0...3.28.1) (2023-09-19)
 
 
