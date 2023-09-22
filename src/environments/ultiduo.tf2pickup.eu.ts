@@ -3,7 +3,7 @@ import { defaultFooterLinks } from './default-footer-links';
 import { defaultHeaderLinks } from './default-header-links';
 import { entryQueueUltiduo } from './entry-queues/entry-queue-ultiduo';
 
-const discordInvitation = 'https://discord.gg/bG4WKUqx';
+const discordInvitation = 'https://discord.gg/p329aqVy42';
 
 export const environment = {
   ...defaultEnvironment,
