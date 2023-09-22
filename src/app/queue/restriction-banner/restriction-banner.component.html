@@ -1,7 +1,21 @@
 <div *ngIf="restriction" class="restriction-banner">
   <ng-container [ngSwitch]="restriction.reason">
     <span *ngSwitchCase="'account needs review'">
-      Your account needs to be reviewed by an admin before you can join the queue. We will get to it as soon as possible. Please stay patient.
+      Your account needs to be reviewed by an admin before you can join the
+      queue. We will get to it as soon as possible. Please stay patient.
+    </span>
+    <span
+      *ngSwitchCase="'player skill is below the threshold'"
+      class="flex flex-row items-center gap-2"
+    >
+      You do not meet requirements to join the queue on the following classes:
+      <span
+        *ngFor="let gameClass of restriction.gameClasses"
+        class="flex flex-row font-bold items-center gap-1"
+      >
+        <app-game-class-icon [gameClass]="gameClass"></app-game-class-icon>
+        {{ gameClass }}
+      </span>
     </span>
   </ng-container>
 </div>
