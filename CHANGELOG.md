@@ -1,5 +1,17 @@
 
 
+# [3.29.0](https://github.com/tf2pickup-org/client/compare/3.28.2...3.29.0) (2023-09-23)
+
+
+### Bug Fixes
+
+* **au.tf2pickup.org, bball.tf2pickup.eu, ultiduo.tf2pickup.eu:** update Discord invitation URLs ([#2419](https://github.com/tf2pickup-org/client/issues/2419)) ([488ae94](https://github.com/tf2pickup-org/client/commit/488ae949234eeea7580ca708819ae7b0016e28f8))
+
+
+### Features
+
+* **queue:** show skill threshold restriction ([#2418](https://github.com/tf2pickup-org/client/issues/2418)) ([10c37e6](https://github.com/tf2pickup-org/client/commit/10c37e6d8e8aa30b98238150aaede9e507e063ba))
+
 ## [3.28.2](https://github.com/tf2pickup-org/client/compare/3.28.1...3.28.2) (2023-09-20)
 
 

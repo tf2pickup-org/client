@@ -1,6 +1,6 @@
 {
   "name": "tf2pickuppl",
-  "version": "3.28.2",
+  "version": "3.29.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
