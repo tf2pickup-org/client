@@ -23,6 +23,9 @@ import { GameConfigurationComponent } from './game-configuration/game-configurat
 import { GameConfigurationResolver } from './game-configuration/game-configuration.resolver';
 import { ConfigurationEditComponent } from './configuration-edit/configuration-edit.component';
 import { ServemeTfConfigurationResolver } from './game-servers/serveme-tf-configuration/serveme-tf-configuration.resolver';
+import { DiscordComponent } from './discord/discord.component';
+import { DiscordConfigurationResolver } from './discord/discord-configuration.resolver';
+import { GuildsResolver } from './discord/guilds.resolver';
 
 const routes: Routes = [
   {
@@ -169,6 +172,14 @@ const routes: Routes = [
         component: ConfigurationEditComponent,
         data: {
           animation: 'ConfigurationEditPage',
+        },
+      },
+      {
+        path: 'discord',
+        component: DiscordComponent,
+        resolve: {
+          configuration: DiscordConfigurationResolver,
+          guilds: GuildsResolver,
         },
       },
     ],
