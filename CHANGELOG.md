@@ -1,5 +1,12 @@
 
 
+## [3.30.1](https://github.com/tf2pickup-org/client/compare/3.30.0...3.30.1) (2023-11-07)
+
+
+### Bug Fixes
+
+* **admin:** load guild roles properly ([#2422](https://github.com/tf2pickup-org/client/issues/2422)) ([a37d8d2](https://github.com/tf2pickup-org/client/commit/a37d8d260c916a6bff04bd991e1e5c195e276811))
+
 # [3.30.0](https://github.com/tf2pickup-org/client/compare/3.29.0...3.30.0) (2023-11-07)
 
 
