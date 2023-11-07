@@ -1,5 +1,12 @@
 
 
+# [3.30.0](https://github.com/tf2pickup-org/client/compare/3.29.0...3.30.0) (2023-11-07)
+
+
+### Features
+
+* **admin:** discord configuration ([#2421](https://github.com/tf2pickup-org/client/issues/2421)) ([6e4804c](https://github.com/tf2pickup-org/client/commit/6e4804c2e13c1ef78a29ad97f1afe09c187e34b6))
+
 # [3.29.0](https://github.com/tf2pickup-org/client/compare/3.28.2...3.29.0) (2023-09-23)
 
 
