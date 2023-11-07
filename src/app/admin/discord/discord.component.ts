@@ -84,7 +84,7 @@ export class DiscordComponent implements OnInit {
                     role: config?.substituteNotifications?.role ?? null,
                   }),
                   queuePrompts: this.formBuilder.group({
-                    channel: config?.substituteNotifications?.channel ?? null,
+                    channel: config?.queuePrompts?.channel ?? null,
                   }),
                 });
               }),
@@ -106,16 +106,29 @@ export class DiscordComponent implements OnInit {
         .filter(value => value.isEnabled)
         .map(value => ({
           id: value.id,
-          adminNotifications: {
-            channel: value.adminNotifications.channel ?? undefined,
-          },
-          substituteNotifications: {
-            channel: value.substituteNotifications.channel ?? undefined,
-            role: value.substituteNotifications.role ?? undefined,
-          },
-          queuePrompts: {
-            channel: value.queuePrompts.channel ?? undefined,
-          },
+          ...(value.adminNotifications.channel
+            ? {
+                adminNotifications: {
+                  channel: value.adminNotifications.channel,
+                },
+              }
+            : {}),
+          ...(value.substituteNotifications.channel
+            ? {
+                substituteNotifications: {
+                  channel: value.substituteNotifications.channel,
+                  role: value.substituteNotifications.role ?? undefined,
+                },
+              }
+            : {}),
+          ...(value.queuePrompts.channel
+            ? {
+                queuePrompts: {
+                  channel: value.queuePrompts.channel,
+                  bumpPlayerThresholdRatio: 0.5,
+                },
+              }
+            : {}),
         })),
     };
 

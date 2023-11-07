@@ -11,14 +11,14 @@
     >
       <span>Admin notifications channel:</span>
       <select formControlName="channel">
-        <option [value]="null" class="text-gray-600">disabled</option>
+        <option [ngValue]="null" class="text-gray-600">disabled</option>
         <optgroup
           *ngFor="let textChannelGroup of textChannels | async | keyvalue"
           label="{{ textChannelGroup.key }}"
         >
           <option
             *ngFor="let textChannel of textChannelGroup.value"
-            value="{{ textChannel.id }}"
+            [value]="textChannel.id"
           >
             {{ textChannel.name }}
           </option>
@@ -32,14 +32,14 @@
     >
       <span>Substitute notifications channel:</span>
       <select formControlName="channel">
-        <option [value]="null" class="text-gray-600">disabled</option>
+        <option [ngValue]="null" class="text-gray-600">disabled</option>
         <optgroup
           *ngFor="let textChannelGroup of textChannels | async | keyvalue"
           label="{{ textChannelGroup.key }}"
         >
           <option
             *ngFor="let textChannel of textChannelGroup.value"
-            value="{{ textChannel.id }}"
+            [value]="textChannel.id"
           >
             {{ textChannel.name }}
           </option>
@@ -48,8 +48,8 @@
 
       <span>mention role:</span>
       <select formControlName="role">
-        <option [value]="null">disabled</option>
-        <option *ngFor="let role of roles | async" value="{{ role.id }}">
+        <option [ngValue]="null">disabled</option>
+        <option *ngFor="let role of roles | async" [value]="role.id">
           {{ role.name }}
         </option>
       </select>
@@ -58,14 +58,14 @@
     <div class="flex flex-row gap-2 items-center" formGroupName="queuePrompts">
       <span>Queue prompts channel:</span>
       <select formControlName="channel">
-        <option [value]="null" class="text-gray-600">disabled</option>
+        <option [ngValue]="null" class="text-gray-600">disabled</option>
         <optgroup
           *ngFor="let textChannelGroup of textChannels | async | keyvalue"
           label="{{ textChannelGroup.key }}"
         >
           <option
             *ngFor="let textChannel of textChannelGroup.value"
-            value="{{ textChannel.id }}"
+            [value]="textChannel.id"
           >
             {{ textChannel.name }}
           </option>
