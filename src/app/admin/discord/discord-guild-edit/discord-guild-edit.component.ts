@@ -78,7 +78,7 @@ export class DiscordGuildEditComponent implements OnInit {
 
   loadRoles() {
     this.discordService
-      .fetchTextChannels(this.guildControl.get('id').value)
+      .fetchRoles(this.guildControl.get('id').value)
       .pipe(map(roles => roles.sort((a, b) => a.name.localeCompare(b.name))))
       .subscribe(roles => this.roles.next(roles));
   }
