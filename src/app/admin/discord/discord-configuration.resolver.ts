@@ -1,11 +1,6 @@
 import { Injectable } from '@angular/core';
-import {
-  Router,
-  Resolve,
-  RouterStateSnapshot,
-  ActivatedRouteSnapshot,
-} from '@angular/router';
-import { map, Observable, of } from 'rxjs';
+import { Resolve } from '@angular/router';
+import { map, Observable } from 'rxjs';
 import { ConfigurationService } from '@app/configuration/configuration.service';
 import { DiscordConfiguration } from './models/discord-configuration';
 import { GuildConfiguration } from './models/guild-configuration';

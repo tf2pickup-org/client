@@ -21,7 +21,7 @@ import { TextChannel } from './models/text-channel';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DiscordComponent implements OnInit {
-  private destroyed = new Subject<void>();
+  private readonly destroyed = new Subject<void>();
 
   form = this.formBuilder.group({
     guilds: this.formBuilder.array<
@@ -75,7 +75,7 @@ export class DiscordComponent implements OnInit {
                 return this.formBuilder.group({
                   id: guild.id,
                   name: guild.name,
-                  isEnabled: !!config,
+                  isEnabled: Boolean(config),
                   adminNotifications: this.formBuilder.group({
                     channel: config?.adminNotifications?.channel ?? null,
                   }),
