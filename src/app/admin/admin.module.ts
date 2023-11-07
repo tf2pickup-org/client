@@ -28,6 +28,8 @@ import { ImportExportPlayerSkillComponent } from './import-export-player-skill/i
 import { GameConfigurationComponent } from './game-configuration/game-configuration.component';
 import { ConfigurationEditComponent } from './configuration-edit/configuration-edit.component';
 import { NgxEditInlineModule } from 'ngx-edit-inline';
+import { DiscordComponent } from './discord/discord.component';
+import { DiscordGuildEditComponent } from './discord/discord-guild-edit/discord-guild-edit.component';
 
 @NgModule({
   imports: [
@@ -64,6 +66,8 @@ import { NgxEditInlineModule } from 'ngx-edit-inline';
     ImportExportPlayerSkillComponent,
     GameConfigurationComponent,
     ConfigurationEditComponent,
+    DiscordComponent,
+    DiscordGuildEditComponent,
   ],
 })
 export class AdminModule {}

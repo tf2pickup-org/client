@@ -1,0 +1,76 @@
+<div class="flex flex-col" [formGroup]="guildControl">
+  <div class="flex flex-row gap-2 items-center">
+    <input type="checkbox" name="id" formControlName="isEnabled" />
+    <span>{{ guildControl.get('name').value }}</span>
+  </div>
+
+  <div class="flex flex-col gap-2" *ngIf="guildControl.get('isEnabled').value">
+    <div
+      class="flex flex-row gap-2 items-center"
+      formGroupName="adminNotifications"
+    >
+      <span>Admin notifications channel:</span>
+      <select formControlName="channel">
+        <option [ngValue]="null" class="text-gray-600">disabled</option>
+        <optgroup
+          *ngFor="let textChannelGroup of textChannels | async | keyvalue"
+          label="{{ textChannelGroup.key }}"
+        >
+          <option
+            *ngFor="let textChannel of textChannelGroup.value"
+            [value]="textChannel.id"
+          >
+            {{ textChannel.name }}
+          </option>
+        </optgroup>
+      </select>
+    </div>
+
+    <div
+      class="flex flex-row gap-2 items-center"
+      formGroupName="substituteNotifications"
+    >
+      <span>Substitute notifications channel:</span>
+      <select formControlName="channel">
+        <option [ngValue]="null" class="text-gray-600">disabled</option>
+        <optgroup
+          *ngFor="let textChannelGroup of textChannels | async | keyvalue"
+          label="{{ textChannelGroup.key }}"
+        >
+          <option
+            *ngFor="let textChannel of textChannelGroup.value"
+            [value]="textChannel.id"
+          >
+            {{ textChannel.name }}
+          </option>
+        </optgroup>
+      </select>
+
+      <span>mention role:</span>
+      <select formControlName="role">
+        <option [ngValue]="null">disabled</option>
+        <option *ngFor="let role of roles | async" [value]="role.id">
+          {{ role.name }}
+        </option>
+      </select>
+    </div>
+
+    <div class="flex flex-row gap-2 items-center" formGroupName="queuePrompts">
+      <span>Queue prompts channel:</span>
+      <select formControlName="channel">
+        <option [ngValue]="null" class="text-gray-600">disabled</option>
+        <optgroup
+          *ngFor="let textChannelGroup of textChannels | async | keyvalue"
+          label="{{ textChannelGroup.key }}"
+        >
+          <option
+            *ngFor="let textChannel of textChannelGroup.value"
+            [value]="textChannel.id"
+          >
+            {{ textChannel.name }}
+          </option>
+        </optgroup>
+      </select>
+    </div>
+  </div>
+</div>

@@ -81,6 +81,12 @@
   <ng-template
     *ngTemplateOutlet="
       item;
+      context: { $implicit: { link: 'discord', title: 'Discord' } }
+    "
+  ></ng-template>
+  <ng-template
+    *ngTemplateOutlet="
+      item;
       context: { $implicit: { link: 'configuration', title: 'Configuration' } }
     "
   ></ng-template>
