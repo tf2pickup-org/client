@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate } from '@angular/router';
+
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { profile } from '@app/profile/profile.selectors';
@@ -10,7 +10,7 @@ import { PlayerRole } from '@app/players/models/player-role';
 @Injectable({
   providedIn: 'root',
 })
-export class IsAdminGuard implements CanActivate {
+export class IsAdminGuard {
   constructor(private store: Store) {}
 
   canActivate(): Observable<boolean> {

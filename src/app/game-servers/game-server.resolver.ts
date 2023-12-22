@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
 import { GameServersService } from './game-servers.service';
 import { GameServer } from './models/game-server';
@@ -7,7 +7,7 @@ import { GameServer } from './models/game-server';
 @Injectable({
   providedIn: 'root',
 })
-export class GameServerResolver implements Resolve<GameServer> {
+export class GameServerResolver {
   constructor(private gameServersService: GameServersService) {}
 
   resolve(route: ActivatedRouteSnapshot): Observable<GameServer> {
