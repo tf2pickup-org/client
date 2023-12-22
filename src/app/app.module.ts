@@ -36,7 +36,9 @@ import { DocumentsModule } from './documents/documents.module';
     StoreModule.forRoot({}),
     StoreRouterConnectingModule.forRoot(),
     EffectsModule.forRoot([]),
-    environment.production ? [] : StoreDevtoolsModule.instrument(),
+    environment.production
+      ? []
+      : StoreDevtoolsModule.instrument({ connectInZone: true }),
 
     MarkdownModule.forRoot({ loader: HttpClient }),
     NgxPaginationModule,

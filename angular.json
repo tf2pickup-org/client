@@ -1011,20 +1011,20 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "tf2pickuppl:build",
             "proxyConfig": "proxy.conf.json",
-            "hmr": true
+            "hmr": true,
+            "buildTarget": "tf2pickuppl:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "tf2pickuppl:build:production"
+              "buildTarget": "tf2pickuppl:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "tf2pickuppl:build"
+            "buildTarget": "tf2pickuppl:build"
           }
         },
         "test": {
