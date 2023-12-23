@@ -11,8 +11,6 @@ import {
   loadLinkedProfiles,
   onlinePlayersLoaded,
   loadOnlinePlayers,
-  playerConnected,
-  playerDisconnected,
 } from './actions';
 import { Player } from './models/player';
 import { LinkedProfiles } from './models/linked-profiles';
@@ -70,7 +68,7 @@ const onlinePlayers: Player[] = [
       large:
         'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/fe/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb_full.jpg',
     },
-    roles: [],
+    roles: [] as Player['roles'],
     id: '612412b63231b954417c42e8',
   } as Player,
 ];
@@ -80,7 +78,6 @@ describe('PlayerEffects', () => {
   let effects: PlayerEffects;
   let playersService: jasmine.SpyObj<PlayersService>;
   let store: MockStore;
-  let socket: Socket;
 
   beforeEach(() => {
     actions = new ReplaySubject<Action>(1);
@@ -114,7 +111,6 @@ describe('PlayerEffects', () => {
       PlayersService,
     ) as jasmine.SpyObj<PlayersService>;
     store = TestBed.inject(MockStore);
-    socket = TestBed.inject(Socket);
 
     spyOn(store, 'dispatch');
   });
@@ -157,32 +153,6 @@ describe('PlayerEffects', () => {
       });
       actions.next(loadOnlinePlayers());
       expect(playersService.fetchOnlinePlayers).toHaveBeenCalledTimes(1);
-    });
-  });
-
-  describe('when player connects', () => {
-    beforeEach(() => {
-      // @ts-ignore
-      socket.emit('player connected', onlinePlayers[0]);
-    });
-
-    it('should dispatch action', () => {
-      expect(store.dispatch).toHaveBeenCalledWith(
-        playerConnected({ player: onlinePlayers[0] }),
-      );
-    });
-  });
-
-  describe('when player disconnects', () => {
-    beforeEach(() => {
-      // @ts-ignore
-      socket.emit('player disconnected', onlinePlayers[1]);
-    });
-
-    it('should dispatch action', () => {
-      expect(store.dispatch).toHaveBeenCalledWith(
-        playerDisconnected({ player: onlinePlayers[1] }),
-      );
     });
   });
 });

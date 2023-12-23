@@ -20,8 +20,9 @@ describe('MapThumbnailComponent', () => {
   );
 
   beforeEach(() => {
-    fixture = MockRender(MapThumbnailComponent, { map: 'cp_badlands' } as any);
+    fixture = MockRender(MapThumbnailComponent);
     component = fixture.point.componentInstance;
+    component.map = 'cp_badlands';
     fixture.detectChanges();
   });
 

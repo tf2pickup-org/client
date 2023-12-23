@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/naming-convention */
-/* eslint-disable id-blacklist */
 import { ReplaySubject, of } from 'rxjs';
 import { Action } from '@ngrx/store';
 import { TestBed } from '@angular/core/testing';
@@ -17,7 +15,7 @@ import {
   ownGameAdded,
 } from './games.actions';
 import { routerNavigatedAction } from '@ngrx/router-store';
-import { NavigationEnd } from '@angular/router';
+import { ActivatedRouteSnapshot, NavigationEnd } from '@angular/router';
 import { Socket } from '@app/io/socket';
 import { EventEmitter } from 'eventemitter3';
 import { Game } from './models/game';
@@ -120,13 +118,13 @@ describe('GamesEffects', () => {
 
     const game = { id: 'FAKE_GAME_ID' };
 
-    // @ts-ignore
+    // @ts-expect-error emit is not a function
     socket.emit('game created', game);
-    expect(spy).toHaveBeenCalledWith(gameCreated({ game } as any));
+    expect(spy).toHaveBeenCalledWith(gameCreated({ game } as { game: Game }));
 
-    // @ts-ignore
+    // @ts-expect-error emit is not a function
     socket.emit('game updated', game);
-    expect(spy).toHaveBeenCalledWith(gameUpdated({ game } as any));
+    expect(spy).toHaveBeenCalledWith(gameUpdated({ game } as { game: Game }));
   });
 
   describe('loadRoutedGame', () => {
@@ -145,9 +143,9 @@ describe('GamesEffects', () => {
                     params: {
                       id: 'FAKE_GAME_ID',
                     },
-                  } as any,
+                  } as unknown as ActivatedRouteSnapshot,
                 ],
-              } as any,
+              } as ActivatedRouteSnapshot,
             },
             event: {} as NavigationEnd,
           },

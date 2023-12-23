@@ -16,8 +16,8 @@ import { GameServerDiagnosticsComponent } from './game-server-diagnostics.compon
 describe(GameServerDiagnosticsComponent.name, () => {
   let component: GameServerDiagnosticsComponent;
   let fixture: MockedComponentFixture<GameServerDiagnosticsComponent>;
-  let routeData: Subject<any>;
-  let diagnostics: Subject<any>;
+  let routeData: Subject<unknown>;
+  let diagnostics: Subject<unknown>;
 
   beforeEach(() => {
     routeData = new Subject();

@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { RouterStateSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { MockProvider } from 'ng-mocks';
 import { of } from 'rxjs';
 import { DocumentResolver } from './document.resolver';
@@ -33,7 +33,10 @@ describe(DocumentResolver.name, () => {
       it('should resolve the document', done => {
         resolver
           .resolve(
-            { data: { documentName: 'rules' }, params: {} } as any,
+            {
+              data: { documentName: 'rules' },
+              params: {},
+            } as unknown as ActivatedRouteSnapshot,
             {} as RouterStateSnapshot,
           )
           .subscribe(document => {
@@ -47,7 +50,10 @@ describe(DocumentResolver.name, () => {
       it('should resolve the document', done => {
         resolver
           .resolve(
-            { data: {}, params: { documentName: 'foo' } } as any,
+            {
+              data: {},
+              params: { documentName: 'foo' },
+            } as unknown as ActivatedRouteSnapshot,
             {} as RouterStateSnapshot,
           )
           .subscribe(document => {

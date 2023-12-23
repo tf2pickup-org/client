@@ -16,8 +16,8 @@ export class MapThumbnailComponent implements OnChanges {
   src?: string;
   loaded = false;
 
-  @Input()
-  map: string;
+  @Input({ required: true })
+  map!: string;
 
   @Input()
   width = 300;

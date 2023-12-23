@@ -16,6 +16,7 @@ import { Player } from '@app/players/models/player';
 import { State } from './queue.reducer';
 import { Tf2ClassName } from '@app/shared/models/tf2-class-name';
 import { QueueConfig } from './models/queue-config';
+import { Friendship } from './models/friendship';
 
 describe('queue selectors', () => {
   describe('queueRequiredPlayerCount', () => {
@@ -59,7 +60,7 @@ describe('queue selectors', () => {
           { id: 0, gameClass: 'scout' } as QueueSlot,
           { id: 1, gameClass: 'soldier' } as QueueSlot,
         ]),
-      ).toEqual({ id: 1, gameClass: 'soldier' } as any);
+      ).toEqual({ id: 1, gameClass: 'soldier' } as QueueSlot);
     });
   });
 
@@ -145,7 +146,7 @@ describe('queue selectors', () => {
 
   describe('friendships', () => {
     it('should pluck friendships', () => {
-      const friendships = [
+      const friendships: Friendship[] = [
         {
           sourcePlayerId: 'SOURCE_PLAYER_ID',
           targetPlayerId: 'TARGET_PLAYER_ID',
@@ -153,7 +154,7 @@ describe('queue selectors', () => {
       ];
       expect(
         queueFriendships.projector({
-          slots: [],
+          slots: [] as QueueSlot[],
           state: 'waiting',
           friendships,
         } as State),

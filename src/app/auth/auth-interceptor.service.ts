@@ -11,9 +11,9 @@ import { Observable } from 'rxjs';
 export class AuthInterceptorService implements HttpInterceptor {
   // skipcq: JS-0105
   intercept(
-    request: HttpRequest<any>,
+    request: HttpRequest<unknown>,
     next: HttpHandler,
-  ): Observable<HttpEvent<any>> {
+  ): Observable<HttpEvent<unknown>> {
     return next.handle(request.clone({ withCredentials: true }));
   }
 }

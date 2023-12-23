@@ -11,10 +11,9 @@ import {
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { DocumentsService } from '@app/documents/documents.service';
-import { Document } from '@app/documents/models/document';
 import { MDCTextField } from '@material/textfield';
 import { BehaviorSubject, Subject } from 'rxjs';
-import { map, pluck, switchMap, takeUntil, tap } from 'rxjs/operators';
+import { pluck, takeUntil, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-document-edit',

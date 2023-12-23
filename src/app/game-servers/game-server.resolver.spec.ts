@@ -3,6 +3,7 @@ import { MockProvider } from 'ng-mocks';
 import { of } from 'rxjs';
 import { GameServerResolver } from './game-server.resolver';
 import { GameServersService } from './game-servers.service';
+import { ActivatedRouteSnapshot } from '@angular/router';
 
 describe(GameServerResolver.name, () => {
   let resolver: GameServerResolver;
@@ -26,7 +27,9 @@ describe(GameServerResolver.name, () => {
 
   it('should resolve the game server', done => {
     resolver
-      .resolve({ params: { gameServerId: 'FAKE_GAME_SERVER_ID' } } as any)
+      .resolve({
+        params: { gameServerId: 'FAKE_GAME_SERVER_ID' },
+      } as unknown as ActivatedRouteSnapshot)
       .subscribe(gameServer => {
         expect(gameServer.id).toEqual('FAKE_GAME_SERVER_ID');
 

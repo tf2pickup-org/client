@@ -15,8 +15,10 @@ import {
   isPlayingGame,
   restrictions,
 } from './profile.selectors';
-import { State } from './profile.reducer';
+import { ProfileState } from './profile.reducer';
 import { PlayerBan } from '@app/players/models/player-ban';
+import { PlayerRole } from '@app/players/models/player-role';
+import { Restriction } from './models/restriction';
 
 describe('currentPlayer', () => {
   describe('when authenticated', () => {
@@ -27,7 +29,7 @@ describe('currentPlayer', () => {
           player: {
             id: 'FAKE_PLAYER_ID',
           } as Player,
-        } as State),
+        } as ProfileState),
       ).toEqual({
         id: 'FAKE_PLAYER_ID',
       } as Player);
@@ -55,7 +57,9 @@ describe('isLoggedIn', () => {
   describe('when the user is logged in', () => {
     it('should return true', () => {
       expect(
-        isLoggedIn.projector({ authenticated: 'authenticated' } as State),
+        isLoggedIn.projector({
+          authenticated: 'authenticated',
+        } as ProfileState),
       ).toBe(true);
     });
   });
@@ -72,7 +76,9 @@ describe('isLoggedIn', () => {
 describe('isAdmin', () => {
   it('should return the correct value', () => {
     expect(isAdmin.projector(null)).toBeFalsy();
-    expect(isAdmin.projector({ roles: [] } as Player)).toBe(false);
+    expect(isAdmin.projector({ roles: [] as PlayerRole[] } as Player)).toBe(
+      false,
+    );
     expect(isAdmin.projector({ roles: ['admin'] } as Player)).toBe(true);
   });
 });
@@ -80,7 +86,9 @@ describe('isAdmin', () => {
 describe('isSuperUser', () => {
   it('should return the correct value', () => {
     expect(isSuperUser.projector(null)).toBeFalsy();
-    expect(isSuperUser.projector({ roles: [] } as Player)).toBe(false);
+    expect(isSuperUser.projector({ roles: [] as PlayerRole[] } as Player)).toBe(
+      false,
+    );
     expect(isSuperUser.projector({ roles: ['super user'] } as Player)).toBe(
       true,
     );
@@ -96,8 +104,8 @@ describe('bans', () => {
       bans.projector({
         authenticated: 'authenticated',
         bans: [{ id: '1' } as PlayerBan],
-      } as State),
-    ).toEqual([{ id: '1' } as any]);
+      } as ProfileState),
+    ).toEqual([{ id: '1' } as PlayerBan]);
   });
 });
 
@@ -119,7 +127,7 @@ describe('linkedProfiles', () => {
               provider: 'twitch.tv',
             } as TwitchTvProfile,
           ],
-        } as State),
+        } as ProfileState),
       ).toEqual([
         {
           provider: 'twitch.tv',
@@ -151,7 +159,7 @@ describe('restrictions', () => {
               gameClasses: [Tf2ClassName.soldier],
             },
           ],
-        } as State),
+        } as ProfileState),
       ).toEqual([
         {
           reason: 'account needs review',
@@ -166,8 +174,8 @@ describe('restrictions', () => {
       expect(
         restrictions.projector({
           authenticated: 'authenticated',
-          restrictions: [],
-        } as State),
+          restrictions: [] as Restriction[],
+        } as ProfileState),
       ).toEqual([]);
     });
   });
@@ -204,7 +212,7 @@ describe('activeGameId', () => {
         expect(
           activeGameId.projector({
             authenticated: 'authenticated',
-          } as State),
+          } as ProfileState),
         ).toBe(null);
       });
     });
@@ -215,7 +223,7 @@ describe('activeGameId', () => {
           activeGameId.projector({
             authenticated: 'authenticated',
             activeGameId: 'FAKE_GAME_ID',
-          } as State),
+          } as ProfileState),
         ).toEqual('FAKE_GAME_ID');
       });
     });

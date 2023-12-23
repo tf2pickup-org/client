@@ -68,7 +68,6 @@ describe('QueueEffects', () => {
   let effects: QueueEffects;
   let store: MockStore<AppState>;
   let isInQueueSelector: MemoizedSelector<unknown, boolean>;
-  let isReadyUpDialogShownSelector: MemoizedSelector<unknown, boolean>;
 
   beforeEach(() => {
     queueServiceStub = jasmine.createSpyObj<QueueService>(QueueService.name, [
@@ -102,7 +101,7 @@ describe('QueueEffects', () => {
   beforeEach(() => {
     store = TestBed.inject(MockStore);
     isInQueueSelector = store.overrideSelector(isInQueue, false);
-    isReadyUpDialogShownSelector = store.overrideSelector(awaitsReadyUp, false);
+    store.overrideSelector(awaitsReadyUp, false);
 
     effects = TestBed.inject(QueueEffects);
   });

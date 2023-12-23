@@ -23,6 +23,6 @@ describe('OrderTf2ClassesPipe', () => {
       { gameClass: 'scout' },
       { gameClass: 'soldier' },
       { gameClass: 'demoman' },
-    ] as any);
+    ] as GameSlot[]);
   });
 });

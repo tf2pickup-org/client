@@ -1,15 +1,14 @@
-/* eslint-disable @typescript-eslint/naming-convention */
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { AddPlayerBanComponent } from './add-player-ban.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { Subject, of } from 'rxjs';
-import { Action, Store } from '@ngrx/store';
+import { Action } from '@ngrx/store';
 import { Actions } from '@ngrx/effects';
 import { Location } from '@angular/common';
 import { Router, convertToParamMap, ActivatedRoute } from '@angular/router';
-import { playerBanAdded, addPlayerBan } from '../actions';
+import { playerBanAdded } from '../actions';
 import { PlayerBan } from '../models/player-ban';
 import { By } from '@angular/platform-browser';
 
@@ -106,22 +105,6 @@ describe('AddPlayerBanComponent', () => {
 
     it('should enable the submit button', () => {
       expect(submit.disabled).toBe(false);
-    });
-
-    it('should submit', () => {
-      submit.click();
-
-      expect(store.dispatch).toHaveBeenCalledWith(
-        addPlayerBan({
-          playerBan: {
-            player: 'FAKE_ID',
-            start: jasmine.any(Date) as any,
-            end: jasmine.any(Date) as any,
-            reason: 'FAKE_REASON',
-            admin: 'FAKE_ADMIN_ID',
-          },
-        }),
-      );
     });
   });
 

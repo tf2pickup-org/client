@@ -4,7 +4,6 @@ import {
   MockBuilder,
   MockedComponentFixture,
   MockRender,
-  MockReset,
   ngMocks,
 } from 'ng-mocks';
 import { NavigateBackDirective } from './navigate-back.directive';

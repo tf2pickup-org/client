@@ -4,9 +4,9 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'seconds',
 })
 export class SecondsPipe implements PipeTransform {
-  transform(value: any): string {
+  transform(value: number): string {
     if (isNaN(value)) {
-      return value;
+      return `${value}`;
     }
 
     const minutes = Math.floor(value / 60);

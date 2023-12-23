@@ -1,18 +1,21 @@
 <div class="mdc-dialog mdc-dialog--open">
-  <div [ngSwitch]="phase | async"
-    class="mdc-dialog__container">
-    <div *ngSwitchCase="'mumble'"
-      class="mdc-dialog__surface">
-      <div class="mdc-dialog__title">
-        Do you have Mumble?
-      </div>
+  <div [ngSwitch]="phase | async" class="mdc-dialog__container">
+    <div *ngSwitchCase="'mumble'" class="mdc-dialog__surface">
+      <div class="mdc-dialog__title">Do you have Mumble?</div>
 
       <div class="mdc-dialog__content">
         <div class="d-flex align-items-center">
           <div class="pr-4">
-            <p><markdown src="/assets/documents/CONFIRM-MUMBLE.md"></markdown></p>
+            <p>
+              <markdown src="/assets/documents/CONFIRM-MUMBLE.md"></markdown>
+            </p>
           </div>
-          <img src="/assets/mumble-logo-png-transparent.png" width="128" height="128">
+          <img
+            src="/assets/mumble-logo-png-transparent.png"
+            width="128"
+            height="128"
+            alt="mumble logo"
+          />
         </div>
       </div>
 
@@ -20,28 +23,31 @@
         <button
           type="button"
           class="mdc-button mdc-dialog__button mdc-button--unelevated w-100 confirm-mumble-button"
-          (click)="step()">
+          (click)="step()"
+        >
           <div class="mdc-button__ripple"></div>
-          <span class="mdc-button__label">Yes, I confirm I have Mumble installed</span>
+          <span class="mdc-button__label"
+            >Yes, I confirm I have Mumble installed</span
+          >
         </button>
       </div>
     </div>
 
-    <div *ngSwitchCase="'rules'"
-      class="mdc-dialog__surface">
-      <div class="mdc-dialog__title">
-        Accept rules
-      </div>
+    <div *ngSwitchCase="'rules'" class="mdc-dialog__surface">
+      <div class="mdc-dialog__title">Accept rules</div>
 
       <div class="mdc-dialog__content">
-        <p><markdown [data]="rules | async" ngPreserveWhitespaces></markdown></p>
+        <p>
+          <markdown [data]="rules | async" ngPreserveWhitespaces></markdown>
+        </p>
       </div>
 
       <div class="mdc-dialog__actions">
         <button
           type="button"
           class="mdc-button mdc-dialog__button mdc-button--unelevated w-100 accept-rules-button"
-          (click)="step()">
+          (click)="step()"
+        >
           <div class="mdc-button__ripple"></div>
           <span class="mdc-button__label">Okay, I accept these rules</span>
         </button>

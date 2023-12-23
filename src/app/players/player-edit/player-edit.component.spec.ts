@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { PlayerEditComponent } from './player-edit.component';
-import { of, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { ActivatedRoute, convertToParamMap } from '@angular/router';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import {
@@ -24,15 +24,15 @@ import { ConfigurationService } from '@app/configuration/configuration.service';
 describe(PlayerEditComponent.name, () => {
   let fixture: MockedComponentFixture;
   let component: PlayerEditComponent;
-  let routeParams: Subject<any>;
+  let routeParams: Subject<{ id: string }>;
   let store: MockStore;
   let playersService: jasmine.SpyObj<PlayersService>;
   let saveButton: HTMLButtonElement;
   let nameInput: HTMLInputElement;
   let fetchPlayerSkill: Subject<{ [gameClass in Tf2ClassName]?: number }>;
   let setPlayerName: Subject<Player>;
-  let setPlayerSkill: Subject<any>;
-  let configuration: Subject<Record<string, any>>;
+  let setPlayerSkill: Subject<{ [gameClass in Tf2ClassName]?: number }>;
+  let configuration: Subject<Record<string, unknown>>;
 
   beforeEach(() => {
     routeParams = new Subject();

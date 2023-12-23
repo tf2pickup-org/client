@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { profile } from '@app/profile/profile.selectors';
@@ -18,7 +17,6 @@ export class IsAdminGuard {
       filter(profile =>
         ['authenticated', 'not authenticated'].includes(profile.authenticated),
       ),
-      // eslint-disable-next-line ngrx/avoid-mapping-selectors
       map(profile => {
         if (profile.authenticated === 'not authenticated') {
           return false;

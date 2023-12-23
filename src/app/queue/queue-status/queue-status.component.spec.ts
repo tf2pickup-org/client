@@ -18,7 +18,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 describe('QueueStatusComponent', () => {
   let component: QueueStatusComponent;
   let fixture: ComponentFixture<QueueStatusComponent>;
-  let store: MockStore<any>;
+  let store: MockStore;
   let isInQueueSelector: MemoizedSelector<AppState, boolean>;
   let queueStateSelector: MemoizedSelector<AppState, string>;
 
@@ -43,7 +43,7 @@ describe('QueueStatusComponent', () => {
   beforeEach(() => {
     store = TestBed.inject(MockStore);
     isInQueueSelector = store.overrideSelector(isInQueue, false);
-    queueStateSelector = store.overrideSelector(queueState, 'loading');
+    store.overrideSelector(queueState, 'loading');
 
     fixture = TestBed.createComponent(QueueStatusComponent);
     component = fixture.componentInstance;

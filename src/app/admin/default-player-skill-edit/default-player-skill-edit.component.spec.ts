@@ -19,7 +19,7 @@ import { DefaultPlayerSkillEditComponent } from './default-player-skill-edit.com
 describe(DefaultPlayerSkillEditComponent.name, () => {
   let component: DefaultPlayerSkillEditComponent;
   let fixture: MockedComponentFixture<DefaultPlayerSkillEditComponent>;
-  let configuration: Subject<Record<string, any>>;
+  let configuration: Subject<Record<string, unknown>>;
   let submitButton: HTMLButtonElement;
 
   beforeEach(() => {

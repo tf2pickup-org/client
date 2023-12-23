@@ -14,7 +14,7 @@ describe('PreReadyUpButtonComponent', () => {
   let component: PreReadyUpButtonComponent;
   let fixture: ComponentFixture<PreReadyUpButtonComponent>;
   let store: MockStore;
-  let isPreReadiedSelector: MemoizedSelector<any, boolean>;
+  let isPreReadiedSelector: MemoizedSelector<unknown, boolean>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({

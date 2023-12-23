@@ -1,9 +1,16 @@
 <div class="flex flex-row">
   <ng-container *ngIf="player; else ghost">
-    <img [src]="player.avatar.large" class="avatar" crossorigin="anonymous">
+    <img
+      [src]="player.avatar.large"
+      class="avatar"
+      crossorigin="anonymous"
+      [alt]="player.name + '\'s avatar'"
+    />
     <div class="flex flex-col text-white gap-2">
       <div class="text-4xl">{{ player?.name }}</div>
-      <span><strong>joined:</strong> {{ player?.joinedAt | date:'medium' }}</span>
+      <span
+        ><strong>joined:</strong> {{ player?.joinedAt | date : 'medium' }}</span
+      >
     </div>
   </ng-container>
 

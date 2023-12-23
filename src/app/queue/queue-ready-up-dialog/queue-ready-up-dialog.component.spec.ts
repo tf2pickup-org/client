@@ -9,7 +9,6 @@ import { By } from '@angular/platform-browser';
 describe('QueueReadyUpDialogComponent', () => {
   let component: QueueReadyUpDialogComponent;
   let fixture: ComponentFixture<QueueReadyUpDialogComponent>;
-  let store: MockStore<any>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
@@ -19,8 +18,6 @@ describe('QueueReadyUpDialogComponent', () => {
   }));
 
   beforeEach(() => {
-    store = TestBed.inject(MockStore);
-
     fixture = TestBed.createComponent(QueueReadyUpDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

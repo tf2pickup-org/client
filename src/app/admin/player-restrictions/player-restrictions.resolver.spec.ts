@@ -6,7 +6,7 @@ import { PlayerRestrictionsResolver } from './player-restrictions.resolver';
 
 describe('PlayerRestrictionsResolver', () => {
   let resolver: PlayerRestrictionsResolver;
-  let configuration: Subject<Record<string, any>>;
+  let configuration: Subject<Record<string, unknown>>;
 
   beforeEach(() => {
     configuration = new Subject();

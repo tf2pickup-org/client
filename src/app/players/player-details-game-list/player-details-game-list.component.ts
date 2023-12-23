@@ -5,7 +5,7 @@ import {
   OnDestroy,
 } from '@angular/core';
 import { BehaviorSubject, ReplaySubject, Subject, combineLatest } from 'rxjs';
-import { map, switchMap, takeUntil, tap, filter } from 'rxjs/operators';
+import { map, switchMap, takeUntil, filter } from 'rxjs/operators';
 import { PlayersService } from '../players.service';
 import { Game } from '@app/games/models/game';
 
@@ -61,8 +61,8 @@ export class PlayerDetailsGameListComponent implements OnDestroy {
                 this.games.next(
                   response.results.map(game => ({
                     ...game,
-                    classPlayed: game.slots.find(s => s.player.id === playerId)
-                      ?.gameClass,
+                    classPlayed: game.slots.find(s => s.player.id === playerId)!
+                      .gameClass,
                   })),
                 );
               }),

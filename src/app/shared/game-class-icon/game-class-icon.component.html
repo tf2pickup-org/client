@@ -1,6 +1,15 @@
-<img *ngIf="gameClass"
-  [srcset]="'/assets/game-class-icons/' + gameClass + '-32x32.png,
-            /assets/game-class-icons/' + gameClass + '-64x64.png 2x'"
+<img
+  *ngIf="gameClass"
+  [srcset]="
+    '/assets/game-class-icons/' +
+    gameClass +
+    '-32x32.png,
+            /assets/game-class-icons/' +
+    gameClass +
+    '-64x64.png 2x'
+  "
   [src]="'/assets/game-class-icons/' + gameClass + '-64x64.png'"
   [width]="size"
-  [height]="size">
+  [height]="size"
+  [alt]="gameClass + ' icon'"
+/>

@@ -1,9 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { SocketFactoryService } from './socket-factory.service';
-import {
-  HttpClientTestingModule,
-  HttpTestingController,
-} from '@angular/common/http/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { WS_URL } from '@app/ws-url';
 import { WsTokenService } from './ws-token.service';
 import { NEVER } from 'rxjs';
@@ -18,7 +15,6 @@ class WsTokenServiceStub {
 
 describe('SocketFactoryService', () => {
   let service: SocketFactoryService;
-  let httpController: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -31,7 +27,6 @@ describe('SocketFactoryService', () => {
     });
 
     service = TestBed.inject(SocketFactoryService);
-    httpController = TestBed.inject(HttpTestingController);
   });
 
   afterEach(() => TestBed.inject(MockStore)?.resetSelectors());

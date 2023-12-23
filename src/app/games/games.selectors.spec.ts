@@ -7,6 +7,6 @@ describe('gameById', () => {
       gameById('FAKE_ID').projector({
         FAKE_ID: { id: 'FAKE_ID', number: 2 } as Game,
       }),
-    ).toEqual({ id: 'FAKE_ID', number: 2 } as any);
+    ).toEqual({ id: 'FAKE_ID', number: 2 } as Game);
   });
 });

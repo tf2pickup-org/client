@@ -7,12 +7,14 @@ import { MemoizedSelector } from '@ngrx/store';
 import { allPlayers } from '../selectors';
 import { By } from '@angular/platform-browser';
 import { IsAdminPipe } from '../is-admin.pipe';
+import { Player } from '../models/player';
+import { PlayerRole } from '../models/player-role';
 
 describe('PlayerListComponent', () => {
   let component: PlayerListComponent;
   let fixture: ComponentFixture<PlayerListComponent>;
   let store: MockStore<AppState>;
-  let allPlayersSelector: MemoizedSelector<AppState, any[]>;
+  let allPlayersSelector: MemoizedSelector<AppState, Player[]>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
@@ -40,7 +42,11 @@ describe('PlayerListComponent', () => {
   describe('with players', () => {
     beforeEach(() => {
       allPlayersSelector.setResult([
-        { id: 'FAKE_ID', name: 'FAKE_NAME', roles: [] },
+        {
+          id: 'FAKE_ID',
+          name: 'FAKE_NAME',
+          roles: [] as PlayerRole[],
+        } as Player,
       ]);
       store.refreshState();
       fixture.detectChanges();
@@ -57,7 +63,7 @@ describe('PlayerListComponent', () => {
 
   it('should render an admin badge', () => {
     allPlayersSelector.setResult([
-      { id: 'FAKE_ID', name: 'FAKE_NAME', roles: ['admin'] },
+      { id: 'FAKE_ID', name: 'FAKE_NAME', roles: ['admin'] } as Player,
     ]);
     store.refreshState();
     fixture.detectChanges();

@@ -12,7 +12,7 @@ import { MarkdownComponent } from 'ngx-markdown';
 describe(RulesComponent.name, () => {
   let component: RulesComponent;
   let fixture: MockedComponentFixture<RulesComponent>;
-  let routeData: Subject<any>;
+  let routeData: Subject<unknown>;
 
   beforeEach(() => (routeData = new Subject()));
 

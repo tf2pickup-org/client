@@ -246,10 +246,7 @@ describe('QueueSlotItemComponent', () => {
           beforeEach(() => {
             component.friendFlags = {
               canMarkAsFriend: true,
-              markedBy: {
-                id: 'FAKE_ENEMY_MEDIC_ID',
-                name: 'FAKE_ENEMY_MEDIC',
-              } as any,
+              markedBy: 'FAKE_ENEMY_MEDIC_ID',
             };
             fixture.detectChanges();
           });

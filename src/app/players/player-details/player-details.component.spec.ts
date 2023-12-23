@@ -25,7 +25,7 @@ const paramMap = of(convertToParamMap({ id: 'FAKE_ID' }));
 describe('PlayerDetailsComponent', () => {
   let component: PlayerDetailsComponent;
   let fixture: ComponentFixture<PlayerDetailsComponent>;
-  let store: MockStore<any>;
+  let store: MockStore;
   let storeDispatchSpy: jasmine.Spy;
   let playersService: jasmine.SpyObj<PlayersService>;
   let isAdminSelector: MemoizedSelector<unknown, boolean>;
