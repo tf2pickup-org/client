@@ -156,5 +156,8 @@
     "typescript": "5.2.2",
     "webpack-bundle-analyzer": "4.9.1"
   },
+  "resolutions": {
+    "got": "12.4.1"
+  },
   "packageManager": "yarn@3.6.3"
 }

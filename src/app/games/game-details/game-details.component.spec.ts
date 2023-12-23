@@ -657,9 +657,13 @@ describe('GameDetailsComponent', () => {
               playerList => playerList.showAssignedSkills,
             ),
           ).toBe(true);
-          const storage = TestBed.inject(LOCAL_STORAGE);
+          const storage = TestBed.inject(
+            LOCAL_STORAGE,
+          ) as StorageService<boolean>;
           // skicq: JS-0296
-          expect(storage.set).toHaveBeenCalledWith('skills_visible', true);
+          expect(
+            storage.set as (key: string, value: boolean) => void,
+          ).toHaveBeenCalledWith('skills_visible', true);
         });
       });
     });
