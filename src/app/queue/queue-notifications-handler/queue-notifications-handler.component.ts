@@ -71,7 +71,7 @@ export class QueueNotificationsHandlerComponent implements OnInit, OnDestroy {
       .select(substituteRequests)
       .pipe(
         takeUntil(this.destroyed),
-        filter(requests => !!requests),
+        filter(requests => Boolean(requests)),
         filter(requests => requests!.length > 0),
         withLatestFrom(this.store.select(isPlayingGame)),
         debounceTime(1000),
