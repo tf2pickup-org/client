@@ -43,7 +43,7 @@ describe('QueueStatusComponent', () => {
   beforeEach(() => {
     store = TestBed.inject(MockStore);
     isInQueueSelector = store.overrideSelector(isInQueue, false);
-    store.overrideSelector(queueState, 'loading');
+    queueStateSelector = store.overrideSelector(queueState, 'loading');
 
     fixture = TestBed.createComponent(QueueStatusComponent);
     component = fixture.componentInstance;

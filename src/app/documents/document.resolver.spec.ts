@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot } from '@angular/router';
 import { MockProvider } from 'ng-mocks';
 import { of } from 'rxjs';
 import { DocumentResolver } from './document.resolver';
@@ -32,13 +32,10 @@ describe(DocumentResolver.name, () => {
     describe('when using route data', () => {
       it('should resolve the document', done => {
         resolver
-          .resolve(
-            {
-              data: { documentName: 'rules' },
-              params: {},
-            } as unknown as ActivatedRouteSnapshot,
-            {} as RouterStateSnapshot,
-          )
+          .resolve({
+            data: { documentName: 'rules' },
+            params: {},
+          } as unknown as ActivatedRouteSnapshot)
           .subscribe(document => {
             expect(document.name).toEqual('rules');
             done();
@@ -49,13 +46,10 @@ describe(DocumentResolver.name, () => {
     describe('when using route params', () => {
       it('should resolve the document', done => {
         resolver
-          .resolve(
-            {
-              data: {},
-              params: { documentName: 'foo' },
-            } as unknown as ActivatedRouteSnapshot,
-            {} as RouterStateSnapshot,
-          )
+          .resolve({
+            data: {},
+            params: { documentName: 'foo' },
+          } as unknown as ActivatedRouteSnapshot)
           .subscribe(document => {
             expect(document.name).toEqual('foo');
             done();

@@ -80,7 +80,7 @@
     "@ngrx/store-devtools": "17.0.1",
     "@swimlane/ngx-datatable": "20.1.0",
     "@tailwindcss/forms": "0.5.6",
-    "angular-tabler-icons": "2.34.0",
+    "angular-tabler-icons": "2.44.0",
     "chart.js": "4.4.0",
     "chartjs-plugin-datalabels": "2.2.0",
     "country-flag-icons": "1.5.7",

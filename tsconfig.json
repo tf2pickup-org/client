@@ -22,7 +22,9 @@
     "paths": {
       "@app/*": ["src/app/*"],
       "@environment": ["src/environments/environment"]
-    }
+    },
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true
   },
   "angularCompilerOptions": {
     "disableTypeScriptVersionCheck": true,

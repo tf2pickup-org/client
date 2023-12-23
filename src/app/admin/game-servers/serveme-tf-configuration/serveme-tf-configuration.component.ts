@@ -44,7 +44,7 @@ export class ServemeTfConfigurationComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.route.data
       .pipe(
-        map<Data, ServemeTfConfiguration>(data => data.configuration),
+        map<Data, ServemeTfConfiguration>(data => data['configuration']),
         takeUntil(this.destroyed),
       )
       .subscribe(({ preferredRegion }) => {

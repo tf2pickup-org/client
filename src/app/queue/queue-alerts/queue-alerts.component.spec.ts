@@ -46,9 +46,9 @@ describe('QueueAlertsComponent', () => {
 
   beforeEach(() => {
     store = TestBed.inject(MockStore);
-    store.overrideSelector(activeGameId, null);
+    activeGameIdSelector = store.overrideSelector(activeGameId, null);
     bansSelector = store.overrideSelector(bans, []);
-    store.overrideSelector(substituteRequests, []);
+    substituteRequestsSelector = store.overrideSelector(substituteRequests, []);
     store.overrideSelector(restrictions, []);
 
     fixture = TestBed.createComponent(QueueAlertsComponent);

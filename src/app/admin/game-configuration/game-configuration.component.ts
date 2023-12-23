@@ -41,7 +41,7 @@ export class GameConfigurationComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.route.data
       .pipe(
-        map<Data, GameConfiguration>(data => data.gameConfiguration),
+        map<Data, GameConfiguration>(data => data['gameConfiguration']),
         takeUntil(this.destroyed),
       )
       .subscribe(

@@ -11,7 +11,7 @@ export class GameServerResolver {
   constructor(private gameServersService: GameServersService) {}
 
   resolve(route: ActivatedRouteSnapshot): Observable<GameServer> {
-    const gameServerId = route.params.gameServerId;
+    const gameServerId = route.params['gameServerId'];
     return this.gameServersService.fetchGameServer(gameServerId);
   }
 }
