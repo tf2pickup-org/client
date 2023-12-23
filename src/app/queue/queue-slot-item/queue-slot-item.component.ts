@@ -15,8 +15,8 @@ import { FriendFlags } from '../friend-flags';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class QueueSlotItemComponent {
-  @Input()
-  slot: QueueSlot;
+  @Input({ required: true })
+  slot!: QueueSlot;
 
   @Input()
   locked = true;
@@ -34,7 +34,7 @@ export class QueueSlotItemComponent {
   freeSlot = new EventEmitter<void>();
 
   @Output()
-  markFriend = new EventEmitter<string>();
+  markFriend = new EventEmitter<string | null>();
 
   maybeTakeSlot() {
     if (!this.locked && !this.slot?.player && !this.takenByMe) {

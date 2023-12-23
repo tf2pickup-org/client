@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Resolve } from '@angular/router';
+
 import { ConfigurationService } from '@app/configuration/configuration.service';
 import { map, Observable } from 'rxjs';
 import { GameConfiguration, LogsTfUploadMethod } from './game-configuration';
@@ -7,7 +7,7 @@ import { GameConfiguration, LogsTfUploadMethod } from './game-configuration';
 @Injectable({
   providedIn: 'root',
 })
-export class GameConfigurationResolver implements Resolve<GameConfiguration> {
+export class GameConfigurationResolver {
   constructor(private readonly configurationService: ConfigurationService) {}
 
   resolve(): Observable<GameConfiguration> {

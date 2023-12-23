@@ -1,4 +1,4 @@
-import { Overlay } from '@angular/cdk/overlay';
+import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { Location } from '@angular/common';
 import { ChangeDetectorRef } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
@@ -22,10 +22,10 @@ import { PlayerRestrictionsComponent } from './player-restrictions.component';
 describe(PlayerRestrictionsComponent.name, () => {
   let component: PlayerRestrictionsComponent;
   let fixture: MockedComponentFixture<PlayerRestrictionsComponent>;
-  let configuration: Subject<Record<string, any>>;
+  let configuration: Subject<Record<string, unknown>>;
   let overlay: jasmine.SpyObj<Overlay>;
   let configurationService: jasmine.SpyObj<ConfigurationService>;
-  let routeData: Subject<any>;
+  let routeData: Subject<unknown>;
 
   beforeEach(() => {
     configuration = new Subject();
@@ -129,7 +129,7 @@ describe(PlayerRestrictionsComponent.name, () => {
         overlay.create.and.returnValue({
           attach: () => ({ instance: dialog }),
           dispose: () => null,
-        } as any);
+        } as unknown as OverlayRef);
 
         const item = ngMocks.find('li[minimumTf2InGameHoursItem]')
           .nativeElement as HTMLElement;

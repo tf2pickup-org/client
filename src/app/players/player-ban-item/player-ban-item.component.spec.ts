@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { PlayerBanItemComponent } from './player-ban-item.component';
-import { NO_ERRORS_SCHEMA, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
 describe('PlayerBanItemComponent', () => {

@@ -25,7 +25,7 @@ describe('ConfigurationService', () => {
 
   describe('#fetchValues()', () => {
     it('should query the api', () => {
-      let result: any;
+      let result;
       service
         .fetchValues<[string]>('games.whitelist_id')
         .subscribe(r => (result = r));
@@ -51,7 +51,7 @@ describe('ConfigurationService', () => {
 
   describe('#storeValues()', () => {
     it('should query the api', () => {
-      let result: any;
+      let result;
       service
         .storeValues<[string]>({
           key: 'games.whitelist_id',

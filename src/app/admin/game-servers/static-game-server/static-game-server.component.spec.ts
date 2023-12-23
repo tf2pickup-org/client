@@ -13,7 +13,7 @@ import { StaticGameServerComponent } from './static-game-server.component';
 describe(StaticGameServerComponent.name, () => {
   let component: StaticGameServerComponent;
   let fixture: MockedComponentFixture<StaticGameServerComponent>;
-  let routeData: Subject<any>;
+  let routeData: Subject<unknown>;
 
   beforeEach(() => {
     routeData = new Subject();

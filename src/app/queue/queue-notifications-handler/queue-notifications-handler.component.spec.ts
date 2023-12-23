@@ -1,7 +1,6 @@
 import {
   ComponentFixture,
   fakeAsync,
-  flushMicrotasks,
   TestBed,
   tick,
 } from '@angular/core/testing';
@@ -36,7 +35,7 @@ describe('QueueNotificationsHandlerComponent', () => {
       SoundPlayerService.name,
       ['playSound'],
     );
-    soundPlayerService.playSound.and.returnValue(of(null));
+    soundPlayerService.playSound.and.returnValue(of());
   });
 
   beforeEach(async () => {

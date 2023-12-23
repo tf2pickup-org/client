@@ -7,7 +7,7 @@ import {
 import { isPlayingGame } from '@app/profile/profile.selectors';
 import { awaitsReadyUp } from '@app/selectors';
 import { SoundPlayerService } from '@app/shared/sound-player.service';
-import { select, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { NEVER, of, Subject } from 'rxjs';
 import {
   debounceTime,
@@ -71,7 +71,8 @@ export class QueueNotificationsHandlerComponent implements OnInit, OnDestroy {
       .select(substituteRequests)
       .pipe(
         takeUntil(this.destroyed),
-        filter(requests => requests?.length > 0),
+        filter(requests => Boolean(requests)),
+        filter(requests => requests!.length > 0),
         withLatestFrom(this.store.select(isPlayingGame)),
         debounceTime(1000),
       )
@@ -85,7 +86,7 @@ export class QueueNotificationsHandlerComponent implements OnInit, OnDestroy {
             )
             .subscribe();
 
-          requests.forEach(request => {
+          requests!.forEach(request => {
             new Notification('A subsitute is needed!', {
               body: `Team ${request.team} needs a substitute for ${request.gameClass} in game #${request.gameNumber}`,
               icon: '/assets/android-icon-48x48.png',

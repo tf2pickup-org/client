@@ -27,11 +27,7 @@ export const initialState: State = {
   config: environment.entryQueue.config as QueueConfig,
   slots: environment.entryQueue.slots,
   state: 'loading',
-  mapVoteResults: [
-    { map: null, voteCount: 0 },
-    { map: null, voteCount: 0 },
-    { map: null, voteCount: 0 },
-  ],
+  mapVoteResults: [],
   preReady: false,
   friendships: [],
 };

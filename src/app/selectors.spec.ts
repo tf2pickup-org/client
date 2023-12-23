@@ -35,7 +35,13 @@ describe('canJoinQueue()', () => {
   describe('when the user has an active game', () => {
     it('should return false', () => {
       expect(
-        canJoinQueue(Tf2ClassName.soldier).projector(true, true, {}, false, []),
+        canJoinQueue(Tf2ClassName.soldier).projector(
+          true,
+          true,
+          'FAKE_GAME_ID',
+          false,
+          [],
+        ),
       ).toBe(false);
     });
   });
@@ -59,7 +65,7 @@ describe('canJoinQueue()', () => {
       expect(
         canJoinQueue(Tf2ClassName.soldier).projector(true, true, null, false, [
           {
-            reason: 'test',
+            reason: 'account needs review',
             gameClasses: [Tf2ClassName.soldier],
           },
         ]),

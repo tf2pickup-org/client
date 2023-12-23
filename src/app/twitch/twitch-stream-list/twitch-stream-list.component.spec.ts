@@ -3,7 +3,7 @@ import { TwitchStreamListComponent } from './twitch-stream-list.component';
 import { MockComponent } from 'ng-mocks';
 import { TwitchStreamListItemComponent } from '../twitch-stream-list-item/twitch-stream-list-item.component';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
-import { MemoizedSelector, Store } from '@ngrx/store';
+import { MemoizedSelector } from '@ngrx/store';
 import { AppState } from '@app/app.state';
 import { TwitchStream } from '../models/twitch-stream';
 import { twitchStreams } from '../twitch.selectors';

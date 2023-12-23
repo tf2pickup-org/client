@@ -22,7 +22,7 @@ import { EditPlayerRolesComponent } from './edit-player-roles.component';
 describe(EditPlayerRolesComponent.name, () => {
   let component: EditPlayerRolesComponent;
   let fixture: MockedComponentFixture;
-  let routeParams: Subject<any>;
+  let routeParams: Subject<{ id: string }>;
   let store: MockStore;
   let playersService: jasmine.SpyObj<PlayersService>;
   let submitButton: HTMLButtonElement;

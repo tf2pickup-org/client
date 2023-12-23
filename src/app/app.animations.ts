@@ -2,7 +2,6 @@ import {
   animate,
   group,
   query,
-  stagger,
   style,
   transition,
   trigger,

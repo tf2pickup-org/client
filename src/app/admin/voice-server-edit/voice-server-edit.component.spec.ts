@@ -17,7 +17,7 @@ import { VoiceServerEditComponent } from './voice-server-edit.component';
 describe(VoiceServerEditComponent.name, () => {
   let component: VoiceServerEditComponent;
   let fixture: MockedComponentFixture<VoiceServerEditComponent>;
-  let configuration: Subject<Record<string, any>>;
+  let configuration: Subject<Record<string, unknown>>;
   let submitButton: HTMLButtonElement;
   let configurationService: jasmine.SpyObj<ConfigurationService>;
 

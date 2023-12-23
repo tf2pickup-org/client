@@ -1,4 +1,5 @@
 import {
+  DefaultRenderComponent,
   MockBuilder,
   MockedComponentFixture,
   MockRender,
@@ -20,7 +21,9 @@ describe('MapThumbnailComponent', () => {
   );
 
   beforeEach(() => {
-    fixture = MockRender(MapThumbnailComponent, { map: 'cp_badlands' } as any);
+    fixture = MockRender(MapThumbnailComponent, {
+      map: 'cp_badlands',
+    } as DefaultRenderComponent<MapThumbnailComponent>);
     component = fixture.point.componentInstance;
     fixture.detectChanges();
   });

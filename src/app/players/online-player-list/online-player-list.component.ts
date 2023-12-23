@@ -31,7 +31,6 @@ export class OnlinePlayerListComponent implements OnInit {
     this.store
       .select(onlinePlayersLoaded)
       .pipe(first())
-      // eslint-disable-next-line ngrx/no-store-subscription
       .subscribe(loaded => {
         if (!loaded) {
           this.store.dispatch(loadOnlinePlayers());

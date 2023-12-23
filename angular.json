@@ -28,9 +28,7 @@
                 "glob": "**/*",
                 "input": "src/assets/",
                 "output": "/assets/",
-                "ignore": [
-                  "custom/**/*"
-                ]
+                "ignore": ["custom/**/*"]
               },
               {
                 "glob": "favicon.ico",
@@ -52,9 +50,7 @@
                 "src/styles/themes/tf2pickup.pl"
               ]
             },
-            "scripts": [
-              "node_modules/marked/marked.min.js"
-            ],
+            "scripts": ["node_modules/marked/marked.min.js"],
             "vendorChunk": true,
             "extractLicenses": false,
             "buildOptimizer": false,
@@ -110,9 +106,7 @@
                   "glob": "**/*",
                   "input": "src/assets/",
                   "output": "/assets/",
-                  "ignore": [
-                    "custom/**/*"
-                  ]
+                  "ignore": ["custom/**/*"]
                 },
                 {
                   "glob": "favicon.ico",
@@ -145,9 +139,7 @@
                   "glob": "**/*",
                   "input": "src/assets/",
                   "output": "/assets/",
-                  "ignore": [
-                    "custom/**/*"
-                  ]
+                  "ignore": ["custom/**/*"]
                 },
                 {
                   "glob": "favicon.ico",
@@ -180,9 +172,7 @@
                   "glob": "**/*",
                   "input": "src/assets/",
                   "output": "/assets/",
-                  "ignore": [
-                    "custom/**/*"
-                  ]
+                  "ignore": ["custom/**/*"]
                 },
                 {
                   "glob": "favicon.ico",
@@ -208,9 +198,7 @@
                   "glob": "**/*",
                   "input": "src/assets/",
                   "output": "/assets/",
-                  "ignore": [
-                    "custom/**/*"
-                  ]
+                  "ignore": ["custom/**/*"]
                 },
                 {
                   "glob": "favicon.ico",
@@ -236,9 +224,7 @@
                   "glob": "**/*",
                   "input": "src/assets/",
                   "output": "/assets/",
-                  "ignore": [
-                    "custom/**/*"
-                  ]
+                  "ignore": ["custom/**/*"]
                 },
                 {
                   "glob": "favicon.ico",
@@ -264,9 +250,7 @@
                   "glob": "**/*",
                   "input": "src/assets/",
                   "output": "/assets/",
-                  "ignore": [
-                    "custom/**/*"
-                  ]
+                  "ignore": ["custom/**/*"]
                 },
                 {
                   "glob": "favicon.ico",
@@ -292,9 +276,7 @@
                   "glob": "**/*",
                   "input": "src/assets/",
                   "output": "/assets/",
-                  "ignore": [
-                    "custom/**/*"
-                  ]
+                  "ignore": ["custom/**/*"]
                 },
                 {
                   "glob": "favicon.ico",
@@ -320,9 +302,7 @@
                   "glob": "**/*",
                   "input": "src/assets/",
                   "output": "/assets/",
-                  "ignore": [
-                    "custom/**/*"
-                  ]
+                  "ignore": ["custom/**/*"]
                 },
                 {
                   "glob": "favicon.ico",
@@ -348,9 +328,7 @@
                   "glob": "**/*",
                   "input": "src/assets/",
                   "output": "/assets/",
-                  "ignore": [
-                    "custom/**/*"
-                  ]
+                  "ignore": ["custom/**/*"]
                 },
                 {
                   "glob": "favicon.ico",
@@ -376,9 +354,7 @@
                   "glob": "**/*",
                   "input": "src/assets/",
                   "output": "/assets/",
-                  "ignore": [
-                    "custom/**/*"
-                  ]
+                  "ignore": ["custom/**/*"]
                 },
                 {
                   "glob": "favicon.ico",
@@ -404,9 +380,7 @@
                   "glob": "**/*",
                   "input": "src/assets/",
                   "output": "/assets/",
-                  "ignore": [
-                    "custom/**/*"
-                  ]
+                  "ignore": ["custom/**/*"]
                 },
                 {
                   "glob": "favicon.ico",
@@ -432,9 +406,7 @@
                   "glob": "**/*",
                   "input": "src/assets/",
                   "output": "/assets/",
-                  "ignore": [
-                    "custom/**/*"
-                  ]
+                  "ignore": ["custom/**/*"]
                 },
                 {
                   "glob": "favicon.ico",
@@ -460,9 +432,7 @@
                   "glob": "**/*",
                   "input": "src/assets/",
                   "output": "/assets/",
-                  "ignore": [
-                    "custom/**/*"
-                  ]
+                  "ignore": ["custom/**/*"]
                 },
                 {
                   "glob": "favicon.ico",
@@ -488,9 +458,7 @@
                   "glob": "**/*",
                   "input": "src/assets/",
                   "output": "/assets/",
-                  "ignore": [
-                    "custom/**/*"
-                  ]
+                  "ignore": ["custom/**/*"]
                 },
                 {
                   "glob": "favicon.ico",
@@ -516,9 +484,7 @@
                   "glob": "**/*",
                   "input": "src/assets/",
                   "output": "/assets/",
-                  "ignore": [
-                    "custom/**/*"
-                  ]
+                  "ignore": ["custom/**/*"]
                 },
                 {
                   "glob": "favicon.ico",
@@ -544,9 +510,7 @@
                   "glob": "**/*",
                   "input": "src/assets/",
                   "output": "/assets/",
-                  "ignore": [
-                    "custom/**/*"
-                  ]
+                  "ignore": ["custom/**/*"]
                 },
                 {
                   "glob": "favicon.ico",
@@ -577,9 +541,7 @@
                   "glob": "**/*",
                   "input": "src/assets/",
                   "output": "/assets/",
-                  "ignore": [
-                    "custom/**/*"
-                  ]
+                  "ignore": ["custom/**/*"]
                 },
                 {
                   "glob": "favicon.ico",
@@ -605,9 +567,7 @@
                   "glob": "**/*",
                   "input": "src/assets/",
                   "output": "/assets/",
-                  "ignore": [
-                    "custom/**/*"
-                  ]
+                  "ignore": ["custom/**/*"]
                 },
                 {
                   "glob": "favicon.ico",
@@ -633,9 +593,7 @@
                   "glob": "**/*",
                   "input": "src/assets/",
                   "output": "/assets/",
-                  "ignore": [
-                    "custom/**/*"
-                  ]
+                  "ignore": ["custom/**/*"]
                 },
                 {
                   "glob": "favicon.ico",
@@ -661,9 +619,7 @@
                   "glob": "**/*",
                   "input": "src/assets/",
                   "output": "/assets/",
-                  "ignore": [
-                    "custom/**/*"
-                  ]
+                  "ignore": ["custom/**/*"]
                 },
                 {
                   "glob": "favicon.ico",
@@ -689,9 +645,7 @@
                   "glob": "**/*",
                   "input": "src/assets/",
                   "output": "/assets/",
-                  "ignore": [
-                    "custom/**/*"
-                  ]
+                  "ignore": ["custom/**/*"]
                 },
                 {
                   "glob": "favicon.ico",
@@ -717,9 +671,7 @@
                   "glob": "**/*",
                   "input": "src/assets/",
                   "output": "/assets/",
-                  "ignore": [
-                    "custom/**/*"
-                  ]
+                  "ignore": ["custom/**/*"]
                 },
                 {
                   "glob": "favicon.ico",
@@ -745,9 +697,7 @@
                   "glob": "**/*",
                   "input": "src/assets/",
                   "output": "/assets/",
-                  "ignore": [
-                    "custom/**/*"
-                  ]
+                  "ignore": ["custom/**/*"]
                 },
                 {
                   "glob": "favicon.ico",
@@ -773,9 +723,7 @@
                   "glob": "**/*",
                   "input": "src/assets/",
                   "output": "/assets/",
-                  "ignore": [
-                    "custom/**/*"
-                  ]
+                  "ignore": ["custom/**/*"]
                 },
                 {
                   "glob": "favicon.ico",
@@ -801,9 +749,7 @@
                   "glob": "**/*",
                   "input": "src/assets/",
                   "output": "/assets/",
-                  "ignore": [
-                    "custom/**/*"
-                  ]
+                  "ignore": ["custom/**/*"]
                 },
                 {
                   "glob": "favicon.ico",
@@ -829,9 +775,7 @@
                   "glob": "**/*",
                   "input": "src/assets/",
                   "output": "/assets/",
-                  "ignore": [
-                    "custom/**/*"
-                  ]
+                  "ignore": ["custom/**/*"]
                 },
                 {
                   "glob": "favicon.ico",
@@ -857,9 +801,7 @@
                   "glob": "**/*",
                   "input": "src/assets/",
                   "output": "/assets/",
-                  "ignore": [
-                    "custom/**/*"
-                  ]
+                  "ignore": ["custom/**/*"]
                 },
                 {
                   "glob": "**/*",
@@ -880,9 +822,7 @@
                   "glob": "**/*",
                   "input": "src/assets/",
                   "output": "/assets/",
-                  "ignore": [
-                    "custom/**/*"
-                  ]
+                  "ignore": ["custom/**/*"]
                 },
                 {
                   "glob": "**/*",
@@ -903,9 +843,7 @@
                   "glob": "**/*",
                   "input": "src/assets/",
                   "output": "/assets/",
-                  "ignore": [
-                    "custom/**/*"
-                  ]
+                  "ignore": ["custom/**/*"]
                 },
                 {
                   "glob": "**/*",
@@ -926,9 +864,7 @@
                   "glob": "**/*",
                   "input": "src/assets/",
                   "output": "/assets/",
-                  "ignore": [
-                    "custom/**/*"
-                  ]
+                  "ignore": ["custom/**/*"]
                 },
                 {
                   "glob": "**/*",
@@ -949,9 +885,7 @@
                   "glob": "**/*",
                   "input": "src/assets/",
                   "output": "/assets/",
-                  "ignore": [
-                    "custom/**/*"
-                  ]
+                  "ignore": ["custom/**/*"]
                 },
                 {
                   "glob": "**/*",
@@ -972,9 +906,7 @@
                   "glob": "**/*",
                   "input": "src/assets/",
                   "output": "/assets/",
-                  "ignore": [
-                    "custom/**/*"
-                  ]
+                  "ignore": ["custom/**/*"]
                 },
                 {
                   "glob": "**/*",
@@ -995,9 +927,7 @@
                   "glob": "**/*",
                   "input": "src/assets/",
                   "output": "/assets/",
-                  "ignore": [
-                    "custom/**/*"
-                  ]
+                  "ignore": ["custom/**/*"]
                 },
                 {
                   "glob": "**/*",
@@ -1011,20 +941,20 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "tf2pickuppl:build",
             "proxyConfig": "proxy.conf.json",
-            "hmr": true
+            "hmr": true,
+            "buildTarget": "tf2pickuppl:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "tf2pickuppl:build:production"
+              "buildTarget": "tf2pickuppl:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "tf2pickuppl:build"
+            "buildTarget": "tf2pickuppl:build"
           }
         },
         "test": {
@@ -1034,13 +964,8 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "src/styles/main.scss"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": ["src/styles/main.scss"],
             "scripts": [],
             "stylePreprocessorOptions": {
               "includePaths": [
@@ -1054,10 +979,7 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": [
-              "src/**/*.ts",
-              "src/**/*.html"
-            ]
+            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
           }
         },
         "e2e": {

@@ -6,7 +6,7 @@ import {
 } from '@angular/common/http/testing';
 import { API_URL } from '@app/api-url';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
-import { MemoizedSelector, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { AppState } from '@app/app.state';
 import { QueueConfig } from '@app/queue/models/queue-config';
 import { queueConfig } from '@app/queue/queue.selectors';
@@ -36,7 +36,6 @@ const initialQueueConfig = {
 describe('PlayersService', () => {
   let httpContoller: HttpTestingController;
   let store: MockStore<AppState>;
-  let queueConfigSelector: MemoizedSelector<AppState, QueueConfig>;
 
   beforeEach(() =>
     TestBed.configureTestingModule({
@@ -51,10 +50,7 @@ describe('PlayersService', () => {
   beforeEach(() => {
     httpContoller = TestBed.get(HttpTestingController);
     store = TestBed.get(Store);
-    queueConfigSelector = store.overrideSelector(
-      queueConfig,
-      initialQueueConfig as QueueConfig,
-    );
+    store.overrideSelector(queueConfig, initialQueueConfig as QueueConfig);
   });
   afterEach(() => httpContoller.verify());
   afterEach(() => TestBed.inject(MockStore)?.resetSelectors());

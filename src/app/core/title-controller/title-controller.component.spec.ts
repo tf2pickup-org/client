@@ -7,7 +7,7 @@ import { Title } from '@angular/platform-browser';
 import { environment } from '@environment';
 
 class RouterStub {
-  events = new ReplaySubject<any>(1);
+  events = new ReplaySubject<unknown>(1);
   routerState = {
     root: {
       firstChild: {
@@ -22,7 +22,7 @@ class RouterStub {
 }
 
 class TitleStub {
-  setTitle(title: string) {}
+  setTitle() {}
 }
 
 describe('TitleControllerComponent', () => {

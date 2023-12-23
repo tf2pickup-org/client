@@ -57,7 +57,7 @@ export class PlayerRestrictionsComponent
   ngOnInit() {
     this.route.data
       .pipe(
-        map<Data, PlayerRestrictions>(data => data.playerRestrictions),
+        map<Data, PlayerRestrictions>(data => data['playerRestrictions']),
         takeUntil(this.destroyed),
       )
       .subscribe(

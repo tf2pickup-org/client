@@ -209,7 +209,7 @@ describe('QueueSlotContainerComponent', () => {
         expect(value).toEqual({
           canMarkAsFriend: true,
           markedBy: 'FAKE_MEDIC_2_ID',
-        } as any),
+        }),
       );
     });
   });

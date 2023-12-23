@@ -207,7 +207,6 @@ export class GameDetailsStore extends ComponentStore<GameDetailsState> {
         first(Boolean),
         map(game => game.id),
       )
-      // eslint-disable-next-line ngrx/no-store-subscription
       .subscribe(gameId => this.store.dispatch(reinitializeServer({ gameId })));
   }
 
@@ -217,7 +216,6 @@ export class GameDetailsStore extends ComponentStore<GameDetailsState> {
         first(Boolean),
         map(game => game.id),
       )
-      // eslint-disable-next-line ngrx/no-store-subscription
       .subscribe(gameId => this.store.dispatch(forceEndGame({ gameId })));
   }
 
@@ -243,7 +241,6 @@ export class GameDetailsStore extends ComponentStore<GameDetailsState> {
         first(Boolean),
         map(game => game.id),
       )
-      // eslint-disable-next-line ngrx/no-store-subscription
       .subscribe(gameId =>
         this.store.dispatch(requestSubstitute({ gameId, playerId })),
       );

@@ -1,5 +1,5 @@
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute, convertToParamMap } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { DocumentsService } from '@app/documents/documents.service';
 import {
   MockBuilder,
@@ -20,7 +20,7 @@ describe(DocumentEditComponent.name, () => {
   let fixture: MockedComponentFixture<DocumentEditComponent>;
   let submitButton: HTMLButtonElement;
   let textarea: HTMLTextAreaElement;
-  let routeData: Subject<any>;
+  let routeData: Subject<unknown>;
   let saveDocument: Subject<Document>;
 
   beforeEach(() => {

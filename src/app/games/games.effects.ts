@@ -53,7 +53,7 @@ export class GamesEffects {
     return this.actions.pipe(
       ofType(routerNavigatedAction),
       filter(({ payload }) => /^\/game\/.+$/.test(payload.routerState.url)),
-      map(({ payload }) => payload.routerState.root.children[0].params.id),
+      map(({ payload }) => payload.routerState.root.children[0].params['id']),
       map(gameId => loadGame({ gameId })),
     );
   });

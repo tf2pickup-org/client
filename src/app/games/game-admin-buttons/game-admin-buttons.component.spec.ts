@@ -1,4 +1,4 @@
-import { Overlay } from '@angular/cdk/overlay';
+import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { ConfirmDialogComponent } from '@app/shared/confirm-dialog/confirm-dialog.component';
@@ -31,7 +31,7 @@ describe(GameAdminButtonsComponent.name, () => {
     overlay.create.and.returnValue({
       attach: () => ({ instance: dialog }),
       dispose: () => null,
-    } as any);
+    } as unknown as OverlayRef);
   });
 
   it('should create', () => {

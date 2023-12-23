@@ -1,28 +1,32 @@
 <div class="mdc-dialog mdc-dialog--open">
   <div class="mdc-dialog__container">
-    <div class="mdc-dialog__surface"
+    <div
+      class="mdc-dialog__surface"
       role="alertdialog"
       aria-modal="true"
       aria-labelledby="game-server-option-list-dialog-title"
-      aria-describedby="game-server-option-list-dialog-content">
+      aria-describedby="game-server-option-list-dialog-content"
+    >
       <!-- Title cannot contain leading whitespace due to mdc-typography-baseline-top() -->
-      <h2 class="mdc-dialog__title" id="game-server-option-list-dialog-title"><!--
+      <h2 class="mdc-dialog__title" id="game-server-option-list-dialog-title">
+        <!--
      -->Choose game server<!--
-   --></h2>
+   -->
+      </h2>
       <div
         *ngIf="options | withLoading | async as _options"
         class="mdc-dialog__content"
-        id="game-server-option-list-dialog-content">
-
+        id="game-server-option-list-dialog-content"
+      >
         <app-game-server-option-list
           *ngIf="_options.value"
           [gameServerOptions]="_options.value"
-          (optionSelect)="optionSelect.emit($event)">
+          (optionSelect)="optionSelect.emit($event)"
+        >
         </app-game-server-option-list>
 
-        <div *ngIf="_options.loading"
-          class="loading-wrapper">
-          <img src="/assets/loading-medium.gif">
+        <div *ngIf="_options.loading" class="loading-wrapper">
+          <img src="/assets/loading-medium.gif" alt="loading" />
         </div>
       </div>
     </div>

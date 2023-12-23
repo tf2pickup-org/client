@@ -31,7 +31,7 @@ export class ConnectStringToLinkPipe implements PipeTransform {
     }
   }
 
-  private parseConnectString(connect: string): SteamConnect {
+  private parseConnectString(connect: string): SteamConnect | undefined {
     const match = connect.match(
       /^connect (.[^:;]+):?(\d+)?(?:;\s?password\s(.+))?$/,
     );
@@ -48,5 +48,7 @@ export class ConnectStringToLinkPipe implements PipeTransform {
 
       return ret;
     }
+
+    return undefined;
   }
 }

@@ -25,7 +25,7 @@ export class TitleControllerComponent implements OnInit {
 
           return route.snapshot;
         }),
-        map(route => route.data.title),
+        map(route => route.data['title']),
         filter(title => Boolean(title)),
       )
       .subscribe(title =>

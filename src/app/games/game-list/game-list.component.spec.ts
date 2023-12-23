@@ -1,4 +1,3 @@
-/* eslint-disable id-blacklist */
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { GameListComponent } from './game-list.component';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -8,7 +7,12 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { By } from '@angular/platform-browser';
 import { PaginatedList } from '@app/core/models/paginated-list';
 import { Game } from '../models/game';
-import { ActivatedRoute, convertToParamMap, Router } from '@angular/router';
+import {
+  ActivatedRoute,
+  convertToParamMap,
+  ParamMap,
+  Router,
+} from '@angular/router';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { first } from 'rxjs/operators';
 import { ChangeDetectionStrategy } from '@angular/core';
@@ -32,8 +36,8 @@ describe('GameListComponent', () => {
   let fixture: ComponentFixture<GameListComponent>;
   let gamesService: jasmine.SpyObj<GamesService>;
   let results: Subject<PaginatedList<Game>>;
-  let queryParams: Subject<any>;
-  let activatedRoute: { queryParamMap: Observable<any> };
+  let queryParams: Subject<ParamMap>;
+  let activatedRoute: { queryParamMap: Observable<unknown> };
   let router: Router;
 
   beforeEach(() => {
@@ -97,7 +101,7 @@ describe('GameListComponent', () => {
       results.next({
         results: mockGameListResponse.results,
         itemCount: 5,
-      } as any);
+      } as PaginatedList<Game>);
       fixture.detectChanges();
     });
 
@@ -108,7 +112,7 @@ describe('GameListComponent', () => {
 
   describe('when there are more pages', () => {
     beforeEach(() => {
-      results.next(mockGameListResponse as any);
+      results.next(mockGameListResponse as PaginatedList<Game>);
 
       // This is a workaround, I have no idea how to make Angular call the animation.done callback...
       component.onAnimationDone();

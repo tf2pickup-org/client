@@ -11,6 +11,6 @@ import { fadeThrough } from './app.animations';
 })
 export class AppComponent {
   prepareRoute(outlet: RouterOutlet) {
-    return outlet?.activatedRouteData?.animation;
+    return outlet?.activatedRouteData?.['animation'];
   }
 }

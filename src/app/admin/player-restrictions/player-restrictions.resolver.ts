@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Resolve } from '@angular/router';
+
 import { ConfigurationService } from '@app/configuration/configuration.service';
 import { map, Observable } from 'rxjs';
 import { PlayerRestrictions } from './player-restrictions';
@@ -7,7 +7,7 @@ import { PlayerRestrictions } from './player-restrictions';
 @Injectable({
   providedIn: 'root',
 })
-export class PlayerRestrictionsResolver implements Resolve<PlayerRestrictions> {
+export class PlayerRestrictionsResolver {
   constructor(private readonly configurationService: ConfigurationService) {}
 
   resolve(): Observable<PlayerRestrictions> {

@@ -5,7 +5,6 @@ import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import {
   MockBuilder,
   MockedComponentFixture,
-  MockRender,
   MockRenderFactory,
   ngMocks,
 } from 'ng-mocks';

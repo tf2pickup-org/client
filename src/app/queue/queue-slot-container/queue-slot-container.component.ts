@@ -21,7 +21,6 @@ export class QueueSlotContainerComponent {
 
   slot = this._slotId.pipe(
     switchMap(slotId => this.store.select(slotById(slotId))),
-    // eslint-disable-next-line rxjs/no-sharereplay
     shareReplay(1),
   );
 
@@ -31,7 +30,9 @@ export class QueueSlotContainerComponent {
 
   canMarkAsFriend = combineLatest([this.store.select(mySlot), this.slot]).pipe(
     map(([_mySlot, thisSlot]) =>
-      _mySlot?.canMakeFriendsWith?.includes(thisSlot.gameClass),
+      thisSlot
+        ? _mySlot?.canMakeFriendsWith?.includes(thisSlot?.gameClass)
+        : false,
     ),
   );
 
@@ -47,7 +48,7 @@ export class QueueSlotContainerComponent {
       }
 
       const friendship = allFriendships.find(
-        f => f.targetPlayerId === theSlot.player?.id,
+        f => f.targetPlayerId === theSlot?.player?.id,
       );
       if (friendship?.sourcePlayerId === player?.id) {
         return of({ canMarkAsFriend: true, markedByMe: true });
@@ -64,7 +65,7 @@ export class QueueSlotContainerComponent {
 
   locked = this.slot.pipe(
     filter(slot => Boolean(slot)),
-    map(slot => slot.gameClass),
+    map(slot => slot!.gameClass),
     switchMap(gameClass => this.store.select(canJoinQueue(gameClass))),
     map(canJoin => !canJoin),
   );

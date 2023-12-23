@@ -37,7 +37,7 @@
         tooltip="Hall of fame"
         class="navbar__link navbar__link--icon"
       >
-        <img src="/assets/ui_icon_crown.png" />
+        <img src="/assets/ui_icon_crown.png" alt="Hall of fame" />
       </a>
     </li>
 
@@ -48,7 +48,7 @@
         tooltip="Statistics"
         class="navbar__link navbar__link--icon"
       >
-        <img src="/assets/ui_icon_stats.png" />
+        <img src="/assets/ui_icon_stats.png" alt="Statistics" />
       </a>
     </li>
 
@@ -81,7 +81,7 @@
       tooltip="Settings"
       class="navbar__link navbar__link--settings"
     >
-      <img src="/assets/ui_settings.png" />
+      <img src="/assets/ui_settings.png" alt="Settings" />
     </a>
 
     <a
@@ -93,6 +93,7 @@
         [src]="_currentPlayer.avatar.medium"
         class="profile-avatar"
         crossorigin="anonymous"
+        alt="_currentPlayer.name + '\'s avatar'"
       />
       {{ _currentPlayer.name }}
     </a>

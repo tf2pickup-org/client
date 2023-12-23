@@ -23,7 +23,7 @@ describe(SoundPlayerService.name, () => {
   });
 
   beforeEach(() => {
-    // @ts-ignore
+    // @ts-expect-error init is not visible by ts
     spyOn(Howl.prototype, 'init');
     spyOn(Howl.prototype, 'stop');
   });
@@ -37,7 +37,7 @@ describe(SoundPlayerService.name, () => {
   describe('#playSound()', () => {
     it('should autoplay the sound', () => {
       service.playSound(['sound.wav']).subscribe();
-      // @ts-ignore
+      // @ts-expect-error init is not visible by ts
       expect(Howl.prototype.init).toHaveBeenCalledOnceWith(
         jasmine.objectContaining({
           autoplay: true,
@@ -55,7 +55,7 @@ describe(SoundPlayerService.name, () => {
     describe('when preferences are null', () => {
       it('should set the volume to 1', () => {
         service.playSound(['sound.wav']).subscribe();
-        // @ts-ignore
+        // @ts-expect-error init is not visible by ts
         expect(Howl.prototype.init).toHaveBeenCalledOnceWith(
           jasmine.objectContaining({
             volume: 1.0,
@@ -72,7 +72,7 @@ describe(SoundPlayerService.name, () => {
 
       it('should set the volume to 1', () => {
         service.playSound(['sound.wav']).subscribe();
-        // @ts-ignore
+        // @ts-expect-error init is not visible by ts
         expect(Howl.prototype.init).toHaveBeenCalledOnceWith(
           jasmine.objectContaining({
             volume: 1.0,
@@ -89,7 +89,7 @@ describe(SoundPlayerService.name, () => {
 
       it('should respect the preference', () => {
         service.playSound(['sound.wav']).subscribe();
-        // @ts-ignore
+        // @ts-expect-error init is not visible by ts
         expect(Howl.prototype.init).toHaveBeenCalledOnceWith(
           jasmine.objectContaining({
             volume: 0.5,

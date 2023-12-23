@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { CanActivate } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { profile } from '@app/profile/profile.selectors';
@@ -10,7 +9,7 @@ import { PlayerRole } from '@app/players/models/player-role';
 @Injectable({
   providedIn: 'root',
 })
-export class IsAdminGuard implements CanActivate {
+export class IsAdminGuard {
   constructor(private store: Store) {}
 
   canActivate(): Observable<boolean> {
@@ -18,7 +17,6 @@ export class IsAdminGuard implements CanActivate {
       filter(profile =>
         ['authenticated', 'not authenticated'].includes(profile.authenticated),
       ),
-      // eslint-disable-next-line ngrx/avoid-mapping-selectors
       map(profile => {
         if (profile.authenticated === 'not authenticated') {
           return false;

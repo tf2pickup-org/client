@@ -1,4 +1,4 @@
-import { animate, animation, stagger, style } from '@angular/animations';
+import { animate, animation, style } from '@angular/animations';
 
 export const fadeIn = animation([
   style({

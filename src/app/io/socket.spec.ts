@@ -29,7 +29,7 @@ describe('Socket', () => {
     it('should add event listener', () => {
       socket.on('queue state update', () => {});
       expect(
-        // @ts-expect-error
+        // @ts-expect-error socket is private
         socketFactoryService.socket.listenerCount('queue state update'),
       ).toEqual(1);
     });
@@ -43,7 +43,7 @@ describe('Socket', () => {
     it('should remove event listener', () => {
       socket.off('queue state update');
       expect(
-        // @ts-expect-error
+        // @ts-expect-error socket is private
         socketFactoryService.socket.listenerCount('queue state update'),
       ).toEqual(0);
     });
@@ -51,9 +51,9 @@ describe('Socket', () => {
 
   describe('#call()', () => {
     it('should emit the method name', () => {
-      // @ts-ignore
+      // @ts-expect-error socket is private
       const spy = spyOn(socketFactoryService.socket, 'emit');
-      socket.call<any>('mark friend').subscribe();
+      socket.call('mark friend').subscribe();
       expect(spy).toHaveBeenCalledWith(
         'mark friend',
         {},

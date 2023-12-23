@@ -20,13 +20,16 @@ interface UnknownState {
   authenticated: 'unknown';
 }
 
-export type State = UnknownState | NotAuthenticatedState | AuthenticatedState;
+export type ProfileState =
+  | UnknownState
+  | NotAuthenticatedState
+  | AuthenticatedState;
 
-export const initialState: State = {
+export const initialState: ProfileState = {
   authenticated: 'unknown',
 };
 
-const profileReducer = createReducer<State>(
+const profileReducer = createReducer<ProfileState>(
   initialState,
   on(profileLoaded, (state, { profile }) => ({
     ...profile,
@@ -47,5 +50,5 @@ const profileReducer = createReducer<State>(
   })),
 );
 
-export const reducer = (state: State | undefined, action: Action) =>
+export const reducer = (state: ProfileState | undefined, action: Action) =>
   profileReducer(state, action);

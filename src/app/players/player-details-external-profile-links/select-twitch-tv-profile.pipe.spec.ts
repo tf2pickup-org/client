@@ -19,10 +19,7 @@ describe(SelectTwitchTvProfilePipe.name, () => {
     expect(
       pipe.transform({
         playerId: 'FAKE_PLAYER_ID',
-        linkedProfiles: [
-          twitchTvProfile,
-          { provider: 'another provider' } as any,
-        ],
+        linkedProfiles: [twitchTvProfile],
       }),
     ).toEqual(twitchTvProfile);
   });

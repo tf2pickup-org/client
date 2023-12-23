@@ -18,7 +18,7 @@ describe(PlayerPreferencesComponent.name, () => {
   let component: PlayerPreferencesComponent;
   let fixture: MockedComponentFixture<PlayerPreferencesComponent>;
   let store: MockStore;
-  let actions: Subject<any>;
+  let actions: Subject<unknown>;
   let submitButton: HTMLButtonElement;
   let volumeSlider: HTMLInputElement;
 

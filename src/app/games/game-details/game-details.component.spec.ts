@@ -43,6 +43,7 @@ import { PlayersInTeamPipe } from './players-in-team.pipe';
 import { ShowSkillsSwitchComponent } from '../show-skills-switch/show-skills-switch.component';
 import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
 import { InjectionToken } from '@angular/core';
+import { ProfileState } from '@app/profile/profile.reducer';
 
 const mockPlayer1 = {
   id: 'FAKE_PLAYER_1_ID',
@@ -151,8 +152,8 @@ const makeState = (games: Game[]) => ({
 describe('GameDetailsComponent', () => {
   let fixture: MockedComponentFixture;
   let component: GameDetailsComponent;
-  let store: MockStore<any>;
-  let routeParams: Subject<any>;
+  let store: MockStore;
+  let routeParams: Subject<{ id: string }>;
   let connectInfo: Subject<ConnectInfo>;
 
   beforeEach(() => {
@@ -177,7 +178,7 @@ describe('GameDetailsComponent', () => {
       .mock(LOCAL_STORAGE, {
         set: jasmine.createSpy('StorageService.set'),
         get: jasmine.createSpy('StorageService.get').and.returnValue(false),
-      } as unknown as InjectionToken<StorageService<any>>)
+      } as unknown as InjectionToken<StorageService>)
       .mock(Title)
       .mock(GameAdminButtonsComponent)
       .mock(GameSummaryComponent)
@@ -297,8 +298,8 @@ describe('GameDetailsComponent', () => {
           beforeEach(() => {
             profile.setResult({
               authenticated: 'authenticated',
-              player: { id: 'FAKE_PLAYER_ID' },
-            } as any);
+              player: { id: 'FAKE_PLAYER_ID' } as Player,
+            } as ProfileState);
             isLoggedIn.setResult(true);
             store.refreshState();
             fixture.detectChanges();
@@ -656,12 +657,13 @@ describe('GameDetailsComponent', () => {
               playerList => playerList.showAssignedSkills,
             ),
           ).toBe(true);
-          const storage = TestBed.inject(LOCAL_STORAGE);
+          const storage = TestBed.inject(
+            LOCAL_STORAGE,
+          ) as StorageService<boolean>;
           // skicq: JS-0296
-          expect(storage.set as Function).toHaveBeenCalledWith(
-            'skills_visible',
-            true,
-          );
+          expect(
+            storage.set as (key: string, value: boolean) => void,
+          ).toHaveBeenCalledWith('skills_visible', true);
         });
       });
     });

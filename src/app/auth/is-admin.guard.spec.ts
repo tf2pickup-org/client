@@ -4,7 +4,7 @@ import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { AppState } from '@app/app.state';
 import { MemoizedSelector } from '@ngrx/store';
 import { profile } from '@app/profile/profile.selectors';
-import { State as ProfileState } from '@app/profile/profile.reducer';
+import { ProfileState } from '@app/profile/profile.reducer';
 import { Player } from '@app/players/models/player';
 
 describe('IsAdminGuard', () => {
@@ -48,7 +48,7 @@ describe('IsAdminGuard', () => {
         profileSelector.setResult({
           authenticated: 'authenticated',
           player: { roles: [] } as Player,
-        } as any);
+        } as ProfileState);
         store.refreshState();
       });
 
@@ -65,7 +65,7 @@ describe('IsAdminGuard', () => {
         profileSelector.setResult({
           authenticated: 'authenticated',
           player: { roles: ['admin'] } as Player,
-        } as any);
+        } as ProfileState);
         store.refreshState();
       });
 

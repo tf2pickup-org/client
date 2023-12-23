@@ -1,6 +1,6 @@
 import { State as QueueState } from './queue/queue.reducer';
 import { State as PlayersState } from './players/reducers';
-import { State as ProfileState } from './profile/profile.reducer';
+import { ProfileState } from './profile/profile.reducer';
 import { State as GamesState } from './games/games.reducer';
 import { State as TwitchState } from './twitch/twitch.reducer';
 import { State as IoState } from './io/io.reducer';

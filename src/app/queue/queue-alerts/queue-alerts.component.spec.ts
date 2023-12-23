@@ -17,20 +17,18 @@ import { MockComponent } from 'ng-mocks';
 import { ActiveGameSnackbarComponent } from '../active-game-snackbar/active-game-snackbar.component';
 import { SubstituteRequestBannerComponent } from '../substitute-request-banner/substitute-request-banner.component';
 import { BanBannerComponent } from '../ban-banner/ban-banner.component';
-import { Restriction } from '@app/profile/models/restriction';
 import { RestrictionBannerComponent } from '../restriction-banner/restriction-banner.component';
 
 describe('QueueAlertsComponent', () => {
   let component: QueueAlertsComponent;
   let fixture: ComponentFixture<QueueAlertsComponent>;
-  let store: MockStore<any>;
+  let store: MockStore;
   let activeGameIdSelector: MemoizedSelector<AppState, string>;
   let bansSelector: MemoizedSelector<AppState, PlayerBan[]>;
   let substituteRequestsSelector: MemoizedSelector<
     AppState,
     SubstituteRequest[]
   >;
-  let restrictionsSelector: MemoizedSelector<AppState, Restriction[]>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
@@ -51,7 +49,7 @@ describe('QueueAlertsComponent', () => {
     activeGameIdSelector = store.overrideSelector(activeGameId, null);
     bansSelector = store.overrideSelector(bans, []);
     substituteRequestsSelector = store.overrideSelector(substituteRequests, []);
-    restrictionsSelector = store.overrideSelector(restrictions, []);
+    store.overrideSelector(restrictions, []);
 
     fixture = TestBed.createComponent(QueueAlertsComponent);
     component = fixture.componentInstance;

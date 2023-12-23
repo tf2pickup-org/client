@@ -15,6 +15,10 @@ import {
   isPlayingGame,
   restrictions,
 } from './profile.selectors';
+import { ProfileState } from './profile.reducer';
+import { PlayerBan } from '@app/players/models/player-ban';
+import { PlayerRole } from '@app/players/models/player-role';
+import { Restriction } from './models/restriction';
 
 describe('currentPlayer', () => {
   describe('when authenticated', () => {
@@ -24,8 +28,8 @@ describe('currentPlayer', () => {
           authenticated: 'authenticated',
           player: {
             id: 'FAKE_PLAYER_ID',
-          },
-        }),
+          } as Player,
+        } as ProfileState),
       ).toEqual({
         id: 'FAKE_PLAYER_ID',
       } as Player);
@@ -43,18 +47,20 @@ describe('currentPlayer', () => {
 
 describe('currentPlayerId', () => {
   it("should return current player's id", () => {
-    expect(currentPlayerId.projector({ id: 'FAKE_PLAYER_ID' })).toEqual(
-      'FAKE_PLAYER_ID',
-    );
+    expect(
+      currentPlayerId.projector({ id: 'FAKE_PLAYER_ID' } as Player),
+    ).toEqual('FAKE_PLAYER_ID');
   });
 });
 
 describe('isLoggedIn', () => {
   describe('when the user is logged in', () => {
     it('should return true', () => {
-      expect(isLoggedIn.projector({ authenticated: 'authenticated' })).toBe(
-        true,
-      );
+      expect(
+        isLoggedIn.projector({
+          authenticated: 'authenticated',
+        } as ProfileState),
+      ).toBe(true);
     });
   });
 
@@ -70,19 +76,23 @@ describe('isLoggedIn', () => {
 describe('isAdmin', () => {
   it('should return the correct value', () => {
     expect(isAdmin.projector(null)).toBeFalsy();
-    expect(isAdmin.projector({ roles: [] })).toBe(false);
-    expect(isAdmin.projector({ roles: ['whatever'] })).toBe(false);
-    expect(isAdmin.projector({ roles: ['admin'] })).toBe(true);
+    expect(isAdmin.projector({ roles: [] as PlayerRole[] } as Player)).toBe(
+      false,
+    );
+    expect(isAdmin.projector({ roles: ['admin'] } as Player)).toBe(true);
   });
 });
 
 describe('isSuperUser', () => {
   it('should return the correct value', () => {
     expect(isSuperUser.projector(null)).toBeFalsy();
-    expect(isSuperUser.projector({ roles: [] })).toBe(false);
-    expect(isSuperUser.projector({ roles: ['something'] })).toBe(false);
-    expect(isSuperUser.projector({ roles: ['super user'] })).toBe(true);
-    expect(isSuperUser.projector({ roles: ['admin'] })).toBe(false);
+    expect(isSuperUser.projector({ roles: [] as PlayerRole[] } as Player)).toBe(
+      false,
+    );
+    expect(isSuperUser.projector({ roles: ['super user'] } as Player)).toBe(
+      true,
+    );
+    expect(isSuperUser.projector({ roles: ['admin'] } as Player)).toBe(false);
   });
 });
 
@@ -91,15 +101,18 @@ describe('bans', () => {
     expect(bans.projector({ authenticated: 'unknown' })).toEqual([]);
     expect(bans.projector({ authenticated: 'not authenticated' })).toEqual([]);
     expect(
-      bans.projector({ authenticated: 'authenticated', bans: [{ id: '1' }] }),
-    ).toEqual([{ id: '1' } as any]);
+      bans.projector({
+        authenticated: 'authenticated',
+        bans: [{ id: '1' } as PlayerBan],
+      } as ProfileState),
+    ).toEqual([{ id: '1' } as PlayerBan]);
   });
 });
 
 describe('isBanned', () => {
   it('should return true if the player has at least one ban', () => {
     expect(isBanned.projector([])).toBe(false);
-    expect(isBanned.projector([{}])).toBe(true);
+    expect(isBanned.projector([{} as PlayerBan])).toBe(true);
   });
 });
 
@@ -112,9 +125,9 @@ describe('linkedProfiles', () => {
           linkedProfiles: [
             {
               provider: 'twitch.tv',
-            },
+            } as TwitchTvProfile,
           ],
-        }),
+        } as ProfileState),
       ).toEqual([
         {
           provider: 'twitch.tv',
@@ -146,7 +159,7 @@ describe('restrictions', () => {
               gameClasses: [Tf2ClassName.soldier],
             },
           ],
-        }),
+        } as ProfileState),
       ).toEqual([
         {
           reason: 'account needs review',
@@ -161,8 +174,8 @@ describe('restrictions', () => {
       expect(
         restrictions.projector({
           authenticated: 'authenticated',
-          restrictions: [],
-        }),
+          restrictions: [] as Restriction[],
+        } as ProfileState),
       ).toEqual([]);
     });
   });
@@ -174,10 +187,7 @@ describe('twitchTvProfile', () => {
       twitchTvProfile.projector([
         {
           provider: 'twitch.tv',
-        },
-        {
-          provider: 'other provider',
-        },
+        } as TwitchTvProfile,
       ]),
     ).toEqual({
       provider: 'twitch.tv',
@@ -202,7 +212,7 @@ describe('activeGameId', () => {
         expect(
           activeGameId.projector({
             authenticated: 'authenticated',
-          }),
+          } as ProfileState),
         ).toBe(null);
       });
     });
@@ -213,7 +223,7 @@ describe('activeGameId', () => {
           activeGameId.projector({
             authenticated: 'authenticated',
             activeGameId: 'FAKE_GAME_ID',
-          }),
+          } as ProfileState),
         ).toEqual('FAKE_GAME_ID');
       });
     });

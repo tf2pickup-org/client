@@ -2,29 +2,43 @@
   <app-edit-page-wrapper
     title="Player restrictions"
     [saveDisabled]="!form.valid || form.pristine"
-    (save)="save()">
-
+    (save)="save()"
+  >
     <div class="surface surface--white my-4">
       <ul class="mdc-deprecated-list mdc-deprecated-list--two-line">
         <li class="mdc-deprecated-list-item" tabindex="0">
           <span class="mdc-deprecated-list-item__ripple"></span>
           <div class="mdc-deprecated-list-item__text grow">
-            <label class="mdc-deprecated-list-item__primary-text" for="etf2l-account-required-switch">Require ETF2L account</label>
-            <span class="mdc-deprecated-list-item__secondary-text"
-              [ngSwitch]="this.form.get('etf2lAccountRequired').value">
-              <ng-container *ngSwitchCase="true">Players that do not have an ETF2L profile will not be able to register</ng-container>
-              <ng-container *ngSwitchCase="false">All players will be able to register</ng-container>
+            <label
+              class="mdc-deprecated-list-item__primary-text"
+              for="etf2l-account-required-switch"
+              >Require ETF2L account</label
+            >
+            <span
+              class="mdc-deprecated-list-item__secondary-text"
+              [ngSwitch]="this.form.get('etf2lAccountRequired').value"
+            >
+              <ng-container *ngSwitchCase="true"
+                >Players that do not have an ETF2L profile will not be able to
+                register</ng-container
+              >
+              <ng-container *ngSwitchCase="false"
+                >All players will be able to register</ng-container
+              >
             </span>
           </div>
 
           <span class="mdc-deprecated-list-item__graphic">
-            <button type="button"
+            <button
+              type="button"
               class="mdc-switch"
               [class.mdc-switch--selected]="etf2lAccountRequired"
               role="switch"
+              [attr.aria-checked]="etf2lAccountRequired"
               (click)="updateEtf2lAccountRequired()"
               #etf2lAccountRequiredSwitch
-              id="etf2l-account-required-switch">
+              id="etf2l-account-required-switch"
+            >
               <div class="mdc-switch__track"></div>
               <div class="mdc-switch__handle-track">
                 <div class="mdc-switch__handle">
@@ -33,10 +47,18 @@
                   </div>
                   <div class="mdc-switch__ripple"></div>
                   <div class="mdc-switch__icons">
-                    <svg class="mdc-switch__icon mdc-switch__icon--on" viewBox="0 0 24 24">
-                      <path d="M19.69,5.23L8.96,15.96l-4.23-4.23L2.96,13.5l6,6L21.46,7L19.69,5.23z" />
+                    <svg
+                      class="mdc-switch__icon mdc-switch__icon--on"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M19.69,5.23L8.96,15.96l-4.23-4.23L2.96,13.5l6,6L21.46,7L19.69,5.23z"
+                      />
                     </svg>
-                    <svg class="mdc-switch__icon mdc-switch__icon--off" viewBox="0 0 24 24">
+                    <svg
+                      class="mdc-switch__icon mdc-switch__icon--off"
+                      viewBox="0 0 24 24"
+                    >
                       <path d="M20 13H4v-2h16v2z" />
                     </svg>
                   </div>
@@ -46,35 +68,57 @@
           </span>
         </li>
 
-        <li class="mdc-deprecated-list-item"
+        <li
+          class="mdc-deprecated-list-item"
           (click)="openMinimumTf2InGameHoursDialog()"
-          minimumTf2InGameHoursItem>
+          minimumTf2InGameHoursItem
+        >
           <span class="mdc-deprecated-list-item__ripple"></span>
           <span class="mdc-deprecated-list-item__text">
-            <span class="mdc-deprecated-list-item__primary-text">Minimum TF2 in-game time spent</span>
-            <span class="mdc-deprecated-list-item__secondary-text">{{ this.form.get('minimumTf2InGameHours').value }} hours</span>
+            <span class="mdc-deprecated-list-item__primary-text"
+              >Minimum TF2 in-game time spent</span
+            >
+            <span class="mdc-deprecated-list-item__secondary-text"
+              >{{ this.form.get('minimumTf2InGameHours').value }} hours</span
+            >
           </span>
         </li>
 
         <li class="mdc-deprecated-list-item" tabindex="0">
           <span class="mdc-deprecated-list-item__ripple"></span>
           <div class="mdc-deprecated-list-item__text grow">
-            <label class="mdc-deprecated-list-item__primary-text" for="deny-players-with-no-skill-assigned-switch">Deny players with no skill assigned</label>
-            <span class="mdc-deprecated-list-item__secondary-text"
-              [ngSwitch]="this.form.get('denyPlayersWithNoSkillAssigned').value">
-              <ng-container *ngSwitchCase="true">Players with no skill assigned won't be allowed to join the queue</ng-container>
-              <ng-container *ngSwitchCase="false">Players that have no skill assigned will be able to join the queue and the default skill will be used for them when launching a game</ng-container>
+            <label
+              class="mdc-deprecated-list-item__primary-text"
+              for="deny-players-with-no-skill-assigned-switch"
+              >Deny players with no skill assigned</label
+            >
+            <span
+              class="mdc-deprecated-list-item__secondary-text"
+              [ngSwitch]="this.form.get('denyPlayersWithNoSkillAssigned').value"
+            >
+              <ng-container *ngSwitchCase="true"
+                >Players with no skill assigned won't be allowed to join the
+                queue</ng-container
+              >
+              <ng-container *ngSwitchCase="false"
+                >Players that have no skill assigned will be able to join the
+                queue and the default skill will be used for them when launching
+                a game</ng-container
+              >
             </span>
           </div>
 
           <span class="mdc-deprecated-list-item__graphic">
-            <button type="button"
+            <button
+              type="button"
               class="mdc-switch"
               [class.mdc-switch--selected]="denyPlayersWithNoSkillAssigned"
               role="switch"
+              [attr.aria-checked]="denyPlayersWithNoSkillAssigned"
               (click)="updateDenyPlayersWithNoSkillAssigned()"
               #denyPlayersWithNoSkillAssignedSwitch
-              id="deny-players-with-no-skill-assigned-switch">
+              id="deny-players-with-no-skill-assigned-switch"
+            >
               <div class="mdc-switch__track"></div>
               <div class="mdc-switch__handle-track">
                 <div class="mdc-switch__handle">
@@ -83,10 +127,18 @@
                   </div>
                   <div class="mdc-switch__ripple"></div>
                   <div class="mdc-switch__icons">
-                    <svg class="mdc-switch__icon mdc-switch__icon--on" viewBox="0 0 24 24">
-                      <path d="M19.69,5.23L8.96,15.96l-4.23-4.23L2.96,13.5l6,6L21.46,7L19.69,5.23z" />
+                    <svg
+                      class="mdc-switch__icon mdc-switch__icon--on"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M19.69,5.23L8.96,15.96l-4.23-4.23L2.96,13.5l6,6L21.46,7L19.69,5.23z"
+                      />
                     </svg>
-                    <svg class="mdc-switch__icon mdc-switch__icon--off" viewBox="0 0 24 24">
+                    <svg
+                      class="mdc-switch__icon mdc-switch__icon--off"
+                      viewBox="0 0 24 24"
+                    >
                       <path d="M20 13H4v-2h16v2z" />
                     </svg>
                   </div>
@@ -97,10 +149,11 @@
         </li>
       </ul>
     </div>
-
   </app-edit-page-wrapper>
 
-  <input type="hidden"
+  <input
+    type="hidden"
     formControlName="minimumTf2InGameHours"
-    id="minimum-tf2-in-game-hours-field">
+    id="minimum-tf2-in-game-hours-field"
+  />
 </form>

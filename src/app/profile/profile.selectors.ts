@@ -1,7 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { State } from './profile.reducer';
+import { ProfileState } from './profile.reducer';
 
-export const profile = createFeatureSelector<State>('profile');
+export const profile = createFeatureSelector<ProfileState>('profile');
 
 // skipcq: JS-0229
 export const currentPlayer = createSelector(profile, profile =>

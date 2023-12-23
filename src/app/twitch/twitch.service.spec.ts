@@ -14,7 +14,6 @@ import { MockProvider } from 'ng-mocks';
 describe('TwitchService', () => {
   let service: TwitchService;
   let httpController: HttpTestingController;
-  let socket: Socket;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -29,7 +28,6 @@ describe('TwitchService', () => {
 
     service = TestBed.inject(TwitchService);
     httpController = TestBed.inject(HttpTestingController);
-    socket = TestBed.inject(Socket);
   });
 
   afterEach(() => httpController.verify());
