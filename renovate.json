@@ -1,7 +1,5 @@
 {
-  "extends": [
-    "config:base"
-  ],
+  "extends": ["config:base"],
   "packageRules": [
     {
       "depTypeList": ["devDependencies"],
@@ -12,6 +10,7 @@
       "automerge": true
     }
   ],
+  "automergeType": "branch",
   "labels": ["renovate"],
   "semanticCommits": true
 }
