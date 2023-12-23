@@ -7058,10 +7058,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"country-flag-icons@npm:1.5.7":
-  version: 1.5.7
-  resolution: "country-flag-icons@npm:1.5.7"
-  checksum: b2512623ec7fa5a7b3d875b173469637f8782bb160d6054cd281223847b434316b22a736488a441168fc278fc9ee4b0b5e84a0b6164ab0a371a7afb1c2d50ca5
+"country-flag-icons@npm:1.5.9":
+  version: 1.5.9
+  resolution: "country-flag-icons@npm:1.5.9"
+  checksum: de9041dd7d37b608038255ab41f9a1f16f71e7530de6b168cd96f44bb206c50cef9765054cd8da8d00fde1751f7c9095093e6f86cb74bc4aafaa1651b9808f56
   languageName: node
   linkType: hard
 
@@ -17891,7 +17891,7 @@ __metadata:
     autoprefixer: 10.4.15
     chart.js: 4.4.0
     chartjs-plugin-datalabels: 2.2.0
-    country-flag-icons: 1.5.7
+    country-flag-icons: 1.5.9
     date-fns: 2.30.0
     echarts: 5.4.3
     eslint: ^8.54.0
