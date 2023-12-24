@@ -91,7 +91,7 @@
     "jwt-decode": "3.1.2",
     "lodash-es": "4.17.21",
     "marked": "11.1.0",
-    "ngx-echarts": "15.0.3",
+    "ngx-echarts": "17.1.0",
     "ngx-edit-inline": "15.0.0",
     "ngx-markdown": "17.1.1",
     "ngx-pagination": "6.0.3",
