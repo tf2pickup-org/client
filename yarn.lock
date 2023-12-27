@@ -6174,12 +6174,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chart.js@npm:4.4.0":
-  version: 4.4.0
-  resolution: "chart.js@npm:4.4.0"
+"chart.js@npm:4.4.1":
+  version: 4.4.1
+  resolution: "chart.js@npm:4.4.1"
   dependencies:
     "@kurkle/color": ^0.3.0
-  checksum: 5ee2d99b78608025525b5790af17178fdaa5adc3294e082deba2718029b0496109ba124f1b08dd1e4c8a04d6e842be7f384f2cfe9a11df8d1c6fe884acece52b
+  checksum: 8c108f137824ea0e3d79914708b409298c12ed7d16da99a40ca3cab51466ef7b0068ad82ac0addeb288b938fe0621d3e5a6a913b60e72a729aa42aa96705fcad
   languageName: node
   linkType: hard
 
@@ -17771,7 +17771,7 @@ __metadata:
     "@typescript-eslint/parser": 6.13.1
     angular-tabler-icons: 2.44.0
     autoprefixer: 10.4.16
-    chart.js: 4.4.0
+    chart.js: 4.4.1
     chartjs-plugin-datalabels: 2.2.0
     country-flag-icons: 1.5.9
     date-fns: 3.0.6
