@@ -4111,10 +4111,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/howler@npm:2.2.9":
-  version: 2.2.9
-  resolution: "@types/howler@npm:2.2.9"
-  checksum: 5d1637b107ec837a7faf9b3018f6197d370e8b22e59089dd80123be8d6c7083e93e7124cd6f6bd0d0319bfb506254a6338e46bbabf7ab5a723994926e2a6ae7d
+"@types/howler@npm:2.2.11":
+  version: 2.2.11
+  resolution: "@types/howler@npm:2.2.11"
+  checksum: 736f210decc43a258c3cdb076f7b551cffa0078699a39a3f819400aba24d2839beaa5db20d910afb132f76a40d62e504baf5b7d74bf63f176b2d2cb6656f29bd
   languageName: node
   linkType: hard
 
@@ -10410,10 +10410,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"howler@npm:2.2.3":
-  version: 2.2.3
-  resolution: "howler@npm:2.2.3"
-  checksum: c04ce19411f4d86f8508d411a93aea943f128c2686b3df3c61383fd4ed8f5551232c4389aba3a8d4c8b0eeb34ae51df5a9c3ccd9ba48583ac53e9bf9fcbd1ecf
+"howler@npm:2.2.4":
+  version: 2.2.4
+  resolution: "howler@npm:2.2.4"
+  checksum: 14ad7ed8825ac4439a63429d25f3ba6f44daca1d6df4ad6b04f33e342269b80db5608d9f1e6e980e2d47027c7ceba7811068eba7f56e8e75f2601086e07f0b73
   languageName: node
   linkType: hard
 
@@ -17760,7 +17760,7 @@ __metadata:
     "@swimlane/ngx-datatable": 20.1.0
     "@tailwindcss/forms": 0.5.7
     "@tailwindcss/typography": 0.5.10
-    "@types/howler": 2.2.9
+    "@types/howler": 2.2.11
     "@types/jasmine": 4.3.6
     "@types/jasminewd2": 2.0.13
     "@types/jwt-decode": 2.2.1
@@ -17786,7 +17786,7 @@ __metadata:
     eslint-plugin-rxjs: 5.0.3
     eventemitter3: 5.0.1
     feather-icons: 4.29.1
-    howler: 2.2.3
+    howler: 2.2.4
     jasmine-core: 5.1.1
     jasmine-spec-reporter: 7.0.0
     jwt-decode: 3.1.2
