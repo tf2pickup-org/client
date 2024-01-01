@@ -154,7 +154,7 @@
     "tailwindcss": "3.4.0",
     "ts-node": "10.9.2",
     "typescript": "5.3.3",
-    "webpack-bundle-analyzer": "4.9.1"
+    "webpack-bundle-analyzer": "4.10.1"
   },
   "resolutions": {
     "got": "14.0.0"
