@@ -4141,10 +4141,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/jasmine@npm:4.6.4":
-  version: 4.6.4
-  resolution: "@types/jasmine@npm:4.6.4"
-  checksum: 91fd628b04d334ec9f80f0a4e19fbd357c0d385cb36ea2bf69f5158042d4a70ba4d3421ac9194da9fc338f57e699930d8d2544d68562e91ebedba2984a7549a0
+"@types/jasmine@npm:5.1.4":
+  version: 5.1.4
+  resolution: "@types/jasmine@npm:5.1.4"
+  checksum: 1b2048d988077aee747a72fab31f4e0820f928c25e886ab91aa5a1ee2d4277655c22f81feed5d7b3b15cc61542878568a24b2381457eb21dfc84250c693f980a
   languageName: node
   linkType: hard
 
@@ -17721,7 +17721,7 @@ __metadata:
     "@tailwindcss/forms": 0.5.7
     "@tailwindcss/typography": 0.5.10
     "@types/howler": 2.2.11
-    "@types/jasmine": 4.6.4
+    "@types/jasmine": 5.1.4
     "@types/jasminewd2": 2.0.13
     "@types/jwt-decode": 2.2.1
     "@types/lodash-es": 4.17.12
