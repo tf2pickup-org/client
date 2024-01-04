@@ -126,7 +126,7 @@
     "@typescript-eslint/parser": "6.17.0",
     "autoprefixer": "10.4.16",
     "eslint": "^8.54.0",
-    "eslint-config-prettier": "8.10.0",
+    "eslint-config-prettier": "9.1.0",
     "eslint-plugin-import": "2.29.1",
     "eslint-plugin-jsdoc": "46.10.1",
     "eslint-plugin-ngrx": "2.1.4",
