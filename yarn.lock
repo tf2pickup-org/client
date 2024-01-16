@@ -7609,10 +7609,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"date-fns@npm:3.0.6":
-  version: 3.0.6
-  resolution: "date-fns@npm:3.0.6"
-  checksum: ee62b8e764e4c11c418d342f401d3e85adb4a631b196746e49ac89099c8d34cb141f10ae953c4a72bd3c76fe4d8740ec89564c8599a31256c82adbbed56c0014
+"date-fns@npm:3.2.0":
+  version: 3.2.0
+  resolution: "date-fns@npm:3.2.0"
+  checksum: ff5dab139f40170c4ba5472bab9bc887dd3940f7661bd8322f074faadbd422513c7195296541b5237fc450a0333a4b1c5659f887c7c14b1bfa2902998ac7582e
   languageName: node
   linkType: hard
 
@@ -17779,7 +17779,7 @@ __metadata:
     chart.js: 4.4.1
     chartjs-plugin-datalabels: 2.2.0
     country-flag-icons: 1.5.9
-    date-fns: 3.0.6
+    date-fns: 3.2.0
     echarts: 5.4.3
     eslint: ^8.54.0
     eslint-config-prettier: 9.1.0
