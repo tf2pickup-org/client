@@ -144,7 +144,7 @@
     "karma-spec-reporter": "0.0.36",
     "ng-mocks": "14.12.1",
     "postcss": "8.4.33",
-    "prettier": "2.8.8",
+    "prettier": "3.2.4",
     "protractor": "7.0.0",
     "release-it": "15.11.0",
     "stylelint": "15.2.0",
