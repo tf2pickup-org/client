@@ -146,7 +146,7 @@
     "postcss": "8.4.33",
     "prettier": "3.2.4",
     "protractor": "7.0.0",
-    "release-it": "15.11.0",
+    "release-it": "17.0.3",
     "stylelint": "15.2.0",
     "stylelint-config-sass-guidelines": "10.0.0",
     "stylelint-config-standard-scss": "7.0.1",
