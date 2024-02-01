@@ -9891,9 +9891,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"got@npm:14.0.0":
-  version: 14.0.0
-  resolution: "got@npm:14.0.0"
+"got@npm:14.1.0":
+  version: 14.1.0
+  resolution: "got@npm:14.1.0"
   dependencies:
     "@sindresorhus/is": ^6.1.0
     "@szmarczak/http-timer": ^5.0.1
@@ -9906,7 +9906,7 @@ __metadata:
     lowercase-keys: ^3.0.0
     p-cancelable: ^4.0.1
     responselike: ^3.0.0
-  checksum: 60dca6dfda445bffd298277c7e5b252dcca9cb2a0c65bf3a4b70f8429663f448279642aea2230711207f2668e3749ab184989eb3fed32e75911b6b183f510a91
+  checksum: 087fe8fa0607d7ae115e42e5cd47bdc835badd6cfd5a24dc6ef43989e887fae55e5ca634a0ee9df662b2d4456a38a5ab7d2e553255848b4825d4af96e14986c9
   languageName: node
   linkType: hard
 
