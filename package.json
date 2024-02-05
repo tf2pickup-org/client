@@ -157,7 +157,7 @@
     "webpack-bundle-analyzer": "4.10.1"
   },
   "resolutions": {
-    "got": "14.1.0"
+    "got": "14.2.0"
   },
   "packageManager": "yarn@3.7.0"
 }
