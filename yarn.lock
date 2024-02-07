@@ -12202,12 +12202,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"marked@npm:11.2.0":
-  version: 11.2.0
-  resolution: "marked@npm:11.2.0"
+"marked@npm:12.0.0":
+  version: 12.0.0
+  resolution: "marked@npm:12.0.0"
   bin:
     marked: bin/marked.js
-  checksum: 80757c268420d58d2fb2dadb8e1f9e80b96160dc667de69fe455cf5fd874e5cfec87a171249f49f28729e90de4bafa1f586562ffaad04836fe6e6c355365f60a
+  checksum: 973e803debf7eca946213cd583792c2968ecab1b6698653604272d5406f9f07375a4865a7a28633a7200c8a4682761f8d866198fb36c10c686e3bda3a9b36fc9
   languageName: node
   linkType: hard
 
@@ -17157,7 +17157,7 @@ __metadata:
     karma-jasmine-html-reporter: 2.1.0
     karma-spec-reporter: 0.0.36
     lodash-es: 4.17.21
-    marked: 11.2.0
+    marked: 12.0.0
     ng-mocks: 14.12.1
     ngx-echarts: 17.1.0
     ngx-edit-inline: 15.0.0
