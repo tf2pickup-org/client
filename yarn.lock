@@ -5143,7 +5143,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ansi-styles@npm:^4.0.0, ansi-styles@npm:^4.1.0, ansi-styles@npm:^4.2.1":
+"ansi-styles@npm:^4.0.0, ansi-styles@npm:^4.1.0":
   version: 4.3.0
   resolution: "ansi-styles@npm:4.3.0"
   dependencies:
@@ -5163,6 +5163,13 @@ __metadata:
   version: 6.1.0
   resolution: "ansi-styles@npm:6.1.0"
   checksum: 7a7f8528c07a9d20c3a92bccd2b6bc3bb4d26e5cb775c02826921477377bd495d615d61f710d56216344b6238d1d11ef2b0348e146c5b128715578bfb3217229
+  languageName: node
+  linkType: hard
+
+"ansi-styles@npm:^6.2.1":
+  version: 6.2.1
+  resolution: "ansi-styles@npm:6.2.1"
+  checksum: ef940f2f0ced1a6347398da88a91da7930c33ecac3c77b72c5905f8b8fe402c52e6fde304ff5347f616e27a742da3f1dc76de98f6866c69251ad0b07a66776d9
   languageName: node
   linkType: hard
 
@@ -13433,22 +13440,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"npm-run-all2@npm:5.0.0":
-  version: 5.0.0
-  resolution: "npm-run-all2@npm:5.0.0"
+"npm-run-all2@npm:6.1.2":
+  version: 6.1.2
+  resolution: "npm-run-all2@npm:6.1.2"
   dependencies:
-    ansi-styles: ^4.2.1
+    ansi-styles: ^6.2.1
     cross-spawn: ^7.0.3
     memorystream: ^0.3.1
-    minimatch: ^3.0.4
-    pidtree: ^0.5.0
-    read-pkg: ^5.2.0
-    shell-quote: ^1.6.1
+    minimatch: ^9.0.0
+    pidtree: ^0.6.0
+    read-package-json-fast: ^3.0.2
+    shell-quote: ^1.7.3
   bin:
     npm-run-all: bin/npm-run-all/index.js
+    npm-run-all2: bin/npm-run-all/index.js
     run-p: bin/run-p/index.js
     run-s: bin/run-s/index.js
-  checksum: 0e91f513cde3f24fad718baa3341e90d536fafffa89d48dd9c5d1ca99b4ae02762919c97419df23cf7dc714cf01c3782c0d1f4348a32e3425287d073e0e8c846
+  checksum: dc595a8341eba7f1ac23496da1f5751b8372023716124d4204cee3e2e7005679902137247106861f01b9fc8976681245191ce925f2c6cea9c37a34c61cf1f9d0
   languageName: node
   linkType: hard
 
@@ -14213,12 +14221,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pidtree@npm:^0.5.0":
-  version: 0.5.0
-  resolution: "pidtree@npm:0.5.0"
+"pidtree@npm:^0.6.0":
+  version: 0.6.0
+  resolution: "pidtree@npm:0.6.0"
   bin:
     pidtree: bin/pidtree.js
-  checksum: 371cd14bbc9bdee2a6a44596dd521dd3565e223481e0b1afffdca3f1c29831850bfa7784114dc30d245d37e7d186cec035e036256b39f75d878d19498fe0df6a
+  checksum: 8fbc073ede9209dd15e80d616e65eb674986c93be49f42d9ddde8dbbd141bb53d628a7ca4e58ab5c370bb00383f67d75df59a9a226dede8fa801267a7030c27a
   languageName: node
   linkType: hard
 
@@ -14866,6 +14874,16 @@ __metadata:
     json-parse-even-better-errors: ^3.0.0
     npm-normalize-package-bin: ^3.0.0
   checksum: b2e249c9bba4e0f188bea06dd57a7cfe0d76e272e8de14d1d71bcee894f48f576a9884a5890786a4a97990d196b86461c8b7e43024dca00b091081effcfd7ea0
+  languageName: node
+  linkType: hard
+
+"read-package-json-fast@npm:^3.0.2":
+  version: 3.0.2
+  resolution: "read-package-json-fast@npm:3.0.2"
+  dependencies:
+    json-parse-even-better-errors: ^3.0.0
+    npm-normalize-package-bin: ^3.0.0
+  checksum: 8d406869f045f1d76e2a99865a8fd1c1af9c1dc06200b94d2b07eef87ed734b22703a8d72e1cd36ea36cc48e22020bdd187f88243c7dd0563f72114d38c17072
   languageName: node
   linkType: hard
 
@@ -15979,14 +15997,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"shell-quote@npm:^1.6.1":
-  version: 1.7.3
-  resolution: "shell-quote@npm:1.7.3"
-  checksum: aca58e73a3a5d933d02e0bdddedc53ee14f7c2ec264f97ac915b9d4482d077a38e422aa664631d60a672cd3cdb4054eb2e6c0303f54882453dacb6483e482d34
-  languageName: node
-  linkType: hard
-
-"shell-quote@npm:^1.8.1":
+"shell-quote@npm:^1.7.3, shell-quote@npm:^1.8.1":
   version: 1.8.1
   resolution: "shell-quote@npm:1.8.1"
   checksum: 5f01201f4ef504d4c6a9d0d283fa17075f6770bfbe4c5850b074974c68062f37929ca61700d95ad2ac8822e14e8c4b990ca0e6e9272e64befd74ce5e19f0736b
@@ -17164,7 +17175,7 @@ __metadata:
     ngx-markdown: 17.1.1
     ngx-pagination: 6.0.3
     ngx-webstorage-service: 5.0.0
-    npm-run-all2: 5.0.0
+    npm-run-all2: 6.1.2
     postcss: 8.4.33
     prettier: 3.2.5
     protractor: 7.0.0
