@@ -1,5 +1,14 @@
 
 
+## [3.30.4](https://github.com/tf2pickup-org/client/compare/3.30.3...3.30.4) (2024-02-08)
+
+
+### Bug Fixes
+
+* ***.poland.tf:** replace logos ([#2517](https://github.com/tf2pickup-org/client/issues/2517)) ([1c8d419](https://github.com/tf2pickup-org/client/commit/1c8d4190c4191132fd69fe1ebe4861a195f99510))
+* **tf2pickup.it:** fix discord invitation link ([#2516](https://github.com/tf2pickup-org/client/issues/2516)) ([715c1fb](https://github.com/tf2pickup-org/client/commit/715c1fbf568b74803536ac7483f24de8b653953d))
+* use full map name in thumbnail url ([#2515](https://github.com/tf2pickup-org/client/issues/2515)) ([9ca6d70](https://github.com/tf2pickup-org/client/commit/9ca6d70a77cb6d26247a8673b07b47d4fa35b5fe))
+
 ## [3.30.3](https://github.com/tf2pickup-org/client/compare/3.30.2...3.30.3) (2024-02-07)
 
 
