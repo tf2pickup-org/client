@@ -30,6 +30,7 @@ import { SubstituteRequestBannerComponent } from './substitute-request-banner/su
 import { BanBannerComponent } from './ban-banner/ban-banner.component';
 import { QueueNotificationsHandlerComponent } from './queue-notifications-handler/queue-notifications-handler.component';
 import { RestrictionBannerComponent } from './restriction-banner/restriction-banner.component';
+import { MapThumbnailComponent } from '@app/shared/map-thumbnail/map-thumbnail.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,8 @@ import { RestrictionBannerComponent } from './restriction-banner/restriction-ban
     IconsModule,
 
     QueueRoutingModule,
+
+    MapThumbnailComponent,
   ],
   exports: [QueueNotificationsHandlerComponent],
 })
