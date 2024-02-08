@@ -9,7 +9,6 @@ import { AsFormGroupPipe } from './as-form-group.pipe';
 import { CountryFlagPipe } from './country-flag.pipe';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { WithLoadingPipe } from './with-loading.pipe';
-import { MapThumbnailComponent } from './map-thumbnail/map-thumbnail.component';
 import { TooltipDirective } from './tooltip.directive';
 import { TooltipComponent } from './tooltip/tooltip.component';
 
@@ -24,7 +23,6 @@ import { TooltipComponent } from './tooltip/tooltip.component';
     CountryFlagPipe,
     ConfirmDialogComponent,
     WithLoadingPipe,
-    MapThumbnailComponent,
     TooltipDirective,
     TooltipComponent,
   ],
@@ -39,7 +37,6 @@ import { TooltipComponent } from './tooltip/tooltip.component';
     CountryFlagPipe,
     ConfirmDialogComponent,
     WithLoadingPipe,
-    MapThumbnailComponent,
     TooltipDirective,
   ],
 })

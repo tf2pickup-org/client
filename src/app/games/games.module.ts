@@ -24,6 +24,7 @@ import { PlayersInTeamPipe } from './game-details/players-in-team.pipe';
 import { GameServerOptionListDialogComponent } from './game-server-option-list-dialog/game-server-option-list-dialog.component';
 import { GameServerOptionListComponent } from './game-server-option-list/game-server-option-list.component';
 import { ShowSkillsSwitchComponent } from './show-skills-switch/show-skills-switch.component';
+import { MapThumbnailComponent } from '@app/shared/map-thumbnail/map-thumbnail.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,8 @@ import { ShowSkillsSwitchComponent } from './show-skills-switch/show-skills-swit
     IconsModule,
 
     GamesRoutingModule,
+
+    MapThumbnailComponent,
   ],
   exports: [GameListComponent],
 })
