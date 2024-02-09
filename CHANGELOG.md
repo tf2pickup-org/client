@@ -1,5 +1,12 @@
 
 
+## [3.30.5](https://github.com/tf2pickup-org/client/compare/3.30.4...3.30.5) (2024-02-09)
+
+
+### Bug Fixes
+
+* **documents:** fix documents rendering ([#2520](https://github.com/tf2pickup-org/client/issues/2520)) ([df8bb5b](https://github.com/tf2pickup-org/client/commit/df8bb5bae3bbc281de415f974f6cae875c330ff1))
+
 ## [3.30.4](https://github.com/tf2pickup-org/client/compare/3.30.3...3.30.4) (2024-02-08)
 
 
