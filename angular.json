@@ -50,7 +50,6 @@
                 "src/styles/themes/tf2pickup.pl"
               ]
             },
-            "scripts": ["node_modules/marked/marked.min.js"],
             "vendorChunk": true,
             "extractLicenses": false,
             "buildOptimizer": false,

@@ -16,7 +16,7 @@ import { WS_URL } from './ws-url';
 import { CoreModule } from './core/core.module';
 import { GamesModule } from './games/games.module';
 import { MarkdownModule } from 'ngx-markdown';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { HallOfFameModule } from './hall-of-fame/hall-of-fame.module';
 import { NotificationsModule } from './notifications/notifications.module';
@@ -40,7 +40,7 @@ import { DocumentsModule } from './documents/documents.module';
       ? []
       : StoreDevtoolsModule.instrument({ connectInZone: true }),
 
-    MarkdownModule.forRoot({ loader: HttpClient }),
+    MarkdownModule.forRoot(),
     NgxPaginationModule,
 
     AuthModule,

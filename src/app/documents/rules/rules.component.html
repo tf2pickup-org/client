@@ -1,7 +1,10 @@
 <div class="container mx-auto my-4">
   <div class="surface">
     <div class="surface__content prose max-w-none">
-      <markdown [data]="(document | async)?.body" ngPreserveWhitespaces></markdown>
+      <markdown
+        [data]="(document | async)?.body"
+        ngPreserveWhitespaces
+      ></markdown>
     </div>
   </div>
 </div>
