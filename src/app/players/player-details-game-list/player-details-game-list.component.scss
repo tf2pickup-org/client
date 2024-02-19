@@ -1,8 +1,8 @@
-@use "sass:color";
-@use "components/surface";
-@use "utils/outline";
-@use "theme";
-@use "variables";
+@use 'sass:color';
+@use 'components/surface';
+@use 'utils/outline';
+@use 'theme';
+@use 'variables';
 
 .game-list {
   @include surface.make;
@@ -26,10 +26,7 @@
 
   .loading-wrapper {
     position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    inset: 0;
     border-radius: variables.$default-border-radius;
     background-color: rgb(0 0 0 / 50%);
     display: flex;
