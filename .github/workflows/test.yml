@@ -18,19 +18,25 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
+          cache: pnpm
 
       - name: Install Chrome
         uses: nanasess/setup-chromedriver@v2
 
       - name: Install dependencies
-        run: yarn install
+        run: pnpm install
 
       - name: Test
-        run: yarn test:ci
+        run: pnpm test:ci
 
       - name: Upload test coverage info
         uses: codecov/codecov-action@v3
@@ -46,16 +52,22 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
+          cache: pnpm
 
       - name: Install dependencies
-        run: yarn install
+        run: pnpm install
 
       - name: Build
-        run: yarn build
+        run: pnpm build
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4

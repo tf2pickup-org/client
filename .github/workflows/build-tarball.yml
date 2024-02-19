@@ -2,7 +2,7 @@ name: build-tarball
 
 on:
   release:
-    types: [ created, edited ]
+    types: [created, edited]
 
 jobs:
   build-tarball:
@@ -10,20 +10,28 @@ jobs:
 
     strategy:
       matrix:
-        branding: [ tf2pickup.pl, hl.tf2pickup.pl, tf2pickup.es ]
+        branding: [tf2pickup.pl, hl.tf2pickup.pl, tf2pickup.es]
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
+        with:
+          node-version: '18.x'
+          cache: pnpm
 
       - name: Install dependencies
-        run: yarn install
+        run: pnpm install
 
       - name: Build ${{ matrix.branding }}
-        run: yarn build:${{ matrix.branding }}
+        run: pnpm build:${{ matrix.branding }}
 
       - name: Create ${{ matrix.branding }} tarball
         run: tar -C dist/${{ matrix.branding }} -zcvf ${{ matrix.branding }}_client-${{ github.event.release.tag_name }}.tar.gz .

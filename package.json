@@ -63,14 +63,18 @@
     "@material/card": "14.0.0",
     "@material/checkbox": "14.0.0",
     "@material/dialog": "14.0.0",
+    "@material/floating-label": "14.0.0",
     "@material/form-field": "14.0.0",
     "@material/icon-button": "14.0.0",
+    "@material/line-ripple": "14.0.0",
     "@material/list": "14.0.0",
+    "@material/notched-outline": "14.0.0",
     "@material/radio": "14.0.0",
     "@material/ripple": "14.0.0",
     "@material/snackbar": "14.0.0",
     "@material/switch": "14.0.0",
     "@material/textfield": "14.0.0",
+    "@material/theme": "14.0.0",
     "@material/typography": "14.0.0",
     "@ngrx/component-store": "17.1.0",
     "@ngrx/effects": "17.1.0",
@@ -157,6 +161,5 @@
   },
   "resolutions": {
     "got": "14.2.0"
-  },
-  "packageManager": "yarn@3.8.0"
+  }
 }
