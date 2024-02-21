@@ -207,7 +207,7 @@ devDependencies:
     version: 17.1.0
   '@release-it/conventional-changelog':
     specifier: 8.0.1
-    version: 8.0.1(release-it@17.0.5)
+    version: 8.0.1(release-it@17.1.1)
   '@tailwindcss/typography':
     specifier: 0.5.10
     version: 0.5.10(tailwindcss@3.4.1)
@@ -302,8 +302,8 @@ devDependencies:
     specifier: 7.0.0
     version: 7.0.0
   release-it:
-    specifier: 17.0.5
-    version: 17.0.5(typescript@5.3.3)
+    specifier: 17.1.1
+    version: 17.1.1(typescript@5.3.3)
   stylelint:
     specifier: 16.2.1
     version: 16.2.1(typescript@5.3.3)
@@ -3455,7 +3455,7 @@ packages:
     resolution: {integrity: sha512-2LuNTFBIO0m7kKIQvvPHN6UE63VjpmL9rnEEaOOaiSPbZK+zUOYIzBAWcED+3XYzhYsd/0mD57VdxAEqqV52CQ==}
     dev: true
 
-  /@release-it/conventional-changelog@8.0.1(release-it@17.0.5):
+  /@release-it/conventional-changelog@8.0.1(release-it@17.1.1):
     resolution: {integrity: sha512-pwc9jaBYDaSX5TXw6rEnPfqDkKJN2sFBhYpON1kBi9T3sA9EOBncC4ed0Bv3L1ciNb6eqEJXPfp+tQMqVlv/eg==}
     engines: {node: '>=18'}
     peerDependencies:
@@ -3464,7 +3464,7 @@ packages:
       concat-stream: 2.0.0
       conventional-changelog: 5.1.0
       conventional-recommended-bump: 9.0.0
-      release-it: 17.0.5(typescript@5.3.3)
+      release-it: 17.1.1(typescript@5.3.3)
       semver: 7.6.0
     dev: true
 
@@ -11517,8 +11517,8 @@ packages:
       jsesc: 0.5.0
     dev: true
 
-  /release-it@17.0.5(typescript@5.3.3):
-    resolution: {integrity: sha512-97FcBu/2IjPd4qMvliZSnavpCO0+BWi8lZr+BgVJTXs6ihX8HLPucYR5RsgUUcZoGKj3beO8cunrsMuvEWTzGQ==}
+  /release-it@17.1.1(typescript@5.3.3):
+    resolution: {integrity: sha512-b+4Tu2eb5f2wIdIe5E9hre0evbMQrXp/kRq0natHsHYJVqu1Bd4/h2a+swFi0faGmC3cJdB16uYR6LscG9SchQ==}
     engines: {node: '>=18'}
     hasBin: true
     dependencies:
