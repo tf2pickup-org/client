@@ -126,8 +126,8 @@ dependencies:
     specifier: 3.3.1
     version: 3.3.1
   echarts:
-    specifier: 5.4.3
-    version: 5.4.3
+    specifier: 5.5.0
+    version: 5.5.0
   feather-icons:
     specifier: 4.29.1
     version: 4.29.1
@@ -145,7 +145,7 @@ dependencies:
     version: 9.1.6
   ngx-echarts:
     specifier: 17.1.0
-    version: 17.1.0(echarts@5.4.3)
+    version: 17.1.0(echarts@5.5.0)
   ngx-edit-inline:
     specifier: 15.0.0
     version: 15.0.0
@@ -6626,11 +6626,11 @@ packages:
       safer-buffer: 2.1.2
     dev: true
 
-  /echarts@5.4.3:
-    resolution: {integrity: sha512-mYKxLxhzy6zyTi/FaEbJMOZU1ULGEQHaeIeuMR5L+JnJTpz+YR03mnnpBhbR4+UYJAgiXgpyTVLffPAjOTLkZA==}
+  /echarts@5.5.0:
+    resolution: {integrity: sha512-rNYnNCzqDAPCr4m/fqyUFv7fD9qIsd50S6GDFgO1DxZhncCsNsG7IfUlAlvZe5oSEQxtsjnHiUuppzccry93Xw==}
     dependencies:
       tslib: 2.3.0
-      zrender: 5.4.4
+      zrender: 5.5.0
     dev: false
 
   /ee-first@1.1.1:
@@ -10136,12 +10136,12 @@ packages:
       '@angular/platform-browser': 17.2.1(@angular/animations@17.2.1)(@angular/common@17.2.1)(@angular/core@17.2.1)
     dev: true
 
-  /ngx-echarts@17.1.0(echarts@5.4.3):
+  /ngx-echarts@17.1.0(echarts@5.5.0):
     resolution: {integrity: sha512-DSNF/aKmJSxJWb9UwPUgNtY8Ma9SmViDBRacvAwpakc/5mJerunxndDgoBQkYk5JFKAjXX6bp4ZWLRKL3/5AGA==}
     peerDependencies:
       echarts: '>=5.0.0'
     dependencies:
-      echarts: 5.4.3
+      echarts: 5.5.0
       tslib: 2.6.2
     dev: false
 
@@ -13933,8 +13933,8 @@ packages:
     dependencies:
       tslib: 2.6.2
 
-  /zrender@5.4.4:
-    resolution: {integrity: sha512-0VxCNJ7AGOMCWeHVyTrGzUgrK4asT4ml9PEkeGirAkKNYXYzoPJCLvmyfdoOXcjTHPs10OZVMfD1Rwg16AZyYw==}
+  /zrender@5.5.0:
+    resolution: {integrity: sha512-O3MilSi/9mwoovx77m6ROZM7sXShR/O/JIanvzTwjN3FORfLSr81PsUGd7jlaYOeds9d8tw82oP44+3YucVo+w==}
     dependencies:
       tslib: 2.3.0
     dev: false
