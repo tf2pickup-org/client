@@ -85,7 +85,7 @@
     "@swimlane/ngx-datatable": "20.1.0",
     "@tailwindcss/forms": "0.5.7",
     "angular-tabler-icons": "2.46.0",
-    "chart.js": "4.4.1",
+    "chart.js": "4.4.2",
     "chartjs-plugin-datalabels": "2.2.0",
     "country-flag-icons": "1.5.9",
     "date-fns": "3.3.1",
