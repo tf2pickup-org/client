@@ -114,11 +114,11 @@ dependencies:
     specifier: 2.46.0
     version: 2.46.0(@angular/common@17.2.3)(@angular/core@17.2.3)
   chart.js:
-    specifier: 4.4.1
-    version: 4.4.1
+    specifier: 4.4.2
+    version: 4.4.2
   chartjs-plugin-datalabels:
     specifier: 2.2.0
-    version: 2.2.0(chart.js@4.4.1)
+    version: 2.2.0(chart.js@4.4.2)
   country-flag-icons:
     specifier: 1.5.9
     version: 1.5.9
@@ -5289,19 +5289,19 @@ packages:
     resolution: {integrity: sha512-mT8iDcrh03qDGRRmoA2hmBJnxpllMR+0/0qlzjqZES6NdiWDcZkCNAk4rPFZ9Q85r27unkiNNg8ZOiwZXBHwcA==}
     dev: true
 
-  /chart.js@4.4.1:
-    resolution: {integrity: sha512-C74QN1bxwV1v2PEujhmKjOZ7iUM4w6BWs23Md/6aOZZSlwMzeCIDGuZay++rBgChYru7/+QFeoQW0fQoP534Dg==}
-    engines: {pnpm: '>=7'}
+  /chart.js@4.4.2:
+    resolution: {integrity: sha512-6GD7iKwFpP5kbSD4MeRRRlTnQvxfQREy36uEtm1hzHzcOqwWx0YEHuspuoNlslu+nciLIB7fjjsHkUv/FzFcOg==}
+    engines: {pnpm: '>=8'}
     dependencies:
       '@kurkle/color': 0.3.2
     dev: false
 
-  /chartjs-plugin-datalabels@2.2.0(chart.js@4.4.1):
+  /chartjs-plugin-datalabels@2.2.0(chart.js@4.4.2):
     resolution: {integrity: sha512-14ZU30lH7n89oq+A4bWaJPnAG8a7ZTk7dKf48YAzMvJjQtjrgg5Dpk9f+LbjCF6bpx3RAGTeL13IXpKQYyRvlw==}
     peerDependencies:
       chart.js: '>=3.0.0'
     dependencies:
-      chart.js: 4.4.1
+      chart.js: 4.4.2
     dev: false
 
   /chokidar@3.6.0:
