@@ -111,8 +111,8 @@ dependencies:
     specifier: 0.5.7
     version: 0.5.7(tailwindcss@3.4.1)
   angular-tabler-icons:
-    specifier: 2.46.0
-    version: 2.46.0(@angular/common@17.2.3)(@angular/core@17.2.3)
+    specifier: 2.47.0
+    version: 2.47.0(@angular/common@17.2.3)(@angular/core@17.2.3)
   chart.js:
     specifier: 4.4.2
     version: 4.4.2
@@ -4568,8 +4568,8 @@ packages:
       uri-js: 4.4.1
     dev: true
 
-  /angular-tabler-icons@2.46.0(@angular/common@17.2.3)(@angular/core@17.2.3):
-    resolution: {integrity: sha512-H29dbl4eCjJAfBTEL1CK3O/1Xb68TNA8xeyb9k2BwVb8V2WUqq3dROiPU0QKlAGjl07ezPLW0O2CyhG0YjuUKA==}
+  /angular-tabler-icons@2.47.0(@angular/common@17.2.3)(@angular/core@17.2.3):
+    resolution: {integrity: sha512-Pfnnq3lB3gxmu4S/jXQR88DXnmCvD4hgZrx1PofmudqRqzzSl1eV37siogp7v+dDT6IGSXYgi6CQlDKHU2pQnw==}
     peerDependencies:
       '@angular/common': 14 - 17
       '@angular/core': 14 - 17
