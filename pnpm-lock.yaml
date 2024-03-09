@@ -5,7 +5,7 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
-  got: 14.2.0
+  got: 14.2.1
 
 dependencies:
   '@angular/animations':
@@ -8010,8 +8010,8 @@ packages:
       get-intrinsic: 1.2.4
     dev: true
 
-  /got@14.2.0:
-    resolution: {integrity: sha512-dBq2KkHcQl3AwPoIWsLsQScCPpUgRulz1qZVthjPYKYOPmYfBnekR3vxecjZbm91Vc3JUGnV9mqFX7B+Fe2quw==}
+  /got@14.2.1:
+    resolution: {integrity: sha512-KOaPMremmsvx6l9BLC04LYE6ZFW4x7e4HkTe3LwBmtuYYQwpeS4XKqzhubTIkaQ1Nr+eXxeori0zuwupXMovBQ==}
     engines: {node: '>=20'}
     dependencies:
       '@sindresorhus/is': 6.1.0
@@ -10753,7 +10753,7 @@ packages:
     resolution: {integrity: sha512-cbH9IAIJHNj9uXi196JVsRlt7cHKak6u/e6AkL/bkRelZ7rlL3X1YKxsZwa36xipOEKAsdtmaG6aAJoM1fx2zA==}
     engines: {node: '>=14.16'}
     dependencies:
-      got: 14.2.0
+      got: 14.2.1
       registry-auth-token: 5.0.2
       registry-url: 6.0.1
       semver: 7.6.0
@@ -11546,7 +11546,7 @@ packages:
       execa: 8.0.1
       git-url-parse: 14.0.0
       globby: 14.0.1
-      got: 14.2.0
+      got: 14.2.1
       inquirer: 9.2.14
       is-ci: 3.0.1
       issue-parser: 6.0.0
