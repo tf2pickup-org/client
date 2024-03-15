@@ -165,8 +165,8 @@ dependencies:
     specifier: 7.8.1
     version: 7.8.1
   socket.io-client:
-    specifier: 4.7.4
-    version: 4.7.4
+    specifier: 4.7.5
+    version: 4.7.5
   tslib:
     specifier: 2.6.2
     version: 2.6.2
@@ -12275,8 +12275,8 @@ packages:
       - utf-8-validate
     dev: true
 
-  /socket.io-client@4.7.4:
-    resolution: {integrity: sha512-wh+OkeF0rAVCrABWQBaEjLfb7DVPotMbu0cgWgyR0v6eA4EoVnAwcIeIbcdTE3GT/H3kbdLl7OoH2+asoDRIIg==}
+  /socket.io-client@4.7.5:
+    resolution: {integrity: sha512-sJ/tqHOCe7Z50JCBCXrsY3I2k03iOiUe+tj1OmKeD2lXPiGH/RUCdTZFoqVyN7l1MnpIzPrGtLcijffmeouNlQ==}
     engines: {node: '>=10.0.0'}
     dependencies:
       '@socket.io/component-emitter': 3.1.0
