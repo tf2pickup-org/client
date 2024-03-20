@@ -120,8 +120,8 @@ dependencies:
     specifier: 2.2.0
     version: 2.2.0(chart.js@4.4.2)
   country-flag-icons:
-    specifier: 1.5.9
-    version: 1.5.9
+    specifier: 1.5.10
+    version: 1.5.10
   date-fns:
     specifier: 3.6.0
     version: 3.6.0
@@ -5828,8 +5828,8 @@ packages:
       typescript: 5.3.3
     dev: true
 
-  /country-flag-icons@1.5.9:
-    resolution: {integrity: sha512-9jrjv2w7kRbqNtdtMdK2j3gmDIZzd5l9L2pZiQjF9J0mUcB+NKIGDNADTDHBEp8EQtjOkCOcciJGGSOpERdXPQ==}
+  /country-flag-icons@1.5.10:
+    resolution: {integrity: sha512-x3elaK+ZY23W1YtFsNQknRdURzkV7g3Z93AoA7SHZJUEXbVjRsNh4h9Uf09+OjWF/4u8tXeAt37gezGRdwR/2g==}
     dev: false
 
   /create-require@1.1.1:
