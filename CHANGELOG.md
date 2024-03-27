@@ -1,5 +1,23 @@
 
 
+## [3.30.7](https://github.com/tf2pickup-org/client/compare/3.30.6...3.30.7) (2024-03-27)
+
+
+### Bug Fixes
+
+* **deps:** update angular monorepo to v17.2.4 ([#2560](https://github.com/tf2pickup-org/client/issues/2560)) ([b228e2e](https://github.com/tf2pickup-org/client/commit/b228e2e6be08da44adb2fe032072e14b3c0e5f47))
+* **deps:** update angular monorepo to v17.3.0 ([#2569](https://github.com/tf2pickup-org/client/issues/2569)) ([c7617c2](https://github.com/tf2pickup-org/client/commit/c7617c2d8caffbcd04788aa9f942f8b68e6a2eaf))
+* **deps:** update angular monorepo to v17.3.1 ([#2579](https://github.com/tf2pickup-org/client/issues/2579)) ([af87c9e](https://github.com/tf2pickup-org/client/commit/af87c9e20576aaa875d426db8b5bf26672cd00f1))
+* **deps:** update dependency @angular/cdk to v17.2.2 ([#2561](https://github.com/tf2pickup-org/client/issues/2561)) ([241732e](https://github.com/tf2pickup-org/client/commit/241732e0ea2e33645d5171c067b07e05992ac4ff))
+* **deps:** update dependency @angular/cdk to v17.3.0 ([#2571](https://github.com/tf2pickup-org/client/issues/2571)) ([457ba0e](https://github.com/tf2pickup-org/client/commit/457ba0e44df4c73d521e1b61f54709996e0b548c))
+* **deps:** update dependency @angular/cdk to v17.3.1 ([#2580](https://github.com/tf2pickup-org/client/issues/2580)) ([79131e7](https://github.com/tf2pickup-org/client/commit/79131e71a41baba1bb0b1a50e98c1d4c25afe0f0))
+* **deps:** update dependency angular-tabler-icons to v2.47.0 ([#2554](https://github.com/tf2pickup-org/client/issues/2554)) ([88c7dc8](https://github.com/tf2pickup-org/client/commit/88c7dc8bb57576a44736829327dea7f956547d68))
+* **deps:** update dependency country-flag-icons to v1.5.10 ([#2575](https://github.com/tf2pickup-org/client/issues/2575)) ([c0d3243](https://github.com/tf2pickup-org/client/commit/c0d32435d92b3eeb7ce5d9ae166c0679c5aaa4d6))
+* **deps:** update dependency date-fns to v3.4.0 ([#2563](https://github.com/tf2pickup-org/client/issues/2563)) ([02864a5](https://github.com/tf2pickup-org/client/commit/02864a5769ad96b1765fc4f50d69be16c2bdb5e9))
+* **deps:** update dependency date-fns to v3.6.0 ([#2573](https://github.com/tf2pickup-org/client/issues/2573)) ([57d0432](https://github.com/tf2pickup-org/client/commit/57d043215bd389b9e071758b916c6906e5ddbc2b))
+* **deps:** update dependency socket.io-client to v4.7.5 ([#2568](https://github.com/tf2pickup-org/client/issues/2568)) ([39a4b02](https://github.com/tf2pickup-org/client/commit/39a4b0214bb86917ab3e58bbbfa46c4b273ff871))
+* **games:** display positive timeout ([#2585](https://github.com/tf2pickup-org/client/issues/2585)) ([7ad37a6](https://github.com/tf2pickup-org/client/commit/7ad37a636def8cd7fc28c2e639a7226d7470b2ff))
+
 ## [3.30.6](https://github.com/tf2pickup-org/client/compare/3.30.5...3.30.6) (2024-03-03)
 
 
