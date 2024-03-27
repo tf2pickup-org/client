@@ -35,16 +35,16 @@ export class ConnectStringComponent implements OnInit, OnDestroy {
         map(() => this.connectTimeout),
         map(timeout =>
           timeout && isAfter(timeout, new Date())
-            ? intervalToDuration({ start: timeout, end: new Date() })
+            ? intervalToDuration({ start: new Date(), end: timeout })
             : null,
         ),
         map(duration =>
           duration
             ? [
                 duration.minutes,
-                duration.seconds.toLocaleString('en-US', {
+                duration.seconds?.toLocaleString('en-US', {
                   minimumIntegerDigits: 2,
-                }),
+                }) ?? '00',
               ].join(':')
             : null,
         ),
