@@ -150,8 +150,8 @@ dependencies:
     specifier: 15.0.0
     version: 15.0.0
   ngx-markdown:
-    specifier: 17.1.1
-    version: 17.1.1(@angular/common@17.3.2)(@angular/core@17.3.2)(@angular/platform-browser@17.3.2)(marked@9.1.6)(rxjs@7.8.1)(zone.js@0.14.4)
+    specifier: 17.2.0
+    version: 17.2.0(@angular/common@17.3.2)(@angular/core@17.3.2)(@angular/platform-browser@17.3.2)(marked@9.1.6)(rxjs@7.8.1)(zone.js@0.14.4)
   ngx-pagination:
     specifier: 6.0.3
     version: 6.0.3(@angular/common@17.3.2)(@angular/core@17.3.2)
@@ -10215,13 +10215,13 @@ packages:
       tslib: 2.6.2
     dev: false
 
-  /ngx-markdown@17.1.1(@angular/common@17.3.2)(@angular/core@17.3.2)(@angular/platform-browser@17.3.2)(marked@9.1.6)(rxjs@7.8.1)(zone.js@0.14.4):
-    resolution: {integrity: sha512-BGNWGJ6tmfPx+ScZFq5qeGLgWJwsakjScZ2e+oUzm+97DAHpIHSl8gptNZvZgRhOiFdjLcKBcuY2Rz8WB6J6UQ==}
+  /ngx-markdown@17.2.0(@angular/common@17.3.2)(@angular/core@17.3.2)(@angular/platform-browser@17.3.2)(marked@9.1.6)(rxjs@7.8.1)(zone.js@0.14.4):
+    resolution: {integrity: sha512-Hix8M/RgbtbDrCTKCsxRJuYXzBBNxFHkM7fd2zGypS7CmhhjAWueEWtUDwaetEHYGGeXvzXhpCml4TUAAMua+w==}
     peerDependencies:
       '@angular/common': ^17.0.0
       '@angular/core': ^17.0.0
       '@angular/platform-browser': ^17.0.0
-      marked: ^9.0.0
+      marked: '>= 9.0.0 < 13.0.0'
       rxjs: ^6.5.3 || ^7.4.0
       zone.js: ~0.14.0
     dependencies:
