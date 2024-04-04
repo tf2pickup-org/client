@@ -311,8 +311,8 @@ devDependencies:
     specifier: 11.1.0
     version: 11.1.0(postcss@8.4.38)(stylelint@16.3.1)
   stylelint-config-standard-scss:
-    specifier: 13.0.0
-    version: 13.0.0(postcss@8.4.38)(stylelint@16.3.1)
+    specifier: 13.1.0
+    version: 13.1.0(postcss@8.4.38)(stylelint@16.3.1)
   stylelint-order:
     specifier: 6.0.4
     version: 6.0.4(stylelint@16.3.1)
@@ -12592,7 +12592,7 @@ packages:
       postcss-scss: 4.0.9(postcss@8.4.38)
       stylelint: 16.3.1(typescript@5.3.3)
       stylelint-config-recommended: 14.0.0(stylelint@16.3.1)
-      stylelint-scss: 6.1.0(stylelint@16.3.1)
+      stylelint-scss: 6.2.1(stylelint@16.3.1)
     dev: true
 
   /stylelint-config-recommended@14.0.0(stylelint@16.3.1):
@@ -12617,12 +12617,12 @@ packages:
       stylelint-scss: 6.2.1(stylelint@16.3.1)
     dev: true
 
-  /stylelint-config-standard-scss@13.0.0(postcss@8.4.38)(stylelint@16.3.1):
-    resolution: {integrity: sha512-WaLvkP689qSYUpJQPCo30TFJSSc3VzvvoWnrgp+7PpVby5o8fRUY1cZcP0sePZfjrFl9T8caGhcKg0GO34VDiQ==}
+  /stylelint-config-standard-scss@13.1.0(postcss@8.4.38)(stylelint@16.3.1):
+    resolution: {integrity: sha512-Eo5w7/XvwGHWkeGLtdm2FZLOMYoZl1omP2/jgFCXyl2x5yNz7/8vv4Tj6slHvMSSUNTaGoam/GAZ0ZhukvalfA==}
     engines: {node: '>=18.12.0'}
     peerDependencies:
       postcss: ^8.3.3
-      stylelint: ^16.1.0
+      stylelint: ^16.3.1
     peerDependenciesMeta:
       postcss:
         optional: true
@@ -12650,20 +12650,6 @@ packages:
     dependencies:
       postcss: 8.4.38
       postcss-sorting: 8.0.2(postcss@8.4.38)
-      stylelint: 16.3.1(typescript@5.3.3)
-    dev: true
-
-  /stylelint-scss@6.1.0(stylelint@16.3.1):
-    resolution: {integrity: sha512-kCfK8TQzthGwb4vaZniZgxRsVbCM4ZckmT1b/H5m4FU3I8Dz0id9llKsy1NMp3XXqC8+OPD4rVKtUbSxXlJb5g==}
-    engines: {node: '>=18.12.0'}
-    peerDependencies:
-      stylelint: ^16.0.2
-    dependencies:
-      known-css-properties: 0.29.0
-      postcss-media-query-parser: 0.2.3
-      postcss-resolve-nested-selector: 0.1.1
-      postcss-selector-parser: 6.0.16
-      postcss-value-parser: 4.2.0
       stylelint: 16.3.1(typescript@5.3.3)
     dev: true
 
