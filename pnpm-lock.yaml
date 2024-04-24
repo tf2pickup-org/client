@@ -153,8 +153,8 @@ importers:
         specifier: 15.0.0
         version: 15.0.0
       ngx-markdown:
-        specifier: 17.2.0
-        version: 17.2.0(@angular/common@17.3.5(@angular/core@17.3.5(rxjs@7.8.1)(zone.js@0.14.4))(rxjs@7.8.1))(@angular/core@17.3.5(rxjs@7.8.1)(zone.js@0.14.4))(@angular/platform-browser@17.3.5(@angular/animations@17.3.5(@angular/core@17.3.5(rxjs@7.8.1)(zone.js@0.14.4)))(@angular/common@17.3.5(@angular/core@17.3.5(rxjs@7.8.1)(zone.js@0.14.4))(rxjs@7.8.1))(@angular/core@17.3.5(rxjs@7.8.1)(zone.js@0.14.4)))(marked@9.1.6)(rxjs@7.8.1)(zone.js@0.14.4)
+        specifier: 17.2.1
+        version: 17.2.1(@angular/common@17.3.5(@angular/core@17.3.5(rxjs@7.8.1)(zone.js@0.14.4))(rxjs@7.8.1))(@angular/core@17.3.5(rxjs@7.8.1)(zone.js@0.14.4))(@angular/platform-browser@17.3.5(@angular/animations@17.3.5(@angular/core@17.3.5(rxjs@7.8.1)(zone.js@0.14.4)))(@angular/common@17.3.5(@angular/core@17.3.5(rxjs@7.8.1)(zone.js@0.14.4))(rxjs@7.8.1))(@angular/core@17.3.5(rxjs@7.8.1)(zone.js@0.14.4)))(marked@9.1.6)(rxjs@7.8.1)(zone.js@0.14.4)
       ngx-pagination:
         specifier: 6.0.3
         version: 6.0.3(@angular/common@17.3.5(@angular/core@17.3.5(rxjs@7.8.1)(zone.js@0.14.4))(rxjs@7.8.1))(@angular/core@17.3.5(rxjs@7.8.1)(zone.js@0.14.4))
@@ -5402,8 +5402,8 @@ packages:
   ngx-edit-inline@15.0.0:
     resolution: {integrity: sha512-RrXwRwD0j2JmFe2Bo3/sOQzHBAXYjYjVUrOj0vXDITdEDEhyiMQIjYawUpz3q9kQ+LQ36gaaIVjbhJkMfiJ90A==}
 
-  ngx-markdown@17.2.0:
-    resolution: {integrity: sha512-Hix8M/RgbtbDrCTKCsxRJuYXzBBNxFHkM7fd2zGypS7CmhhjAWueEWtUDwaetEHYGGeXvzXhpCml4TUAAMua+w==}
+  ngx-markdown@17.2.1:
+    resolution: {integrity: sha512-TKzxP2R2uTGpVFx0OZDFC/BpNJYUabG2z59/9/PXrTP3R7xTNFuvGQZSNitAQFD7nI3Uko87Ra3GJrbaHdjeBA==}
     peerDependencies:
       '@angular/common': ^17.0.0
       '@angular/core': ^17.0.0
@@ -13361,7 +13361,7 @@ snapshots:
     dependencies:
       tslib: 2.6.2
 
-  ngx-markdown@17.2.0(@angular/common@17.3.5(@angular/core@17.3.5(rxjs@7.8.1)(zone.js@0.14.4))(rxjs@7.8.1))(@angular/core@17.3.5(rxjs@7.8.1)(zone.js@0.14.4))(@angular/platform-browser@17.3.5(@angular/animations@17.3.5(@angular/core@17.3.5(rxjs@7.8.1)(zone.js@0.14.4)))(@angular/common@17.3.5(@angular/core@17.3.5(rxjs@7.8.1)(zone.js@0.14.4))(rxjs@7.8.1))(@angular/core@17.3.5(rxjs@7.8.1)(zone.js@0.14.4)))(marked@9.1.6)(rxjs@7.8.1)(zone.js@0.14.4):
+  ngx-markdown@17.2.1(@angular/common@17.3.5(@angular/core@17.3.5(rxjs@7.8.1)(zone.js@0.14.4))(rxjs@7.8.1))(@angular/core@17.3.5(rxjs@7.8.1)(zone.js@0.14.4))(@angular/platform-browser@17.3.5(@angular/animations@17.3.5(@angular/core@17.3.5(rxjs@7.8.1)(zone.js@0.14.4)))(@angular/common@17.3.5(@angular/core@17.3.5(rxjs@7.8.1)(zone.js@0.14.4))(rxjs@7.8.1))(@angular/core@17.3.5(rxjs@7.8.1)(zone.js@0.14.4)))(marked@9.1.6)(rxjs@7.8.1)(zone.js@0.14.4):
     dependencies:
       '@angular/common': 17.3.5(@angular/core@17.3.5(rxjs@7.8.1)(zone.js@0.14.4))(rxjs@7.8.1)
       '@angular/core': 17.3.5(rxjs@7.8.1)(zone.js@0.14.4)
