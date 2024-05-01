@@ -132,8 +132,8 @@ importers:
         specifier: 5.5.0
         version: 5.5.0
       feather-icons:
-        specifier: 4.29.1
-        version: 4.29.1
+        specifier: 4.29.2
+        version: 4.29.2
       howler:
         specifier: 2.2.4
         version: 2.2.4
@@ -3932,8 +3932,8 @@ packages:
     resolution: {integrity: sha512-CzbClwlXAuiRQAlUyfqPgvPoNKTckTPGfwZV4ZdAhVcP2lh9KUxJg2b5GkE7XbjKQ3YJnQ9z6D9ntLAlB+tP8g==}
     engines: {node: '>=0.8.0'}
 
-  feather-icons@4.29.1:
-    resolution: {integrity: sha512-P1we61haGTds6lKWe6CCVPsNULb8tHr1y6S9gXEpU+lNR1Ja7GdV0A1l2hTNmzXv+0Stix/3YMWMAn7n1Qtd6A==}
+  feather-icons@4.29.2:
+    resolution: {integrity: sha512-0TaCFTnBTVCz6U+baY2UJNKne5ifGh7sMG4ZC2LoBWCZdIyPa+y6UiR4lEYGws1JOFWdee8KAsAIvu0VcXqiqA==}
 
   fetch-blob@3.2.0:
     resolution: {integrity: sha512-7yAQpD2UMJzLi1Dqv7qFYnPbaPx7ZfFK6PiIxQ4PfkGPyNyl2Ugx+a/umUonmKqjhM4DnfbMvdX6otXq83soQQ==}
@@ -11747,7 +11747,7 @@ snapshots:
     dependencies:
       websocket-driver: 0.7.4
 
-  feather-icons@4.29.1:
+  feather-icons@4.29.2:
     dependencies:
       classnames: 2.5.1
       core-js: 3.36.0
