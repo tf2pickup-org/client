@@ -5,7 +5,7 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
-  got: 14.3.0
+  got: 14.4.1
 
 importers:
 
@@ -4190,8 +4190,8 @@ packages:
   gopd@1.0.1:
     resolution: {integrity: sha512-d65bNlIadxvpb/A2abVdlqKqV563juRnZ1Wtk6s1sIR8uNsXR70xqIzVqxVf1eTqDunwT2MkczEeaezCKTZhwA==}
 
-  got@14.3.0:
-    resolution: {integrity: sha512-vZkrXdq5BtPWTXqvjXSpl6zky3zpHaOVfSug/RfFHu3YrtSsvYzopVMDqrh2do77WnGoCSSRCHW25zXOSAQ9zw==}
+  got@14.4.1:
+    resolution: {integrity: sha512-IvDJbJBUeexX74xNQuMIVgCRRuNOm5wuK+OC3Dc2pnSoh1AOmgc7JVj7WC+cJ4u0aPcO9KZ2frTXcqK4W/5qTQ==}
     engines: {node: '>=20'}
 
   graceful-fs@4.2.10:
@@ -6920,6 +6920,10 @@ packages:
 
   type-fest@4.10.3:
     resolution: {integrity: sha512-JLXyjizi072smKGGcZiAJDCNweT8J+AuRxmPZ1aG7TERg4ijx9REl8CNhbr36RV4qXqL1gO1FF9HL8OkVmmrsA==}
+    engines: {node: '>=16'}
+
+  type-fest@4.20.0:
+    resolution: {integrity: sha512-MBh+PHUHHisjXf4tlx0CFWoMdjx8zCMLJHOjnV1prABYZFHqtFOyauCIK2/7w4oIfwkF8iNhLtnJEfVY2vn3iw==}
     engines: {node: '>=16'}
 
   type-is@1.6.18:
@@ -12003,7 +12007,7 @@ snapshots:
     dependencies:
       get-intrinsic: 1.2.4
 
-  got@14.3.0:
+  got@14.4.1:
     dependencies:
       '@sindresorhus/is': 6.3.1
       '@szmarczak/http-timer': 5.0.1
@@ -12016,6 +12020,7 @@ snapshots:
       lowercase-keys: 3.0.0
       p-cancelable: 4.0.1
       responselike: 3.0.0
+      type-fest: 4.20.0
 
   graceful-fs@4.2.10: {}
 
@@ -13675,7 +13680,7 @@ snapshots:
 
   package-json@8.1.1:
     dependencies:
-      got: 14.3.0
+      got: 14.4.1
       registry-auth-token: 5.0.2
       registry-url: 6.0.1
       semver: 7.6.2
@@ -14158,7 +14163,7 @@ snapshots:
       execa: 8.0.1
       git-url-parse: 14.0.0
       globby: 14.0.1
-      got: 14.3.0
+      got: 14.4.1
       inquirer: 9.2.22
       is-ci: 3.0.1
       issue-parser: 7.0.0
@@ -15122,6 +15127,8 @@ snapshots:
   type-fest@3.13.1: {}
 
   type-fest@4.10.3: {}
+
+  type-fest@4.20.0: {}
 
   type-is@1.6.18:
     dependencies:
