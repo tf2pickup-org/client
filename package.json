@@ -84,7 +84,7 @@
     "@ngrx/store": "17.2.0",
     "@ngrx/store-devtools": "17.2.0",
     "@swimlane/ngx-datatable": "20.1.0",
-    "@tailwindcss/forms": "0.5.7",
+    "@tailwindcss/forms": "0.5.8",
     "angular-tabler-icons": "2.47.0",
     "chart.js": "4.4.4",
     "chartjs-plugin-datalabels": "2.2.0",
