@@ -118,7 +118,7 @@
     "@angular/compiler-cli": "17.3.12",
     "@angular/language-service": "17.3.12",
     "@ngrx/schematics": "17.2.0",
-    "@release-it/conventional-changelog": "8.0.1",
+    "@release-it/conventional-changelog": "8.0.2",
     "@tailwindcss/typography": "0.5.15",
     "@types/howler": "2.2.11",
     "@types/jasmine": "5.1.4",
