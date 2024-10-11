@@ -161,6 +161,6 @@
     "webpack-bundle-analyzer": "4.10.2"
   },
   "resolutions": {
-    "got": "14.4.2"
+    "got": "14.4.3"
   }
 }
