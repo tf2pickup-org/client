@@ -1,5 +1,26 @@
 
 
+# [3.32.0](https://github.com/tf2pickup-org/client/compare/3.31.0...3.32.0) (2024-11-05)
+
+
+### Bug Fixes
+
+* **deps:** update angular monorepo ([#2694](https://github.com/tf2pickup-org/client/issues/2694)) ([ea0b131](https://github.com/tf2pickup-org/client/commit/ea0b131cef7c607703f6c71ef3e13faae96658ee))
+* **deps:** update dependency @tailwindcss/forms to v0.5.8 ([#2704](https://github.com/tf2pickup-org/client/issues/2704)) ([4ddc439](https://github.com/tf2pickup-org/client/commit/4ddc439332987409aa9ec1dce7b13fabdf5d6475))
+* **deps:** update dependency @tailwindcss/forms to v0.5.9 ([#2709](https://github.com/tf2pickup-org/client/issues/2709)) ([c757f06](https://github.com/tf2pickup-org/client/commit/c757f068aa69d2e4fa3686c7317ad2294bbc5bb8))
+* **deps:** update dependency chart.js to v4.4.4 ([#2696](https://github.com/tf2pickup-org/client/issues/2696)) ([68fdc2d](https://github.com/tf2pickup-org/client/commit/68fdc2d1a80e3baba23c600050cf0ff7a6290353))
+* **deps:** update dependency chart.js to v4.4.5 ([#2724](https://github.com/tf2pickup-org/client/issues/2724)) ([bc115c5](https://github.com/tf2pickup-org/client/commit/bc115c5ded4cfbb3a67bbe7c4beba75cdb5134ac))
+* **deps:** update dependency country-flag-icons to v1.5.13 ([#2695](https://github.com/tf2pickup-org/client/issues/2695)) ([3374529](https://github.com/tf2pickup-org/client/commit/33745292fc81d603428521d15a744d55b3fdc751))
+* **deps:** update dependency echarts to v5.5.1 ([#2697](https://github.com/tf2pickup-org/client/issues/2697)) ([3629ecb](https://github.com/tf2pickup-org/client/commit/3629ecb55d4d0dbed3698ba603219ab5862dd91c))
+* **deps:** update dependency npm-run-all2 to v6.2.2 ([#2698](https://github.com/tf2pickup-org/client/issues/2698)) ([b488604](https://github.com/tf2pickup-org/client/commit/b488604c118d91d8839de460229d42e3845f0e4e))
+* **deps:** update dependency npm-run-all2 to v6.2.3 ([#2720](https://github.com/tf2pickup-org/client/issues/2720)) ([8bf64b8](https://github.com/tf2pickup-org/client/commit/8bf64b86de0275fc63b21c71dedd032a83f191ea))
+* **deps:** update dependency npm-run-all2 to v6.2.6 ([#2726](https://github.com/tf2pickup-org/client/issues/2726)) ([90c88c7](https://github.com/tf2pickup-org/client/commit/90c88c7e83dcab7f1c651c36eae20fd5e172cf8a))
+
+
+### Features
+
+* **uberfest:** add uberfest branding ([#2731](https://github.com/tf2pickup-org/client/issues/2731)) ([e72d188](https://github.com/tf2pickup-org/client/commit/e72d1881876508b847bbf020120b11da232705d4))
+
 # [3.31.0](https://github.com/tf2pickup-org/client/compare/3.30.7...3.31.0) (2024-07-10)
 
 
