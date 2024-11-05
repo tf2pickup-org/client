@@ -64,6 +64,8 @@ jobs:
             apiUrl: api.tf2pickup.asia
           - branding: ar.tf2pickup.org
             apiUrl: api.ar.tf2pickup.org
+          - branding: uberfest
+            apiUrl: api.tf2pickup.teamfortress2.com
 
     steps:
       - name: Docker meta
