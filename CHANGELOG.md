@@ -1,5 +1,12 @@
 
 
+## [3.32.1](https://github.com/tf2pickup-org/client/compare/3.32.0...3.32.1) (2024-11-06)
+
+
+### Bug Fixes
+
+* **uberfest:** fix logo ([#2732](https://github.com/tf2pickup-org/client/issues/2732)) ([ce58644](https://github.com/tf2pickup-org/client/commit/ce58644d776dfa86ebbe3770cfe67967692fc0c3))
+
 # [3.32.0](https://github.com/tf2pickup-org/client/compare/3.31.0...3.32.0) (2024-11-05)
 
 
