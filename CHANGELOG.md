@@ -1,5 +1,12 @@
 
 
+## [3.32.2](https://github.com/tf2pickup-org/client/compare/3.32.1...3.32.2) (2024-11-08)
+
+
+### Bug Fixes
+
+* **uberfest:** fix logo padding ([#2733](https://github.com/tf2pickup-org/client/issues/2733)) ([f5869eb](https://github.com/tf2pickup-org/client/commit/f5869ebb1af5741a0fc3566c2883fdabb5e4a320))
+
 ## [3.32.1](https://github.com/tf2pickup-org/client/compare/3.32.0...3.32.1) (2024-11-06)
 
 
