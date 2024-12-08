@@ -171,8 +171,8 @@ importers:
         specifier: 4.8.1
         version: 4.8.1
       tslib:
-        specifier: 2.6.3
-        version: 2.6.3
+        specifier: 2.8.1
+        version: 2.8.1
       zone.js:
         specifier: 0.14.10
         version: 0.14.10
@@ -6675,8 +6675,8 @@ packages:
   tslib@2.6.2:
     resolution: {integrity: sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==}
 
-  tslib@2.6.3:
-    resolution: {integrity: sha512-xNvxJEOUiWPGhUuUdQgAJPKOOJfGnIyKySOc09XkKsgdUV/3E2zvwZYdejjmRgPCgcym1juLH3226yA7sEFJKQ==}
+  tslib@2.8.1:
+    resolution: {integrity: sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==}
 
   tsutils-etc@1.4.2:
     resolution: {integrity: sha512-2Dn5SxTDOu6YWDNKcx1xu2YUy6PUeKrWZB/x2cQ8vY2+iz3JRembKn/iZ0JLT1ZudGNwQQvtFX9AwvRHbXuPUg==}
@@ -7439,14 +7439,14 @@ snapshots:
   '@angular/animations@17.3.12(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10))':
     dependencies:
       '@angular/core': 17.3.12(rxjs@7.8.1)(zone.js@0.14.10)
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   '@angular/cdk@17.3.10(@angular/common@17.3.12(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1)':
     dependencies:
       '@angular/common': 17.3.12(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1)
       '@angular/core': 17.3.12(rxjs@7.8.1)(zone.js@0.14.10)
       rxjs: 7.8.1
-      tslib: 2.6.3
+      tslib: 2.8.1
     optionalDependencies:
       parse5: 7.1.2
 
@@ -7479,7 +7479,7 @@ snapshots:
     dependencies:
       '@angular/core': 17.3.12(rxjs@7.8.1)(zone.js@0.14.10)
       rxjs: 7.8.1
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   '@angular/compiler-cli@17.3.12(@angular/compiler@17.3.12(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10)))(typescript@5.4.5)':
     dependencies:
@@ -7490,7 +7490,7 @@ snapshots:
       convert-source-map: 1.9.0
       reflect-metadata: 0.2.1
       semver: 7.6.2
-      tslib: 2.6.3
+      tslib: 2.8.1
       typescript: 5.4.5
       yargs: 17.7.2
     transitivePeerDependencies:
@@ -7498,14 +7498,14 @@ snapshots:
 
   '@angular/compiler@17.3.12(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10))':
     dependencies:
-      tslib: 2.6.3
+      tslib: 2.8.1
     optionalDependencies:
       '@angular/core': 17.3.12(rxjs@7.8.1)(zone.js@0.14.10)
 
   '@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10)':
     dependencies:
       rxjs: 7.8.1
-      tslib: 2.6.3
+      tslib: 2.8.1
       zone.js: 0.14.10
 
   '@angular/forms@17.3.12(@angular/common@17.3.12(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10))(@angular/platform-browser@17.3.12(@angular/animations@17.3.12(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/common@17.3.12(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10)))(rxjs@7.8.1)':
@@ -7514,7 +7514,7 @@ snapshots:
       '@angular/core': 17.3.12(rxjs@7.8.1)(zone.js@0.14.10)
       '@angular/platform-browser': 17.3.12(@angular/animations@17.3.12(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/common@17.3.12(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10))
       rxjs: 7.8.1
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   '@angular/language-service@17.3.12': {}
 
@@ -7524,13 +7524,13 @@ snapshots:
       '@angular/compiler': 17.3.12(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10))
       '@angular/core': 17.3.12(rxjs@7.8.1)(zone.js@0.14.10)
       '@angular/platform-browser': 17.3.12(@angular/animations@17.3.12(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/common@17.3.12(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10))
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   '@angular/platform-browser@17.3.12(@angular/animations@17.3.12(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/common@17.3.12(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10))':
     dependencies:
       '@angular/common': 17.3.12(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1)
       '@angular/core': 17.3.12(rxjs@7.8.1)(zone.js@0.14.10)
-      tslib: 2.6.3
+      tslib: 2.8.1
     optionalDependencies:
       '@angular/animations': 17.3.12(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10))
 
@@ -7540,7 +7540,7 @@ snapshots:
       '@angular/core': 17.3.12(rxjs@7.8.1)(zone.js@0.14.10)
       '@angular/platform-browser': 17.3.12(@angular/animations@17.3.12(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/common@17.3.12(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10))
       rxjs: 7.8.1
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   '@babel/code-frame@7.23.5':
     dependencies:
@@ -8576,11 +8576,11 @@ snapshots:
 
   '@material/animation@14.0.0':
     dependencies:
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   '@material/base@14.0.0':
     dependencies:
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   '@material/button@14.0.0':
     dependencies:
@@ -8596,7 +8596,7 @@ snapshots:
       '@material/tokens': 14.0.0
       '@material/touch-target': 14.0.0
       '@material/typography': 14.0.0
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   '@material/card@14.0.0':
     dependencies:
@@ -8607,7 +8607,7 @@ snapshots:
       '@material/rtl': 14.0.0
       '@material/shape': 14.0.0
       '@material/theme': 14.0.0
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   '@material/checkbox@14.0.0':
     dependencies:
@@ -8620,11 +8620,11 @@ snapshots:
       '@material/ripple': 14.0.0
       '@material/theme': 14.0.0
       '@material/touch-target': 14.0.0
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   '@material/density@14.0.0':
     dependencies:
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   '@material/dialog@14.0.0':
     dependencies:
@@ -8642,12 +8642,12 @@ snapshots:
       '@material/tokens': 14.0.0
       '@material/touch-target': 14.0.0
       '@material/typography': 14.0.0
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   '@material/dom@14.0.0':
     dependencies:
       '@material/feature-targeting': 14.0.0
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   '@material/elevation@14.0.0':
     dependencies:
@@ -8656,11 +8656,11 @@ snapshots:
       '@material/feature-targeting': 14.0.0
       '@material/rtl': 14.0.0
       '@material/theme': 14.0.0
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   '@material/feature-targeting@14.0.0':
     dependencies:
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   '@material/floating-label@14.0.0':
     dependencies:
@@ -8671,7 +8671,7 @@ snapshots:
       '@material/rtl': 14.0.0
       '@material/theme': 14.0.0
       '@material/typography': 14.0.0
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   '@material/focus-ring@14.0.0':
     dependencies:
@@ -8687,7 +8687,7 @@ snapshots:
       '@material/rtl': 14.0.0
       '@material/theme': 14.0.0
       '@material/typography': 14.0.0
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   '@material/icon-button@14.0.0':
     dependencies:
@@ -8701,7 +8701,7 @@ snapshots:
       '@material/rtl': 14.0.0
       '@material/theme': 14.0.0
       '@material/touch-target': 14.0.0
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   '@material/line-ripple@14.0.0':
     dependencies:
@@ -8709,7 +8709,7 @@ snapshots:
       '@material/base': 14.0.0
       '@material/feature-targeting': 14.0.0
       '@material/theme': 14.0.0
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   '@material/list@14.0.0':
     dependencies:
@@ -8722,7 +8722,7 @@ snapshots:
       '@material/shape': 14.0.0
       '@material/theme': 14.0.0
       '@material/typography': 14.0.0
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   '@material/notched-outline@14.0.0':
     dependencies:
@@ -8732,7 +8732,7 @@ snapshots:
       '@material/rtl': 14.0.0
       '@material/shape': 14.0.0
       '@material/theme': 14.0.0
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   '@material/radio@14.0.0':
     dependencies:
@@ -8745,7 +8745,7 @@ snapshots:
       '@material/ripple': 14.0.0
       '@material/theme': 14.0.0
       '@material/touch-target': 14.0.0
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   '@material/ripple@14.0.0':
     dependencies:
@@ -8755,19 +8755,19 @@ snapshots:
       '@material/feature-targeting': 14.0.0
       '@material/rtl': 14.0.0
       '@material/theme': 14.0.0
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   '@material/rtl@14.0.0':
     dependencies:
       '@material/theme': 14.0.0
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   '@material/shape@14.0.0':
     dependencies:
       '@material/feature-targeting': 14.0.0
       '@material/rtl': 14.0.0
       '@material/theme': 14.0.0
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   '@material/snackbar@14.0.0':
     dependencies:
@@ -8783,7 +8783,7 @@ snapshots:
       '@material/shape': 14.0.0
       '@material/theme': 14.0.0
       '@material/typography': 14.0.0
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   '@material/switch@14.0.0':
     dependencies:
@@ -8799,7 +8799,7 @@ snapshots:
       '@material/shape': 14.0.0
       '@material/theme': 14.0.0
       '@material/tokens': 14.0.0
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   '@material/textfield@14.0.0':
     dependencies:
@@ -8817,12 +8817,12 @@ snapshots:
       '@material/theme': 14.0.0
       '@material/tokens': 14.0.0
       '@material/typography': 14.0.0
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   '@material/theme@14.0.0':
     dependencies:
       '@material/feature-targeting': 14.0.0
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   '@material/tokens@14.0.0':
     dependencies:
@@ -8833,20 +8833,20 @@ snapshots:
       '@material/base': 14.0.0
       '@material/feature-targeting': 14.0.0
       '@material/rtl': 14.0.0
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   '@material/typography@14.0.0':
     dependencies:
       '@material/feature-targeting': 14.0.0
       '@material/theme': 14.0.0
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   '@ngrx/component-store@17.2.0(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1)':
     dependencies:
       '@angular/core': 17.3.12(rxjs@7.8.1)(zone.js@0.14.10)
       '@ngrx/operators': 17.0.0-beta.0(rxjs@7.8.1)
       rxjs: 7.8.1
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   '@ngrx/effects@17.2.0(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10))(@ngrx/store@17.2.0(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(rxjs@7.8.1)':
     dependencies:
@@ -8854,19 +8854,19 @@ snapshots:
       '@ngrx/operators': 17.0.0-beta.0(rxjs@7.8.1)
       '@ngrx/store': 17.2.0(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1)
       rxjs: 7.8.1
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   '@ngrx/entity@17.2.0(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10))(@ngrx/store@17.2.0(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(rxjs@7.8.1)':
     dependencies:
       '@angular/core': 17.3.12(rxjs@7.8.1)(zone.js@0.14.10)
       '@ngrx/store': 17.2.0(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1)
       rxjs: 7.8.1
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   '@ngrx/operators@17.0.0-beta.0(rxjs@7.8.1)':
     dependencies:
       rxjs: 7.8.1
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   '@ngrx/router-store@17.2.0(@angular/common@17.3.12(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10))(@angular/router@17.3.12(@angular/common@17.3.12(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10))(@angular/platform-browser@17.3.12(@angular/animations@17.3.12(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/common@17.3.12(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10)))(rxjs@7.8.1))(@ngrx/store@17.2.0(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(rxjs@7.8.1)':
     dependencies:
@@ -8875,7 +8875,7 @@ snapshots:
       '@angular/router': 17.3.12(@angular/common@17.3.12(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10))(@angular/platform-browser@17.3.12(@angular/animations@17.3.12(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/common@17.3.12(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10)))(rxjs@7.8.1)
       '@ngrx/store': 17.2.0(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1)
       rxjs: 7.8.1
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   '@ngrx/schematics@17.2.0': {}
 
@@ -8883,13 +8883,13 @@ snapshots:
     dependencies:
       '@ngrx/store': 17.2.0(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1)
       rxjs: 7.8.1
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   '@ngrx/store@17.2.0(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1)':
     dependencies:
       '@angular/core': 17.3.12(rxjs@7.8.1)(zone.js@0.14.10)
       rxjs: 7.8.1
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   '@ngtools/webpack@17.3.11(@angular/compiler-cli@17.3.12(@angular/compiler@17.3.12(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10)))(typescript@5.4.5))(typescript@5.4.5)(webpack@5.94.0(esbuild@0.20.1))':
     dependencies:
@@ -9159,7 +9159,7 @@ snapshots:
       '@angular/core': 17.3.12(rxjs@7.8.1)(zone.js@0.14.10)
       '@angular/platform-browser': 17.3.12(@angular/animations@17.3.12(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/common@17.3.12(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10))
       rxjs: 7.8.1
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   '@tailwindcss/forms@0.5.9(tailwindcss@3.4.16(ts-node@10.9.2(@types/node@20.17.9)(typescript@5.4.5)))':
     dependencies:
@@ -9670,7 +9670,7 @@ snapshots:
     dependencies:
       '@angular/common': 17.3.12(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1)
       '@angular/core': 17.3.12(rxjs@7.8.1)(zone.js@0.14.10)
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   ansi-align@3.0.1:
     dependencies:
@@ -9795,7 +9795,7 @@ snapshots:
 
   ast-types@0.13.4:
     dependencies:
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   astral-regex@2.0.0: {}
 
@@ -11269,7 +11269,7 @@ snapshots:
       eslint-etc: 5.2.1(eslint@9.16.0(jiti@1.21.6))(typescript@5.4.5)
       requireindex: 1.2.0
       rxjs-report-usage: 1.0.6
-      tslib: 2.6.3
+      tslib: 2.8.1
       tsutils: 3.21.0(typescript@5.4.5)
       tsutils-etc: 1.4.2(tsutils@3.21.0(typescript@5.4.5))(typescript@5.4.5)
       typescript: 5.4.5
@@ -12470,7 +12470,7 @@ snapshots:
     dependencies:
       copy-anything: 2.0.6
       parse-node-version: 1.0.1
-      tslib: 2.6.3
+      tslib: 2.8.1
     optionalDependencies:
       errno: 0.1.8
       graceful-fs: 4.2.11
@@ -12989,11 +12989,11 @@ snapshots:
   ngx-echarts@17.2.0(echarts@5.5.1):
     dependencies:
       echarts: 5.5.1
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   ngx-edit-inline@15.0.0:
     dependencies:
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   ngx-markdown@17.2.1(@angular/common@17.3.12(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10))(@angular/platform-browser@17.3.12(@angular/animations@17.3.12(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/common@17.3.12(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10)))(marked@9.1.6)(rxjs@7.8.1)(zone.js@0.14.10):
     dependencies:
@@ -13002,7 +13002,7 @@ snapshots:
       '@angular/platform-browser': 17.3.12(@angular/animations@17.3.12(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10)))(@angular/common@17.3.12(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1))(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10))
       marked: 9.1.6
       rxjs: 7.8.1
-      tslib: 2.6.3
+      tslib: 2.8.1
       zone.js: 0.14.10
     optionalDependencies:
       clipboard: 2.0.11
@@ -13017,12 +13017,12 @@ snapshots:
     dependencies:
       '@angular/common': 17.3.12(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10))(rxjs@7.8.1)
       '@angular/core': 17.3.12(rxjs@7.8.1)(zone.js@0.14.10)
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   ngx-webstorage-service@5.0.0(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.14.10)):
     dependencies:
       '@angular/core': 17.3.12(rxjs@7.8.1)(zone.js@0.14.10)
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   nice-napi@1.0.2:
     dependencies:
@@ -13940,7 +13940,7 @@ snapshots:
 
   rxjs@7.8.1:
     dependencies:
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   sade@1.8.1:
     dependencies:
@@ -14541,7 +14541,7 @@ snapshots:
   synckit@0.9.2:
     dependencies:
       '@pkgr/core': 0.1.1
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   table@6.8.2:
     dependencies:
@@ -14697,7 +14697,7 @@ snapshots:
 
   tslib@2.6.2: {}
 
-  tslib@2.6.3: {}
+  tslib@2.8.1: {}
 
   tsutils-etc@1.4.2(tsutils@3.21.0(typescript@5.4.5))(typescript@5.4.5):
     dependencies:
