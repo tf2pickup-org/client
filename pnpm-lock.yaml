@@ -114,8 +114,8 @@ importers:
         specifier: 0.5.9
         version: 0.5.9(tailwindcss@3.4.16(ts-node@10.9.2(@types/node@20.17.9)(typescript@5.4.5)))
       angular-tabler-icons:
-        specifier: 2.47.0
-        version: 2.47.0(@angular/common@17.3.12(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.15.0))(rxjs@7.8.1))(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.15.0))
+        specifier: 3.26.0
+        version: 3.26.0(@angular/common@17.3.12(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.15.0))(rxjs@7.8.1))(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.15.0))
       chart.js:
         specifier: 4.4.7
         version: 4.4.7
@@ -2377,11 +2377,11 @@ packages:
   ajv@8.9.0:
     resolution: {integrity: sha512-qOKJyNj/h+OWx7s5DePL6Zu1KeM9jPZhwBqs+7DzP6bGOvqzVCSf0xueYmVuaC/oQ/VtS2zLMLHdQFbkka+XDQ==}
 
-  angular-tabler-icons@2.47.0:
-    resolution: {integrity: sha512-Pfnnq3lB3gxmu4S/jXQR88DXnmCvD4hgZrx1PofmudqRqzzSl1eV37siogp7v+dDT6IGSXYgi6CQlDKHU2pQnw==}
+  angular-tabler-icons@3.26.0:
+    resolution: {integrity: sha512-gOvELHvz9TgOXAVq1YDqPQ8Z+0kII4IETzKn95x//zdZ5//3RekpeAJE2go3zczXaxoy44frmea7i7mr40BDTw==}
     peerDependencies:
-      '@angular/common': 14 - 17
-      '@angular/core': 14 - 17
+      '@angular/common': 17 - 19
+      '@angular/core': 17 - 19
 
   ansi-align@3.0.1:
     resolution: {integrity: sha512-IOfwwBF5iczOjp/WeY4YxyjqAFMQoZufdQWDd19SEExbVLNXqvpzSJ/M7Za4/sCPmQ0+GRquoA7bGcINcxew6w==}
@@ -9666,7 +9666,7 @@ snapshots:
       require-from-string: 2.0.2
       uri-js: 4.4.1
 
-  angular-tabler-icons@2.47.0(@angular/common@17.3.12(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.15.0))(rxjs@7.8.1))(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.15.0)):
+  angular-tabler-icons@3.26.0(@angular/common@17.3.12(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.15.0))(rxjs@7.8.1))(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.15.0)):
     dependencies:
       '@angular/common': 17.3.12(@angular/core@17.3.12(rxjs@7.8.1)(zone.js@0.15.0))(rxjs@7.8.1)
       '@angular/core': 17.3.12(rxjs@7.8.1)(zone.js@0.15.0)
