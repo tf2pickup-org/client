@@ -1,5 +1,17 @@
 
 
+## [3.32.3](https://github.com/tf2pickup-org/client/compare/3.32.2...3.32.3) (2025-04-05)
+
+
+### Bug Fixes
+
+* **deps:** update dependency chart.js to v4.4.6 ([#2738](https://github.com/tf2pickup-org/client/issues/2738)) ([92d46a3](https://github.com/tf2pickup-org/client/commit/92d46a321cb25840db9bcb31a15c1090aa7db469))
+* **deps:** update dependency chart.js to v4.4.7 ([#2752](https://github.com/tf2pickup-org/client/issues/2752)) ([7e4a390](https://github.com/tf2pickup-org/client/commit/7e4a390d36815d826e32c4c0c0714940f83be2ac))
+* **deps:** update dependency socket.io-client to v4.8.1 ([#2758](https://github.com/tf2pickup-org/client/issues/2758)) ([d7dd655](https://github.com/tf2pickup-org/client/commit/d7dd65587bde54ab9044b39b53cc46b3a9c81ef5))
+* **deps:** update dependency tslib to v2.8.1 ([#2759](https://github.com/tf2pickup-org/client/issues/2759)) ([0c3af13](https://github.com/tf2pickup-org/client/commit/0c3af133ed364f903114a5df69204263ebeaa7ed))
+* **deps:** update dependency zone.js to v0.15.0 ([#2760](https://github.com/tf2pickup-org/client/issues/2760)) ([3aee4eb](https://github.com/tf2pickup-org/client/commit/3aee4eb65fc0263234f08c84b2552634770ecdaf))
+* **sea.tf2pickup.org:** rename tf2pickup.asia to sea.tf2pickup.org ([#2763](https://github.com/tf2pickup-org/client/issues/2763)) ([360b827](https://github.com/tf2pickup-org/client/commit/360b827a5c85e40f0bd999f728ae4b16e0c33edc))
+
 ## [3.32.2](https://github.com/tf2pickup-org/client/compare/3.32.1...3.32.2) (2024-11-08)
 
 
