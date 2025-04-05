@@ -710,11 +710,11 @@
                 }
               ]
             },
-            "tf2pickup.asia": {
+            "sea.tf2pickup.org": {
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/tf2pickup.asia.ts"
+                  "with": "src/environments/sea.tf2pickup.org.ts"
                 }
               ],
               "assets": [
@@ -726,12 +726,12 @@
                 },
                 {
                   "glob": "favicon.ico",
-                  "input": "src/assets/custom/tf2pickup.asia",
+                  "input": "src/assets/custom/sea.tf2pickup.org",
                   "output": "/"
                 },
                 {
                   "glob": "**/*",
-                  "input": "src/assets/custom/tf2pickup.asia",
+                  "input": "src/assets/custom/sea.tf2pickup.org",
                   "output": "/assets/"
                 }
               ]

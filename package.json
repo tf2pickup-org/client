@@ -31,7 +31,7 @@
     "build:br.tf2pickup.org": "ng build --subresource-integrity --configuration=production,br.tf2pickup.org --output-path=dist/br.tf2pickup.org && node scripts/write-buildinfo.js > dist/br.tf2pickup.org/buildinfo.json",
     "build:au.tf2pickup.org": "ng build --subresource-integrity --configuration=production,au.tf2pickup.org --output-path=dist/au.tf2pickup.org && node scripts/write-buildinfo.js > dist/au.tf2pickup.org/buildinfo.json",
     "build:hl.br.tf2pickup.org": "ng build --subresource-integrity --configuration=production,hl.br.tf2pickup.org --output-path=dist/hl.br.tf2pickup.org && node scripts/write-buildinfo.js > dist/hl.br.tf2pickup.org/buildinfo.json",
-    "build:tf2pickup.asia": "ng build --subresource-integrity --configuration=production,tf2pickup.asia --output-path=dist/tf2pickup.asia && node scripts/write-buildinfo.js > dist/tf2pickup.asia/buildinfo.json",
+    "build:sea.tf2pickup.org": "ng build --subresource-integrity --configuration=production,sea.tf2pickup.org --output-path=dist/sea.tf2pickup.org && node scripts/write-buildinfo.js > dist/sea.tf2pickup.org/buildinfo.json",
     "build:ultiduo.tf2pickup.eu": "ng build --subresource-integrity --configuration=production,ultiduo.tf2pickup.eu --output-path=dist/ultiduo.tf2pickup.eu && node scripts/write-buildinfo.js > dist/ultiduo.tf2pickup.eu/buildinfo.json",
     "build:hl.tf2pickup.eu": "ng build --subresource-integrity --configuration=production,hl.tf2pickup.eu --output-path=dist/hl.tf2pickup.eu && node scripts/write-buildinfo.js > dist/hl.tf2pickup.eu/buildinfo.json",
     "build:6v6.poland.tf": "ng build --subresource-integrity --configuration=production,6v6.poland.tf --output-path=dist/6v6.poland.tf && node scripts/write-buildinfo.js > dist/6v6.poland.tf/buildinfo.json",
