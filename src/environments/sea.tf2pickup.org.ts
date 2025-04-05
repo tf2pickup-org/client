@@ -6,8 +6,8 @@ const discordInvitation = 'https://discord.com/invite/bTF8ME6';
 
 export const environment = {
   ...defaultEnvironment,
-  apiUrl: 'https://api.tf2pickup.asia',
-  wsUrl: 'https://api.tf2pickup.asia',
+  apiUrl: 'https://api.sea.tf2pickup.org',
+  wsUrl: 'https://api.sea.tf2pickup.org',
   headerLinks: [
     {
       name: 'discord',
@@ -21,5 +21,5 @@ export const environment = {
     ...defaultFooterLinks,
     { name: 'discord', target: discordInvitation },
   ],
-  titleSuffix: 'tf2pickup.asia • Asian 6v6 Pickups',
+  titleSuffix: 'sea.tf2pickup.org • Asian 6v6 Pickups',
 };

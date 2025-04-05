@@ -60,8 +60,8 @@ jobs:
             apiUrl: api.au.tf2pickup.org
           - branding: tf2pickup.us
             apiUrl: api.tf2pickup.us
-          - branding: tf2pickup.asia
-            apiUrl: api.tf2pickup.asia
+          - branding: sea.tf2pickup.org
+            apiUrl: api.sea.tf2pickup.org
           - branding: ar.tf2pickup.org
             apiUrl: api.ar.tf2pickup.org
           - branding: uberfest
