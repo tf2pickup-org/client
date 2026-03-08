@@ -26,6 +26,9 @@
   </a>
 </p>
 
+> [!WARNING]
+> This project is deprecated and no longer maintained. It has been replaced by [tf2pickup v4](https://github.com/tf2pickup-org/tf2pickup).
+
 <p align="center">
   <img src="images/screenshot.png" alt="screenshot">
 </P>
